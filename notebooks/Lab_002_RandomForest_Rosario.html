@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; My sample book</title>
+    <title>Lab 002 · Random Forest (Rosario) &#8212; My sample book</title>
   
   
   
@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -172,9 +172,10 @@
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../clasificacion_s2_gee_colab.html">Clasificación supervisada con Sentinel-2 en GEE y Colab</a></li>
 
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 002 · Random Forest (Rosario)</a></li>
 </ul>
 
     </div>
@@ -221,6 +222,55 @@
 
 
 
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/tu-usuario/tu-repo/main?urlpath=lab/tree/./notebooks/Lab_002_RandomForest_Rosario.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Binder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Binder logo" src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
 <div class="dropdown dropdown-source-buttons">
   <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
     <i class="fab fa-github"></i>
@@ -229,7 +279,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+      <li><a href="https://github.com/tu-usuario/tu-repo" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -246,7 +296,7 @@
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Lab_002_RandomForest_Rosario.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/tu-usuario/tu-repo/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Lab_002_RandomForest_Rosario.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -347,9 +397,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -360,19 +408,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Lab 002 · Random Forest (Rosario)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -382,16 +422,18 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-002-random-forest-rosario">
+<h1>Lab 002 · Random Forest (Rosario)<a class="headerlink" href="#lab-002-random-forest-rosario" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geemap</span><span class="o">,</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">ee</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geemap</span><span class="o">,</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">ee</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Autenticación (solo la primera vez o si vence el token)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Autenticación (solo la primera vez o si vence el token)</span>
 <span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -419,73 +461,20 @@ document.write(`
                     --jp-layout-color3: var(--colab-primary-surface-color, white);
                 }
             </style>
-            </div><div class="output text_html"><p>To authorize access needed by Earth Engine, open the following
-        URL in a web browser and follow the instructions:</p>
-        <p><a href=https://code.earthengine.google.com/client-auth?scopes=https%3A//www.googleapis.com/auth/earthengine%20https%3A//www.googleapis.com/auth/cloud-platform%20https%3A//www.googleapis.com/auth/devstorage.full_control&request_id=gU6URDM82vdamvUI2VXBhrHGM7LMMfX-gYQDKTUWBIE&tc=97gXRUVGqeS6WwNn2inhu3agmS2DajrPp7Nrj5psOVw&cc=jUfudPRGbRdKdZYJ-Cl-7x-vJquporMEngLUFc7fofw>https://code.earthengine.google.com/client-auth?scopes=https%3A//www.googleapis.com/auth/earthengine%20https%3A//www.googleapis.com/auth/cloud-platform%20https%3A//www.googleapis.com/auth/devstorage.full_control&request_id=gU6URDM82vdamvUI2VXBhrHGM7LMMfX-gYQDKTUWBIE&tc=97gXRUVGqeS6WwNn2inhu3agmS2DajrPp7Nrj5psOVw&cc=jUfudPRGbRdKdZYJ-Cl-7x-vJquporMEngLUFc7fofw</a></p>
-        <p>The authorization workflow will generate a code, which you should paste in the box below.</p>
-        </div><div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Autenticación (solo la primera vez o si vence el token)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
-
-<span class="nn">File ~\.conda\envs\gee\Lib\site-packages\ee\__init__.py:125,</span> in <span class="ni">Authenticate</span><span class="nt">(authorization_code, quiet, code_verifier, auth_mode, scopes, force)</span>
-<span class="g g-Whitespace">     </span><span class="mi">94</span> <span class="k">def</span> <span class="nf">Authenticate</span><span class="p">(</span>
-<span class="g g-Whitespace">     </span><span class="mi">95</span>     <span class="n">authorization_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="g g-Whitespace">     </span><span class="mi">96</span>     <span class="n">quiet</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">100</span>     <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">101</span> <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="g g-Whitespace">    </span><span class="mi">102</span><span class="w">   </span><span class="sd">&quot;&quot;&quot;Prompts the user to authorize access to Earth Engine via OAuth2.</span>
-<span class="g g-Whitespace">    </span><span class="mi">103</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">104</span><span class="sd">   Args:</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">123</span><span class="sd">     True if we found valid credentials and didn&#39;t run the auth flow.</span>
-<span class="g g-Whitespace">    </span><span class="mi">124</span><span class="sd">   &quot;&quot;&quot;</span>
-<span class="ne">--&gt; </span><span class="mi">125</span>   <span class="k">return</span> <span class="n">oauth</span><span class="o">.</span><span class="n">authenticate</span><span class="p">(</span><span class="n">authorization_code</span><span class="p">,</span> <span class="n">quiet</span><span class="p">,</span> <span class="n">code_verifier</span><span class="p">,</span> <span class="n">auth_mode</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">126</span>                             <span class="n">scopes</span><span class="p">,</span> <span class="n">force</span><span class="p">)</span>
-
-<span class="nn">File ~\.conda\envs\gee\Lib\site-packages\ee\oauth.py:521,</span> in <span class="ni">authenticate</span><span class="nt">(cli_authorization_code, quiet, cli_code_verifier, auth_mode, scopes, force)</span>
-<span class="g g-Whitespace">    </span><span class="mi">518</span> <span class="k">if</span> <span class="n">flow</span><span class="o">.</span><span class="n">display_instructions</span><span class="p">(</span><span class="n">quiet</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">519</span>   <span class="n">_open_new_browser</span><span class="p">(</span><span class="n">flow</span><span class="o">.</span><span class="n">auth_url</span><span class="p">)</span>
-<span class="ne">--&gt; </span><span class="mi">521</span> <span class="n">flow</span><span class="o">.</span><span class="n">save_code</span><span class="p">()</span>
-
-<span class="nn">File ~\.conda\envs\gee\Lib\site-packages\ee\oauth.py:571,</span> in <span class="ni">Flow.save_code</span><span class="nt">(self, code)</span>
-<span class="g g-Whitespace">    </span><span class="mi">569</span>   <span class="n">redirect_uri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">url</span>
-<span class="g g-Whitespace">    </span><span class="mi">570</span>   <span class="n">code</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">fetch_code</span><span class="p">()</span>  <span class="c1"># Waits for oauth callback</span>
-<span class="ne">--&gt; </span><span class="mi">571</span> <span class="n">_obtain_and_write_token</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">code_verifier</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">scopes</span><span class="p">,</span> <span class="n">redirect_uri</span><span class="p">)</span>
-
-<span class="nn">File ~\.conda\envs\gee\Lib\site-packages\ee\oauth.py:238,</span> in <span class="ni">_obtain_and_write_token</span><span class="nt">(auth_code, code_verifier, scopes, redirect_uri)</span>
-<span class="g g-Whitespace">    </span><span class="mi">236</span>   <span class="n">client_info</span><span class="p">[</span><span class="s1">&#39;redirect_uri&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">redirect_uri</span>
-<span class="g g-Whitespace">    </span><span class="mi">237</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">auth_code</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">238</span>   <span class="n">auth_code</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Enter verification code: &#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">239</span> <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">auth_code</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">240</span> <span class="n">scopes</span> <span class="o">=</span> <span class="n">scopes</span> <span class="ow">or</span> <span class="n">SCOPES</span>
-
-<span class="nn">File ~\AppData\Roaming\Python\Python312\site-packages\ipykernel\kernelbase.py:1281,</span> in <span class="ni">Kernel.raw_input</span><span class="nt">(self, prompt)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1279</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_stdin</span><span class="p">:</span>
-<span class="g g-Whitespace">   </span><span class="mi">1280</span>     <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
-<span class="ne">-&gt; </span><span class="mi">1281</span>     <span class="k">raise</span> <span class="n">StdinNotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1282</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_request</span><span class="p">(</span>
-<span class="g g-Whitespace">   </span><span class="mi">1283</span>     <span class="nb">str</span><span class="p">(</span><span class="n">prompt</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1284</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_parent_ident</span><span class="p">[</span><span class="s2">&quot;shell&quot;</span><span class="p">],</span>
-<span class="g g-Whitespace">   </span><span class="mi">1285</span>     <span class="bp">self</span><span class="o">.</span><span class="n">get_parent</span><span class="p">(</span><span class="s2">&quot;shell&quot;</span><span class="p">),</span>
-<span class="g g-Whitespace">   </span><span class="mi">1286</span>     <span class="n">password</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<span class="g g-Whitespace">   </span><span class="mi">1287</span> <span class="p">)</span>
-
-<span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
+            </div><div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1) Autenticación (solo si hace falta)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1) Autenticación (solo si hace falta)</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;ee-cdgidera&#39;</span><span class="p">)</span>
 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
     <span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
     <span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s1">&#39;ee-cdgidera&#39;</span><span class="p">)</span>
+
 </pre></div>
 </div>
 </div>
@@ -519,7 +508,7 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cargar los assets exportados</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cargar los assets exportados</span>
 <span class="n">roi_fc</span>  <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">(</span><span class="s1">&#39;users/cdg-idera/roi_polygon_2024&#39;</span><span class="p">)</span>
 <span class="n">roi</span>     <span class="o">=</span> <span class="n">roi_fc</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
 
@@ -561,7 +550,7 @@ GCPS features: 261
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 1. Sentinel-2 -&gt; filtro -&gt; composite (mediana) -&gt; mostrar composite</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 1. Sentinel-2 -&gt; filtro -&gt; composite (mediana) -&gt; mostrar composite</span>
 <span class="c1"># ImageCollection S2</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_SR_HARMONIZED&quot;</span><span class="p">)</span>
 
@@ -608,11 +597,11 @@ GCPS features: 261
                     --jp-layout-color3: var(--colab-primary-surface-color, white);
                 }
             </style>
-            </div><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "2d78ec0a4d6f4330a4f3d3a1be0e4f50"}</script></div>
+            </div><script type="application/vnd.jupyter.widget-view+json">{"model_id": "2d78ec0a4d6f4330a4f3d3a1be0e4f50", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># paso 2) Tranining and validation (60/40) con columna aleatoria</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># paso 2) Tranining and validation (60/40) con columna aleatoria</span>
 <span class="c1"># Asignar número aleatorio en [0,1)</span>
 <span class="n">gcp</span> <span class="o">=</span> <span class="n">gcps</span><span class="o">.</span><span class="n">randomColumn</span><span class="p">()</span>  <span class="c1"># opcional: .randomColumn(&#39;random&#39;, seed=0)</span>
 
@@ -655,7 +644,7 @@ Validation GCP: 102
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 3) extraer pixeles (sampleRegions) para entrenamiento</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 3) extraer pixeles (sampleRegions) para entrenamiento</span>
 
 <span class="n">training</span> <span class="o">=</span> <span class="n">composite</span><span class="o">.</span><span class="n">sampleRegions</span><span class="p">(</span>
     <span class="n">collection</span><span class="o">=</span><span class="n">trainingGCP</span><span class="p">,</span>
@@ -700,7 +689,7 @@ Bandas usadas: [&#39;B1&#39;, &#39;B2&#39;, &#39;B3&#39;, &#39;B4&#39;, &#39;B5&
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 4) entrenar clasificador Random Forest (100 árboles)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 4) entrenar clasificador Random Forest (100 árboles)</span>
 
 <span class="n">classifier</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Classifier</span><span class="o">.</span><span class="n">smileRandomForest</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
     <span class="n">features</span><span class="o">=</span><span class="n">training</span><span class="p">,</span>
@@ -737,7 +726,7 @@ Bandas usadas: [&#39;B1&#39;, &#39;B2&#39;, &#39;B3&#39;, &#39;B4&#39;, &#39;B5&
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 5) Clasificar la imagen y mostrar clasificación</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 5) Clasificar la imagen y mostrar clasificación</span>
 
 <span class="n">classified</span> <span class="o">=</span> <span class="n">composite</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">classifier</span><span class="p">)</span>
 
@@ -773,11 +762,11 @@ Bandas usadas: [&#39;B1&#39;, &#39;B2&#39;, &#39;B3&#39;, &#39;B4&#39;, &#39;B5&
                     --jp-layout-color3: var(--colab-primary-surface-color, white);
                 }
             </style>
-            </div><script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "d99e10a02efc4c2faa060cdb59ce71bb"}</script></div>
+            </div><script type="application/vnd.jupyter.widget-view+json">{"model_id": "d99e10a02efc4c2faa060cdb59ce71bb", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 6) Accurracy assessment (matriz de confusión, OA, PA/UA, Kappa, F1)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 6) Accurracy assessment (matriz de confusión, OA, PA/UA, Kappa, F1)</span>
 
 <span class="c1"># Sampleo sobre puntos de validación</span>
 <span class="n">test</span> <span class="o">=</span> <span class="n">classified</span><span class="o">.</span><span class="n">sampleRegions</span><span class="p">(</span>
@@ -842,13 +831,14 @@ F1 (clase 1): [1, 0.955223880597015, 0.9, 0.9285714285714286, 0.896551724137931]
 </div>
 </div>
 </div>
+</section>
 
     <script type="text/x-thebe-config">
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "tu-usuario/tu-repo",
+            ref: "main",
         },
         codeMirrorConfig: {
             theme: "abcdef",
@@ -888,21 +878,6 @@ F1 (clase 1): [1, 0.955223880597015, 0.9, 0.9285714285714286, 0.896551724137931]
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>

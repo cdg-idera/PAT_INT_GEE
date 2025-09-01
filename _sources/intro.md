@@ -11,7 +11,6 @@ kernelspec:
 
 ```{code-cell} ipython3
 from IPython.display import Image
-Image(filename='imagenes/logo.png', width=336, height=48)
 Image(filename='imagenes/GEE.png', width=336, height=48)
 ```
 
@@ -21,5 +20,3 @@ El objetivo de este libro digital es impulsar el desarrollo de capacidades sobre
 
 Este libro interactivo digital está siendo desarrollado con [Jupyter Book documentation](https://jupyterbook.org) y tendrá ISBN tramitado por IDERA-IGN.
 
-```{tableofcontents}
-```
