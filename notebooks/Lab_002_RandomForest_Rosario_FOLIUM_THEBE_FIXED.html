@@ -523,11 +523,11 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 6: Entrenamiento del clasificador (Random Forest) ===</span>
-<span class="n">classifier</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Classifier</span><span class="o">.</span><span class="n">smileRandomForest</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">train</span><span class="p">({</span>
-  <span class="n">features</span> <span class="o">=</span> <span class="n">training</span><span class="p">,</span>
-  <span class="n">classProperty</span> <span class="o">=</span> <span class="s1">&#39;landcover&#39;</span><span class="p">,</span>
-  <span class="n">inputProperties</span> <span class="o">=</span> <span class="n">composite</span><span class="o">.</span><span class="n">bandNames</span><span class="p">()</span>
-<span class="p">})</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Classifier</span><span class="o">.</span><span class="n">smileRandomForest</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
+    <span class="n">features</span><span class="o">=</span><span class="n">training</span><span class="p">,</span>
+    <span class="n">classProperty</span><span class="o">=</span><span class="s1">&#39;landcover&#39;</span><span class="p">,</span>
+    <span class="n">inputProperties</span><span class="o">=</span><span class="n">composite</span><span class="o">.</span><span class="n">bandNames</span><span class="p">()</span>
+<span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Clasificador entrenado.&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -557,18 +557,12 @@ document.write(`
     <span class="n">scale</span><span class="o">=</span><span class="mi">10</span>
 <span class="p">)</span>
 <span class="n">cm</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">errorMatrix</span><span class="p">(</span><span class="s1">&#39;landcover&#39;</span><span class="p">,</span> <span class="s1">&#39;classification&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix:&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test Accuracy:&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">accuracy</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Producers Accuracy:&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">producersAccuracy</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Consumers Accuracy:&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">consumersAccuracy</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-
-<span class="n">observedAccuracy</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">accuracy</span><span class="p">()</span>
-<span class="n">expectedAccuracy</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">kappa</span><span class="p">()</span>
-<span class="n">kappa</span> <span class="o">=</span> <span class="n">observedAccuracy</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">expectedAccuracy</span><span class="p">)</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">expectedAccuracy</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kappa Coefficient:&#39;</span><span class="p">,</span> <span class="n">kappa</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-
-<span class="n">fScore</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">fscore</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F-Score:&#39;</span><span class="p">,</span> <span class="n">fScore</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Confusion Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Overall Accuracy:&quot;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">accuracy</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Producers Accuracy:&quot;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">producersAccuracy</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Consumers Accuracy:&quot;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">consumersAccuracy</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Kappa:&quot;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">kappa</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;F1 (class 1):&quot;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">fscore</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
