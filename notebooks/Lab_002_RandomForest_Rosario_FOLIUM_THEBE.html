@@ -425,7 +425,7 @@ document.write(`
 <h1>Lab 002 · Random Forest (Rosario)<a class="headerlink" href="#lab-002-random-forest-rosario" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paquetes (asegura que estén en Binder también)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Asegurar paquetes en Thebe/Binder (solo instala si falta)</span>
 <span class="kn">import</span> <span class="nn">importlib</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
 <span class="k">def</span> <span class="nf">ensure</span><span class="p">(</span><span class="n">pkgs</span><span class="p">):</span>
     <span class="n">miss</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pkgs</span> <span class="k">if</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">]</span>
@@ -434,11 +434,12 @@ document.write(`
 <span class="n">ensure</span><span class="p">([</span><span class="s2">&quot;earthengine-api&quot;</span><span class="p">,</span> <span class="s2">&quot;geemap&quot;</span><span class="p">,</span> <span class="s2">&quot;folium&quot;</span><span class="p">])</span>
 
 <span class="kn">import</span> <span class="nn">ee</span>
-<span class="kn">import</span> <span class="nn">geemap.foliumap</span> <span class="k">as</span> <span class="nn">geemap</span>  <span class="c1"># &lt;&lt;-- CLAVE: backend folium</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+<span class="kn">import</span> <span class="nn">geemap.foliumap</span> <span class="k">as</span> <span class="nn">geemap</span>   <span class="c1"># &lt;— CLAVE: backend folium</span>
+<span class="kn">import</span> <span class="nn">folium</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
 
-<span class="c1"># Sanidad: verificar que NO estamos en el backend de widgets</span>
-<span class="k">assert</span> <span class="n">geemap</span><span class="o">.</span><span class="vm">__name__</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;foliumap&quot;</span><span class="p">),</span> <span class="s2">&quot;Se importó el backend equivocado (widgets).&quot;</span>
+<span class="c1"># Sanidad: debe imprimir &#39;geemap.foliumap&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;geemap module:&quot;</span><span class="p">,</span> <span class="n">geemap</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -500,11 +501,11 @@ document.write(`
 <span class="n">Map</span> <span class="o">=</span> <span class="n">geemap</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>              <span class="c1"># folium</span>
 <span class="n">Map</span><span class="o">.</span><span class="n">centerObject</span><span class="p">(</span><span class="n">roi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">rgbVisParams</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span> <span class="s1">&#39;bands&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">]}</span>
-<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">composite</span><span class="p">,</span> <span class="n">rgbVisParams</span><span class="p">,</span> <span class="s1">&#39;ROI: Composite S2 2024&#39;</span><span class="p">)</span>
 
-<span class="c1"># MOSTRAR (elige 1, no uses los dos)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Map</span><span class="p">)</span>                    <span class="c1"># opción A (suficiente la mayoría de veces)</span>
-<span class="c1"># HTML(Map.to_html())           # opción B (si querés forzar HTML)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">32.95</span><span class="p">,</span> <span class="o">-</span><span class="mf">60.65</span><span class="p">],</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># o centrado al ROI si tenés coords</span>
+<span class="n">tile</span> <span class="o">=</span> <span class="n">geemap</span><span class="o">.</span><span class="n">ee_tile_layer</span><span class="p">(</span><span class="n">composite</span><span class="p">,</span> <span class="n">rgbVisParams</span><span class="p">,</span> <span class="s1">&#39;ROI: Composite S2 2024&#39;</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="n">tile</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>                    <span class="c1"># &lt;- muestra en HTML (nada de widgets)</span>
 </pre></div>
 </div>
 </div>
@@ -561,11 +562,13 @@ document.write(`
 <span class="n">classified</span> <span class="o">=</span> <span class="n">composite</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">classifier</span><span class="p">)</span>
 
 <span class="c1"># Visualización</span>
-<span class="n">classVis</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;palette&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;violet&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">]}</span>
-<span class="n">Map2</span> <span class="o">=</span> <span class="n">geemap</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>
-<span class="n">Map2</span><span class="o">.</span><span class="n">centerObject</span><span class="p">(</span><span class="n">roi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-<span class="n">Map2</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">classified</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">roi</span><span class="p">),</span> <span class="n">classVis</span><span class="p">,</span> <span class="s1">&#39;Imagen Clasificada&#39;</span><span class="p">)</span>
-<span class="n">display</span><span class="p">(</span><span class="n">Map2</span><span class="p">)</span>    
+<span class="n">classVis</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="s1">&#39;palette&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;violet&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">]}</span>
+
+<span class="n">m2</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mf">32.95</span><span class="p">,</span> <span class="o">-</span><span class="mf">60.65</span><span class="p">],</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">tile2</span> <span class="o">=</span> <span class="n">geemap</span><span class="o">.</span><span class="n">ee_tile_layer</span><span class="p">(</span><span class="n">classified</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">roi</span><span class="p">),</span> <span class="n">classVis</span><span class="p">,</span> <span class="s1">&#39;Imagen Clasificada&#39;</span><span class="p">)</span>
+<span class="n">m2</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="n">tile2</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">m2</span><span class="p">)</span> 
 </pre></div>
 </div>
 </div>
