@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Lab 002 · Random Forest (Rosario) &#8212; GeoIA aplicado a Imágenes Satelitales</title>
+    <title>Lab 002 · Random Forest (Rosario) — Folium / Thebe &#8212; GeoIA aplicado a Imágenes Satelitales</title>
   
   
   
@@ -57,10 +57,10 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Lab_002_RandomForest_Rosario_FOLIUM_FINAL';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Clasificación supervisada con Sentinel-2 en GEE y Colab" href="../clasificacion_s2_gee_colab.html" />
+    <link rel="prev" title="Prueba folium" href="zzz.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -173,9 +173,8 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../clasificacion_s2_gee_colab.html">Clasificación supervisada con Sentinel-2 en GEE y Colab</a></li>
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 002 · Random Forest (Rosario)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zzz.html">Prueba Folium</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 002 · Random Forest (Rosario)  Thebe</a></li>
 </ul>
 
     </div>
@@ -230,7 +229,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/cdg-idera/PAT_INT_GEE/main?urlpath=lab/tree/./notebooks/Lab_002_RandomForest_Rosario_FOLIUM_FINAL.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/cdg-idera/PAT_INT_GEE/main?urlpath=lab/tree/./notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -296,7 +295,7 @@
       
       
       
-      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Lab_002_RandomForest_Rosario_FOLIUM_FINAL.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE/issues/new?title=Issue%20on%20page%20%2Fnotebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -326,7 +325,7 @@
       
       
       
-      <li><a href="../_sources/notebooks/Lab_002_RandomForest_Rosario_FOLIUM_FINAL.ipynb" target="_blank"
+      <li><a href="../_sources/notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -408,7 +407,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lab 002 · Random Forest (Rosario)</h1>
+    <h1>Lab 002 · Random Forest (Rosario) — Folium / Thebe</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -422,30 +421,41 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lab-002-random-forest-rosario">
-<h1>Lab 002 · Random Forest (Rosario)<a class="headerlink" href="#lab-002-random-forest-rosario" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-002-random-forest-rosario-folium-thebe">
+<h1>Lab 002 · Random Forest (Rosario) — Folium / Thebe<a class="headerlink" href="#lab-002-random-forest-rosario-folium-thebe" title="Link to this heading">#</a></h1>
+<p>Este cuaderno usa <strong>geemap.foliumap</strong> (no widgets) para que los mapas se vean en Thebe/Binder.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Preparación del entorno (solo si hace falta)</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">ee</span>
-    <span class="kn">import</span> <span class="nn">geemap.foliumap</span> <span class="k">as</span> <span class="nn">geemap</span>
-<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-    <span class="o">%</span><span class="k">pip</span> -q install earthengine-api geemap
-    <span class="kn">import</span> <span class="nn">ee</span>
-    <span class="kn">import</span> <span class="nn">geemap.foliumap</span> <span class="k">as</span> <span class="nn">geemap</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 0: asegurar paquetes y forzar backend folium ===</span>
+<span class="kn">import</span> <span class="nn">importlib</span><span class="o">,</span> <span class="nn">sys</span><span class="o">,</span> <span class="nn">subprocess</span>
+<span class="k">def</span> <span class="nf">ensure</span><span class="p">(</span><span class="n">pkgs</span><span class="p">):</span>
+    <span class="n">miss</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pkgs</span> <span class="k">if</span> <span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">miss</span><span class="p">:</span>
+        <span class="n">subprocess</span><span class="o">.</span><span class="n">check_call</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="s2">&quot;-m&quot;</span><span class="p">,</span> <span class="s2">&quot;pip&quot;</span><span class="p">,</span> <span class="s2">&quot;install&quot;</span><span class="p">,</span> <span class="o">*</span><span class="n">miss</span><span class="p">])</span>
+<span class="n">ensure</span><span class="p">([</span><span class="s2">&quot;earthengine-api&quot;</span><span class="p">,</span> <span class="s2">&quot;geemap&quot;</span><span class="p">,</span> <span class="s2">&quot;folium&quot;</span><span class="p">])</span>
+
+<span class="c1"># Limpiar módulos previos de geemap (por si quedó el backend de widgets cargado)</span>
+<span class="k">for</span> <span class="n">_m</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">_m</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;geemap&quot;</span><span class="p">):</span>
+        <span class="k">del</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">_m</span><span class="p">]</span>
+
+<span class="kn">import</span> <span class="nn">ee</span>
+<span class="kn">import</span> <span class="nn">importlib</span> <span class="k">as</span> <span class="nn">_imp</span>
+<span class="n">geemap</span> <span class="o">=</span> <span class="n">_imp</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;geemap.foliumap&quot;</span><span class="p">)</span>  <span class="c1"># &lt;&lt;-- backend folium SIEMPRE</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;geemap backend:&quot;</span><span class="p">,</span> <span class="n">geemap</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Autenticación e inicialización de Earth Engine</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 1: Autenticación / Inicialización de Earth Engine ===</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;ee-cdgidera&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Earth Engine inicializado.&quot;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Autenticación requerida: ejecutá esta celda, seguí el enlace, pegá el código y ejecutá de nuevo.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;EE inicializado.&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Autenticación requerida. Seguí el enlace, pegá el código y re-ejecutá esta celda.&quot;</span><span class="p">)</span>
     <span class="n">ee</span><span class="o">.</span><span class="n">Authenticate</span><span class="p">()</span>
     <span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;ee-cdgidera&quot;</span><span class="p">)</span>
 </pre></div>
@@ -454,332 +464,110 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">geemap</span><span class="o">,</span> <span class="nn">json</span><span class="o">,</span> <span class="nn">ee</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cargar los assets exportados</span>
-<span class="n">roi_fc</span>  <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">(</span><span class="s1">&#39;users/cdg-idera/roi_polygon_2024&#39;</span><span class="p">)</span>
-<span class="n">roi</span>     <span class="o">=</span> <span class="n">roi_fc</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
-
-<span class="n">gcps</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">(</span><span class="s1">&#39;users/cdg-idera/gcps_landcover_2024&#39;</span><span class="p">)</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 2: Cargar assets (ROI y GCPS) ===</span>
+<span class="n">roi_fc</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">(</span><span class="s1">&#39;users/cdg-idera/roi_polygon_2024&#39;</span><span class="p">)</span>
+<span class="n">roi</span> <span class="o">=</span> <span class="n">roi_fc</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
+<span class="n">gcps_fc</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">(</span><span class="s1">&#39;users/cdg-idera/gcps_landcover_2024&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ROI features:&#39;</span><span class="p">,</span> <span class="n">roi_fc</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GCPS features:&#39;</span><span class="p">,</span> <span class="n">gcps</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ROI features: 1
-GCPS features: 261
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GCPS features:&#39;</span><span class="p">,</span> <span class="n">gcps_fc</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 1. Sentinel-2 -&gt; filtro -&gt; composite (mediana) -&gt; mostrar composite</span>
-<span class="c1"># ImageCollection S2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 3: Sentinel-2: filtro -&gt; composite (mediana) ===</span>
 <span class="n">s2</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_SR_HARMONIZED&quot;</span><span class="p">)</span>
-
-<span class="c1"># Filtros y selección de bandas B.*</span>
 <span class="n">filtered</span> <span class="o">=</span> <span class="p">(</span><span class="n">s2</span>
     <span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span> <span class="mi">30</span><span class="p">))</span>
     <span class="o">.</span><span class="n">filterDate</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2025-01-01&#39;</span><span class="p">)</span>
     <span class="o">.</span><span class="n">filterBounds</span><span class="p">(</span><span class="n">roi</span><span class="p">)</span>
     <span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;B.*&#39;</span><span class="p">)</span>
 <span class="p">)</span>
-
-<span class="c1"># Composite mediana y recorte al ROI</span>
 <span class="n">composite</span> <span class="o">=</span> <span class="n">filtered</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">roi</span><span class="p">)</span>
-
-<span class="c1"># Visualizar composite ANTES de dividir train/valid</span>
-<span class="n">Map</span> <span class="o">=</span> <span class="n">geemap</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>
-<span class="n">Map</span><span class="o">.</span><span class="n">centerObject</span><span class="p">(</span><span class="n">roi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">rgbVisParams</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span> <span class="s1">&#39;bands&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">]}</span>
-<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">composite</span><span class="p">,</span> <span class="n">rgbVisParams</span><span class="p">,</span> <span class="s1">&#39;ROI: región de interés (Composite S2 2024)&#39;</span><span class="p">)</span>
-<span class="n">Map</span>
+
+<span class="n">Map</span> <span class="o">=</span> <span class="n">geemap</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>              <span class="c1"># backend folium</span>
+<span class="n">Map</span><span class="o">.</span><span class="n">centerObject</span><span class="p">(</span><span class="n">roi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">Map</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">composite</span><span class="p">,</span> <span class="n">rgbVisParams</span><span class="p">,</span> <span class="s1">&#39;Composite S2 2024 (ROI)&#39;</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Map</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div><script type="application/vnd.jupyter.widget-view+json">{"model_id": "2d78ec0a4d6f4330a4f3d3a1be0e4f50", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># paso 2) Tranining and validation (60/40) con columna aleatoria</span>
-<span class="c1"># Asignar número aleatorio en [0,1)</span>
-<span class="n">gcp</span> <span class="o">=</span> <span class="n">gcps</span><span class="o">.</span><span class="n">randomColumn</span><span class="p">()</span>  <span class="c1"># opcional: .randomColumn(&#39;random&#39;, seed=0)</span>
-
-<span class="n">trainingGCP</span>   <span class="o">=</span> <span class="n">gcp</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 4: Partición 60/40 train/valid ===</span>
+<span class="n">gcp</span> <span class="o">=</span> <span class="n">gcps_fc</span><span class="o">.</span><span class="n">randomColumn</span><span class="p">()</span>
+<span class="n">trainingGCP</span> <span class="o">=</span> <span class="n">gcp</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">lt</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">))</span>
 <span class="n">validationGCP</span> <span class="o">=</span> <span class="n">gcp</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Filter</span><span class="o">.</span><span class="n">gte</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training GCP:&#39;</span><span class="p">,</span> <span class="n">trainingGCP</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Validation GCP:&#39;</span><span class="p">,</span> <span class="n">validationGCP</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training GCP: 159
-Validation GCP: 102
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Train pts:&#39;</span><span class="p">,</span> <span class="n">trainingGCP</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">(),</span> <span class="s1">&#39;| Valid pts:&#39;</span><span class="p">,</span> <span class="n">validationGCP</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 3) extraer pixeles (sampleRegions) para entrenamiento</span>
-
-<span class="n">training</span> <span class="o">=</span> <span class="n">composite</span><span class="o">.</span><span class="n">sampleRegions</span><span class="p">(</span>
-    <span class="n">collection</span><span class="o">=</span><span class="n">trainingGCP</span><span class="p">,</span>
-    <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
-    <span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-    <span class="n">tileScale</span><span class="o">=</span><span class="mi">16</span>
-<span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training samples (rows):&#39;</span><span class="p">,</span> <span class="n">training</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bandas usadas:&#39;</span><span class="p">,</span> <span class="n">composite</span><span class="o">.</span><span class="n">bandNames</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Training samples (rows): 159
-Bandas usadas: [&#39;B1&#39;, &#39;B2&#39;, &#39;B3&#39;, &#39;B4&#39;, &#39;B5&#39;, &#39;B6&#39;, &#39;B7&#39;, &#39;B8&#39;, &#39;B8A&#39;, &#39;B9&#39;, &#39;B11&#39;, &#39;B12&#39;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 5: Sampleo de pixeles para entrenamiento ===</span>
+<span class="n">training</span> <span class="o">=</span> <span class="n">composite</span><span class="o">.</span><span class="n">sampleRegions</span><span class="p">({</span>
+  <span class="s1">&#39;collection&#39;</span><span class="p">:</span> <span class="n">trainingGCP</span><span class="p">,</span>
+  <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="s1">&#39;tileScale&#39;</span><span class="p">:</span> <span class="mi">16</span>
+<span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training samples:&#39;</span><span class="p">,</span> <span class="n">training</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 4) entrenar clasificador Random Forest (100 árboles)</span>
-
-<span class="n">classifier</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Classifier</span><span class="o">.</span><span class="n">smileRandomForest</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">train</span><span class="p">(</span>
-    <span class="n">features</span><span class="o">=</span><span class="n">training</span><span class="p">,</span>
-    <span class="n">classProperty</span><span class="o">=</span><span class="s1">&#39;landcover&#39;</span><span class="p">,</span>
-    <span class="n">inputProperties</span><span class="o">=</span><span class="n">composite</span><span class="o">.</span><span class="n">bandNames</span><span class="p">()</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 6: Entrenamiento del clasificador (Random Forest) ===</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">Classifier</span><span class="o">.</span><span class="n">smileRandomForest</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">train</span><span class="p">({</span>
+  <span class="s1">&#39;features&#39;</span><span class="p">:</span> <span class="n">training</span><span class="p">,</span>
+  <span class="s1">&#39;classProperty&#39;</span><span class="p">:</span> <span class="s1">&#39;landcover&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;inputProperties&#39;</span><span class="p">:</span> <span class="n">composite</span><span class="o">.</span><span class="n">bandNames</span><span class="p">()</span>
+<span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Clasificador entrenado.&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 5) Clasificar la imagen y mostrar clasificación</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 7: Clasificar e imagen clasificada ===</span>
 <span class="n">classified</span> <span class="o">=</span> <span class="n">composite</span><span class="o">.</span><span class="n">classify</span><span class="p">(</span><span class="n">classifier</span><span class="p">)</span>
-
-<span class="c1"># Visualización</span>
 <span class="n">classVis</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;palette&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;violet&#39;</span><span class="p">,</span> <span class="s1">&#39;orange&#39;</span><span class="p">]}</span>
+
 <span class="n">Map2</span> <span class="o">=</span> <span class="n">geemap</span><span class="o">.</span><span class="n">Map</span><span class="p">()</span>
 <span class="n">Map2</span><span class="o">.</span><span class="n">centerObject</span><span class="p">(</span><span class="n">roi</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">Map2</span><span class="o">.</span><span class="n">addLayer</span><span class="p">(</span><span class="n">classified</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">roi</span><span class="p">),</span> <span class="n">classVis</span><span class="p">,</span> <span class="s1">&#39;Imagen Clasificada&#39;</span><span class="p">)</span>
-<span class="n">Map2</span>
+<span class="n">display</span><span class="p">(</span><span class="n">Map2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div><script type="application/vnd.jupyter.widget-view+json">{"model_id": "d99e10a02efc4c2faa060cdb59ce71bb", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Paso 6) Accurracy assessment (matriz de confusión, OA, PA/UA, Kappa, F1)</span>
-
-<span class="c1"># Sampleo sobre puntos de validación</span>
-<span class="n">test</span> <span class="o">=</span> <span class="n">classified</span><span class="o">.</span><span class="n">sampleRegions</span><span class="p">(</span>
-    <span class="n">collection</span><span class="o">=</span><span class="n">validationGCP</span><span class="p">,</span>
-    <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
-    <span class="n">scale</span><span class="o">=</span><span class="mi">10</span>
-<span class="p">)</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 8: Evaluación de exactitud ===</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">classified</span><span class="o">.</span><span class="n">sampleRegions</span><span class="p">({</span>
+  <span class="s1">&#39;collection&#39;</span><span class="p">:</span> <span class="n">validationGCP</span><span class="p">,</span>
+  <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
+  <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">10</span>
+<span class="p">})</span>
 <span class="n">cm</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">errorMatrix</span><span class="p">(</span><span class="s1">&#39;landcover&#39;</span><span class="p">,</span> <span class="s1">&#39;classification&#39;</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test Accuracy (Overall):&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">accuracy</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix:&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test Accuracy:&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">accuracy</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Producers Accuracy:&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">producersAccuracy</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Consumers Accuracy:&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">consumersAccuracy</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
 
-<span class="c1"># Kappa correcto según API:</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kappa (API):&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">kappa</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-
-<span class="c1"># (Opcional) tu fórmula del guion original:</span>
 <span class="n">observedAccuracy</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">accuracy</span><span class="p">()</span>
-<span class="n">expectedAccuracy</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">kappa</span><span class="p">()</span>  <span class="c1"># en tu script lo llamabas &quot;expected&quot;, aunque es kappa</span>
-<span class="n">kappa_formula</span> <span class="o">=</span> <span class="n">observedAccuracy</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">expectedAccuracy</span><span class="p">)</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">expectedAccuracy</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kappa (según fórmula del script):&#39;</span><span class="p">,</span> <span class="n">kappa_formula</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+<span class="n">expectedAccuracy</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">kappa</span><span class="p">()</span>
+<span class="n">kappa</span> <span class="o">=</span> <span class="n">observedAccuracy</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">expectedAccuracy</span><span class="p">)</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="n">ee</span><span class="o">.</span><span class="n">Number</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">subtract</span><span class="p">(</span><span class="n">expectedAccuracy</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kappa Coefficient:&#39;</span><span class="p">,</span> <span class="n">kappa</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
 
-<span class="c1"># F1 para la clase 1 (urbano), como en tu script</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F1 (clase 1):&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">fscore</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html">
-            <style>
-                .geemap-dark {
-                    --jp-widgets-color: white;
-                    --jp-widgets-label-color: white;
-                    --jp-ui-font-color1: white;
-                    --jp-layout-color2: #454545;
-                    background-color: #383838;
-                }
-
-                .geemap-dark .jupyter-button {
-                    --jp-layout-color3: #383838;
-                }
-
-                .geemap-colab {
-                    background-color: var(--colab-primary-surface-color, white);
-                }
-
-                .geemap-colab .jupyter-button {
-                    --jp-layout-color3: var(--colab-primary-surface-color, white);
-                }
-            </style>
-            </div><div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Confusion Matrix:
- [[30, 0, 0, 0, 0], [0, 32, 0, 0, 1], [0, 0, 9, 1, 0], [0, 0, 1, 13, 0], [0, 2, 0, 0, 13]]
-Test Accuracy (Overall): 0.9509803921568627
-Producers Accuracy: [[1], [0.9696969696969697], [0.9], [0.9285714285714286], [0.8666666666666667]]
-Consumers Accuracy: [[1, 0.9411764705882353, 0.9, 0.9285714285714286, 0.9285714285714286]]
-Kappa (API): 0.9352463179278822
-Kappa (según fórmula del script): 0.2429834678969622
-F1 (clase 1): [1, 0.955223880597015, 0.9, 0.9285714285714286, 0.896551724137931]
+<span class="n">fScore</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">fscore</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;F-Score:&#39;</span><span class="p">,</span> <span class="n">fScore</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -817,12 +605,12 @@ F1 (clase 1): [1, 0.955223880597015, 0.9, 0.9285714285714286, 0.896551724137931]
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../clasificacion_s2_gee_colab.html"
+       href="zzz.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Clasificación supervisada con Sentinel-2 en GEE y Colab</p>
+        <p class="prev-next-title">Prueba folium</p>
       </div>
     </a>
 </div>
