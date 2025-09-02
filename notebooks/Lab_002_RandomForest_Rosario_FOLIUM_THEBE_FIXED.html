@@ -508,13 +508,13 @@ document.write(`
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 5: Sampleo de pixeles para entrenamiento ===</span>
-<span class="n">training</span> <span class="o">=</span> <span class="n">composite</span><span class="o">.</span><span class="n">sampleRegions</span><span class="p">({</span>
-  <span class="s1">&#39;collection&#39;</span><span class="p">:</span> <span class="n">trainingGCP</span><span class="p">,</span>
-  <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
-  <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-  <span class="s1">&#39;tileScale&#39;</span><span class="p">:</span> <span class="mi">16</span>
-<span class="p">})</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 5: Sampleo de pixeles para entrenamiento (FIX PYTHON) ===</span>
+<span class="n">training</span> <span class="o">=</span> <span class="n">composite</span><span class="o">.</span><span class="n">sampleRegions</span><span class="p">(</span>
+    <span class="n">collection</span><span class="o">=</span><span class="n">trainingGCP</span><span class="p">,</span>
+    <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
+    <span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">tileScale</span><span class="o">=</span><span class="mi">16</span>
+<span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Training samples:&#39;</span><span class="p">,</span> <span class="n">training</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -550,11 +550,12 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 8: Evaluación de exactitud ===</span>
-<span class="n">test</span> <span class="o">=</span> <span class="n">classified</span><span class="o">.</span><span class="n">sampleRegions</span><span class="p">({</span>
-  <span class="s1">&#39;collection&#39;</span><span class="p">:</span> <span class="n">validationGCP</span><span class="p">,</span>
-  <span class="s1">&#39;properties&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
-  <span class="s1">&#39;scale&#39;</span><span class="p">:</span> <span class="mi">10</span>
-<span class="p">})</span>
+<span class="c1"># === Test set / evaluación (FIX PYTHON) ===</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">classified</span><span class="o">.</span><span class="n">sampleRegions</span><span class="p">(</span>
+    <span class="n">collection</span><span class="o">=</span><span class="n">validationGCP</span><span class="p">,</span>
+    <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
+    <span class="n">scale</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
 <span class="n">cm</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">errorMatrix</span><span class="p">(</span><span class="s1">&#39;landcover&#39;</span><span class="p">,</span> <span class="s1">&#39;classification&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix:&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test Accuracy:&#39;</span><span class="p">,</span> <span class="n">cm</span><span class="o">.</span><span class="n">accuracy</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
