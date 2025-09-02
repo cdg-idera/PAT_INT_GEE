@@ -451,6 +451,14 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># === Celda 1: Autenticación / Inicialización de Earth Engine ===</span>
+
+<span class="c1"># === Celda 1: Imports + inicialización de Earth Engine (autónoma) ===</span>
+<span class="kn">import</span> <span class="nn">ee</span>
+<span class="kn">import</span> <span class="nn">geemap.foliumap</span> <span class="k">as</span> <span class="nn">geemap</span>   <span class="c1"># SIEMPRE este backend (no widgets)</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;geemap backend:&quot;</span><span class="p">,</span> <span class="n">geemap</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>  <span class="c1"># Debe decir geemap.foliumap</span>
+
 <span class="k">try</span><span class="p">:</span>
     <span class="n">ee</span><span class="o">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">project</span><span class="o">=</span><span class="s2">&quot;ee-cdgidera&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;EE inicializado.&quot;</span><span class="p">)</span>
