@@ -1,3 +1,0 @@
-earthengine-api
-geemap
-folium
