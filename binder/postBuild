@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+pip install --no-cache-dir earthengine-api geemap folium
+python - <<'PY'
+import importlib, folium
+g = importlib.import_module("geemap.foliumap")
+print("BINDER READY:", folium.__version__, g.__name__)
+PY
