@@ -229,7 +229,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/cdg-idera/PAT_INT_GEE/main?urlpath=lab/tree/./notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/cdg-idera/PAT_INT_GEE/main?urlpath=tree/./notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -444,6 +444,16 @@ document.write(`
 <span class="n">geemap</span> <span class="o">=</span> <span class="n">_imp</span><span class="o">.</span><span class="n">import_module</span><span class="p">(</span><span class="s2">&quot;geemap.foliumap&quot;</span><span class="p">)</span>  <span class="c1"># &lt;&lt;-- backend folium SIEMPRE</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;geemap backend:&quot;</span><span class="p">,</span> <span class="n">geemap</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">importlib</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ee:&quot;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="s2">&quot;ee&quot;</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;geemap.foliumap:&quot;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="s2">&quot;geemap.foliumap&quot;</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;folium:&quot;</span><span class="p">,</span> <span class="nb">bool</span><span class="p">(</span><span class="n">importlib</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="s2">&quot;folium&quot;</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>

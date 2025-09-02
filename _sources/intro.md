@@ -18,5 +18,5 @@ Image(filename='imagenes/GEE.png', width=336, height=48)
 
 El objetivo de este libro digital es impulsar el desarrollo de capacidades sobre cómo emplear tecnicas de geoIA con información geoespacial, principalmente empleando imágenes satelitales disponibles en Google Earth Engine.
 
-Este libro interactivo digital está siendo desarrollado con [Jupyter Book documentation](https://jupyterbook.org) y tendrá ISBN tramitado por parte de IDERA.
+Este libro interactivo digital está siendo desarrollado con [Jupyter Book documentation](https://jupyterbook.org) y tendrá ISBN tramitado por IDERA-IGN.
 
