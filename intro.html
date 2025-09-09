@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -505,14 +505,7 @@ document.write(`
 <p>Jensen, John R. en su libro Remote Sensing of the Environment: An Earth Resource Perspective (2007) define la teledetección como: “La ciencia y el arte de obtener información sobre un objeto, área o fenómeno mediante el análisis de datos adquiridos por un dispositivo que no está en contacto con el objeto, área o fenómeno en estudio.”</p>
 <p>Remote Sensing and Image Interpretation (2015), Lillesand, Kiefer y Chipman definen la teledetección como:</p>
 <p>“La teledetección es el proceso de adquirir información sobre las propiedades de los objetos en la superficie terrestre sin estar en contacto físico con ellos. Esto se logra detectando y analizando la radiación reflejada o emitida por esos objetos, utilizando sensores montados en plataformas remotas, como satélites o aeronaves.”</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;imagenes/areasIA2.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">336</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">48</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p><img alt="" src="_images/areasIA2.png" />{width=336px height=48px}</p>
 <p>Esta disciplina se ha convertido en una herramienta esencial para entender nuestro entorno y tomar decisiones fundamentadas en múltiples campos. Entre sus principales propósitos se encuentran:</p>
 <ul class="simple">
 <li><p>La Generación de mapas de uso del suelo y cobertura del suelo (LULC, por sus siglas en inglés), una práctica clave para monitorear el crecimiento urbano, la planificación urbana sostenible y la identificación de cambios en el paisaje.</p></li>
@@ -522,14 +515,7 @@ document.write(`
 </ul>
 <p>Además, gracias a las capacidades de procesamiento en la nube, podemos llevar a cabo estudios a escalas regionales y nacionales sin la necesidad de infraestructuras complejas. Esto abre un abanico de posibilidades para investigadores, profesionales y tomadores de decisiones que buscan soluciones sostenibles basadas en datos confiables y actualizados.</p>
 <p>Como indicamos anteriormente este capítulo se enfocará en el uso del aprendizaje automático en teledetección y mostraremos un ejemplo en el cual aplicamos aprendizaje supervisado con árboles aleatorios o Random Forest.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;imagenes/tele2.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">336</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">48</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p><img alt="" src="_images/tele2.png" />{width=336px height=48px}</p>
 <p>El aprendizaje automático se ha consolidado como una herramienta ideal para resolver problemas complejos en teledetección, principalmente porque aborda de manera eficiente la clasificación y detección de objetos o materiales en imágenes satelitales (por ejemplo detectar vegetación, agua, edificios, carreteras). Estos problemas, como identificar tipos de cobertura terrestre o distinguir entre características específicas, presentan desafíos significativos cuando se intentan resolver mediante métodos analíticos tradicionales.</p>
 <p>Existen algunos desafíos de los Datos de Observación Terrestre:</p>
 <ul class="simple">
@@ -568,14 +554,7 @@ document.write(`
 <li><p>Evaluación de precisión</p></li>
 <li><p>Refinamiento iterativo mediante ajustes de parámetros o mejora de los datos de entrada</p></li>
 </ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;imagenes/Workflow.png&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">336</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">48</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
+<p><img alt="" src="_images/Workflow.png" />{width=336px height=48px}</p>
 <section id="consideraciones-practicas">
 <h3>Consideraciones prácticas<a class="headerlink" href="#consideraciones-practicas" title="Link to this heading">#</a></h3>
 <p>Aunque el aprendizaje automático simplifica el manejo de datos complejos, no siempre es la mejor opción. Métodos tradicionales como los sistemas expertos, que emplean fórmulas derivadas de las propiedades físicas del terreno, son preferibles en ciertos casos, especialmente cuando se trabaja con pocos parámetros (bandas espectrales). Por ejemplo, el conjunto de datos global Global Surface Water, basado en un sistema experto, supera a los métodos de Aprendizaje automático en la detección de agua en imágenes Landsat a escala global.</p>

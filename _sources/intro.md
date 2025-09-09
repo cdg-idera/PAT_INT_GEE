@@ -30,10 +30,8 @@ Remote Sensing and Image Interpretation (2015), Lillesand, Kiefer y Chipman defi
 
 "La teledetección es el proceso de adquirir información sobre las propiedades de los objetos en la superficie terrestre sin estar en contacto físico con ellos. Esto se logra detectando y analizando la radiación reflejada o emitida por esos objetos, utilizando sensores montados en plataformas remotas, como satélites o aeronaves."
 
-```{code-cell} ipython3
-from IPython.display import Image
-Image(filename='imagenes/areasIA2.png', width=336, height=48)
-```
+![](imagenes/areasIA2.png){width=336px height=48px}
+
 
 Esta disciplina se ha convertido en una herramienta esencial para entender nuestro entorno y tomar decisiones fundamentadas en múltiples campos. Entre sus principales propósitos se encuentran:
 
@@ -51,11 +49,8 @@ Además, gracias a las capacidades de procesamiento en la nube, podemos llevar a
 
 Como indicamos anteriormente este capítulo se enfocará en el uso del aprendizaje automático en teledetección y mostraremos un ejemplo en el cual aplicamos aprendizaje supervisado con árboles aleatorios o Random Forest. 
 
+![](imagenes/tele2.png){width=336px height=48px}
 
-```{code-cell} ipython3
-from IPython.display import Image
-Image(filename='imagenes/tele2.png', width=336, height=48)
-```
 
 El aprendizaje automático se ha consolidado como una herramienta ideal para resolver problemas complejos en teledetección, principalmente porque aborda de manera eficiente la clasificación y detección de objetos o materiales en imágenes satelitales (por ejemplo detectar vegetación, agua, edificios, carreteras). Estos problemas, como identificar tipos de cobertura terrestre o distinguir entre características específicas, presentan desafíos significativos cuando se intentan resolver mediante métodos analíticos tradicionales.
 
@@ -105,12 +100,9 @@ En la práctica, la clasificación supervisada es la técnica predominante, ya q
 * Evaluación de precisión 
 * Refinamiento iterativo mediante ajustes de parámetros o mejora de los datos de entrada 
 
+![](imagenes/Workflow.png){width=336px height=48px}
 
 
-```{code-cell} ipython3
-from IPython.display import Image
-Image(filename='imagenes/Workflow.png', width=336, height=48)
-```
 
 ### Consideraciones prácticas
 
