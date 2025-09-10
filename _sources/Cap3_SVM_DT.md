@@ -59,8 +59,58 @@ Como mencionamos en el video 2 de esta serie, el árbol de decisión es útil po
 
 Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.
 
-Este capitulo incluye en su descripción un enlace al código Python que permite graficar un árbol de decisión, dado el archivo .dot. Cada vez que emplees árbol de decisión en GEE podrás utilizar este
-archivo colab para graficar el árbol del clasificador entrenado. Simplemente deberás modificar el archivo dot,y eejecutar cada chunk de código.
+# Gráfico del Arbol de decisión con Google Colab
+
+A continuación se muestra el código Python que permite graficar un árbol de decisión, dado el archivo .dot. 
+
+> **Colab (Python)**
+```python
+!apt-get install graphviz
+!pip install graphviz
+
+# Instalar dependencias adicionales para la conversión de PDF a imagen
+!apt-get -qq install -y poppler-utils
+!pip install pdf2image
+
+# Importar las librerías necesarias
+import graphviz
+from google.colab import files
+from pdf2image import convert_from_path
+import matplotlib.pyplot as plt
+
+# Definir las reglas del árbol de decisión en formato DOT
+dot_data = """
+digraph DecisionTree {
+ node [shape=box, style="filled, rounded", color="black", fontname=helvetica];
+ edge [fontname=helvetica];
+ 0 [label=<B8 &le; 891.5833<br/>score = 0.4998>, fillcolor="#00000000"];
+ 1 [label=<class = 1>, fillcolor="#00000000", shape=ellipse];
+ 0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"];
+ 2 [label=<class = 0>, fillcolor="#00000000", shape=ellipse];
+ 0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel="False"];
+}
+"""
+
+# Crear el gráfico a partir del DOT
+graph = graphviz.Source(dot_data)
+
+# Renderizar el árbol de decisión en formato PDF
+graph.render('decision_tree', format='pdf', cleanup=False)
+
+# Convertir el PDF a imagen
+images = convert_from_path('decision_tree.pdf')
+
+# Mostrar la imagen del árbol de decisión
+plt.imshow(images[0])
+plt.axis('off')  # Desactivar los ejes para que solo se vea la imagen
+plt.show()
+
+```
+
+Cada vez que emplees árbol de decisión en GEE podrás utilizar este archivo colab para graficar el árbol del clasificador entrenado. Simplemente deberás modificar el archivo .dot, es decir modificar el contendio de la vairalbe **dot_data** y ejecutar cada chunk de código.
+
+Enlace al archivo en Google Colab: https://colab.research.google.com/drive/1AdTW_jUPDzoIhBjeoGgWkSdsh1Ke6SLy?usp=sharing
+
 
 ![](imagenes/POST_6.png)
 
@@ -118,22 +168,33 @@ En cada ejemplo, mostraremos el píxel al cual determinaremos la clase a la que 
 
 ## Ejemplo 1 clase 0 agua
 
+El recorrido del arbol para clasificar este píxel es corto y consiste solo de una evaluación:
+
 * Condición: B6 ≤ 1095.5
-* Valor de B6: 521
+* B6: 521
 * Evaluación: 521 <= 1095.5 se evalúa a true, verdadero.
-* Seguimos por la rama true: La clase predicha para este píxel es clase 0.
+
+Seguimos por la rama true: La clase predicha para este píxel es clase 0.
 
 ![](imagenes/Pixel78_Cat0.png)
 
 ## Ejemplo 2 clase 1 urbano
 
+El recorrido consiste de tres evaluaciones:
+
+Primera evaluación:
+
 * Condición B6 <= 1095.5
 * B6: 2743
 * evaluación:  2743 <= 1095.5 Falso
 
+Segunda evaluación:
+
 * B1 <= 955.00
 * B1: 1153
 * evaluación 1153 <= 955 falso
+
+Tercera evaluación:
 
 * B9 <= 2879.25
 * B9: 2416
@@ -220,7 +281,7 @@ Tercera evaluación:
 
 * Condición B11 <= 1879.5
 * B11: 3756
-* Evaluacon 3756 <= 1879.5, falso
+* Evaluación 3756 <= 1879.5, falso
 
 Cuarta evaluación:
 
@@ -232,35 +293,25 @@ Seguimos por la rama falso: La clase predicha para este píxel es clase 4.
 
 ![](imagenes/Pixel115_Cat4.png)
 
-## Interpretación del Gráfico
 
-Ejes del gráfico (B1 y B2):
+# Enlaces al Código:
 
-En este caso, los valores de la banda B1 se colocan en el eje X, y los valores de la banda B2 se colocan en el eje Y.
-Esto implica que el gráfico es una proyección bidimensional del conjunto de datos, únicamente en función de estas dos bandas.
+Recursos:
 
-Puntos de entrenamiento:
-
-Cada punto del gráfico corresponde a una muestra de entrenamiento (un píxel de tus datos originales).
-Los colores de los puntos representan la clase (landcover) asignada a cada muestra.
-Vectores de soporte:
-
-Los vectores de soporte se muestran como puntos resaltados con un borde rojo.
-Estos son los puntos más importantes utilizados por el SVM para definir el límite de decisión entre las clases. En un espacio de múltiples dimensiones, estos vectores están en los bordes del margen entre las clases.
-Limitación:
-
-Como estás graficando solo dos dimensiones (B1 y B2), el gráfico no muestra toda la información disponible. Es una simplificación que ayuda a visualizar cómo el SVM está separando las clases en este espacio reducido.
+* Colab: https://colab.research.google.com/drive/1AdTW_jUPDzoIhBjeoGgWkSdsh1Ke6SLy?usp=sharing
+* Repositorio GEE: https://code.earthengine.google.com/?accept_repo=users%2Fcdg-idera%2Fgee
 
 
+# Cierre e Incentivos
 
 Hemos explorado cómo aplicar técnicas de machine learning, una rama clave de la inteligencia artificial, para abordar la clasificación de imágenes satelitales, centrándonos en herramientas como árboles de decisión, Random Forest y máquinas de soporte vectorial (SVM). Estas técnicas permiten no solo clasificar imágenes en múltiples clases, sino también realizar tareas más específicas como clasificación binaria, generando insights valiosos para distintos campos. A lo largo de este recorrido, revisamos el flujo de trabajo completo, incorporando métricas esenciales como la precisión general, la precisión del productor y del consumidor, lo que refuerza nuestra capacidad de evaluar y mejorar la calidad de nuestros modelos.
 
-Sin embargo, este es solo el comienzo de las posibilidades. Por ejemplo, el ajuste de hiperparámetros es una tarea crucial para optimizar el rendimiento de los clasificadores, y plataformas como Google Colab nos ofrecen un entorno accesible y potente para explorar estas técnicas con recursos computacionales avanzados. Además, conceptos como la detección de cambios o la creación de series de tiempo permiten un análisis mucho más dinámico y profundo. Estas herramientas son fundamentales para comprender fenómenos como el crecimiento urbano, la deforestación o los impactos de eventos extremos como inundaciones, mientras que los paneles interactivos, con barras deslizantes o comparaciones visuales, facilitan una mejor comunicación de resultados, haciéndolos accesibles para una audiencia más amplia.
+Sin embargo, este es solo el comienzo de las posibilidades. Por ejemplo, el ajuste de hiperparámetros es una tarea crucial para optimizar el rendimiento de los clasificadores, y plataformas como Google Colab nos ofrecen un entorno accesible y potente para explorar estas técnicas con recursos computacionales avanzados. Además, conceptos como la *detección de cambios* o la creación de *series de tiempo* permiten un análisis mucho más dinámico y profundo. Estas herramientas son fundamentales para comprender fenómenos como el crecimiento urbano, la deforestación o los impactos de eventos extremos como inundaciones, mientras que los paneles interactivos, con barras deslizantes o comparaciones visuales, facilitan una mejor comunicación de resultados, haciéndolos accesibles para una audiencia más amplia.
 
-En otras posibilidades, podemos analizar imágenes satelitales nocturnas, un recurso valioso para explorar patrones y actividades humanas que solo se manifiestan de noche, como la iluminación artificial en áreas urbanas. Las imágenes de luz nocturna proporcionan información relevante sobre la urbanización, el uso de la tierra y el desarrollo económico. A través de estas imágenes, es posible realizar estudios sobre la expansión urbana, monitorear el comportamiento de las actividades industriales o incluso analizar la distribución de la pobreza en diferentes regiones. De hecho, se ha demostrado que las luces nocturnas pueden ser un indicador confiable de la actividad económica y social, lo que abre nuevas oportunidades para aplicar machine learning y técnicas de clasificación en este tipo de datos.
+En otras posibilidades, podemos analizar *imágenes satelitales nocturnas*, un recurso valioso para explorar patrones y actividades humanas que solo se manifiestan de noche, como la iluminación artificial en áreas urbanas. Las imágenes de luz nocturna proporcionan información relevante sobre la urbanización, el uso de la tierra y el desarrollo económico. A través de estas imágenes, es posible realizar estudios sobre la expansión urbana, monitorear el comportamiento de las actividades industriales o incluso analizar la distribución de la pobreza en diferentes regiones. De hecho, se ha demostrado que las luces nocturnas pueden ser un indicador confiable de la actividad económica y social, lo que abre nuevas oportunidades para aplicar machine learning y técnicas de clasificación en este tipo de datos.
 
-Más allá de estas herramientas, también debemos reconocer el impacto de los productos globales que integran machine learning y sistemas expertos, como OpenBuilding V3, Global Surface Water, TerraClimate y otros conjuntos de datos clave. Estos productos no solo nos permiten realizar análisis geoespaciales detallados, sino que también simplifican tareas complejas, como el estudio de tendencias climáticas o la evaluación de la urbanización. Por ejemplo, Global Surface Water proporciona un monitoreo detallado de los cuerpos de agua desde 1984, mientras que TerraClimate facilita el análisis de variables climáticas a lo largo del tiempo. El uso de estos recursos combina el poder del aprendizaje automático con la democratización de datos geoespaciales, permitiendo a más personas y organizaciones participar en el análisis y toma de decisiones informadas.
+Más allá de estas herramientas, también debemos reconocer el impacto de los productos globales que integran machine learning y sistemas expertos, como OpenBuilding V3, Global Surface Water, TerraClimate y otros conjuntos de datos clave. Estos productos no solo nos permiten realizar análisis geoespaciales detallados, sino que también simplifican tareas complejas, como el estudio de tendencias climáticas o la evaluación de la urbanización. Por ejemplo, *Global Surface Water* proporciona un monitoreo detallado de los cuerpos de agua desde 1984, mientras que *TerraClimate* facilita el análisis de variables climáticas a lo largo del tiempo. El uso de estos recursos combina el poder del aprendizaje automático con la democratización de datos geoespaciales, permitiendo a más personas y organizaciones participar en el análisis y toma de decisiones informadas.
 
-Estamos en un momento histórico donde el acceso a imágenes satelitales y datos geoespaciales se ha expandido enormemente, abriendo la puerta a un futuro prometedor. La posibilidad de trabajar con imágenes de mayor resolución y precisión en un futuro cercano potenciará aún más las capacidades que estamos desarrollando ahora. Este enfoque progresivo y escalonado es clave: cada concepto y herramienta que integramos se convierte en un peldaño más en esta espiral de conocimiento, que nos permitirá abordar desafíos más complejos con confianza.
+Estamos en un *momento histórico donde el acceso a imágenes satelitales y datos geoespaciales se ha expandido enormemente*, abriendo la puerta a un futuro prometedor. La posibilidad de trabajar con imágenes de mayor resolución y precisión en un futuro cercano potenciará aún más las capacidades que estamos desarrollando ahora. Este enfoque progresivo y escalonado es clave: cada concepto y herramienta que integramos se convierte en *un peldaño más en esta espiral de conocimiento*, que nos permitirá abordar desafíos más complejos con confianza.
 
-Finalmente, quiero invitarte a seguir profundizando en este fascinante campo en la intersección entre inteligencia artificial, ciencia de datos y análisis geoespacial. La democratización de las imágenes satelitales nos permite acceder a datos precisos y tangibles sobre la realidad del mundo que nos rodea, lo que transforma cómo entendemos y respondemos a los desafíos globales. Al trabajar con estos datos concretos, no solo aprendemos, sino que también tenemos la oportunidad de generar un impacto real en proyectos que afectan directamente nuestras comunidades y el entorno. Cada paso que damos nos acerca más a dominar estas herramientas poderosas, y eso, sin duda, nos abre un abanico de posibilidades para cambiar el mundo. ¡Lo mejor está por venir! Gracias por acompañarme en este viaje, y espero verte en el próximo video.
+Finalmente, quiero invitarte a seguir profundizando en este fascinante campo en la intersección entre inteligencia artificial, ciencia de datos y análisis geoespacial. *La democratización de las imágenes satelitales nos permite acceder a datos precisos y tangibles sobre la realidad del mundo que nos rodea, lo que transforma cómo entendemos y respondemos a los desafíos globales*. Al trabajar con estos datos concretos, no solo aprendemos, sino que también tenemos la *oportunidad de generar un impacto real en proyectos que afectan directamente nuestras comunidades y el entorno*. Cada paso que damos nos acerca más a dominar estas herramientas poderosas, y eso, sin duda, nos abre un abanico de posibilidades para cambiar el mundo. ¡Lo mejor está por venir! Gracias por acompañarme en este viaje, y espero verte en el próximo video.

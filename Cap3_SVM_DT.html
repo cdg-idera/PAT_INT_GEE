@@ -189,6 +189,9 @@
 
 
 
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="clasificacion_s2_gee_colab.html">Clasificación supervisada con Sentinel-2 en GEE y Colab</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">Lab 002 · Random Forest (Rosario)  Thebe</a></li>
@@ -393,6 +396,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">Arbol de Decisión</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-del-arbol-de-decision-con-google-colab">Gráfico del Arbol de decisión con Google Colab</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#identificando-los-elementos-del-arbol-de-decision">Identificando los elementos del árbol de decisión</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-utilizacion-del-arbol-de-decision">Ejemplo de utilización del Árbol de Decisión</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-clase-0-agua">Ejemplo 1 clase 0 agua</a></li>
@@ -400,9 +404,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-clase-2-cultivos">Ejemplo 3 clase 2 cultivos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-clase-3-bosque">Ejemplo 4 clase 3 bosque</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-clase-4-suelo-desnudo">Ejemplo 5 clase 4 suelo desnudo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-del-grafico">Interpretación del Gráfico</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#enlaces-al-codigo">Enlaces al Código:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-e-incentivos">Cierre e Incentivos</a></li>
 </ul>
 
             </nav>
@@ -457,12 +462,61 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p>Calculamos su precsión 98.02 por ciento. Ahora agregaremo código para obtener las reglas del árbol de decisión entrenado, y para mostrar las reglas del árbol.</p>
 <p>Como mencionamos en el video 2 de esta serie, el árbol de decisión es útil porque condensa la información del modelo entrenado.</p>
 <p>Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.</p>
-<p>Este capitulo incluye en su descripción un enlace al código Python que permite graficar un árbol de decisión, dado el archivo .dot. Cada vez que emplees árbol de decisión en GEE podrás utilizar este
-archivo colab para graficar el árbol del clasificador entrenado. Simplemente deberás modificar el archivo dot,y eejecutar cada chunk de código.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="grafico-del-arbol-de-decision-con-google-colab">
+<h1>Gráfico del Arbol de decisión con Google Colab<a class="headerlink" href="#grafico-del-arbol-de-decision-con-google-colab" title="Link to this heading">#</a></h1>
+<p>A continuación se muestra el código Python que permite graficar un árbol de decisión, dado el archivo .dot.</p>
+<blockquote>
+<div><p><strong>Colab (Python)</strong></p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">graphviz</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">graphviz</span>
+
+<span class="c1"># Instalar dependencias adicionales para la conversión de PDF a imagen</span>
+<span class="err">!</span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="o">-</span><span class="n">qq</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">poppler</span><span class="o">-</span><span class="n">utils</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">pdf2image</span>
+
+<span class="c1"># Importar las librerías necesarias</span>
+<span class="kn">import</span> <span class="nn">graphviz</span>
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">files</span>
+<span class="kn">from</span> <span class="nn">pdf2image</span> <span class="kn">import</span> <span class="n">convert_from_path</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Definir las reglas del árbol de decisión en formato DOT</span>
+<span class="n">dot_data</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">digraph DecisionTree {</span>
+<span class="s2"> node [shape=box, style=&quot;filled, rounded&quot;, color=&quot;black&quot;, fontname=helvetica];</span>
+<span class="s2"> edge [fontname=helvetica];</span>
+<span class="s2"> 0 [label=&lt;B8 &amp;le; 891.5833&lt;br/&gt;score = 0.4998&gt;, fillcolor=&quot;#00000000&quot;];</span>
+<span class="s2"> 1 [label=&lt;class = 1&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
+<span class="s2"> 0 -&gt; 1 [labeldistance=2.5, labelangle=45, headlabel=&quot;True&quot;];</span>
+<span class="s2"> 2 [label=&lt;class = 0&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
+<span class="s2"> 0 -&gt; 2 [labeldistance=2.5, labelangle=-45, headlabel=&quot;False&quot;];</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># Crear el gráfico a partir del DOT</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">dot_data</span><span class="p">)</span>
+
+<span class="c1"># Renderizar el árbol de decisión en formato PDF</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;decision_tree&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="n">cleanup</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Convertir el PDF a imagen</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">convert_from_path</span><span class="p">(</span><span class="s1">&#39;decision_tree.pdf&#39;</span><span class="p">)</span>
+
+<span class="c1"># Mostrar la imagen del árbol de decisión</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>  <span class="c1"># Desactivar los ejes para que solo se vea la imagen</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+</pre></div>
+</div>
+<p>Cada vez que emplees árbol de decisión en GEE podrás utilizar este archivo colab para graficar el árbol del clasificador entrenado. Simplemente deberás modificar el archivo .dot, es decir modificar el contendio de la vairalbe <strong>dot_data</strong> y ejecutar cada chunk de código.</p>
+<p>Enlace al archivo en Google Colab: <a class="reference external" href="https://colab.research.google.com/drive/1AdTW_jUPDzoIhBjeoGgWkSdsh1Ke6SLy?usp=sharing">https://colab.research.google.com/drive/1AdTW_jUPDzoIhBjeoGgWkSdsh1Ke6SLy?usp=sharing</a></p>
 <p><img alt="" src="_images/POST_6.png" /></p>
 <p>Los árboles de decisión son una herramienta sencilla y poderosa, especialmente para tareas donde la <em>interpretabilidad es importante</em>. Comparados con Random Forest y SVM, ofrecen una estructura clara de cómo se toman las decisiones.</p>
 <p>Ahora que hemos aplicado el algoritmo de aprendizaje automático de Arboles de Decisión al área metropolitana de Rosario, podemos analizar el árbol de decisión</p>
-</section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="identificando-los-elementos-del-arbol-de-decision">
 <h1>Identificando los elementos del árbol de decisión<a class="headerlink" href="#identificando-los-elementos-del-arbol-de-decision" title="Link to this heading">#</a></h1>
@@ -501,23 +555,32 @@ archivo colab para graficar el árbol del clasificador entrenado. Simplemente de
 </ul>
 <section id="ejemplo-1-clase-0-agua">
 <h2>Ejemplo 1 clase 0 agua<a class="headerlink" href="#ejemplo-1-clase-0-agua" title="Link to this heading">#</a></h2>
+<p>El recorrido del arbol para clasificar este píxel es corto y consiste solo de una evaluación:</p>
 <ul class="simple">
 <li><p>Condición: B6 ≤ 1095.5</p></li>
-<li><p>Valor de B6: 521</p></li>
+<li><p>B6: 521</p></li>
 <li><p>Evaluación: 521 &lt;= 1095.5 se evalúa a true, verdadero.</p></li>
-<li><p>Seguimos por la rama true: La clase predicha para este píxel es clase 0.</p></li>
 </ul>
+<p>Seguimos por la rama true: La clase predicha para este píxel es clase 0.</p>
 <p><img alt="" src="_images/Pixel78_Cat0.png" /></p>
 </section>
 <section id="ejemplo-2-clase-1-urbano">
 <h2>Ejemplo 2 clase 1 urbano<a class="headerlink" href="#ejemplo-2-clase-1-urbano" title="Link to this heading">#</a></h2>
+<p>El recorrido consiste de tres evaluaciones:</p>
+<p>Primera evaluación:</p>
 <ul class="simple">
 <li><p>Condición B6 &lt;= 1095.5</p></li>
 <li><p>B6: 2743</p></li>
 <li><p>evaluación:  2743 &lt;= 1095.5 Falso</p></li>
+</ul>
+<p>Segunda evaluación:</p>
+<ul class="simple">
 <li><p>B1 &lt;= 955.00</p></li>
 <li><p>B1: 1153</p></li>
 <li><p>evaluación 1153 &lt;= 955 falso</p></li>
+</ul>
+<p>Tercera evaluación:</p>
+<ul class="simple">
 <li><p>B9 &lt;= 2879.25</p></li>
 <li><p>B9: 2416</p></li>
 <li><p>evaluación 2416 &lt;= 2879.25 true</p></li>
@@ -592,7 +655,7 @@ archivo colab para graficar el árbol del clasificador entrenado. Simplemente de
 <ul class="simple">
 <li><p>Condición B11 &lt;= 1879.5</p></li>
 <li><p>B11: 3756</p></li>
-<li><p>Evaluacon 3756 &lt;= 1879.5, falso</p></li>
+<li><p>Evaluación 3756 &lt;= 1879.5, falso</p></li>
 </ul>
 <p>Cuarta evaluación:</p>
 <ul class="simple">
@@ -603,26 +666,23 @@ archivo colab para graficar el árbol del clasificador entrenado. Simplemente de
 <p>Seguimos por la rama falso: La clase predicha para este píxel es clase 4.</p>
 <p><img alt="" src="_images/Pixel115_Cat4.png" /></p>
 </section>
-<section id="interpretacion-del-grafico">
-<h2>Interpretación del Gráfico<a class="headerlink" href="#interpretacion-del-grafico" title="Link to this heading">#</a></h2>
-<p>Ejes del gráfico (B1 y B2):</p>
-<p>En este caso, los valores de la banda B1 se colocan en el eje X, y los valores de la banda B2 se colocan en el eje Y.
-Esto implica que el gráfico es una proyección bidimensional del conjunto de datos, únicamente en función de estas dos bandas.</p>
-<p>Puntos de entrenamiento:</p>
-<p>Cada punto del gráfico corresponde a una muestra de entrenamiento (un píxel de tus datos originales).
-Los colores de los puntos representan la clase (landcover) asignada a cada muestra.
-Vectores de soporte:</p>
-<p>Los vectores de soporte se muestran como puntos resaltados con un borde rojo.
-Estos son los puntos más importantes utilizados por el SVM para definir el límite de decisión entre las clases. En un espacio de múltiples dimensiones, estos vectores están en los bordes del margen entre las clases.
-Limitación:</p>
-<p>Como estás graficando solo dos dimensiones (B1 y B2), el gráfico no muestra toda la información disponible. Es una simplificación que ayuda a visualizar cómo el SVM está separando las clases en este espacio reducido.</p>
-<p>Hemos explorado cómo aplicar técnicas de machine learning, una rama clave de la inteligencia artificial, para abordar la clasificación de imágenes satelitales, centrándonos en herramientas como árboles de decisión, Random Forest y máquinas de soporte vectorial (SVM). Estas técnicas permiten no solo clasificar imágenes en múltiples clases, sino también realizar tareas más específicas como clasificación binaria, generando insights valiosos para distintos campos. A lo largo de este recorrido, revisamos el flujo de trabajo completo, incorporando métricas esenciales como la precisión general, la precisión del productor y del consumidor, lo que refuerza nuestra capacidad de evaluar y mejorar la calidad de nuestros modelos.</p>
-<p>Sin embargo, este es solo el comienzo de las posibilidades. Por ejemplo, el ajuste de hiperparámetros es una tarea crucial para optimizar el rendimiento de los clasificadores, y plataformas como Google Colab nos ofrecen un entorno accesible y potente para explorar estas técnicas con recursos computacionales avanzados. Además, conceptos como la detección de cambios o la creación de series de tiempo permiten un análisis mucho más dinámico y profundo. Estas herramientas son fundamentales para comprender fenómenos como el crecimiento urbano, la deforestación o los impactos de eventos extremos como inundaciones, mientras que los paneles interactivos, con barras deslizantes o comparaciones visuales, facilitan una mejor comunicación de resultados, haciéndolos accesibles para una audiencia más amplia.</p>
-<p>En otras posibilidades, podemos analizar imágenes satelitales nocturnas, un recurso valioso para explorar patrones y actividades humanas que solo se manifiestan de noche, como la iluminación artificial en áreas urbanas. Las imágenes de luz nocturna proporcionan información relevante sobre la urbanización, el uso de la tierra y el desarrollo económico. A través de estas imágenes, es posible realizar estudios sobre la expansión urbana, monitorear el comportamiento de las actividades industriales o incluso analizar la distribución de la pobreza en diferentes regiones. De hecho, se ha demostrado que las luces nocturnas pueden ser un indicador confiable de la actividad económica y social, lo que abre nuevas oportunidades para aplicar machine learning y técnicas de clasificación en este tipo de datos.</p>
-<p>Más allá de estas herramientas, también debemos reconocer el impacto de los productos globales que integran machine learning y sistemas expertos, como OpenBuilding V3, Global Surface Water, TerraClimate y otros conjuntos de datos clave. Estos productos no solo nos permiten realizar análisis geoespaciales detallados, sino que también simplifican tareas complejas, como el estudio de tendencias climáticas o la evaluación de la urbanización. Por ejemplo, Global Surface Water proporciona un monitoreo detallado de los cuerpos de agua desde 1984, mientras que TerraClimate facilita el análisis de variables climáticas a lo largo del tiempo. El uso de estos recursos combina el poder del aprendizaje automático con la democratización de datos geoespaciales, permitiendo a más personas y organizaciones participar en el análisis y toma de decisiones informadas.</p>
-<p>Estamos en un momento histórico donde el acceso a imágenes satelitales y datos geoespaciales se ha expandido enormemente, abriendo la puerta a un futuro prometedor. La posibilidad de trabajar con imágenes de mayor resolución y precisión en un futuro cercano potenciará aún más las capacidades que estamos desarrollando ahora. Este enfoque progresivo y escalonado es clave: cada concepto y herramienta que integramos se convierte en un peldaño más en esta espiral de conocimiento, que nos permitirá abordar desafíos más complejos con confianza.</p>
-<p>Finalmente, quiero invitarte a seguir profundizando en este fascinante campo en la intersección entre inteligencia artificial, ciencia de datos y análisis geoespacial. La democratización de las imágenes satelitales nos permite acceder a datos precisos y tangibles sobre la realidad del mundo que nos rodea, lo que transforma cómo entendemos y respondemos a los desafíos globales. Al trabajar con estos datos concretos, no solo aprendemos, sino que también tenemos la oportunidad de generar un impacto real en proyectos que afectan directamente nuestras comunidades y el entorno. Cada paso que damos nos acerca más a dominar estas herramientas poderosas, y eso, sin duda, nos abre un abanico de posibilidades para cambiar el mundo. ¡Lo mejor está por venir! Gracias por acompañarme en este viaje, y espero verte en el próximo video.</p>
 </section>
+<section class="tex2jax_ignore mathjax_ignore" id="enlaces-al-codigo">
+<h1>Enlaces al Código:<a class="headerlink" href="#enlaces-al-codigo" title="Link to this heading">#</a></h1>
+<p>Recursos:</p>
+<ul class="simple">
+<li><p>Colab: <a class="reference external" href="https://colab.research.google.com/drive/1AdTW_jUPDzoIhBjeoGgWkSdsh1Ke6SLy?usp=sharing">https://colab.research.google.com/drive/1AdTW_jUPDzoIhBjeoGgWkSdsh1Ke6SLy?usp=sharing</a></p></li>
+<li><p>Repositorio GEE: <a class="reference external" href="https://code.earthengine.google.com/?accept_repo=users%2Fcdg-idera%2Fgee">https://code.earthengine.google.com/?accept_repo=users%2Fcdg-idera%2Fgee</a></p></li>
+</ul>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="cierre-e-incentivos">
+<h1>Cierre e Incentivos<a class="headerlink" href="#cierre-e-incentivos" title="Link to this heading">#</a></h1>
+<p>Hemos explorado cómo aplicar técnicas de machine learning, una rama clave de la inteligencia artificial, para abordar la clasificación de imágenes satelitales, centrándonos en herramientas como árboles de decisión, Random Forest y máquinas de soporte vectorial (SVM). Estas técnicas permiten no solo clasificar imágenes en múltiples clases, sino también realizar tareas más específicas como clasificación binaria, generando insights valiosos para distintos campos. A lo largo de este recorrido, revisamos el flujo de trabajo completo, incorporando métricas esenciales como la precisión general, la precisión del productor y del consumidor, lo que refuerza nuestra capacidad de evaluar y mejorar la calidad de nuestros modelos.</p>
+<p>Sin embargo, este es solo el comienzo de las posibilidades. Por ejemplo, el ajuste de hiperparámetros es una tarea crucial para optimizar el rendimiento de los clasificadores, y plataformas como Google Colab nos ofrecen un entorno accesible y potente para explorar estas técnicas con recursos computacionales avanzados. Además, conceptos como la <em>detección de cambios</em> o la creación de <em>series de tiempo</em> permiten un análisis mucho más dinámico y profundo. Estas herramientas son fundamentales para comprender fenómenos como el crecimiento urbano, la deforestación o los impactos de eventos extremos como inundaciones, mientras que los paneles interactivos, con barras deslizantes o comparaciones visuales, facilitan una mejor comunicación de resultados, haciéndolos accesibles para una audiencia más amplia.</p>
+<p>En otras posibilidades, podemos analizar <em>imágenes satelitales nocturnas</em>, un recurso valioso para explorar patrones y actividades humanas que solo se manifiestan de noche, como la iluminación artificial en áreas urbanas. Las imágenes de luz nocturna proporcionan información relevante sobre la urbanización, el uso de la tierra y el desarrollo económico. A través de estas imágenes, es posible realizar estudios sobre la expansión urbana, monitorear el comportamiento de las actividades industriales o incluso analizar la distribución de la pobreza en diferentes regiones. De hecho, se ha demostrado que las luces nocturnas pueden ser un indicador confiable de la actividad económica y social, lo que abre nuevas oportunidades para aplicar machine learning y técnicas de clasificación en este tipo de datos.</p>
+<p>Más allá de estas herramientas, también debemos reconocer el impacto de los productos globales que integran machine learning y sistemas expertos, como OpenBuilding V3, Global Surface Water, TerraClimate y otros conjuntos de datos clave. Estos productos no solo nos permiten realizar análisis geoespaciales detallados, sino que también simplifican tareas complejas, como el estudio de tendencias climáticas o la evaluación de la urbanización. Por ejemplo, <em>Global Surface Water</em> proporciona un monitoreo detallado de los cuerpos de agua desde 1984, mientras que <em>TerraClimate</em> facilita el análisis de variables climáticas a lo largo del tiempo. El uso de estos recursos combina el poder del aprendizaje automático con la democratización de datos geoespaciales, permitiendo a más personas y organizaciones participar en el análisis y toma de decisiones informadas.</p>
+<p>Estamos en un <em>momento histórico donde el acceso a imágenes satelitales y datos geoespaciales se ha expandido enormemente</em>, abriendo la puerta a un futuro prometedor. La posibilidad de trabajar con imágenes de mayor resolución y precisión en un futuro cercano potenciará aún más las capacidades que estamos desarrollando ahora. Este enfoque progresivo y escalonado es clave: cada concepto y herramienta que integramos se convierte en <em>un peldaño más en esta espiral de conocimiento</em>, que nos permitirá abordar desafíos más complejos con confianza.</p>
+<p>Finalmente, quiero invitarte a seguir profundizando en este fascinante campo en la intersección entre inteligencia artificial, ciencia de datos y análisis geoespacial. <em>La democratización de las imágenes satelitales nos permite acceder a datos precisos y tangibles sobre la realidad del mundo que nos rodea, lo que transforma cómo entendemos y respondemos a los desafíos globales</em>. Al trabajar con estos datos concretos, no solo aprendemos, sino que también tenemos la <em>oportunidad de generar un impacto real en proyectos que afectan directamente nuestras comunidades y el entorno</em>. Cada paso que damos nos acerca más a dominar estas herramientas poderosas, y eso, sin duda, nos abre un abanico de posibilidades para cambiar el mundo. ¡Lo mejor está por venir! Gracias por acompañarme en este viaje, y espero verte en el próximo video.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -695,6 +755,7 @@ Limitación:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">Arbol de Decisión</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-del-arbol-de-decision-con-google-colab">Gráfico del Arbol de decisión con Google Colab</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#identificando-los-elementos-del-arbol-de-decision">Identificando los elementos del árbol de decisión</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-utilizacion-del-arbol-de-decision">Ejemplo de utilización del Árbol de Decisión</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-clase-0-agua">Ejemplo 1 clase 0 agua</a></li>
@@ -702,9 +763,10 @@ Limitación:</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-clase-2-cultivos">Ejemplo 3 clase 2 cultivos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-clase-3-bosque">Ejemplo 4 clase 3 bosque</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-clase-4-suelo-desnudo">Ejemplo 5 clase 4 suelo desnudo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-del-grafico">Interpretación del Gráfico</a></li>
 </ul>
 </li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#enlaces-al-codigo">Enlaces al Código:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-e-incentivos">Cierre e Incentivos</a></li>
 </ul>
 
   </nav></div>
