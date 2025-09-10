@@ -1,0 +1,763 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Aplicando Máquina de Soporte Vectorial y Árboles de Decisión &#8212; GeoIA aplicado a Imágenes Satelitales</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Cap3_SVM_DT';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Clasificación supervisada con Sentinel-2 en GEE y Colab" href="clasificacion_s2_gee_colab.html" />
+    <link rel="prev" title="Aplicando Random Forest" href="Cap2_RFRosario.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">GeoIA aplicado a Imágenes Satelitales</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Prólogo
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Cap1_Tecnicas.html">Teledetección y GeoIA</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">Aplicando Random Forest</a></li>
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Aplicando Máquina de Soporte Vectorial y Árboles de Decisión</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="clasificacion_s2_gee_colab.html">Clasificación supervisada con Sentinel-2 en GEE y Colab</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">Lab 002 · Random Forest (Rosario)  Thebe</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE/issues/new?title=Issue%20on%20page%20%2FCap3_SVM_DT.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Cap3_SVM_DT.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Aplicando Máquina de Soporte Vectorial y Árboles de Decisión</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Aplicando Máquina de Soporte Vectorial y Árboles de Decisión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial">Maquina de soporte vectorial.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">Arbol de Decisión</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#identificando-los-elementos-del-arbol-de-decision">Identificando los elementos del árbol de decisión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-utilizacion-del-arbol-de-decision">Ejemplo de utilización del Árbol de Decisión</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-clase-0-agua">Ejemplo 1 clase 0 agua</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-clase-1-urbano">Ejemplo 2 clase 1 urbano</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-clase-2-cultivos">Ejemplo 3 clase 2 cultivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-clase-3-bosque">Ejemplo 4 clase 3 bosque</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-clase-4-suelo-desnudo">Ejemplo 5 clase 4 suelo desnudo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-del-grafico">Interpretación del Gráfico</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="aplicando-maquina-de-soporte-vectorial-y-arboles-de-decision">
+<h1>Aplicando Máquina de Soporte Vectorial y Árboles de Decisión<a class="headerlink" href="#aplicando-maquina-de-soporte-vectorial-y-arboles-de-decision" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduccion">
+<h1>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h1>
+<p>Propiciar la incorporación enfoques innovadores y paradigmas de ciencias de dato para maximizar la gestión, análisis y aprovechamiento de la información geoespacial, fomentando el uso de tecnologías emergentes, inteligencia artificial y modelos analíticos avanzados que optimicen la toma de decisiones y potencien el desarrollo de soluciones estratégicas en todos los niveles de gobierno y sectores involucrados.</p>
+<p>En este capítulo exploraremos el uso de dos técnicas de aprendizaje automático para clasificación supervisada multiclase en Google Earth Engine. Aplicaremos Maquina de Soporte Vectorial: SVM (Support Vector Machine)
+y Arboles de Decisión.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="maquina-de-soporte-vectorial">
+<h1>Maquina de soporte vectorial.<a class="headerlink" href="#maquina-de-soporte-vectorial" title="Link to this heading">#</a></h1>
+<p>En un capitulo anterior utilizamos Random Forest para clasificar imágenes de Sentinel-2 en  el área metropolitana de Rosario, para ello creamos el script GEE: Lab_002_RandomForest_Rosario.</p>
+<p>Accederemos a dicho script y guardaremos una copia del mismo, que renombraremos a Lab_003_SVM_Rosario.</p>
+<p>Para aplicar Maquinas de soporte vectorial, el flujo de trabajo es el mismo que utilizamos RF, con excepción de que en lugar de utilizar un clasificador de Random Forest, utilizaremos un clasificador de Maquina de Soporte Vectorial. En otras palabras, el cambio principal está en la etapa de entrenamiento del clasificador.</p>
+<p>Antes usábamos ee.Classifier.smileRandomForest(100), ahora utilizamos ee.Classifier.libsvm(). Libsvm significa “a library por support vector machine”.</p>
+<p><img alt="" src="_images/POST_5.png" /></p>
+<p>¿Qué es SVM? Es un clasificador que busca encontrar un hiperplano óptimo que separe los datos en clases. (esto fue explicado en el capítulo anterior)</p>
+<p>Luego de este, cambio no hay nada mas que hacer para obtener la clasificación, simplemente guardar y volver a ejecutar.</p>
+<p>Realizamos una evaluación de la exactitud, incluyendo la matriz de confusión. Obtenemos métricas de productor y consumidor y el coeficiente de Kappa, como en el script anterior.</p>
+<p>SVM es ideal para escenarios donde las clases no están claramente separadas linealmente. GEE es una poderosa herramienta para el análisis de datos espaciales y la clasificaicon de imágenes satelitales,
+Sin embargo, hay ciertas limitaciones cuando trabajamos con algoritmos como SVM. Por ejemplo GEE no esta diseñado para visualizar los hiperplanos que separan las clases en una clasificación.
+Esto se debe a que el enfoque principal de GEE es el procesamiento y el analisis de datos espaciales no la visualizacion detallada de los resultados matematicos de los modelos de ML.</p>
+<p><img alt="" src="_images/POST_7.png" /></p>
+<p>Ademas cuando aplicamos una clasificacion multiclase, como en el caso de un problema con 5 clases, el uso de SVM puede tornarse un tanto engorroso. Esto se debe a que SVM manejan las clasificaciones multiclase
+dividiendolas en multiples problemas de clasificiones binarias. Lo que aumenta la complejida del modelo y su interpretación. Si bien GEE puede efectuar la clasificacion y devolver el mapa resultante, no proporcionará una visualización clara de como se generan o estructuran estos hiperplanos en el espacio de características.</p>
+<section id="arbol-de-decision">
+<h2>Arbol de Decisión<a class="headerlink" href="#arbol-de-decision" title="Link to this heading">#</a></h2>
+<p>Ahora guardaremos nuevamente este script con otro nombre: Lab_004_DT_Rosario. DT son las siglas de <em>árbol de decisión</em> o <em>decision tree</em>.</p>
+<p>Para aplicar esta técnica necesitamos cambiar el clasificador, borraremos el clasificador <strong>libsvm()</strong> y lo reemplazaremos por <strong>smileCart()</strong></p>
+<p>Es decir, ahora usamos ee.Classifier.smileCart() para aplicar un árbol de decisión. Como lo indica su documentación CART significa ´<em>Clasification and Regression Tree</em> <em>Árbol de Regresión y Clasificación</em></p>
+<p><img alt="" src="_images/POST_8.png" /></p>
+<blockquote>
+<div><p><strong>¿Qué es un árbol de decisión?</strong>
+Es un modelo jerárquico que divide los datos en función de preguntas simples o nodos decisión, también llamadas condiciones, para clasificar cada pixel.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>Ventajas y aplicaciones:</strong>
+Es fácil de interpretar y útil para entender cómo se toman las decisiones de clasificación. Extraemos las reglas del árbol con el comando classifier.explain(), que nos permite visualizar las condiciones utilizadas para clasificar.</p>
+</div></blockquote>
+<p>Calculamos su precsión 98.02 por ciento. Ahora agregaremo código para obtener las reglas del árbol de decisión entrenado, y para mostrar las reglas del árbol.</p>
+<p>Como mencionamos en el video 2 de esta serie, el árbol de decisión es útil porque condensa la información del modelo entrenado.</p>
+<p>Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.</p>
+<p>Este capitulo incluye en su descripción un enlace al código Python que permite graficar un árbol de decisión, dado el archivo .dot. Cada vez que emplees árbol de decisión en GEE podrás utilizar este
+archivo colab para graficar el árbol del clasificador entrenado. Simplemente deberás modificar el archivo dot,y eejecutar cada chunk de código.</p>
+<p><img alt="" src="_images/POST_6.png" /></p>
+<p>Los árboles de decisión son una herramienta sencilla y poderosa, especialmente para tareas donde la <em>interpretabilidad es importante</em>. Comparados con Random Forest y SVM, ofrecen una estructura clara de cómo se toman las decisiones.</p>
+<p>Ahora que hemos aplicado el algoritmo de aprendizaje automático de Arboles de Decisión al área metropolitana de Rosario, podemos analizar el árbol de decisión</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="identificando-los-elementos-del-arbol-de-decision">
+<h1>Identificando los elementos del árbol de decisión<a class="headerlink" href="#identificando-los-elementos-del-arbol-de-decision" title="Link to this heading">#</a></h1>
+<p>Primero podemos identificar las principales partes de un árbol de decisión:</p>
+<p>Este árbol tiene 7 <strong>nodos de decisión</strong>, donde cada nodo de decisión tiene una condición lógica o booleana “menor igual que”, basado en un umbral de las bandas.</p>
+<p><img alt="" src="_images/NDhojasArbolDecisionLab004.png" /></p>
+<p>Por ejemplo la <strong>raíz del árbol</strong> es el primer nodo situado en la parte superior:</p>
+<p><img alt="" src="_images/raizArbolDecisionLab004.png" /></p>
+<p>Este nodo, el nodo raíz, tiene una condición: B6 &lt;= 1095.0.</p>
+<p>El árbol además de tener siete <strong>nodos de decisión</strong> cuenta con 8 hojas. Cada hoja representa una clasificación a una de las 5 clases de nuestra clasificación multiclase de Rosario.</p>
+<p><img alt="" src="_images/hojasArbolDecisionLab004.png" /></p>
+<p>Para clasificar una imagen satelital, una vez entrenado este clasificador de arbol de decisión CART, debemos tomar cada pixel y analizar la clase que le corresponde, es decir el árbol se aplica a cada pixel de la imagen satelital.</p>
+<p>Hemos calculado la cantidad de pixel por banda con este código:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Contar píxeles válidos por banda</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">pixelCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">reduceRegion</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">count</span><span class="p">(),</span>
+<span class="w">  </span><span class="nx">geometry</span><span class="o">:</span><span class="w"> </span><span class="nx">roi</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="c1">// Asegúrate de usar la escala correcta</span>
+<span class="w">  </span><span class="nx">maxPixels</span><span class="o">:</span><span class="w"> </span><span class="mf">1e13</span>
+<span class="p">});</span>
+
+<span class="c1">// Imprimir el resultado</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Número total de píxeles válidos por banda:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">pixelCount</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Cada banda tiene un total de 22,600,300 píxeles válidos dentro de la región de interés (roi). Área total en m²: 2,260,030,000 m² (2,260 km² para 10 m de resolución).</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ejemplo-de-utilizacion-del-arbol-de-decision">
+<h1>Ejemplo de utilización del Árbol de Decisión<a class="headerlink" href="#ejemplo-de-utilizacion-del-arbol-de-decision" title="Link to this heading">#</a></h1>
+<p>Utilizaremos 5 puntos de entrenamiento de nuestra clasificación, uno para cada clase, de los cuales conocemos su clase (ya que son datos conocidos) y verificaremos que el árbol asocia correctamente a la clase correspondiente.</p>
+<p>Para clasificar el píxel con los valores proporcionados, seguimos el árbol de decisión paso a paso utilizando las condiciones definidas en cada nodo.</p>
+<p>En cada ejemplo, mostraremos el píxel al cual determinaremos la clase a la que corresponde. El video asociado a este script muestra el paso a paso de la evaluación mostrando:</p>
+<ul class="simple">
+<li><p>a la izquierda el árbol de decisión,</p></li>
+<li><p>a la derecha los valores de cada una de sus bandas.</p></li>
+</ul>
+<section id="ejemplo-1-clase-0-agua">
+<h2>Ejemplo 1 clase 0 agua<a class="headerlink" href="#ejemplo-1-clase-0-agua" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Condición: B6 ≤ 1095.5</p></li>
+<li><p>Valor de B6: 521</p></li>
+<li><p>Evaluación: 521 &lt;= 1095.5 se evalúa a true, verdadero.</p></li>
+<li><p>Seguimos por la rama true: La clase predicha para este píxel es clase 0.</p></li>
+</ul>
+<p><img alt="" src="_images/Pixel78_Cat0.png" /></p>
+</section>
+<section id="ejemplo-2-clase-1-urbano">
+<h2>Ejemplo 2 clase 1 urbano<a class="headerlink" href="#ejemplo-2-clase-1-urbano" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Condición B6 &lt;= 1095.5</p></li>
+<li><p>B6: 2743</p></li>
+<li><p>evaluación:  2743 &lt;= 1095.5 Falso</p></li>
+<li><p>B1 &lt;= 955.00</p></li>
+<li><p>B1: 1153</p></li>
+<li><p>evaluación 1153 &lt;= 955 falso</p></li>
+<li><p>B9 &lt;= 2879.25</p></li>
+<li><p>B9: 2416</p></li>
+<li><p>evaluación 2416 &lt;= 2879.25 true</p></li>
+</ul>
+<p>Seguimos por la rama true: La clase predicha para este píxel es clase 1.</p>
+<p><img alt="" src="_images/Pixel41_Cat1.png" /></p>
+</section>
+<section id="ejemplo-3-clase-2-cultivos">
+<h2>Ejemplo 3 clase 2 cultivos<a class="headerlink" href="#ejemplo-3-clase-2-cultivos" title="Link to this heading">#</a></h2>
+<p>El recorrido consiste de tres evaluaciones:</p>
+<p>Primera evaluación:</p>
+<ul class="simple">
+<li><p>Condición B6 &lt;= 1095.5</p></li>
+<li><p>B6: 2751</p></li>
+<li><p>Evaluación: 2751 &lt;= 1095.5 falso</p></li>
+<li><p>condición B1 &lt;= 955.0</p></li>
+<li><p>B1: 351</p></li>
+<li><p>evaluación 351 &lt;= 955 true, verdadero</p></li>
+<li><p>condición B11 &lt;= 1879.5</p></li>
+<li><p>B11: 2579</p></li>
+<li><p>evalucion 2579 &lt;= 1879.5 false</p></li>
+<li><p>condición B11 &lt;= 2910.0</p></li>
+<li><p>B11: 2579</p></li>
+<li><p>evaluación 2579 &lt;= 2910.0 true</p></li>
+<li><p>condición B1 &lt;= 625.00</p></li>
+<li><p>B1: 351</p></li>
+<li><p>Evalucion 351 &lt;= 625.00 true ,</p></li>
+</ul>
+<p>Seguimos por la rama true: La clase predicha para este píxel es clase 2.</p>
+<p>![](imagenes/Pixel109_Cat2.png</p>
+</section>
+<section id="ejemplo-4-clase-3-bosque">
+<h2>Ejemplo 4 clase 3 bosque<a class="headerlink" href="#ejemplo-4-clase-3-bosque" title="Link to this heading">#</a></h2>
+<p>El recorrido consiste de tres evaluaciones:</p>
+<p>Primera evaluación:</p>
+<ul class="simple">
+<li><p>Condición B6 &lt;= 1095.5</p></li>
+<li><p>B6 2062</p></li>
+<li><p>Evaluación 2062 &lt;= 1095.5 falso</p></li>
+</ul>
+<p>Segunda evaluación:</p>
+<ul class="simple">
+<li><p>Condición B1 &lt;= 955</p></li>
+<li><p>B1: 159</p></li>
+<li><p>Evaluación 159 &lt;= 955 verdaero</p></li>
+</ul>
+<p>Tercera evaluación:</p>
+<ul class="simple">
+<li><p>Condición B11 &lt;= 1879.5</p></li>
+<li><p>B11: 1388</p></li>
+<li><p>Evaluacon 1388 &lt;= 1879.5, verdadero</p></li>
+</ul>
+<p>Seguimos por la rama true: La clase predicha para este píxel es clase 3</p>
+<p><img alt="" src="_images/Pixel159_Cat3.png" /></p>
+</section>
+<section id="ejemplo-5-clase-4-suelo-desnudo">
+<h2>Ejemplo 5 clase 4 suelo desnudo<a class="headerlink" href="#ejemplo-5-clase-4-suelo-desnudo" title="Link to this heading">#</a></h2>
+<p>El recorrido consiste de cuatro evaluaciones:</p>
+<p>Primera evaluación:</p>
+<ul class="simple">
+<li><p>Condición B6 &lt;= 1095.5</p></li>
+<li><p>B6: 3151</p></li>
+<li><p>Evaluación 3151 &lt;= 1095.5 , falso.</p></li>
+</ul>
+<p>Segunda evaluación:</p>
+<ul class="simple">
+<li><p>Condición B1 &lt;= 955</p></li>
+<li><p>B1: 804</p></li>
+<li><p>Evaluación 804 &lt;= 955 verdaero</p></li>
+</ul>
+<p>Tercera evaluación:</p>
+<ul class="simple">
+<li><p>Condición B11 &lt;= 1879.5</p></li>
+<li><p>B11: 3756</p></li>
+<li><p>Evaluacon 3756 &lt;= 1879.5, falso</p></li>
+</ul>
+<p>Cuarta evaluación:</p>
+<ul class="simple">
+<li><p>B11 &lt;= 2910.0</p></li>
+<li><p>B11: es 3756</p></li>
+<li><p>Evaluación 3756 &lt;= 2910, falso</p></li>
+</ul>
+<p>Seguimos por la rama falso: La clase predicha para este píxel es clase 4.</p>
+<p><img alt="" src="_images/Pixel115_Cat4.png" /></p>
+</section>
+<section id="interpretacion-del-grafico">
+<h2>Interpretación del Gráfico<a class="headerlink" href="#interpretacion-del-grafico" title="Link to this heading">#</a></h2>
+<p>Ejes del gráfico (B1 y B2):</p>
+<p>En este caso, los valores de la banda B1 se colocan en el eje X, y los valores de la banda B2 se colocan en el eje Y.
+Esto implica que el gráfico es una proyección bidimensional del conjunto de datos, únicamente en función de estas dos bandas.</p>
+<p>Puntos de entrenamiento:</p>
+<p>Cada punto del gráfico corresponde a una muestra de entrenamiento (un píxel de tus datos originales).
+Los colores de los puntos representan la clase (landcover) asignada a cada muestra.
+Vectores de soporte:</p>
+<p>Los vectores de soporte se muestran como puntos resaltados con un borde rojo.
+Estos son los puntos más importantes utilizados por el SVM para definir el límite de decisión entre las clases. En un espacio de múltiples dimensiones, estos vectores están en los bordes del margen entre las clases.
+Limitación:</p>
+<p>Como estás graficando solo dos dimensiones (B1 y B2), el gráfico no muestra toda la información disponible. Es una simplificación que ayuda a visualizar cómo el SVM está separando las clases en este espacio reducido.</p>
+<p>Hemos explorado cómo aplicar técnicas de machine learning, una rama clave de la inteligencia artificial, para abordar la clasificación de imágenes satelitales, centrándonos en herramientas como árboles de decisión, Random Forest y máquinas de soporte vectorial (SVM). Estas técnicas permiten no solo clasificar imágenes en múltiples clases, sino también realizar tareas más específicas como clasificación binaria, generando insights valiosos para distintos campos. A lo largo de este recorrido, revisamos el flujo de trabajo completo, incorporando métricas esenciales como la precisión general, la precisión del productor y del consumidor, lo que refuerza nuestra capacidad de evaluar y mejorar la calidad de nuestros modelos.</p>
+<p>Sin embargo, este es solo el comienzo de las posibilidades. Por ejemplo, el ajuste de hiperparámetros es una tarea crucial para optimizar el rendimiento de los clasificadores, y plataformas como Google Colab nos ofrecen un entorno accesible y potente para explorar estas técnicas con recursos computacionales avanzados. Además, conceptos como la detección de cambios o la creación de series de tiempo permiten un análisis mucho más dinámico y profundo. Estas herramientas son fundamentales para comprender fenómenos como el crecimiento urbano, la deforestación o los impactos de eventos extremos como inundaciones, mientras que los paneles interactivos, con barras deslizantes o comparaciones visuales, facilitan una mejor comunicación de resultados, haciéndolos accesibles para una audiencia más amplia.</p>
+<p>En otras posibilidades, podemos analizar imágenes satelitales nocturnas, un recurso valioso para explorar patrones y actividades humanas que solo se manifiestan de noche, como la iluminación artificial en áreas urbanas. Las imágenes de luz nocturna proporcionan información relevante sobre la urbanización, el uso de la tierra y el desarrollo económico. A través de estas imágenes, es posible realizar estudios sobre la expansión urbana, monitorear el comportamiento de las actividades industriales o incluso analizar la distribución de la pobreza en diferentes regiones. De hecho, se ha demostrado que las luces nocturnas pueden ser un indicador confiable de la actividad económica y social, lo que abre nuevas oportunidades para aplicar machine learning y técnicas de clasificación en este tipo de datos.</p>
+<p>Más allá de estas herramientas, también debemos reconocer el impacto de los productos globales que integran machine learning y sistemas expertos, como OpenBuilding V3, Global Surface Water, TerraClimate y otros conjuntos de datos clave. Estos productos no solo nos permiten realizar análisis geoespaciales detallados, sino que también simplifican tareas complejas, como el estudio de tendencias climáticas o la evaluación de la urbanización. Por ejemplo, Global Surface Water proporciona un monitoreo detallado de los cuerpos de agua desde 1984, mientras que TerraClimate facilita el análisis de variables climáticas a lo largo del tiempo. El uso de estos recursos combina el poder del aprendizaje automático con la democratización de datos geoespaciales, permitiendo a más personas y organizaciones participar en el análisis y toma de decisiones informadas.</p>
+<p>Estamos en un momento histórico donde el acceso a imágenes satelitales y datos geoespaciales se ha expandido enormemente, abriendo la puerta a un futuro prometedor. La posibilidad de trabajar con imágenes de mayor resolución y precisión en un futuro cercano potenciará aún más las capacidades que estamos desarrollando ahora. Este enfoque progresivo y escalonado es clave: cada concepto y herramienta que integramos se convierte en un peldaño más en esta espiral de conocimiento, que nos permitirá abordar desafíos más complejos con confianza.</p>
+<p>Finalmente, quiero invitarte a seguir profundizando en este fascinante campo en la intersección entre inteligencia artificial, ciencia de datos y análisis geoespacial. La democratización de las imágenes satelitales nos permite acceder a datos precisos y tangibles sobre la realidad del mundo que nos rodea, lo que transforma cómo entendemos y respondemos a los desafíos globales. Al trabajar con estos datos concretos, no solo aprendemos, sino que también tenemos la oportunidad de generar un impacto real en proyectos que afectan directamente nuestras comunidades y el entorno. Cada paso que damos nos acerca más a dominar estas herramientas poderosas, y eso, sin duda, nos abre un abanico de posibilidades para cambiar el mundo. ¡Lo mejor está por venir! Gracias por acompañarme en este viaje, y espero verte en el próximo video.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdg-idera/PAT_INT_GEE",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Cap2_RFRosario.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Aplicando Random Forest</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="clasificacion_s2_gee_colab.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Clasificación supervisada con Sentinel-2 en GEE y Colab</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Aplicando Máquina de Soporte Vectorial y Árboles de Decisión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial">Maquina de soporte vectorial.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">Arbol de Decisión</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#identificando-los-elementos-del-arbol-de-decision">Identificando los elementos del árbol de decisión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-utilizacion-del-arbol-de-decision">Ejemplo de utilización del Árbol de Decisión</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-clase-0-agua">Ejemplo 1 clase 0 agua</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-clase-1-urbano">Ejemplo 2 clase 1 urbano</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-clase-2-cultivos">Ejemplo 3 clase 2 cultivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-clase-3-bosque">Ejemplo 4 clase 3 bosque</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-clase-4-suelo-desnudo">Ejemplo 5 clase 4 suelo desnudo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-del-grafico">Interpretación del Gráfico</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Luis Reynoso (IDERA-GTT CDG)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
