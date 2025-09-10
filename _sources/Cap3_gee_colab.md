@@ -1,4 +1,4 @@
-# Clasificación supervisada con Sentinel-2 en GEE y Colab
+# Aplicando Random Fores en GEE (JS) y Colab (Python)
 
 En este capítulo mostramos cómo realizar una clasificación supervisada de imágenes Sentinel-2 utilizando **Google Earth Engine (GEE)** en su Code Editor (JavaScript) y en **Google Colab** (Python API). El flujo incluye:
 

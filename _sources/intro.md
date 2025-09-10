@@ -36,13 +36,15 @@ Luis Reynoso
 
 Este libro esta dedicado a todos los integrantes de la Infraestructura de Datos Espaciales de la República Argentina (IDERA) que han comenzado a transitar un nuevo camino de aprendizaje sobre tecnicas de inteligencia artificial. En particular está dedicado a los miembros del Grupo Técnico de Trabajo de Ciencia de Datos geoespaciales (GTT-CDG) y a los alumnos de la Escuela de Primavera del Instituto Gullich (CONAE-UNC) donde tendré la oportunidad de brindar una capacitación utilizando este material.
 
+![](imagenes/CIN-UNIUEAR.png)
+
 # Agradecimientos
 
 Este libro y recursos didácticos han sido desarrollados en el marco del grupo de investigación 04/F023: Tecnologías de Datos Espaciales, Visualización y Realidad Virtual, Facultad de Informática, Universidad Nacional del Comahue y del proyecto 32707 Patagonia Interoperable, Proyecto de Desarrollo Tecnológico y Social CIN-UNIEUAR, Consejo Interuniversitario Nacional (CIN), Unión Universitaria Argentina Europea para la Tranformación Digital (UNI-UEAR).
 
 # Sobre este libro
 
-El objetivo de este libro digital es impulsar el desarrollo de capacidades sobre cómo emplear tecnicas de geoIA con información geoespacial, principalmente empleando imágenes satelitales disponibles en Google Earth Engine.
+El objetivo de este libro digital es impulsar el desarrollo de capacidades en la aplicación de tecnicas de geoIA con información geoespacial, principalmente empleando imágenes satelitales disponibles en Google Earth Engine. 
 
 Este libro interactivo digital está siendo desarrollado con [Jupyter Book documentation](https://jupyterbook.org) y tendrá ISBN tramitado por IDERA-IGN.
 

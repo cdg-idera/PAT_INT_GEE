@@ -1,0 +1,1008 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cubos de Imágenes Satelitales &#8212; GeoIA aplicado a Imágenes Satelitales</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Cap7_Datacubes';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Lab 002 · Random Forest (Rosario) — Folium / Thebe" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html" />
+    <link rel="prev" title="Series de tiempo" href="Cap6_ST.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">GeoIA aplicado a Imágenes Satelitales</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Prólogo
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Cap1_Tecnicas.html">Teledetección y GeoIA</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">Aplicando Random Forest en GEE</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Cap3_gee_colab.html">Aplicando Random Fores en GEE (JS) y Colab (Python)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Cap4_SVM_DT.html">Aplicando Máquina de Soporte Vectorial y Árboles de Decisión</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">Predecir Superficies de Agua</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Cap6_ST.html">Series de tiempo</a></li>
+
+
+
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Cubos de Imágenes Satelitales</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">Lab 002 · Random Forest (Rosario)  Thebe</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE/issues/new?title=Issue%20on%20page%20%2FCap7_Datacubes.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Cap7_Datacubes.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Cubos de Imágenes Satelitales</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Cubos de Imágenes Satelitales</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#de-imagenes-satelitales-a-cubos-de-imagenes">De imágenes satelitales a Cubos de Imágenes</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="cubos-de-imagenes-satelitales">
+<h1>Cubos de Imágenes Satelitales<a class="headerlink" href="#cubos-de-imagenes-satelitales" title="Link to this heading">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="introduccion">
+<h1>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h1>
+<p>🎬 ¡Seguimos explorando las Series Temporales aplicadas a la Información Geoespacial! 🌍📊
+En este nuevo episodio, damos un paso más: introducimos los cubos de datos 🧊🛰️ como estructura clave para organizar, analizar y visualizar imágenes satelitales a lo largo del tiempo.</p>
+<p>🚀 A partir de la misión Sentinel-3 de la Agencia Espacial Europea, repasamos conceptos esenciales como bandas espectrales, índices y, sobre todo, definimos qué es un cubo de datos geoespaciales, cuáles son sus dimensiones (espacio, tiempo, espectro, categorías) y por qué resultan fundamentales para el análisis ambiental y territorial.</p>
+<p>💡 Para ilustrar su utilidad, presentamos tres casos prácticos donde aplicamos cubos de datos a variables reales:</p>
+<p>🔷 Ejemplo 1: Cubo de temperatura superficial MODIS 🌡️
+Creamos un cubo de datos mensual para Bahía Blanca con imágenes MODIS (2024-2025). Calculamos promedios mensuales, generamos una serie temporal y exportamos los resultados en CSV para analizarlos en Colab. Detectamos tendencias, estacionalidad y anomalías térmicas —como la registrada en marzo de 2025.
+📓 Notebook: Lab_007_ST_BahiaBlanca.ipynb</p>
+<p>🔷 Ejemplo 2: Cubo de precipitación con CHIRPS 🌧️📉
+Construimos un cubo de datos de precipitación mensual para la misma región, utilizando la colección CHIRPS. Visualizamos capas en el mapa, graficamos valores mensuales y detectamos eventos extremos, como lluvias anómalas en marzo de 2025. Gráficos y tablas complementan el análisis en consola.</p>
+<p>🔷 Ejemplo 3: Cubo de clasificación de suelo con Sentinel-2 y Random Forest 🌾🏙️
+Generamos un cubo categórico bimestral de tipos de suelo (agua, urbano, cultivos, etc.) para 2024. A partir de imágenes Sentinel-2 y un modelo Random Forest, construimos una serie temporal clasificada y mostramos su evolución en gráficos apilados. Incluimos métricas de validación, porcentajes y recuentos por clase para interpretar cambios en el paisaje, como expansión urbana o variación en áreas verdes.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="de-imagenes-satelitales-a-cubos-de-imagenes">
+<h1>De imágenes satelitales a Cubos de Imágenes<a class="headerlink" href="#de-imagenes-satelitales-a-cubos-de-imagenes" title="Link to this heading">#</a></h1>
+<p>Al observar una imagen tomada desde un satélite, es tentador pensar que estamos viendo una simple foto de la Tierra como si fuera una fotografía aérea en alta resolución, pero eso sería una visión limitada, sería reducirla a lo que nuestros ojos alcanzan a ver, cuando en realidad hay mucho más que eso.
+En verdad, lo que capturan los satélites no es una simple imagen como una fotografía convencional, sino un conjunto de bandas espectrales, cada una correspondiente a una distinta longitud de onda del espectro electromagnético
+Estas bandas, combinadas, forman una representación detallada y multidimensional de lo que ocurre en la superficie terrestre. Pero la información no termina acá, las bandas pueden ser utilizadas individualmente o combinadas mediante índices espectrales, que son fórmulas matemáticas diseñadas para resaltar ciertos fenómenos, como la vegetación, el agua, los suelos y las áreas urbanas, en función de su comportamiento espectral. El catálogo absam spectral indecis, reúne más de 250 de estos índices organizados por dominio de aplicación, lo que lo convierte en una herramienta clave para interpretar y extraer información significativa de las imágenes satelitales. El cumulo de cientos de índices de este catálogo puede ser accedido desde distintos paquetes en lenguajes d eprogramacion como javascript, Python, R y julia.
+Un excelente ejemplo de esta riqueza espectral es la misión Sentinel-2, operada por la Agencia Espacial Europea. Esta misión no toma simplemente una foto del planeta, sino que registra 13 bandas espectrales distintas, distribuidas en diferentes partes del espectro electromagnético y con distintas resoluciones espaciales 10, 20 y 60 metros, cada una con un propósito específico.</p>
+<p>Estas bandas incluyen banda 1 aerosol captura información en la región del violeta, útil para la corrección atmosférica y detección de aerosoles, resolución 60 metros,
+banda 2 azul, banda 3 verde y banda 4 rojo, bandas visibles al ojo humano que permiten generar imágenes en color natural, resolución 10 metros,
+banda 5, 6 y 7, conocidas como red edge, estas bandas cubren la transición entre el rojo y el infrarrojo cercano, son fundamentales para estudios avanzados de vegetación y agricultura de precisión, resolución 20 metros,
+banda 8 y banda  8a, bandas en el infrarrojo cercano, claves para evaluar la salud de la vegetación, calcular índices como el NDVI y detectar cambios en la biomasa, resolución 10 metros, banda 8 y 20 metros en banda 8a,<br />
+banda 9, vapor de agua, útil para corregir efectos atmosféricos asociados al vapor de agua, resolución 60 metros,
+banda 10, cirrus, diseñada específicamente para la detección de nubes cirrus que pueden interferir en el análisis de otras bandas, resolución 60 metros,
+banda 11 y banda 12, SWIR 1 y SWIR 2, bandas en el infrarrojo de onda corta, útiles para analizar contenido de  humedad del suelo, nieve, hielo o detectar áreas afectadas por incendios, resolución 20 metros,
+Cada una de estas bandas aporta una capa distinta de información. Y al combinar esta riqueza espectral con series temporales, índices matemáticos e inteligencia artificial, podemos transformar simples imágenes en verdaderos análisis dinámicos del territorio.
+Entonces, lo que vemos como una imagen, en realidad, es una colección multidimensional de datos espectrales. Cada píxel tiene múltiples valores asociados, uno por cada banda, revelando propiedades biofísicas que no podríamos captar con nuestros sentidos. Es como si viéramos el mundo con “ojos científicos”.
+Y esto ocurre para cada punto de la Tierra observado por la misión. Pero además, estos puntos no se observan una única vez…
+🎬 Parte 2 – Revisitando la Tierra: frecuencia y volumen de datos en Sentinel 2
+Sentinel 2 no solo es poderosa por la cantidad de bandas que captura…
+Lo verdaderamente extraordinario es su capacidad para volver a mirar, una y otra vez, el mismo lugar del planeta con una frecuencia difícil de igualar.
+Durante años, esta misión estuvo compuesta por dos satélites gemelos: Sentinel 2A y Sentinel 2B, operando en la misma órbita para cubrir la superficie terrestre con alta frecuencia. Pero en septiembre de 2024 se produjo un hito importante: el lanzamiento de Sentinel 2C, desde la Guayana Francesa a bordo del último cohete Vega de la Agencia Espacial Europea.
+Aunque Sentinel 2C fue diseñado como satélite de reemplazo, durante una etapa transitoria en 2025, los tres satélites estuvieron operativos de forma simultánea, lo que llevó la frecuencia de revisita a niveles inéditos. En ciertas regiones, ahora es posible observar un mismo punto del territorio con apenas uno o dos días de diferencia entre capturas. Y eso, para quienes trabajamos con análisis multitemporal, es una oportunidad invaluable.
+Este ritmo sostenido de adquisición nos permite construir series temporales detalladas: ver cómo se expande una ciudad, cómo reverdece un bosque tras un incendio, cómo evoluciona un cultivo o cómo fluctúan los cuerpos de agua. Pero claro… semejante constancia tiene un precio. No económico, sino informativo.
+La constancia genera volumen. Mucho volumen.
+Cada satélite Sentinel 2 recolecta y transmite más de 1.5 terabytes de datos por día, por lo que la constelación —en esta fase de tres satélites activos— puede generar más de 4.5 terabytes diarios. A lo largo del año, esto representa más de 1.6 petabytes de nuevas imágenes satelitales.
+Hasta mediados de 2025, el archivo acumulado de la misión supera los 30 petabytes. Un océano de información geoespacial, que incluye productos de nivel 1C (ortorrectificados, en top-of-atmosphere) y nivel 2A (corregidos atmosféricamente, en bottom-of-atmosphere).
+Y lo mejor de todo es que esta información no está bajo llave.
+La Agencia Espacial Europea, a través del programa Copernicus, ha impulsado una política de ciencia abierta sin precedentes. Los datos de Sentinel 2 están disponibles para todo el mundo en repositorios como el Copernicus Data Space Ecosystem o el CEDA del Reino Unido, que ya superan los 34 petabytes de información de Observación de la Tierra, creciendo cada día en varios terabytes.
+Este compromiso con la transparencia, el acceso libre y el desarrollo global de capacidades analíticas nos plantea un desafío apasionante:
+Con tanto conocimiento disponible desde el espacio…
+¿Estamos preparados para sacarle el máximo provecho?
+¿Cómo organizamos toda esta información?
+Bienvenidos al mundo de los cubos de datos, o datacubes.
+El volumen y la complejidad de los datos satelitales nos obliga a pensar de una forma nueva. ¿Cómo podemos analizar millones de imágenes, cada una con múltiples bandas y fechas distintas, sin ahogarnos en un mar de archivos?
+Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el cubo de dato o inglés datacube dádaciubs
+Según la plataforma abierta para la observación de la Tierra openEO:
+“Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.”
+Y según Giuliani et al. (2016):
+“Es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”
+En otras palabras, un cubo de datos no es solo un almacenamiento de imágenes, sino una forma ordenada e inteligente de organizarlas para que podamos filtrar, combinar, analizar y visualizar los datos de manera eficiente.
+¿Y cuáles son sus dimensiones? Las principales son:
+•	Espacio: definido por las coordenadas x e y, donde x representa la longitud (el eje horizontal, de oeste a este) y y representa la latitud (el eje vertical, de sur a norte). Estas dos dimensiones permiten ubicar cada píxel en la superficie terrestre.
+•	Tiempo: corresponde al momento en que fue adquirida cada imagen, ya sea una fecha o una hora específica. Esta dimensión es clave para el análisis de cambios en el territorio.
+•	Espectro: se refiere a las bandas espectrales que capturan diferentes rangos del espectro electromagnético, como el visible, el infrarrojo cercano o el SWIR, lo que permite observar fenómenos que no son visibles a simple vista.
+•	Y, en algunos casos, también la geometría o incluso el sistema de referencia espacial (CRS) como una dimensión adicional.
+Esto nos permite hacer operaciones sofisticadas sin necesidad de reestructurar los datos. Por ejemplo:
+•	Filtrar el cubo por fechas, bandas o región.
+•	Aplicar funciones matemáticas sobre cada píxel o grupo de píxeles.
+•	Calcular promedios temporales, máximos espectrales, o derivar índices como NDVI o NDBI.
+•	Remuestrear los datos a resoluciones espaciales o temporales diferentes.
+•	Y realizar agregaciones estadísticas por regiones geográficas, como cuencas, provincias o áreas de cultivo.
+Un cubo de datos puede ser raster, cuando trabaja con pixeles organizados en grillas, o vectorial, cuando se organiza por geometrías como polígonos o puntos.</p>
+<hr class="docutils" />
+<p>🟣 Aplicaciones reales y cierre
+Gracias a los cubos de datos, hoy es posible:
+•	Analizar la evolución mensual del NDVI en una región agrícola.
+•	Detectar patrones de urbanización usando índices como NDBI.
+•	Entrenar modelos de machine learning sobre cubos multitemporales.
+•	Crear tableros interactivos para monitorear el ambiente a gran escala.
+📢 En definitiva, los cubos de datos no son solo una forma eficiente de almacenar información, sino una herramienta poderosa para transformar datos satelitales en conocimiento accionable.
+🧠 Comprender cómo se estructuran, cómo se consultan y cómo se transforman es clave para aprovechar todo el potencial de los datos de observación de la Tierra.</p>
+<p>“Datacubes de Imágenes Satelitales: Fundamentos y Aplicaciones”</p>
+<hr class="docutils" />
+<p>🟢 Introducción (1 minuto)
+[Visual: Animación de un globo terráqueo con imágenes satelitales apareciendo en distintos momentos]
+📢 “¿Qué pasaría si pudiéramos organizar miles de imágenes satelitales como si fueran una sola estructura ordenada, lista para ser procesada en bloque? Esa es la promesa de los datacubes: una forma poderosa de manejar datos espaciales y temporales de forma eficiente.”</p>
+<hr class="docutils" />
+<p>🟡 ¿Qué es un Datacube? (2 minutos)
+[Visual: Representación de cubo multibanda y luego una versión “plana” de ese cubo]
+📚 Definición base (openEO):
+“Un datacube es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.”
+📚 Definición académica complementaria (Giuliani et al., 2016):
+“Un datacube es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”
+🔎 Conceptos clave:
+•	Multidimensionalidad: espacio (x, y), tiempo (t), bandas (espectral), geometría.
+•	Arreglo ordenado: permite aplicar operaciones masivas, comparaciones, filtros y algoritmos sin necesidad de reestructurar el dataset.
+•	No es literalmente un cubo: puede tener más o menos de tres dimensiones, es solo una metáfora visual.</p>
+<hr class="docutils" />
+<p>🔵 Tipos de Datacubes (1 minuto)
+[Visual: Comparativa de raster vs vector datacube]
+•	Raster datacube: ejes x, y, t, bandas. Ejemplo clásico: Sentinel-2.
+•	Vector datacube: geometrías (polígonos, puntos), t, bandas. Útil para análisis estadísticos por regiones.
+•	Otros tipos: temporal puro (solo t), o con dimensión CRS (cuando hay varias zonas UTM).
+📌 Ejemplo: una imagen Sentinel-2 con 4 bandas y 3 fechas → 4 dimensiones (x, y, bandas, tiempo).</p>
+<hr class="docutils" />
+<p>🟣 Dimensiones: El eje del análisis (2 minutos)
+[Visual: Tabla con metadatos de las dimensiones]
+📌 Cada dimensión tiene propiedades clave:
+•	Nombre, tipo (espacial, temporal, espectral), etiquetas, resolución, sistema de referencia.
+•	Ejemplo: dimensión temporal con fechas 2020-10-01, 2020-10-13, 2020-10-25.
+📏 Resoluciones:
+•	Temporal: cada cuánto hay observaciones (ej. cada 5 días).
+•	Espacial: tamaño de pixel (ej. 10m).
+•	Espectral: cantidad y tipo de bandas.
+📐 CRS como dimensión adicional: importante cuando se usan datos en diferentes zonas UTM. Se puede evitar reproyecciones costosas incluyendo CRS como una dimensión más.</p>
+<hr class="docutils" />
+<p>🟤 Valores y Metadatos (1 minuto)
+[Visual: Estructura de un datacube con valores y metadatos]
+•	Los valores dentro del datacube son escalares: números, texto o booleanos.
+•	Todo lo demás (coordenadas, bandas, fechas, geometrías) va como metadatos o etiquetas de dimensiones.
+•	Precaución: evitar cambiar tipos de datos entre operaciones si el backend no lo soporta.</p>
+<hr class="docutils" />
+<p>🟠 Procesos sobre Datacubes (6 minutos)</p>
+<ol class="arabic simple">
+<li><p>Filtrado (filter) – (1 minuto)
+[Visual: Animación filtrando tiempo, bandas y espacio]
+Permite recortar el cubo en función de:
+•	Intervalos temporales (fechas).
+•	Bandas específicas.
+•	Área geográfica.
+Ejemplo: filtrar solo la banda NIR entre octubre 15 y 27 en un polígono dado.</p></li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="2">
+<li><p>Aplicar Funciones (apply) – (1.5 minutos)
+[Visual: Comparativa antes/después de aplicar abs() o media espacial]
+•	apply: aplicar función pixel a pixel (unary) o considerando vecinos (n-ary).
+•	apply_neighborhood: usa ventana de píxeles alrededor (kernel espacial o temporal).
+•	apply_dimension: aplica función a todos los valores de una dimensión (ej: media temporal).
+Ejemplo: suavizar una serie temporal usando media móvil de 3 pasos.</p></li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="3">
+<li><p>Reducción (reduce) – (1 minuto)
+[Visual: Cubo antes y después de reducir una dimensión]
+•	Colapsa una dimensión usando una función resumen: media, máximo, etc.
+•	Ejemplo: reducir dimensión temporal → imagen con valores promedio.</p></li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="4">
+<li><p>Remuestreo (resample) – (1 minuto)
+[Visual: Cambio de resolución espacial y temporal]
+•	Cambia la disposición o resolución de una dimensión.
+•	Ejemplo: pasar de imágenes cada 5 días a una imagen mensual (temporal).
+•	Ejemplo: reescalar de 10m a 30m o viceversa (espacial).</p></li>
+</ol>
+<hr class="docutils" />
+<ol class="arabic simple" start="5">
+<li><p>Agregación (aggregate) – (1.5 minutos)
+[Visual: Agregación por polígonos]
+•	Agrupa datos por intervalos o geometrías, y luego reduce dentro de cada grupo.
+•	Temporal: por mes, trimestre, año.
+•	Espacial: por polígonos (provincias, cuencas, etc.), obteniendo una tabla con valores por banda, geometría y tiempo.</p></li>
+</ol>
+<hr class="docutils" />
+<p>🟤 Aplicaciones prácticas (1 minuto)
+[Visual: Dashboard o mapa de resultados con un datacube]
+•	Seguimiento de NDVI mensual en zonas agrícolas.
+•	Detección de cambios urbanos usando NDBI.
+•	Cálculo de estadísticas climáticas por región.
+•	Entrenamiento de modelos de machine learning sobre cubos temporales.</p>
+<hr class="docutils" />
+<p>🔴 Cierre (1 minuto)
+📢 “Los datacubes no son solo una forma de organizar datos, son una herramienta poderosa para el análisis geoespacial a escala. Su estructura permite filtrar, combinar, reducir y visualizar información de manera reproducible, precisa y escalable.”
+🧠 “Entender sus dimensiones, procesos y resoluciones es clave para aprovechar su potencial en tareas de teledetección, monitoreo ambiental y geoIA.”
+🎓 “Te invito a seguir explorando este tema con datasets reales y plataformas como openEO, Google Earth Engine, xcube o rasdaman.”</p>
+<hr class="docutils" />
+<p>🎙️ Script detallado para video – Análisis Temporal Multisensor en Bahía Blanca (GEE)</p>
+<hr class="docutils" />
+<p>🎬 Introducción
+🎤 [Locución]
+¡Hola! Bienvenidos a este video donde vamos a recorrer paso a paso un algoritmo desarrollado en Google Earth Engine.
+¿El objetivo? Construir una serie temporal multifuente que combine imágenes ópticas de Sentinel-2, datos radar de Sentinel-1, precipitación diaria del producto CHIRPS y temperatura superficial del satélite MODIS, todo aplicado al área de Bahía Blanca, Argentina.</p>
+<hr class="docutils" />
+<p>🧭 1. Configuración temporal
+🎤 [Locución]
+Comenzamos definiendo la frecuencia de análisis, en este caso mensual.
+Creamos una secuencia de fechas desde enero de 2024 hasta julio de 2025, avanzando mes a mes.
+Estas fechas serán utilizadas para iterar y obtener imágenes representativas de cada período.
+javascript
+CopyEdit
+var frecuencia = ‘mensual’;
+var mesesPorPaso = { ‘mensual’: 1, ‘bimestral’: 2, ‘trimestral’: 3, ‘cuatrimestral’: 4 };
+var paso = mesesPorPaso[frecuencia];
+🎤 [Locución]
+Calculamos cuántos pasos mensuales hay entre las fechas de inicio y fin, y creamos una lista de fechas que usaremos más adelante para procesar la información.</p>
+<hr class="docutils" />
+<p>🗺️ 2. Delimitación del área de estudio
+🎤 [Locución]
+Utilizamos la base GAUL para filtrar el polígono de Bahía Blanca, en la provincia de Buenos Aires.
+Esta geometría será nuestra región de interés para recortar y analizar todas las imágenes.
+javascript
+CopyEdit
+var bahiaBlanca = admin2.filter(ee.Filter.eq(‘ADM2_NAME’, ‘Bahia Blanca’));
+var roi2 = bahiaBlanca.geometry().simplify(100);</p>
+<hr class="docutils" />
+<p>🌱 3. Índices espectrales Sentinel-2
+🎤 [Locución]
+A continuación definimos una función llamada agregarIndices, que calcula varios índices espectrales a partir de las bandas de Sentinel-2.
+Calculamos:
+•	NDVI, para vegetación.
+•	NDWI, para agua superficial.
+•	NDMI, para humedad de vegetación.
+•	NDBI, útil para identificar suelo desnudo o áreas urbanas.
+•	Y el NIR, es decir, el infrarrojo cercano.
+javascript
+CopyEdit
+function agregarIndices(img) {
+…
+return img.addBands([ndvi, ndbi, ndwi, ndmi, nir]);
+}</p>
+<hr class="docutils" />
+<p>🛰️ 4. Construcción de la colección mensual óptica
+🎤 [Locución]
+Luego definimos la función getColeccionPorPeriodo, que por cada mes filtra imágenes Sentinel-2 que cubren nuestra región y tienen menos de un 20% de nubosidad.
+Recortamos las imágenes, aplicamos los índices y calculamos una imagen promedio mensual, que guarda además la fecha y la cantidad de imágenes utilizadas.
+javascript
+CopyEdit
+return coleccionConIndices.mean()
+.set(‘system:time_start’, fecha.millis())
+.set(‘fecha’, fecha.format(‘YYYY-MM’))
+.set(‘cantidad_imagenes’, cantidad);</p>
+<hr class="docutils" />
+<p>📊 5. Cantidad de imágenes por período
+🎤 [Locución]
+Con esta colección mensual generamos un resumen por consola, mostrando cuántas imágenes fueron procesadas cada mes.
+Esto permite ver la cobertura temporal y posibles vacíos de datos.</p>
+<hr class="docutils" />
+<p>📡 6. Procesamiento de datos Sentinel-1 radar
+🎤 [Locución]
+Ahora incorporamos datos de radar Sentinel-1, filtrando aquellas imágenes que tienen polarización VV y, si está disponible, también VH.
+Calculamos además el índice Ratio, que compara VV y VH.
+Esto es muy útil para detectar humedad o inundaciones, ya que el radar penetra nubes y capta señales de superficie.
+javascript
+CopyEdit
+var ratio = ee.Algorithms.If(hasVH,
+vv.divide(ee.Image(vh)).rename(‘Ratio’),
+null
+);</p>
+<hr class="docutils" />
+<p>🔀 7. Combinación óptico + radar
+🎤 [Locución]
+En este paso unimos, para cada mes, la imagen óptica con la imagen radar correspondiente.
+Si no hay radar para ese período, la fecha se omite.
+El resultado es una colección integrada multisensorial, lista para análisis más completos.</p>
+<hr class="docutils" />
+<p>🌧️ 8. Precipitación con CHIRPS
+🎤 [Locución]
+Incorporamos el componente climático con datos diarios de precipitación del producto CHIRPS.
+Sumamos los valores diarios para cada mes, generando una serie mensual de lluvia acumulada.
+javascript
+CopyEdit
+var suma = chirps.filterDate(inicio, fin).sum();</p>
+<hr class="docutils" />
+<p>🌡️ 9. Temperatura superficial con MODIS
+🎤 [Locución]
+También sumamos información térmica, utilizando el producto MODIS LST.
+Este dataset nos da la temperatura superficial terrestre cada 8 días, que escalamos y convertimos de Kelvin a grados Celsius.
+javascript
+CopyEdit
+.multiply(0.02).subtract(273.15)</p>
+<hr class="docutils" />
+<p>📈 10. Visualización de resultados
+🎤 [Locución]
+Finalmente, generamos cuatro gráficos de series temporales:
+•	Uno para la precipitación mensual (CHIRPS).
+•	Otro con los índices ópticos y radar como NDVI, NDWI, NDMI, NDBI, NIR y el Ratio.
+•	Un tercero para VV y VH de radar Sentinel-1.
+•	Y uno adicional para la temperatura superficial (LST) de MODIS.
+🎤 [Locución]
+Todos estos gráficos se integran en un panel de visualización dentro del entorno de Google Earth Engine.
+Esto permite explorar fácilmente la evolución mensual de distintas variables ambientales sobre el área de Bahía Blanca.</p>
+<hr class="docutils" />
+<p>🧭 Cierre
+🎤 [Locución]
+Como vimos, Google Earth Engine permite combinar diferentes fuentes de datos satelitales y meteorológicos para construir análisis temporales multivariados.
+Esta metodología puede adaptarse a otras regiones, otras frecuencias o incluso extenderse con algoritmos de clasificación y detección de cambios.
+¡Gracias por acompañarnos!
+ 
+🎬 Guion de Video: Serie Temporal de Clases de Suelo con Clasificador Entrenado</p>
+<hr class="docutils" />
+<p>🧭 Introducción al Bloque
+“En este video vamos a aplicar el clasificador supervisado que entrenamos previamente sobre datos Sentinel-2 de la ciudad de Rosario. Nuestro objetivo es generar una serie temporal que nos permita observar cómo evolucionan los distintos tipos de cobertura del suelo a lo largo del tiempo, distinguiendo clases como agua, zonas urbanas, cultivos, vegetación natural y terreno desnudo.”</p>
+<hr class="docutils" />
+<p>🔧 BLOQUE 1: Configuración del período temporal
+javascript
+CopyEdit
+var frecuencia = “bimestral”;
+Definimos la frecuencia temporal con la que vamos a construir nuestra serie de tiempo. En este caso elegimos bimestral, lo que implica que cada punto de la serie va a representar un promedio de dos meses.
+javascript
+CopyEdit
+var mesesPorPaso = {
+“mensual”: 1,
+“bimestral”: 2,
+“trimestral”: 3,
+“cuatrimestral”: 4
+};
+Creamos un diccionario que traduce cada opción de frecuencia en una cantidad de meses. Esto nos permitirá usar la misma estructura para distintas resoluciones temporales.
+javascript
+CopyEdit
+var paso = mesesPorPaso[frecuencia];
+Extraemos el valor del paso correspondiente a la frecuencia elegida (en este caso 2 meses).
+javascript
+CopyEdit
+var fechas = ee.List.sequence(0, 12, paso).map(function(mes) {
+return ee.Date(‘2024-01-01’).advance(mes, ‘month’);
+});
+Generamos una lista de fechas que representan los inicios de cada período bimestral, a partir de enero de 2024. Cada valor es un objeto ee.Date.</p>
+<hr class="docutils" />
+<p>🏷️ BLOQUE 2: Definición de etiquetas de clases
+javascript
+CopyEdit
+var etiquetas = ee.Dictionary({
+‘0’: ‘Agua’,
+‘1’: ‘Urbano’,
+‘2’: ‘Cultivos’,
+‘3’: ‘Bosque-Area arbustiva’,
+‘4’: ‘Terreno desnudo’
+});
+Creamos un diccionario que asocia cada código de clase (usado por el clasificador) con un nombre legible. Esto nos permitirá mostrar las clases en gráficos con nombres descriptivos.</p>
+<hr class="docutils" />
+<p>🧠 BLOQUE 3: Aplicación del clasificador por período
+javascript
+CopyEdit
+var coleccionClasificada = ee.FeatureCollection(fechas.map(function(fechaInicio) {
+Usamos map() para iterar sobre la lista de fechas y aplicar la misma lógica de clasificación a cada período bimestral.
+javascript
+CopyEdit
+var fechaFin = ee.Date(fechaInicio).advance(paso, ‘month’);
+Calculamos la fecha final del período sumando el paso (dos meses en este caso) a la fecha de inicio.
+javascript
+CopyEdit
+var s2 = ee.ImageCollection(“COPERNICUS/S2_SR_HARMONIZED”)
+.filterDate(fechaInicio, fechaFin)
+.filterBounds(roi)
+.filter(<a class="reference external" href="http://ee.Filter.lt">ee.Filter.lt</a>(‘CLOUDY_PIXEL_PERCENTAGE’, 30))
+.select(‘B.*’);
+Descargamos las imágenes Sentinel-2 del período actual:
+•	Filtramos por fechas, región de interés (roi) y porcentaje de nubes.
+•	Seleccionamos todas las bandas ópticas.
+javascript
+CopyEdit
+var imagen = s2.median().clip(roi);
+Calculamos la mediana de las imágenes en el período y la recortamos al área de estudio.
+javascript
+CopyEdit
+var clasificada = imagen.classify(classifier);
+Aplicamos el clasificador previamente entrenado a la imagen compuesta para generar un raster de clases.</p>
+<hr class="docutils" />
+<p>📊 BLOQUE 4: Conteo de píxeles por clase
+javascript
+CopyEdit
+var histograma = clasificada.reduceRegion({
+reducer: ee.Reducer.frequencyHistogram(),
+geometry: ee.FeatureCollection(roi).geometry(),
+scale: 30,
+maxPixels: 1e13
+}).get(‘classification’);
+Reducimos la imagen clasificada a una tabla que indica cuántos píxeles hay de cada clase en ese período, usando un histograma.
+javascript
+CopyEdit
+var dict = ee.Dictionary(histograma);
+var keys = dict.keys();
+var valores = keys.map(function(k) { return dict.get(k); });
+Obtenemos las claves del diccionario (0, 1, etc.) y los valores asociados (cantidad de píxeles).
+javascript
+CopyEdit
+var nuevasClaves = keys.map(function(k) {
+return etiquetas.get(k);
+});
+Traducimos las claves numéricas por sus nombres: agua, urbano, etc.
+javascript
+CopyEdit
+var propsEtiquetadas = ee.Dictionary.fromLists(nuevasClaves, valores);
+Construimos un nuevo diccionario con claves descriptivas y valores numéricos.
+javascript
+CopyEdit
+var ft = ee.Feature(null, propsEtiquetadas)
+.set(‘fecha’, ee.Date(fechaInicio).format(‘YYYY-MM-dd’));</p>
+<p>return ft;
+}));
+Creamos un Feature con los datos de ese período y la fecha correspondiente, y lo devolvemos. Al final, coleccionClasificada es una colección de Features, uno por período.</p>
+<hr class="docutils" />
+<p>📊 BLOQUE 5: Visualización absoluta
+javascript
+CopyEdit
+var grafico = ui.Chart.feature.byFeature({
+features: coleccionClasificada,
+xProperty: ‘fecha’
+}).setChartType(‘ColumnChart’).setOptions({
+title: ‘Serie temporal de clases de suelo - ‘ + frecuencia,
+hAxis: {title: ‘Fecha’},
+vAxis: {title: ‘Cantidad de píxeles’},
+isStacked: true
+});
+Creamos un gráfico de barras apiladas que muestra la cantidad absoluta de píxeles por clase en cada período. Esto permite ver por ejemplo si aumentaron los cultivos o disminuyó el área urbana en un bimestre determinado.</p>
+<hr class="docutils" />
+<p>📐 BLOQUE 6: Conversión a porcentajes
+javascript
+CopyEdit
+var coleccionPorcentual = coleccionClasificada.map(function(feat) {
+Iteramos sobre cada Feature de la colección anterior para convertir los valores absolutos en porcentajes.
+javascript
+CopyEdit
+var props = feat.toDictionary();
+var clases = props.keys().remove(‘fecha’);
+Convertimos cada Feature en un diccionario y extraemos las clases (omitimos la fecha).
+javascript
+CopyEdit
+var total = ee.Number(
+clases.map(function(k) {
+return ee.Number(props.get(k));
+}).reduce(ee.Reducer.sum())
+);
+Calculamos el total de píxeles clasificados en ese período.
+javascript
+CopyEdit
+var nuevasProps = ee.Dictionary(
+clases.iterate(function(k, acc) {
+…
+}, ee.Dictionary({}))
+);
+Para cada clase, calculamos su porcentaje con respecto al total y lo guardamos en un nuevo diccionario.
+javascript
+CopyEdit
+return ee.Feature(null, nuevasProps)
+.set(‘fecha’, props.get(‘fecha’));
+});
+Creamos un nuevo Feature para cada período, ahora con porcentajes. coleccionPorcentual es una colección con los datos relativos.</p>
+<hr class="docutils" />
+<p>📈 BLOQUE 7: Visualización porcentual
+javascript
+CopyEdit
+var graficoPorcentual = ui.Chart.feature.byFeature({
+features: coleccionPorcentual,
+xProperty: ‘fecha’
+}).setChartType(‘LineChart’).setOptions({
+title: ‘Serie temporal porcentual de clases de suelo - ‘ + frecuencia,
+hAxis: {title: ‘Fecha’},
+vAxis: {
+title: ‘Porcentaje (%)’,
+minValue: 0,
+maxValue: 100
+},
+isStacked: false
+});
+print(graficoPorcentual);
+Mostramos un gráfico de líneas con la evolución relativa de cada clase. A diferencia del gráfico anterior, este permite detectar tendencias aunque cambie el número total de píxeles disponibles (por ejemplo, por nubosidad).</p>
+<hr class="docutils" />
+<p>🧪 Conclusión
+“Con este bloque de código logramos aplicar automáticamente el clasificador de suelos para Rosario a cada período bimestral. A partir de ahí, generamos una serie de tiempo de clases del suelo que nos permite observar tanto los cambios absolutos como los relativos. Este enfoque es ideal para detectar procesos de urbanización, expansión agrícola, deforestación o cambios hidrológicos en el territorio.”</p>
+<hr class="docutils" />
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdg-idera/PAT_INT_GEE",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Cap6_ST.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Series de tiempo</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lab 002 · Random Forest (Rosario) — Folium / Thebe</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Cubos de Imágenes Satelitales</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#de-imagenes-satelitales-a-cubos-de-imagenes">De imágenes satelitales a Cubos de Imágenes</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Luis Reynoso (IDERA-GTT CDG)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -57,11 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Cap3_SVM_DT';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Cap4_SVM_DT';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Clasificación supervisada con Sentinel-2 en GEE y Colab" href="clasificacion_s2_gee_colab.html" />
-    <link rel="prev" title="Aplicando Random Forest" href="Cap2_RFRosario.html" />
+    <link rel="next" title="Predecir Superficies de Agua" href="Cap5_Agua.html" />
+    <link rel="prev" title="Aplicando Random Fores en GEE (JS) y Colab (Python)" href="Cap3_gee_colab.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,10 +179,12 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">Aplicando Random Forest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">Aplicando Random Forest en GEE</a></li>
 
 
 
+
+<li class="toctree-l1"><a class="reference internal" href="Cap3_gee_colab.html">Aplicando Random Fores en GEE (JS) y Colab (Python)</a></li>
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Aplicando Máquina de Soporte Vectorial y Árboles de Decisión</a></li>
 
@@ -192,7 +194,23 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="clasificacion_s2_gee_colab.html">Clasificación supervisada con Sentinel-2 en GEE y Colab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">Predecir Superficies de Agua</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Cap6_ST.html">Series de tiempo</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">Cubos de Imágenes Satelitales</a></li>
+
 
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">Lab 002 · Random Forest (Rosario)  Thebe</a></li>
 </ul>
@@ -266,7 +284,7 @@
       
       
       
-      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE/issues/new?title=Issue%20on%20page%20%2FCap3_SVM_DT.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE/issues/new?title=Issue%20on%20page%20%2FCap4_SVM_DT.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -296,7 +314,7 @@
       
       
       
-      <li><a href="_sources/Cap3_SVM_DT.md" target="_blank"
+      <li><a href="_sources/Cap4_SVM_DT.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -392,7 +410,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Aplicando Máquina de Soporte Vectorial y Árboles de Decisión</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial">Maquina de soporte vectorial.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial">Máquina de soporte vectorial.</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">Arbol de Decisión</a></li>
 </ul>
 </li>
@@ -406,7 +424,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-clase-4-suelo-desnudo">Ejemplo 5 clase 4 suelo desnudo</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#enlaces-al-codigo">Enlaces al Código:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos">Recursos</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-e-incentivos">Cierre e Incentivos</a></li>
 </ul>
 
@@ -430,8 +448,8 @@ document.write(`
 y Arboles de Decisión.</p>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="maquina-de-soporte-vectorial">
-<h1>Maquina de soporte vectorial.<a class="headerlink" href="#maquina-de-soporte-vectorial" title="Link to this heading">#</a></h1>
-<p>En un capitulo anterior utilizamos Random Forest para clasificar imágenes de Sentinel-2 en  el área metropolitana de Rosario, para ello creamos el script GEE: Lab_002_RandomForest_Rosario.</p>
+<h1>Máquina de soporte vectorial.<a class="headerlink" href="#maquina-de-soporte-vectorial" title="Link to this heading">#</a></h1>
+<p>En un capítulo anterior utilizamos Random Forest para clasificar imágenes de Sentinel-2 en  el área metropolitana de Rosario, para ello creamos el script GEE: Lab_002_RandomForest_Rosario.</p>
 <p>Accederemos a dicho script y guardaremos una copia del mismo, que renombraremos a Lab_003_SVM_Rosario.</p>
 <p>Para aplicar Maquinas de soporte vectorial, el flujo de trabajo es el mismo que utilizamos RF, con excepción de que en lugar de utilizar un clasificador de Random Forest, utilizaremos un clasificador de Maquina de Soporte Vectorial. En otras palabras, el cambio principal está en la etapa de entrenamiento del clasificador.</p>
 <p>Antes usábamos ee.Classifier.smileRandomForest(100), ahora utilizamos ee.Classifier.libsvm(). Libsvm significa “a library por support vector machine”.</p>
@@ -439,12 +457,132 @@ y Arboles de Decisión.</p>
 <p>¿Qué es SVM? Es un clasificador que busca encontrar un hiperplano óptimo que separe los datos en clases. (esto fue explicado en el capítulo anterior)</p>
 <p>Luego de este, cambio no hay nada mas que hacer para obtener la clasificación, simplemente guardar y volver a ejecutar.</p>
 <p>Realizamos una evaluación de la exactitud, incluyendo la matriz de confusión. Obtenemos métricas de productor y consumidor y el coeficiente de Kappa, como en el script anterior.</p>
-<p>SVM es ideal para escenarios donde las clases no están claramente separadas linealmente. GEE es una poderosa herramienta para el análisis de datos espaciales y la clasificaicon de imágenes satelitales,
+<p>SVM es ideal para escenarios donde las clases no están claramente separadas linealmente. GEE es una poderosa herramienta para el análisis de datos espaciales y la clasificación de imágenes satelitales,
 Sin embargo, hay ciertas limitaciones cuando trabajamos con algoritmos como SVM. Por ejemplo GEE no esta diseñado para visualizar los hiperplanos que separan las clases en una clasificación.
 Esto se debe a que el enfoque principal de GEE es el procesamiento y el analisis de datos espaciales no la visualizacion detallada de los resultados matematicos de los modelos de ML.</p>
 <p><img alt="" src="_images/POST_7.png" /></p>
 <p>Ademas cuando aplicamos una clasificacion multiclase, como en el caso de un problema con 5 clases, el uso de SVM puede tornarse un tanto engorroso. Esto se debe a que SVM manejan las clasificaciones multiclase
 dividiendolas en multiples problemas de clasificiones binarias. Lo que aumenta la complejida del modelo y su interpretación. Si bien GEE puede efectuar la clasificacion y devolver el mapa resultante, no proporcionará una visualización clara de como se generan o estructuran estos hiperplanos en el espacio de características.</p>
+<blockquote>
+<div><p><strong>GEE (JavaScript)</strong></p>
+</div></blockquote>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_SR_HARMONIZED&quot;</span><span class="p">);</span>
+<span class="w"> </span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">s2</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">date</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2025-01-01&#39;</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">bounds</span><span class="p">(</span><span class="nx">roi</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B.*&#39;</span><span class="p">);</span>
+<span class="w">  </span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">composite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">filtered</span><span class="p">.</span><span class="nx">median</span><span class="p">().</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi</span><span class="p">);</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">rgbVisParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">3000</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">bands</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">composite</span><span class="p">,</span><span class="w"> </span><span class="nx">rgbVisParams</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;roi: región de interés&#39;</span><span class="p">);</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">roi</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span>
+
+<span class="c1">// TRAINING DATA:</span>
+<span class="c1">// Crear FeatureCollections para</span>
+<span class="c1">// agua con propiedad landcover = 0</span>
+<span class="c1">// urbano  con propiedad landcover = 1</span>
+<span class="c1">// cultivos con propiedad landcover = 2</span>
+<span class="c1">// bosque con propiedad landcover = 3</span>
+<span class="c1">// terrenoDesnudo con propiedad landcover = 4</span>
+
+<span class="c1">// Merge Training Samples</span>
+<span class="c1">// definir una variable gcps: ground control points</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">gcps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">urbano</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">agua</span><span class="p">).</span><span class="nx">merge</span><span class="p">(</span><span class="nx">cultivos</span><span class="p">).</span><span class="nx">merge</span><span class="p">(</span><span class="nx">terrenoDesnudo</span><span class="p">).</span><span class="nx">merge</span><span class="p">(</span><span class="nx">bosque</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">gcps</span><span class="p">.</span><span class="nx">size</span><span class="p">());</span>
+
+<span class="c1">// Training fraction 60%</span>
+<span class="c1">// Validation Fraction 40%</span>
+
+<span class="c1">// Asignar un numero random entre 0 y 1 </span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">gcp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gcps</span><span class="p">.</span><span class="nx">randomColumn</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">trainingGCP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gcp</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">));</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">validationGCP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gcp</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">gte</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">));</span>
+<span class="c1">// print(trainingGCP.size());</span>
+<span class="c1">// print(validationGCP.size());</span>
+
+<span class="c1">// Extract the pixel values</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">training</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">sampleRegions</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">trainingGCP</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
+<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">tileScale</span><span class="o">:</span><span class="w"> </span><span class="mf">16</span>
+<span class="p">});</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">training</span><span class="p">);</span>
+
+<span class="c1">//print(&#39;Training data:&#39;, training.limit(10)); </span>
+
+
+<span class="c1">// Agregar propiedades explícitas al training si es necesario</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">trainingWithBands</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">training</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">feature</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">set</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">B1</span><span class="o">:</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;B1&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">B2</span><span class="o">:</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;B2&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">B3</span><span class="o">:</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;B3&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">B4</span><span class="o">:</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;B4&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">B5</span><span class="o">:</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;B5&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">B6</span><span class="o">:</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;B6&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">B7</span><span class="o">:</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;B7&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">B8</span><span class="o">:</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;B8&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">B8A</span><span class="o">:</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;B8A&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">B9</span><span class="o">:</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;B9&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">B11</span><span class="o">:</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;B11&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">B12</span><span class="o">:</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;B12&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">landcover</span><span class="o">:</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;landcover&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">});</span>
+<span class="c1">// Exportar los datos a Google Drive</span>
+<span class="nx">Export</span><span class="p">.</span><span class="nx">table</span><span class="p">.</span><span class="nx">toDrive</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">trainingWithBands</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Training_Data2&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">fileFormat</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;CSV&#39;</span>
+<span class="p">});</span>
+
+
+<span class="c1">// TRAIN A CLASSIFIER</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">classifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Classifier</span><span class="p">.</span><span class="nx">libsvm</span><span class="p">().</span><span class="nx">train</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">features</span><span class="o">:</span><span class="w"> </span><span class="nx">training</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">classProperty</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;landcover&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">inputProperties</span><span class="o">:</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">bandNames</span><span class="p">()</span>
+<span class="p">});</span>
+
+<span class="c1">// CLASSIFY THE IMAGE</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">classified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">classify</span><span class="p">(</span><span class="nx">classifier</span><span class="p">);</span>
+
+<span class="c1">// Display the image</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">classVis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">palette</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;violet&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;orange&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">classified</span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi</span><span class="p">),</span><span class="w"> </span><span class="nx">classVis</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Imagen Clasificada&#39;</span><span class="p">);</span>
+
+<span class="c1">// ACCURACY ASSESSMENT</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">classified</span><span class="p">.</span><span class="nx">sampleRegions</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">validationGCP</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
+<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span>
+<span class="p">});</span>
+<span class="c1">// print(test);</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">test</span><span class="p">.</span><span class="nx">errorMatrix</span><span class="p">(</span><span class="s1">&#39;landcover&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;classification&#39;</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Test Accuracy&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">accuracy</span><span class="p">());</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Producers Accuracy:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">producersAccuracy</span><span class="p">()</span><span class="w"> </span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Consumers Accuracy:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">consumersAccuracy</span><span class="p">()</span><span class="w"> </span><span class="p">);</span>
+</pre></div>
+</div>
 <section id="arbol-de-decision">
 <h2>Arbol de Decisión<a class="headerlink" href="#arbol-de-decision" title="Link to this heading">#</a></h2>
 <p>Ahora guardaremos nuevamente este script con otro nombre: Lab_004_DT_Rosario. DT son las siglas de <em>árbol de decisión</em> o <em>decision tree</em>.</p>
@@ -461,11 +599,119 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 </div></blockquote>
 <p>Calculamos su precsión 98.02 por ciento. Ahora agregaremo código para obtener las reglas del árbol de decisión entrenado, y para mostrar las reglas del árbol.</p>
 <p>Como mencionamos en el video 2 de esta serie, el árbol de decisión es útil porque condensa la información del modelo entrenado.</p>
-<p>Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.</p>
+<blockquote>
+<div><p><strong>GEE (JavaScript)</strong></p>
+</div></blockquote>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_SR_HARMONIZED&quot;</span><span class="p">);</span>
+<span class="w"> </span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">s2</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">date</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2025-01-01&#39;</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">bounds</span><span class="p">(</span><span class="nx">roi</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B.*&#39;</span><span class="p">);</span>
+<span class="w">  </span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">composite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">filtered</span><span class="p">.</span><span class="nx">median</span><span class="p">().</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi</span><span class="p">);</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">rgbVisParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">3000</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">bands</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">composite</span><span class="p">,</span><span class="w"> </span><span class="nx">rgbVisParams</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;roi: región de interés&#39;</span><span class="p">);</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">roi</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span>
+
+<span class="c1">// TRAINING DATA:</span>
+<span class="c1">// Crear FeatureCollections para</span>
+<span class="c1">// agua con propiedad landcover = 0</span>
+<span class="c1">// urbano  con propiedad landcover = 1</span>
+<span class="c1">// cultivos con propiedad landcover = 2</span>
+<span class="c1">// bosque con propiedad landcover = 3</span>
+<span class="c1">// terrenoDesnudo con propiedad landcover = 4</span>
+
+<span class="c1">// Merge Training Samples</span>
+<span class="c1">// definir una variable gcps: ground control points</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">gcps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">urbano</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">agua</span><span class="p">).</span><span class="nx">merge</span><span class="p">(</span><span class="nx">cultivos</span><span class="p">).</span><span class="nx">merge</span><span class="p">(</span><span class="nx">terrenoDesnudo</span><span class="p">).</span><span class="nx">merge</span><span class="p">(</span><span class="nx">bosque</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">gcps</span><span class="p">.</span><span class="nx">size</span><span class="p">());</span>
+
+<span class="c1">// Training fraction 60%</span>
+<span class="c1">// Validation Fraction 40%</span>
+
+<span class="c1">// Asignar un numero random entre 0 y 1 </span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">gcp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gcps</span><span class="p">.</span><span class="nx">randomColumn</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">trainingGCP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gcp</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">));</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">validationGCP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gcp</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">gte</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">));</span>
+<span class="c1">// print(trainingGCP.size());</span>
+<span class="c1">// print(validationGCP.size());</span>
+
+<span class="c1">// Extract the pixel values</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">training</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">sampleRegions</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">trainingGCP</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
+<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">tileScale</span><span class="o">:</span><span class="w"> </span><span class="mf">16</span>
+<span class="p">});</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">training</span><span class="p">);</span>
+
+<span class="c1">// TRAIN A CLASSIFIER</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">classifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Classifier</span><span class="p">.</span><span class="nx">smileCart</span><span class="p">().</span><span class="nx">train</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">features</span><span class="o">:</span><span class="w"> </span><span class="nx">training</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">classProperty</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;landcover&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">inputProperties</span><span class="o">:</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">bandNames</span><span class="p">()</span>
+<span class="p">});</span>
+
+<span class="c1">// CLASSIFY THE IMAGE</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">classified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">classify</span><span class="p">(</span><span class="nx">classifier</span><span class="p">);</span>
+
+<span class="c1">// Display the image</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">classVis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">palette</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;violet&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;orange&#39;</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">classified</span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi</span><span class="p">),</span><span class="w"> </span><span class="nx">classVis</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Imagen Clasificada&#39;</span><span class="p">);</span>
+
+<span class="c1">// ACCURACY ASSESSMENT</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">classified</span><span class="p">.</span><span class="nx">sampleRegions</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">validationGCP</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
+<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span>
+<span class="p">});</span>
+<span class="c1">// print(test);</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">test</span><span class="p">.</span><span class="nx">errorMatrix</span><span class="p">(</span><span class="s1">&#39;landcover&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;classification&#39;</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Test Accuracy&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">accuracy</span><span class="p">());</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Producers Accuracy:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">producersAccuracy</span><span class="p">()</span><span class="w"> </span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Consumers Accuracy:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">consumersAccuracy</span><span class="p">()</span><span class="w"> </span><span class="p">);</span>
+
+<span class="c1">// Obtener las reglas del árbol de decisión entrenado</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">treeRules</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">classifier</span><span class="p">.</span><span class="nx">explain</span><span class="p">();</span>
+
+<span class="c1">// Mostrar las reglas del árbol</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Tree Rules:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">treeRules</span><span class="p">);</span>
+
+<span class="c1">// Contar píxeles válidos por banda</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">pixelCount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">reduceRegion</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">count</span><span class="p">(),</span>
+<span class="w">  </span><span class="nx">geometry</span><span class="o">:</span><span class="w"> </span><span class="nx">roi</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="c1">// Usar la escala correcta, en este caso utilizo Sentinel-2</span>
+<span class="w">  </span><span class="nx">maxPixels</span><span class="o">:</span><span class="w"> </span><span class="mf">1e13</span>
+<span class="p">});</span>
+
+<span class="c1">// Imprimir el resultado</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Número total de píxeles válidos por banda:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">pixelCount</span><span class="p">);</span>
+</pre></div>
+</div>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="grafico-del-arbol-de-decision-con-google-colab">
 <h1>Gráfico del Arbol de decisión con Google Colab<a class="headerlink" href="#grafico-del-arbol-de-decision-con-google-colab" title="Link to this heading">#</a></h1>
+<p>Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.</p>
 <p>A continuación se muestra el código Python que permite graficar un árbol de decisión, dado el archivo .dot.</p>
 <blockquote>
 <div><p><strong>Colab (Python)</strong></p>
@@ -569,21 +815,21 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p>El recorrido consiste de tres evaluaciones:</p>
 <p>Primera evaluación:</p>
 <ul class="simple">
-<li><p>Condición B6 &lt;= 1095.5</p></li>
+<li><p>Condición: B6 &lt;= 1095.5</p></li>
 <li><p>B6: 2743</p></li>
-<li><p>evaluación:  2743 &lt;= 1095.5 Falso</p></li>
+<li><p>Evaluación:  2743 &lt;= 1095.5 Falso</p></li>
 </ul>
 <p>Segunda evaluación:</p>
 <ul class="simple">
-<li><p>B1 &lt;= 955.00</p></li>
+<li><p>Condición: B1 &lt;= 955.00</p></li>
 <li><p>B1: 1153</p></li>
-<li><p>evaluación 1153 &lt;= 955 falso</p></li>
+<li><p>Evaluación 1153 &lt;= 955 falso</p></li>
 </ul>
 <p>Tercera evaluación:</p>
 <ul class="simple">
-<li><p>B9 &lt;= 2879.25</p></li>
+<li><p>Condición: B9 &lt;= 2879.25</p></li>
 <li><p>B9: 2416</p></li>
-<li><p>evaluación 2416 &lt;= 2879.25 true</p></li>
+<li><p>Evaluación: 2416 &lt;= 2879.25 true</p></li>
 </ul>
 <p>Seguimos por la rama true: La clase predicha para este píxel es clase 1.</p>
 <p><img alt="" src="_images/Pixel41_Cat1.png" /></p>
@@ -593,45 +839,45 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p>El recorrido consiste de tres evaluaciones:</p>
 <p>Primera evaluación:</p>
 <ul class="simple">
-<li><p>Condición B6 &lt;= 1095.5</p></li>
+<li><p>Condición: B6 &lt;= 1095.5</p></li>
 <li><p>B6: 2751</p></li>
 <li><p>Evaluación: 2751 &lt;= 1095.5 falso</p></li>
-<li><p>condición B1 &lt;= 955.0</p></li>
+<li><p>Condición: B1 &lt;= 955.0</p></li>
 <li><p>B1: 351</p></li>
-<li><p>evaluación 351 &lt;= 955 true, verdadero</p></li>
-<li><p>condición B11 &lt;= 1879.5</p></li>
+<li><p>Evaluación: 351 &lt;= 955 true, verdadero</p></li>
+<li><p>Condición: B11 &lt;= 1879.5</p></li>
 <li><p>B11: 2579</p></li>
-<li><p>evalucion 2579 &lt;= 1879.5 false</p></li>
-<li><p>condición B11 &lt;= 2910.0</p></li>
+<li><p>Evalucion: 2579 &lt;= 1879.5 false</p></li>
+<li><p>Condición: B11 &lt;= 2910.0</p></li>
 <li><p>B11: 2579</p></li>
-<li><p>evaluación 2579 &lt;= 2910.0 true</p></li>
-<li><p>condición B1 &lt;= 625.00</p></li>
+<li><p>Evaluación: 2579 &lt;= 2910.0 true</p></li>
+<li><p>Condición: B1 &lt;= 625.00</p></li>
 <li><p>B1: 351</p></li>
-<li><p>Evalucion 351 &lt;= 625.00 true ,</p></li>
+<li><p>Evalución: 351 &lt;= 625.00 true ,</p></li>
 </ul>
 <p>Seguimos por la rama true: La clase predicha para este píxel es clase 2.</p>
-<p>![](imagenes/Pixel109_Cat2.png</p>
+<p><img alt="" src="_images/Pixel109_Cat2.png" /></p>
 </section>
 <section id="ejemplo-4-clase-3-bosque">
 <h2>Ejemplo 4 clase 3 bosque<a class="headerlink" href="#ejemplo-4-clase-3-bosque" title="Link to this heading">#</a></h2>
 <p>El recorrido consiste de tres evaluaciones:</p>
 <p>Primera evaluación:</p>
 <ul class="simple">
-<li><p>Condición B6 &lt;= 1095.5</p></li>
-<li><p>B6 2062</p></li>
-<li><p>Evaluación 2062 &lt;= 1095.5 falso</p></li>
+<li><p>Condición: B6 &lt;= 1095.5</p></li>
+<li><p>B6: 2062</p></li>
+<li><p>Evaluación: 2062 &lt;= 1095.5 falso</p></li>
 </ul>
 <p>Segunda evaluación:</p>
 <ul class="simple">
-<li><p>Condición B1 &lt;= 955</p></li>
+<li><p>Condición: B1 &lt;= 955</p></li>
 <li><p>B1: 159</p></li>
-<li><p>Evaluación 159 &lt;= 955 verdaero</p></li>
+<li><p>Evaluación: 159 &lt;= 955 verdaero</p></li>
 </ul>
 <p>Tercera evaluación:</p>
 <ul class="simple">
-<li><p>Condición B11 &lt;= 1879.5</p></li>
+<li><p>Condición: B11 &lt;= 1879.5</p></li>
 <li><p>B11: 1388</p></li>
-<li><p>Evaluacon 1388 &lt;= 1879.5, verdadero</p></li>
+<li><p>Evaluación: 1388 &lt;= 1879.5, verdadero</p></li>
 </ul>
 <p>Seguimos por la rama true: La clase predicha para este píxel es clase 3</p>
 <p><img alt="" src="_images/Pixel159_Cat3.png" /></p>
@@ -641,38 +887,40 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p>El recorrido consiste de cuatro evaluaciones:</p>
 <p>Primera evaluación:</p>
 <ul class="simple">
-<li><p>Condición B6 &lt;= 1095.5</p></li>
+<li><p>Condición: B6 &lt;= 1095.5</p></li>
 <li><p>B6: 3151</p></li>
-<li><p>Evaluación 3151 &lt;= 1095.5 , falso.</p></li>
+<li><p>Evaluación: 3151 &lt;= 1095.5 , falso.</p></li>
 </ul>
 <p>Segunda evaluación:</p>
 <ul class="simple">
 <li><p>Condición B1 &lt;= 955</p></li>
 <li><p>B1: 804</p></li>
-<li><p>Evaluación 804 &lt;= 955 verdaero</p></li>
+<li><p>Evaluación: 804 &lt;= 955 verdaero</p></li>
 </ul>
 <p>Tercera evaluación:</p>
 <ul class="simple">
-<li><p>Condición B11 &lt;= 1879.5</p></li>
+<li><p>Condición: B11 &lt;= 1879.5</p></li>
 <li><p>B11: 3756</p></li>
-<li><p>Evaluación 3756 &lt;= 1879.5, falso</p></li>
+<li><p>Evaluación: 3756 &lt;= 1879.5, falso</p></li>
 </ul>
 <p>Cuarta evaluación:</p>
 <ul class="simple">
-<li><p>B11 &lt;= 2910.0</p></li>
+<li><p>Condición: B11 &lt;= 2910.0</p></li>
 <li><p>B11: es 3756</p></li>
-<li><p>Evaluación 3756 &lt;= 2910, falso</p></li>
+<li><p>Evaluación: 3756 &lt;= 2910, falso</p></li>
 </ul>
 <p>Seguimos por la rama falso: La clase predicha para este píxel es clase 4.</p>
 <p><img alt="" src="_images/Pixel115_Cat4.png" /></p>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="enlaces-al-codigo">
-<h1>Enlaces al Código:<a class="headerlink" href="#enlaces-al-codigo" title="Link to this heading">#</a></h1>
-<p>Recursos:</p>
+<section class="tex2jax_ignore mathjax_ignore" id="recursos">
+<h1>Recursos<a class="headerlink" href="#recursos" title="Link to this heading">#</a></h1>
+<p>Los recursos asociados a este capítulo incluyen:</p>
 <ul class="simple">
+<li><p>Youtube: <a class="reference external" href="https://www.youtube.com/watch?v=QBJtlQOPdfQ">https://www.youtube.com/watch?v=QBJtlQOPdfQ</a></p></li>
 <li><p>Colab: <a class="reference external" href="https://colab.research.google.com/drive/1AdTW_jUPDzoIhBjeoGgWkSdsh1Ke6SLy?usp=sharing">https://colab.research.google.com/drive/1AdTW_jUPDzoIhBjeoGgWkSdsh1Ke6SLy?usp=sharing</a></p></li>
 <li><p>Repositorio GEE: <a class="reference external" href="https://code.earthengine.google.com/?accept_repo=users%2Fcdg-idera%2Fgee">https://code.earthengine.google.com/?accept_repo=users%2Fcdg-idera%2Fgee</a></p></li>
+<li><p>Scripts GEE: Lab_003_SVM_Rosario y Lab_004_DT_Rosario</p></li>
 </ul>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="cierre-e-incentivos">
@@ -716,20 +964,20 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Cap2_RFRosario.html"
+       href="Cap3_gee_colab.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Aplicando Random Forest</p>
+        <p class="prev-next-title">Aplicando Random Fores en GEE (JS) y Colab (Python)</p>
       </div>
     </a>
     <a class="right-next"
-       href="clasificacion_s2_gee_colab.html"
+       href="Cap5_Agua.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Clasificación supervisada con Sentinel-2 en GEE y Colab</p>
+        <p class="prev-next-title">Predecir Superficies de Agua</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -751,7 +999,7 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Aplicando Máquina de Soporte Vectorial y Árboles de Decisión</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial">Maquina de soporte vectorial.</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial">Máquina de soporte vectorial.</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">Arbol de Decisión</a></li>
 </ul>
 </li>
@@ -765,7 +1013,7 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-clase-4-suelo-desnudo">Ejemplo 5 clase 4 suelo desnudo</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#enlaces-al-codigo">Enlaces al Código:</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos">Recursos</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-e-incentivos">Cierre e Incentivos</a></li>
 </ul>
 

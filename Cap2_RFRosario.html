@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Aplicando Random Forest &#8212; GeoIA aplicado a Imágenes Satelitales</title>
+    <title>Aplicando Random Forest en GEE &#8212; GeoIA aplicado a Imágenes Satelitales</title>
   
   
   
@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Cap2_RFRosario';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Aplicando Máquina de Soporte Vectorial y Árboles de Decisión" href="Cap3_SVM_DT.html" />
+    <link rel="next" title="Aplicando Random Fores en GEE (JS) y Colab (Python)" href="Cap3_gee_colab.html" />
     <link rel="prev" title="Teledetección y GeoIA" href="Cap1_Tecnicas.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -179,12 +179,14 @@
 
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Aplicando Random Forest</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Aplicando Random Forest en GEE</a></li>
 
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="Cap3_SVM_DT.html">Aplicando Máquina de Soporte Vectorial y Árboles de Decisión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap3_gee_colab.html">Aplicando Random Fores en GEE (JS) y Colab (Python)</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Cap4_SVM_DT.html">Aplicando Máquina de Soporte Vectorial y Árboles de Decisión</a></li>
 
 
 
@@ -192,7 +194,23 @@
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="clasificacion_s2_gee_colab.html">Clasificación supervisada con Sentinel-2 en GEE y Colab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">Predecir Superficies de Agua</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Cap6_ST.html">Series de tiempo</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">Cubos de Imágenes Satelitales</a></li>
+
 
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">Lab 002 · Random Forest (Rosario)  Thebe</a></li>
 </ul>
@@ -380,7 +398,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Aplicando Random Forest</h1>
+    <h1>Aplicando Random Forest en GEE</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -390,7 +408,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Aplicando Random Forest</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Aplicando Random Forest en GEE</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">Entrenamiento del Clasificador</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-la-imagen">Clasificación de la Imagen</a></li>
@@ -411,8 +429,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="aplicando-random-forest">
-<h1>Aplicando Random Forest<a class="headerlink" href="#aplicando-random-forest" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="aplicando-random-forest-en-gee">
+<h1>Aplicando Random Forest en GEE<a class="headerlink" href="#aplicando-random-forest-en-gee" title="Link to this heading">#</a></h1>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="introduccion">
 <h1>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h1>
@@ -587,11 +605,11 @@ Otras métricas incluyen el coeficiente Kappa, que mide la concordancia entre la
       </div>
     </a>
     <a class="right-next"
-       href="Cap3_SVM_DT.html"
+       href="Cap3_gee_colab.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Aplicando Máquina de Soporte Vectorial y Árboles de Decisión</p>
+        <p class="prev-next-title">Aplicando Random Fores en GEE (JS) y Colab (Python)</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -611,7 +629,7 @@ Otras métricas incluyen el coeficiente Kappa, que mide la concordancia entre la
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Aplicando Random Forest</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Aplicando Random Forest en GEE</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">Entrenamiento del Clasificador</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-la-imagen">Clasificación de la Imagen</a></li>

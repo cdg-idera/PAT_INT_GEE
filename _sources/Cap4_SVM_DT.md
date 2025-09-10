@@ -8,9 +8,9 @@ Propiciar la incorporación enfoques innovadores y paradigmas de ciencias de dat
 En este capítulo exploraremos el uso de dos técnicas de aprendizaje automático para clasificación supervisada multiclase en Google Earth Engine. Aplicaremos Maquina de Soporte Vectorial: SVM (Support Vector Machine) 
 y Arboles de Decisión.
 
-# Maquina de soporte vectorial.
+# Máquina de soporte vectorial.
 
-En un capitulo anterior utilizamos Random Forest para clasificar imágenes de Sentinel-2 en  el área metropolitana de Rosario, para ello creamos el script GEE: Lab_002_RandomForest_Rosario.
+En un capítulo anterior utilizamos Random Forest para clasificar imágenes de Sentinel-2 en  el área metropolitana de Rosario, para ello creamos el script GEE: Lab_002_RandomForest_Rosario.
 
 Accederemos a dicho script y guardaremos una copia del mismo, que renombraremos a Lab_003_SVM_Rosario.
 
@@ -27,7 +27,7 @@ Luego de este, cambio no hay nada mas que hacer para obtener la clasificación, 
 
 Realizamos una evaluación de la exactitud, incluyendo la matriz de confusión. Obtenemos métricas de productor y consumidor y el coeficiente de Kappa, como en el script anterior.
 
-SVM es ideal para escenarios donde las clases no están claramente separadas linealmente. GEE es una poderosa herramienta para el análisis de datos espaciales y la clasificaicon de imágenes satelitales, 
+SVM es ideal para escenarios donde las clases no están claramente separadas linealmente. GEE es una poderosa herramienta para el análisis de datos espaciales y la clasificación de imágenes satelitales, 
 Sin embargo, hay ciertas limitaciones cuando trabajamos con algoritmos como SVM. Por ejemplo GEE no esta diseñado para visualizar los hiperplanos que separan las clases en una clasificación. 
 Esto se debe a que el enfoque principal de GEE es el procesamiento y el analisis de datos espaciales no la visualizacion detallada de los resultados matematicos de los modelos de ML.
 
@@ -35,6 +35,125 @@ Esto se debe a que el enfoque principal de GEE es el procesamiento y el analisis
 
 Ademas cuando aplicamos una clasificacion multiclase, como en el caso de un problema con 5 clases, el uso de SVM puede tornarse un tanto engorroso. Esto se debe a que SVM manejan las clasificaciones multiclase
 dividiendolas en multiples problemas de clasificiones binarias. Lo que aumenta la complejida del modelo y su interpretación. Si bien GEE puede efectuar la clasificacion y devolver el mapa resultante, no proporcionará una visualización clara de como se generan o estructuran estos hiperplanos en el espacio de características.
+
+> **GEE (JavaScript)**
+```javascript
+var s2 = ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED");
+ 
+var filtered = s2
+  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 30))
+  .filter(ee.Filter.date('2024-01-01', '2025-01-01'))
+  .filter(ee.Filter.bounds(roi))
+  .select('B.*');
+  
+var composite = filtered.median().clip(roi);
+
+var rgbVisParams = {
+  min: 0.0,
+  max: 3000,
+  bands: ['B4','B3','B2']
+}
+
+Map.addLayer(composite, rgbVisParams, 'roi: región de interés');
+Map.centerObject(roi, 10);
+
+// TRAINING DATA:
+// Crear FeatureCollections para
+// agua con propiedad landcover = 0
+// urbano  con propiedad landcover = 1
+// cultivos con propiedad landcover = 2
+// bosque con propiedad landcover = 3
+// terrenoDesnudo con propiedad landcover = 4
+
+// Merge Training Samples
+// definir una variable gcps: ground control points
+
+var gcps = urbano.merge(agua).merge(cultivos).merge(terrenoDesnudo).merge(bosque);
+print(gcps.size());
+
+// Training fraction 60%
+// Validation Fraction 40%
+
+// Asignar un numero random entre 0 y 1 
+var gcp = gcps.randomColumn();
+var trainingGCP = gcp.filter(ee.Filter.lt('random', 0.6));
+var validationGCP = gcp.filter(ee.Filter.gte('random', 0.6));
+// print(trainingGCP.size());
+// print(validationGCP.size());
+
+// Extract the pixel values
+var training = composite.sampleRegions({
+  collection: trainingGCP,
+  properties: ['landcover'],
+  scale: 10,
+  tileScale: 16
+});
+print(training);
+
+//print('Training data:', training.limit(10)); 
+
+
+// Agregar propiedades explícitas al training si es necesario
+var trainingWithBands = training.map(function(feature) {
+  return feature.set({
+    B1: feature.get('B1'),
+    B2: feature.get('B2'),
+    B3: feature.get('B3'),
+    B4: feature.get('B4'),
+    B5: feature.get('B5'),
+    B6: feature.get('B6'),
+    B7: feature.get('B7'),
+    B8: feature.get('B8'),
+    B8A: feature.get('B8A'),
+    B9: feature.get('B9'),
+    B11: feature.get('B11'),
+    B12: feature.get('B12'),
+    landcover: feature.get('landcover')
+  });
+});
+// Exportar los datos a Google Drive
+Export.table.toDrive({
+  collection: trainingWithBands,
+  description: 'Training_Data2',
+  fileFormat: 'CSV'
+});
+
+
+// TRAIN A CLASSIFIER
+var classifier = ee.Classifier.libsvm().train({
+  features: training,
+  classProperty: 'landcover',
+  inputProperties: composite.bandNames()
+});
+
+// CLASSIFY THE IMAGE
+var classified = composite.classify(classifier);
+
+// Display the image
+var classVis = {
+  min: 0,
+  max: 4,
+  palette: ['blue', 'gray', 'green', 'violet', 'orange']
+}
+
+Map.addLayer(classified.clip(roi), classVis, 'Imagen Clasificada');
+
+// ACCURACY ASSESSMENT
+
+var test = classified.sampleRegions({
+  collection: validationGCP,
+  properties: ['landcover'],
+  scale: 10
+});
+// print(test);
+
+var testConfusionMatrix = test.errorMatrix('landcover', 'classification');
+print('Confusion Matrix', testConfusionMatrix);
+print('Test Accuracy', testConfusionMatrix.accuracy());
+
+print('Producers Accuracy:', testConfusionMatrix.producersAccuracy() );
+print('Consumers Accuracy:', testConfusionMatrix.consumersAccuracy() );
+```
 
 ## Arbol de Decisión
 
@@ -57,9 +176,118 @@ Calculamos su precsión 98.02 por ciento. Ahora agregaremo código para obtener 
 
 Como mencionamos en el video 2 de esta serie, el árbol de decisión es útil porque condensa la información del modelo entrenado. 
 
-Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.
+> **GEE (JavaScript)**
+```javascript
+var s2 = ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED");
+ 
+var filtered = s2
+  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 30))
+  .filter(ee.Filter.date('2024-01-01', '2025-01-01'))
+  .filter(ee.Filter.bounds(roi))
+  .select('B.*');
+  
+var composite = filtered.median().clip(roi);
+
+var rgbVisParams = {
+  min: 0.0,
+  max: 3000,
+  bands: ['B4','B3','B2']
+}
+
+Map.addLayer(composite, rgbVisParams, 'roi: región de interés');
+Map.centerObject(roi, 10);
+
+// TRAINING DATA:
+// Crear FeatureCollections para
+// agua con propiedad landcover = 0
+// urbano  con propiedad landcover = 1
+// cultivos con propiedad landcover = 2
+// bosque con propiedad landcover = 3
+// terrenoDesnudo con propiedad landcover = 4
+
+// Merge Training Samples
+// definir una variable gcps: ground control points
+
+var gcps = urbano.merge(agua).merge(cultivos).merge(terrenoDesnudo).merge(bosque);
+print(gcps.size());
+
+// Training fraction 60%
+// Validation Fraction 40%
+
+// Asignar un numero random entre 0 y 1 
+var gcp = gcps.randomColumn();
+var trainingGCP = gcp.filter(ee.Filter.lt('random', 0.6));
+var validationGCP = gcp.filter(ee.Filter.gte('random', 0.6));
+// print(trainingGCP.size());
+// print(validationGCP.size());
+
+// Extract the pixel values
+var training = composite.sampleRegions({
+  collection: trainingGCP,
+  properties: ['landcover'],
+  scale: 10,
+  tileScale: 16
+});
+print(training);
+
+// TRAIN A CLASSIFIER
+var classifier = ee.Classifier.smileCart().train({
+  features: training,
+  classProperty: 'landcover',
+  inputProperties: composite.bandNames()
+});
+
+// CLASSIFY THE IMAGE
+var classified = composite.classify(classifier);
+
+// Display the image
+var classVis = {
+  min: 0,
+  max: 4,
+  palette: ['blue', 'gray', 'green', 'violet', 'orange']
+}
+
+Map.addLayer(classified.clip(roi), classVis, 'Imagen Clasificada');
+
+// ACCURACY ASSESSMENT
+
+var test = classified.sampleRegions({
+  collection: validationGCP,
+  properties: ['landcover'],
+  scale: 10
+});
+// print(test);
+
+var testConfusionMatrix = test.errorMatrix('landcover', 'classification');
+print('Confusion Matrix', testConfusionMatrix);
+print('Test Accuracy', testConfusionMatrix.accuracy());
+
+print('Producers Accuracy:', testConfusionMatrix.producersAccuracy() );
+print('Consumers Accuracy:', testConfusionMatrix.consumersAccuracy() );
+
+// Obtener las reglas del árbol de decisión entrenado
+var treeRules = classifier.explain();
+
+// Mostrar las reglas del árbol
+print('Tree Rules:', treeRules);
+
+// Contar píxeles válidos por banda
+var pixelCount = composite.reduceRegion({
+  reducer: ee.Reducer.count(),
+  geometry: roi,
+  scale: 10, // Usar la escala correcta, en este caso utilizo Sentinel-2
+  maxPixels: 1e13
+});
+
+// Imprimir el resultado
+print('Número total de píxeles válidos por banda:', pixelCount);
+```
 
 # Gráfico del Arbol de decisión con Google Colab
+
+
+Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.
+
 
 A continuación se muestra el código Python que permite graficar un árbol de decisión, dado el archivo .dot. 
 
@@ -184,21 +412,21 @@ El recorrido consiste de tres evaluaciones:
 
 Primera evaluación:
 
-* Condición B6 <= 1095.5
+* Condición: B6 <= 1095.5
 * B6: 2743
-* evaluación:  2743 <= 1095.5 Falso
+* Evaluación:  2743 <= 1095.5 Falso
 
 Segunda evaluación:
 
-* B1 <= 955.00
+* Condición: B1 <= 955.00
 * B1: 1153
-* evaluación 1153 <= 955 falso
+* Evaluación 1153 <= 955 falso
 
 Tercera evaluación:
 
-* B9 <= 2879.25
+* Condición: B9 <= 2879.25
 * B9: 2416
-* evaluación 2416 <= 2879.25 true
+* Evaluación: 2416 <= 2879.25 true
 
 Seguimos por la rama true: La clase predicha para este píxel es clase 1.
 
@@ -210,30 +438,30 @@ El recorrido consiste de tres evaluaciones:
 
 Primera evaluación:
 
-* Condición B6 <= 1095.5
+* Condición: B6 <= 1095.5
 * B6: 2751 
 * Evaluación: 2751 <= 1095.5 falso
 
-* condición B1 <= 955.0
+* Condición: B1 <= 955.0
 * B1: 351
-* evaluación 351 <= 955 true, verdadero
+* Evaluación: 351 <= 955 true, verdadero
  
-* condición B11 <= 1879.5
+* Condición: B11 <= 1879.5
 * B11: 2579 
-* evalucion 2579 <= 1879.5 false
+* Evalucion: 2579 <= 1879.5 false
 
-* condición B11 <= 2910.0
+* Condición: B11 <= 2910.0
 * B11: 2579
-* evaluación 2579 <= 2910.0 true
+* Evaluación: 2579 <= 2910.0 true
 
-* condición B1 <= 625.00
+* Condición: B1 <= 625.00
 * B1: 351
-* Evalucion 351 <= 625.00 true , 
+* Evalución: 351 <= 625.00 true , 
 
 Seguimos por la rama true: La clase predicha para este píxel es clase 2.
 
 
-![](imagenes/Pixel109_Cat2.png
+![](imagenes/Pixel109_Cat2.png)
 
 ## Ejemplo 4 clase 3 bosque
 
@@ -241,21 +469,21 @@ El recorrido consiste de tres evaluaciones:
 
 Primera evaluación:
 
-* Condición B6 <= 1095.5
-* B6 2062
-* Evaluación 2062 <= 1095.5 falso
+* Condición: B6 <= 1095.5
+* B6: 2062
+* Evaluación: 2062 <= 1095.5 falso
 
 Segunda evaluación:
 
-* Condición B1 <= 955
+* Condición: B1 <= 955
 * B1: 159
-* Evaluación 159 <= 955 verdaero
+* Evaluación: 159 <= 955 verdaero
 
 Tercera evaluación:
 
-* Condición B11 <= 1879.5
+* Condición: B11 <= 1879.5
 * B11: 1388
-* Evaluacon 1388 <= 1879.5, verdadero
+* Evaluación: 1388 <= 1879.5, verdadero
 
 Seguimos por la rama true: La clase predicha para este píxel es clase 3
 
@@ -267,40 +495,41 @@ El recorrido consiste de cuatro evaluaciones:
 
 Primera evaluación:
 
-* Condición B6 <= 1095.5
+* Condición: B6 <= 1095.5
 * B6: 3151
-* Evaluación 3151 <= 1095.5 , falso.
+* Evaluación: 3151 <= 1095.5 , falso.
 
 Segunda evaluación:
 
 * Condición B1 <= 955
 * B1: 804
-* Evaluación 804 <= 955 verdaero
+* Evaluación: 804 <= 955 verdaero
 
 Tercera evaluación:
 
-* Condición B11 <= 1879.5
+* Condición: B11 <= 1879.5
 * B11: 3756
-* Evaluación 3756 <= 1879.5, falso
+* Evaluación: 3756 <= 1879.5, falso
 
 Cuarta evaluación:
 
-* B11 <= 2910.0
+* Condición: B11 <= 2910.0
 * B11: es 3756
-* Evaluación 3756 <= 2910, falso
+* Evaluación: 3756 <= 2910, falso
 
 Seguimos por la rama falso: La clase predicha para este píxel es clase 4.
 
 ![](imagenes/Pixel115_Cat4.png)
 
 
-# Enlaces al Código:
+# Recursos
 
-Recursos:
+Los recursos asociados a este capítulo incluyen:
 
+* Youtube: https://www.youtube.com/watch?v=QBJtlQOPdfQ
 * Colab: https://colab.research.google.com/drive/1AdTW_jUPDzoIhBjeoGgWkSdsh1Ke6SLy?usp=sharing
 * Repositorio GEE: https://code.earthengine.google.com/?accept_repo=users%2Fcdg-idera%2Fgee
-
+* Scripts GEE: Lab_003_SVM_Rosario y Lab_004_DT_Rosario
 
 # Cierre e Incentivos
 

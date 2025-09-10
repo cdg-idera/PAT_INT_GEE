@@ -1,4 +1,4 @@
-# Aplicando Random Forest 
+# Aplicando Random Forest en GEE
 
 # Introducción
 
