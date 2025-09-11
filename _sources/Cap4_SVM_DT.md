@@ -36,6 +36,8 @@ Esto se debe a que el enfoque principal de GEE es el procesamiento y el analisis
 Ademas cuando aplicamos una clasificacion multiclase, como en el caso de un problema con 5 clases, el uso de SVM puede tornarse un tanto engorroso. Esto se debe a que SVM manejan las clasificaciones multiclase
 dividiendolas en multiples problemas de clasificiones binarias. Lo que aumenta la complejida del modelo y su interpretación. Si bien GEE puede efectuar la clasificacion y devolver el mapa resultante, no proporcionará una visualización clara de como se generan o estructuran estos hiperplanos en el espacio de características.
 
+
+
 > **GEE (JavaScript)**
 ```javascript
 var s2 = ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED");
@@ -155,6 +157,9 @@ print('Producers Accuracy:', testConfusionMatrix.producersAccuracy() );
 print('Consumers Accuracy:', testConfusionMatrix.consumersAccuracy() );
 ```
 
+![](imagenes/POST_6.png)
+
+
 ## Arbol de Decisión
 
 Ahora guardaremos nuevamente este script con otro nombre: Lab_004_DT_Rosario. DT son las siglas de *árbol de decisión* o *decision tree*.
@@ -174,7 +179,12 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 
 Calculamos su precsión 98.02 por ciento. Ahora agregaremo código para obtener las reglas del árbol de decisión entrenado, y para mostrar las reglas del árbol.
 
+![](imagenes/POST_10.png)
+
 Como mencionamos en el video 2 de esta serie, el árbol de decisión es útil porque condensa la información del modelo entrenado. 
+
+![](imagenes/POST_9.png)
+
 
 > **GEE (JavaScript)**
 ```javascript
@@ -288,6 +298,8 @@ print('Número total de píxeles válidos por banda:', pixelCount);
 
 Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.
 
+![](imagenes/POST_11.png)
+
 
 A continuación se muestra el código Python que permite graficar un árbol de decisión, dado el archivo .dot. 
 
@@ -352,13 +364,21 @@ Primero podemos identificar las principales partes de un árbol de decisión:
 
 Este árbol tiene 7 **nodos de decisión**, donde cada nodo de decisión tiene una condición lógica o booleana "menor igual que", basado en un umbral de las bandas. 
 
+![](imagenes/POST_16.png)
+
 ![](imagenes/NDhojasArbolDecisionLab004.png)
 
 Por ejemplo la **raíz del árbol** es el primer nodo situado en la parte superior:
 
+
+![](imagenes/POST_17.png)
+
+
 ![](imagenes/raizArbolDecisionLab004.png)
 
 Este nodo, el nodo raíz, tiene una condición: B6 <= 1095.0.
+
+![](imagenes/POST_15.png)
 
 El árbol además de tener siete **nodos de decisión** cuenta con 8 hojas. Cada hoja representa una clasificación a una de las 5 clases de nuestra clasificación multiclase de Rosario.
 
@@ -393,6 +413,10 @@ En cada ejemplo, mostraremos el píxel al cual determinaremos la clase a la que 
 
 * a la izquierda el árbol de decisión,
 * a la derecha los valores de cada una de sus bandas.
+
+Para cada píxel realizaremos un recorrido del arbol considerando los valores de las bandas espectrales en el pixel:
+
+![](imagenes/POST_1.png)
 
 ## Ejemplo 1 clase 0 agua
 
@@ -540,6 +564,8 @@ Sin embargo, este es solo el comienzo de las posibilidades. Por ejemplo, el ajus
 En otras posibilidades, podemos analizar *imágenes satelitales nocturnas*, un recurso valioso para explorar patrones y actividades humanas que solo se manifiestan de noche, como la iluminación artificial en áreas urbanas. Las imágenes de luz nocturna proporcionan información relevante sobre la urbanización, el uso de la tierra y el desarrollo económico. A través de estas imágenes, es posible realizar estudios sobre la expansión urbana, monitorear el comportamiento de las actividades industriales o incluso analizar la distribución de la pobreza en diferentes regiones. De hecho, se ha demostrado que las luces nocturnas pueden ser un indicador confiable de la actividad económica y social, lo que abre nuevas oportunidades para aplicar machine learning y técnicas de clasificación en este tipo de datos.
 
 Más allá de estas herramientas, también debemos reconocer el impacto de los productos globales que integran machine learning y sistemas expertos, como OpenBuilding V3, Global Surface Water, TerraClimate y otros conjuntos de datos clave. Estos productos no solo nos permiten realizar análisis geoespaciales detallados, sino que también simplifican tareas complejas, como el estudio de tendencias climáticas o la evaluación de la urbanización. Por ejemplo, *Global Surface Water* proporciona un monitoreo detallado de los cuerpos de agua desde 1984, mientras que *TerraClimate* facilita el análisis de variables climáticas a lo largo del tiempo. El uso de estos recursos combina el poder del aprendizaje automático con la democratización de datos geoespaciales, permitiendo a más personas y organizaciones participar en el análisis y toma de decisiones informadas.
+
+![](imagenes/POST_14.png)
 
 Estamos en un *momento histórico donde el acceso a imágenes satelitales y datos geoespaciales se ha expandido enormemente*, abriendo la puerta a un futuro prometedor. La posibilidad de trabajar con imágenes de mayor resolución y precisión en un futuro cercano potenciará aún más las capacidades que estamos desarrollando ahora. Este enfoque progresivo y escalonado es clave: cada concepto y herramienta que integramos se convierte en *un peldaño más en esta espiral de conocimiento*, que nos permitirá abordar desafíos más complejos con confianza.
 

@@ -210,6 +210,13 @@
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Cubos de Imágenes Satelitales</a></li>
 
 
+
+
+
+
+
+
+
 <li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">Lab 002 · Random Forest (Rosario)  Thebe</a></li>
 </ul>
 
@@ -408,7 +415,60 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Cubos de Imágenes Satelitales</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#de-imagenes-satelitales-a-cubos-de-imagenes">De imágenes satelitales a Cubos de Imágenes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#de-imagenes-satelitales-a-cubos-de-imagenes">De imágenes satelitales a Cubos de Imágenes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revisitando-la-tierra-frecuencia-y-volumen-de-datos-en-sentinel-2">Revisitando la Tierra: frecuencia y volumen de datos en Sentinel 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-reales-y-cierre">Aplicaciones reales y cierre</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#datacube-de-temperatura-superficial-en-bahia-blanca-con-gee">Datacube de temperatura superficial en Bahía Blanca con GEE</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-definir-la-region-de-interes">Paso 1: Definir la región de interés</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-seleccion-temporal">Paso 2: Selección temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-cargar-modis-lst-y-convertir-unidades">Paso 3: Cargar MODIS LST y convertir unidades</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-parametros-visuales-para-el-mapa">Paso 4: Parámetros visuales para el mapa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-5-y-6-generar-imagenes-mensuales-y-mostrarlas-en-el-mapa">Paso 5 y 6: Generar imágenes mensuales y mostrarlas en el mapa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-7-crear-tabla-de-promedios-mensuales-reduccion-espacial">Paso 7: Crear tabla de promedios mensuales (reducción espacial)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-8-visualizar-la-serie-de-tiempo">Paso 8: Visualizar la serie de tiempo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-9-estetica-del-mapa">Paso 9: Estética del mapa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-10-exportar-la-serie-al-drive">Paso 10: Exportar la serie al Drive</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-de-esta-seccion">Conclusión de esta sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-y-analisis-de-un-datacube-de-precipitacion-mensual-en-bahia-blanca-chirps">Visualización y análisis de un datacube de precipitación mensual en Bahía Blanca (CHIRPS)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-chirps">¿Qué es CHIRPS?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-de-la-region-bahia-blanca">Selección de la región: Bahía Blanca</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definimos-el-periodo-de-analisis">Definimos el período de análisis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cargamos-la-coleccion-chirps-diaria">Cargamos la colección CHIRPS diaria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paleta-de-colores-para-visualizacion">Paleta de colores para visualización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizamos-cada-capa-mensual-del-datacube">Visualizamos cada capa mensual del datacube</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-la-serie-temporal-mensual-promedio">Cálculo de la serie temporal mensual promedio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras-de-la-serie">Gráfico de barras de la serie</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-concreto-feature-14">Ejemplo concreto: Feature 14</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mejora-estetica-del-mapa">Mejora estética del mapa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Conclusión de esta sección</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-tipos-de-suelo-con-sentinel-2-un-enfoque-basado-en-datacubes">Clasificación de tipos de suelo con Sentinel-2: un enfoque basado en datacubes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Introducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coleccion-de-imagenes-sentinel-2-y-preparacion-del-mosaico-base">Colección de imágenes Sentinel-2 y preparación del mosaico base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-clases-de-suelo-y-preparacion-de-datos-de-entrenamiento">Definición de clases de suelo y preparación de datos de entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-modelo-random-forest">Entrenamiento del modelo Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-la-imagen-y-visualizacion-del-resultado">Clasificación de la imagen y visualización del resultado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-del-modelo">Evaluación del modelo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-de-la-serie-temporal">Configuración de la serie temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-temporal-e-interpretacion-del-datacube">7. Clasificación temporal e interpretación del datacube</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-especifica-ejemplo-marzo-2024">10. Interpretación específica: ejemplo marzo 2024</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-serie-temporal-de-clases-de-suelo-con-clasificador-entrenado">Ejemplo 2: Serie Temporal de Clases de Suelo con Clasificador Entrenado</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-2-definicion-de-etiquetas-de-clases">BLOQUE 2: Definición de etiquetas de clases</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-3-aplicacion-del-clasificador-por-periodo">BLOQUE 3: Aplicación del clasificador por período</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-4-conteo-de-pixeles-por-clase">BLOQUE 4: Conteo de píxeles por clase</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-5-visualizacion-absoluta">BLOQUE 5: Visualización absoluta</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-6-conversion-a-porcentajes">BLOQUE 6: Conversión a porcentajes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-7-visualizacion-porcentual">BLOQUE 7: Visualización porcentual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">Video del capítulo</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -440,10 +500,15 @@ Generamos un cubo categórico bimestral de tipos de suelo (agua, urbano, cultivo
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="de-imagenes-satelitales-a-cubos-de-imagenes">
 <h1>De imágenes satelitales a Cubos de Imágenes<a class="headerlink" href="#de-imagenes-satelitales-a-cubos-de-imagenes" title="Link to this heading">#</a></h1>
-<p>Al observar una imagen tomada desde un satélite, es tentador pensar que estamos viendo una simple foto de la Tierra como si fuera una fotografía aérea en alta resolución, pero eso sería una visión limitada, sería reducirla a lo que nuestros ojos alcanzan a ver, cuando en realidad hay mucho más que eso.
-En verdad, lo que capturan los satélites no es una simple imagen como una fotografía convencional, sino un conjunto de bandas espectrales, cada una correspondiente a una distinta longitud de onda del espectro electromagnético
-Estas bandas, combinadas, forman una representación detallada y multidimensional de lo que ocurre en la superficie terrestre. Pero la información no termina acá, las bandas pueden ser utilizadas individualmente o combinadas mediante índices espectrales, que son fórmulas matemáticas diseñadas para resaltar ciertos fenómenos, como la vegetación, el agua, los suelos y las áreas urbanas, en función de su comportamiento espectral. El catálogo absam spectral indecis, reúne más de 250 de estos índices organizados por dominio de aplicación, lo que lo convierte en una herramienta clave para interpretar y extraer información significativa de las imágenes satelitales. El cumulo de cientos de índices de este catálogo puede ser accedido desde distintos paquetes en lenguajes d eprogramacion como javascript, Python, R y julia.
-Un excelente ejemplo de esta riqueza espectral es la misión Sentinel-2, operada por la Agencia Espacial Europea. Esta misión no toma simplemente una foto del planeta, sino que registra 13 bandas espectrales distintas, distribuidas en diferentes partes del espectro electromagnético y con distintas resoluciones espaciales 10, 20 y 60 metros, cada una con un propósito específico.</p>
+<p>Al observar una imagen tomada desde un satélite, es tentador pensar que estamos viendo una simple foto de la Tierra como si fuera una fotografía aérea en alta resolución, pero eso sería una visión limitada, sería reducirla a lo que nuestros ojos alcanzan a ver, cuando en realidad hay mucho más que eso.</p>
+<p><img alt="" src="imagenes/spectrum.png" /></p>
+<p>En verdad, lo que capturan los satélites no es una simple imagen como una fotografía convencional, sino un conjunto de bandas espectrales, cada una correspondiente a una distinta longitud de onda del espectro electromagnético</p>
+<p><img alt="" src="_images/PlacaNegraMedia2.png" /></p>
+<p>Estas bandas, combinadas, forman una representación detallada y multidimensional de lo que ocurre en la superficie terrestre. Pero la información no termina acá, las bandas pueden ser utilizadas individualmente o combinadas mediante índices espectrales, que son fórmulas matemáticas diseñadas para resaltar ciertos fenómenos, como la vegetación, el agua, los suelos y las áreas urbanas, en función de su comportamiento espectral.</p>
+<p><img alt="" src="_images/PlacaNegraMedia1.png" /></p>
+<p>El catálogo awesome spectral indecis, reúne más de 250 de estos índices organizados por dominio de aplicación, lo que lo convierte en una herramienta clave para interpretar y extraer información significativa de las imágenes satelitales. El cumulo de cientos de índices de este catálogo puede ser accedido desde distintos paquetes en lenguajes d eprogramacion como javascript, Python, R y julia.</p>
+<p><img alt="" src="_images/asiUsedBy.png" /></p>
+<p>Un excelente ejemplo de esta riqueza espectral es la misión Sentinel-2, operada por la Agencia Espacial Europea. Esta misión no toma simplemente una foto del planeta, sino que registra 13 bandas espectrales distintas, distribuidas en diferentes partes del espectro electromagnético y con distintas resoluciones espaciales 10, 20 y 60 metros, cada una con un propósito específico.</p>
 <p>Estas bandas incluyen banda 1 aerosol captura información en la región del violeta, útil para la corrección atmosférica y detección de aerosoles, resolución 60 metros,
 banda 2 azul, banda 3 verde y banda 4 rojo, bandas visibles al ojo humano que permiten generar imágenes en color natural, resolución 10 metros,
 banda 5, 6 y 7, conocidas como red edge, estas bandas cubren la transición entre el rojo y el infrarrojo cercano, son fundamentales para estudios avanzados de vegetación y agricultura de precisión, resolución 20 metros,
@@ -453,9 +518,10 @@ banda 10, cirrus, diseñada específicamente para la detección de nubes cirrus 
 banda 11 y banda 12, SWIR 1 y SWIR 2, bandas en el infrarrojo de onda corta, útiles para analizar contenido de  humedad del suelo, nieve, hielo o detectar áreas afectadas por incendios, resolución 20 metros,
 Cada una de estas bandas aporta una capa distinta de información. Y al combinar esta riqueza espectral con series temporales, índices matemáticos e inteligencia artificial, podemos transformar simples imágenes en verdaderos análisis dinámicos del territorio.
 Entonces, lo que vemos como una imagen, en realidad, es una colección multidimensional de datos espectrales. Cada píxel tiene múltiples valores asociados, uno por cada banda, revelando propiedades biofísicas que no podríamos captar con nuestros sentidos. Es como si viéramos el mundo con “ojos científicos”.
-Y esto ocurre para cada punto de la Tierra observado por la misión. Pero además, estos puntos no se observan una única vez…
-🎬 Parte 2 – Revisitando la Tierra: frecuencia y volumen de datos en Sentinel 2
-Sentinel 2 no solo es poderosa por la cantidad de bandas que captura…
+Y esto ocurre para cada punto de la Tierra observado por la misión. Pero además, estos puntos no se observan una única vez</p>
+<section id="revisitando-la-tierra-frecuencia-y-volumen-de-datos-en-sentinel-2">
+<h2>Revisitando la Tierra: frecuencia y volumen de datos en Sentinel 2<a class="headerlink" href="#revisitando-la-tierra-frecuencia-y-volumen-de-datos-en-sentinel-2" title="Link to this heading">#</a></h2>
+<p>Sentinel 2 no solo es poderosa por la cantidad de bandas que captura…
 Lo verdaderamente extraordinario es su capacidad para volver a mirar, una y otra vez, el mismo lugar del planeta con una frecuencia difícil de igualar.
 Durante años, esta misión estuvo compuesta por dos satélites gemelos: Sentinel 2A y Sentinel 2B, operando en la misma órbita para cubrir la superficie terrestre con alta frecuencia. Pero en septiembre de 2024 se produjo un hito importante: el lanzamiento de Sentinel 2C, desde la Guayana Francesa a bordo del último cohete Vega de la Agencia Espacial Europea.
 Aunque Sentinel 2C fue diseñado como satélite de reemplazo, durante una etapa transitoria en 2025, los tres satélites estuvieron operativos de forma simultánea, lo que llevó la frecuencia de revisita a niveles inéditos. En ciertas regiones, ahora es posible observar un mismo punto del territorio con apenas uno o dos días de diferencia entre capturas. Y eso, para quienes trabajamos con análisis multitemporal, es una oportunidad invaluable.
@@ -463,422 +529,756 @@ Este ritmo sostenido de adquisición nos permite construir series temporales det
 La constancia genera volumen. Mucho volumen.
 Cada satélite Sentinel 2 recolecta y transmite más de 1.5 terabytes de datos por día, por lo que la constelación —en esta fase de tres satélites activos— puede generar más de 4.5 terabytes diarios. A lo largo del año, esto representa más de 1.6 petabytes de nuevas imágenes satelitales.
 Hasta mediados de 2025, el archivo acumulado de la misión supera los 30 petabytes. Un océano de información geoespacial, que incluye productos de nivel 1C (ortorrectificados, en top-of-atmosphere) y nivel 2A (corregidos atmosféricamente, en bottom-of-atmosphere).
-Y lo mejor de todo es que esta información no está bajo llave.
-La Agencia Espacial Europea, a través del programa Copernicus, ha impulsado una política de ciencia abierta sin precedentes. Los datos de Sentinel 2 están disponibles para todo el mundo en repositorios como el Copernicus Data Space Ecosystem o el CEDA del Reino Unido, que ya superan los 34 petabytes de información de Observación de la Tierra, creciendo cada día en varios terabytes.
+Y lo mejor de todo es que esta información no está bajo llave.</p>
+<p>La Agencia Espacial Europea, a través del programa Copernicus, ha impulsado una política de ciencia abierta sin precedentes. Los datos de Sentinel 2 están disponibles para todo el mundo en repositorios como el Copernicus Data Space Ecosystem o el CEDA del Reino Unido, que ya superan los 34 petabytes de información de Observación de la Tierra, creciendo cada día en varios terabytes.
 Este compromiso con la transparencia, el acceso libre y el desarrollo global de capacidades analíticas nos plantea un desafío apasionante:
-Con tanto conocimiento disponible desde el espacio…
+Con tanto conocimiento disponible desde el espacio.
 ¿Estamos preparados para sacarle el máximo provecho?
-¿Cómo organizamos toda esta información?
-Bienvenidos al mundo de los cubos de datos, o datacubes.
-El volumen y la complejidad de los datos satelitales nos obliga a pensar de una forma nueva. ¿Cómo podemos analizar millones de imágenes, cada una con múltiples bandas y fechas distintas, sin ahogarnos en un mar de archivos?
-Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el cubo de dato o inglés datacube dádaciubs
-Según la plataforma abierta para la observación de la Tierra openEO:
-“Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.”
-Y según Giuliani et al. (2016):
+¿Cómo organizamos toda esta información?</p>
+<blockquote>
+<div><p>¡Bienvenidos al mundo de los cubos de datos, o datacubes!</p>
+</div></blockquote>
+<p>El volumen y la complejidad de los datos satelitales nos obliga a pensar de una forma nueva. ¿Cómo podemos analizar millones de imágenes, cada una con múltiples bandas y fechas distintas, sin ahogarnos en un mar de archivos?
+Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el cubo de dato o inglés datacube dádaciubs</p>
+<p><img alt="" src="_images/PlacaJ.png" /></p>
+<p>Según la plataforma abierta para la observación de la Tierra openEO:
+“Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.”</p>
+<p><img alt="" src="_images/PlacaL.png" /></p>
+<p>Y según Giuliani et al. (2016):
 “Es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”
-En otras palabras, un cubo de datos no es solo un almacenamiento de imágenes, sino una forma ordenada e inteligente de organizarlas para que podamos filtrar, combinar, analizar y visualizar los datos de manera eficiente.
-¿Y cuáles son sus dimensiones? Las principales son:
-•	Espacio: definido por las coordenadas x e y, donde x representa la longitud (el eje horizontal, de oeste a este) y y representa la latitud (el eje vertical, de sur a norte). Estas dos dimensiones permiten ubicar cada píxel en la superficie terrestre.
-•	Tiempo: corresponde al momento en que fue adquirida cada imagen, ya sea una fecha o una hora específica. Esta dimensión es clave para el análisis de cambios en el territorio.
-•	Espectro: se refiere a las bandas espectrales que capturan diferentes rangos del espectro electromagnético, como el visible, el infrarrojo cercano o el SWIR, lo que permite observar fenómenos que no son visibles a simple vista.
-•	Y, en algunos casos, también la geometría o incluso el sistema de referencia espacial (CRS) como una dimensión adicional.
-Esto nos permite hacer operaciones sofisticadas sin necesidad de reestructurar los datos. Por ejemplo:
-•	Filtrar el cubo por fechas, bandas o región.
-•	Aplicar funciones matemáticas sobre cada píxel o grupo de píxeles.
-•	Calcular promedios temporales, máximos espectrales, o derivar índices como NDVI o NDBI.
-•	Remuestrear los datos a resoluciones espaciales o temporales diferentes.
-•	Y realizar agregaciones estadísticas por regiones geográficas, como cuencas, provincias o áreas de cultivo.
-Un cubo de datos puede ser raster, cuando trabaja con pixeles organizados en grillas, o vectorial, cuando se organiza por geometrías como polígonos o puntos.</p>
-<hr class="docutils" />
-<p>🟣 Aplicaciones reales y cierre
-Gracias a los cubos de datos, hoy es posible:
-•	Analizar la evolución mensual del NDVI en una región agrícola.
-•	Detectar patrones de urbanización usando índices como NDBI.
-•	Entrenar modelos de machine learning sobre cubos multitemporales.
-•	Crear tableros interactivos para monitorear el ambiente a gran escala.
-📢 En definitiva, los cubos de datos no son solo una forma eficiente de almacenar información, sino una herramienta poderosa para transformar datos satelitales en conocimiento accionable.
-🧠 Comprender cómo se estructuran, cómo se consultan y cómo se transforman es clave para aprovechar todo el potencial de los datos de observación de la Tierra.</p>
-<p>“Datacubes de Imágenes Satelitales: Fundamentos y Aplicaciones”</p>
-<hr class="docutils" />
-<p>🟢 Introducción (1 minuto)
-[Visual: Animación de un globo terráqueo con imágenes satelitales apareciendo en distintos momentos]
-📢 “¿Qué pasaría si pudiéramos organizar miles de imágenes satelitales como si fueran una sola estructura ordenada, lista para ser procesada en bloque? Esa es la promesa de los datacubes: una forma poderosa de manejar datos espaciales y temporales de forma eficiente.”</p>
-<hr class="docutils" />
-<p>🟡 ¿Qué es un Datacube? (2 minutos)
-[Visual: Representación de cubo multibanda y luego una versión “plana” de ese cubo]
-📚 Definición base (openEO):
-“Un datacube es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.”
-📚 Definición académica complementaria (Giuliani et al., 2016):
-“Un datacube es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”
-🔎 Conceptos clave:
-•	Multidimensionalidad: espacio (x, y), tiempo (t), bandas (espectral), geometría.
-•	Arreglo ordenado: permite aplicar operaciones masivas, comparaciones, filtros y algoritmos sin necesidad de reestructurar el dataset.
-•	No es literalmente un cubo: puede tener más o menos de tres dimensiones, es solo una metáfora visual.</p>
-<hr class="docutils" />
-<p>🔵 Tipos de Datacubes (1 minuto)
-[Visual: Comparativa de raster vs vector datacube]
-•	Raster datacube: ejes x, y, t, bandas. Ejemplo clásico: Sentinel-2.
-•	Vector datacube: geometrías (polígonos, puntos), t, bandas. Útil para análisis estadísticos por regiones.
-•	Otros tipos: temporal puro (solo t), o con dimensión CRS (cuando hay varias zonas UTM).
-📌 Ejemplo: una imagen Sentinel-2 con 4 bandas y 3 fechas → 4 dimensiones (x, y, bandas, tiempo).</p>
-<hr class="docutils" />
-<p>🟣 Dimensiones: El eje del análisis (2 minutos)
-[Visual: Tabla con metadatos de las dimensiones]
-📌 Cada dimensión tiene propiedades clave:
-•	Nombre, tipo (espacial, temporal, espectral), etiquetas, resolución, sistema de referencia.
-•	Ejemplo: dimensión temporal con fechas 2020-10-01, 2020-10-13, 2020-10-25.
-📏 Resoluciones:
-•	Temporal: cada cuánto hay observaciones (ej. cada 5 días).
-•	Espacial: tamaño de pixel (ej. 10m).
-•	Espectral: cantidad y tipo de bandas.
-📐 CRS como dimensión adicional: importante cuando se usan datos en diferentes zonas UTM. Se puede evitar reproyecciones costosas incluyendo CRS como una dimensión más.</p>
-<hr class="docutils" />
-<p>🟤 Valores y Metadatos (1 minuto)
-[Visual: Estructura de un datacube con valores y metadatos]
-•	Los valores dentro del datacube son escalares: números, texto o booleanos.
-•	Todo lo demás (coordenadas, bandas, fechas, geometrías) va como metadatos o etiquetas de dimensiones.
-•	Precaución: evitar cambiar tipos de datos entre operaciones si el backend no lo soporta.</p>
-<hr class="docutils" />
-<p>🟠 Procesos sobre Datacubes (6 minutos)</p>
-<ol class="arabic simple">
-<li><p>Filtrado (filter) – (1 minuto)
-[Visual: Animación filtrando tiempo, bandas y espacio]
-Permite recortar el cubo en función de:
-•	Intervalos temporales (fechas).
-•	Bandas específicas.
-•	Área geográfica.
-Ejemplo: filtrar solo la banda NIR entre octubre 15 y 27 en un polígono dado.</p></li>
+En otras palabras, un cubo de datos no es solo un almacenamiento de imágenes, sino una forma ordenada e inteligente de organizarlas para que podamos filtrar, combinar, analizar y visualizar los datos de manera eficiente.</p>
+<p><img alt="" src="_images/PlacaM.png" /></p>
+<p>¿Y cuáles son sus dimensiones? Las principales son:</p>
+<ul class="simple">
+<li><p>Espacio: definido por las coordenadas x e y, donde x representa la longitud (el eje horizontal, de oeste a este) y y representa la latitud (el eje vertical, de sur a norte). Estas dos dimensiones permiten ubicar cada píxel en la superficie terrestre.</p></li>
+<li><p>Tiempo: corresponde al momento en que fue adquirida cada imagen, ya sea una fecha o una hora específica. Esta dimensión es clave para el análisis de cambios en el territorio.</p></li>
+<li><p>Espectro: se refiere a las bandas espectrales que capturan diferentes rangos del espectro electromagnético, como el visible, el infrarrojo cercano o el SWIR, lo que permite observar fenómenos que no son visibles a simple vista.</p></li>
+<li><p>Y, en algunos casos, también la geometría o incluso el sistema de referencia espacial (CRS) como una dimensión adicional.</p></li>
+</ul>
+<p>Esto nos permite hacer operaciones sofisticadas sin necesidad de reestructurar los datos. Por ejemplo:</p>
+<ul class="simple">
+<li><p>Filtrar el cubo por fechas, bandas o región.</p></li>
+<li><p>Aplicar funciones matemáticas sobre cada píxel o grupo de píxeles.</p></li>
+<li><p>Calcular promedios temporales, máximos espectrales, o derivar índices como NDVI o NDBI.</p></li>
+<li><p>Remuestrear los datos a resoluciones espaciales o temporales diferentes.</p></li>
+<li><p>Y realizar agregaciones estadísticas por regiones geográficas, como cuencas, provincias o áreas de cultivo.</p></li>
+</ul>
+<p><img alt="" src="_images/PlacaN.png" /></p>
+<p>Un cubo de datos puede ser raster, cuando trabaja con pixeles organizados en grillas, o vectorial, cuando se organiza por geometrías como polígonos o puntos.</p>
+</section>
+<section id="aplicaciones-reales-y-cierre">
+<h2>Aplicaciones reales y cierre<a class="headerlink" href="#aplicaciones-reales-y-cierre" title="Link to this heading">#</a></h2>
+<p>Gracias a los cubos de datos, hoy es posible:</p>
+<ul class="simple">
+<li><p>Analizar la evolución mensual del NDVI en una región agrícola.</p></li>
+<li><p>Detectar patrones de urbanización usando índices como NDBI.</p></li>
+<li><p>Entrenar modelos de machine learning sobre cubos multitemporales.</p></li>
+<li><p>Crear tableros interactivos para monitorear el ambiente a gran escala.</p></li>
+</ul>
+<p><img alt="" src="_images/PlacaP.png" /></p>
+<p>En definitiva, los cubos de datos no son solo una forma eficiente de almacenar información, sino una herramienta poderosa para transformar datos satelitales en conocimiento accionable.
+Comprender cómo se estructuran, cómo se consultan y cómo se transforman es clave para aprovechar todo el potencial de los datos de observación de la Tierra.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="datacube-de-temperatura-superficial-en-bahia-blanca-con-gee">
+<h1>Datacube de temperatura superficial en Bahía Blanca con GEE<a class="headerlink" href="#datacube-de-temperatura-superficial-en-bahia-blanca-con-gee" title="Link to this heading">#</a></h1>
+<p>En este laboratorio vamos a construir y analizar un datacube de temperatura superficial terrestre (LST) para la región de Bahía Blanca, usando imágenes satelitales MODIS desde Google Earth Engine.
+Veremos cómo generar mapas mensuales de temperatura, cómo calcular promedios sobre toda el área y cómo exportar esta información para estudios más avanzados.
+Lo más importante: vamos a entender cómo este proceso representa un claro ejemplo del uso de cubo de datos geoespacial.</p>
+<section id="paso-1-definir-la-region-de-interes">
+<h2>Paso 1: Definir la región de interés<a class="headerlink" href="#paso-1-definir-la-region-de-interes" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">admin2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="s2">&quot;FAO/GAUL/2015/level2&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM0_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Argentina&#39;</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM1_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Buenos Aires&#39;</span><span class="p">));</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">bahiaBlanca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">admin2</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM2_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Bahia Blanca&#39;</span><span class="p">));</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">roi2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bahiaBlanca</span><span class="p">.</span><span class="nx">geometry</span><span class="p">().</span><span class="nx">simplify</span><span class="p">(</span><span class="mf">100</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Comenzamos seleccionando la región administrativa de Bahía Blanca desde el catálogo GAUL de la FAO.
+El resultado es un polígono que define el recorte espacial de nuestro cubo de datos.</p>
+</section>
+<section id="paso-2-seleccion-temporal">
+<h2>Paso 2: Selección temporal<a class="headerlink" href="#paso-2-seleccion-temporal" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">fechaInicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">fechaFin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">(</span><span class="s1">&#39;2025-08-01&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Aquí definimos el recorte temporal del datacube. Estamos solicitando 20 meses consecutivos de datos, desde enero de 2024 hasta agosto de 2025.</p>
+</section>
+<section id="paso-3-cargar-modis-lst-y-convertir-unidades">
+<h2>Paso 3: Cargar MODIS LST y convertir unidades<a class="headerlink" href="#paso-3-cargar-modis-lst-y-convertir-unidades" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">modisLST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;MODIS/061/MOD11A2&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">roi2</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="nx">fechaInicio</span><span class="p">,</span><span class="w"> </span><span class="nx">fechaFin</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">lst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;LST_Day_1km&#39;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">multiply</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">subtract</span><span class="p">(</span><span class="mf">273.15</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;LST&#39;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi2</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">lst</span><span class="p">.</span><span class="nx">copyProperties</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">propertyNames</span><span class="p">());</span>
+<span class="w">  </span><span class="p">});</span>
+</pre></div>
+</div>
+<p>El satélite MODIS entrega datos de temperatura superficial terrestre (LST) cada 8 días.</p>
+<p>Este bloque:</p>
+<ul class="simple">
+<li><p>Filtra imágenes dentro del ROI y del rango temporal.</p></li>
+<li><p>Convierte los valores de Kelvin a Celsius.</p></li>
+<li><p>Recorta cada imagen al área de Bahía Blanca.</p></li>
+</ul>
+<p>Lo que estamos construyendo es un cubo de datos con tres dimensiones:</p>
+<ul class="simple">
+<li><p>X e Y: espacio (píxeles)</p></li>
+<li><p>T: tiempo (una imagen promedio por mes)</p></li>
+</ul>
+</section>
+<section id="paso-4-parametros-visuales-para-el-mapa">
+<h2>Paso 4: Parámetros visuales para el mapa<a class="headerlink" href="#paso-4-parametros-visuales-para-el-mapa" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">visParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">45</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">palette</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;cyan&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;red&#39;</span><span class="p">]</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Configuramos una paleta de colores que irá de azul a rojo, resaltando las diferencias térmicas. Este rango se adapta a temperaturas comunes en superficie terrestre.</p>
+</section>
+<section id="paso-5-y-6-generar-imagenes-mensuales-y-mostrarlas-en-el-mapa">
+<h2>Paso 5 y 6: Generar imágenes mensuales y mostrarlas en el mapa<a class="headerlink" href="#paso-5-y-6-generar-imagenes-mensuales-y-mostrarlas-en-el-mapa" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">meses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">List</span><span class="p">.</span><span class="nx">sequence</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">fechaFin</span><span class="p">.</span><span class="nx">difference</span><span class="p">(</span><span class="nx">fechaInicio</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">).</span><span class="nx">subtract</span><span class="p">(</span><span class="mf">1</span><span class="p">));</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">fechasStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">meses</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">m</span><span class="p">){</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">fechaInicio</span><span class="p">.</span><span class="nx">advance</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">).</span><span class="nx">format</span><span class="p">(</span><span class="s1">&#39;YYYY-MM&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nx">Esta</span><span class="w"> </span><span class="nx">lista</span><span class="w"> </span><span class="nx">representa</span><span class="w"> </span><span class="nx">la</span><span class="w"> </span><span class="nx">dimensión</span><span class="w"> </span><span class="nx">temporal</span><span class="w"> </span><span class="nx">del</span><span class="w"> </span><span class="nx">cubo</span><span class="p">.</span><span class="w"> </span><span class="nx">Luego</span><span class="o">:</span>
+<span class="w"> </span>
+<span class="w">  </span>
+<span class="nx">fechasStr</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">listaFechas</span><span class="p">){</span>
+<span class="w">  </span><span class="nx">listaFechas</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">fechaStr</span><span class="p">){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">&#39;YYYY-MM&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">fechaStr</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">start</span><span class="p">.</span><span class="nx">advance</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">modisLST</span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span><span class="w"> </span><span class="nx">end</span><span class="p">).</span><span class="nx">mean</span><span class="p">();</span>
+<span class="w">    </span><span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">img</span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi2</span><span class="p">),</span><span class="w"> </span><span class="nx">visParams</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;LST &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">fechaStr</span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Calculamos y mostramos una imagen mensual promedio para cada mes del período.
+Estas imágenes conforman la dimensión espacial + temporal del cubo de temperatura.</p>
+</section>
+<section id="paso-7-crear-tabla-de-promedios-mensuales-reduccion-espacial">
+<h2>Paso 7: Crear tabla de promedios mensuales (reducción espacial)<a class="headerlink" href="#paso-7-crear-tabla-de-promedios-mensuales-reduccion-espacial" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">tablaMensual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="nx">meses</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">m</span><span class="p">){</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">inicioMes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fechaInicio</span><span class="p">.</span><span class="nx">advance</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">finMes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inicioMes</span><span class="p">.</span><span class="nx">advance</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">media</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">modisLST</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="nx">inicioMes</span><span class="p">,</span><span class="w"> </span><span class="nx">finMes</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">mean</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">reduceRegion</span><span class="p">({</span>
+<span class="w">      </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">mean</span><span class="p">(),</span>
+<span class="w">      </span><span class="nx">geometry</span><span class="o">:</span><span class="w"> </span><span class="nx">roi2</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">maxPixels</span><span class="o">:</span><span class="w"> </span><span class="mf">1e9</span>
+<span class="w">    </span><span class="p">}).</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;LST&#39;</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Feature</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fecha</span><span class="o">:</span><span class="w"> </span><span class="nx">inicioMes</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="s1">&#39;YYYY-MM&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">temperatura_celsius</span><span class="o">:</span><span class="w"> </span><span class="nx">media</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">}));</span>
+</pre></div>
+</div>
+<p>Aquí aplicamos una reducción espacial sobre cada mes. Para cada imagen mensual, calculamos el promedio de temperatura sobre todo el polígono de Bahía Blanca.
+El resultado es una tabla de 20 filas, cada una representando un mes.</p>
+<p>Ejemplo:</p>
+<p>Feature 14
+fecha: 2025-03
+temperatura_celsius: 19.49</p>
+<p>Este valor corresponde al promedio de temperatura superficial en marzo de 2025, cuando se registraron eventos de inundación en la región. Esta cifra es útil para estudiar el comportamiento térmico durante ese evento extremo.</p>
+</section>
+<section id="paso-8-visualizar-la-serie-de-tiempo">
+<h2>Paso 8: Visualizar la serie de tiempo<a class="headerlink" href="#paso-8-visualizar-la-serie-de-tiempo" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">chart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ui</span><span class="p">.</span><span class="nx">Chart</span><span class="p">.</span><span class="nx">feature</span><span class="p">.</span><span class="nx">byFeature</span><span class="p">(</span><span class="nx">tablaMensual</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;fecha&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;temperatura_celsius&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">setChartType</span><span class="p">(</span><span class="s1">&#39;LineChart&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Temperatura superficial promedio mensual - Bahía Blanca&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">hAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Mes&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">vAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;°C&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">lineWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">pointSize</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">colors</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Serie mensual de LST:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">tablaMensual</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">chart</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>En consola se imprimen dos elementos:</p>
+<ul class="simple">
+<li><p>Una tabla con los valores mensuales.</p></li>
+<li><p>Un gráfico de líneas que permite visualizar tendencias, oscilaciones térmicas y meses extremos.</p></li>
+</ul>
+</section>
+<section id="paso-9-estetica-del-mapa">
+<h2>Paso 9: Estética del mapa<a class="headerlink" href="#paso-9-estetica-del-mapa" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">roi2</span><span class="p">,</span><span class="w"> </span><span class="mf">8</span><span class="p">);</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="s1">&#39;SATELLITE&#39;</span><span class="p">);</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">bahiaBlanca</span><span class="p">.</span><span class="nx">style</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">fillColor</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;00000000&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span>
+<span class="p">}),</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="s1">&#39;Límite Bahía Blanca&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Agregamos una capa de contorno para la región, usando un estilo transparente y bordes negros, para que los mapas mensuales se vean claramente.</p>
+</section>
+<section id="paso-10-exportar-la-serie-al-drive">
+<h2>Paso 10: Exportar la serie al Drive<a class="headerlink" href="#paso-10-exportar-la-serie-al-drive" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">Export</span><span class="p">.</span><span class="nx">table</span><span class="p">.</span><span class="nx">toDrive</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">tablaMensual</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;serie_LST_BahiaBlanca&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">fileFormat</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;CSV&#39;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Finalmente, exportamos los datos mensuales de temperatura como un archivo .CSV.
+Este archivo será utilizado luego en Python, para aplicar modelos de análisis de tendencia y estacionalidad, completando así el ciclo de análisis del datacube.</p>
+</section>
+<section id="conclusion-de-esta-seccion">
+<h2>Conclusión de esta sección<a class="headerlink" href="#conclusion-de-esta-seccion" title="Link to this heading">#</a></h2>
+<p>En resumen:</p>
+<ul class="simple">
+<li><p>Hemos construido un datacube geoespacial tridimensional (X, Y, T) a partir de datos satelitales MODIS.</p></li>
+<li><p>Derivamos productos de este cubo: mapas mensuales y series temporales.</p></li>
+<li><p>Extraemos conocimiento para analizar eventos climáticos, como el caso de marzo de 2025.</p></li>
+</ul>
+<p>Este ejemplo muestra cómo GEE permite integrar observación satelital, cálculo estadístico y visualización, con un enfoque moderno y escalable para el análisis de fenómenos ambientales.</p>
+</section>
+<section id="visualizacion-y-analisis-de-un-datacube-de-precipitacion-mensual-en-bahia-blanca-chirps">
+<h2>Visualización y análisis de un datacube de precipitación mensual en Bahía Blanca (CHIRPS)<a class="headerlink" href="#visualizacion-y-analisis-de-un-datacube-de-precipitacion-mensual-en-bahia-blanca-chirps" title="Link to this heading">#</a></h2>
+<p>En este ejercicio analizamos la precipitación mensual en el partido de Bahía Blanca, utilizando la colección satelital CHIRPS Daily en Google Earth Engine. La idea principal es construir un datacube espacio-temporal de precipitación para luego visualizar sus capas mensuales, graficar su evolución a lo largo del tiempo y finalmente exportar sus estadísticas.</p>
+</section>
+<section id="que-es-chirps">
+<h2>¿Qué es CHIRPS?<a class="headerlink" href="#que-es-chirps" title="Link to this heading">#</a></h2>
+<p>CHIRPS (Climate Hazards Group InfraRed Precipitation with Station data) es un producto de precipitación global que combina observaciones satelitales infrarrojas con datos de estaciones meteorológicas. Está disponible a resolución diaria desde 1981, con una malla espacial de aproximadamente 5 km.
+Es muy utilizado para estudios hidrológicos, agrícolas y climáticos en todo el mundo, gracias a su cobertura consistente y su accesibilidad.</p>
+<p>¿Cuál es el datacube en este ejemplo?</p>
+<p>En este caso, el datacube es una colección tridimensional de datos, estructurado según:</p>
+<ul class="simple">
+<li><p>Espacio (x, y): el área geográfica de Bahía Blanca</p></li>
+<li><p>Tiempo: una capa por cada mes</p></li>
+<li><p>Variable: precipitación promedio en milímetros</p></li>
+</ul>
+<p>Este cubo de datos nos permite realizar consultas espaciales (¿dónde llovió más en marzo?) y temporales (¿cómo varió la lluvia durante el año?), de forma conjunta.</p>
+</section>
+<section id="seleccion-de-la-region-bahia-blanca">
+<h2>Selección de la región: Bahía Blanca<a class="headerlink" href="#seleccion-de-la-region-bahia-blanca" title="Link to this heading">#</a></h2>
+<p>Utilizamos la colección GAUL de la FAO para recortar el área de interés:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">admin2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="s2">&quot;FAO/GAUL/2015/level2&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM0_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Argentina&#39;</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM1_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Buenos Aires&#39;</span><span class="p">));</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">bahiaBlanca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">admin2</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM2_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Bahia Blanca&#39;</span><span class="p">));</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">roi2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bahiaBlanca</span><span class="p">.</span><span class="nx">geometry</span><span class="p">().</span><span class="nx">simplify</span><span class="p">(</span><span class="mf">100</span><span class="p">);</span><span class="w">  </span><span class="c1">// recorte suave</span>
+</pre></div>
+</div>
+</section>
+<section id="definimos-el-periodo-de-analisis">
+<h2>Definimos el período de análisis<a class="headerlink" href="#definimos-el-periodo-de-analisis" title="Link to this heading">#</a></h2>
+<p>El estudio abarca desde enero de 2024 hasta agosto de 2025:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">fechaInicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">fechaFin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">(</span><span class="s1">&#39;2025-08-01&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="cargamos-la-coleccion-chirps-diaria">
+<h2>Cargamos la colección CHIRPS diaria<a class="headerlink" href="#cargamos-la-coleccion-chirps-diaria" title="Link to this heading">#</a></h2>
+<p>Filtramos espacial y temporalmente para solo conservar datos sobre nuestra región:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">chirps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s1">&#39;UCSB-CHG/CHIRPS/DAILY&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">roi2</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="nx">fechaInicio</span><span class="p">,</span><span class="w"> </span><span class="nx">fechaFin</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="paleta-de-colores-para-visualizacion">
+<h2>Paleta de colores para visualización<a class="headerlink" href="#paleta-de-colores-para-visualizacion" title="Link to this heading">#</a></h2>
+<p>Configuramos una escala cromática que distingue mejor las zonas con mayor o menor precipitación:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">visParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">9</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">palette</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;#f7fbff&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;#deebf7&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;#9ecae1&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;#3182bd&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;#08519c&#39;</span><span class="p">]</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+<section id="visualizamos-cada-capa-mensual-del-datacube">
+<h2>Visualizamos cada capa mensual del datacube<a class="headerlink" href="#visualizamos-cada-capa-mensual-del-datacube" title="Link to this heading">#</a></h2>
+<p>Creamos capas mensuales promediando la precipitación diaria por mes. Cada capa se muestra en el mapa:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">meses</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">List</span><span class="p">.</span><span class="nx">sequence</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">fechaFin</span><span class="p">.</span><span class="nx">difference</span><span class="p">(</span><span class="nx">fechaInicio</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">).</span><span class="nx">subtract</span><span class="p">(</span><span class="mf">1</span><span class="p">));</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">fechasStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">meses</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">m</span><span class="p">){</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">fechaInicio</span><span class="p">.</span><span class="nx">advance</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">).</span><span class="nx">format</span><span class="p">(</span><span class="s1">&#39;YYYY-MM&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">fechasStr</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">listaFechas</span><span class="p">){</span>
+<span class="w">  </span><span class="nx">listaFechas</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">fechaStr</span><span class="p">){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">start</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">&#39;YYYY-MM&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">fechaStr</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">start</span><span class="p">.</span><span class="nx">advance</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">img</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">chirps</span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span><span class="w"> </span><span class="nx">end</span><span class="p">).</span><span class="nx">mean</span><span class="p">();</span>
+<span class="w">    </span><span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">img</span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi2</span><span class="p">),</span><span class="w"> </span><span class="nx">visParams</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;CHIRPS &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">fechaStr</span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>En el mapa, se agregan capas con nombres como CHIRPS 2024-01, CHIRPS 2025-03, etc. Estas capas muestran con distintos tonos de azul la distribución espacial de la lluvia mensual sobre Bahía Blanca.</p>
+</section>
+<section id="calculo-de-la-serie-temporal-mensual-promedio">
+<h2>Cálculo de la serie temporal mensual promedio<a class="headerlink" href="#calculo-de-la-serie-temporal-mensual-promedio" title="Link to this heading">#</a></h2>
+<p>Calculamos el promedio mensual de precipitación para todo Bahía Blanca, generando una tabla que representa la evolución temporal:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">tablaMensual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="nx">meses</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">m</span><span class="p">){</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">inicioMes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fechaInicio</span><span class="p">.</span><span class="nx">advance</span><span class="p">(</span><span class="nx">m</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">finMes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">inicioMes</span><span class="p">.</span><span class="nx">advance</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">media</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">chirps</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="nx">inicioMes</span><span class="p">,</span><span class="w"> </span><span class="nx">finMes</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">mean</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">reduceRegion</span><span class="p">({</span>
+<span class="w">      </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">mean</span><span class="p">(),</span>
+<span class="w">      </span><span class="nx">geometry</span><span class="o">:</span><span class="w"> </span><span class="nx">roi2</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">5500</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">maxPixels</span><span class="o">:</span><span class="w"> </span><span class="mf">1e9</span>
+<span class="w">    </span><span class="p">}).</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;precipitation&#39;</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Feature</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">fecha</span><span class="o">:</span><span class="w"> </span><span class="nx">inicioMes</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="s1">&#39;YYYY-MM&#39;</span><span class="p">),</span>
+<span class="w">    </span><span class="nx">precipitacion_mm</span><span class="o">:</span><span class="w"> </span><span class="nx">media</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">}));</span>
+</pre></div>
+</div>
+<p>Esta tabla representa el eje temporal del datacube, sintetizando cada capa mensual en un único valor promedio.</p>
+</section>
+<section id="grafico-de-barras-de-la-serie">
+<h2>Gráfico de barras de la serie<a class="headerlink" href="#grafico-de-barras-de-la-serie" title="Link to this heading">#</a></h2>
+<p>Se visualiza en consola una serie temporal que muestra cómo evolucionó la lluvia:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">chart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ui</span><span class="p">.</span><span class="nx">Chart</span><span class="p">.</span><span class="nx">feature</span><span class="p">.</span><span class="nx">byFeature</span><span class="p">(</span><span class="nx">tablaMensual</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;fecha&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;precipitacion_mm&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">setChartType</span><span class="p">(</span><span class="s1">&#39;ColumnChart&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Precipitación mensual promedio - Bahía Blanca&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">hAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Mes&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">vAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Precipitación (mm)&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">legend</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">position</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;none&#39;</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">colors</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;#1f78b4&#39;</span><span class="p">]</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Serie mensual:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">tablaMensual</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">chart</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>En la consola, el gráfico permite detectar anomalías climáticas o estacionalidades.
+Por ejemplo, en el mes de marzo de 2025, se registró un valor atípico de 8.27 mm, que puede corresponder a un evento extremo como una DANA (Depresión Aislada en Niveles Altos).</p>
+</section>
+<section id="ejemplo-concreto-feature-14">
+<h2>Ejemplo concreto: Feature 14<a class="headerlink" href="#ejemplo-concreto-feature-14" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">Feature</span><span class="w"> </span><span class="mf">14</span>
+<span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="nx">Feature</span>
+<span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="mf">14</span>
+<span class="nx">geometry</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="nx">properties</span><span class="o">:</span>
+<span class="w">  </span><span class="nx">fecha</span><span class="o">:</span><span class="w"> </span><span class="mf">2025</span><span class="o">-</span><span class="mo">03</span>
+<span class="w">  </span><span class="nx">precipitacion_mm</span><span class="o">:</span><span class="w"> </span><span class="mf">8.274471593871292</span>
+</pre></div>
+</div>
+<p>Este objeto representa la capa del datacube correspondiente a marzo de 2025, donde se registró una precipitación muy por encima del promedio. El valor fue calculado sobre toda el área de Bahía Blanca.</p>
+</section>
+<section id="mejora-estetica-del-mapa">
+<h2>Mejora estética del mapa<a class="headerlink" href="#mejora-estetica-del-mapa" title="Link to this heading">#</a></h2>
+<p>Para facilitar la lectura visual, centramos el mapa, lo mostramos en fondo satelital y destacamos el contorno de Bahía Blanca:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">roi2</span><span class="p">,</span><span class="w"> </span><span class="mf">8</span><span class="p">);</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">setOptions</span><span class="p">(</span><span class="s1">&#39;SATELLITE&#39;</span><span class="p">);</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">bahiaBlanca</span><span class="p">.</span><span class="nx">style</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;black&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">fillColor</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;00000000&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">width</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span>
+<span class="p">}),</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="s1">&#39;Límite Bahía Blanca&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h2>Conclusión de esta sección<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>Este ejercicio nos permite construir y visualizar un datacube mensual de precipitación, combinando imágenes diarias CHIRPS. La visualización de cada capa en el mapa junto al gráfico de evolución mensual facilita la detección de anomalías climáticas y proporciona insumos valiosos para análisis posteriores en Python.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="clasificacion-de-tipos-de-suelo-con-sentinel-2-un-enfoque-basado-en-datacubes">
+<h1>Clasificación de tipos de suelo con Sentinel-2: un enfoque basado en datacubes<a class="headerlink" href="#clasificacion-de-tipos-de-suelo-con-sentinel-2-un-enfoque-basado-en-datacubes" title="Link to this heading">#</a></h1>
+<section id="id2">
+<h2>Introducción<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>En este laboratorio, vamos a construir un ejemplo claro de datacube aplicado a la clasificación de tipos de suelo. Utilizaremos imágenes Sentinel-2 armonizadas, clasificaremos por Random Forest y generaremos una serie temporal categórica para el año 2024, con énfasis en su interpretación como cubo de datos espacio-temporal. Vamos paso por paso.</p>
+</section>
+<section id="coleccion-de-imagenes-sentinel-2-y-preparacion-del-mosaico-base">
+<h2>Colección de imágenes Sentinel-2 y preparación del mosaico base<a class="headerlink" href="#coleccion-de-imagenes-sentinel-2-y-preparacion-del-mosaico-base" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_SR_HARMONIZED&quot;</span><span class="p">);</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">s2</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">date</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2025-01-01&#39;</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">bounds</span><span class="p">(</span><span class="nx">roi</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B.*&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">composite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">filtered</span><span class="p">.</span><span class="nx">median</span><span class="p">().</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi</span><span class="p">);</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">rgbVisParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">3000</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">bands</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">]</span>
+<span class="p">};</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">composite</span><span class="p">,</span><span class="w"> </span><span class="nx">rgbVisParams</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;roi: región de interés&#39;</span><span class="p">);</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">roi</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Descripción: Aquí preparamos un mosaico RGB de Sentinel-2 a partir de imágenes del año 2024, filtrando por cobertura nubosa y por la región de interés (roi). Este mosaico sirve como base para entrenar el clasificador.</p>
+<p>🗺️ En el mapa se añade una visualización en color natural de la región seleccionada, permitiendo al usuario tener una vista previa del área a clasificar.</p>
+</section>
+<section id="definicion-de-clases-de-suelo-y-preparacion-de-datos-de-entrenamiento">
+<h2>Definición de clases de suelo y preparación de datos de entrenamiento<a class="headerlink" href="#definicion-de-clases-de-suelo-y-preparacion-de-datos-de-entrenamiento" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">gcps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">urbano</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">agua</span><span class="p">).</span><span class="nx">merge</span><span class="p">(</span><span class="nx">cultivos</span><span class="p">).</span><span class="nx">merge</span><span class="p">(</span><span class="nx">terrenoDesnudo</span><span class="p">).</span><span class="nx">merge</span><span class="p">(</span><span class="nx">bosque</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">gcp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gcps</span><span class="p">.</span><span class="nx">randomColumn</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">trainingGCP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gcp</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">));</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">validationGCP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gcp</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">gte</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Descripción: Se definen manualmente cinco clases: agua, urbano, cultivos, bosque y terreno desnudo. Luego se combinan en una colección y se dividen en datos de entrenamiento (60%) y validación (40%) mediante una columna aleatoria.</p>
+</section>
+<section id="entrenamiento-del-modelo-random-forest">
+<h2>Entrenamiento del modelo Random Forest<a class="headerlink" href="#entrenamiento-del-modelo-random-forest" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">training</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">sampleRegions</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">trainingGCP</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
+<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">tileScale</span><span class="o">:</span><span class="w"> </span><span class="mf">16</span>
+<span class="p">});</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">classifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Classifier</span><span class="p">.</span><span class="nx">smileRandomForest</span><span class="p">(</span><span class="mf">100</span><span class="p">).</span><span class="nx">train</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">features</span><span class="o">:</span><span class="w"> </span><span class="nx">training</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">classProperty</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;landcover&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">inputProperties</span><span class="o">:</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">bandNames</span><span class="p">()</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Descripción: Se extraen los valores de las bandas para las regiones de entrenamiento y se entrena un modelo de Random Forest con 100 árboles para clasificar los tipos de suelo.</p>
+</section>
+<section id="clasificacion-de-la-imagen-y-visualizacion-del-resultado">
+<h2>Clasificación de la imagen y visualización del resultado<a class="headerlink" href="#clasificacion-de-la-imagen-y-visualizacion-del-resultado" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">classified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">classify</span><span class="p">(</span><span class="nx">classifier</span><span class="p">);</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">classVis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">palette</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;violet&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;orange&#39;</span><span class="p">]</span>
+<span class="p">};</span>
+
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">classified</span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi</span><span class="p">),</span><span class="w"> </span><span class="nx">classVis</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Imagen Clasificada&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Descripción: Se clasifica el mosaico de Sentinel-2 usando el modelo entrenado y se visualiza el mapa resultante. Cada clase se representa con un color distinto.</p>
+<p>En el mapa se observa la distribución espacial de las clases de suelo sobre la región de interés.</p>
+</section>
+<section id="evaluacion-del-modelo">
+<h2>Evaluación del modelo<a class="headerlink" href="#evaluacion-del-modelo" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">classified</span><span class="p">.</span><span class="nx">sampleRegions</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">validationGCP</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
+<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span>
+<span class="p">});</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">test</span><span class="p">.</span><span class="nx">errorMatrix</span><span class="p">(</span><span class="s1">&#39;landcover&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;classification&#39;</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Test Accuracy&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">accuracy</span><span class="p">());</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Producers Accuracy:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">producersAccuracy</span><span class="p">());</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Consumers Accuracy:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">consumersAccuracy</span><span class="p">());</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39; Kappa Coefficient: &#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">kappa</span><span class="p">());</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;F-Score:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">fscore</span><span class="p">(</span><span class="mf">1</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Descripción: Se evalúa la precisión del modelo mediante una matriz de confusión y se imprimen métricas clave: exactitud global, precisión por clase, coeficiente de Kappa y F-score.</p>
+<p>Consola: Muestra resultados numéricos que indican cuán bien el modelo ha clasificado las diferentes clases en los datos de validación.</p>
+</section>
+<section id="configuracion-de-la-serie-temporal">
+<h2>Configuración de la serie temporal<a class="headerlink" href="#configuracion-de-la-serie-temporal" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">frecuencia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;bimestral&quot;</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">mesesPorPaso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;mensual&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;bimestral&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;trimestral&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;cuatrimestral&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span>
+<span class="p">};</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">paso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mesesPorPaso</span><span class="p">[</span><span class="nx">frecuencia</span><span class="p">];</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">fechas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">List</span><span class="p">.</span><span class="nx">sequence</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">12</span><span class="p">,</span><span class="w"> </span><span class="nx">paso</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">).</span><span class="nx">advance</span><span class="p">(</span><span class="nx">mes</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Descripción: Configuramos la frecuencia temporal de la serie para generar nuestro datacube categórico. En este caso, elegimos una frecuencia bimestral.</p>
+</section>
+<section id="clasificacion-temporal-e-interpretacion-del-datacube">
+<h2>7. Clasificación temporal e interpretación del datacube<a class="headerlink" href="#clasificacion-temporal-e-interpretacion-del-datacube" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">coleccionClasificada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="nx">fechas</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">fechaInicio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// ...</span>
+<span class="p">}));</span>
+</pre></div>
+</div>
+<p>Descripción: Para cada período bimestral, se crea un nuevo mosaico de Sentinel-2, se clasifica y se cuenta la cantidad de píxeles por clase. Esta colección temporal de objetos Feature conforma el núcleo del datacube: cada capa representa un período de tiempo con distribución espacial clasificada.</p>
+<p>🧊 Datacube: Este es un cubo de datos categóricos donde:</p>
+<p>El eje x es el tiempo (bimestres).</p>
+<p>El eje y representa las clases del suelo.</p>
+<p>El eje z es la cantidad de píxeles por clase, reflejando área relativa.</p>
+<ol class="arabic simple" start="8">
+<li><p>Visualización de resultados en consola</p></li>
 </ol>
-<hr class="docutils" />
-<ol class="arabic simple" start="2">
-<li><p>Aplicar Funciones (apply) – (1.5 minutos)
-[Visual: Comparativa antes/después de aplicar abs() o media espacial]
-•	apply: aplicar función pixel a pixel (unary) o considerando vecinos (n-ary).
-•	apply_neighborhood: usa ventana de píxeles alrededor (kernel espacial o temporal).
-•	apply_dimension: aplica función a todos los valores de una dimensión (ej: media temporal).
-Ejemplo: suavizar una serie temporal usando media móvil de 3 pasos.</p></li>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="nx">grafico</span><span class="p">);</span><span class="w">          </span><span class="c1">// gráfico apilado por clase</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">tablaCantidad</span><span class="p">);</span><span class="w">    </span><span class="c1">// cantidad de imágenes por período</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">graficoCantidad</span><span class="p">);</span><span class="w">  </span><span class="c1">// gráfico de cantidad de imágenes</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">graficoPorcentual</span><span class="p">);</span><span class="w"> </span><span class="c1">// evolución porcentual por clase</span>
+</pre></div>
+</div>
+<p>Descripción:</p>
+<p>Gráfico apilado: muestra cuántos píxeles ocupa cada clase por período, permitiendo detectar cambios como expansión urbana o pérdida de vegetación.</p>
+<p>Gráfico de imágenes: señala cuántas imágenes se usaron por período, útil para evaluar calidad del mosaico.</p>
+<p>Gráfico porcentual: destaca tendencias proporcionales. Por ejemplo, si el área urbana crece, su porcentaje aumentará aunque el número de píxeles totales también lo haga.</p>
+<ol class="arabic simple" start="9">
+<li><p>Visualización espacial del datacube
+Gracias al siguiente bloque:</p></li>
 </ol>
-<hr class="docutils" />
-<ol class="arabic simple" start="3">
-<li><p>Reducción (reduce) – (1 minuto)
-[Visual: Cubo antes y después de reducir una dimensión]
-•	Colapsa una dimensión usando una función resumen: media, máximo, etc.
-•	Ejemplo: reducir dimensión temporal → imagen con valores promedio.</p></li>
-</ol>
-<hr class="docutils" />
-<ol class="arabic simple" start="4">
-<li><p>Remuestreo (resample) – (1 minuto)
-[Visual: Cambio de resolución espacial y temporal]
-•	Cambia la disposición o resolución de una dimensión.
-•	Ejemplo: pasar de imágenes cada 5 días a una imagen mensual (temporal).
-•	Ejemplo: reescalar de 10m a 30m o viceversa (espacial).</p></li>
-</ol>
-<hr class="docutils" />
-<ol class="arabic simple" start="5">
-<li><p>Agregación (aggregate) – (1.5 minutos)
-[Visual: Agregación por polígonos]
-•	Agrupa datos por intervalos o geometrías, y luego reduce dentro de cada grupo.
-•	Temporal: por mes, trimestre, año.
-•	Espacial: por polígonos (provincias, cuencas, etc.), obteniendo una tabla con valores por banda, geometría y tiempo.</p></li>
-</ol>
-<hr class="docutils" />
-<p>🟤 Aplicaciones prácticas (1 minuto)
-[Visual: Dashboard o mapa de resultados con un datacube]
-•	Seguimiento de NDVI mensual en zonas agrícolas.
-•	Detección de cambios urbanos usando NDBI.
-•	Cálculo de estadísticas climáticas por región.
-•	Entrenamiento de modelos de machine learning sobre cubos temporales.</p>
-<hr class="docutils" />
-<p>🔴 Cierre (1 minuto)
-📢 “Los datacubes no son solo una forma de organizar datos, son una herramienta poderosa para el análisis geoespacial a escala. Su estructura permite filtrar, combinar, reducir y visualizar información de manera reproducible, precisa y escalable.”
-🧠 “Entender sus dimensiones, procesos y resoluciones es clave para aprovechar su potencial en tareas de teledetección, monitoreo ambiental y geoIA.”
-🎓 “Te invito a seguir explorando este tema con datasets reales y plataformas como openEO, Google Earth Engine, xcube o rasdaman.”</p>
-<hr class="docutils" />
-<p>🎙️ Script detallado para video – Análisis Temporal Multisensor en Bahía Blanca (GEE)</p>
-<hr class="docutils" />
-<p>🎬 Introducción
-🎤 [Locución]
-¡Hola! Bienvenidos a este video donde vamos a recorrer paso a paso un algoritmo desarrollado en Google Earth Engine.
-¿El objetivo? Construir una serie temporal multifuente que combine imágenes ópticas de Sentinel-2, datos radar de Sentinel-1, precipitación diaria del producto CHIRPS y temperatura superficial del satélite MODIS, todo aplicado al área de Bahía Blanca, Argentina.</p>
-<hr class="docutils" />
-<p>🧭 1. Configuración temporal
-🎤 [Locución]
-Comenzamos definiendo la frecuencia de análisis, en este caso mensual.
-Creamos una secuencia de fechas desde enero de 2024 hasta julio de 2025, avanzando mes a mes.
-Estas fechas serán utilizadas para iterar y obtener imágenes representativas de cada período.
-javascript
-CopyEdit
-var frecuencia = ‘mensual’;
-var mesesPorPaso = { ‘mensual’: 1, ‘bimestral’: 2, ‘trimestral’: 3, ‘cuatrimestral’: 4 };
-var paso = mesesPorPaso[frecuencia];
-🎤 [Locución]
-Calculamos cuántos pasos mensuales hay entre las fechas de inicio y fin, y creamos una lista de fechas que usaremos más adelante para procesar la información.</p>
-<hr class="docutils" />
-<p>🗺️ 2. Delimitación del área de estudio
-🎤 [Locución]
-Utilizamos la base GAUL para filtrar el polígono de Bahía Blanca, en la provincia de Buenos Aires.
-Esta geometría será nuestra región de interés para recortar y analizar todas las imágenes.
-javascript
-CopyEdit
-var bahiaBlanca = admin2.filter(ee.Filter.eq(‘ADM2_NAME’, ‘Bahia Blanca’));
-var roi2 = bahiaBlanca.geometry().simplify(100);</p>
-<hr class="docutils" />
-<p>🌱 3. Índices espectrales Sentinel-2
-🎤 [Locución]
-A continuación definimos una función llamada agregarIndices, que calcula varios índices espectrales a partir de las bandas de Sentinel-2.
-Calculamos:
-•	NDVI, para vegetación.
-•	NDWI, para agua superficial.
-•	NDMI, para humedad de vegetación.
-•	NDBI, útil para identificar suelo desnudo o áreas urbanas.
-•	Y el NIR, es decir, el infrarrojo cercano.
-javascript
-CopyEdit
-function agregarIndices(img) {
-…
-return img.addBands([ndvi, ndbi, ndwi, ndmi, nir]);
-}</p>
-<hr class="docutils" />
-<p>🛰️ 4. Construcción de la colección mensual óptica
-🎤 [Locución]
-Luego definimos la función getColeccionPorPeriodo, que por cada mes filtra imágenes Sentinel-2 que cubren nuestra región y tienen menos de un 20% de nubosidad.
-Recortamos las imágenes, aplicamos los índices y calculamos una imagen promedio mensual, que guarda además la fecha y la cantidad de imágenes utilizadas.
-javascript
-CopyEdit
-return coleccionConIndices.mean()
-.set(‘system:time_start’, fecha.millis())
-.set(‘fecha’, fecha.format(‘YYYY-MM’))
-.set(‘cantidad_imagenes’, cantidad);</p>
-<hr class="docutils" />
-<p>📊 5. Cantidad de imágenes por período
-🎤 [Locución]
-Con esta colección mensual generamos un resumen por consola, mostrando cuántas imágenes fueron procesadas cada mes.
-Esto permite ver la cobertura temporal y posibles vacíos de datos.</p>
-<hr class="docutils" />
-<p>📡 6. Procesamiento de datos Sentinel-1 radar
-🎤 [Locución]
-Ahora incorporamos datos de radar Sentinel-1, filtrando aquellas imágenes que tienen polarización VV y, si está disponible, también VH.
-Calculamos además el índice Ratio, que compara VV y VH.
-Esto es muy útil para detectar humedad o inundaciones, ya que el radar penetra nubes y capta señales de superficie.
-javascript
-CopyEdit
-var ratio = ee.Algorithms.If(hasVH,
-vv.divide(ee.Image(vh)).rename(‘Ratio’),
-null
-);</p>
-<hr class="docutils" />
-<p>🔀 7. Combinación óptico + radar
-🎤 [Locución]
-En este paso unimos, para cada mes, la imagen óptica con la imagen radar correspondiente.
-Si no hay radar para ese período, la fecha se omite.
-El resultado es una colección integrada multisensorial, lista para análisis más completos.</p>
-<hr class="docutils" />
-<p>🌧️ 8. Precipitación con CHIRPS
-🎤 [Locución]
-Incorporamos el componente climático con datos diarios de precipitación del producto CHIRPS.
-Sumamos los valores diarios para cada mes, generando una serie mensual de lluvia acumulada.
-javascript
-CopyEdit
-var suma = chirps.filterDate(inicio, fin).sum();</p>
-<hr class="docutils" />
-<p>🌡️ 9. Temperatura superficial con MODIS
-🎤 [Locución]
-También sumamos información térmica, utilizando el producto MODIS LST.
-Este dataset nos da la temperatura superficial terrestre cada 8 días, que escalamos y convertimos de Kelvin a grados Celsius.
-javascript
-CopyEdit
-.multiply(0.02).subtract(273.15)</p>
-<hr class="docutils" />
-<p>📈 10. Visualización de resultados
-🎤 [Locución]
-Finalmente, generamos cuatro gráficos de series temporales:
-•	Uno para la precipitación mensual (CHIRPS).
-•	Otro con los índices ópticos y radar como NDVI, NDWI, NDMI, NDBI, NIR y el Ratio.
-•	Un tercero para VV y VH de radar Sentinel-1.
-•	Y uno adicional para la temperatura superficial (LST) de MODIS.
-🎤 [Locución]
-Todos estos gráficos se integran en un panel de visualización dentro del entorno de Google Earth Engine.
-Esto permite explorar fácilmente la evolución mensual de distintas variables ambientales sobre el área de Bahía Blanca.</p>
-<hr class="docutils" />
-<p>🧭 Cierre
-🎤 [Locución]
-Como vimos, Google Earth Engine permite combinar diferentes fuentes de datos satelitales y meteorológicos para construir análisis temporales multivariados.
-Esta metodología puede adaptarse a otras regiones, otras frecuencias o incluso extenderse con algoritmos de clasificación y detección de cambios.
-¡Gracias por acompañarnos!
- 
-🎬 Guion de Video: Serie Temporal de Clases de Suelo con Clasificador Entrenado</p>
-<hr class="docutils" />
-<p>🧭 Introducción al Bloque
-“En este video vamos a aplicar el clasificador supervisado que entrenamos previamente sobre datos Sentinel-2 de la ciudad de Rosario. Nuestro objetivo es generar una serie temporal que nos permita observar cómo evolucionan los distintos tipos de cobertura del suelo a lo largo del tiempo, distinguiendo clases como agua, zonas urbanas, cultivos, vegetación natural y terreno desnudo.”</p>
-<hr class="docutils" />
-<p>🔧 BLOQUE 1: Configuración del período temporal
-javascript
-CopyEdit
-var frecuencia = “bimestral”;
-Definimos la frecuencia temporal con la que vamos a construir nuestra serie de tiempo. En este caso elegimos bimestral, lo que implica que cada punto de la serie va a representar un promedio de dos meses.
-javascript
-CopyEdit
-var mesesPorPaso = {
-“mensual”: 1,
-“bimestral”: 2,
-“trimestral”: 3,
-“cuatrimestral”: 4
-};
-Creamos un diccionario que traduce cada opción de frecuencia en una cantidad de meses. Esto nos permitirá usar la misma estructura para distintas resoluciones temporales.
-javascript
-CopyEdit
-var paso = mesesPorPaso[frecuencia];
-Extraemos el valor del paso correspondiente a la frecuencia elegida (en este caso 2 meses).
-javascript
-CopyEdit
-var fechas = ee.List.sequence(0, 12, paso).map(function(mes) {
-return ee.Date(‘2024-01-01’).advance(mes, ‘month’);
-});
-Generamos una lista de fechas que representan los inicios de cada período bimestral, a partir de enero de 2024. Cada valor es un objeto ee.Date.</p>
-<hr class="docutils" />
-<p>🏷️ BLOQUE 2: Definición de etiquetas de clases
-javascript
-CopyEdit
-var etiquetas = ee.Dictionary({
-‘0’: ‘Agua’,
-‘1’: ‘Urbano’,
-‘2’: ‘Cultivos’,
-‘3’: ‘Bosque-Area arbustiva’,
-‘4’: ‘Terreno desnudo’
-});
-Creamos un diccionario que asocia cada código de clase (usado por el clasificador) con un nombre legible. Esto nos permitirá mostrar las clases en gráficos con nombres descriptivos.</p>
-<hr class="docutils" />
-<p>🧠 BLOQUE 3: Aplicación del clasificador por período
-javascript
-CopyEdit
-var coleccionClasificada = ee.FeatureCollection(fechas.map(function(fechaInicio) {
-Usamos map() para iterar sobre la lista de fechas y aplicar la misma lógica de clasificación a cada período bimestral.
-javascript
-CopyEdit
-var fechaFin = ee.Date(fechaInicio).advance(paso, ‘month’);
-Calculamos la fecha final del período sumando el paso (dos meses en este caso) a la fecha de inicio.
-javascript
-CopyEdit
-var s2 = ee.ImageCollection(“COPERNICUS/S2_SR_HARMONIZED”)
-.filterDate(fechaInicio, fechaFin)
-.filterBounds(roi)
-.filter(<a class="reference external" href="http://ee.Filter.lt">ee.Filter.lt</a>(‘CLOUDY_PIXEL_PERCENTAGE’, 30))
-.select(‘B.*’);
-Descargamos las imágenes Sentinel-2 del período actual:
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">fechasStr</span><span class="p">.</span><span class="nx">evaluate</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">listaFechas</span><span class="p">){</span>
+<span class="w">  </span><span class="nx">listaFechas</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">fechaStr</span><span class="p">){</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">fechaInicio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="s1">&#39;YYYY-MM&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">fechaStr</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">fechaFin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fechaInicio</span><span class="p">.</span><span class="nx">advance</span><span class="p">(</span><span class="nx">paso</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">imagen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">s2</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="nx">fechaInicio</span><span class="p">,</span><span class="w"> </span><span class="nx">fechaFin</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">roi</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">))</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B.*&#39;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">median</span><span class="p">()</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi</span><span class="p">);</span>
+
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">clasificada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">imagen</span><span class="p">.</span><span class="nx">classify</span><span class="p">(</span><span class="nx">classifier</span><span class="p">);</span>
+<span class="w">    </span><span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">clasificada</span><span class="p">,</span><span class="w"> </span><span class="nx">classVis</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Clasificada &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">fechaStr</span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Descripción: Se visualiza en el mapa la imagen clasificada para cada período, completando así el datacube con su representación espacial. Esto permite identificar, por ejemplo, que en marzo de 2024 predomina la clase “Cultivos” o que en mayo crece el parche urbano.</p>
+</section>
+<section id="interpretacion-especifica-ejemplo-marzo-2024">
+<h2>10. Interpretación específica: ejemplo marzo 2024<a class="headerlink" href="#interpretacion-especifica-ejemplo-marzo-2024" title="Link to this heading">#</a></h2>
+<p>Supongamos que en marzo de 2024 hubo inundaciones. Si vemos en consola el siguiente Feature:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">yaml</span>
+<span class="nx">Copy</span>
+<span class="nx">Edit</span>
+<span class="nx">Feature</span><span class="w"> </span><span class="mf">3</span>
+<span class="nx">fecha</span><span class="o">:</span><span class="w"> </span><span class="mf">2024</span><span class="o">-</span><span class="mo">03</span><span class="o">-</span><span class="mo">01</span>
+<span class="nx">Agua</span><span class="o">:</span><span class="w"> </span><span class="mf">120000</span>
+<span class="nx">Urbano</span><span class="o">:</span><span class="w"> </span><span class="mf">85000</span>
+<span class="nx">Cultivos</span><span class="o">:</span><span class="w"> </span><span class="mf">150000</span>
+<span class="nx">Bosque</span><span class="o">-</span><span class="nx">Area</span><span class="w"> </span><span class="nx">arbustiva</span><span class="o">:</span><span class="w"> </span><span class="mf">30000</span>
+<span class="nx">Terreno</span><span class="w"> </span><span class="nx">desnudo</span><span class="o">:</span><span class="w"> </span><span class="mf">18000</span>
+</pre></div>
+</div>
+<p>Interpretación: Aquí vemos un aumento inusual en la cantidad de píxeles clasificados como “Agua”, lo que podría reflejar la superficie inundada durante ese mes.</p>
+</section>
+<section id="conclusion">
+<h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>Este ejemplo nos muestra cómo construir un datacube categórico sobre tipos de suelo usando imágenes Sentinel-2, Random Forest y Google Earth Engine. Integramos series temporales espaciales clasificadas, métricas de validación del modelo, visualizaciones dinámicas y tablas estadísticas. Esta estrategia es ideal para monitoreo de uso del suelo, detección de cambios, gestión ambiental y planificación urbana.</p>
+<p>Este es un ejemplo de cómo un cubo de datos no solo organiza información geoespacial, sino que nos permite responder a preguntas relevantes sobre qué tipo de cobertura existe, cuándo cambia y dónde ocurre.</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="ejemplo-2-serie-temporal-de-clases-de-suelo-con-clasificador-entrenado">
+<h1>Ejemplo 2: Serie Temporal de Clases de Suelo con Clasificador Entrenado<a class="headerlink" href="#ejemplo-2-serie-temporal-de-clases-de-suelo-con-clasificador-entrenado" title="Link to this heading">#</a></h1>
+<p>En esta sección vamos a aplicar el clasificador supervisado que entrenamos en capítulo 2 sobre datos Sentinel-2 de la ciudad de Rosario. Nuestro objetivo es generar una serie temporal que nos permita observar cómo evolucionan los distintos tipos de cobertura del suelo a lo largo del tiempo, distinguiendo clases como agua, zonas urbanas, cultivos, vegetación natural y terreno desnudo.</p>
+<p>BLOQUE 1: Configuración del período temporal</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">frecuencia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;bimestral&quot;</span><span class="p">;</span>
+<span class="nx">Definimos</span><span class="w"> </span><span class="nx">la</span><span class="w"> </span><span class="nx">frecuencia</span><span class="w"> </span><span class="nx">temporal</span><span class="w"> </span><span class="nx">con</span><span class="w"> </span><span class="nx">la</span><span class="w"> </span><span class="nx">que</span><span class="w"> </span><span class="nx">vamos</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">construir</span><span class="w"> </span><span class="nx">nuestra</span><span class="w"> </span><span class="nx">serie</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">tiempo</span><span class="p">.</span><span class="w"> </span><span class="nx">En</span><span class="w"> </span><span class="nx">este</span><span class="w"> </span><span class="nx">caso</span><span class="w"> </span><span class="nx">elegimos</span><span class="w"> </span><span class="nx">bimestral</span><span class="p">,</span><span class="w"> </span><span class="nx">lo</span><span class="w"> </span><span class="nx">que</span><span class="w"> </span><span class="nx">implica</span><span class="w"> </span><span class="nx">que</span><span class="w"> </span><span class="nx">cada</span><span class="w"> </span><span class="nx">punto</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">la</span><span class="w"> </span><span class="nx">serie</span><span class="w"> </span><span class="nx">va</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">representar</span><span class="w"> </span><span class="nx">un</span><span class="w"> </span><span class="nx">promedio</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">dos</span><span class="w"> </span><span class="nx">meses</span><span class="p">.</span>
+<span class="nx">javascript</span>
+<span class="nx">CopyEdit</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">mesesPorPaso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;mensual&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;bimestral&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;trimestral&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;cuatrimestral&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Creamos un diccionario que traduce cada opción de frecuencia en una cantidad de meses. Esto nos permitirá usar la misma estructura para distintas resoluciones temporales.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">paso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mesesPorPaso</span><span class="p">[</span><span class="nx">frecuencia</span><span class="p">];</span>
+<span class="nx">Extraemos</span><span class="w"> </span><span class="nx">el</span><span class="w"> </span><span class="nx">valor</span><span class="w"> </span><span class="nx">del</span><span class="w"> </span><span class="nx">paso</span><span class="w"> </span><span class="nx">correspondiente</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">la</span><span class="w"> </span><span class="nx">frecuencia</span><span class="w"> </span><span class="nx">elegida</span><span class="w"> </span><span class="p">(</span><span class="nx">en</span><span class="w"> </span><span class="nx">este</span><span class="w"> </span><span class="nx">caso</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="nx">meses</span><span class="p">).</span>
+<span class="nx">javascript</span>
+<span class="nx">CopyEdit</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">fechas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">List</span><span class="p">.</span><span class="nx">sequence</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">12</span><span class="p">,</span><span class="w"> </span><span class="nx">paso</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">).</span><span class="nx">advance</span><span class="p">(</span><span class="nx">mes</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Generamos una lista de fechas que representan los inicios de cada período bimestral, a partir de enero de 2024. Cada valor es un objeto ee.Date.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bloque-2-definicion-de-etiquetas-de-clases">
+<h1>BLOQUE 2: Definición de etiquetas de clases<a class="headerlink" href="#bloque-2-definicion-de-etiquetas-de-clases" title="Link to this heading">#</a></h1>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">etiquetas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Dictionary</span><span class="p">({</span>
+<span class="w">  </span><span class="s1">&#39;0&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Agua&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;1&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Urbano&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;2&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Cultivos&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;3&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Bosque-Area arbustiva&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;4&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Terreno desnudo&#39;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Creamos un diccionario que asocia cada código de clase (usado por el clasificador) con un nombre legible. Esto nos permitirá mostrar las clases en gráficos con nombres descriptivos.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bloque-3-aplicacion-del-clasificador-por-periodo">
+<h1>BLOQUE 3: Aplicación del clasificador por período<a class="headerlink" href="#bloque-3-aplicacion-del-clasificador-por-periodo" title="Link to this heading">#</a></h1>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">coleccionClasificada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="nx">fechas</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">fechaInicio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</pre></div>
+</div>
+<p>Usamos map() para iterar sobre la lista de fechas y aplicar la misma lógica de clasificación a cada período bimestral.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">fechaFin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">(</span><span class="nx">fechaInicio</span><span class="p">).</span><span class="nx">advance</span><span class="p">(</span><span class="nx">paso</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Calculamos la fecha final del período sumando el paso (dos meses en este caso) a la fecha de inicio.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_SR_HARMONIZED&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="nx">fechaInicio</span><span class="p">,</span><span class="w"> </span><span class="nx">fechaFin</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">roi</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">))</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B.*&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Descargamos las imágenes Sentinel-2 del período actual:
 •	Filtramos por fechas, región de interés (roi) y porcentaje de nubes.
-•	Seleccionamos todas las bandas ópticas.
-javascript
-CopyEdit
-var imagen = s2.median().clip(roi);
-Calculamos la mediana de las imágenes en el período y la recortamos al área de estudio.
-javascript
-CopyEdit
-var clasificada = imagen.classify(classifier);
-Aplicamos el clasificador previamente entrenado a la imagen compuesta para generar un raster de clases.</p>
-<hr class="docutils" />
-<p>📊 BLOQUE 4: Conteo de píxeles por clase
-javascript
-CopyEdit
-var histograma = clasificada.reduceRegion({
-reducer: ee.Reducer.frequencyHistogram(),
-geometry: ee.FeatureCollection(roi).geometry(),
-scale: 30,
-maxPixels: 1e13
-}).get(‘classification’);
-Reducimos la imagen clasificada a una tabla que indica cuántos píxeles hay de cada clase en ese período, usando un histograma.
-javascript
-CopyEdit
-var dict = ee.Dictionary(histograma);
-var keys = dict.keys();
-var valores = keys.map(function(k) { return dict.get(k); });
-Obtenemos las claves del diccionario (0, 1, etc.) y los valores asociados (cantidad de píxeles).
-javascript
-CopyEdit
-var nuevasClaves = keys.map(function(k) {
-return etiquetas.get(k);
-});
-Traducimos las claves numéricas por sus nombres: agua, urbano, etc.
-javascript
-CopyEdit
-var propsEtiquetadas = ee.Dictionary.fromLists(nuevasClaves, valores);
-Construimos un nuevo diccionario con claves descriptivas y valores numéricos.
-javascript
-CopyEdit
-var ft = ee.Feature(null, propsEtiquetadas)
-.set(‘fecha’, ee.Date(fechaInicio).format(‘YYYY-MM-dd’));</p>
-<p>return ft;
-}));
-Creamos un Feature con los datos de ese período y la fecha correspondiente, y lo devolvemos. Al final, coleccionClasificada es una colección de Features, uno por período.</p>
-<hr class="docutils" />
-<p>📊 BLOQUE 5: Visualización absoluta
-javascript
-CopyEdit
-var grafico = ui.Chart.feature.byFeature({
-features: coleccionClasificada,
-xProperty: ‘fecha’
-}).setChartType(‘ColumnChart’).setOptions({
-title: ‘Serie temporal de clases de suelo - ‘ + frecuencia,
-hAxis: {title: ‘Fecha’},
-vAxis: {title: ‘Cantidad de píxeles’},
-isStacked: true
-});
-Creamos un gráfico de barras apiladas que muestra la cantidad absoluta de píxeles por clase en cada período. Esto permite ver por ejemplo si aumentaron los cultivos o disminuyó el área urbana en un bimestre determinado.</p>
-<hr class="docutils" />
-<p>📐 BLOQUE 6: Conversión a porcentajes
-javascript
-CopyEdit
-var coleccionPorcentual = coleccionClasificada.map(function(feat) {
-Iteramos sobre cada Feature de la colección anterior para convertir los valores absolutos en porcentajes.
-javascript
-CopyEdit
-var props = feat.toDictionary();
-var clases = props.keys().remove(‘fecha’);
-Convertimos cada Feature en un diccionario y extraemos las clases (omitimos la fecha).
-javascript
-CopyEdit
-var total = ee.Number(
-clases.map(function(k) {
-return ee.Number(props.get(k));
-}).reduce(ee.Reducer.sum())
-);
-Calculamos el total de píxeles clasificados en ese período.
-javascript
-CopyEdit
-var nuevasProps = ee.Dictionary(
-clases.iterate(function(k, acc) {
-…
-}, ee.Dictionary({}))
-);
-Para cada clase, calculamos su porcentaje con respecto al total y lo guardamos en un nuevo diccionario.
-javascript
-CopyEdit
-return ee.Feature(null, nuevasProps)
-.set(‘fecha’, props.get(‘fecha’));
-});
-Creamos un nuevo Feature para cada período, ahora con porcentajes. coleccionPorcentual es una colección con los datos relativos.</p>
-<hr class="docutils" />
-<p>📈 BLOQUE 7: Visualización porcentual
-javascript
-CopyEdit
-var graficoPorcentual = ui.Chart.feature.byFeature({
-features: coleccionPorcentual,
-xProperty: ‘fecha’
-}).setChartType(‘LineChart’).setOptions({
-title: ‘Serie temporal porcentual de clases de suelo - ‘ + frecuencia,
-hAxis: {title: ‘Fecha’},
-vAxis: {
-title: ‘Porcentaje (%)’,
-minValue: 0,
-maxValue: 100
-},
-isStacked: false
-});
-print(graficoPorcentual);
-Mostramos un gráfico de líneas con la evolución relativa de cada clase. A diferencia del gráfico anterior, este permite detectar tendencias aunque cambie el número total de píxeles disponibles (por ejemplo, por nubosidad).</p>
-<hr class="docutils" />
-<p>🧪 Conclusión
-“Con este bloque de código logramos aplicar automáticamente el clasificador de suelos para Rosario a cada período bimestral. A partir de ahí, generamos una serie de tiempo de clases del suelo que nos permite observar tanto los cambios absolutos como los relativos. Este enfoque es ideal para detectar procesos de urbanización, expansión agrícola, deforestación o cambios hidrológicos en el territorio.”</p>
-<hr class="docutils" />
+•	Seleccionamos todas las bandas ópticas.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">imagen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">s2</span><span class="p">.</span><span class="nx">median</span><span class="p">().</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Calculamos la mediana de las imágenes en el período y la recortamos al área de estudio.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">clasificada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">imagen</span><span class="p">.</span><span class="nx">classify</span><span class="p">(</span><span class="nx">classifier</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Aplicamos el clasificador previamente entrenado a la imagen compuesta para generar un raster de clases.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bloque-4-conteo-de-pixeles-por-clase">
+<h1>BLOQUE 4: Conteo de píxeles por clase<a class="headerlink" href="#bloque-4-conteo-de-pixeles-por-clase" title="Link to this heading">#</a></h1>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">histograma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">clasificada</span><span class="p">.</span><span class="nx">reduceRegion</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">frequencyHistogram</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">geometry</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="nx">roi</span><span class="p">).</span><span class="nx">geometry</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">30</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">maxPixels</span><span class="o">:</span><span class="w"> </span><span class="mf">1e13</span>
+<span class="w">  </span><span class="p">}).</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;classification&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Reducimos la imagen clasificada a una tabla que indica cuántos píxeles hay de cada clase en ese período, usando un histograma.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Dictionary</span><span class="p">(</span><span class="nx">histograma</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">dict</span><span class="p">.</span><span class="nx">keys</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">valores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keys</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">dict</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">k</span><span class="p">);</span><span class="w"> </span><span class="p">});</span>
+</pre></div>
+</div>
+<p>Obtenemos las claves del diccionario (0, 1, etc.) y los valores asociados (cantidad de píxeles).</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">nuevasClaves</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">keys</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">etiquetas</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">k</span><span class="p">);</span>
+<span class="w">  </span><span class="p">});</span>
+</pre></div>
+</div>
+<p>Traducimos las claves numéricas por sus nombres: agua, urbano, etc.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">propsEtiquetadas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Dictionary</span><span class="p">.</span><span class="nx">fromLists</span><span class="p">(</span><span class="nx">nuevasClaves</span><span class="p">,</span><span class="w"> </span><span class="nx">valores</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Construimos un nuevo diccionario con claves descriptivas y valores numéricos.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">ft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Feature</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nx">propsEtiquetadas</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;fecha&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">(</span><span class="nx">fechaInicio</span><span class="p">).</span><span class="nx">format</span><span class="p">(</span><span class="s1">&#39;YYYY-MM-dd&#39;</span><span class="p">));</span>
+<span class="w">    </span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">ft</span><span class="p">;</span>
+<span class="p">}));</span>
+</pre></div>
+</div>
+<p>Creamos un Feature con los datos de ese período y la fecha correspondiente, y lo devolvemos. Al final, coleccionClasificada es una colección de Features, uno por período.</p>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="bloque-5-visualizacion-absoluta">
+<h1>BLOQUE 5: Visualización absoluta<a class="headerlink" href="#bloque-5-visualizacion-absoluta" title="Link to this heading">#</a></h1>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">grafico</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ui</span><span class="p">.</span><span class="nx">Chart</span><span class="p">.</span><span class="nx">feature</span><span class="p">.</span><span class="nx">byFeature</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">features</span><span class="o">:</span><span class="w"> </span><span class="nx">coleccionClasificada</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">xProperty</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;fecha&#39;</span>
+<span class="p">}).</span><span class="nx">setChartType</span><span class="p">(</span><span class="s1">&#39;ColumnChart&#39;</span><span class="p">).</span><span class="nx">setOptions</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Serie temporal de clases de suelo - &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">frecuencia</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">hAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Fecha&#39;</span><span class="p">},</span>
+<span class="w">  </span><span class="nx">vAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Cantidad de píxeles&#39;</span><span class="p">},</span>
+<span class="w">  </span><span class="nx">isStacked</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Creamos un gráfico de barras apiladas que muestra la cantidad absoluta de píxeles por clase en cada período. Esto permite ver por ejemplo si aumentaron los cultivos o disminuyó el área urbana en un bimestre determinado.</p>
+<section id="bloque-6-conversion-a-porcentajes">
+<h2>BLOQUE 6: Conversión a porcentajes<a class="headerlink" href="#bloque-6-conversion-a-porcentajes" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">coleccionPorcentual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">coleccionClasificada</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">feat</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</pre></div>
+</div>
+<p>Iteramos sobre cada Feature de la colección anterior para convertir los valores absolutos en porcentajes.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">props</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">feat</span><span class="p">.</span><span class="nx">toDictionary</span><span class="p">();</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">clases</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">props</span><span class="p">.</span><span class="nx">keys</span><span class="p">().</span><span class="nx">remove</span><span class="p">(</span><span class="s1">&#39;fecha&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Convertimos cada Feature en un diccionario y extraemos las clases (omitimos la fecha).</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Number</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">clases</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">k</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Number</span><span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">k</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}).</span><span class="nx">reduce</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">sum</span><span class="p">())</span>
+<span class="w">  </span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Calculamos el total de píxeles clasificados en ese período.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nx">nuevasProps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Dictionary</span><span class="p">(</span>
+<span class="w">    </span><span class="nx">clases</span><span class="p">.</span><span class="nx">iterate</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">k</span><span class="p">,</span><span class="w"> </span><span class="nx">acc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="p">...</span>
+<span class="w">    </span><span class="p">},</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Dictionary</span><span class="p">({}))</span>
+<span class="w">  </span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Para cada clase, calculamos su porcentaje con respecto al total y lo guardamos en un nuevo diccionario.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Feature</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nx">nuevasProps</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;fecha&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">props</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;fecha&#39;</span><span class="p">));</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Creamos un nuevo Feature para cada período, ahora con porcentajes. coleccionPorcentual es una colección con los datos relativos.</p>
+</section>
+<section id="bloque-7-visualizacion-porcentual">
+<h2>BLOQUE 7: Visualización porcentual<a class="headerlink" href="#bloque-7-visualizacion-porcentual" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">graficoPorcentual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ui</span><span class="p">.</span><span class="nx">Chart</span><span class="p">.</span><span class="nx">feature</span><span class="p">.</span><span class="nx">byFeature</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">features</span><span class="o">:</span><span class="w"> </span><span class="nx">coleccionPorcentual</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">xProperty</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;fecha&#39;</span>
+<span class="p">}).</span><span class="nx">setChartType</span><span class="p">(</span><span class="s1">&#39;LineChart&#39;</span><span class="p">).</span><span class="nx">setOptions</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Serie temporal porcentual de clases de suelo - &#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">frecuencia</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">hAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Fecha&#39;</span><span class="p">},</span>
+<span class="w">  </span><span class="nx">vAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Porcentaje (%)&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">minValue</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">maxValue</span><span class="o">:</span><span class="w"> </span><span class="mf">100</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nx">isStacked</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">});</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">graficoPorcentual</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Mostramos un gráfico de líneas con la evolución relativa de cada clase. A diferencia del gráfico anterior, este permite detectar tendencias aunque cambie el número total de píxeles disponibles (por ejemplo, por nubosidad).</p>
+</section>
+<section id="id3">
+<h2>Conclusión<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<p>Con este último código logramos aplicar automáticamente el clasificador de suelos para Rosario a cada período bimestral. A partir de ahí, generamos una serie de tiempo de clases del suelo que nos permite observar tanto los cambios absolutos como los relativos. Este enfoque es ideal para detectar procesos de urbanización, expansión agrícola, deforestación o cambios hidrológicos en el territorio.</p>
+</section>
+<section id="video-del-capitulo">
+<h2>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
+<p>Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA:</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -947,7 +1347,60 @@ Mostramos un gráfico de líneas con la evolución relativa de cada clase. A dif
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Cubos de Imágenes Satelitales</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#de-imagenes-satelitales-a-cubos-de-imagenes">De imágenes satelitales a Cubos de Imágenes</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#de-imagenes-satelitales-a-cubos-de-imagenes">De imágenes satelitales a Cubos de Imágenes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#revisitando-la-tierra-frecuencia-y-volumen-de-datos-en-sentinel-2">Revisitando la Tierra: frecuencia y volumen de datos en Sentinel 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-reales-y-cierre">Aplicaciones reales y cierre</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#datacube-de-temperatura-superficial-en-bahia-blanca-con-gee">Datacube de temperatura superficial en Bahía Blanca con GEE</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-definir-la-region-de-interes">Paso 1: Definir la región de interés</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-seleccion-temporal">Paso 2: Selección temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-cargar-modis-lst-y-convertir-unidades">Paso 3: Cargar MODIS LST y convertir unidades</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-parametros-visuales-para-el-mapa">Paso 4: Parámetros visuales para el mapa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-5-y-6-generar-imagenes-mensuales-y-mostrarlas-en-el-mapa">Paso 5 y 6: Generar imágenes mensuales y mostrarlas en el mapa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-7-crear-tabla-de-promedios-mensuales-reduccion-espacial">Paso 7: Crear tabla de promedios mensuales (reducción espacial)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-8-visualizar-la-serie-de-tiempo">Paso 8: Visualizar la serie de tiempo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-9-estetica-del-mapa">Paso 9: Estética del mapa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-10-exportar-la-serie-al-drive">Paso 10: Exportar la serie al Drive</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-de-esta-seccion">Conclusión de esta sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizacion-y-analisis-de-un-datacube-de-precipitacion-mensual-en-bahia-blanca-chirps">Visualización y análisis de un datacube de precipitación mensual en Bahía Blanca (CHIRPS)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#que-es-chirps">¿Qué es CHIRPS?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#seleccion-de-la-region-bahia-blanca">Selección de la región: Bahía Blanca</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definimos-el-periodo-de-analisis">Definimos el período de análisis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cargamos-la-coleccion-chirps-diaria">Cargamos la colección CHIRPS diaria</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paleta-de-colores-para-visualizacion">Paleta de colores para visualización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizamos-cada-capa-mensual-del-datacube">Visualizamos cada capa mensual del datacube</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-la-serie-temporal-mensual-promedio">Cálculo de la serie temporal mensual promedio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-barras-de-la-serie">Gráfico de barras de la serie</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-concreto-feature-14">Ejemplo concreto: Feature 14</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mejora-estetica-del-mapa">Mejora estética del mapa</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Conclusión de esta sección</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-tipos-de-suelo-con-sentinel-2-un-enfoque-basado-en-datacubes">Clasificación de tipos de suelo con Sentinel-2: un enfoque basado en datacubes</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Introducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#coleccion-de-imagenes-sentinel-2-y-preparacion-del-mosaico-base">Colección de imágenes Sentinel-2 y preparación del mosaico base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-clases-de-suelo-y-preparacion-de-datos-de-entrenamiento">Definición de clases de suelo y preparación de datos de entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-modelo-random-forest">Entrenamiento del modelo Random Forest</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-la-imagen-y-visualizacion-del-resultado">Clasificación de la imagen y visualización del resultado</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-del-modelo">Evaluación del modelo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-de-la-serie-temporal">Configuración de la serie temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-temporal-e-interpretacion-del-datacube">7. Clasificación temporal e interpretación del datacube</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-especifica-ejemplo-marzo-2024">10. Interpretación específica: ejemplo marzo 2024</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-serie-temporal-de-clases-de-suelo-con-clasificador-entrenado">Ejemplo 2: Serie Temporal de Clases de Suelo con Clasificador Entrenado</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-2-definicion-de-etiquetas-de-clases">BLOQUE 2: Definición de etiquetas de clases</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-3-aplicacion-del-clasificador-por-periodo">BLOQUE 3: Aplicación del clasificador por período</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-4-conteo-de-pixeles-por-clase">BLOQUE 4: Conteo de píxeles por clase</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-5-visualizacion-absoluta">BLOQUE 5: Visualización absoluta</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-6-conversion-a-porcentajes">BLOQUE 6: Conversión a porcentajes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-7-visualizacion-porcentual">BLOQUE 7: Visualización porcentual</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">Video del capítulo</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
