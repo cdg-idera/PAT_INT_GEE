@@ -207,8 +207,6 @@
 
 
 
-
-
 <li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">Cubos de Imágenes Satelitales</a></li>
 
 
@@ -421,25 +419,16 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">—————————————————————</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-seleccion-del-area-de-estudio">Paso 1: Selección del área de estudio</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-definicion-temporal">Paso 2: Definición temporal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-calculo-de-indices-espectrales">Paso 3: Cálculo de índices espectrales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-construccion-de-la-serie-de-tiempo">Paso 4: Construcción de la serie de tiempo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-5-grafico-de-la-serie-temporal">Paso 5: Gráfico de la serie temporal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-6-incorporacion-de-temperatura-superficial-modis-lst">Paso 6: Incorporación de temperatura superficial (MODIS LST)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-7-exportacion-de-estadisticas">Paso 7: Exportación de estadísticas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-reflexiones-desde-la-teoria-de-series-de-tiempo">Cierre: Reflexiones desde la teoría de series de tiempo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-awesome-spectral-indices-en-gee">Uso de Awesome Spectral Indices en GEE</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona-importar-el-modulo">¿Cómo funciona? – Importar el módulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ver-la-lista-completa-de-indices">Ver la lista completa de índices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explorar-los-atributos-del-indice">Explorar los atributos del índice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2">Calcular un índice: NDVI sobre una imagen Sentinel-2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-multiples-indices-a-la-vez">Calcular múltiples índices a la vez</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sundo-ejemplo">Sundo ejemplo</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2">Ejemplo 2.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-de-tiempo-de-tipos-de-suelo-conurbano-de-rosario-obtenidos-con-rf">Serie de tiempo de tipos de suelo (Conurbano de Rosario) obtenidos con RF</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#st-en-colab">ST en colab</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-de-fechas">Configuración de fechas</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-graficar-una-serie">Función para graficar una serie</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explicacion-de-la-nueva-version-con-asi">Explicación de la nueva versión con ASI</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre">Cierre</a></li>
 </ul>
 
             </nav>
@@ -462,10 +451,20 @@ document.write(`
 </div></blockquote>
 <p><img alt="" src="_images/graf1.png" /></p>
 <p>En este primer video vamos a trabajar con un ejemplo concreto y sencillo para introducirnos en el tema:</p>
-<p>El caso es Bahía Blanca, donde analizamos la evolución mensual durante el año 2024 de una serie de indicadores ambientales derivados de imágenes satelitales Sentinel-2 y MODIS. Calculamos índices como NDVI, NDWI, NDBI, NDMI, NIR y temperatura superficial (LST) que permiten seguir la dinámica de la vegetación, la presencia de agua, el suelo desnudo, o el impacto del calor. A lo largo del ejemplo, mostramos cómo graficar estas variables, cómo generar las series de tiempo con Earth Engine, y cómo exportarlas para su posterior análisis en R o Python.</p>
-<p><img alt="" src="_images/IndicesST.png" /></p>
-<p>Ahora bien, para trabajar de forma sólida con series temporales es importante entender que detrás de cada gráfico hay múltiples componentes interactuando.</p>
-<p><img alt="" src="_images/componentes.png" /></p>
+<p>El caso es Bahía Blanca, donde analizamos la evolución mensual durante el año 2024 de una serie de indicadores ambientales derivados de imágenes satelitales Sentinel-2 y MODIS. Calculamos índices como NDVI, NDWI, NDBI, NDMI, NIR y temperatura superficial (LST) (ver en <a class="reference internal" href="#fig-indices"><span class="std std-numref">Fig. 1</span></a>) que permiten seguir la dinámica de la vegetación, la presencia de agua, el suelo desnudo, o el impacto del calor. A lo largo del ejemplo, mostramos cómo graficar estas variables, cómo generar las series de tiempo con Earth Engine, y cómo exportarlas para su posterior análisis en R o Python.</p>
+<figure class="align-default" id="fig-indices">
+<a class="reference internal image-reference" href="_images/IndicesST.png"><img alt="_images/IndicesST.png" src="_images/IndicesST.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Indices espectrales y bandas utilizadas en el estudio.</span><a class="headerlink" href="#fig-indices" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Ahora bien, para trabajar de forma sólida con series temporales es importante entender que detrás de cada gráfico hay múltiples componentes interactuando (ver en <a class="reference internal" href="#fig-componentes"><span class="std std-numref">Fig. 2</span></a>).</p>
+<figure class="align-default" id="fig-componentes">
+<a class="reference internal image-reference" href="_images/componentes.png"><img alt="_images/componentes.png" src="_images/componentes.png" style="width: 50%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Componentes principales del sistema.</span><a class="headerlink" href="#fig-componentes" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Por un lado, está la <strong>tendencia</strong>, ese <em>comportamiento de largo plazo</em> que puede marcar una dirección ascendente o descendente.</p>
 <p><img alt="" src="_images/tendencia.png" /></p>
 <p>También encontramos <strong>ciclos</strong>, como los que impone el clima o la economía, que pueden repetirse con menor frecuencia pero tener gran impacto.</p>
@@ -634,7 +633,10 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 </section>
 <section id="exportacion-opcional-de-estadisticas-a-csv">
 <h2>Exportación opcional de estadísticas a CSV<a class="headerlink" href="#exportacion-opcional-de-estadisticas-a-csv" title="Link to this heading">#</a></h2>
+<p>Exportar los conjuntos de datos a csv es una buena opción para procesamiento posterior en lenguajes como R, python, julia o Power BI.</p>
+<p><img alt="" src="_images/interApp2.png" /></p>
 <p>a) Para Sentinel-2:</p>
+<p>Esto exporta una tabla con una fila por período, conteniendo los valores promedio de NDVI, NDBI, etc.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// var statsSentinel = imagenesPorPeriodo.map(function(img) {</span>
 </pre></div>
 </div>
@@ -657,8 +659,8 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>Esto exporta una tabla con una fila por período, conteniendo los valores promedio de NDVI, NDBI, etc.</p>
 <p>b) Para MODIS LST:</p>
+<p>De forma similar, se genera una tabla con una fila por imagen de MODIS, con el valor de temperatura superficial promedio.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">statsLST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">modisLST</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">reducer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">reduceRegion</span><span class="p">({</span>
 <span class="w">    </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">mean</span><span class="p">(),</span>
@@ -677,11 +679,11 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>De forma similar, se genera una tabla con una fila por imagen de MODIS, con el valor de temperatura superficial promedio.</p>
 </section>
 <section id="conclusion">
 <h2>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>Este script permite:</p>
+<p><img alt="" src="_images/Placa15.png" /></p>
 <ol class="arabic simple">
 <li><p>Analizar múltiples índices espectrales (vegetación, humedad, estructura urbana, etc.).</p></li>
 <li><p>Ajustar la resolución temporal del análisis (mensual a cuatrimestral).</p></li>
@@ -691,627 +693,168 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <p>Este código puede adaptarse fácilmente a otras regiones o años cambiando el filtro de fechas o la geometría de interés.</p>
 </section>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>—————————————————————<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
-<p>En este video, vamos a explorar cómo construir y analizar series de tiempo aplicadas a información geoespacial usando Google Earth Engine. Lo haremos con un caso concreto: el municipio de Bahía Blanca, en la provincia de Buenos Aires, Argentina.</p>
-<p>Nuestro objetivo es observar cómo varían en el tiempo ciertos indicadores ambientales, como la vegetación, el agua superficial, las áreas urbanas y la temperatura superficial terrestre. Para eso, trabajaremos con imágenes satelitales de Sentinel-2 y MODIS durante el año 2024.</p>
-<section id="paso-1-seleccion-del-area-de-estudio">
-<h2>Paso 1: Selección del área de estudio<a class="headerlink" href="#paso-1-seleccion-del-area-de-estudio" title="Link to this heading">#</a></h2>
-<p>Comenzamos cargando los límites administrativos de segundo nivel (municipios) de Argentina a partir de la colección FAO/GAUL/2015/level2:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">admin2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="s2">&quot;FAO/GAUL/2015/level2&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM0_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Argentina&#39;</span><span class="p">))</span>
-<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM1_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Buenos Aires&#39;</span><span class="p">));</span>
+<section class="tex2jax_ignore mathjax_ignore" id="uso-de-awesome-spectral-indices-en-gee">
+<h1>Uso de Awesome Spectral Indices en GEE<a class="headerlink" href="#uso-de-awesome-spectral-indices-en-gee" title="Link to this heading">#</a></h1>
+<p>En este video vamos a explorar cómo usar el  catálogo abierto y colaborativo de índices espectrales denominado <strong>Awesome Spectral Indices</strong>, una herramienta muy potente para calcular de forma sencilla decenas de índices espectrales en Google Earth Engine.</p>
+<p>Esta librería nos ahorra tiempo y evita errores al aplicar fórmulas, ya que contiene una base de datos bien documentada con cada índice, su fórmula, sus bandas requeridas y su referencia académica.</p>
+<p><img alt="Librería spectral de JS para consumir Awesome Spectral Indices" src="_images/spectral.png" /></p>
+<section id="como-funciona-importar-el-modulo">
+<h2>¿Cómo funciona? – Importar el módulo<a class="headerlink" href="#como-funciona-importar-el-modulo" title="Link to this heading">#</a></h2>
+<p>Lo primero que tenemos que hacer es aceptar el módulo desde el repositorio del autor. Una vez aceptado, lo cargamos con la siguiente línea:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">spectral</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;users/dmlmont/spectral:spectral&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Luego, filtramos por el municipio de Bahía Blanca:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">bahiaBlanca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">admin2</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM2_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Bahía Blanca&#39;</span><span class="p">));</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">roi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bahiaBlanca</span><span class="p">.</span><span class="nx">geometry</span><span class="p">();</span>
-</pre></div>
-</div>
-<p>Finalmente, centramos el mapa y dibujamos en rojo el ejido urbano:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">roi</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">);</span>
-<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">roi</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;red&#39;</span><span class="p">},</span><span class="w"> </span><span class="s1">&#39;Ejido Bahía Blanca&#39;</span><span class="p">);</span>
-</pre></div>
-</div>
-<p>Esto define nuestra región de interés (ROI), el espacio geográfico sobre el cual extraeremos información temporal.</p>
+<p>Esto nos habilita todas las funciones y estructuras que forman parte del paquete.</p>
 </section>
-<section id="paso-2-definicion-temporal">
-<h2>Paso 2: Definición temporal<a class="headerlink" href="#paso-2-definicion-temporal" title="Link to this heading">#</a></h2>
-<p>Comenzamos cargando los límites administrativos de Argentina y filtramos específicamente el municipio de Bahía Blanca. Esta región se convierte en nuestra región de interés (ROI). Luego la visualizamos en el mapa como una referencia para centrar el análisis.</p>
-<p>Elegimos una frecuencia de análisis, en este caso trimestral:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">frecuencia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;trimestral&#39;</span><span class="p">;</span>
+<section id="ver-la-lista-completa-de-indices">
+<h2>Ver la lista completa de índices<a class="headerlink" href="#ver-la-lista-completa-de-indices" title="Link to this heading">#</a></h2>
+<p>Podemos listar todos los índices disponibles simplemente con:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="nx">spectral</span><span class="p">.</span><span class="nx">indices</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Luego definimos cuántos meses hay por paso:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">mesesPorPaso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="s1">&#39;mensual&#39;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
-<span class="w">  </span><span class="s1">&#39;bimestral&#39;</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
-<span class="w">  </span><span class="s1">&#39;trimestral&#39;</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span>
-<span class="w">  </span><span class="s1">&#39;cuatrimestral&#39;</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span>
-<span class="p">};</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">paso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mesesPorPaso</span><span class="p">[</span><span class="nx">frecuencia</span><span class="p">];</span>
+<p>En la consola vamos a ver un diccionario grande, donde cada clave es el nombre corto del índice: como NDVI, EVI, NDWI, NDBI, SAVI, entre muchos otros.</p>
+<hr class="docutils" />
+<p>🔎 3. Acceder a la información de un índice específico
+Supongamos que queremos saber más sobre el NDVI. Tenemos dos formas equivalentes de hacerlo:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="nx">spectral</span><span class="p">.</span><span class="nx">indices</span><span class="p">.</span><span class="nx">NDVI</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">spectral</span><span class="p">.</span><span class="nx">indices</span><span class="p">[</span><span class="s2">&quot;NDVI&quot;</span><span class="p">]);</span>
 </pre></div>
 </div>
-<p>Y generamos las fechas de inicio de cada período:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">fechas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">List</span><span class="p">.</span><span class="nx">sequence</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">12</span><span class="p">,</span><span class="w"> </span><span class="nx">paso</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">).</span><span class="nx">advance</span><span class="p">(</span><span class="nx">mes</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
-<span class="p">});</span>
-</pre></div>
-</div>
-<p>Este bloque crea una lista de fechas trimestrales a partir de enero de 2024. Es la base temporal de nuestra serie.</p>
+<p>En ambos casos se nos despliega toda la información asociada a ese índice.</p>
 </section>
-<section id="paso-3-calculo-de-indices-espectrales">
-<h2>Paso 3: Cálculo de índices espectrales<a class="headerlink" href="#paso-3-calculo-de-indices-espectrales" title="Link to this heading">#</a></h2>
-<p>A continuación, elegimos la frecuencia temporal con la que queremos analizar las imágenes. En este caso, optamos por una resolución trimestral, es decir, una imagen representativa cada tres meses. Esto nos permite construir una serie de tiempo que describe cómo cambian los valores promedio en Bahía Blanca a lo largo del año.</p>
-<p>Desde la teoría de series de tiempo, esto significa que estamos generando una secuencia ordenada de observaciones espaciadas regularmente en el tiempo. Esta frecuencia define el tipo de variabilidad que podemos detectar: si quisiéramos observar cambios más rápidos, como eventos extremos puntuales, podríamos usar una frecuencia mensual o incluso semanal.</p>
-<p>Definimos una función para agregar índices a cada imagen:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">agregarIndices</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">ndvi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B4&#39;</span><span class="p">]).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NDVI&#39;</span><span class="p">);</span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">ndbi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B11&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B8&#39;</span><span class="p">]).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NDBI&#39;</span><span class="p">);</span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">ndwi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B8&#39;</span><span class="p">]).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NDWI&#39;</span><span class="p">);</span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">nir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B8&#39;</span><span class="p">).</span><span class="nx">divide</span><span class="p">(</span><span class="mf">10000</span><span class="p">).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NIR&#39;</span><span class="p">);</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">addBands</span><span class="p">([</span><span class="nx">ndvi</span><span class="p">,</span><span class="w"> </span><span class="nx">ndbi</span><span class="p">,</span><span class="w"> </span><span class="nx">ndwi</span><span class="p">,</span><span class="w"> </span><span class="nx">nir</span><span class="p">]);</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-<p>Cada índice está basado en combinaciones de bandas de Sentinel-2. Por ejemplo, el NDVI se calcula como (B8 - B4) / (B8 + B4), y es una medida de vegetación. También escalamos la banda infrarroja cercana (B8) para mejorar su interpretación.</p>
-</section>
-<section id="paso-4-construccion-de-la-serie-de-tiempo">
-<h2>Paso 4: Construcción de la serie de tiempo<a class="headerlink" href="#paso-4-construccion-de-la-serie-de-tiempo" title="Link to this heading">#</a></h2>
-<p>Para cada imagen Sentinel-2 descargada, calculamos una serie de índices espectrales:</p>
+<section id="explorar-los-atributos-del-indice">
+<h2>Explorar los atributos del índice<a class="headerlink" href="#explorar-los-atributos-del-indice" title="Link to this heading">#</a></h2>
+<p>Los atributos disponibles para cada índice incluyen:</p>
 <ul class="simple">
-<li><p>NDVI, para estimar la vegetación activa.</p></li>
-<li><p>NDBI, que ayuda a detectar zonas urbanas.</p></li>
-<li><p>NDWI, para observar cuerpos de agua.</p></li>
-<li><p>Y una banda NIR (infrarrojo cercano) escalada, útil para varios análisis ambientales.</p></li>
+<li><p>short_name: el nombre corto (por ejemplo “NDVI”).</p></li>
+<li><p>long_name: el nombre largo (como “Normalized Difference Vegetation Index”).</p></li>
+<li><p>formula: la fórmula que se utiliza para calcularlo.</p></li>
+<li><p>bands: las bandas que requiere (por ejemplo, “N” y “R”).</p></li>
+<li><p>reference: el link al paper o DOI original.</p></li>
+<li><p>type: el tipo o dominio de aplicación (vegetación, agua, suelo, etc.).</p></li>
+<li><p>date_of_addition: la fecha en que fue agregado a la lista.</p></li>
+<li><p>contributor: el enlace al usuario de GitHub que lo subió.</p></li>
 </ul>
-<p>Estos índices son bandas sintéticas calculadas a partir de las bandas originales del satélite. Capturan comportamientos clave del territorio y nos permiten identificar patrones en la cobertura y el uso del suelo.</p>
-<p>Definimos una función para obtener imágenes representativas de cada período:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">getColeccionPorPeriodo</span><span class="p">(</span><span class="nx">fecha</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">fecha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">(</span><span class="nx">fecha</span><span class="p">);</span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">fin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fecha</span><span class="p">.</span><span class="nx">advance</span><span class="p">(</span><span class="nx">paso</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
+<p>Por ejemplo, si queremos ver únicamente la fórmula del NDVI, usamos:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="nx">spectral</span><span class="p">.</span><span class="nx">indices</span><span class="p">.</span><span class="nx">NDVI</span><span class="p">.</span><span class="nx">formula</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>O bien:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="nx">spectral</span><span class="p">.</span><span class="nx">indices</span><span class="p">.</span><span class="nx">NDVI</span><span class="p">[</span><span class="s2">&quot;formula&quot;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</section>
+<section id="calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2">
+<h2>Calcular un índice: NDVI sobre una imagen Sentinel-2<a class="headerlink" href="#calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2" title="Link to this heading">#</a></h2>
+<p>Ahora vamos a calcular un índice real sobre una imagen de Sentinel-2.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">dataset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;COPERNICUS/S2_SR&quot;</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">S2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="nx">dataset</span><span class="p">).</span><span class="nx">first</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">S2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">spectral</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">S2</span><span class="p">,</span><span class="w"> </span><span class="nx">dataset</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Lo primero que hacemos es seleccionar una imagen y escalarla usando la función spectral.scale, que ajusta las bandas correctamente.
+Luego definimos los parámetros necesarios para el NDVI:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">parameters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;N&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;B8&quot;</span><span class="p">),</span><span class="w">  </span><span class="c1">// Banda del infrarrojo cercano</span>
+<span class="w">    </span><span class="s2">&quot;R&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;B4&quot;</span><span class="p">)</span><span class="w">   </span><span class="c1">// Banda del rojo</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Finalmente, aplicamos el cálculo del índice:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">S2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">spectral</span><span class="p">.</span><span class="nx">computeIndex</span><span class="p">(</span><span class="nx">S2</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;NDVI&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">parameters</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Esto agrega una nueva banda llamada NDVI a la imagen. Podemos verificarlo imprimiendo la imagen:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="s2">&quot;Imagen con NDVI:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">S2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>En la consola, dentro de la pestaña bands, vamos a ver que además de las bandas originales, ahora tenemos una nueva banda NDVI, calculada automáticamente.</p>
+</section>
+<section id="calcular-multiples-indices-a-la-vez">
+<h2>Calcular múltiples índices a la vez<a class="headerlink" href="#calcular-multiples-indices-a-la-vez" title="Link to this heading">#</a></h2>
+<p>También podemos calcular varios índices simultáneamente:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">parameters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;N&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;B8&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="s2">&quot;R&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;B4&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="s2">&quot;G&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;B3&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="s2">&quot;L&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="p">};</span>
 
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">coleccion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s1">&#39;COPERNICUS/S2_SR_HARMONIZED&#39;</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">roi2</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="nx">fecha</span><span class="p">,</span><span class="w"> </span><span class="nx">fin</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">20</span><span class="p">))</span>
-<span class="w">    </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi2</span><span class="p">).</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;system:time_start&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">date</span><span class="p">().</span><span class="nx">millis</span><span class="p">());</span>
-<span class="w">    </span><span class="p">})</span>
-<span class="w">    </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">agregarIndices</span><span class="p">);</span>
-
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">coleccion</span><span class="p">.</span><span class="nx">median</span><span class="p">().</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;system:time_start&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">fecha</span><span class="p">.</span><span class="nx">millis</span><span class="p">());</span>
-<span class="p">}</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">S2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">spectral</span><span class="p">.</span><span class="nx">computeIndex</span><span class="p">(</span><span class="nx">S2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;NDVI&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;GNDVI&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAVI&quot;</span><span class="p">],</span><span class="w"> </span><span class="nx">parameters</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Este bloque toma las imágenes de Sentinel-2 de cada período, las filtra por nubes y región, les agrega los índices, y luego calcula la imagen mediana del trimestre, lo que reduce el ruido.</p>
-<p>Generamos una colección de imágenes con:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">imagenesPorPeriodo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">.</span><span class="nx">fromImages</span><span class="p">(</span>
-<span class="w">  </span><span class="nx">fechas</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">getColeccionPorPeriodo</span><span class="p">)</span>
-<span class="p">);</span>
+<p>Nuevamente, si imprimimos la imagen:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="s2">&quot;Imagen con varios índices:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">S2</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Esta colección contiene una imagen por trimestre, cada una con los cuatro índices calculados.</p>
-</section>
-<section id="paso-5-grafico-de-la-serie-temporal">
-<h2>Paso 5: Gráfico de la serie temporal<a class="headerlink" href="#paso-5-grafico-de-la-serie-temporal" title="Link to this heading">#</a></h2>
-<p>A partir de las imágenes filtradas, generamos un mosaico por cada período (cada trimestre), calculando el valor mediano para reducir el impacto de nubes o valores atípicos. Esto nos da una colección de imágenes representativas del año 2024.</p>
-<p>Luego, mediante la herramienta ui.Chart.image.series, creamos una gráfica de series de tiempo para los valores promedio de cada índice en la región de Bahía Blanca. Esto nos permite observar visualmente la evolución temporal del NDVI, NDBI, NDWI y NIR a lo largo del año.</p>
-<p>Utilizamos ui.Chart.image.series para graficar la evolución promedio de cada índice:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">chart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ui</span><span class="p">.</span><span class="nx">Chart</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">series</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">imageCollection</span><span class="o">:</span><span class="w"> </span><span class="nx">imagenesPorPeriodo</span><span class="p">.</span><span class="nx">select</span><span class="p">([</span><span class="s1">&#39;NDVI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDBI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDWI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NIR&#39;</span><span class="p">]),</span>
-<span class="w">  </span><span class="nx">region</span><span class="o">:</span><span class="w"> </span><span class="nx">roi2</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">mean</span><span class="p">(),</span>
-<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">60</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">xProperty</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;system:time_start&#39;</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">setChartType</span><span class="p">(</span><span class="s1">&#39;LineChart&#39;</span><span class="p">)</span>
-<span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Series temporales - Índices Sentinel-2&#39;</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">hAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Fecha&#39;</span><span class="p">},</span>
-<span class="w">  </span><span class="nx">vAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Valor promedio&#39;</span><span class="p">},</span>
-<span class="w">  </span><span class="nx">lineWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">pointSize</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span>
-<span class="p">});</span>
+<p>En la consola vamos a ver que ahora tenemos nuevas bandas: NDVI, GNDVI y SAVI, todas calculadas en una sola línea de código.</p>
+<p>Mostrar el resultado en el visor de GEE
+Podemos agregar cualquiera de estos índices al mapa. Por ejemplo:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">S2</span><span class="p">,</span><span class="w"> </span><span class="mf">9</span><span class="p">);</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;NDVI&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">{</span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">palette</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;white&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;green&quot;</span><span class="p">]},</span><span class="w"> </span><span class="s2">&quot;NDVI&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Esto produce una gráfica con 4 líneas, cada una representando el comportamiento de un índice a lo largo del año. Ideal para identificar estacionalidad, tendencias o eventos puntuales.</p>
+<p>Así podemos ver visualmente el resultado del índice espectral calculado con Awesome Spectral Indices.</p>
+<p>Como vimos, Awesome Spectral Indices facilita mucho el trabajo con índices en GEE.
+No solo nos permite acceder a una base de datos curada y documentada de fórmulas, sino que también simplifica su cálculo, evita errores y permite hacer análisis espectrales complejos con muy pocas líneas de código.
+Si trabajás con teledetección, esta herramienta es realmente imprescindible.
+¡Gracias por mirar y te invito a probarlo en tu propio análisis!</p>
 </section>
-<section id="paso-6-incorporacion-de-temperatura-superficial-modis-lst">
-<h2>Paso 6: Incorporación de temperatura superficial (MODIS LST)<a class="headerlink" href="#paso-6-incorporacion-de-temperatura-superficial-modis-lst" title="Link to this heading">#</a></h2>
-<p>Para enriquecer el análisis, incorporamos una serie de tiempo de temperatura superficial terrestre, derivada del sensor MODIS. Esta serie tiene una frecuencia quincenal, por lo que nos da una visión más detallada de cómo varía la temperatura en el municipio. Convertimos los valores de kelvin a grados Celsius y generamos otra gráfica de línea.</p>
-<p>Este tipo de integración multifuente es clave en geoIA: nos permite combinar variables climáticas, biofísicas y antrópicas para descubrir relaciones complejas.</p>
-<p>Agregamos una serie de tiempo térmica usando MODIS:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">modisLST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;MODIS/061/MOD11A2&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">roi2</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2024-12-31&#39;</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">lst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;LST_Day_1km&#39;</span><span class="p">)</span>
-<span class="w">      </span><span class="p">.</span><span class="nx">multiply</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span>
-<span class="w">      </span><span class="p">.</span><span class="nx">subtract</span><span class="p">(</span><span class="mf">273.15</span><span class="p">)</span>
-<span class="w">      </span><span class="p">.</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;LST&#39;</span><span class="p">)</span>
-<span class="w">      </span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi2</span><span class="p">);</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">lst</span><span class="p">.</span><span class="nx">copyProperties</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">propertyNames</span><span class="p">());</span>
-<span class="w">  </span><span class="p">});</span>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="explicacion-de-la-nueva-version-con-asi">
+<h1>Explicación de la nueva versión con ASI<a class="headerlink" href="#explicacion-de-la-nueva-version-con-asi" title="Link to this heading">#</a></h1>
+<p>Para cerrar este capítulo mostraremos una mejora en la función agregarIndices, ahora usando la librería Awesome Spectral Indices (ASI). Realizamos una copia del script anterior y lo denominamos
+Lab_006_TS_BahiaBlanca_BIS</p>
+<p>Comentamos la función agregarIndices anterior, para volver a definirla utilizando Awesome Spectral Indices. Lo primero que hacemos es importar la librería desde el repositorio público:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">spectral</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;users/dmlmont/spectral:spectral&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>El valor original se convierte de Kelvin a grados Celsius. Luego graficamos su evolución:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">lstChart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ui</span><span class="p">.</span><span class="nx">Chart</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">series</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">imageCollection</span><span class="o">:</span><span class="w"> </span><span class="nx">modisLST</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">region</span><span class="o">:</span><span class="w"> </span><span class="nx">roi2</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">mean</span><span class="p">(),</span>
-<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">xProperty</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;system:time_start&#39;</span>
-<span class="p">})</span>
-<span class="p">.</span><span class="nx">setChartType</span><span class="p">(</span><span class="s1">&#39;LineChart&#39;</span><span class="p">)</span>
-<span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Serie temporal de Temperatura Superficial (LST)&#39;</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">hAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Fecha&#39;</span><span class="p">},</span>
-<span class="w">  </span><span class="nx">vAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;°C&#39;</span><span class="p">},</span>
-<span class="w">  </span><span class="nx">lineWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">pointSize</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span>
-<span class="p">});</span>
+<p>Luego, definimos la función agregarIndices, donde pedimos que se calculen automáticamente los índices NDVI, NDBI, NDWI y NDMI:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">indices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;NDVI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDBI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDWI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDMI&#39;</span><span class="p">];</span>
 </pre></div>
 </div>
-<p>Esto nos muestra cómo cambia la temperatura superficial en Bahía Blanca a lo largo del año, una variable clave para entender fenómenos como olas de calor o sequías.</p>
-</section>
-<section id="paso-7-exportacion-de-estadisticas">
-<h2>Paso 7: Exportación de estadísticas<a class="headerlink" href="#paso-7-exportacion-de-estadisticas" title="Link to this heading">#</a></h2>
-<p>Finalmente, exportamos los valores promedio de cada índice y de la temperatura para cada período a archivos CSV. Estos pueden ser usados en herramientas externas como R o Python para realizar análisis más avanzados: detección de estacionalidad, identificación de rupturas, modelado predictivo o entrenamiento de modelos de machine learning.</p>
-<p>Exportamos los valores promedio de cada índice por período:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">statsSentinel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">imagenesPorPeriodo</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">reducer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">reduceRegion</span><span class="p">({</span>
-<span class="w">    </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">mean</span><span class="p">(),</span>
-<span class="w">    </span><span class="nx">geometry</span><span class="o">:</span><span class="w"> </span><span class="nx">roi2</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">60</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">maxPixels</span><span class="o">:</span><span class="w"> </span><span class="mf">1e8</span>
-<span class="w">  </span><span class="p">});</span>
-
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Feature</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nx">reducer</span><span class="p">).</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;fecha&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">date</span><span class="p">().</span><span class="nx">format</span><span class="p">(</span><span class="s1">&#39;YYYY-MM-dd&#39;</span><span class="p">));</span>
-<span class="p">});</span>
-
-<span class="nx">Export</span><span class="p">.</span><span class="nx">table</span><span class="p">.</span><span class="nx">toDrive</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">statsSentinel</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;sentinel_indices_roi&#39;</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">fileFormat</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;CSV&#39;</span>
-<span class="p">});</span>
+<p>Para que ASI entienda correctamente qué bandas usar, le tenemos que pasar un objeto con los parámetros necesarios. Por ejemplo:</p>
+<ul class="simple">
+<li><p>N representa el infrarrojo cercano → banda B8</p></li>
+<li><p>R es el rojo → B4</p></li>
+<li><p>G es el verde → B3</p></li>
+<li><p>S1 es el SWIR1 → B11</p></li>
+</ul>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">parametros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">N</span><span class="o">:</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B8&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="nx">S1</span><span class="o">:</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B11&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="nx">G</span><span class="o">:</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B3&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="nx">R</span><span class="o">:</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B4&#39;</span><span class="p">)</span>
+<span class="p">};</span>
 </pre></div>
 </div>
-<p>Y hacemos lo mismo para la temperatura:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">statsLST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">modisLST</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">reducer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">reduceRegion</span><span class="p">({</span>
-<span class="w">    </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">mean</span><span class="p">(),</span>
-<span class="w">    </span><span class="nx">geometry</span><span class="o">:</span><span class="w"> </span><span class="nx">roi2</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span>
-<span class="w">    </span><span class="nx">maxPixels</span><span class="o">:</span><span class="w"> </span><span class="mf">1e8</span>
-<span class="w">  </span><span class="p">});</span>
-
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Feature</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nx">reducer</span><span class="p">).</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;fecha&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">date</span><span class="p">().</span><span class="nx">format</span><span class="p">(</span><span class="s1">&#39;YYYY-MM-dd&#39;</span><span class="p">));</span>
-<span class="p">});</span>
-
-<span class="nx">Export</span><span class="p">.</span><span class="nx">table</span><span class="p">.</span><span class="nx">toDrive</span><span class="p">({</span>
-<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">statsLST</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;modis_lst_roi&#39;</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">fileFormat</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;CSV&#39;</span>
-<span class="p">});</span>
+<p>Con eso, ASI puede interpretar correctamente las fórmulas internas de cada índice y calcularlos todos de forma automática con una sola línea:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">conIndices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">spectral</span><span class="p">.</span><span class="nx">computeIndex</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span><span class="w"> </span><span class="nx">indices</span><span class="p">,</span><span class="w"> </span><span class="nx">parametros</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Esto genera dos archivos CSV con los valores de cada índice y la temperatura, útiles para modelado o análisis con R, Python o Power BI.</p>
+<p>Finalmente, como en la versión anterior, agregamos la banda NIR escalada dividiendo la B8 por 10.000:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">nir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B8&#39;</span><span class="p">).</span><span class="nx">divide</span><span class="p">(</span><span class="mf">10000</span><span class="p">).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NIR&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Y retornamos la imagen con todos los índices calculados:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">return</span><span class="w"> </span><span class="nx">conIndices</span><span class="p">.</span><span class="nx">addBands</span><span class="p">(</span><span class="nx">nir</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Esta versión es más ordenada, más mantenible, y nos permite reutilizar fácilmente la función para otros índices o sensores si lo necesitamos más adelante.</p>
 </section>
-<section id="cierre-reflexiones-desde-la-teoria-de-series-de-tiempo">
-<h2>Cierre: Reflexiones desde la teoría de series de tiempo<a class="headerlink" href="#cierre-reflexiones-desde-la-teoria-de-series-de-tiempo" title="Link to this heading">#</a></h2>
-<p>Este ejemplo aplicado a Bahía Blanca nos muestra cómo transformar imágenes satelitales en datos estructurados para análisis temporal. En series de tiempo, lo importante no es solo observar lo que ocurre, sino entender cómo, cuándo y por qué ocurre.</p>
-<p>Detectar tendencias, ciclos estacionales o anomalías nos permite anticipar problemas, diseñar intervenciones y monitorear el territorio de forma inteligente. Y cuando combinamos esto con inteligencia artificial, abrimos la puerta a predicciones automatizadas, segmentaciones espaciales dinámicas y sistemas de alerta temprana.</p>
-<p>Las series de tiempo en geodatos no son solo gráficos, son narrativas del paisaje en movimiento.</p>
-<p>Este primer ejemplo nos muestra cómo transformar imágenes satelitales en datos estructurados para análisis temporal, permitiendo entender fenómenos como crecimiento urbano, variaciones de vegetación o cambios de temperatura.</p>
-<p>Las series de tiempo aplicadas a información geoespacial no solo nos ayudan a mirar el pasado, sino que nos brindan herramientas concretas para anticipar y planificar. En la siguiente parte, exploraremos ejemplos más avanzados, con datos multifuente y clasificación supervisada.</p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="sundo-ejemplo">
-<h1>Sundo ejemplo<a class="headerlink" href="#sundo-ejemplo" title="Link to this heading">#</a></h1>
-<p>En esta segunda parte del video, vamos a explorar cómo las series temporales pueden combinar múltiples fuentes de datos satelitales —ópticos, radar, térmicos y de precipitación— y cómo aplicar modelos de clasificación supervisada sobre secuencias de imágenes.</p>
-<p>Veremos dos ejemplos complementarios:</p>
-<p>Bahía Blanca, con una serie multifuente de Sentinel-2, Sentinel-1, MODIS y CHIRPS.</p>
-<p>El conurbano de Rosario, donde usamos un modelo Random Forest para monitorear dinámicamente los cambios en el uso del suelo.</p>
-<p>Ambos casos reflejan cómo las técnicas de geoIA pueden integrarse con análisis de series temporales para extraer valor del tiempo y del espacio.</p>
-<p>🛰 Ejemplo 2 – Bahía Blanca: combinación multifuente (óptico, radar, térmico, lluvia)
-Aquí construimos una aplicación visual en Earth Engine que permite ver gráficos de serie de tiempo mensuales desde enero de 2024 hasta julio de 2025, con:</p>
-<p>Índices ópticos: NDVI, NDWI, NDBI, NDMI, NIR</p>
-<p>Radar: VV, VH, VV/VH</p>
-<p>Temperatura superficial (MODIS LST)</p>
-<p>Precipitación mensual (CHIRPS)</p>
-<p>Todos los datos se combinan en una única interfaz visual interactiva. Esto permite monitorear fenómenos como estrés hídrico, cambios de cobertura, eventos extremos, y detectar posibles correlaciones entre lluvia, temperatura y respuesta de la vegetación.</p>
-<p>Se incluye también la posibilidad de exportar los datos en CSV.</p>
-<p>🛰 Ejemplo 3 – Rosario: clasificación de coberturas con Random Forest
-En este caso retomamos un clasificador Random Forest previamente entrenado, y lo aplicamos sobre una serie de imágenes bimestrales Sentinel-2 del año 2024.</p>
-<p>Por cada período, se genera una imagen compuesta y se clasifica en cinco tipos de suelo: agua, urbano, cultivos, bosque y terreno desnudo.</p>
-<p>Se cuenta la cantidad de píxeles por clase en cada período, y se genera:</p>
-<p>Un gráfico de barras apiladas (valores absolutos)</p>
-<p>Un gráfico de líneas con porcentajes (valores relativos)</p>
-<p>Esto permite observar dinámicamente cómo cambia el uso del suelo mes a mes, detectar expansión urbana, retroceso de vegetación o ciclos agrícolas.</p>
-<section id="ejemplo-2">
-<h2>Ejemplo 2.<a class="headerlink" href="#ejemplo-2" title="Link to this heading">#</a></h2>
-<p>🎥 Guion actualizado del video
-Ejemplo intermedio: Combinación multifuente para Bahía Blanca
-En este ejemplo intermedio, trabajamos con una serie de tiempo multifuente que combina datos ópticos del satélite Sentinel-2, radar de Sentinel-1, temperatura superficial de MODIS, y precipitación estimada por CHIRPS. El área de estudio es Bahía Blanca, en la provincia de Buenos Aires, y el período de análisis va de enero de 2024 a julio de 2025.</p>
-<p>A diferencia de los ejemplos anteriores, este script no imprime resultados en la consola, sino que construye una aplicación visual en la misma interfaz de Earth Engine, donde los gráficos se muestran en un panel lateral interactivo. Esto permite que cualquier persona que ejecute el script pueda visualizar fácilmente los resultados, sin necesidad de revisar la consola.</p>
-<p>🛠 Paso 1: Configuración temporal
-Se define la frecuencia temporal como mensual:</p>
-<p>Copiar
-Editar
-var frecuencia = ‘mensual’;
-var paso = mesesPorPaso[frecuencia];
-Luego, se generan las fechas de inicio de cada período mensual entre enero 2024 y julio 2025, lo que da un total de 19 pasos.</p>
-<p>📍 Paso 2: Área de estudio
-Se selecciona Bahía Blanca utilizando la capa administrativa de GAUL, y se simplifica la geometría para mejorar el rendimiento. Luego, se visualiza en el mapa con un contorno rojo.</p>
-<p>🌿 Paso 3: Índices ópticos
-Se calcula una imagen promedio mensual Sentinel-2 para cada período, libre de nubes, sobre la que se generan los siguientes índices:</p>
-<p>NDVI (vegetación)</p>
-<p>NDBI (áreas urbanas o suelo expuesto)</p>
-<p>NDWI (agua superficial)</p>
-<p>NDMI (humedad de la vegetación)</p>
-<p>NIR (valor de reflectancia en el infrarrojo cercano, escalado)</p>
-<p>Todos estos índices se almacenan en una colección de imágenes con una observación mensual.</p>
-<p>📡 Paso 4: Datos radar Sentinel-1
-Se procesan imágenes mensuales de Sentinel-1, polarización VV, y cuando está disponible, también VH y la razón VV/VH. Estas imágenes se recortan al ROI y se promedian por mes.</p>
-<p>Luego, se combinan los datos ópticos y radar en una única colección multibanda que contiene para cada mes los índices ópticos y las bandas radar disponibles.</p>
-<p>🌧️ Paso 5: Precipitación mensual (CHIRPS)
-Se utiliza la colección CHIRPS Daily para estimar la precipitación mensual acumulada en la región. Para cada período mensual, se calcula la suma de valores diarios, generando una serie de tiempo de precipitaciones desde enero de 2024 hasta julio de 2025.</p>
-<p>🌡️ Paso 6: Temperatura superficial (MODIS)
-De forma opcional, se incluye también una serie de tiempo de temperatura de la superficie terrestre (LST) a partir del producto MOD11A2 de MODIS. La temperatura se convierte de Kelvin a grados Celsius.</p>
-<p>📈 Paso 7: Gráficos de series de tiempo
-Se generan cuatro gráficos utilizando ui.Chart.image.series():</p>
-<p>Índices ópticos + NDMI + Ratio (VV/VH)</p>
-<p>Polarizaciones VV y VH</p>
-<p>Temperatura superficial MODIS</p>
-<p>Precipitación acumulada mensual (CHIRPS)</p>
-<p>Cada gráfico promedia espacialmente los valores sobre la región de Bahía Blanca y los presenta como líneas en función del tiempo. Las escalas espaciales utilizadas son de 200 a 1000 metros, según el sensor.</p>
-<p>🖥️ Paso 8: Mostrar los gráficos en una App
-Los gráficos se organizan en un ui.Panel vertical con título. Esto transforma el script en una mini app interactiva, visualizable directamente en el visor de Earth Engine:</p>
-<p>Copiar
-Editar
-panel.add(chartOpticos);
-panel.add(chartRadar);
-panel.add(lstChart);
-panel.add(chartLluvia);
-Este enfoque facilita su uso por otros usuarios, instituciones o docentes, sin necesidad de inspeccionar variables manualmente en la consola.</p>
-<p>💾 Paso 9: Exportación de estadísticas a CSV (opcional)
-Además de visualizar los gráficos, el script incluye la opción de exportar datos a un archivo .CSV, útil para análisis fuera de GEE:</p>
-<p>Estadísticas promedio de los índices ópticos mensuales.</p>
-<p>Serie mensual de valores promedio de VV radar.</p>
-<p>La exportación se realiza con Export.table.toDrive(), permitiendo guardar los resultados en Google Drive:</p>
-<p>Copiar
-Editar
-Export.table.toDrive({
-collection: statsSentinel,
-description: ‘sentinel_indices_roi’,
-fileFormat: ‘CSV’
-});
-✅ Cierre
-Este ejemplo demuestra cómo construir una serie de tiempo multifuente e interactiva combinando datos ópticos, radar, térmicos y de precipitación. La visualización integrada en Earth Engine permite compartir y reutilizar fácilmente la app para distintos territorios, facilitando el monitoreo ambiental, análisis territorial o procesos de toma de decisiones.</p>
-</section>
-<section id="serie-de-tiempo-de-tipos-de-suelo-conurbano-de-rosario-obtenidos-con-rf">
-<h2>Serie de tiempo de tipos de suelo (Conurbano de Rosario) obtenidos con RF<a class="headerlink" href="#serie-de-tiempo-de-tipos-de-suelo-conurbano-de-rosario-obtenidos-con-rf" title="Link to this heading">#</a></h2>
-<p>Construir series de tiempo con información geoespacial permite observar, analizar y comprender cómo cambian los fenómenos en el espacio a lo largo del tiempo.</p>
-<p>🎙️ ¿Para qué sirven las series de tiempo con información geoespacial?</p>
-<p>Las series de tiempo aplicadas a datos geoespaciales nos permiten visualizar y analizar dinámicamente los cambios en el territorio.
-A diferencia de una imagen estática o de un análisis puntual, una serie de tiempo revela tendencias, estacionalidades, rupturas y anomalías a lo largo de meses o años.</p>
-<p>🌾 [Monitoreo del uso del suelo]</p>
-<p>Podemos, por ejemplo, monitorear cómo evoluciona el uso del suelo: cómo se expande una ciudad, cómo retrocede un bosque, o cómo se alternan cultivos a lo largo del año agrícola.</p>
-<p>🌊 [Detección de eventos extremos]</p>
-<p>También son muy útiles para detectar y analizar eventos extremos, como inundaciones, sequías, incendios o deforestación.
-Ver el “antes, durante y después” de un evento nos ayuda a entender su impacto y a planificar mejor las respuestas.</p>
-<p>🌡️ [Cambios ambientales y climáticos]</p>
-<p>En el contexto del cambio climático, las series de tiempo permiten detectar alteraciones en patrones naturales, como cambios en la vegetación, retroceso de cuerpos de agua, o el aumento de islas de calor urbanas.</p>
-<p>📈 [Toma de decisiones y planificación]</p>
-<p>Para gobiernos, instituciones científicas o productores agropecuarios, estas series brindan evidencia concreta que facilita la toma de decisiones.
-Saber cuándo ocurre un cambio y cómo evoluciona permite planificar políticas públicas, hacer evaluaciones ambientales o definir estrategias de adaptación.</p>
-<p>🎯 [En resumen…]</p>
-<p>Las series de tiempo geoespaciales transforman grandes volúmenes de datos satelitales en conocimiento útil, brindando una visión temporal y espacial integrada del territorio.
-Son una herramienta clave para entender el pasado, monitorear el presente y anticipar el futuro.</p>
-<p>Explicación de una serie</p>
-<p>🎙️ [Inicio]</p>
-<p>En este gráfico de serie de tiempo podemos identificar varios elementos fundamentales que nos ayudan a interpretar la evolución de los datos a lo largo del tiempo.</p>
-<p>📅 [Eje horizontal: el tiempo]</p>
-<p>En primer lugar, el eje horizontal, también llamado eje X, representa el tiempo.
-Aquí podemos ver las distintas fechas o períodos —por ejemplo, cada dos meses— que nos permiten observar cómo cambian las clases de suelo en el tiempo.</p>
-<p>📏 [Eje vertical: los valores]</p>
-<p>Luego, el eje vertical o eje Y muestra los valores que estamos midiendo.
-Puede tratarse de la cantidad de píxeles para cada clase de suelo, o del porcentaje que representa cada una respecto del total.</p>
-<p>📊 [Curvas o columnas]</p>
-<p>En el cuerpo del gráfico vemos representadas las series de datos.
-Pueden aparecer como barras apiladas, si estamos mostrando cantidades absolutas, o como líneas, si estamos observando la evolución de los porcentajes.
-Cada color representa una clase de suelo distinta, como agua, urbano, cultivos, bosque o terreno desnudo.</p>
-<p>🗂️ [La leyenda]</p>
-<p>En un costado, tenemos la leyenda.
-Esta nos permite identificar rápidamente qué color corresponde a cada tipo de cobertura del suelo, facilitando la lectura del gráfico.</p>
-<p>🧾 [El título y las etiquetas]</p>
-<p>Por último, tanto el título como las etiquetas de los ejes nos dan contexto.
-Nos indican qué estamos midiendo, en qué unidad, y en qué período.</p>
-<p>🎯 [Cierre]</p>
-<p>En conjunto, estos elementos convierten al gráfico de serie de tiempo en una herramienta visual poderosa para entender cómo cambian los paisajes y coberturas del suelo a lo largo del tiempo en una región determinada.</p>
-<p>En este video vamos a analizar los cambios en los tipos de suelo en el conurbano de Rosario, utilizando imágenes satelitales Sentinel-2 y una clasificación supervisada con Random Forest.
-A partir de esta clasificación, vamos a generar una serie temporal, que nos permite observar cómo evolucionan las distintas coberturas del suelo en el tiempo.</p>
-<p>🧮 [Configuración de la serie de tiempo]
-Comenzamos definiendo la frecuencia temporal con la que queremos observar los cambios. En este caso elegimos una frecuencia bimestral, es decir, cada dos meses.
-Luego generamos una lista de fechas que representa los inicios de cada período de análisis a lo largo del año 2024.</p>
-<p>Por cada una de esas fechas, vamos a obtener un composite temporal a partir de imágenes Sentinel-2 libres de nubes, y lo clasificamos usando el modelo entrenado previamente con Random Forest.</p>
-<p>🏷️ [Etiquetas de clasificación]
-Las clases que analizamos son:</p>
-<p>Agua (0)</p>
-<p>Urbano (1)</p>
-<p>Cultivos (2)</p>
-<p>Bosque o áreas arbustivas (3)</p>
-<p>Terreno desnudo (4)</p>
-<p>A cada clase se le asigna una etiqueta más legible, que luego se usará en los gráficos.</p>
-<p>🗺️ [Clasificación por períodos]
-Para cada período de la serie, generamos una imagen clasificada que representa los tipos de suelo presentes.
-Luego, contamos cuántos píxeles corresponden a cada clase mediante un histograma espacial.
-Esa información se transforma en una tabla con etiquetas y se almacena como una colección de Features con una columna por clase y una fila por período.</p>
-<p>📊 [Gráfico de cantidades]
-El primer gráfico muestra la cantidad absoluta de píxeles por clase en cada período.
-Es un gráfico de barras apiladas que permite visualizar la evolución de cada tipo de cobertura de manera clara a lo largo del año.</p>
-<p>📈 [Gráfico porcentual]
-Para facilitar la comparación entre períodos, generamos también un segundo gráfico donde los valores se normalizan como porcentajes.
-Esto permite ver mejor los cambios relativos entre clases, por ejemplo, el aumento de áreas urbanas o la reducción de áreas cultivadas.</p>
-<p>🔚 [Cierre]
-Esta serie temporal basada en clasificación supervisada nos permite monitorear dinámicamente el uso del suelo, detectar tendencias, y tomar decisiones basadas en evidencia.
-La combinación de imágenes Sentinel-2, Google Earth Engine y algoritmos como Random Forest facilita el análisis eficiente y reproducible de grandes áreas geográficas.</p>
-<p>EXPLICACIÓN PASO A PASO DEL CÓDIGO
-🔧 1. Configuración de la frecuencia temporal</p>
-<p>var frecuencia = “bimestral”;  // opciones: “mensual”, “bimestral”, “trimestral”, “cuatrimestral”
-Define cada cuánto tiempo queremos hacer una imagen representativa.</p>
-<p>En este caso, será cada 2 meses.</p>
-<p>var mesesPorPaso = {
-“mensual”: 1,
-“bimestral”: 2,
-“trimestral”: 3,
-“cuatrimestral”: 4
-};
-Diccionario que traduce el nombre de frecuencia en un número de meses.</p>
-<p>var paso = mesesPorPaso[frecuencia];
-Guarda el valor numérico correspondiente a la frecuencia elegida (en este caso, 2).</p>
-<p>var fechas = ee.List.sequence(0, 12, paso).map(function(mes) {
-return ee.Date(‘2024-01-01’).advance(mes, ‘month’);
-});
-Genera una lista de fechas bimestrales desde enero de 2024.</p>
-<p>Cada una será el inicio de un período para analizar y clasificar imágenes.</p>
-<p>🏷️ 2. Definir etiquetas de clases de suelo</p>
-<p>var etiquetas = ee.Dictionary({
-‘0’: ‘Agua’,
-‘1’: ‘Urbano’,
-‘2’: ‘Cultivos’,
-‘3’: ‘Bosque-Area arbustiva’,
-‘4’: ‘Terreno desnudo’
-});
-Mapea los valores de clasificación (0–4) a nombres interpretables para los gráficos.</p>
-<p>🗂️ 3. Clasificación por períodos
-En este segmento del código, se ejecuta una operación repetida para cada fecha de inicio del período temporal definido. Para cada mes (o período, según la frecuencia seleccionada), se filtran las imágenes Sentinel-2 correspondientes a ese rango temporal, al área de interés (roi), y con baja cobertura de nubes. Luego, se genera una imagen compuesta por la mediana espectral, se la clasifica utilizando el modelo de Random Forest previamente entrenado, y se calcula un histograma de clases que cuenta cuántos píxeles pertenecen a cada tipo de cobertura del suelo. A estos resultados se les asignan etiquetas descriptivas y se guardan como una Feature con su fecha correspondiente. El resultado es una FeatureCollection que resume la evolución temporal de las clases de suelo en la región analizada.</p>
-<p>var coleccionClasificada = ee.FeatureCollection(fechas.map(function(fechaInicio) {
-Inicia la creación de una colección donde cada Feature representa un período temporal.</p>
-<p>var fechaFin = ee.Date(fechaInicio).advance(paso, ‘month’);
-Define el final del período (fechaInicio + paso meses).</p>
-<p>var s2 = ee.ImageCollection(“COPERNICUS/S2_SR_HARMONIZED”)
-.filterDate(fechaInicio, fechaFin)
-.filterBounds(roi)
-.filter(<a class="reference external" href="http://ee.Filter.lt">ee.Filter.lt</a>(‘CLOUDY_PIXEL_PERCENTAGE’, 30))
-.select(‘B.*’);
-Filtra imágenes Sentinel-2 que cubren la zona de interés (roi) y estén libres de nubes en el período definido.</p>
-<p>var imagen = s2.median().clip(roi);
-Calcula la imagen representativa del período aplicando la mediana y recortando al área de estudio.</p>
-<p>var clasificada = imagen.classify(classifier);
-Clasifica esa imagen con el modelo Random Forest previamente entrenado (classifier).</p>
-<p>var histograma = clasificada.reduceRegion({
-reducer: ee.Reducer.frequencyHistogram(),
-…
-}).get(‘classification’);
-Cuenta cuántos píxeles hay de cada clase dentro del área para ese período (frecuencia de clases).</p>
-<p>var dict = ee.Dictionary(histograma);
-var keys = dict.keys();
-var valores = keys.map(function(k) { return dict.get(k); });
-Separa las claves (clases numéricas) y los valores (cantidades de píxeles) del histograma.</p>
-<p>var nuevasClaves = keys.map(function(k) {
-return etiquetas.get(k);
-});
-Traduce los códigos numéricos a etiquetas legibles usando el diccionario etiquetas.</p>
-<p>var propsEtiquetadas = ee.Dictionary.fromLists(nuevasClaves, valores);
-Crea un diccionario con nombres de clases como claves y cantidad de píxeles como valores.</p>
-<p>var ft = ee.Feature(null, propsEtiquetadas)
-.set(‘fecha’, ee.Date(fechaInicio).format(‘YYYY-MM-dd’));
-return ft;
-}));
-Construye un Feature con esa información, incluyendo la fecha.</p>
-<p>El resultado final es una FeatureCollection con una fila por período y columnas con cada tipo de suelo.</p>
-<p>📊 4. Gráfico de cantidad de píxeles</p>
-<p>var grafico = ui.Chart.feature.byFeature({
-features: coleccionClasificada,
-xProperty: ‘fecha’
-})
-Crea un gráfico donde cada barra representa un período y cada color una clase de suelo.</p>
-<p>.setChartType(‘ColumnChart’).setOptions({…});
-Especifica que sea un gráfico de columnas apiladas y le da formato (título, ejes, etc.).</p>
-<p>📉 5. Convertir a porcentajes</p>
-<p>var coleccionPorcentual = coleccionClasificada.map(function(feat) {
-Crea una nueva colección, esta vez con porcentajes en lugar de cantidades absolutas.</p>
-<p>var props = feat.toDictionary();
-var clases = props.keys().remove(‘fecha’);
-Extrae las clases (columnas) y elimina el campo fecha para trabajar solo con los valores.</p>
-<p>var total = ee.Number(
-clases.map(function(k) {
-return ee.Number(props.get(k));
-}).reduce(ee.Reducer.sum())
-);
-Suma la cantidad total de píxeles para ese período (para luego calcular el porcentaje).</p>
-<p>var nuevasProps = ee.Dictionary(
-clases.iterate(function(k, acc) {
-…
-}, ee.Dictionary({}))
-);
-Calcula el porcentaje de cada clase en ese período y lo guarda en un nuevo diccionario.</p>
-<p>return ee.Feature(null, nuevasProps).set(‘fecha’, props.get(‘fecha’));
-});
-Devuelve un nuevo Feature con los porcentajes y la misma fecha que el original.</p>
-<p>📈 6. Gráfico porcentual</p>
-<p>var graficoPorcentual = ui.Chart.feature.byFeature({
-features: coleccionPorcentual,
-xProperty: ‘fecha’
-})
-Crea un gráfico de líneas con los porcentajes de cada clase en cada período.</p>
-<p>.setChartType(‘LineChart’).setOptions({…});
-Especifica formato: líneas, título, escala en porcentaje, etc.</p>
-<p>✅ Resultado final:
-Dos gráficos:</p>
-<p>Uno que muestra cuántos píxeles hay de cada tipo de suelo a lo largo del tiempo.</p>
-<p>Otro que muestra la proporción porcentual de cada clase en cada fecha.</p>
-<p>✅ Cierre Parte 2
-Estos ejemplos nos muestran el enorme potencial de combinar series temporales con geotecnologías avanzadas y modelos de inteligencia artificial.</p>
-<p>Con herramientas como Google Earth Engine, podemos construir análisis multiescalares, reproducibles y basados en evidencia, que permiten monitorear el territorio, anticipar riesgos y tomar decisiones más informadas.</p>
-<p>En un mundo en transformación, las series de tiempo geoespaciales no solo son gráficas: son narrativas del cambio. Lecturas del pasado, diagnósticos del presente y ventanas al futuro.</p>
-<p><a class="reference external" href="https://otexts.com/fpp3/">https://otexts.com/fpp3/</a></p>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="st-en-colab">
-<h1>ST en colab<a class="headerlink" href="#st-en-colab" title="Link to this heading">#</a></h1>
-<p>🎬 Guion para video: “Análisis de temperatura mensual con STL en Google Colab”</p>
-<hr class="docutils" />
-<p>🟡 Introducción
-En este video vamos a analizar una serie temporal de temperaturas promedio mensuales para la ciudad de Bahía Blanca, correspondientes al período enero 2024 – junio 2025.
-A partir de datos exportados desde Google Earth Engine, vamos a usar Google Colab para aplicar un método llamado STL, que nos permite descomponer la serie en tres componentes fundamentales: tendencia, estacionalidad y residuo.
-Veamos paso a paso cómo hacerlo.</p>
-<hr class="docutils" />
-<p>🔵 Paso 1: Montar Google Drive
-python
-CopyEdit
-from google.colab import drive
-drive.mount(‘/content/drive’)
-Empezamos montando Google Drive para acceder al archivo CSV que contiene nuestros datos. Este archivo fue previamente exportado desde GEE y contiene la temperatura media mensual por fila, junto a la fecha correspondiente.</p>
-<hr class="docutils" />
-<p>🔵 Paso 2: Importar las librerías necesarias
-python
-CopyEdit
-import pandas as pd
-import matplotlib.pyplot as plt
-from statsmodels.tsa.seasonal import STL
-import matplotlib.dates as mdates
-Importamos pandas para manejar la tabla de datos, matplotlib para graficar, y lo más importante: STL desde statsmodels, que nos permitirá descomponer la serie. También usamos mdates para formatear las fechas en los gráficos.</p>
-<hr class="docutils" />
-<p>🔵 Paso 3: Leer el archivo CSV
-python
-CopyEdit
-file_path = ‘/content/drive/MyDrive/serie_LST_BahiaBlanca.csv’
-df = pd.read_csv(file_path)
-print(df.head())
-print(df.dtypes)
-Cargamos el archivo CSV con los datos de temperatura. Verificamos su contenido y el tipo de datos. En particular, la columna fecha está en formato texto (object), y debe convertirse a un formato de fecha real para trabajar correctamente como serie temporal.</p>
-<hr class="docutils" />
-<p>🔵 Paso 4: Procesar la columna de fecha
-python
-CopyEdit
-df[‘fecha’] = pd.to_datetime(df[‘fecha’], format=’%Y-%m’, errors=’coerce’)
-df = df.dropna(subset=[‘fecha’])
-df = df.set_index(‘fecha’).asfreq(‘MS’)
-Transformamos la columna ‘fecha’ al tipo datetime, eliminamos posibles fechas inválidas, y la convertimos en índice del DataFrame, con frecuencia mensual fija. Esto es esencial para que STL entienda que estamos trabajando con una serie temporal ordenada.</p>
-<hr class="docutils" />
-<p>🔵 Paso 5: Seleccionar la serie
-python
-CopyEdit
-serie = df[‘temperatura_celsius’].dropna()
-Extraemos la columna de temperatura como una serie individual. Esta variable representa la temperatura media mensual en grados Celsius para Bahía Blanca.</p>
-<hr class="docutils" />
-<p>🔵 Paso 6: Aplicar STL
-python
-CopyEdit
-stl = STL(serie, period=12, seasonal=13, robust=True)
-resultado = stl.fit()
-Aquí aplicamos el método STL, que significa Seasonal-Trend decomposition using Loess.
-STL descompone una serie temporal en tres componentes:
-•	Tendencia: la evolución de largo plazo.
-•	Estacionalidad: los ciclos repetitivos (como estaciones del año).
-•	Residuo: lo que queda, es decir, variaciones no explicadas.
-El parámetro period=12 le indica a STL que la estacionalidad se repite cada 12 meses.
-seasonal=13 ajusta el suavizado de esa estacionalidad.
-Y robust=True protege contra valores atípicos.</p>
-<hr class="docutils" />
-<p>🔵 Paso 7: Extraer las componentes
-python
-CopyEdit
-trend = pd.Series(resultado.trend, index=serie.index)
-seasonal = pd.Series(resultado.seasonal, index=serie.index)
-resid = pd.Series(resultado.resid, index=serie.index)
-Reconstruimos cada componente como una nueva serie con su índice temporal, para que puedan graficarse correctamente. Estas tres series representan la tendencia, la estacionalidad y el residuo de nuestra serie original.</p>
-<hr class="docutils" />
-<p>🔵 Paso 8: Graficar la serie y las componentes
-python
-CopyEdit</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="configuracion-de-fechas">
-<h1>Configuración de fechas<a class="headerlink" href="#configuracion-de-fechas" title="Link to this heading">#</a></h1>
-<p>locator = mdates.MonthLocator()
-formatter = mdates.DateFormatter(‘%b %Y’)
-fechas = serie.index</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="funcion-para-graficar-una-serie">
-<h1>Función para graficar una serie<a class="headerlink" href="#funcion-para-graficar-una-serie" title="Link to this heading">#</a></h1>
-<p>def graficar_componente(serie, titulo):
-fig, ax = plt.subplots(figsize=(12, 4))
-ax.plot(fechas, serie, marker=’o’)
-ax.set_title(titulo)
-ax.grid(True)
-ax.set_xticks(fechas)
-ax.set_xlim([fechas.min(), fechas.max()])
-ax.xaxis.set_major_locator(locator)
-ax.xaxis.set_major_formatter(formatter)
-ax.tick_params(axis=’x’, rotation=45)
-plt.tight_layout()
-plt.show()
-Definimos una función que grafica cualquier componente de la serie usando fechas bien formateadas. Esto facilita la comparación visual entre los distintos elementos de la descomposición STL.</p>
-<hr class="docutils" />
-<p>python
-CopyEdit
-graficar_componente(serie, ‘Serie original de temperatura’)
-graficar_componente(trend, ‘Tendencia (Trend)’)
-graficar_componente(seasonal, ‘Estacionalidad (Seasonal)’)
-graficar_componente(resid, ‘Residuo (Residual)’)
-Graficamos:</p>
-<ol class="arabic simple">
-<li><p>La serie original,</p></li>
-<li><p>La tendencia,</p></li>
-<li><p>La estacionalidad,</p></li>
-<li><p>Y el residuo.
-Cada uno en su propia figura, para observar su evolución mes a mes entre enero 2024 y junio 2025.</p></li>
-</ol>
-<hr class="docutils" />
-<p>🧠 Interpretación de los resultados</p>
-<hr class="docutils" />
-<p>🔷 Tendencia
-La tendencia muestra una baja progresiva en la temperatura media mensual:
-Desde unos 26 °C en enero de 2024 hasta unos 18 °C en junio de 2025.
-Esta bajada puede reflejar:
-•	Un verano 2024 particularmente cálido.
-•	Otoños e inviernos con temperaturas más frías.
-Esta señal no implica necesariamente un cambio climático estructural, pero sí refleja una disminución persistente durante el período observado.</p>
-<hr class="docutils" />
-<p>🔷 Estacionalidad
-La estacionalidad muestra un patrón cíclico anual claro:
-•	Enero y febrero con valores estacionales positivos (más cálido que el promedio general).
-•	Junio y julio con valores negativos (más fríos).
-Este patrón refleja las estaciones bien marcadas del clima templado de Bahía Blanca.</p>
-<hr class="docutils" />
-<p>🔷 Residuo
-El residuo representa lo que no puede explicarse por tendencia ni estacionalidad.
-En este caso:
-•	Los residuos son pequeños y no presentan estructura visible.
-•	Esto indica que STL modeló bien la serie.
-•	Si hubiera picos importantes, podrían indicar meses anómalos.</p>
-<hr class="docutils" />
-<p>✅ Conclusión final para el video
-En este análisis aplicamos STL para descomponer una serie de temperatura mensual exportada desde Google Earth Engine.
-Con pocas líneas de código en Colab, logramos obtener una visión clara de:
-•	Cómo evoluciona la tendencia,
-•	Qué ciclos estacionales se repiten,
-•	Y dónde hay variaciones inesperadas.
-La función STL es poderosa porque se adapta automáticamente a la estructura de la serie, y simplifica la interpretación mediante gráficos separados, cada uno con un significado preciso.
-Esta técnica puede aplicarse no solo a temperatura, sino también a precipitaciones, índices de vegetación, o cualquier serie temporal ambiental o climática.</p>
+<section class="tex2jax_ignore mathjax_ignore" id="cierre">
+<h1>Cierre<a class="headerlink" href="#cierre" title="Link to this heading">#</a></h1>
+<p>Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de datos geoespaciales de varios petabytes con capacidades de análisis a escala planetaria. Científicos, investigadores y desarrolladores utilizan Earth Engine para detectar cambios, mapear tendencias y cuantificar diferencias en la superficie terrestre. Earth Engine ahora está disponible para uso comercial y sigue siendo gratuito para fines académicos y de investigación.</p>
+<p>“Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real” es una fórmula que resume el potencial de Google Earth Engine (GEE) para generar soluciones científicas y prácticas.</p>
+<p><img alt="" src="_images/Satellite_150dpi.png" /></p>
+<p>Imágenes satelitales: GEE brinda acceso inmediato a un vasto catálogo de imágenes de observación de la Tierra, que incluye datos de sensores como Landsat, Sentinel, MODIS, entre otros. Esto permite monitorear cambios en el planeta en escalas temporales y espaciales diversas.</p>
+<p><img alt="" src="_images/Algorithm_150dpi.png" /></p>
+<p>Tus algoritmos: Los usuarios pueden aplicar sus propios modelos de análisis, ya sean simples cálculos de índices espectrales o complejos algoritmos de machine learning, todo dentro del entorno de GEE, aprovechando su capacidad de procesamiento en la nube.</p>
+<p><img alt="" src="_images/mundo.png" />
+Aplicaciones en el mundo real: Al combinar datos y algoritmos, es posible desarrollar soluciones para problemas concretos como la deforestación, el cambio climático, la planificación urbana, la gestión del agua, la agricultura de precisión y muchos más.</p>
+<p>En conjunto, esta fórmula representa cómo GEE empodera a los científicos, desarrolladores y tomadores de decisiones para transformar datos en conocimiento y acción.</p>
+<p><img alt="" src="_images/interApp.png" /></p>
+<p>En próximos videos de esta serie Time Series, calcularemos mas series temporales de precipitaciones, y obtendremos una seri etemporal de tipos de suelo de Rosario utilizando el clasificador de Random Forest de un video anterio</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -1391,25 +934,16 @@ Esta técnica puede aplicarse no solo a temperatura, sino también a precipitaci
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">—————————————————————</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-seleccion-del-area-de-estudio">Paso 1: Selección del área de estudio</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-definicion-temporal">Paso 2: Definición temporal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-calculo-de-indices-espectrales">Paso 3: Cálculo de índices espectrales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-construccion-de-la-serie-de-tiempo">Paso 4: Construcción de la serie de tiempo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-5-grafico-de-la-serie-temporal">Paso 5: Gráfico de la serie temporal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-6-incorporacion-de-temperatura-superficial-modis-lst">Paso 6: Incorporación de temperatura superficial (MODIS LST)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-7-exportacion-de-estadisticas">Paso 7: Exportación de estadísticas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-reflexiones-desde-la-teoria-de-series-de-tiempo">Cierre: Reflexiones desde la teoría de series de tiempo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-awesome-spectral-indices-en-gee">Uso de Awesome Spectral Indices en GEE</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona-importar-el-modulo">¿Cómo funciona? – Importar el módulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ver-la-lista-completa-de-indices">Ver la lista completa de índices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explorar-los-atributos-del-indice">Explorar los atributos del índice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2">Calcular un índice: NDVI sobre una imagen Sentinel-2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-multiples-indices-a-la-vez">Calcular múltiples índices a la vez</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sundo-ejemplo">Sundo ejemplo</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2">Ejemplo 2.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-de-tiempo-de-tipos-de-suelo-conurbano-de-rosario-obtenidos-con-rf">Serie de tiempo de tipos de suelo (Conurbano de Rosario) obtenidos con RF</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#st-en-colab">ST en colab</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-de-fechas">Configuración de fechas</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-graficar-una-serie">Función para graficar una serie</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explicacion-de-la-nueva-version-con-asi">Explicación de la nueva versión con ASI</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre">Cierre</a></li>
 </ul>
 
   </nav></div>
