@@ -68,6 +68,8 @@ Ventajas del Aprendizaje Automático:
 
 El aprendizaje automático supera estos desafíos al modelar relaciones complejas entre las bandas espectrales y los objetos de interés, sin requerir que el usuario formule reglas explícitas. En su lugar, utiliza datos etiquetados de campo  para entrenar modelos, a estos datos etiqeutados de campo se los suele denominar "verdad terrestre". A partir de estas etiquetas los algoritmos de aprendizaje automático:
 
+![](imagenes/EtiquetaA.png) ![](imagenes/EtiquetaB.png)
+
 * Aprenden *patrones espectrales*: es decir, Identifican combinaciones óptimas de bandas espectrales para clasificar materiales específicos, como agua o vegetación, a pesar del ruido.
 
 * *Se adaptan a la variabilidad*: Los modelos pueden generalizar patrones, tolerando pequeñas variaciones en los datos de entrada sin comprometer la precisión.
@@ -288,9 +290,13 @@ El aprendizaje automático no solo transforma datos en conocimiento accionable t
 El futuro del Análisis Geoespacial está aquí combinando algoritmos robustos y datos satelitales podemos planificar un desarrollo sostenible que beneficie a las generaciones actuales y futuras. Gracias por acompañarnos en este recorrido acerca del aprendizaje automático aplicado análisis territorial, sigamos impulsando el conocimiento y la acción en favor de nuestro entorno.
 
 
-# Sobre este libro
 
-El objetivo de este libro digital es impulsar el desarrollo de capacidades sobre cómo emplear tecnicas de geoIA con información geoespacial, principalmente empleando imágenes satelitales disponibles en Google Earth Engine.
+## Video del capítulo
 
-Este libro interactivo digital está siendo desarrollado con [Jupyter Book documentation](https://jupyterbook.org) y tendrá ISBN tramitado por IDERA-IGN.
+Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA:
+
+```{iframe} https://www.youtube.com/watch?v=fk6atugR6ss
+:width: 80%
+:height: 400px
+```
 

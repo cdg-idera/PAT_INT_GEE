@@ -1,5 +1,8 @@
 # Cubos de Imágenes Satelitales
 
+d\st_v2
+
+
 # Introducción
 
 🎬 ¡Seguimos explorando las Series Temporales aplicadas a la Información Geoespacial! 🌍📊

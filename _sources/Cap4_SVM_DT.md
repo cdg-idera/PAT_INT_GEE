@@ -570,3 +570,15 @@ Más allá de estas herramientas, también debemos reconocer el impacto de los p
 Estamos en un *momento histórico donde el acceso a imágenes satelitales y datos geoespaciales se ha expandido enormemente*, abriendo la puerta a un futuro prometedor. La posibilidad de trabajar con imágenes de mayor resolución y precisión en un futuro cercano potenciará aún más las capacidades que estamos desarrollando ahora. Este enfoque progresivo y escalonado es clave: cada concepto y herramienta que integramos se convierte en *un peldaño más en esta espiral de conocimiento*, que nos permitirá abordar desafíos más complejos con confianza.
 
 Finalmente, quiero invitarte a seguir profundizando en este fascinante campo en la intersección entre inteligencia artificial, ciencia de datos y análisis geoespacial. *La democratización de las imágenes satelitales nos permite acceder a datos precisos y tangibles sobre la realidad del mundo que nos rodea, lo que transforma cómo entendemos y respondemos a los desafíos globales*. Al trabajar con estos datos concretos, no solo aprendemos, sino que también tenemos la *oportunidad de generar un impacto real en proyectos que afectan directamente nuestras comunidades y el entorno*. Cada paso que damos nos acerca más a dominar estas herramientas poderosas, y eso, sin duda, nos abre un abanico de posibilidades para cambiar el mundo. ¡Lo mejor está por venir! Gracias por acompañarme en este viaje, y espero verte en el próximo video.
+
+## Video del capítulo
+
+Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA:
+
+```{iframe} https://www.youtube.com/watch?v=QBJtlQOPdfQ&t=375s
+:width: 80%
+:height: 400px
+```
+
+
+

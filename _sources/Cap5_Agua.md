@@ -12,11 +12,16 @@ Nos vamos a centrar en Sentinel-2, cuyos datos son muy populares.
 
 Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida la gestión de desastres, la gestión de emergencias, la cuantificación de la tendencia de urbanización y la cobertura del suelo, entre otras.
 
+
+![](imagenes/PosIT-1.png)
+
+
 -------------------------------------------------------------------------------
 Bien CREAMOS UN NUEVO SCRIPT denominado A001_RandomForest_CuerposDeAguaComahue
 
-Nuestra área de estudio será la región del Comahue principalmente la provincia del Neuquén y la de Rio negro
-vamos a crear nuestra región de estudio, nuestraregión de interés o ROI. 
+Nuestra área de estudio será la región del Comahue principalmente la provincia del Neuquén y la de Rio negro. Vamos a crear nuestra región de estudio, nuestraregión de interés o ROI. 
+
+![alt text](imagenes/p_3.png)
 
 Como no estamos interesados en los límites provinciales precisos de la provincia, debido a que queremos abarcar los rios que componen los limites naturales provinciales, 
 no utilizaremos los límites administrativos exactos disponibles en la IDE de la provincia de RN y Nqn, o en el Instituto Geográfico Nacional
@@ -24,8 +29,13 @@ sino que utilizaremos el conjunto de datos de Capas de Unidades Administrativas 
 
 Esto nos permitirá aprender un poco más sobre este conjunto de datos de Unidades Administrativas Globales: 
 
-<<buscar: Global Administrative Unit Layers>>
+
 FAO GAUL: Global Administrative Unit Layers 2015, First-Level Administrative Units
+
+![](imagenes/PosIT-2.png)
+
+
+![](imagenes/Tabla_1.png)
 
 Las Capas de Unidades Administrativas Globales (GAUL) recopilan y difunden la mejor información disponible sobre unidades administrativas para todos los países del mundo, contribuyendo a la estandarización del conjunto de datos espaciales que representan las unidades administrativas.
 
@@ -148,11 +158,7 @@ Y luego un valor mínimo y máximo en función de los datos de reflectancia de l
 var visParams = {bands: ['B4','B3','B2'], min: 0 , max: 3000};
 Map.addLayer(image, visParams, "Sentinel 2024")
 
--------------------------------------------------------------------------------
-
--------------------------------------------------------------------------------
-
-FUNCIÓN PARA CALCULAR NDVI
+## FUNCIÓN PARA CALCULAR NDVI
 
 En nuestra clasificación aplicando aprendizaje automático utilizaremos valores de reflectancia de ciertas bandas de la imagen Sentinel en conjunto con el índice NDVI. 
 Utilizaremos filtros de nubes, y filtros temporales
@@ -162,6 +168,7 @@ Por lo tanto, un NDVI más alto generalmente indica una cobertura vegetal densa 
 Valores negativos son comunes en cuerpos de agua abiertos.
 mientras que Valores cercanos a 0 pueden observarse en agua con sedimentos o cubierta parcial por vegetación flotante.
 
+![](imagenes/PosIT-NDVIbis.png)
 
 Rangos típicos del NDVI:
 
@@ -172,15 +179,23 @@ Suelo desnudo: 0 a 0.2
 Vegetación escasa: 0.2 a 0.5
 Vegetación densa: 0.5 a 1
 
+![](imagenes/valoresNDVI.png)
+
+
 Lo primero que debemos hacer es escribir una función que calcule el NDVI. 
 Vamos a crear una función denominada agregarNDVI para calcular el NDVI, que vamos a utilizar en nuestra clasificación de aprendizaje automático.
 
 También podríamos utilizar otros índices como:
-NDWI (Índice de Diferencia Normalizada del Agua)
-MNDWI (Índice de Diferencia Normalizada del Agua Modificado)
-AWEI (Índice de Extracción Automática del Agua)
-LSWI (Índice del Agua Basado en Tierra)
-WI (Índice del Agua)
+
+* NDWI (Índice de Diferencia Normalizada del Agua)
+* MNDWI (Índice de Diferencia Normalizada del Agua Modificado)
+* AWEI (Índice de Extracción Automática del Agua)
+* LSWI (Índice del Agua Basado en Tierra)
+* WI (Índice del Agua)
+
+![](imagenes/IndicesAguaBis.png)
+
+
 
 Nuestra función agregarNDVI, tiene un parámetro de entrada imagen. Podemos llamarlo imagen o algún otro nombre significativo.
 
@@ -226,13 +241,19 @@ En un mapa con este esquema de falso color:
 Estos son los datos de Sentinel que vamos a utilizar para nuestro aprendizaje automático, es decir, la clasificación supervisada Random forest. 
 
 -------------------------------------------------------------------------------
-WORKFLOW:
+
+# WORKFLOW:
 Para aplicar la tecnica supervisada de random forest tendremos en cuenta el flujo de trabajo
 
--------------------------------------------------------------------------------
-ENTRENAMIENTO:
+
+![alt text](imagenes/Workflow.png)
+
+## Entrenamiento 
 
 Ahora crearemos datos de entrenamiento y luego ejecutaremos nuestro aprendizaje automático. 
+
+
+![alt text](imagenes/p_1.png) 
 
 Vamos a crear los datos de entrenamiento:
 
@@ -288,6 +309,9 @@ Esa será la etiqueta para nuestra clasificación.
 Vamos a utilizar para el entrenamiento las bandas dos, tres, cuatro, ocho y NDVI de la imagen del satélite Sentinel.
 Extraemos las bandas Sentinel para estos datos de entrenamiento que hemos capturado.
 
+![alt text](imagenes/Tabla_Comahue.png)
+
+
 Para obtener estos datos de la imagen utilizamos la función sampleRegions
 vamos a utilizar la resolución de 10 metros, la resolución más alta posible de los datos de Sentinel-2. 
 
@@ -307,7 +331,10 @@ Por lo tanto, dividiremos esos datos: crearemos una columna aleatoria y luego so
  Y luego, el conjunto de prueba aquí será la evaluación, que es el 30 % de datos restantes.
 
 -------------------------------------------------------------------------------
+
 ENTRENAMIENTO:
+
+![alt text](imagenes/p_2.png) 
 
 En este paso entrenemos el modelo para luego aplicarlo a la imagen con el fin de generar un mapa de masa de agua. 
 
@@ -321,7 +348,10 @@ Entonces, cuando ejecutes esto, entrenarás el modelo de aprendizaje automático
 Cuando lo haga, el modelo de aprendizaje automático se entrenará en función de nuestros datos de entrenamiento en las bandas Sentinel. 
 
 -------------------------------------------------------------------------------
-Clasificar la imagen:
+
+## Clasificar la imagen
+
+![alt text](imagenes/p_3.png)
 
 El siguiente paso es aplicar este modelo, que es el clasificador, a la imagen, la imagen Sentinel.
 Simplemente se va a aplicar el modelo para generar una clasificación.
@@ -351,9 +381,10 @@ Esta es nuestra clase de agua, que se superpone a la imagen de Sentinel. Y esa e
 Esta es nuestra clasificación. Se trata de una clasificación predicha por un modelo basado en el aprendizaje automático, 
 específicamente en un algoritmo de random forest o bosque aleatorio en la plataforma Earth Engine que utiliza datos satelitales Sentinel2 de 10 metros.
 
--------------------------------------------------------------------------------
 
-ACCURRACY ASSESSMENT
+## ACCURRACY ASSESSMENT
+
+![](imagenes/p_4.png)
 
 Como hemos mencionado en anteriores videos, hay algunos pasos después de este posprocesamiento y tenemos que calcular evaluaciones de precisión de estos datos, 
 
@@ -373,9 +404,7 @@ Parece que es 100 %, bastante buena, pero creo que si capturamos más puntos de 
 - A, el agua es bastante fácil de predecir, 
 - B, hemos utilizado la resolución de 10 metros, que también es otro factor.
 
--------------------------------------------------------------------------------
-
-EXPORTACION
+## Exportación
 
 La última parte a considerar, es que si deseas usar esta clasificación fuera de Google eart engen , digamos un software GIS estándar, como QGIS o ArcGIS 
 vas a usar la función Export.image.toDrive para exportar, ya sabes, tu mapa de agua.
@@ -390,7 +419,9 @@ aplicas el modelo para clasificar la imagen de la region de estudio
 estudias el rendimiento de tu modelo y 
 también exporta tu clasificación final a tu Google Drive. 
 
--------------------------------------------------------------------------------
+
+
+```python
 !apt-get install graphviz
 !pip install graphviz
 
@@ -431,3 +462,14 @@ images = convert_from_path('decision_tree.pdf')
 plt.imshow(images[0])
 plt.axis('off')  # Desactivar los ejes para que solo se vea la imagen
 plt.show()
+```
+
+## Video del capítulo
+
+Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA:
+
+```{iframe} https://www.youtube.com/watch?v=-DMd6LXIEkE&t=610s
+:width: 80%
+:height: 400px
+```
+

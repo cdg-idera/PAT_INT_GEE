@@ -530,3 +530,14 @@ En conjunto, esta fórmula representa cómo GEE empodera a los científicos, des
 ![](imagenes/interApp.png)
 
 En próximos videos de esta serie Time Series, calcularemos mas series temporales de precipitaciones, y obtendremos una seri etemporal de tipos de suelo de Rosario utilizando el clasificador de Random Forest de un video anterio
+
+
+## Video del capítulo
+
+Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA:
+
+```{iframe} https://www.youtube.com/watch?v=1hrdqhz78SU
+:width: 80%
+:height: 400px
+```
+

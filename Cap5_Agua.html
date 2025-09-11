@@ -178,7 +178,6 @@
 
 
 
-
 <li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">Aplicando Random Forest en GEE</a></li>
 
 
@@ -195,12 +194,6 @@
 
 
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Predecir Superficies de Agua</a></li>
-
-
-
-
-
-
 
 <li class="toctree-l1"><a class="reference internal" href="Cap6_ST.html">Series de tiempo</a></li>
 
@@ -416,17 +409,19 @@ document.write(`
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Predecir Superficies de Agua</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esta-es-nuestra-area-de-estudio">Esta es nuestra área de estudio.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ahora-podemos-ver-la-imagen-que-es-una-clasificacion-el-siguiente-paso-es-ver-nuestra-imagen-clasificada-en-una-pantalla-aqui">Ahora, podemos ver la imagen, que es una clasificación.
-El siguiente paso es ver nuestra imagen clasificada en una pantalla aquí.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-calcular-ndvi">FUNCIÓN PARA CALCULAR NDVI</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#instalar-dependencias-adicionales-para-la-conversion-de-pdf-a-imagen">Instalar dependencias adicionales para la conversión de PDF a imagen</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#importar-las-librerias-necesarias">Importar las librerías necesarias</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-las-reglas-del-arbol-de-decision-en-formato-dot">Definir las reglas del árbol de decisión en formato DOT</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-el-grafico-a-partir-del-dot">Crear el gráfico a partir del DOT</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#renderizar-el-arbol-de-decision-en-formato-pdf">Renderizar el árbol de decisión en formato PDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#convertir-el-pdf-a-imagen">Convertir el PDF a imagen</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-la-imagen-del-arbol-de-decision">Mostrar la imagen del árbol de decisión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">WORKFLOW:</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">Entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">Clasificar la imagen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ahora-podemos-ver-la-imagen-que-es-una-clasificacion-el-siguiente-paso-es-ver-nuestra-imagen-clasificada-en-una-pantalla-aqui">Ahora, podemos ver la imagen, que es una clasificación.
+El siguiente paso es ver nuestra imagen clasificada en una pantalla aquí.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accurracy-assessment">ACCURRACY ASSESSMENT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion">Exportación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">Video del capítulo</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -448,16 +443,18 @@ El siguiente paso es ver nuestra imagen clasificada en una pantalla aquí.</a></
 <p>Sentinel-2 es propiedad de la Agencia Europea de Satélites ( European Space Agency ESA), en Google eart Engen tenemos varios conjuntos de imágenes satelitales Sentinel: Sentinel-1, Sentinel-2, Sentinel-3 y Sentinel-5.</p>
 <p>Nos vamos a centrar en Sentinel-2, cuyos datos son muy populares.</p>
 <p>Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida la gestión de desastres, la gestión de emergencias, la cuantificación de la tendencia de urbanización y la cobertura del suelo, entre otras.</p>
+<p><img alt="" src="imagenes/PosIT-1.png" /></p>
 <hr class="docutils" />
 <p>Bien CREAMOS UN NUEVO SCRIPT denominado A001_RandomForest_CuerposDeAguaComahue</p>
-<p>Nuestra área de estudio será la región del Comahue principalmente la provincia del Neuquén y la de Rio negro
-vamos a crear nuestra región de estudio, nuestraregión de interés o ROI.</p>
+<p>Nuestra área de estudio será la región del Comahue principalmente la provincia del Neuquén y la de Rio negro. Vamos a crear nuestra región de estudio, nuestraregión de interés o ROI.</p>
+<p><img alt="alt text" src="imagenes/p_3.png" /></p>
 <p>Como no estamos interesados en los límites provinciales precisos de la provincia, debido a que queremos abarcar los rios que componen los limites naturales provinciales,
 no utilizaremos los límites administrativos exactos disponibles en la IDE de la provincia de RN y Nqn, o en el Instituto Geográfico Nacional
 sino que utilizaremos el conjunto de datos de Capas de Unidades Administrativas Globales de Google eart engen</p>
 <p>Esto nos permitirá aprender un poco más sobre este conjunto de datos de Unidades Administrativas Globales:</p>
-<p>&lt;&lt;buscar: Global Administrative Unit Layers&gt;&gt;
-FAO GAUL: Global Administrative Unit Layers 2015, First-Level Administrative Units</p>
+<p>FAO GAUL: Global Administrative Unit Layers 2015, First-Level Administrative Units</p>
+<p><img alt="" src="imagenes/PosIT-2.png" /></p>
+<p><img alt="" src="_images/Tabla_1.png" /></p>
 <p>Las Capas de Unidades Administrativas Globales (GAUL) recopilan y difunden la mejor información disponible sobre unidades administrativas para todos los países del mundo, contribuyendo a la estandarización del conjunto de datos espaciales que representan las unidades administrativas.</p>
 <p>Llamando a esta colección de imágenes, tendremos los límites de administración para todos los países.</p>
 <p>&lt;&lt;ee.FeatureCollection(“FAO/GAUL/2015/level1”)&gt;&gt;</p>
@@ -537,15 +534,16 @@ No las estamos utilizando para nuestro modelo, sino solo para visualizar la imag
 Y luego un valor mínimo y máximo en función de los datos de reflectancia de la superficie PARA ESTAS BANDAS</p>
 <p>var visParams = {bands: [‘B4’,’B3’,’B2’], min: 0 , max: 3000};
 Map.addLayer(image, visParams, “Sentinel 2024”)</p>
-<hr class="docutils" />
-<hr class="docutils" />
-<p>FUNCIÓN PARA CALCULAR NDVI</p>
+</section>
+<section id="funcion-para-calcular-ndvi">
+<h2>FUNCIÓN PARA CALCULAR NDVI<a class="headerlink" href="#funcion-para-calcular-ndvi" title="Link to this heading">#</a></h2>
 <p>En nuestra clasificación aplicando aprendizaje automático utilizaremos valores de reflectancia de ciertas bandas de la imagen Sentinel en conjunto con el índice NDVI.
 Utilizaremos filtros de nubes, y filtros temporales</p>
 <p>El NDVI es el índice de vegetación diferencial normalizado que ayuda a monitorear la salud de la vegetación.
 Por lo tanto, un NDVI más alto generalmente indica una cobertura vegetal densa o una vegetación más verde.
 Valores negativos son comunes en cuerpos de agua abiertos.
 mientras que Valores cercanos a 0 pueden observarse en agua con sedimentos o cubierta parcial por vegetación flotante.</p>
+<p><img alt="" src="imagenes/PosIT-NDVIbis.png" /></p>
 <p>Rangos típicos del NDVI:</p>
 <p>Agua: -1 a ~0
 - Valores negativos son comunes en cuerpos de agua abiertos.
@@ -553,14 +551,18 @@ mientras que Valores cercanos a 0 pueden observarse en agua con sedimentos o cub
 Suelo desnudo: 0 a 0.2
 Vegetación escasa: 0.2 a 0.5
 Vegetación densa: 0.5 a 1</p>
+<p><img alt="" src="imagenes/valoresNDVI.png" /></p>
 <p>Lo primero que debemos hacer es escribir una función que calcule el NDVI.
 Vamos a crear una función denominada agregarNDVI para calcular el NDVI, que vamos a utilizar en nuestra clasificación de aprendizaje automático.</p>
-<p>También podríamos utilizar otros índices como:
-NDWI (Índice de Diferencia Normalizada del Agua)
-MNDWI (Índice de Diferencia Normalizada del Agua Modificado)
-AWEI (Índice de Extracción Automática del Agua)
-LSWI (Índice del Agua Basado en Tierra)
-WI (Índice del Agua)</p>
+<p>También podríamos utilizar otros índices como:</p>
+<ul class="simple">
+<li><p>NDWI (Índice de Diferencia Normalizada del Agua)</p></li>
+<li><p>MNDWI (Índice de Diferencia Normalizada del Agua Modificado)</p></li>
+<li><p>AWEI (Índice de Extracción Automática del Agua)</p></li>
+<li><p>LSWI (Índice del Agua Basado en Tierra)</p></li>
+<li><p>WI (Índice del Agua)</p></li>
+</ul>
+<p><img alt="" src="imagenes/IndicesAguaBis.png" /></p>
 <p>Nuestra función agregarNDVI, tiene un parámetro de entrada imagen. Podemos llamarlo imagen o algún otro nombre significativo.</p>
 <p>La primera instrucción es definir la variable NDVI. que es igual a la diferencia normalizada de la banda ocho, la banda infrarroja cercana, y la banda cuatro, la banda roja de la imagen Sentinel.
 Si consultamos la documentación del método normalizedDifference, este metodo se aplica a una imagen. Aca se utiliza la notación orientada a objetos objeto.metodo() el objeto es 1 imagen y el método es normalizedDifference.</p>
@@ -588,12 +590,17 @@ En un mapa con este esquema de falso color:</p>
 <li><p>Suelo desnudo o urbano: Varía entre tonos de gris y verde tenue.</p></li>
 </ul>
 <p>Estos son los datos de Sentinel que vamos a utilizar para nuestro aprendizaje automático, es decir, la clasificación supervisada Random forest.</p>
+</section>
+</section>
 <hr class="docutils" />
-<p>WORKFLOW:
-Para aplicar la tecnica supervisada de random forest tendremos en cuenta el flujo de trabajo</p>
-<hr class="docutils" />
-<p>ENTRENAMIENTO:</p>
+<section class="tex2jax_ignore mathjax_ignore" id="workflow">
+<h1>WORKFLOW:<a class="headerlink" href="#workflow" title="Link to this heading">#</a></h1>
+<p>Para aplicar la tecnica supervisada de random forest tendremos en cuenta el flujo de trabajo</p>
+<p><img alt="alt text" src="_images/Workflow.png" /></p>
+<section id="entrenamiento">
+<h2>Entrenamiento<a class="headerlink" href="#entrenamiento" title="Link to this heading">#</a></h2>
 <p>Ahora crearemos datos de entrenamiento y luego ejecutaremos nuestro aprendizaje automático.</p>
+<p><img alt="alt text" src="imagenes/p_1.png" /></p>
 <p>Vamos a crear los datos de entrenamiento:</p>
 <p>Para crear los datos de entrenamiento, utilizando la herramienta de dibujo del panel de Earth Engine.</p>
 <p>Crearemos una nueva capa, denominada agua, de tipo featureColeccion, y defiNImos una propiedad denomninada categoriaAgua, con valor 1.</p>
@@ -624,6 +631,7 @@ Recorda que la definimos cuando creamos los dos featureCollection de datos de en
 Esa será la etiqueta para nuestra clasificación.</p>
 <p>Vamos a utilizar para el entrenamiento las bandas dos, tres, cuatro, ocho y NDVI de la imagen del satélite Sentinel.
 Extraemos las bandas Sentinel para estos datos de entrenamiento que hemos capturado.</p>
+<p><img alt="alt text" src="imagenes/Tabla_Comahue.png" /></p>
 <p>Para obtener estos datos de la imagen utilizamos la función sampleRegions
 vamos a utilizar la resolución de 10 metros, la resolución más alta posible de los datos de Sentinel-2.</p>
 <p>SampleRegions permite definir la tabla que entrena el modelo de clasificación supervisada.
@@ -638,6 +646,7 @@ Contamos con el valor de las bandas Sentinel seleccionadas, la banda NDVI y la e
 Y luego, el conjunto de prueba aquí será la evaluación, que es el 30 % de datos restantes.</p>
 <hr class="docutils" />
 <p>ENTRENAMIENTO:</p>
+<p><img alt="alt text" src="imagenes/p_2.png" /></p>
 <p>En este paso entrenemos el modelo para luego aplicarlo a la imagen con el fin de generar un mapa de masa de agua.</p>
 <p>El paso de entrenar el modelo consiste en aplicar la clasificación supervisada de random forest con los datos de entremiento</p>
 <p>Tendrás features, que son datos de entrenamiento, que es el conjunto de entrenamiento,
@@ -645,8 +654,11 @@ luego una etiqueta, necesita una etiqueta para la clasificación.
 y luego, finalmente, las bandas, que usamos para hacer la predicción, que son las bandas Sentinel.</p>
 <p>Entonces, cuando ejecutes esto, entrenarás el modelo de aprendizaje automático.
 Cuando lo haga, el modelo de aprendizaje automático se entrenará en función de nuestros datos de entrenamiento en las bandas Sentinel.</p>
+</section>
 <hr class="docutils" />
-<p>Clasificar la imagen:</p>
+<section id="clasificar-la-imagen">
+<h2>Clasificar la imagen<a class="headerlink" href="#clasificar-la-imagen" title="Link to this heading">#</a></h2>
+<p><img alt="alt text" src="imagenes/p_3.png" /></p>
 <p>El siguiente paso es aplicar este modelo, que es el clasificador, a la imagen, la imagen Sentinel.
 Simplemente se va a aplicar el modelo para generar una clasificación.</p>
 </section>
@@ -666,8 +678,10 @@ Entonces, simplemente ejecutemos eso. Y cuando lo ejecutemos, veremos nuestra cl
 <p>Esta es nuestra clase de agua, que se superpone a la imagen de Sentinel. Y esa es nuestra clase de agua basada en el aprendizaje automático en la imagen de Sentinel.
 Esta es nuestra clasificación. Se trata de una clasificación predicha por un modelo basado en el aprendizaje automático,
 específicamente en un algoritmo de random forest o bosque aleatorio en la plataforma Earth Engine que utiliza datos satelitales Sentinel2 de 10 metros.</p>
-<hr class="docutils" />
-<p>ACCURRACY ASSESSMENT</p>
+</section>
+<section id="accurracy-assessment">
+<h2>ACCURRACY ASSESSMENT<a class="headerlink" href="#accurracy-assessment" title="Link to this heading">#</a></h2>
+<p><img alt="" src="imagenes/p_4.png" /></p>
 <p>Como hemos mencionado en anteriores videos, hay algunos pasos después de este posprocesamiento y tenemos que calcular evaluaciones de precisión de estos datos,</p>
 <p>Utilizaremos la función de matriz de confusión.
 Entonces, vamos a utilizar el conjunto de prueba y luego el clasificador. Este es nuestro modelo, el modelo de entrenamiento.
@@ -682,8 +696,9 @@ Parece que es 100 %, bastante buena, pero creo que si capturamos más puntos de 
 <li><p>A, el agua es bastante fácil de predecir,</p></li>
 <li><p>B, hemos utilizado la resolución de 10 metros, que también es otro factor.</p></li>
 </ul>
-<hr class="docutils" />
-<p>EXPORTACION</p>
+</section>
+<section id="exportacion">
+<h2>Exportación<a class="headerlink" href="#exportacion" title="Link to this heading">#</a></h2>
 <p>La última parte a considerar, es que si deseas usar esta clasificación fuera de Google eart engen , digamos un software GIS estándar, como QGIS o ArcGIS
 vas a usar la función Export.image.toDrive para exportar, ya sabes, tu mapa de agua.</p>
 <p>Cuando lo ejecutes, lo verás en tu Google Drive. Una vez que hayas completado esto, verás los datos o la imagen en tu Google Drive.
@@ -694,54 +709,53 @@ desarrolla un modelo de aprendizaje automático,
 aplicas el modelo para clasificar la imagen de la region de estudio
 estudias el rendimiento de tu modelo y
 también exporta tu clasificación final a tu Google Drive.</p>
-<hr class="docutils" />
-<p>!apt-get install graphviz
-!pip install graphviz</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">graphviz</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">graphviz</span>
+
+<span class="c1"># Instalar dependencias adicionales para la conversión de PDF a imagen</span>
+<span class="err">!</span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="o">-</span><span class="n">qq</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="n">poppler</span><span class="o">-</span><span class="n">utils</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">pdf2image</span>
+
+
+<span class="c1"># Importar las librerías necesarias</span>
+<span class="kn">import</span> <span class="nn">graphviz</span>
+<span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">files</span>
+<span class="kn">from</span> <span class="nn">pdf2image</span> <span class="kn">import</span> <span class="n">convert_from_path</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Definir las reglas del árbol de decisión en formato DOT</span>
+<span class="n">dot_data</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">digraph DecisionTree {</span>
+<span class="s2"> node [shape=box, style=&quot;filled, rounded&quot;, color=&quot;black&quot;, fontname=helvetica];</span>
+<span class="s2"> edge [fontname=helvetica];</span>
+<span class="s2"> 0 [label=&lt;B8 &amp;le; 969.0000&lt;br/&gt;score = 0.4649&gt;, fillcolor=&quot;#00000000&quot;];</span>
+<span class="s2"> 1 [label=&lt;class = 1&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
+<span class="s2"> 0 -&gt; 1 [labeldistance=2.5, labelangle=45, headlabel=&quot;True&quot;];</span>
+<span class="s2"> 2 [label=&lt;class = 0&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
+<span class="s2"> 0 -&gt; 2 [labeldistance=2.5, labelangle=-45, headlabel=&quot;False&quot;];</span>
+<span class="s2">}</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="c1"># Crear el gráfico a partir del DOT</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">graphviz</span><span class="o">.</span><span class="n">Source</span><span class="p">(</span><span class="n">dot_data</span><span class="p">)</span>
+
+<span class="c1"># Renderizar el árbol de decisión en formato PDF</span>
+<span class="n">graph</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s1">&#39;decision_tree&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span> <span class="n">cleanup</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Convertir el PDF a imagen</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">convert_from_path</span><span class="p">(</span><span class="s1">&#39;decision_tree.pdf&#39;</span><span class="p">)</span>
+
+<span class="c1"># Mostrar la imagen del árbol de decisión</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>  <span class="c1"># Desactivar los ejes para que solo se vea la imagen</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
 </section>
+<section id="video-del-capitulo">
+<h2>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
+<p>Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA:</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="instalar-dependencias-adicionales-para-la-conversion-de-pdf-a-imagen">
-<h1>Instalar dependencias adicionales para la conversión de PDF a imagen<a class="headerlink" href="#instalar-dependencias-adicionales-para-la-conversion-de-pdf-a-imagen" title="Link to this heading">#</a></h1>
-<p>!apt-get -qq install -y poppler-utils
-!pip install pdf2image</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="importar-las-librerias-necesarias">
-<h1>Importar las librerías necesarias<a class="headerlink" href="#importar-las-librerias-necesarias" title="Link to this heading">#</a></h1>
-<p>import graphviz
-from google.colab import files
-from pdf2image import convert_from_path
-import matplotlib.pyplot as plt</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="definir-las-reglas-del-arbol-de-decision-en-formato-dot">
-<h1>Definir las reglas del árbol de decisión en formato DOT<a class="headerlink" href="#definir-las-reglas-del-arbol-de-decision-en-formato-dot" title="Link to this heading">#</a></h1>
-<p>dot_data = “””
-digraph DecisionTree {
-node [shape=box, style=”filled, rounded”, color=”black”, fontname=helvetica];
-edge [fontname=helvetica];
-0 [label=&lt;B8 ≤ 969.0000<br/>score = 0.4649&gt;, fillcolor=”#00000000”];
-1 [label=&lt;class = 1&gt;, fillcolor=”#00000000”, shape=ellipse];
-0 -&gt; 1 [labeldistance=2.5, labelangle=45, headlabel=”True”];
-2 [label=&lt;class = 0&gt;, fillcolor=”#00000000”, shape=ellipse];
-0 -&gt; 2 [labeldistance=2.5, labelangle=-45, headlabel=”False”];
-}
-“””</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="crear-el-grafico-a-partir-del-dot">
-<h1>Crear el gráfico a partir del DOT<a class="headerlink" href="#crear-el-grafico-a-partir-del-dot" title="Link to this heading">#</a></h1>
-<p>graph = graphviz.Source(dot_data)</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="renderizar-el-arbol-de-decision-en-formato-pdf">
-<h1>Renderizar el árbol de decisión en formato PDF<a class="headerlink" href="#renderizar-el-arbol-de-decision-en-formato-pdf" title="Link to this heading">#</a></h1>
-<p>graph.render(‘decision_tree’, format=’pdf’, cleanup=False)</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="convertir-el-pdf-a-imagen">
-<h1>Convertir el PDF a imagen<a class="headerlink" href="#convertir-el-pdf-a-imagen" title="Link to this heading">#</a></h1>
-<p>images = convert_from_path(‘decision_tree.pdf’)</p>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="mostrar-la-imagen-del-arbol-de-decision">
-<h1>Mostrar la imagen del árbol de decisión<a class="headerlink" href="#mostrar-la-imagen-del-arbol-de-decision" title="Link to this heading">#</a></h1>
-<p>plt.imshow(images[0])
-plt.axis(‘off’)  # Desactivar los ejes para que solo se vea la imagen
-plt.show()</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -811,17 +825,19 @@ plt.show()</p>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Predecir Superficies de Agua</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esta-es-nuestra-area-de-estudio">Esta es nuestra área de estudio.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ahora-podemos-ver-la-imagen-que-es-una-clasificacion-el-siguiente-paso-es-ver-nuestra-imagen-clasificada-en-una-pantalla-aqui">Ahora, podemos ver la imagen, que es una clasificación.
-El siguiente paso es ver nuestra imagen clasificada en una pantalla aquí.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-calcular-ndvi">FUNCIÓN PARA CALCULAR NDVI</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#instalar-dependencias-adicionales-para-la-conversion-de-pdf-a-imagen">Instalar dependencias adicionales para la conversión de PDF a imagen</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#importar-las-librerias-necesarias">Importar las librerías necesarias</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#definir-las-reglas-del-arbol-de-decision-en-formato-dot">Definir las reglas del árbol de decisión en formato DOT</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-el-grafico-a-partir-del-dot">Crear el gráfico a partir del DOT</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#renderizar-el-arbol-de-decision-en-formato-pdf">Renderizar el árbol de decisión en formato PDF</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#convertir-el-pdf-a-imagen">Convertir el PDF a imagen</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-la-imagen-del-arbol-de-decision">Mostrar la imagen del árbol de decisión</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">WORKFLOW:</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">Entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">Clasificar la imagen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ahora-podemos-ver-la-imagen-que-es-una-clasificacion-el-siguiente-paso-es-ver-nuestra-imagen-clasificada-en-una-pantalla-aqui">Ahora, podemos ver la imagen, que es una clasificación.
+El siguiente paso es ver nuestra imagen clasificada en una pantalla aquí.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accurracy-assessment">ACCURRACY ASSESSMENT</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion">Exportación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">Video del capítulo</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
