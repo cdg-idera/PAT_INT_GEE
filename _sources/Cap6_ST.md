@@ -13,7 +13,7 @@ En este primer video vamos a trabajar con un ejemplo concreto y sencillo para in
 
 ```{figure} imagenes/IndicesST.png
 :name: fig-indices
-:width: 70%
+:width: 100%
 
 Indices espectrales y bandas utilizadas en el estudio.
 ```
