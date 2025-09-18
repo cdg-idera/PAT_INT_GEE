@@ -1,7 +1,5 @@
 # Series de tiempo
 
-c\traspaso\st_v
-
 En el análisis de datos geoespaciales, las series de tiempo ocupan un lugar central. Ya sea que estudiemos fenómenos terrestres, marítimos o atmosféricos, observar cómo varían en el tiempo ciertas variables nos permite comprender procesos, detectar patrones y anticipar futuros escenarios.
 
 Los científicos de datos trabajan con múltiples formas de representar la información, y una de las más poderosas en aplicaciones de inteligencia artificial aplicada al ambiente es, sin dudas, la serie temporal. Nos ayuda a responder preguntas como: ¿qué está cambiando? ¿cómo? ¿cuándo? y, sobre todo, ¿por qué?
@@ -45,12 +43,13 @@ Y, por supuesto, el **ruido aleatorio**, esas pequeñas fluctuaciones impredecib
 
 ![](imagenes/ruido.png)
 
+> ¿Cómo se obtuvieron estos ejemplos gráficos? Fue a partir de la generación de datos sintéticos con el siguiente código en Colab: https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing En el ejemplo se generan gráficos con fondos negro y blanco. El video de este capítulo cuenta con gráficos con fondo negro.
+
 
 Antes de lanzarse a modelar o predecir, conviene detenerse en un análisis exploratorio. Visualizar la serie en un gráfico —con el tiempo en el eje horizontal y el valor en el eje vertical— ya ofrece una gran cantidad de información. A partir de ahí podemos detectar anomalías, rupturas, variaciones estacionales, o comportamientos inesperados.
 
 ![](imagenes/DS_ST.png)
 
-> ¿Cómo se obtuvieron estos ejemplos de datos sintéticos? Fue a partir del siguiente código en Colab: https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing En el ejemplo se generan gráficos con fondos negro y blanco. El video de este capítulo cuenta con gráficos con fondo negro.
 
 Este análisis puede tener distintos niveles de profundidad. Uno **descriptivo**, que se limita a mostrar lo que ocurre. Otro **explicativo**, que busca entender por qué ocurre: por ejemplo, una caída brusca del NDWI puede relacionarse con una sequía o con una obra de canalización. Y también uno **predictivo**, que usa la historia registrada para anticipar lo que podría venir, como un riesgo ambiental o una oportunidad productiva.
 
@@ -266,9 +265,9 @@ Figura generada en GEE de la serie temporal de temperatura promedio para el part
 Exportar los conjuntos de datos a csv es una buena opción para procesamiento posterior en lenguajes como R, python, julia o Power BI.
 
 
-```{figure} imagenes/interApp2.png)
+```{figure} imagenes/interApp2.png
 :name: fig-indices
-:width: 60%
+:width: 70%
 
 Exportación de archivos CSV de GEE a python, R y Power BI.
 ```
@@ -568,9 +567,4 @@ En el próximo capítulo de esta serie Time Series, calcularemos mas series temp
 ## Video del capítulo
 
 Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: https://www.youtube.com/watch?v=1hrdqhz78SU
-
-```{iframe}https://www.youtube.com/watch?v=1hrdqhz78SU
-:width: 80%
-:height: 400px
-```
 

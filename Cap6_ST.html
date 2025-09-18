@@ -448,7 +448,6 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="series-de-tiempo">
 <h1>Series de tiempo<a class="headerlink" href="#series-de-tiempo" title="Link to this heading">#</a></h1>
-<p>c\traspaso\st_v</p>
 <p>En el análisis de datos geoespaciales, las series de tiempo ocupan un lugar central. Ya sea que estudiemos fenómenos terrestres, marítimos o atmosféricos, observar cómo varían en el tiempo ciertas variables nos permite comprender procesos, detectar patrones y anticipar futuros escenarios.</p>
 <p>Los científicos de datos trabajan con múltiples formas de representar la información, y una de las más poderosas en aplicaciones de inteligencia artificial aplicada al ambiente es, sin dudas, la serie temporal. Nos ayuda a responder preguntas como: ¿qué está cambiando? ¿cómo? ¿cuándo? y, sobre todo, ¿por qué?</p>
 <blockquote>
@@ -477,11 +476,11 @@ document.write(`
 <p><img alt="" src="_images/estacionalidad.png" /></p>
 <p>Y, por supuesto, el <strong>ruido aleatorio</strong>, esas pequeñas fluctuaciones impredecibles que también forman parte de la realidad.</p>
 <p><img alt="" src="_images/ruido.png" /></p>
+<blockquote>
+<div><p>¿Cómo se obtuvieron estos ejemplos gráficos? Fue a partir de la generación de datos sintéticos con el siguiente código en Colab: <a class="reference external" href="https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing">https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing</a> En el ejemplo se generan gráficos con fondos negro y blanco. El video de este capítulo cuenta con gráficos con fondo negro.</p>
+</div></blockquote>
 <p>Antes de lanzarse a modelar o predecir, conviene detenerse en un análisis exploratorio. Visualizar la serie en un gráfico —con el tiempo en el eje horizontal y el valor en el eje vertical— ya ofrece una gran cantidad de información. A partir de ahí podemos detectar anomalías, rupturas, variaciones estacionales, o comportamientos inesperados.</p>
 <p><img alt="" src="_images/DS_ST.png" /></p>
-<blockquote>
-<div><p>¿Cómo se obtuvieron estos ejemplos de datos sintéticos? Fue a partir del siguiente código en Colab: <a class="reference external" href="https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing">https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing</a> En el ejemplo se generan gráficos con fondos negro y blanco. El video de este capítulo cuenta con gráficos con fondo negro.</p>
-</div></blockquote>
 <p>Este análisis puede tener distintos niveles de profundidad. Uno <strong>descriptivo</strong>, que se limita a mostrar lo que ocurre. Otro <strong>explicativo</strong>, que busca entender por qué ocurre: por ejemplo, una caída brusca del NDWI puede relacionarse con una sequía o con una obra de canalización. Y también uno <strong>predictivo</strong>, que usa la historia registrada para anticipar lo que podría venir, como un riesgo ambiental o una oportunidad productiva.</p>
 <p>Pero para que todo esto funcione, es fundamental tener algunos conceptos claros desde el inicio. Primero, es indispensable conocer el <em>dominio del fenómeno</em> que estamos estudiando: no podemos interpretar una serie de NDVI si no entendemos qué mide ese índice y cómo se comporta en distintos tipos de cobertura, como cultivos, bosques o zonas urbanas. También es clave <em>tener un objetivo bien definido</em>: ¿Queremos monitorear degradación ambiental? ¿Comparar campañas agrícolas? ¿Estudiar procesos de urbanización? Estas decisiones condicionan cómo configuramos nuestra serie: <em>qué resolución temporal</em> elegimos, a qué <em>escala espacial</em> trabajaremos, qué variables o índices vamos a incorporar.</p>
 <p>Este video tiene un enfoque introductorio. No busca dar una explicación exhaustiva de todos los componentes técnicos que intervienen en el análisis temporal, sino más bien motivar el uso de las series de tiempo como una herramienta clave en el análisis de información geoespacial con técnicas de inteligencia artificial. Por cuestiones de tiempo, no se abordan en profundidad aspectos como los fundamentos de los índices espectrales o los modelos de series temporales. Por eso, si te interesa avanzar, te recomendamos complementar este material con cursos específicos de teledetección y análisis de series de tiempo, que te brinden una base teórica y metodológica más sólida.</p>
@@ -656,7 +655,7 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <h2>Exportación opcional de estadísticas a CSV<a class="headerlink" href="#exportacion-opcional-de-estadisticas-a-csv" title="Link to this heading">#</a></h2>
 <p>Exportar los conjuntos de datos a csv es una buena opción para procesamiento posterior en lenguajes como R, python, julia o Power BI.</p>
 <figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="imagenes/interApp2.png)"><img alt="imagenes/interApp2.png)" src="imagenes/interApp2.png)" style="width: 60%;" /></a>
+<a class="reference internal image-reference" href="_images/interApp2.png"><img alt="_images/interApp2.png" src="_images/interApp2.png" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5 </span><span class="caption-text">Exportación de archivos CSV de GEE a python, R y Power BI.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
@@ -897,10 +896,6 @@ Lab_006_TS_BahiaBlanca_BIS</p>
 <section id="video-del-capitulo">
 <h2>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
 <p>Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: <a class="reference external" href="https://www.youtube.com/watch?v=1hrdqhz78SU">https://www.youtube.com/watch?v=1hrdqhz78SU</a></p>
-<div class="highlight-{iframe}https://www.youtube.com/watch?v=1hrdqhz78SU notranslate"><div class="highlight"><pre><span></span>:width: 80%
-:height: 400px
-</pre></div>
-</div>
 </section>
 </section>
 
