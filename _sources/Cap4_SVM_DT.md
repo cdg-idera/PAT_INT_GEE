@@ -1,4 +1,4 @@
-# Aplicando Máquina de Soporte Vectorial y Árboles de Decisión
+# Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión
 
 # Introducción
 

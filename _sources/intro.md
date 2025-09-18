@@ -1,19 +1,3 @@
----
-jupytext:
-  text_representation:
-    extension: .md
-    format_name: myst
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: python3
----
-
-```{code-cell} ipython3
-from IPython.display import Image
-Image(filename='imagenes/GEE.png', width=336, height=48)
-```
-
 # Prólogo
 
 Estimado lector:

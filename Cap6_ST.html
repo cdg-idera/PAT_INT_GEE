@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Series de tiempo &#8212; GeoIA aplicado a Imágenes Satelitales</title>
+    <title>Capítulo 6 · Serie Temporales &#8212; GeoIA aplicado a Imágenes Satelitales</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Cap6_ST';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Cubos de Imágenes Satelitales" href="Cap7_Datacubes.html" />
-    <link rel="prev" title="Predecir Superficies de Agua" href="Cap5_Agua.html" />
+    <link rel="next" title="Capítulo 7 · Cubos de Imágenes Satelitales" href="Cap7_Datacubes.html" />
+    <link rel="prev" title="Capítulo 5 · Random Forest para detectar agua" href="Cap5_Agua.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -100,8 +100,8 @@
          class="form-control"
          name="q"
          id="search-input"
-         placeholder="Search..."
-         aria-label="Search..."
+         placeholder="Search this book..."
+         aria-label="Search this book..."
          autocomplete="off"
          autocorrect="off"
          autocapitalize="off"
@@ -165,34 +165,26 @@
  </script></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Prólogo
+                </a>
+            </li>
+        </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Cap1_Tecnicas.html">Teledetección y GeoIA</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap1_Tecnicas.html">Capítulo 1 ·Técnicas</a></li>
 
 
 
-<li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">Aplicando Random Forest en GEE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">Capítulo 2 · Random Forest en GEE</a></li>
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="Cap3_gee_colab.html">Capítulo 3 · Random Forest en GEE y Colab</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="Cap3_gee_colab.html">RF en GEE con JScript y en Colab con Python</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="Cap4_SVM_DT.html">Aplicando Máquina de Soporte Vectorial y Árboles de Decisión</a></li>
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">Predecir Superficies de Agua</a></li>
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Series de tiempo</a></li>
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">Cubos de Imágenes Satelitales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap4_SVM_DT.html">Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
 
 
 
@@ -200,9 +192,23 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">Capítulo 5 · Random Forest para detectar agua</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Capítulo 6 · Serie Temporales</a></li>
 
 
-<li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">Lab 002 · Random Forest (Rosario)  Thebe</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">Capítulo 7 · Cubos de Imágenes Satelitales</a></li>
+
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">Capítulo 9 · Lab 002 · Random Forest (Rosario)  Thebe</a></li>
 </ul>
 
     </div>
@@ -244,6 +250,53 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE/issues/new?title=Issue%20on%20page%20%2FCap6_ST.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
 
 
 
@@ -341,7 +394,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Series de tiempo</h1>
+    <h1>Capítulo 6 · Serie Temporales</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -351,7 +404,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Series de tiempo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Capítulo 6 · Serie Temporales</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-de-tiempo-ejemplo-bahia-blanca">Serie de Tiempo: Ejemplo Bahía Blanca</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-la-frecuencia-de-analisis-temporal">Definición de la frecuencia de análisis temporal</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-de-interes-roi">Región de interés (ROI)</a></li>
@@ -391,8 +444,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="series-de-tiempo">
-<h1>Series de tiempo<a class="headerlink" href="#series-de-tiempo" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="capitulo-6-serie-temporales">
+<h1>Capítulo 6 · Serie Temporales<a class="headerlink" href="#capitulo-6-serie-temporales" title="Link to this heading">#</a></h1>
 <p>En el análisis de datos geoespaciales, las series de tiempo ocupan un lugar central. Ya sea que estudiemos fenómenos terrestres, marítimos o atmosféricos, observar cómo varían en el tiempo ciertas variables nos permite comprender procesos, detectar patrones y anticipar futuros escenarios.</p>
 <p>Los científicos de datos trabajan con múltiples formas de representar la información, y una de las más poderosas en aplicaciones de inteligencia artificial aplicada al ambiente es, sin dudas, la serie temporal. Nos ayuda a responder preguntas como: ¿qué está cambiando? ¿cómo? ¿cuándo? y, sobre todo, ¿por qué?</p>
 <blockquote>
@@ -848,8 +901,8 @@ Lab_006_TS_BahiaBlanca_BIS</p>
     {
         requestKernel: true,
         binderOptions: {
-            repo: "binder-examples/jupyter-stacks-datascience",
-            ref: "master",
+            repo: "cdg-idera/PAT_INT_GEE",
+            ref: "main",
         },
         codeMirrorConfig: {
             theme: "abcdef",
@@ -880,7 +933,7 @@ Lab_006_TS_BahiaBlanca_BIS</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Predecir Superficies de Agua</p>
+        <p class="prev-next-title">Capítulo 5 · Random Forest para detectar agua</p>
       </div>
     </a>
     <a class="right-next"
@@ -888,7 +941,7 @@ Lab_006_TS_BahiaBlanca_BIS</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Cubos de Imágenes Satelitales</p>
+        <p class="prev-next-title">Capítulo 7 · Cubos de Imágenes Satelitales</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -908,7 +961,7 @@ Lab_006_TS_BahiaBlanca_BIS</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Series de tiempo</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Capítulo 6 · Serie Temporales</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-de-tiempo-ejemplo-bahia-blanca">Serie de Tiempo: Ejemplo Bahía Blanca</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-la-frecuencia-de-analisis-temporal">Definición de la frecuencia de análisis temporal</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-de-interes-roi">Región de interés (ROI)</a></li>

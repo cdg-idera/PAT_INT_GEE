@@ -1,9 +1,9 @@
-# Cubos de Imágenes Satelitales
-
-d\st_v2
+#  Capítulo 7 · Cubos de Imágenes Satelitales
 
 
-# Introducción
+
+
+## Introducción
 
 🎬 ¡Seguimos explorando las Series Temporales aplicadas a la Información Geoespacial! 🌍📊
 En este nuevo episodio, damos un paso más: introducimos los cubos de datos 🧊🛰️ como estructura clave para organizar, analizar y visualizar imágenes satelitales a lo largo del tiempo.

@@ -1,6 +1,6 @@
-# Aplicando Random Forest en GEE
+# Capítulo 2 · Random Forest en GEE
 
-# Introducción
+## Introducción
 
 La clasificación de imágenes satelitales es una técnica fundamental en teledetección, y uno de los enfoques más comunes es dividir el territorio en categorías específicas como: urbano, suelo desnudo, agua ó vegetación de cultivos, Bosque-o-Zona Arbolada-Arbustiva).
 

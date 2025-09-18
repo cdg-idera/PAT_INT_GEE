@@ -1,20 +1,4 @@
----
-jupytext:
-  text_representation:
-    extension: .md
-    format_name: myst
-kernelspec:
-  display_name: Python 3
-  language: python
-  name: python3
----
-
-```{code-cell} ipython3
-from IPython.display import Image
-Image(filename='imagenes/GEE.png', width=336, height=48)
-```
-
-# Teledetección y GeoIA 
+# Capítulo 1 ·Técnicas
 
 
 Bienvenidos en este capítulo exploraremos cómo el aprendizaje automático está revolucionando la teledetección y el trabajo en la nube y mostraremos un ejemplo práctico de aprendizaje automático supervisado con Random Forest. El capítulo se estructura en tres partes en la primera parte comenzaremos haciendo una breve reseña sobre teledetección luego en la segunda parte abordaremos técnicas de aprendizaje automático o Machine learning aplicadas a imágenes satelitales, en la tercera parte mostraremos un ejemplo concreto de la técnica Random Forest a una composición de imágenes sobre un área de estudio. Comenzaremos haciendo una pequeña reseña sobre teledetección:

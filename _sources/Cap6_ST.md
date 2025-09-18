@@ -1,4 +1,4 @@
-# Series de tiempo
+# Capítulo 6 · Serie Temporales
 
 En el análisis de datos geoespaciales, las series de tiempo ocupan un lugar central. Ya sea que estudiemos fenómenos terrestres, marítimos o atmosféricos, observar cómo varían en el tiempo ciertas variables nos permite comprender procesos, detectar patrones y anticipar futuros escenarios.
 
