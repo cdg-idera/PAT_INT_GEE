@@ -217,7 +217,7 @@ Configuración estética del gráfico (ver Figura {numref}`fig-IndicesBB`).
 
 ```{figure} imagenes/stIndicesBB.png
 :name: fig-IndicesBB
-:width: 60%
+:width: 100%
 
 Serie temporal: valores promedio de NDVI, NDBI, NDWI, NDMI, NIR para el partido de Bahía Blanca, año 2024.
 ```
@@ -256,7 +256,7 @@ Genera un gráfico de temperatura superficial promedio (ver Figura {numref}`fig-
 
 ```{figure} imagenes/stPrecipitacion.png
 :name: fig-preci
-:width: 60%
+:width: 100%
 
 Figura generada en GEE de la serie temporal de temperatura promedio para el partido de Bahía Blanca
 ```
@@ -334,7 +334,7 @@ Export.table.toDrive({
 
 ```{figure} imagenes/Placa15.png
 :name: fig-indicesP15
-:width: 70%
+:width: 100%
 
 Algunas Conclusiones de la sección
 ```
@@ -567,9 +567,9 @@ En el próximo capítulo de esta serie Time Series, calcularemos mas series temp
 
 ## Video del capítulo
 
-Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA:
+Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: https://www.youtube.com/watch?v=1hrdqhz78SU
 
-```{iframe} https://www.youtube.com/watch?v=1hrdqhz78SU
+```{iframe}https://www.youtube.com/watch?v=1hrdqhz78SU
 :width: 80%
 :height: 400px
 ```
