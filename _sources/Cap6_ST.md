@@ -11,22 +11,20 @@ Los científicos de datos trabajan con múltiples formas de representar la infor
 ![](imagenes/graf1.png)
 
 
-En este primer video vamos a trabajar con un ejemplo concreto y sencillo para introducirnos en el tema:
-
-El caso es Bahía Blanca, donde analizamos la evolución mensual durante el año 2024 de una serie de indicadores ambientales derivados de imágenes satelitales Sentinel-2 y MODIS. Calculamos índices como NDVI, NDWI, NDBI, NDMI, NIR y temperatura superficial (LST) (ver en {numref}`fig-indices`) que permiten seguir la dinámica de la vegetación, la presencia de agua, el suelo desnudo, o el impacto del calor. A lo largo del ejemplo, mostramos cómo graficar estas variables, cómo generar las series de tiempo con Earth Engine, y cómo exportarlas para su posterior análisis en R o Python.
+En este primer video vamos a trabajar con un ejemplo concreto y sencillo para introducirnos en el tema: El caso es Bahía Blanca, donde analizamos la evolución mensual durante el año 2024 de una serie de indicadores ambientales derivados de imágenes satelitales *Sentinel-2* y *MODIS*. Calculamos índices como NDVI, NDWI, NDBI, NDMI, NIR y temperatura superficial (LST) (ver en {numref}`fig-indices`) que permiten seguir la dinámica de la vegetación, la presencia de agua, el suelo desnudo, o el impacto del calor. A lo largo del ejemplo, mostramos cómo graficar estas variables, cómo generar las series de tiempo con Google Earth Engine, y cómo exportarlas para su posterior análisis en R o Python.
 
 ```{figure} imagenes/IndicesST.png
 :name: fig-indices
-:width: 50%
+:width: 70%
 
 Indices espectrales y bandas utilizadas en el estudio.
 ```
 
-Ahora bien, para trabajar de forma sólida con series temporales es importante entender que detrás de cada gráfico hay múltiples componentes interactuando (ver en {numref}`fig-componentes`). 
+Ahora bien, para trabajar de forma sólida con series temporales es importante entender que detrás de cada gráfico hay *múltiples componentes interactuando* (ver en {numref}`fig-componentes`). 
 
 ```{figure} imagenes/componentes.png
 :name: fig-componentes
-:width: 50%
+:width: 30%
 
 Componentes principales del sistema.
 ```
@@ -52,15 +50,17 @@ Antes de lanzarse a modelar o predecir, conviene detenerse en un análisis explo
 
 ![](imagenes/DS_ST.png)
 
+> ¿Cómo se obtuvieron estos ejemplos de datos sintéticos? Fue a partir del siguiente código en Colab: https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing En el ejemplo se generan gráficos con fondos negro y blanco. El video de este capítulo cuenta con gráficos con fondo negro.
+
 Este análisis puede tener distintos niveles de profundidad. Uno **descriptivo**, que se limita a mostrar lo que ocurre. Otro **explicativo**, que busca entender por qué ocurre: por ejemplo, una caída brusca del NDWI puede relacionarse con una sequía o con una obra de canalización. Y también uno **predictivo**, que usa la historia registrada para anticipar lo que podría venir, como un riesgo ambiental o una oportunidad productiva.
 
-Pero para que todo esto funcione, es fundamental tener algunos conceptos claros desde el inicio. Primero, es indispensable conocer el *dominio del fenómeno* que estamos estudiando: no podemos interpretar una serie de NDVI si no entendemos qué mide ese índice y cómo se comporta en distintos tipos de cobertura, como cultivos, bosques o zonas urbanas. También es clave *tener un objetivo bien definido*: ¿Queremos monitorear degradación ambiental? ¿Comparar campañas agrícolas? ¿Estudiar procesos de urbanización? Estas decisiones condicionan cómo configuramos nuestra serie: *qué resolución temporal* elegimos, a qué *escala espacial* trabajamos, qué variables o índices vamos a incorporar.
+Pero para que todo esto funcione, es fundamental tener algunos conceptos claros desde el inicio. Primero, es indispensable conocer el *dominio del fenómeno* que estamos estudiando: no podemos interpretar una serie de NDVI si no entendemos qué mide ese índice y cómo se comporta en distintos tipos de cobertura, como cultivos, bosques o zonas urbanas. También es clave *tener un objetivo bien definido*: ¿Queremos monitorear degradación ambiental? ¿Comparar campañas agrícolas? ¿Estudiar procesos de urbanización? Estas decisiones condicionan cómo configuramos nuestra serie: *qué resolución temporal* elegimos, a qué *escala espacial* trabajaremos, qué variables o índices vamos a incorporar.
 
 Este video tiene un enfoque introductorio. No busca dar una explicación exhaustiva de todos los componentes técnicos que intervienen en el análisis temporal, sino más bien motivar el uso de las series de tiempo como una herramienta clave en el análisis de información geoespacial con técnicas de inteligencia artificial. Por cuestiones de tiempo, no se abordan en profundidad aspectos como los fundamentos de los índices espectrales o los modelos de series temporales. Por eso, si te interesa avanzar, te recomendamos complementar este material con cursos específicos de teledetección y análisis de series de tiempo, que te brinden una base teórica y metodológica más sólida.
 
 El preprocesamiento también juega un rol clave: a veces hay que rellenar valores faltantes, unificar series con distintas frecuencias, decidir qué hacer con valores extremos, y elegir con cuidado el *horizonte temporal* según lo que estemos estudiando.
 
-Si el objetivo es predecir, entramos en un terreno más exigente: hay que dividir los datos en un período de *entrenamiento* y otro de *validación*, respetando el orden temporal para no introducir sesgos. Aquí aparecen dos grandes caminos: los modelos estadísticos clásicos, como ARIMA, que buscan capturar regularidades estructuradas, y los modelos basados en datos, como las redes neuronales LSTM, que pueden aprender directamente de la complejidad sin necesidad de hacer suposiciones rígidas.
+Si el objetivo es predecir, entramos en un terreno más exigente: hay que dividir los datos en un período de *entrenamiento* y otro de *validación*, respetando el orden temporal para no introducir sesgos. Aquí aparecen dos grandes caminos: los *modelos estadísticos clásicos*, como ARIMA, que buscan capturar regularidades estructuradas, y los *modelos basados en datos*, como las redes neuronales LSTM, que pueden aprender directamente de la complejidad sin necesidad de hacer suposiciones rígidas.
 
 Las series de tiempo *son mucho más que líneas en un gráfico*. Son herramientas vivas que nos permiten leer el pasado, entender el presente y proyectar el futuro. Aplicadas a la información geoespacial y a la inteligencia artificial, se convierten en aliadas estratégicas para estudiar el mundo cambiante que habitamos. Nos permiten transformar imágenes satelitales en narrativas dinámicas del territorio.
 Estas herramientas no solo sirven para entender el pasado o describir el presente, sino que son esenciales para anticipar y planificar un futuro más informado y sostenible.
@@ -68,9 +68,10 @@ Estas herramientas no solo sirven para entender el pasado o describir el present
 
 # Serie de Tiempo: Ejemplo Bahía Blanca
 
-En este laboratorio trabajamos con series temporales aplicadas a imágenes satelitales, tomando como área de estudio el partido de Bahía Blanca en la provincia de Buenos Aires, Argentina.
-El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a partir de imágenes Sentinel-2 y MODIS, calcular valores promedio sobre una región de interés (ROI), visualizarlos como gráficos y opcionalmente exportar las estadísticas en formato CSV para análisis externos.
+En este laboratorio trabajamos con series temporales aplicadas a imágenes satelitales, tomando como área de estudio *el partido de Bahía Blanca* en la provincia de Buenos Aires, Argentina.
+El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a partir de imágenes *Sentinel-2* y *MODIS*, calcular valores promedio sobre una región de interés (ROI: Region of Interest), visualizarlos como gráficos y opcionalmente exportar las estadísticas en formato CSV para análisis externos con R, python o Power BI.
 
+Con este mismo codigo vas a poder calcular series de tiempo con otras frecuencias.
 
 ## Definición de la frecuencia de análisis temporal
 
@@ -78,7 +79,7 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 var frecuencia = 'mensual';
 ```
 
-Este parámetro define cada cuánto tiempo se va a tomar una imagen compuesta: puede ser mensual, bimestral, trimestral o cuatrimestral. Esto permite adaptar el análisis a diferentes necesidades: monitoreo fino o más general.
+Este parámetro define cada cuánto tiempo se va a tomar una imagen compuesta: puede ser *mensual*, *bimestral*, *trimestral* o *cuatrimestral*. Esto permite adaptar el análisis a diferentes necesidades: monitoreo fino o más general.
 
 ```javascript
 var mesesPorPaso = {
@@ -103,6 +104,8 @@ Se crea una lista de fechas iniciales, empezando el 1 de enero de 2024 y avanzan
 
 ## Región de interés (ROI)
 
+En el siguiente código:
+
 ```javascript
 var admin2 = ee.FeatureCollection("FAO/GAUL/2015/level2")
   .filter(ee.Filter.eq('ADM0_NAME', 'Argentina'))
@@ -111,7 +114,7 @@ var bahiaBlanca = admin2.filter(ee.Filter.eq('ADM2_NAME', 'Bahia Blanca'));
 var roi2 = bahiaBlanca.geometry().simplify(100);
 ```
 
-Se define la región de interés: el polígono de Bahía Blanca. Se simplifica la geometría para que sea más eficiente computacionalmente.
+se define la región de interés: el polígono de Bahía Blanca. Se simplifica la geometría para que sea más eficiente computacionalmente.
 
 ```javascript
 Map.centerObject(roi2, 8);
@@ -133,7 +136,7 @@ function agregarIndices(img) {
 }
 ```
 
-Esta función calcula distintos índices espectrales (NDVI, NDBI, etc.) y agrega esos nuevos bandas derivadas a la imagen original. Esto facilita su análisis posterior.
+Esta función calcula distintos índices espectrales (NDVI, NDBI, NDWI, NDMI) y NIR, y agrega esos nuevos bandas derivadas a la imagen original. Esto facilita su análisis posterior.
 
 ## Función clave: getColeccionPorPeriodo
 
@@ -167,7 +170,7 @@ Filtra la colección Sentinel-2:
 A cada imagen del periodo:
 •	Se la recorta a la ROI.
 •	Se le calculan los índices.
-•	Se le asigna el campo system:time_start para graficar luego.
+•	Se le asigna el campo *system:time_start* para graficar luego.
 
 ```javascript
   return coleccion.mean().set('system:time_start', fecha.millis());
@@ -196,7 +199,7 @@ var chart = ui.Chart.image.series({
 })
 ```
 
-Se crea una serie temporal multivariable, extrayendo el valor promedio de cada índice en la ROI para cada imagen compuesta.
+Se crea una serie temporal multivariable, extrayendo el **valor promedio de cada índice** en la ROI para cada imagen compuesta.
 
 ```javascript
 .setChartType('LineChart')
@@ -209,7 +212,16 @@ Se crea una serie temporal multivariable, extrayendo el valor promedio de cada �
 });
 ```
 
-Configuración estética del gráfico.
+Configuración estética del gráfico (ver Figura {numref}`fig-IndicesBB`).
+
+
+```{figure} imagenes/stIndicesBB.png
+:name: fig-IndicesBB
+:width: 60%
+
+Serie temporal: valores promedio de NDVI, NDBI, NDWI, NDMI, NIR para el partido de Bahía Blanca, año 2024.
+```
+
 
 ## Serie temporal de temperatura superficial (LST)
 
@@ -227,7 +239,7 @@ var modisLST = ee.ImageCollection("MODIS/061/MOD11A2")
   });
 ```
 
-Se obtiene la temperatura superficial de MODIS, se convierte de Kelvin a °C y se recorta a la ROI.
+Se obtiene la temperatura superficial de MODIS, se convierte de Kelvin a Celsius (°C) y se recorta a la ROI.
 
 ```javascript
 var lstChart = ui.Chart.image.series({
@@ -239,16 +251,30 @@ var lstChart = ui.Chart.image.series({
 })
 ```
 
-Genera un gráfico de temperatura superficial promedio.
+Genera un gráfico de temperatura superficial promedio (ver Figura {numref}`fig-preci`).
+
+
+```{figure} imagenes/stPrecipitacion.png
+:name: fig-preci
+:width: 60%
+
+Figura generada en GEE de la serie temporal de temperatura promedio para el partido de Bahía Blanca
+```
 
 ## Exportación opcional de estadísticas a CSV
 
 Exportar los conjuntos de datos a csv es una buena opción para procesamiento posterior en lenguajes como R, python, julia o Power BI.
 
-![](imagenes/interApp2.png)
+
+```{figure} imagenes/interApp2.png)
+:name: fig-indices
+:width: 60%
+
+Exportación de archivos CSV de GEE a python, R y Power BI.
+```
 
 
-a) Para Sentinel-2:
+a) **Para Sentinel-2:**
 
 Esto exporta una tabla con una fila por período, conteniendo los valores promedio de NDVI, NDBI, etc.
 
@@ -278,7 +304,7 @@ Export.table.toDrive({
 });
 ```
 
-b) Para MODIS LST:
+b) **Para MODIS LST:**
 
 De forma similar, se genera una tabla con una fila por imagen de MODIS, con el valor de temperatura superficial promedio.
 
@@ -302,33 +328,34 @@ Export.table.toDrive({
 ```
 
 
-## Conclusión
+## Conclusión de la sección
 
-Este script permite:
+ La Figura {numref}`fig-indicesP15` muestra algunas conclusiones de la sección:
 
-![](imagenes/Placa15.png)
+```{figure} imagenes/Placa15.png
+:name: fig-indicesP15
+:width: 70%
 
-1.	Analizar múltiples índices espectrales (vegetación, humedad, estructura urbana, etc.).
-2.	Ajustar la resolución temporal del análisis (mensual a cuatrimestral).
-3.	Visualizar tendencias y variaciones estacionales.
-4.	Exportar los datos para uso en informes, hojas de cálculo o análisis externos.
-
-Este código puede adaptarse fácilmente a otras regiones o años cambiando el filtro de fechas o la geometría de interés.
-
+Algunas Conclusiones de la sección
+```
 
 # Uso de Awesome Spectral Indices en GEE
 
 
-En este video vamos a explorar cómo usar el  catálogo abierto y colaborativo de índices espectrales denominado **Awesome Spectral Indices**, una herramienta muy potente para calcular de forma sencilla decenas de índices espectrales en Google Earth Engine.
+En este video vamos a explorar cómo usar el  catálogo abierto y colaborativo de índices espectrales denominado **Awesome Spectral Indices (ASI)**, una herramienta muy potente para calcular de forma sencilla decenas de índices espectrales en Google Earth Engine.
 
 Esta librería nos ahorra tiempo y evita errores al aplicar fórmulas, ya que contiene una base de datos bien documentada con cada índice, su fórmula, sus bandas requeridas y su referencia académica.
 
-![Librería spectral de JS para consumir Awesome Spectral Indices](spectral.png)
+```{figure} imagenes/spectral.png
+:name: fig-Spectral
+:width: 60%
 
+ïcono de la librería Spectral que implementa ASI en JS
+```
 
 ## ¿Cómo funciona? – Importar el módulo
 
-Lo primero que tenemos que hacer es aceptar el módulo desde el repositorio del autor. Una vez aceptado, lo cargamos con la siguiente línea:
+Lo primero que tenemos que hacer es aceptar el módulo desde el repositorio del autor. Una vez aceptado, lo cargamos con el siguiente comando:
 
 ```javascript
 var spectral = require("users/dmlmont/spectral:spectral");
@@ -344,8 +371,9 @@ print(spectral.indices);
 ```
 
 En la consola vamos a ver un diccionario grande, donde cada clave es el nombre corto del índice: como NDVI, EVI, NDWI, NDBI, SAVI, entre muchos otros.
-________________________________________
-🔎 3. Acceder a la información de un índice específico
+
+## Acceder a la información de un índice específico
+
 Supongamos que queremos saber más sobre el NDVI. Tenemos dos formas equivalentes de hacerlo:
 
 
@@ -359,16 +387,17 @@ En ambos casos se nos despliega toda la información asociada a ese índice.
 ## Explorar los atributos del índice
 
 Los atributos disponibles para cada índice incluyen:
-*	short_name: el nombre corto (por ejemplo "NDVI").
-*	long_name: el nombre largo (como "Normalized Difference Vegetation Index").
-*	formula: la fórmula que se utiliza para calcularlo.
-*	bands: las bandas que requiere (por ejemplo, "N" y "R").
-*	reference: el link al paper o DOI original.
-*	type: el tipo o dominio de aplicación (vegetación, agua, suelo, etc.).
-*	date_of_addition: la fecha en que fue agregado a la lista.
-*	contributor: el enlace al usuario de GitHub que lo subió.
 
-Por ejemplo, si queremos ver únicamente la fórmula del NDVI, usamos:
+*	**short_name**: el nombre corto (por ejemplo "NDVI").
+*	**long_name**: el nombre largo (como "Normalized Difference Vegetation Index").
+*	**formula**: la fórmula que se utiliza para calcularlo.
+*	**bands**: las bandas que requiere (por ejemplo, "N" y "R").
+*	**reference**: el link al paper o DOI original.
+*	**type**: el tipo o dominio de aplicación (vegetación, agua, suelo, etc.).
+*	**date_of_addition**: la fecha en que fue agregado a la lista.
+*	**contributor**: el enlace al usuario de GitHub que lo subió.
+
+Por ejemplo, si queremos ver únicamente la fórmula del NDVI, utilizamos esta instrucción:
 
 
 ```javascript
@@ -380,6 +409,7 @@ O bien:
 ```javascript
 print(spectral.indices.NDVI["formula"]);
 ```
+
 ## Calcular un índice: NDVI sobre una imagen Sentinel-2
 
 Ahora vamos a calcular un índice real sobre una imagen de Sentinel-2.
@@ -408,7 +438,7 @@ Finalmente, aplicamos el cálculo del índice:
 var S2 = spectral.computeIndex(S2, "NDVI", parameters);
 ```
 
-Esto agrega una nueva banda llamada NDVI a la imagen. Podemos verificarlo imprimiendo la imagen:
+Esto agrega una nueva banda llamada NDVI a la imagen. Podemos verificarlo mostrando la imagen por consola:
 
 
 ```javascript
@@ -439,7 +469,8 @@ print("Imagen con varios índices:", S2);
 
 En la consola vamos a ver que ahora tenemos nuevas bandas: NDVI, GNDVI y SAVI, todas calculadas en una sola línea de código.
 
-Mostrar el resultado en el visor de GEE
+## Mostrar el resultado en el visor de GEE
+
 Podemos agregar cualquiera de estos índices al mapa. Por ejemplo:
 
 ```javascript
@@ -449,10 +480,10 @@ Map.addLayer(S2.select("NDVI"), {min: 0, max: 1, palette: ["white", "green"]}, "
 
 Así podemos ver visualmente el resultado del índice espectral calculado con Awesome Spectral Indices.
 
-Como vimos, Awesome Spectral Indices facilita mucho el trabajo con índices en GEE.
-No solo nos permite acceder a una base de datos curada y documentada de fórmulas, sino que también simplifica su cálculo, evita errores y permite hacer análisis espectrales complejos con muy pocas líneas de código.
-Si trabajás con teledetección, esta herramienta es realmente imprescindible.
-¡Gracias por mirar y te invito a probarlo en tu propio análisis!
+Como vimos Awesome Spectral Indices (ASI) facilita mucho el trabajo con índices en GEE. No solo nos permite acceder a una base de datos curada y documentada de fórmulas, sino que también simplifica su cálculo, evita errores y permite hacer análisis espectrales complejos con muy pocas líneas de código. Si trabajás con teledetección, ¡esta herramienta es realmente imprescindible!. 
+
+ASI no solo esta disponible en GEE para JS, sino tambien en lenguaje python, R y Julia. Ademas en su repositorio oficial de github (https://github.com/awesome-spectral-indices/awesome-spectral-indices) ofrece un completo catalago de indices clasificado por
+**dominio de aplicación** como : vegetación, agua, fuego, nieve, urbano, suelo, kernel y radar. Cada indice incluye la *fórmula*, el *dominio temático* y también la *compatibilidad*, es decir con qué sensores se pueden aplicar cada uno de estos indices, incluyendo: MODIS, Landsat, Sentinel-2 y planet fusion.
 
 
 # Explicación de la nueva versión con ASI
@@ -466,17 +497,18 @@ Comentamos la función agregarIndices anterior, para volver a definirla utilizan
 var spectral = require("users/dmlmont/spectral:spectral");
 ```
 
-Luego, definimos la función agregarIndices, donde pedimos que se calculen automáticamente los índices NDVI, NDBI, NDWI y NDMI:
+Luego, definimos la función **agregarIndices**, donde pedimos que se calculen automáticamente los índices **NDVI**, **NDBI**, **NDWI** y **NDMI**:
 
 ```javascript
 var indices = ['NDVI', 'NDBI', 'NDWI', 'NDMI'];
 ```
 
 Para que ASI entienda correctamente qué bandas usar, le tenemos que pasar un objeto con los parámetros necesarios. Por ejemplo:
-*	N representa el infrarrojo cercano → banda B8
-*	R es el rojo → B4
-*	G es el verde → B3
-*	S1 es el SWIR1 → B11
+
+*	N representa el infrarrojo cercano, la banda B8.
+*	R es el rojo, la banda B4.
+*	G es el verde, la banda B3.
+*	S1 es el SWIR1, la banda B11.
 
 ```javascript
 var parametros = {
@@ -512,24 +544,25 @@ Esta versión es más ordenada, más mantenible, y nos permite reutilizar fácil
 
 Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de datos geoespaciales de varios petabytes con capacidades de análisis a escala planetaria. Científicos, investigadores y desarrolladores utilizan Earth Engine para detectar cambios, mapear tendencias y cuantificar diferencias en la superficie terrestre. Earth Engine ahora está disponible para uso comercial y sigue siendo gratuito para fines académicos y de investigación.
 
-"Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real" es una fórmula que resume el potencial de Google Earth Engine (GEE) para generar soluciones científicas y prácticas.
+> "Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real" es una fórmula que resume el potencial de Google Earth Engine (GEE) para generar soluciones científicas y prácticas.
 
 ![](imagenes/Satellite_150dpi.png)
 
-Imágenes satelitales: GEE brinda acceso inmediato a un vasto catálogo de imágenes de observación de la Tierra, que incluye datos de sensores como Landsat, Sentinel, MODIS, entre otros. Esto permite monitorear cambios en el planeta en escalas temporales y espaciales diversas.
+> Imágenes satelitales: GEE brinda acceso inmediato a un vasto catálogo de imágenes de observación de la Tierra, que incluye datos de sensores como Landsat, Sentinel, MODIS, entre otros. Esto permite monitorear cambios en el planeta en escalas temporales y espaciales diversas.
 
 ![](imagenes/Algorithm_150dpi.png)
 
-Tus algoritmos: Los usuarios pueden aplicar sus propios modelos de análisis, ya sean simples cálculos de índices espectrales o complejos algoritmos de machine learning, todo dentro del entorno de GEE, aprovechando su capacidad de procesamiento en la nube.
+> Tus algoritmos: Los usuarios pueden aplicar sus propios modelos de análisis, ya sean simples cálculos de índices espectrales o complejos algoritmos de **machine learning**, todo dentro del entorno de GEE, aprovechando su capacidad de procesamiento en la nube.
 
 ![](imagenes/mundo.png)
-Aplicaciones en el mundo real: Al combinar datos y algoritmos, es posible desarrollar soluciones para problemas concretos como la deforestación, el cambio climático, la planificación urbana, la gestión del agua, la agricultura de precisión y muchos más.
 
-En conjunto, esta fórmula representa cómo GEE empodera a los científicos, desarrolladores y tomadores de decisiones para transformar datos en conocimiento y acción.
+> Aplicaciones en el mundo real: Al combinar datos y algoritmos, es posible desarrollar soluciones para problemas concretos como la deforestación, el cambio climático, la planificación urbana, la gestión del agua, la agricultura de precisión y muchos más.
+
+En conjunto, ¡esta fórmula representa cómo GEE empodera a los científicos, desarrolladores y tomadores de decisiones para transformar datos en conocimiento y acción!.
 
 ![](imagenes/interApp.png)
 
-En próximos videos de esta serie Time Series, calcularemos mas series temporales de precipitaciones, y obtendremos una seri etemporal de tipos de suelo de Rosario utilizando el clasificador de Random Forest de un video anterio
+En el próximo capítulo de esta serie Time Series, calcularemos mas series temporales de precipitaciones, y obtendremos una serie etemporal de tipos de suelo de Rosario utilizando el clasificador de Random Forest de un video anterior. Nos enfocaremos en ver esos ejemplos en el marco de la teoría de cubos de datos de Imágenes Satelitales.
 
 
 ## Video del capítulo
