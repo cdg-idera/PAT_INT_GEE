@@ -106,7 +106,7 @@ El algoritmo que utilizamos es el clasificador Random forest o en español "bosq
 Lo que Earth Engine aporta es la capacidad de realizar estos procesos en tiempo real y a gran escala. Esto significa que, mientras que en un entorno local podría tomar meses realizar una clasificación a nivel nacional, en Earth Engine se puede hacer en tiempo real.
 
 
-# Recomendaciones para la recolección de Datos
+## Recomendaciones para la recolección de Datos
 
 Algunas recomendaciones para optimizar la recolección de datos son las siguientes:
 
@@ -135,7 +135,7 @@ El método randomColumn() crea una nueva columna llamada random, que contiene n�
 
 Por último, usamos nuevamente el comando print() para verificar el tamaño de cada conjunto y asegurarnos de que la división sea correcta."
 
-# Precisión del Modelo
+## Precisión del Modelo
 
 El objetivo de esta separación de los puntos de control, es medir el rendimiento del modelo en el subconjunto de validación, que contiene muestras que no se han usado en el entrenamiento. Se compara la predicción del modelo con el valor real de cada muestra de validación. Si el modelo clasifica correctamente un píxel, se considera que el modelo ha hecho una predicción acertada.
 
@@ -197,7 +197,7 @@ Recomendación sobre nomenclatura:
 
 Mantener el nombre de "Bosque/Zona Arbolada-Arbustiva" es apropiado, ya que refleja con más precisión la diversidad de esta clase, incluyendo árboles dispersos y vegetación silvestre.
 
-##Otras métricas de validación:
+## Otras métricas de validación:
 
 Otras métricas incluyen el coeficiente Kappa, que mide la concordancia entre las predicciones del modelo y la clasificación aleatoria, y el F-score, que es una medida combinada de la precisión y el recall. En general, la precisión global es la métrica más utilizada en el análisis de precisión, aunque el F-score también es común en el campo del aprendizaje automático.
 
@@ -205,10 +205,15 @@ Una vez que estemos satisfechos con los resultados de la clasificación y la pre
 
 En próximos videos exploraremos otras técnicas de aprendizaje automático supervisado como arboles de decisión y maquinas de soporte vectorial, como así también técnicas de aprendizaje automático no supervisado, por ejemplo K-means.
 
-# Cierre
+## Cierre
 
 El aprendizaje automático no solo transforma datos en conocimiento; también redefine nuestra capacidad para comprender y gestionar entornos complejos. Herramientas como SVM, árboles de decisión y Random Forest nos brindan la precisión necesaria para abordar desafíos reales, como el análisis del uso del suelo y la planificación territorial.
 
 En este ejemplo aplicado al Área Metropolitana de Rosario, Random Forest demostró ser una herramienta poderosa, capaz de clasificar grandes extensiones de territorio con una precisión sobresaliente. Esto no solo mejora nuestra visión científica del entorno, sino que también apoya la toma de decisiones fundamentadas en evidencia.
 
 El futuro del análisis geoespacial está aquí. Combinando algoritmos robustos y datos satelitales, podemos planificar un desarrollo sostenible que beneficie a las generaciones actuales y futuras. Gracias por acompañarnos en este recorrido por el aprendizaje automático aplicado al análisis territorial. Sigamos impulsando el conocimiento y la acción en favor de nuestro entorno.
+
+## Video del capítulo
+
+Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: https://www.youtube.com/watch?v=fk6atugR6ss
+

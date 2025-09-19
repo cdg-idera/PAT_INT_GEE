@@ -16,12 +16,11 @@ Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida 
 ![](imagenes/PosIT-1.png)
 
 
--------------------------------------------------------------------------------
 Bien CREAMOS UN NUEVO SCRIPT denominado A001_RandomForest_CuerposDeAguaComahue
 
 Nuestra área de estudio será la región del Comahue principalmente la provincia del Neuquén y la de Rio negro. Vamos a crear nuestra región de estudio, nuestraregión de interés o ROI. 
 
-![alt text](imagenes/p_3.png)
+![](imagenes/p_3.png)
 
 Como no estamos interesados en los límites provinciales precisos de la provincia, debido a que queremos abarcar los rios que componen los limites naturales provinciales, 
 no utilizaremos los límites administrativos exactos disponibles en la IDE de la provincia de RN y Nqn, o en el Instituto Geográfico Nacional
@@ -57,8 +56,7 @@ Cuando agregamos esta capa al mapa la llamamos Comahue
 En ambos casos se inspeccionan datos utilizando el inspector de Google Earth Engen para ver
 como están escritos los nombres de provincias, por ejemplo Neuquén no esta con acento.
 
--------------------------------------------------------------------------------
-CENTER OBJECT
+### CENTER OBJECT
 
 Centramos nuestra zona de estudio utilizando la función centerObject, haciendo variar el nivel de zoom.
 
@@ -67,30 +65,29 @@ Segun la documentacion el nivel de zoom es un valro entre 0 y 24,
 Podes ajustar el nivel de zoom.
 Si no ajustás el parametro de zoom, no se ampliará el área que te interesa.
 
+```javascript
 var roi = ee.FeatureCollection("FAO/GAUL/2015/level1")
   .filter(ee.Filter.eq('ADM0_NAME', 'Argentina'))  // Filtrar por país
   .filter(ee.Filter.inList('ADM1_NAME', [
     'Neuquen']));
+```
 
-
--------------------------------------------------------------------------------
-
-BUFFER:
+### BUFFER
 
 Aplicaremos un buffer de 5 km para incluir los límites naturales completos que comprenden rios que separan provincias.
 
 Se puede crear un buffer para un FeatureCollection usando el método .map() para aplicar una operación a cada Feature en el FeatureCollection de unidades administrativas.
 
+```javascript
 // Crear un buffer de 10 km (10,000 metros)
 var bufferedRoi = roi.map(function(feature) {
   return feature.buffer(10000); // Agregar buffer de 10 km
 });
-
+```
 
 Esta es nuestra área de estudio.
--------------------------------------------------------------------------------
 
-IMAGENES SENTINEL 2:
+### IMAGENES SENTINEL 2
 
 A continuación buscamos Sentinel-2 y seleccionamos las colecciones de imágenes 
 Harmonized sentinel-2 MSI (MultiSpectralInstrument) level 1-c
@@ -155,10 +152,12 @@ En este caso, vamos a proporcionar las bandas que vamos a utilizar aquí, banda 
 No las estamos utilizando para nuestro modelo, sino solo para visualizar la imagen en el mapa. 
 Y luego un valor mínimo y máximo en función de los datos de reflectancia de la superficie PARA ESTAS BANDAS
 
+```javascript
 var visParams = {bands: ['B4','B3','B2'], min: 0 , max: 3000};
 Map.addLayer(image, visParams, "Sentinel 2024")
+```
 
-## FUNCIÓN PARA CALCULAR NDVI
+## Función para calcular NDVI
 
 En nuestra clasificación aplicando aprendizaje automático utilizaremos valores de reflectancia de ciertas bandas de la imagen Sentinel en conjunto con el índice NDVI. 
 Utilizaremos filtros de nubes, y filtros temporales
@@ -211,9 +210,13 @@ Si no se especifican las bandas a utilizar, es decir no se proporcionan parámet
 La diferencia normalizada se calcula como (primero − segundo) / (primero + segundo)
 
 para nuestro ejemplo:
+```javascript
 (first − second) / (first + second)  = (B8 − B4) / (B8 + B4)
+```
 es decir 
+```javascript
 NDVI= (NIR−RED) / (NIR+RED)
+```
 
 Asi de simple, es calcular un índice para una imagen satelital. Este acercamiento nos permite definir otros índices como: NDWI, MNDWI, LSWI
 
@@ -242,13 +245,14 @@ Estos son los datos de Sentinel que vamos a utilizar para nuestro aprendizaje au
 
 -------------------------------------------------------------------------------
 
-# WORKFLOW:
+## Workflow
+
 Para aplicar la tecnica supervisada de random forest tendremos en cuenta el flujo de trabajo
 
 
 ![alt text](imagenes/Workflow.png)
 
-## Entrenamiento 
+###  Entrenamiento 
 
 Ahora crearemos datos de entrenamiento y luego ejecutaremos nuestro aprendizaje automático. 
 
@@ -330,9 +334,8 @@ necesitamos separar algunos de los datos para entrenar el modelo y también algu
 Por lo tanto, dividiremos esos datos: crearemos una columna aleatoria y luego solo el 70 % de los datos se utilizarán para entrenar nuestro modelo.
  Y luego, el conjunto de prueba aquí será la evaluación, que es el 30 % de datos restantes.
 
--------------------------------------------------------------------------------
 
-ENTRENAMIENTO:
+### ENTRENAMIENTO:
 
 ![alt text](imagenes/p_2.png) 
 
@@ -347,20 +350,20 @@ y luego, finalmente, las bandas, que usamos para hacer la predicción, que son l
 Entonces, cuando ejecutes esto, entrenarás el modelo de aprendizaje automático. 
 Cuando lo haga, el modelo de aprendizaje automático se entrenará en función de nuestros datos de entrenamiento en las bandas Sentinel. 
 
--------------------------------------------------------------------------------
 
-## Clasificar la imagen
 
-![alt text](imagenes/p_3.png)
+### Clasificar la imagen
+
+![](imagenes/p_3.png)
 
 El siguiente paso es aplicar este modelo, que es el clasificador, a la imagen, la imagen Sentinel.
 Simplemente se va a aplicar el modelo para generar una clasificación.
 
 Ahora, podemos ver la imagen, que es una clasificación.
 El siguiente paso es ver nuestra imagen clasificada en una pantalla aquí. 
--------------------------------------------------------------------------------
 
-MASCARA:
+
+### MASCARA:
 en el comando: var water = classifiedImage.updateMask(classifiedImage);
 
 La función updateMask utiliza los valores de classified como una máscara. Los píxeles con valor 1 (agua) permanecen visibles, mientras que los píxeles con valor 0 (no agua) se enmascaran (ocultan).
@@ -382,7 +385,7 @@ Esta es nuestra clasificación. Se trata de una clasificación predicha por un m
 específicamente en un algoritmo de random forest o bosque aleatorio en la plataforma Earth Engine que utiliza datos satelitales Sentinel2 de 10 metros.
 
 
-## ACCURRACY ASSESSMENT
+### Acurracy Assessment
 
 ![](imagenes/p_4.png)
 
@@ -404,7 +407,7 @@ Parece que es 100 %, bastante buena, pero creo que si capturamos más puntos de 
 - A, el agua es bastante fácil de predecir, 
 - B, hemos utilizado la resolución de 10 metros, que también es otro factor.
 
-## Exportación
+### Exportación
 
 La última parte a considerar, es que si deseas usar esta clasificación fuera de Google eart engen , digamos un software GIS estándar, como QGIS o ArcGIS 
 vas a usar la función Export.image.toDrive para exportar, ya sabes, tu mapa de agua.
@@ -466,10 +469,6 @@ plt.show()
 
 ## Video del capítulo
 
-Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA:
+Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: https://www.youtube.com/watch?v=-DMd6LXIEkE&t=610s
 
-```{iframe} https://www.youtube.com/watch?v=-DMd6LXIEkE&t=610s
-:width: 80%
-:height: 400px
-```
 

@@ -1,6 +1,6 @@
 # Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión
 
-# Introducción
+## Introducción
 
 Propiciar la incorporación enfoques innovadores y paradigmas de ciencias de dato para maximizar la gestión, análisis y aprovechamiento de la información geoespacial, fomentando el uso de tecnologías emergentes, inteligencia artificial y modelos analíticos avanzados que optimicen la toma de decisiones y potencien el desarrollo de soluciones estratégicas en todos los niveles de gobierno y sectores involucrados.
 
@@ -8,7 +8,7 @@ Propiciar la incorporación enfoques innovadores y paradigmas de ciencias de dat
 En este capítulo exploraremos el uso de dos técnicas de aprendizaje automático para clasificación supervisada multiclase en Google Earth Engine. Aplicaremos Maquina de Soporte Vectorial: SVM (Support Vector Machine) 
 y Arboles de Decisión.
 
-# Máquina de soporte vectorial.
+## Máquina de soporte vectorial.
 
 En un capítulo anterior utilizamos Random Forest para clasificar imágenes de Sentinel-2 en  el área metropolitana de Rosario, para ello creamos el script GEE: Lab_002_RandomForest_Rosario.
 
@@ -293,7 +293,7 @@ var pixelCount = composite.reduceRegion({
 print('Número total de píxeles válidos por banda:', pixelCount);
 ```
 
-# Gráfico del Arbol de decisión con Google Colab
+## Gráfico del Arbol de decisión con Google Colab
 
 
 Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.
@@ -358,7 +358,7 @@ Los árboles de decisión son una herramienta sencilla y poderosa, especialmente
 
 Ahora que hemos aplicado el algoritmo de aprendizaje automático de Arboles de Decisión al área metropolitana de Rosario, podemos analizar el árbol de decisión
 
-# Identificando los elementos del árbol de decisión
+## Identificando los elementos del árbol de decisión
 
 Primero podemos identificar las principales partes de un árbol de decisión:
 
@@ -403,7 +403,7 @@ print('Número total de píxeles válidos por banda:', pixelCount);
 
 Cada banda tiene un total de 22,600,300 píxeles válidos dentro de la región de interés (roi). Área total en m²: 2,260,030,000 m² (2,260 km² para 10 m de resolución).
 
-# Ejemplo de utilización del Árbol de Decisión
+## Ejemplo de utilización del Árbol de Decisión
 
 Utilizaremos 5 puntos de entrenamiento de nuestra clasificación, uno para cada clase, de los cuales conocemos su clase (ya que son datos conocidos) y verificaremos que el árbol asocia correctamente a la clase correspondiente.
 
@@ -546,7 +546,7 @@ Seguimos por la rama falso: La clase predicha para este píxel es clase 4.
 ![](imagenes/Pixel115_Cat4.png)
 
 
-# Recursos
+## Recursos
 
 Los recursos asociados a este capítulo incluyen:
 
@@ -555,7 +555,7 @@ Los recursos asociados a este capítulo incluyen:
 * Repositorio GEE: https://code.earthengine.google.com/?accept_repo=users%2Fcdg-idera%2Fgee
 * Scripts GEE: Lab_003_SVM_Rosario y Lab_004_DT_Rosario
 
-# Cierre e Incentivos
+## Cierre e Incentivos
 
 Hemos explorado cómo aplicar técnicas de machine learning, una rama clave de la inteligencia artificial, para abordar la clasificación de imágenes satelitales, centrándonos en herramientas como árboles de decisión, Random Forest y máquinas de soporte vectorial (SVM). Estas técnicas permiten no solo clasificar imágenes en múltiples clases, sino también realizar tareas más específicas como clasificación binaria, generando insights valiosos para distintos campos. A lo largo de este recorrido, revisamos el flujo de trabajo completo, incorporando métricas esenciales como la precisión general, la precisión del productor y del consumidor, lo que refuerza nuestra capacidad de evaluar y mejorar la calidad de nuestros modelos.
 
@@ -573,12 +573,8 @@ Finalmente, quiero invitarte a seguir profundizando en este fascinante campo en 
 
 ## Video del capítulo
 
-Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA:
+Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: https://www.youtube.com/watch?v=QBJtlQOPdfQ&t=375s
 
-```{iframe} https://www.youtube.com/watch?v=QBJtlQOPdfQ&t=375s
-:width: 80%
-:height: 400px
-```
 
 
 

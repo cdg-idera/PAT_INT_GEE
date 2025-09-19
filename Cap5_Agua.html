@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Capítulo 5 · Random Forest para detectar agua &#8212; GeoIA aplicado a Imágenes Satelitales</title>
+    <title>5. Capítulo 5 · Random Forest para detectar agua &#8212; GeoIA aplicado a Imágenes Satelitales</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Cap5_Agua';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Capítulo 6 · Serie Temporales" href="Cap6_ST.html" />
-    <link rel="prev" title="Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión" href="Cap4_SVM_DT.html" />
+    <link rel="next" title="6. Capítulo 6 · Serie Temporales" href="Cap6_ST.html" />
+    <link rel="prev" title="4. Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión" href="Cap4_SVM_DT.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,41 +174,14 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Cap1_Tecnicas.html">Capítulo 1 ·Técnicas</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">Capítulo 2 · Random Forest en GEE</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Cap3_gee_colab.html">Capítulo 3 · Random Forest en GEE y Colab</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="Cap4_SVM_DT.html">Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
-
-
-
-
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Capítulo 5 · Random Forest para detectar agua</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="Cap6_ST.html">Capítulo 6 · Serie Temporales</a></li>
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">Capítulo 7 · Cubos de Imágenes Satelitales</a></li>
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">Capítulo 9 · Lab 002 · Random Forest (Rosario)  Thebe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap1_Tecnicas.html">1. Capítulo 1 · Teledetección y Aprendizaje Automático</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">2. Capítulo 2 · Random Forest en GEE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap3_gee_colab.html">3. Capítulo 3 · Random Forest en GEE y Colab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap4_SVM_DT.html">4. Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Capítulo 5 · Random Forest para detectar agua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap6_ST.html">6. Capítulo 6 · Serie Temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">7. Capítulo 7 · Cubos de Imágenes Satelitales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">8. Capítulo 9 · Lab 002 · Random Forest (Rosario)  Thebe</a></li>
 </ul>
 
     </div>
@@ -404,24 +377,24 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Capítulo 5 · Random Forest para detectar agua</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esta-es-nuestra-area-de-estudio">Esta es nuestra área de estudio.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-calcular-ndvi">FUNCIÓN PARA CALCULAR NDVI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">5.1. Introducción</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#center-object">5.1.1. CENTER OBJECT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer">5.1.2. BUFFER</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imagenes-sentinel-2">5.1.3. IMAGENES SENTINEL 2</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">WORKFLOW:</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">Entrenamiento</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">Clasificar la imagen</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ahora-podemos-ver-la-imagen-que-es-una-clasificacion-el-siguiente-paso-es-ver-nuestra-imagen-clasificada-en-una-pantalla-aqui">Ahora, podemos ver la imagen, que es una clasificación.
-El siguiente paso es ver nuestra imagen clasificada en una pantalla aquí.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accurracy-assessment">ACCURRACY ASSESSMENT</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion">Exportación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">Video del capítulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-calcular-ndvi">5.2. Función para calcular NDVI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">5.3. Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">5.3.1. Entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">5.3.2. ENTRENAMIENTO:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">5.3.3. Clasificar la imagen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mascara">5.3.4. MASCARA:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acurracy-assessment">5.3.5. Acurracy Assessment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion">5.3.6. Exportación</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">5.4. Video del capítulo</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -433,25 +406,24 @@ El siguiente paso es ver nuestra imagen clasificada en una pantalla aquí.</a></
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="capitulo-5-random-forest-para-detectar-agua">
-<h1>Capítulo 5 · Random Forest para detectar agua<a class="headerlink" href="#capitulo-5-random-forest-para-detectar-agua" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">5. </span>Capítulo 5 · Random Forest para detectar agua<a class="headerlink" href="#capitulo-5-random-forest-para-detectar-agua" title="Link to this heading">#</a></h1>
 <section id="introduccion">
-<h2>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.1. </span>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
 <p>En este capítulo vamos a aplicar aprendizaje automático a imágenes satelitales para predecir superficies de agua. Utilizaremos datos satelitales de Sentinel-2 para procesar una colección de imágenes correspondientes a una región de estudio y aplicaremos un modelo de Random Forest para clasificar los píxeles en dos categorías: agua y no agua.</p>
 <p>En google Earth Engine, podes explorar imagenes SENTINEL haciendo click en DATASET para acceder al catálogo de datos y luego hacer en la opción de menú Sentinel y encontrarás todos los productos satelitales Sentinel.</p>
 <p>Sentinel-2 es propiedad de la Agencia Europea de Satélites ( European Space Agency ESA), en Google eart Engen tenemos varios conjuntos de imágenes satelitales Sentinel: Sentinel-1, Sentinel-2, Sentinel-3 y Sentinel-5.</p>
 <p>Nos vamos a centrar en Sentinel-2, cuyos datos son muy populares.</p>
 <p>Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida la gestión de desastres, la gestión de emergencias, la cuantificación de la tendencia de urbanización y la cobertura del suelo, entre otras.</p>
-<p><img alt="" src="imagenes/PosIT-1.png" /></p>
-<hr class="docutils" />
+<p><img alt="" src="_images/PosIT-1.png" /></p>
 <p>Bien CREAMOS UN NUEVO SCRIPT denominado A001_RandomForest_CuerposDeAguaComahue</p>
 <p>Nuestra área de estudio será la región del Comahue principalmente la provincia del Neuquén y la de Rio negro. Vamos a crear nuestra región de estudio, nuestraregión de interés o ROI.</p>
-<p><img alt="alt text" src="imagenes/p_3.png" /></p>
+<p><img alt="" src="_images/p_3.png" /></p>
 <p>Como no estamos interesados en los límites provinciales precisos de la provincia, debido a que queremos abarcar los rios que componen los limites naturales provinciales,
 no utilizaremos los límites administrativos exactos disponibles en la IDE de la provincia de RN y Nqn, o en el Instituto Geográfico Nacional
 sino que utilizaremos el conjunto de datos de Capas de Unidades Administrativas Globales de Google eart engen</p>
 <p>Esto nos permitirá aprender un poco más sobre este conjunto de datos de Unidades Administrativas Globales:</p>
 <p>FAO GAUL: Global Administrative Unit Layers 2015, First-Level Administrative Units</p>
-<p><img alt="" src="imagenes/PosIT-2.png" /></p>
+<p><img alt="" src="_images/PosIT-2.png" /></p>
 <p><img alt="" src="_images/Tabla_1.png" /></p>
 <p>Las Capas de Unidades Administrativas Globales (GAUL) recopilan y difunden la mejor información disponible sobre unidades administrativas para todos los países del mundo, contribuyendo a la estandarización del conjunto de datos espaciales que representan las unidades administrativas.</p>
 <p>Llamando a esta colección de imágenes, tendremos los límites de administración para todos los países.</p>
@@ -465,29 +437,34 @@ ADM1_CODE tiene el code of unidades administrativas de primer nivel y ADM1_NAME 
 Cuando agregamos esta capa al mapa la llamamos Comahue</p>
 <p>En ambos casos se inspeccionan datos utilizando el inspector de Google Earth Engen para ver
 como están escritos los nombres de provincias, por ejemplo Neuquén no esta con acento.</p>
-<hr class="docutils" />
-<p>CENTER OBJECT</p>
+<section id="center-object">
+<h3><span class="section-number">5.1.1. </span>CENTER OBJECT<a class="headerlink" href="#center-object" title="Link to this heading">#</a></h3>
 <p>Centramos nuestra zona de estudio utilizando la función centerObject, haciendo variar el nivel de zoom.</p>
 <p>La funcion centerObjet  es una función que te ayuda a cambiar la etiqueta de zoom.
 Segun la documentacion el nivel de zoom es un valro entre 0 y 24,
 Podes ajustar el nivel de zoom.
 Si no ajustás el parametro de zoom, no se ampliará el área que te interesa.</p>
-<p>var roi = ee.FeatureCollection(“FAO/GAUL/2015/level1”)
-.filter(ee.Filter.eq(‘ADM0_NAME’, ‘Argentina’))  // Filtrar por país
-.filter(ee.Filter.inList(‘ADM1_NAME’, [
-‘Neuquen’]));</p>
-<hr class="docutils" />
-<p>BUFFER:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">roi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="s2">&quot;FAO/GAUL/2015/level1&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM0_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Argentina&#39;</span><span class="p">))</span><span class="w">  </span><span class="c1">// Filtrar por país</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">inList</span><span class="p">(</span><span class="s1">&#39;ADM1_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s1">&#39;Neuquen&#39;</span><span class="p">]));</span>
+</pre></div>
+</div>
+</section>
+<section id="buffer">
+<h3><span class="section-number">5.1.2. </span>BUFFER<a class="headerlink" href="#buffer" title="Link to this heading">#</a></h3>
 <p>Aplicaremos un buffer de 5 km para incluir los límites naturales completos que comprenden rios que separan provincias.</p>
 <p>Se puede crear un buffer para un FeatureCollection usando el método .map() para aplicar una operación a cada Feature en el FeatureCollection de unidades administrativas.</p>
-<p>// Crear un buffer de 10 km (10,000 metros)
-var bufferedRoi = roi.map(function(feature) {
-return feature.buffer(10000); // Agregar buffer de 10 km
-});</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Crear un buffer de 10 km (10,000 metros)</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">bufferedRoi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">roi</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">feature</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">buffer</span><span class="p">(</span><span class="mf">10000</span><span class="p">);</span><span class="w"> </span><span class="c1">// Agregar buffer de 10 km</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Esta es nuestra área de estudio.</p>
 </section>
-<section id="esta-es-nuestra-area-de-estudio">
-<h2>Esta es nuestra área de estudio.<a class="headerlink" href="#esta-es-nuestra-area-de-estudio" title="Link to this heading">#</a></h2>
-<p>IMAGENES SENTINEL 2:</p>
+<section id="imagenes-sentinel-2">
+<h3><span class="section-number">5.1.3. </span>IMAGENES SENTINEL 2<a class="headerlink" href="#imagenes-sentinel-2" title="Link to this heading">#</a></h3>
 <p>A continuación buscamos Sentinel-2 y seleccionamos las colecciones de imágenes
 Harmonized sentinel-2 MSI (MultiSpectralInstrument) level 1-c</p>
 <p>Copiamos su identificación que utilizarmeos en la deficion de una colección de imágenes sentinel denominada IMAGE</p>
@@ -530,18 +507,21 @@ para ello, creamos un parámetro de visualización,</p>
 En este caso, vamos a proporcionar las bandas que vamos a utilizar aquí, banda 4, banda 3, banda 2.
 No las estamos utilizando para nuestro modelo, sino solo para visualizar la imagen en el mapa.
 Y luego un valor mínimo y máximo en función de los datos de reflectancia de la superficie PARA ESTAS BANDAS</p>
-<p>var visParams = {bands: [‘B4’,’B3’,’B2’], min: 0 , max: 3000};
-Map.addLayer(image, visParams, “Sentinel 2024”)</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">visParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nx">bands</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">],</span><span class="w"> </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">3000</span><span class="p">};</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">image</span><span class="p">,</span><span class="w"> </span><span class="nx">visParams</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Sentinel 2024&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
 </section>
 <section id="funcion-para-calcular-ndvi">
-<h2>FUNCIÓN PARA CALCULAR NDVI<a class="headerlink" href="#funcion-para-calcular-ndvi" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.2. </span>Función para calcular NDVI<a class="headerlink" href="#funcion-para-calcular-ndvi" title="Link to this heading">#</a></h2>
 <p>En nuestra clasificación aplicando aprendizaje automático utilizaremos valores de reflectancia de ciertas bandas de la imagen Sentinel en conjunto con el índice NDVI.
 Utilizaremos filtros de nubes, y filtros temporales</p>
 <p>El NDVI es el índice de vegetación diferencial normalizado que ayuda a monitorear la salud de la vegetación.
 Por lo tanto, un NDVI más alto generalmente indica una cobertura vegetal densa o una vegetación más verde.
 Valores negativos son comunes en cuerpos de agua abiertos.
 mientras que Valores cercanos a 0 pueden observarse en agua con sedimentos o cubierta parcial por vegetación flotante.</p>
-<p><img alt="" src="imagenes/PosIT-NDVIbis.png" /></p>
+<p><img alt="" src="_images/PosIT-NDVIbis.png" /></p>
 <p>Rangos típicos del NDVI:</p>
 <p>Agua: -1 a ~0
 - Valores negativos son comunes en cuerpos de agua abiertos.
@@ -549,7 +529,7 @@ mientras que Valores cercanos a 0 pueden observarse en agua con sedimentos o cub
 Suelo desnudo: 0 a 0.2
 Vegetación escasa: 0.2 a 0.5
 Vegetación densa: 0.5 a 1</p>
-<p><img alt="" src="imagenes/valoresNDVI.png" /></p>
+<p><img alt="" src="_images/valoresNDVI.png" /></p>
 <p>Lo primero que debemos hacer es escribir una función que calcule el NDVI.
 Vamos a crear una función denominada agregarNDVI para calcular el NDVI, que vamos a utilizar en nuestra clasificación de aprendizaje automático.</p>
 <p>También podríamos utilizar otros índices como:</p>
@@ -560,7 +540,7 @@ Vamos a crear una función denominada agregarNDVI para calcular el NDVI, que vam
 <li><p>LSWI (Índice del Agua Basado en Tierra)</p></li>
 <li><p>WI (Índice del Agua)</p></li>
 </ul>
-<p><img alt="" src="imagenes/IndicesAguaBis.png" /></p>
+<p><img alt="" src="_images/IndicesAguaBis.png" /></p>
 <p>Nuestra función agregarNDVI, tiene un parámetro de entrada imagen. Podemos llamarlo imagen o algún otro nombre significativo.</p>
 <p>La primera instrucción es definir la variable NDVI. que es igual a la diferencia normalizada de la banda ocho, la banda infrarroja cercana, y la banda cuatro, la banda roja de la imagen Sentinel.
 Si consultamos la documentación del método normalizedDifference, este metodo se aplica a una imagen. Aca se utiliza la notación orientada a objetos objeto.metodo() el objeto es 1 imagen y el método es normalizedDifference.</p>
@@ -569,10 +549,14 @@ Si consultamos la documentación del método normalizedDifference, este metodo s
 <p>El método no tiene parámetros obligatorios, cuando los parámetros en la documentación están en letra itálica esto signfiica que los parámetros son opcionales.
 Si no se especifican las bandas a utilizar, es decir no se proporcionan parámetros, el método utiliza las dos primeras bandas.
 La diferencia normalizada se calcula como (primero − segundo) / (primero + segundo)</p>
-<p>para nuestro ejemplo:
-(first − second) / (first + second)  = (B8 − B4) / (B8 + B4)
-es decir
-NDVI= (NIR−RED) / (NIR+RED)</p>
+<p>para nuestro ejemplo:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nx">first</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="nx">second</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">first</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">second</span><span class="p">)</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">B8</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="nx">B4</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">B8</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">B4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>es decir</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">NDVI</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">NIR</span><span class="err">−</span><span class="nx">RED</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">NIR</span><span class="o">+</span><span class="nx">RED</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>Asi de simple, es calcular un índice para una imagen satelital. Este acercamiento nos permite definir otros índices como: NDWI, MNDWI, LSWI</p>
 <p>Luego, finalmente, la funcion devuelve nuestra imagen, a la cual le agregaremos estas banda calculada con el NDVI.</p>
 <hr class="docutils" />
@@ -589,16 +573,15 @@ En un mapa con este esquema de falso color:</p>
 </ul>
 <p>Estos son los datos de Sentinel que vamos a utilizar para nuestro aprendizaje automático, es decir, la clasificación supervisada Random forest.</p>
 </section>
-</section>
 <hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="workflow">
-<h1>WORKFLOW:<a class="headerlink" href="#workflow" title="Link to this heading">#</a></h1>
+<section id="workflow">
+<h2><span class="section-number">5.3. </span>Workflow<a class="headerlink" href="#workflow" title="Link to this heading">#</a></h2>
 <p>Para aplicar la tecnica supervisada de random forest tendremos en cuenta el flujo de trabajo</p>
 <p><img alt="alt text" src="_images/Workflow.png" /></p>
 <section id="entrenamiento">
-<h2>Entrenamiento<a class="headerlink" href="#entrenamiento" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">5.3.1. </span>Entrenamiento<a class="headerlink" href="#entrenamiento" title="Link to this heading">#</a></h3>
 <p>Ahora crearemos datos de entrenamiento y luego ejecutaremos nuestro aprendizaje automático.</p>
-<p><img alt="alt text" src="imagenes/p_1.png" /></p>
+<p><img alt="alt text" src="_images/p_1.png" /></p>
 <p>Vamos a crear los datos de entrenamiento:</p>
 <p>Para crear los datos de entrenamiento, utilizando la herramienta de dibujo del panel de Earth Engine.</p>
 <p>Crearemos una nueva capa, denominada agua, de tipo featureColeccion, y defiNImos una propiedad denomninada categoriaAgua, con valor 1.</p>
@@ -629,7 +612,7 @@ Recorda que la definimos cuando creamos los dos featureCollection de datos de en
 Esa será la etiqueta para nuestra clasificación.</p>
 <p>Vamos a utilizar para el entrenamiento las bandas dos, tres, cuatro, ocho y NDVI de la imagen del satélite Sentinel.
 Extraemos las bandas Sentinel para estos datos de entrenamiento que hemos capturado.</p>
-<p><img alt="alt text" src="imagenes/Tabla_Comahue.png" /></p>
+<p><img alt="alt text" src="_images/Tabla_Comahue.png" /></p>
 <p>Para obtener estos datos de la imagen utilizamos la función sampleRegions
 vamos a utilizar la resolución de 10 metros, la resolución más alta posible de los datos de Sentinel-2.</p>
 <p>SampleRegions permite definir la tabla que entrena el modelo de clasificación supervisada.
@@ -642,9 +625,10 @@ Contamos con el valor de las bandas Sentinel seleccionadas, la banda NDVI y la e
 <p>necesitamos separar algunos de los datos para entrenar el modelo y también algunos de los datos para evaluarlo.</p>
 <p>Por lo tanto, dividiremos esos datos: crearemos una columna aleatoria y luego solo el 70 % de los datos se utilizarán para entrenar nuestro modelo.
 Y luego, el conjunto de prueba aquí será la evaluación, que es el 30 % de datos restantes.</p>
-<hr class="docutils" />
-<p>ENTRENAMIENTO:</p>
-<p><img alt="alt text" src="imagenes/p_2.png" /></p>
+</section>
+<section id="id1">
+<h3><span class="section-number">5.3.2. </span>ENTRENAMIENTO:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p><img alt="alt text" src="_images/p_2.png" /></p>
 <p>En este paso entrenemos el modelo para luego aplicarlo a la imagen con el fin de generar un mapa de masa de agua.</p>
 <p>El paso de entrenar el modelo consiste en aplicar la clasificación supervisada de random forest con los datos de entremiento</p>
 <p>Tendrás features, que son datos de entrenamiento, que es el conjunto de entrenamiento,
@@ -653,18 +637,17 @@ y luego, finalmente, las bandas, que usamos para hacer la predicción, que son l
 <p>Entonces, cuando ejecutes esto, entrenarás el modelo de aprendizaje automático.
 Cuando lo haga, el modelo de aprendizaje automático se entrenará en función de nuestros datos de entrenamiento en las bandas Sentinel.</p>
 </section>
-<hr class="docutils" />
 <section id="clasificar-la-imagen">
-<h2>Clasificar la imagen<a class="headerlink" href="#clasificar-la-imagen" title="Link to this heading">#</a></h2>
-<p><img alt="alt text" src="imagenes/p_3.png" /></p>
+<h3><span class="section-number">5.3.3. </span>Clasificar la imagen<a class="headerlink" href="#clasificar-la-imagen" title="Link to this heading">#</a></h3>
+<p><img alt="" src="_images/p_3.png" /></p>
 <p>El siguiente paso es aplicar este modelo, que es el clasificador, a la imagen, la imagen Sentinel.
 Simplemente se va a aplicar el modelo para generar una clasificación.</p>
+<p>Ahora, podemos ver la imagen, que es una clasificación.
+El siguiente paso es ver nuestra imagen clasificada en una pantalla aquí.</p>
 </section>
-<section id="ahora-podemos-ver-la-imagen-que-es-una-clasificacion-el-siguiente-paso-es-ver-nuestra-imagen-clasificada-en-una-pantalla-aqui">
-<h2>Ahora, podemos ver la imagen, que es una clasificación.
-El siguiente paso es ver nuestra imagen clasificada en una pantalla aquí.<a class="headerlink" href="#ahora-podemos-ver-la-imagen-que-es-una-clasificacion-el-siguiente-paso-es-ver-nuestra-imagen-clasificada-en-una-pantalla-aqui" title="Link to this heading">#</a></h2>
-<p>MASCARA:
-en el comando: var water = classifiedImage.updateMask(classifiedImage);</p>
+<section id="mascara">
+<h3><span class="section-number">5.3.4. </span>MASCARA:<a class="headerlink" href="#mascara" title="Link to this heading">#</a></h3>
+<p>en el comando: var water = classifiedImage.updateMask(classifiedImage);</p>
 <p>La función updateMask utiliza los valores de classified como una máscara. Los píxeles con valor 1 (agua) permanecen visibles, mientras que los píxeles con valor 0 (no agua) se enmascaran (ocultan).</p>
 <p>Esto se traduce en:</p>
 <p>Si un píxel tiene valor 1 → Se mantiene visible en la nueva variable water.
@@ -677,9 +660,9 @@ Entonces, simplemente ejecutemos eso. Y cuando lo ejecutemos, veremos nuestra cl
 Esta es nuestra clasificación. Se trata de una clasificación predicha por un modelo basado en el aprendizaje automático,
 específicamente en un algoritmo de random forest o bosque aleatorio en la plataforma Earth Engine que utiliza datos satelitales Sentinel2 de 10 metros.</p>
 </section>
-<section id="accurracy-assessment">
-<h2>ACCURRACY ASSESSMENT<a class="headerlink" href="#accurracy-assessment" title="Link to this heading">#</a></h2>
-<p><img alt="" src="imagenes/p_4.png" /></p>
+<section id="acurracy-assessment">
+<h3><span class="section-number">5.3.5. </span>Acurracy Assessment<a class="headerlink" href="#acurracy-assessment" title="Link to this heading">#</a></h3>
+<p><img alt="" src="_images/p_4.png" /></p>
 <p>Como hemos mencionado en anteriores videos, hay algunos pasos después de este posprocesamiento y tenemos que calcular evaluaciones de precisión de estos datos,</p>
 <p>Utilizaremos la función de matriz de confusión.
 Entonces, vamos a utilizar el conjunto de prueba y luego el clasificador. Este es nuestro modelo, el modelo de entrenamiento.
@@ -696,7 +679,7 @@ Parece que es 100 %, bastante buena, pero creo que si capturamos más puntos de 
 </ul>
 </section>
 <section id="exportacion">
-<h2>Exportación<a class="headerlink" href="#exportacion" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">5.3.6. </span>Exportación<a class="headerlink" href="#exportacion" title="Link to this heading">#</a></h3>
 <p>La última parte a considerar, es que si deseas usar esta clasificación fuera de Google eart engen , digamos un software GIS estándar, como QGIS o ArcGIS
 vas a usar la función Export.image.toDrive para exportar, ya sabes, tu mapa de agua.</p>
 <p>Cuando lo ejecutes, lo verás en tu Google Drive. Una vez que hayas completado esto, verás los datos o la imagen en tu Google Drive.
@@ -750,9 +733,10 @@ también exporta tu clasificación final a tu Google Drive.</p>
 </pre></div>
 </div>
 </section>
+</section>
 <section id="video-del-capitulo">
-<h2>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
-<p>Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA:</p>
+<h2><span class="section-number">5.4. </span>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
+<p>Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: <a class="reference external" href="https://www.youtube.com/watch?v=-DMd6LXIEkE&amp;amp;t=610s">https://www.youtube.com/watch?v=-DMd6LXIEkE&amp;t=610s</a></p>
 </section>
 </section>
 
@@ -792,7 +776,7 @@ también exporta tu clasificación final a tu Google Drive.</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</p>
       </div>
     </a>
     <a class="right-next"
@@ -800,7 +784,7 @@ también exporta tu clasificación final a tu Google Drive.</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Capítulo 6 · Serie Temporales</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Capítulo 6 · Serie Temporales</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -820,24 +804,24 @@ también exporta tu clasificación final a tu Google Drive.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Capítulo 5 · Random Forest para detectar agua</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#esta-es-nuestra-area-de-estudio">Esta es nuestra área de estudio.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-calcular-ndvi">FUNCIÓN PARA CALCULAR NDVI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">5.1. Introducción</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#center-object">5.1.1. CENTER OBJECT</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#buffer">5.1.2. BUFFER</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imagenes-sentinel-2">5.1.3. IMAGENES SENTINEL 2</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">WORKFLOW:</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">Entrenamiento</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">Clasificar la imagen</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ahora-podemos-ver-la-imagen-que-es-una-clasificacion-el-siguiente-paso-es-ver-nuestra-imagen-clasificada-en-una-pantalla-aqui">Ahora, podemos ver la imagen, que es una clasificación.
-El siguiente paso es ver nuestra imagen clasificada en una pantalla aquí.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accurracy-assessment">ACCURRACY ASSESSMENT</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion">Exportación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">Video del capítulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-calcular-ndvi">5.2. Función para calcular NDVI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">5.3. Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">5.3.1. Entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">5.3.2. ENTRENAMIENTO:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">5.3.3. Clasificar la imagen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mascara">5.3.4. MASCARA:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acurracy-assessment">5.3.5. Acurracy Assessment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion">5.3.6. Exportación</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">5.4. Video del capítulo</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

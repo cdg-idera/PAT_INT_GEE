@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión &#8212; GeoIA aplicado a Imágenes Satelitales</title>
+    <title>4. Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión &#8212; GeoIA aplicado a Imágenes Satelitales</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Cap4_SVM_DT';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Capítulo 5 · Random Forest para detectar agua" href="Cap5_Agua.html" />
-    <link rel="prev" title="Capítulo 3 · Random Forest en GEE y Colab" href="Cap3_gee_colab.html" />
+    <link rel="next" title="5. Capítulo 5 · Random Forest para detectar agua" href="Cap5_Agua.html" />
+    <link rel="prev" title="3. Capítulo 3 · Random Forest en GEE y Colab" href="Cap3_gee_colab.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,41 +174,14 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Cap1_Tecnicas.html">Capítulo 1 ·Técnicas</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">Capítulo 2 · Random Forest en GEE</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Cap3_gee_colab.html">Capítulo 3 · Random Forest en GEE y Colab</a></li>
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">Capítulo 5 · Random Forest para detectar agua</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="Cap6_ST.html">Capítulo 6 · Serie Temporales</a></li>
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">Capítulo 7 · Cubos de Imágenes Satelitales</a></li>
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">Capítulo 9 · Lab 002 · Random Forest (Rosario)  Thebe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap1_Tecnicas.html">1. Capítulo 1 · Teledetección y Aprendizaje Automático</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">2. Capítulo 2 · Random Forest en GEE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap3_gee_colab.html">3. Capítulo 3 · Random Forest en GEE y Colab</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">5. Capítulo 5 · Random Forest para detectar agua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap6_ST.html">6. Capítulo 6 · Serie Temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">7. Capítulo 7 · Cubos de Imágenes Satelitales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">8. Capítulo 9 · Lab 002 · Random Forest (Rosario)  Thebe</a></li>
 </ul>
 
     </div>
@@ -404,29 +377,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial">Máquina de soporte vectorial.</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">Arbol de Decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">4.1. Introducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial">4.2. Máquina de soporte vectorial.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">4.3. Arbol de Decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-del-arbol-de-decision-con-google-colab">4.4. Gráfico del Arbol de decisión con Google Colab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identificando-los-elementos-del-arbol-de-decision">4.5. Identificando los elementos del árbol de decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-utilizacion-del-arbol-de-decision">4.6. Ejemplo de utilización del Árbol de Decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-clase-0-agua">4.7. Ejemplo 1 clase 0 agua</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-clase-1-urbano">4.8. Ejemplo 2 clase 1 urbano</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-clase-2-cultivos">4.9. Ejemplo 3 clase 2 cultivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-clase-3-bosque">4.10. Ejemplo 4 clase 3 bosque</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-clase-4-suelo-desnudo">4.11. Ejemplo 5 clase 4 suelo desnudo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos">4.12. Recursos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-e-incentivos">4.13. Cierre e Incentivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">4.14. Video del capítulo</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-del-arbol-de-decision-con-google-colab">Gráfico del Arbol de decisión con Google Colab</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#identificando-los-elementos-del-arbol-de-decision">Identificando los elementos del árbol de decisión</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-utilizacion-del-arbol-de-decision">Ejemplo de utilización del Árbol de Decisión</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-clase-0-agua">Ejemplo 1 clase 0 agua</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-clase-1-urbano">Ejemplo 2 clase 1 urbano</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-clase-2-cultivos">Ejemplo 3 clase 2 cultivos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-clase-3-bosque">Ejemplo 4 clase 3 bosque</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-clase-4-suelo-desnudo">Ejemplo 5 clase 4 suelo desnudo</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos">Recursos</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-e-incentivos">Cierre e Incentivos</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">Video del capítulo</a></li>
-</ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -438,16 +403,15 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="capitulo-4-maquina-de-soporte-vectorial-y-arbol-de-decision">
-<h1>Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión<a class="headerlink" href="#capitulo-4-maquina-de-soporte-vectorial-y-arbol-de-decision" title="Link to this heading">#</a></h1>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="introduccion">
-<h1>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">4. </span>Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión<a class="headerlink" href="#capitulo-4-maquina-de-soporte-vectorial-y-arbol-de-decision" title="Link to this heading">#</a></h1>
+<section id="introduccion">
+<h2><span class="section-number">4.1. </span>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
 <p>Propiciar la incorporación enfoques innovadores y paradigmas de ciencias de dato para maximizar la gestión, análisis y aprovechamiento de la información geoespacial, fomentando el uso de tecnologías emergentes, inteligencia artificial y modelos analíticos avanzados que optimicen la toma de decisiones y potencien el desarrollo de soluciones estratégicas en todos los niveles de gobierno y sectores involucrados.</p>
 <p>En este capítulo exploraremos el uso de dos técnicas de aprendizaje automático para clasificación supervisada multiclase en Google Earth Engine. Aplicaremos Maquina de Soporte Vectorial: SVM (Support Vector Machine)
 y Arboles de Decisión.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="maquina-de-soporte-vectorial">
-<h1>Máquina de soporte vectorial.<a class="headerlink" href="#maquina-de-soporte-vectorial" title="Link to this heading">#</a></h1>
+<section id="maquina-de-soporte-vectorial">
+<h2><span class="section-number">4.2. </span>Máquina de soporte vectorial.<a class="headerlink" href="#maquina-de-soporte-vectorial" title="Link to this heading">#</a></h2>
 <p>En un capítulo anterior utilizamos Random Forest para clasificar imágenes de Sentinel-2 en  el área metropolitana de Rosario, para ello creamos el script GEE: Lab_002_RandomForest_Rosario.</p>
 <p>Accederemos a dicho script y guardaremos una copia del mismo, que renombraremos a Lab_003_SVM_Rosario.</p>
 <p>Para aplicar Maquinas de soporte vectorial, el flujo de trabajo es el mismo que utilizamos RF, con excepción de que en lugar de utilizar un clasificador de Random Forest, utilizaremos un clasificador de Maquina de Soporte Vectorial. En otras palabras, el cambio principal está en la etapa de entrenamiento del clasificador.</p>
@@ -583,8 +547,9 @@ dividiendolas en multiples problemas de clasificiones binarias. Lo que aumenta l
 </pre></div>
 </div>
 <p><img alt="" src="_images/POST_6.png" /></p>
+</section>
 <section id="arbol-de-decision">
-<h2>Arbol de Decisión<a class="headerlink" href="#arbol-de-decision" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.3. </span>Arbol de Decisión<a class="headerlink" href="#arbol-de-decision" title="Link to this heading">#</a></h2>
 <p>Ahora guardaremos nuevamente este script con otro nombre: Lab_004_DT_Rosario. DT son las siglas de <em>árbol de decisión</em> o <em>decision tree</em>.</p>
 <p>Para aplicar esta técnica necesitamos cambiar el clasificador, borraremos el clasificador <strong>libsvm()</strong> y lo reemplazaremos por <strong>smileCart()</strong></p>
 <p>Es decir, ahora usamos ee.Classifier.smileCart() para aplicar un árbol de decisión. Como lo indica su documentación CART significa ´<em>Clasification and Regression Tree</em> <em>Árbol de Regresión y Clasificación</em></p>
@@ -710,9 +675,8 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 </pre></div>
 </div>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="grafico-del-arbol-de-decision-con-google-colab">
-<h1>Gráfico del Arbol de decisión con Google Colab<a class="headerlink" href="#grafico-del-arbol-de-decision-con-google-colab" title="Link to this heading">#</a></h1>
+<section id="grafico-del-arbol-de-decision-con-google-colab">
+<h2><span class="section-number">4.4. </span>Gráfico del Arbol de decisión con Google Colab<a class="headerlink" href="#grafico-del-arbol-de-decision-con-google-colab" title="Link to this heading">#</a></h2>
 <p>Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.</p>
 <p><img alt="" src="imagenes/POST_11.png" /></p>
 <p>A continuación se muestra el código Python que permite graficar un árbol de decisión, dado el archivo .dot.</p>
@@ -767,8 +731,8 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p>Los árboles de decisión son una herramienta sencilla y poderosa, especialmente para tareas donde la <em>interpretabilidad es importante</em>. Comparados con Random Forest y SVM, ofrecen una estructura clara de cómo se toman las decisiones.</p>
 <p>Ahora que hemos aplicado el algoritmo de aprendizaje automático de Arboles de Decisión al área metropolitana de Rosario, podemos analizar el árbol de decisión</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="identificando-los-elementos-del-arbol-de-decision">
-<h1>Identificando los elementos del árbol de decisión<a class="headerlink" href="#identificando-los-elementos-del-arbol-de-decision" title="Link to this heading">#</a></h1>
+<section id="identificando-los-elementos-del-arbol-de-decision">
+<h2><span class="section-number">4.5. </span>Identificando los elementos del árbol de decisión<a class="headerlink" href="#identificando-los-elementos-del-arbol-de-decision" title="Link to this heading">#</a></h2>
 <p>Primero podemos identificar las principales partes de un árbol de decisión:</p>
 <p>Este árbol tiene 7 <strong>nodos de decisión</strong>, donde cada nodo de decisión tiene una condición lógica o booleana “menor igual que”, basado en un umbral de las bandas.</p>
 <p><img alt="" src="imagenes/POST_16.png" /></p>
@@ -796,8 +760,8 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 </div>
 <p>Cada banda tiene un total de 22,600,300 píxeles válidos dentro de la región de interés (roi). Área total en m²: 2,260,030,000 m² (2,260 km² para 10 m de resolución).</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="ejemplo-de-utilizacion-del-arbol-de-decision">
-<h1>Ejemplo de utilización del Árbol de Decisión<a class="headerlink" href="#ejemplo-de-utilizacion-del-arbol-de-decision" title="Link to this heading">#</a></h1>
+<section id="ejemplo-de-utilizacion-del-arbol-de-decision">
+<h2><span class="section-number">4.6. </span>Ejemplo de utilización del Árbol de Decisión<a class="headerlink" href="#ejemplo-de-utilizacion-del-arbol-de-decision" title="Link to this heading">#</a></h2>
 <p>Utilizaremos 5 puntos de entrenamiento de nuestra clasificación, uno para cada clase, de los cuales conocemos su clase (ya que son datos conocidos) y verificaremos que el árbol asocia correctamente a la clase correspondiente.</p>
 <p>Para clasificar el píxel con los valores proporcionados, seguimos el árbol de decisión paso a paso utilizando las condiciones definidas en cada nodo.</p>
 <p>En cada ejemplo, mostraremos el píxel al cual determinaremos la clase a la que corresponde. El video asociado a este script muestra el paso a paso de la evaluación mostrando:</p>
@@ -807,8 +771,9 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 </ul>
 <p>Para cada píxel realizaremos un recorrido del arbol considerando los valores de las bandas espectrales en el pixel:</p>
 <p><img alt="" src="imagenes/POST_1.png" /></p>
+</section>
 <section id="ejemplo-1-clase-0-agua">
-<h2>Ejemplo 1 clase 0 agua<a class="headerlink" href="#ejemplo-1-clase-0-agua" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.7. </span>Ejemplo 1 clase 0 agua<a class="headerlink" href="#ejemplo-1-clase-0-agua" title="Link to this heading">#</a></h2>
 <p>El recorrido del arbol para clasificar este píxel es corto y consiste solo de una evaluación:</p>
 <ul class="simple">
 <li><p>Condición: B6 ≤ 1095.5</p></li>
@@ -819,7 +784,7 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p><img alt="" src="_images/Pixel78_Cat0.png" /></p>
 </section>
 <section id="ejemplo-2-clase-1-urbano">
-<h2>Ejemplo 2 clase 1 urbano<a class="headerlink" href="#ejemplo-2-clase-1-urbano" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.8. </span>Ejemplo 2 clase 1 urbano<a class="headerlink" href="#ejemplo-2-clase-1-urbano" title="Link to this heading">#</a></h2>
 <p>El recorrido consiste de tres evaluaciones:</p>
 <p>Primera evaluación:</p>
 <ul class="simple">
@@ -843,7 +808,7 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p><img alt="" src="_images/Pixel41_Cat1.png" /></p>
 </section>
 <section id="ejemplo-3-clase-2-cultivos">
-<h2>Ejemplo 3 clase 2 cultivos<a class="headerlink" href="#ejemplo-3-clase-2-cultivos" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.9. </span>Ejemplo 3 clase 2 cultivos<a class="headerlink" href="#ejemplo-3-clase-2-cultivos" title="Link to this heading">#</a></h2>
 <p>El recorrido consiste de tres evaluaciones:</p>
 <p>Primera evaluación:</p>
 <ul class="simple">
@@ -867,7 +832,7 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p><img alt="" src="_images/Pixel109_Cat2.png" /></p>
 </section>
 <section id="ejemplo-4-clase-3-bosque">
-<h2>Ejemplo 4 clase 3 bosque<a class="headerlink" href="#ejemplo-4-clase-3-bosque" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.10. </span>Ejemplo 4 clase 3 bosque<a class="headerlink" href="#ejemplo-4-clase-3-bosque" title="Link to this heading">#</a></h2>
 <p>El recorrido consiste de tres evaluaciones:</p>
 <p>Primera evaluación:</p>
 <ul class="simple">
@@ -891,7 +856,7 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p><img alt="" src="_images/Pixel159_Cat3.png" /></p>
 </section>
 <section id="ejemplo-5-clase-4-suelo-desnudo">
-<h2>Ejemplo 5 clase 4 suelo desnudo<a class="headerlink" href="#ejemplo-5-clase-4-suelo-desnudo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">4.11. </span>Ejemplo 5 clase 4 suelo desnudo<a class="headerlink" href="#ejemplo-5-clase-4-suelo-desnudo" title="Link to this heading">#</a></h2>
 <p>El recorrido consiste de cuatro evaluaciones:</p>
 <p>Primera evaluación:</p>
 <ul class="simple">
@@ -920,9 +885,8 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p>Seguimos por la rama falso: La clase predicha para este píxel es clase 4.</p>
 <p><img alt="" src="_images/Pixel115_Cat4.png" /></p>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="recursos">
-<h1>Recursos<a class="headerlink" href="#recursos" title="Link to this heading">#</a></h1>
+<section id="recursos">
+<h2><span class="section-number">4.12. </span>Recursos<a class="headerlink" href="#recursos" title="Link to this heading">#</a></h2>
 <p>Los recursos asociados a este capítulo incluyen:</p>
 <ul class="simple">
 <li><p>Youtube: <a class="reference external" href="https://www.youtube.com/watch?v=QBJtlQOPdfQ">https://www.youtube.com/watch?v=QBJtlQOPdfQ</a></p></li>
@@ -931,8 +895,8 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <li><p>Scripts GEE: Lab_003_SVM_Rosario y Lab_004_DT_Rosario</p></li>
 </ul>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="cierre-e-incentivos">
-<h1>Cierre e Incentivos<a class="headerlink" href="#cierre-e-incentivos" title="Link to this heading">#</a></h1>
+<section id="cierre-e-incentivos">
+<h2><span class="section-number">4.13. </span>Cierre e Incentivos<a class="headerlink" href="#cierre-e-incentivos" title="Link to this heading">#</a></h2>
 <p>Hemos explorado cómo aplicar técnicas de machine learning, una rama clave de la inteligencia artificial, para abordar la clasificación de imágenes satelitales, centrándonos en herramientas como árboles de decisión, Random Forest y máquinas de soporte vectorial (SVM). Estas técnicas permiten no solo clasificar imágenes en múltiples clases, sino también realizar tareas más específicas como clasificación binaria, generando insights valiosos para distintos campos. A lo largo de este recorrido, revisamos el flujo de trabajo completo, incorporando métricas esenciales como la precisión general, la precisión del productor y del consumidor, lo que refuerza nuestra capacidad de evaluar y mejorar la calidad de nuestros modelos.</p>
 <p>Sin embargo, este es solo el comienzo de las posibilidades. Por ejemplo, el ajuste de hiperparámetros es una tarea crucial para optimizar el rendimiento de los clasificadores, y plataformas como Google Colab nos ofrecen un entorno accesible y potente para explorar estas técnicas con recursos computacionales avanzados. Además, conceptos como la <em>detección de cambios</em> o la creación de <em>series de tiempo</em> permiten un análisis mucho más dinámico y profundo. Estas herramientas son fundamentales para comprender fenómenos como el crecimiento urbano, la deforestación o los impactos de eventos extremos como inundaciones, mientras que los paneles interactivos, con barras deslizantes o comparaciones visuales, facilitan una mejor comunicación de resultados, haciéndolos accesibles para una audiencia más amplia.</p>
 <p>En otras posibilidades, podemos analizar <em>imágenes satelitales nocturnas</em>, un recurso valioso para explorar patrones y actividades humanas que solo se manifiestan de noche, como la iluminación artificial en áreas urbanas. Las imágenes de luz nocturna proporcionan información relevante sobre la urbanización, el uso de la tierra y el desarrollo económico. A través de estas imágenes, es posible realizar estudios sobre la expansión urbana, monitorear el comportamiento de las actividades industriales o incluso analizar la distribución de la pobreza en diferentes regiones. De hecho, se ha demostrado que las luces nocturnas pueden ser un indicador confiable de la actividad económica y social, lo que abre nuevas oportunidades para aplicar machine learning y técnicas de clasificación en este tipo de datos.</p>
@@ -940,9 +904,10 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p><img alt="" src="imagenes/POST_14.png" /></p>
 <p>Estamos en un <em>momento histórico donde el acceso a imágenes satelitales y datos geoespaciales se ha expandido enormemente</em>, abriendo la puerta a un futuro prometedor. La posibilidad de trabajar con imágenes de mayor resolución y precisión en un futuro cercano potenciará aún más las capacidades que estamos desarrollando ahora. Este enfoque progresivo y escalonado es clave: cada concepto y herramienta que integramos se convierte en <em>un peldaño más en esta espiral de conocimiento</em>, que nos permitirá abordar desafíos más complejos con confianza.</p>
 <p>Finalmente, quiero invitarte a seguir profundizando en este fascinante campo en la intersección entre inteligencia artificial, ciencia de datos y análisis geoespacial. <em>La democratización de las imágenes satelitales nos permite acceder a datos precisos y tangibles sobre la realidad del mundo que nos rodea, lo que transforma cómo entendemos y respondemos a los desafíos globales</em>. Al trabajar con estos datos concretos, no solo aprendemos, sino que también tenemos la <em>oportunidad de generar un impacto real en proyectos que afectan directamente nuestras comunidades y el entorno</em>. Cada paso que damos nos acerca más a dominar estas herramientas poderosas, y eso, sin duda, nos abre un abanico de posibilidades para cambiar el mundo. ¡Lo mejor está por venir! Gracias por acompañarme en este viaje, y espero verte en el próximo video.</p>
+</section>
 <section id="video-del-capitulo">
-<h2>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
-<p>Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA:</p>
+<h2><span class="section-number">4.14. </span>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
+<p>Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: <a class="reference external" href="https://www.youtube.com/watch?v=QBJtlQOPdfQ&amp;amp;t=375s">https://www.youtube.com/watch?v=QBJtlQOPdfQ&amp;t=375s</a></p>
 </section>
 </section>
 
@@ -982,7 +947,7 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Capítulo 3 · Random Forest en GEE y Colab</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Capítulo 3 · Random Forest en GEE y Colab</p>
       </div>
     </a>
     <a class="right-next"
@@ -990,7 +955,7 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Capítulo 5 · Random Forest para detectar agua</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Capítulo 5 · Random Forest para detectar agua</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1010,29 +975,21 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">Introducción</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial">Máquina de soporte vectorial.</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">Arbol de Decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">4.1. Introducción</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial">4.2. Máquina de soporte vectorial.</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision">4.3. Arbol de Decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-del-arbol-de-decision-con-google-colab">4.4. Gráfico del Arbol de decisión con Google Colab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identificando-los-elementos-del-arbol-de-decision">4.5. Identificando los elementos del árbol de decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-utilizacion-del-arbol-de-decision">4.6. Ejemplo de utilización del Árbol de Decisión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-clase-0-agua">4.7. Ejemplo 1 clase 0 agua</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-clase-1-urbano">4.8. Ejemplo 2 clase 1 urbano</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-clase-2-cultivos">4.9. Ejemplo 3 clase 2 cultivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-clase-3-bosque">4.10. Ejemplo 4 clase 3 bosque</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-clase-4-suelo-desnudo">4.11. Ejemplo 5 clase 4 suelo desnudo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos">4.12. Recursos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-e-incentivos">4.13. Cierre e Incentivos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">4.14. Video del capítulo</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-del-arbol-de-decision-con-google-colab">Gráfico del Arbol de decisión con Google Colab</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#identificando-los-elementos-del-arbol-de-decision">Identificando los elementos del árbol de decisión</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-utilizacion-del-arbol-de-decision">Ejemplo de utilización del Árbol de Decisión</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-clase-0-agua">Ejemplo 1 clase 0 agua</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-clase-1-urbano">Ejemplo 2 clase 1 urbano</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-clase-2-cultivos">Ejemplo 3 clase 2 cultivos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-clase-3-bosque">Ejemplo 4 clase 3 bosque</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-clase-4-suelo-desnudo">Ejemplo 5 clase 4 suelo desnudo</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos">Recursos</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre-e-incentivos">Cierre e Incentivos</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">Video del capítulo</a></li>
-</ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>

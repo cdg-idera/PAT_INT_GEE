@@ -206,7 +206,6 @@ print("Kappa:", cm.kappa().getInfo())
 print("F1 (class 1):", cm.fscore(1).getInfo())
 ```
 
----
 
 ## 9. Interpretación de resultados
 
@@ -216,9 +215,9 @@ print("F1 (class 1):", cm.fscore(1).getInfo())
 - **Kappa**: mide el acuerdo más allá del azar.  
 - **F1-Score**: balance entre precisión y exhaustividad para la clase analizada.
 
----
 
-# Conclusión
+
+## Conclusión
 
 Este ejemplo muestra cómo un flujo completo de clasificación supervisada en GEE (JavaScript) puede trasladarse paso a paso a Colab (Python). Esto permite:
 - Integrar GEE con librerías de Python.

@@ -23,7 +23,7 @@ Construimos un cubo de datos de precipitación mensual para la misma región, ut
 Generamos un cubo categórico bimestral de tipos de suelo (agua, urbano, cultivos, etc.) para 2024. A partir de imágenes Sentinel-2 y un modelo Random Forest, construimos una serie temporal clasificada y mostramos su evolución en gráficos apilados. Incluimos métricas de validación, porcentajes y recuentos por clase para interpretar cambios en el paisaje, como expansión urbana o variación en áreas verdes.
 
 
-# De imágenes satelitales a Cubos de Imágenes
+## De imágenes satelitales a Cubos de Imágenes
 
 Al observar una imagen tomada desde un satélite, es tentador pensar que estamos viendo una simple foto de la Tierra como si fuera una fotografía aérea en alta resolución, pero eso sería una visión limitada, sería reducirla a lo que nuestros ojos alcanzan a ver, cuando en realidad hay mucho más que eso. 
 
@@ -125,13 +125,13 @@ Gracias a los cubos de datos, hoy es posible:
 En definitiva, los cubos de datos no son solo una forma eficiente de almacenar información, sino una herramienta poderosa para transformar datos satelitales en conocimiento accionable.
 Comprender cómo se estructuran, cómo se consultan y cómo se transforman es clave para aprovechar todo el potencial de los datos de observación de la Tierra.
 
-# Datacube de temperatura superficial en Bahía Blanca con GEE
+## Datacube de temperatura superficial en Bahía Blanca con GEE
 
 En este laboratorio vamos a construir y analizar un datacube de temperatura superficial terrestre (LST) para la región de Bahía Blanca, usando imágenes satelitales MODIS desde Google Earth Engine.
 Veremos cómo generar mapas mensuales de temperatura, cómo calcular promedios sobre toda el área y cómo exportar esta información para estudios más avanzados.
 Lo más importante: vamos a entender cómo este proceso representa un claro ejemplo del uso de cubo de datos geoespacial.
 
-## Paso 1: Definir la región de interés
+### Paso 1: Definir la región de interés
  
 ```javascript
 var admin2 = ee.FeatureCollection("FAO/GAUL/2015/level2")
@@ -145,7 +145,7 @@ var roi2 = bahiaBlanca.geometry().simplify(100);
 Comenzamos seleccionando la región administrativa de Bahía Blanca desde el catálogo GAUL de la FAO.
 El resultado es un polígono que define el recorte espacial de nuestro cubo de datos.
 
-## Paso 2: Selección temporal
+### Paso 2: Selección temporal
  
 ```javascript
 var fechaInicio = ee.Date('2024-01-01');
@@ -156,7 +156,7 @@ var fechaFin = ee.Date('2025-08-01');
 Aquí definimos el recorte temporal del datacube. Estamos solicitando 20 meses consecutivos de datos, desde enero de 2024 hasta agosto de 2025.
 
 
-## Paso 3: Cargar MODIS LST y convertir unidades
+### Paso 3: Cargar MODIS LST y convertir unidades
  
 ```javascript
 var modisLST = ee.ImageCollection("MODIS/061/MOD11A2")
@@ -186,7 +186,7 @@ Lo que estamos construyendo es un cubo de datos con tres dimensiones:
 * T: tiempo (una imagen promedio por mes)
 
 
-## Paso 4: Parámetros visuales para el mapa
+### Paso 4: Parámetros visuales para el mapa
  
 ```javascript
 var visParams = {
@@ -199,7 +199,7 @@ var visParams = {
 Configuramos una paleta de colores que irá de azul a rojo, resaltando las diferencias térmicas. Este rango se adapta a temperaturas comunes en superficie terrestre.
 
 
-## Paso 5 y 6: Generar imágenes mensuales y mostrarlas en el mapa
+### Paso 5 y 6: Generar imágenes mensuales y mostrarlas en el mapa
  
 ```javascript
 var meses = ee.List.sequence(0, fechaFin.difference(fechaInicio, 'month').subtract(1));
@@ -224,7 +224,7 @@ Calculamos y mostramos una imagen mensual promedio para cada mes del período.
 Estas imágenes conforman la dimensión espacial + temporal del cubo de temperatura.
 
 
-## Paso 7: Crear tabla de promedios mensuales (reducción espacial)
+### Paso 7: Crear tabla de promedios mensuales (reducción espacial)
  
 ```javascript
 var tablaMensual = ee.FeatureCollection(meses.map(function(m){
@@ -259,7 +259,7 @@ temperatura_celsius: 19.49
 
 Este valor corresponde al promedio de temperatura superficial en marzo de 2025, cuando se registraron eventos de inundación en la región. Esta cifra es útil para estudiar el comportamiento térmico durante ese evento extremo.
 
-## Paso 8: Visualizar la serie de tiempo
+### Paso 8: Visualizar la serie de tiempo
  
 ```javascript
  
@@ -283,7 +283,7 @@ En consola se imprimen dos elementos:
 * Un gráfico de líneas que permite visualizar tendencias, oscilaciones térmicas y meses extremos.
 
 
-## Paso 9: Estética del mapa
+### Paso 9: Estética del mapa
  
 ```javascript
 Map.centerObject(roi2, 8);
@@ -298,7 +298,7 @@ Map.addLayer(bahiaBlanca.style({
 Agregamos una capa de contorno para la región, usando un estilo transparente y bordes negros, para que los mapas mensuales se vean claramente.
 
 
-## Paso 10: Exportar la serie al Drive
+### Paso 10: Exportar la serie al Drive
  
 ```javascript
 Export.table.toDrive({
@@ -354,7 +354,7 @@ var roi2 = bahiaBlanca.geometry().simplify(100);  // recorte suave
 ```
 
 
-## Definimos el período de análisis
+### Definimos el período de análisis
 
 El estudio abarca desde enero de 2024 hasta agosto de 2025:
  
@@ -364,7 +364,7 @@ var fechaFin = ee.Date('2025-08-01');
 ```
 
 
-## Cargamos la colección CHIRPS diaria
+### Cargamos la colección CHIRPS diaria
 
 Filtramos espacial y temporalmente para solo conservar datos sobre nuestra región:
  
@@ -376,7 +376,7 @@ var chirps = ee.ImageCollection('UCSB-CHG/CHIRPS/DAILY')
 ```
 
 
-## Paleta de colores para visualización
+### Paleta de colores para visualización
 
 Configuramos una escala cromática que distingue mejor las zonas con mayor o menor precipitación:
  
@@ -389,7 +389,7 @@ var visParams = {
 ```
 
 
-## Visualizamos cada capa mensual del datacube
+### Visualizamos cada capa mensual del datacube
 
 Creamos capas mensuales promediando la precipitación diaria por mes. Cada capa se muestra en el mapa:
  
@@ -412,7 +412,7 @@ fechasStr.evaluate(function(listaFechas){
 
 En el mapa, se agregan capas con nombres como CHIRPS 2024-01, CHIRPS 2025-03, etc. Estas capas muestran con distintos tonos de azul la distribución espacial de la lluvia mensual sobre Bahía Blanca.
 
-## Cálculo de la serie temporal mensual promedio
+### Cálculo de la serie temporal mensual promedio
 
 Calculamos el promedio mensual de precipitación para todo Bahía Blanca, generando una tabla que representa la evolución temporal:
  
@@ -442,7 +442,7 @@ var tablaMensual = ee.FeatureCollection(meses.map(function(m){
 Esta tabla representa el eje temporal del datacube, sintetizando cada capa mensual en un único valor promedio.
 
 
-## Gráfico de barras de la serie
+### Gráfico de barras de la serie
 
 Se visualiza en consola una serie temporal que muestra cómo evolucionó la lluvia:
  
@@ -480,7 +480,7 @@ properties:
 
 Este objeto representa la capa del datacube correspondiente a marzo de 2025, donde se registró una precipitación muy por encima del promedio. El valor fue calculado sobre toda el área de Bahía Blanca.
 
-## Mejora estética del mapa
+### Mejora estética del mapa
 
 Para facilitar la lectura visual, centramos el mapa, lo mostramos en fondo satelital y destacamos el contorno de Bahía Blanca:
  
@@ -500,13 +500,13 @@ Map.addLayer(bahiaBlanca.style({
 
 Este ejercicio nos permite construir y visualizar un datacube mensual de precipitación, combinando imágenes diarias CHIRPS. La visualización de cada capa en el mapa junto al gráfico de evolución mensual facilita la detección de anomalías climáticas y proporciona insumos valiosos para análisis posteriores en Python.
  
-# Clasificación de tipos de suelo con Sentinel-2: un enfoque basado en datacubes
+## Clasificación de tipos de suelo con Sentinel-2: un enfoque basado en datacubes
 
-## Introducción
+### Introducción
 
 En este laboratorio, vamos a construir un ejemplo claro de datacube aplicado a la clasificación de tipos de suelo. Utilizaremos imágenes Sentinel-2 armonizadas, clasificaremos por Random Forest y generaremos una serie temporal categórica para el año 2024, con énfasis en su interpretación como cubo de datos espacio-temporal. Vamos paso por paso.
 
-## Colección de imágenes Sentinel-2 y preparación del mosaico base
+### Colección de imágenes Sentinel-2 y preparación del mosaico base
 
 ```javascript
 var s2 = ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED");
@@ -544,7 +544,7 @@ var validationGCP = gcp.filter(ee.Filter.gte('random', 0.6));
 
 Descripción: Se definen manualmente cinco clases: agua, urbano, cultivos, bosque y terreno desnudo. Luego se combinan en una colección y se dividen en datos de entrenamiento (60%) y validación (40%) mediante una columna aleatoria.
 
-## Entrenamiento del modelo Random Forest
+### Entrenamiento del modelo Random Forest
 
 ```javascript
 var training = composite.sampleRegions({
@@ -563,7 +563,7 @@ var classifier = ee.Classifier.smileRandomForest(100).train({
 
 Descripción: Se extraen los valores de las bandas para las regiones de entrenamiento y se entrena un modelo de Random Forest con 100 árboles para clasificar los tipos de suelo.
 
-## Clasificación de la imagen y visualización del resultado
+### Clasificación de la imagen y visualización del resultado
 
 ```javascript
 var classified = composite.classify(classifier);
@@ -581,7 +581,7 @@ Descripción: Se clasifica el mosaico de Sentinel-2 usando el modelo entrenado y
 
 En el mapa se observa la distribución espacial de las clases de suelo sobre la región de interés.
 
-## Evaluación del modelo
+### Evaluación del modelo
 
 
 ```javascript
@@ -604,7 +604,7 @@ Descripción: Se evalúa la precisión del modelo mediante una matriz de confusi
 
 Consola: Muestra resultados numéricos que indican cuán bien el modelo ha clasificado las diferentes clases en los datos de validación.
 
-## Configuración de la serie temporal
+### Configuración de la serie temporal
 
 ```javascript
 var frecuencia = "bimestral";
@@ -623,7 +623,7 @@ var fechas = ee.List.sequence(0, 12, paso).map(function(mes) {
 
 Descripción: Configuramos la frecuencia temporal de la serie para generar nuestro datacube categórico. En este caso, elegimos una frecuencia bimestral.
 
-## 7. Clasificación temporal e interpretación del datacube
+### Clasificación temporal e interpretación del datacube
 
 ```javascript
 var coleccionClasificada = ee.FeatureCollection(fechas.map(function(fechaInicio) {
@@ -683,7 +683,7 @@ fechasStr.evaluate(function(listaFechas){
 
 Descripción: Se visualiza en el mapa la imagen clasificada para cada período, completando así el datacube con su representación espacial. Esto permite identificar, por ejemplo, que en marzo de 2024 predomina la clase “Cultivos” o que en mayo crece el parche urbano.
 
-## 10. Interpretación específica: ejemplo marzo 2024
+### Interpretación específica: ejemplo marzo 2024
 Supongamos que en marzo de 2024 hubo inundaciones. Si vemos en consola el siguiente Feature:
 
 ```javascript
@@ -701,7 +701,7 @@ Terreno desnudo: 18000
 
 Interpretación: Aquí vemos un aumento inusual en la cantidad de píxeles clasificados como "Agua", lo que podría reflejar la superficie inundada durante ese mes.
 
-## Conclusión
+### Conclusión
 
 Este ejemplo nos muestra cómo construir un datacube categórico sobre tipos de suelo usando imágenes Sentinel-2, Random Forest y Google Earth Engine. Integramos series temporales espaciales clasificadas, métricas de validación del modelo, visualizaciones dinámicas y tablas estadísticas. Esta estrategia es ideal para monitoreo de uso del suelo, detección de cambios, gestión ambiental y planificación urbana.
 
@@ -709,7 +709,7 @@ Este es un ejemplo de cómo un cubo de datos no solo organiza información geoes
 
 
 
-# Ejemplo 2: Serie Temporal de Clases de Suelo con Clasificador Entrenado
+## Ejemplo 2: Serie Temporal de Clases de Suelo con Clasificador Entrenado
 
 En esta sección vamos a aplicar el clasificador supervisado que entrenamos en capítulo 2 sobre datos Sentinel-2 de la ciudad de Rosario. Nuestro objetivo es generar una serie temporal que nos permita observar cómo evolucionan los distintos tipos de cobertura del suelo a lo largo del tiempo, distinguiendo clases como agua, zonas urbanas, cultivos, vegetación natural y terreno desnudo.
 
@@ -744,7 +744,7 @@ var fechas = ee.List.sequence(0, 12, paso).map(function(mes) {
 Generamos una lista de fechas que representan los inicios de cada período bimestral, a partir de enero de 2024. Cada valor es un objeto ee.Date.
 
 
-# BLOQUE 2: Definición de etiquetas de clases
+### BLOQUE 2: Definición de etiquetas de clases
 
 ```javascript
 
@@ -760,7 +760,7 @@ var etiquetas = ee.Dictionary({
 Creamos un diccionario que asocia cada código de clase (usado por el clasificador) con un nombre legible. Esto nos permitirá mostrar las clases en gráficos con nombres descriptivos.
 
 
-# BLOQUE 3: Aplicación del clasificador por período
+### BLOQUE 3: Aplicación del clasificador por período
 
 ```javascript
 var coleccionClasificada = ee.FeatureCollection(fechas.map(function(fechaInicio) {
@@ -800,7 +800,7 @@ var clasificada = imagen.classify(classifier);
 
 Aplicamos el clasificador previamente entrenado a la imagen compuesta para generar un raster de clases.
 
-# BLOQUE 4: Conteo de píxeles por clase
+### BLOQUE 4: Conteo de píxeles por clase
 
 ```javascript
 var histograma = clasificada.reduceRegion({
@@ -848,7 +848,7 @@ var ft = ee.Feature(null, propsEtiquetadas)
 Creamos un Feature con los datos de ese período y la fecha correspondiente, y lo devolvemos. Al final, coleccionClasificada es una colección de Features, uno por período.
 
 
-# BLOQUE 5: Visualización absoluta
+### BLOQUE 5: Visualización absoluta
 
 
 ```javascript
@@ -865,7 +865,7 @@ var grafico = ui.Chart.feature.byFeature({
 
 Creamos un gráfico de barras apiladas que muestra la cantidad absoluta de píxeles por clase en cada período. Esto permite ver por ejemplo si aumentaron los cultivos o disminuyó el área urbana en un bimestre determinado.
 
-## BLOQUE 6: Conversión a porcentajes
+### BLOQUE 6: Conversión a porcentajes
 
 ```javascript
 var coleccionPorcentual = coleccionClasificada.map(function(feat) {
@@ -910,7 +910,7 @@ Para cada clase, calculamos su porcentaje con respecto al total y lo guardamos e
 Creamos un nuevo Feature para cada período, ahora con porcentajes. coleccionPorcentual es una colección con los datos relativos.
 
 
-## BLOQUE 7: Visualización porcentual
+### BLOQUE 7: Visualización porcentual
 
 ```javascript
 var graficoPorcentual = ui.Chart.feature.byFeature({
@@ -939,11 +939,8 @@ Con este último código logramos aplicar automáticamente el clasificador de su
 
 ## Video del capítulo
 
-Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA:
+Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: ttps://www.youtube.com/watch?v=mxV8URF8z9U&t=1538s
 
-```{iframe} https://www.youtube.com/watch?v=mxV8URF8z9U&t=1538s
-:width: 80%
-:height: 400px
-```
+
 
 

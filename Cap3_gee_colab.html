@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Capítulo 3 · Random Forest en GEE y Colab &#8212; GeoIA aplicado a Imágenes Satelitales</title>
+    <title>3. Capítulo 3 · Random Forest en GEE y Colab &#8212; GeoIA aplicado a Imágenes Satelitales</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Cap3_gee_colab';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión" href="Cap4_SVM_DT.html" />
-    <link rel="prev" title="Capítulo 2 · Random Forest en GEE" href="Cap2_RFRosario.html" />
+    <link rel="next" title="4. Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión" href="Cap4_SVM_DT.html" />
+    <link rel="prev" title="2. Capítulo 2 · Random Forest en GEE" href="Cap2_RFRosario.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -174,41 +174,14 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="Cap1_Tecnicas.html">Capítulo 1 ·Técnicas</a></li>
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">Capítulo 2 · Random Forest en GEE</a></li>
-
-
-
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Capítulo 3 · Random Forest en GEE y Colab</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="Cap4_SVM_DT.html">Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">Capítulo 5 · Random Forest para detectar agua</a></li>
-
-<li class="toctree-l1"><a class="reference internal" href="Cap6_ST.html">Capítulo 6 · Serie Temporales</a></li>
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">Capítulo 7 · Cubos de Imágenes Satelitales</a></li>
-
-
-
-
-
-
-
-
-<li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">Capítulo 9 · Lab 002 · Random Forest (Rosario)  Thebe</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap1_Tecnicas.html">1. Capítulo 1 · Teledetección y Aprendizaje Automático</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">2. Capítulo 2 · Random Forest en GEE</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Capítulo 3 · Random Forest en GEE y Colab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap4_SVM_DT.html">4. Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">5. Capítulo 5 · Random Forest para detectar agua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap6_ST.html">6. Capítulo 6 · Serie Temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">7. Capítulo 7 · Cubos de Imágenes Satelitales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebooks/Lab_002_RandomForest_Rosario_FOLIUM_THEBE_FIXED.html">8. Capítulo 9 · Lab 002 · Random Forest (Rosario)  Thebe</a></li>
 </ul>
 
     </div>
@@ -404,21 +377,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Capítulo 3 · Random Forest en GEE y Colab</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-imagenes-sentinel-2">1. Carga de imágenes Sentinel-2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-del-composite">2. Creación del composite</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-entrenamiento">3. Datos de entrenamiento</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#division-entrenamiento-validacion">4. División entrenamiento/validación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-espectrales">5. Extracción de valores espectrales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">6. Entrenamiento del clasificador</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion">7. Clasificación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-y-metricas">8. Validación y métricas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">9. Interpretación de resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-imagenes-sentinel-2">3.1. 1. Carga de imágenes Sentinel-2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-del-composite">3.2. 2. Creación del composite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-entrenamiento">3.3. 3. Datos de entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#division-entrenamiento-validacion">3.4. 4. División entrenamiento/validación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-espectrales">3.5. 5. Extracción de valores espectrales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">3.6. 6. Entrenamiento del clasificador</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion">3.7. 7. Clasificación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-y-metricas">3.8. 8. Validación y métricas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">3.9. 9. Interpretación de resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">3.10. Conclusión</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -430,7 +399,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="capitulo-3-random-forest-en-gee-y-colab">
-<h1>Capítulo 3 · Random Forest en GEE y Colab<a class="headerlink" href="#capitulo-3-random-forest-en-gee-y-colab" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">3. </span>Capítulo 3 · Random Forest en GEE y Colab<a class="headerlink" href="#capitulo-3-random-forest-en-gee-y-colab" title="Link to this heading">#</a></h1>
 <p>En este capítulo mostramos cómo realizar una clasificación supervisada de imágenes Sentinel-2 utilizando <strong>Google Earth Engine (GEE)</strong> en su Code Editor (JavaScript) y en <strong>Google Colab</strong> (Python API). El flujo incluye:</p>
 <ol class="arabic simple">
 <li><p>Carga y filtrado de imágenes.</p></li>
@@ -443,7 +412,7 @@ document.write(`
 </ol>
 <hr class="docutils" />
 <section id="carga-de-imagenes-sentinel-2">
-<h2>1. Carga de imágenes Sentinel-2<a class="headerlink" href="#carga-de-imagenes-sentinel-2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.1. </span>1. Carga de imágenes Sentinel-2<a class="headerlink" href="#carga-de-imagenes-sentinel-2" title="Link to this heading">#</a></h2>
 <p>Primero se crea una <code class="docutils literal notranslate"><span class="pre">ImageCollection</span></code> de Sentinel-2, se filtra por porcentaje de nubes, por fecha y por región de interés (ROI).</p>
 <blockquote>
 <div><p><strong>GEE (JavaScript)</strong></p>
@@ -468,7 +437,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="creacion-del-composite">
-<h2>2. Creación del composite<a class="headerlink" href="#creacion-del-composite" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.2. </span>2. Creación del composite<a class="headerlink" href="#creacion-del-composite" title="Link to this heading">#</a></h2>
 <p>Se reduce la colección mediante la <strong>mediana</strong> y se recorta al ROI. Este composite elimina la mayor parte de nubes y anomalías.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -492,7 +461,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="datos-de-entrenamiento">
-<h2>3. Datos de entrenamiento<a class="headerlink" href="#datos-de-entrenamiento" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.3. </span>3. Datos de entrenamiento<a class="headerlink" href="#datos-de-entrenamiento" title="Link to this heading">#</a></h2>
 <p>Cada clase de cobertura (agua, urbano, cultivos, bosque, terreno desnudo) se representa con muestras (<code class="docutils literal notranslate"><span class="pre">FeatureCollection</span></code>) que tienen una propiedad <code class="docutils literal notranslate"><span class="pre">landcover</span></code> con valores entre 0 y 4.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -509,7 +478,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="division-entrenamiento-validacion">
-<h2>4. División entrenamiento/validación<a class="headerlink" href="#division-entrenamiento-validacion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.4. </span>4. División entrenamiento/validación<a class="headerlink" href="#division-entrenamiento-validacion" title="Link to this heading">#</a></h2>
 <p>Se divide aleatoriamente el 60% de las muestras para entrenamiento y el 40% para validación.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -530,7 +499,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="extraccion-de-valores-espectrales">
-<h2>5. Extracción de valores espectrales<a class="headerlink" href="#extraccion-de-valores-espectrales" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.5. </span>5. Extracción de valores espectrales<a class="headerlink" href="#extraccion-de-valores-espectrales" title="Link to this heading">#</a></h2>
 <p>Se muestrean los valores de reflectancia de las bandas Sentinel-2 en cada punto de entrenamiento.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -557,7 +526,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="entrenamiento-del-clasificador">
-<h2>6. Entrenamiento del clasificador<a class="headerlink" href="#entrenamiento-del-clasificador" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.6. </span>6. Entrenamiento del clasificador<a class="headerlink" href="#entrenamiento-del-clasificador" title="Link to this heading">#</a></h2>
 <p>Se utiliza el algoritmo <strong>Random Forest</strong> con 100 árboles.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -582,7 +551,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="clasificacion">
-<h2>7. Clasificación<a class="headerlink" href="#clasificacion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.7. </span>7. Clasificación<a class="headerlink" href="#clasificacion" title="Link to this heading">#</a></h2>
 <p>Se clasifica el composite completo y se visualiza con una paleta de colores.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -607,7 +576,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="validacion-y-metricas">
-<h2>8. Validación y métricas<a class="headerlink" href="#validacion-y-metricas" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.8. </span>8. Validación y métricas<a class="headerlink" href="#validacion-y-metricas" title="Link to this heading">#</a></h2>
 <p>Se evalúa el modelo con las muestras de validación. Se generan métricas de exactitud, matriz de confusión, Kappa y F1.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -645,9 +614,8 @@ document.write(`
 </pre></div>
 </div>
 </section>
-<hr class="docutils" />
 <section id="interpretacion-de-resultados">
-<h2>9. Interpretación de resultados<a class="headerlink" href="#interpretacion-de-resultados" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.9. </span>9. Interpretación de resultados<a class="headerlink" href="#interpretacion-de-resultados" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Matriz de confusión</strong>: muestra aciertos y errores por clase.</p></li>
 <li><p><strong>Overall Accuracy</strong>: porcentaje global de aciertos.</p></li>
@@ -656,16 +624,15 @@ document.write(`
 <li><p><strong>F1-Score</strong>: balance entre precisión y exhaustividad para la clase analizada.</p></li>
 </ul>
 </section>
-</section>
-<hr class="docutils" />
-<section class="tex2jax_ignore mathjax_ignore" id="conclusion">
-<h1>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h1>
+<section id="conclusion">
+<h2><span class="section-number">3.10. </span>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>Este ejemplo muestra cómo un flujo completo de clasificación supervisada en GEE (JavaScript) puede trasladarse paso a paso a Colab (Python). Esto permite:</p>
 <ul class="simple">
 <li><p>Integrar GEE con librerías de Python.</p></li>
 <li><p>Documentar y reproducir análisis en Jupyter/Colab.</p></li>
 <li><p>Generar libros interactivos con JupyterBook que incluyan ambos códigos.</p></li>
 </ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -704,7 +671,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Capítulo 2 · Random Forest en GEE</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Capítulo 2 · Random Forest en GEE</p>
       </div>
     </a>
     <a class="right-next"
@@ -712,7 +679,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -732,21 +699,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Capítulo 3 · Random Forest en GEE y Colab</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-imagenes-sentinel-2">1. Carga de imágenes Sentinel-2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-del-composite">2. Creación del composite</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-entrenamiento">3. Datos de entrenamiento</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#division-entrenamiento-validacion">4. División entrenamiento/validación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-espectrales">5. Extracción de valores espectrales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">6. Entrenamiento del clasificador</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion">7. Clasificación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-y-metricas">8. Validación y métricas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">9. Interpretación de resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-imagenes-sentinel-2">3.1. 1. Carga de imágenes Sentinel-2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-del-composite">3.2. 2. Creación del composite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-entrenamiento">3.3. 3. Datos de entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#division-entrenamiento-validacion">3.4. 4. División entrenamiento/validación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-espectrales">3.5. 5. Extracción de valores espectrales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">3.6. 6. Entrenamiento del clasificador</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion">3.7. 7. Clasificación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-y-metricas">3.8. 8. Validación y métricas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">3.9. 9. Interpretación de resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">3.10. Conclusión</a></li>
 </ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusión</a></li>
-</ul>
-
   </nav></div>
 
 </div></div>

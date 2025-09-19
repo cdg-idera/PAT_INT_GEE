@@ -65,7 +65,7 @@ Las series de tiempo *son mucho más que líneas en un gráfico*. Son herramient
 Estas herramientas no solo sirven para entender el pasado o describir el presente, sino que son esenciales para anticipar y planificar un futuro más informado y sostenible.
 
 
-# Serie de Tiempo: Ejemplo Bahía Blanca
+## Serie de Tiempo: Ejemplo Bahía Blanca
 
 En este laboratorio trabajamos con series temporales aplicadas a imágenes satelitales, tomando como área de estudio *el partido de Bahía Blanca* en la provincia de Buenos Aires, Argentina.
 El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a partir de imágenes *Sentinel-2* y *MODIS*, calcular valores promedio sobre una región de interés (ROI: Region of Interest), visualizarlos como gráficos y opcionalmente exportar las estadísticas en formato CSV para análisis externos con R, python o Power BI.
@@ -338,7 +338,7 @@ Export.table.toDrive({
 Algunas Conclusiones de la sección
 ```
 
-# Uso de Awesome Spectral Indices en GEE
+## Uso de Awesome Spectral Indices en GEE
 
 
 En este video vamos a explorar cómo usar el  catálogo abierto y colaborativo de índices espectrales denominado **Awesome Spectral Indices (ASI)**, una herramienta muy potente para calcular de forma sencilla decenas de índices espectrales en Google Earth Engine.
@@ -352,7 +352,7 @@ Esta librería nos ahorra tiempo y evita errores al aplicar fórmulas, ya que co
 ïcono de la librería Spectral que implementa ASI en JS
 ```
 
-## ¿Cómo funciona? – Importar el módulo
+### ¿Cómo funciona? – Importar el módulo
 
 Lo primero que tenemos que hacer es aceptar el módulo desde el repositorio del autor. Una vez aceptado, lo cargamos con el siguiente comando:
 
@@ -362,7 +362,7 @@ var spectral = require("users/dmlmont/spectral:spectral");
 
 Esto nos habilita todas las funciones y estructuras que forman parte del paquete.
 
-## Ver la lista completa de índices
+### Ver la lista completa de índices
 Podemos listar todos los índices disponibles simplemente con:
 
 ```javascript
@@ -371,7 +371,7 @@ print(spectral.indices);
 
 En la consola vamos a ver un diccionario grande, donde cada clave es el nombre corto del índice: como NDVI, EVI, NDWI, NDBI, SAVI, entre muchos otros.
 
-## Acceder a la información de un índice específico
+### Acceder a la información de un índice específico
 
 Supongamos que queremos saber más sobre el NDVI. Tenemos dos formas equivalentes de hacerlo:
 
@@ -383,7 +383,7 @@ print(spectral.indices["NDVI"]);
 
 En ambos casos se nos despliega toda la información asociada a ese índice.
 
-## Explorar los atributos del índice
+### Explorar los atributos del índice
 
 Los atributos disponibles para cada índice incluyen:
 
@@ -409,7 +409,7 @@ O bien:
 print(spectral.indices.NDVI["formula"]);
 ```
 
-## Calcular un índice: NDVI sobre una imagen Sentinel-2
+### Calcular un índice: NDVI sobre una imagen Sentinel-2
 
 Ahora vamos a calcular un índice real sobre una imagen de Sentinel-2.
 
@@ -445,7 +445,7 @@ print("Imagen con NDVI:", S2);
 ```
 En la consola, dentro de la pestaña bands, vamos a ver que además de las bandas originales, ahora tenemos una nueva banda NDVI, calculada automáticamente.
 
-## Calcular múltiples índices a la vez
+### Calcular múltiples índices a la vez
 
 También podemos calcular varios índices simultáneamente:
 
@@ -468,7 +468,7 @@ print("Imagen con varios índices:", S2);
 
 En la consola vamos a ver que ahora tenemos nuevas bandas: NDVI, GNDVI y SAVI, todas calculadas en una sola línea de código.
 
-## Mostrar el resultado en el visor de GEE
+### Mostrar el resultado en el visor de GEE
 
 Podemos agregar cualquiera de estos índices al mapa. Por ejemplo:
 
@@ -485,7 +485,7 @@ ASI no solo esta disponible en GEE para JS, sino tambien en lenguaje python, R y
 **dominio de aplicación** como : vegetación, agua, fuego, nieve, urbano, suelo, kernel y radar. Cada indice incluye la *fórmula*, el *dominio temático* y también la *compatibilidad*, es decir con qué sensores se pueden aplicar cada uno de estos indices, incluyendo: MODIS, Landsat, Sentinel-2 y planet fusion.
 
 
-# Explicación de la nueva versión con ASI
+## Explicación de la nueva versión con ASI
 
 Para cerrar este capítulo mostraremos una mejora en la función agregarIndices, ahora usando la librería Awesome Spectral Indices (ASI). Realizamos una copia del script anterior y lo denominamos
 Lab_006_TS_BahiaBlanca_BIS
@@ -539,7 +539,7 @@ return conIndices.addBands(nir);
 Esta versión es más ordenada, más mantenible, y nos permite reutilizar fácilmente la función para otros índices o sensores si lo necesitamos más adelante.
 
 
-# Cierre
+## Cierre
 
 Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de datos geoespaciales de varios petabytes con capacidades de análisis a escala planetaria. Científicos, investigadores y desarrolladores utilizan Earth Engine para detectar cambios, mapear tendencias y cuantificar diferencias en la superficie terrestre. Earth Engine ahora está disponible para uso comercial y sigue siendo gratuito para fines académicos y de investigación.
 

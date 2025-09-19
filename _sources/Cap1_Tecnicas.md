@@ -1,4 +1,4 @@
-# Capítulo 1 ·Técnicas
+# Capítulo 1 · Teledetección y Aprendizaje Automático
 
 
 Bienvenidos en este capítulo exploraremos cómo el aprendizaje automático está revolucionando la teledetección y el trabajo en la nube y mostraremos un ejemplo práctico de aprendizaje automático supervisado con Random Forest. El capítulo se estructura en tres partes en la primera parte comenzaremos haciendo una breve reseña sobre teledetección luego en la segunda parte abordaremos técnicas de aprendizaje automático o Machine learning aplicadas a imágenes satelitales, en la tercera parte mostraremos un ejemplo concreto de la técnica Random Forest a una composición de imágenes sobre un área de estudio. Comenzaremos haciendo una pequeña reseña sobre teledetección:
@@ -64,7 +64,7 @@ Por ejemplo, si el objetivo es detectar agua, sería ideal medir directamente la
 
 Conclusión: En el contexto de teledetección, el aprendizaje automático no solo simplifica el manejo de datos complejos y ruidosos, sino que también proporciona una robustez y adaptabilidad que los métodos tradicionales no pueden igualar. Este enfoque representa un cambio de paradigma: en lugar de tratar de definir manualmente las reglas de clasificación, delegamos esta tarea a algoritmos capaces de extraer patrones directamente de los datos.
 
-# Clasificación y aprendizaje automático en teledetección 
+## Clasificación y aprendizaje automático en teledetección 
 
 El aprendizaje automático (en inglés *ML ó Machine learning*) ofrece dos enfoques principales para abordar problemas en teledetección: aprendizaje supervisado y no supervisado. Cada uno tiene aplicaciones específicas y ventajas según el caso de uso: Aprendizaje no supervisado y Aprendizaje supervisado. 
 
@@ -158,7 +158,7 @@ Sin embargo, tienen un problema conocido como sobreajuste: si los datos de entre
 
 Para mitigar el sobreajuste, se pueden podar ramas del árbol, limitar la profundidad máxima o emplear métodos como Random Forest, que combinan múltiples árboles para mejorar la generalización.
 
-# Pasos en la aplicacion de ML a imágenes satelitales.
+## Pasos en la aplicacion de ML a imágenes satelitales.
 
 La clasificación de imágenes satelitales es una técnica fundamental en teledetección, y uno de los enfoques más comunes es dividir el territorio en categorías específicas, como urbano, suelo desnudo, agua y vegetación. Este proceso comienza identificando los píxeles correspondientes a cada una de estas clases dentro de una imagen satelital. Para ello, es esencial recolectar datos de entrenamiento representativos que permitan entrenar un modelo de clasificación eficaz.
 
@@ -267,7 +267,7 @@ Al revisar la matriz de confusión, si se observa que hay una alta confusión en
 Una vez que estemos satisfechos con los resultados de la clasificación y la precisión, podemos comenzar a optimizar el modelo, ajustando parámetros y evaluando nuevas muestras de entrenamiento para mejorar la precisión general.
 
 
-# Conclusión
+## Conclusión
 
 El aprendizaje automático no solo transforma datos en conocimiento accionable también redefine nuestra capacidad para comprender y gestionar entornos complejos. Herramientas como las máquinas de soporte vectorial, árboles de decisión y Random Forest nos brindan la precisión necesaria para abordar desafíos reales como el análisis del uso de suelo y la planificación territorial. En este ejemplo aplicado al área metropolitana de Rosario Random Forest demostró ser una herramienta poderosa capaz de clasificar grandes extensiones de territorio con una precisión sobresaliente esto no solo mejora nuestra visión científica del entorno sino que también apoya la toma de decisiones fundamentadas en evidencia. 
 
@@ -277,10 +277,6 @@ El futuro del Análisis Geoespacial está aquí combinando algoritmos robustos y
 
 ## Video del capítulo
 
-Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA:
+Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: https://www.youtube.com/watch?v=fk6atugR6ss
 
-```{iframe} https://www.youtube.com/watch?v=fk6atugR6ss
-:width: 80%
-:height: 400px
-```
 
