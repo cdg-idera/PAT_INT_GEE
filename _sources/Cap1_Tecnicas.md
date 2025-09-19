@@ -5,14 +5,12 @@ Bienvenidos en este capítulo exploraremos cómo el aprendizaje automático est�
 
 ## Teledetección
 
-La teledetección es la ciencia de obtener información sobre objetos o áreas a distancia mediante el uso de satélites aeronaves o drones.
+> La teledetección es la ciencia de obtener información sobre objetos o áreas a distancia mediante el uso de satélites aeronaves o drones.
 
 
-Jensen, John R. en su libro Remote Sensing of the Environment: An Earth Resource Perspective (2007) define la teledetección como: "La ciencia y el arte de obtener información sobre un objeto, área o fenómeno mediante el análisis de datos adquiridos por un dispositivo que no está en contacto con el objeto, área o fenómeno en estudio."
+> Jensen, John R. en su libro Remote Sensing of the Environment: An Earth Resource Perspective (2007) define la teledetección como: "La ciencia y el arte de obtener información sobre un objeto, área o fenómeno mediante el análisis de datos adquiridos por un dispositivo que no está en contacto con el objeto, área o fenómeno en estudio." Remote Sensing and Image Interpretation (2015), Lillesand, Kiefer y Chipman definen la teledetección como:
 
-Remote Sensing and Image Interpretation (2015), Lillesand, Kiefer y Chipman definen la teledetección como:
-
-"La teledetección es el proceso de adquirir información sobre las propiedades de los objetos en la superficie terrestre sin estar en contacto físico con ellos. Esto se logra detectando y analizando la radiación reflejada o emitida por esos objetos, utilizando sensores montados en plataformas remotas, como satélites o aeronaves."
+> "La teledetección es el proceso de adquirir información sobre las propiedades de los objetos en la superficie terrestre sin estar en contacto físico con ellos. Esto se logra detectando y analizando la radiación reflejada o emitida por esos objetos, utilizando sensores montados en plataformas remotas, como satélites o aeronaves."
 
 ![](imagenes/areasIA2.png)
 
@@ -68,13 +66,13 @@ Conclusión: En el contexto de teledetección, el aprendizaje automático no sol
 
 El aprendizaje automático (en inglés *ML ó Machine learning*) ofrece dos enfoques principales para abordar problemas en teledetección: aprendizaje supervisado y no supervisado. Cada uno tiene aplicaciones específicas y ventajas según el caso de uso: Aprendizaje no supervisado y Aprendizaje supervisado. 
 
-## Aprendizaje o supervisado 
+### Aprendizaje no supervisado 
 
 Este método implica proporcionar los datos al algoritmo sin etiquetas previas. Los algoritmos no supervisados agrupan los datos en categorías basadas en similitudes internas, como los valores de reflectancia en imágenes satelitales. Por ejemplo, algoritmos como k-means clustering o SNCC identifican agrupaciones de píxeles con características espectrales similares, pero no asignan significado alguno a esos grupos; esta tarea recae en el analista o en otro modelo.
 
 Aunque el aprendizaje no supervisado es útil para encontrar patrones en datos complejos, tiene limitaciones. La interpretación y etiquetado posterior de los grupos requieren un esfuerzo significativo, lo que lo convierte más en una herramienta inicial o complementaria que en una solución completa. En teledetección, se utiliza comúnmente para la clasificación basada en objetos, donde se combinan agrupaciones no supervisadas con métodos supervisados.
 
-## Aprendizaje supervisado
+### Aprendizaje supervisado
  
 El aprendizaje supervisado, por otro lado, requiere datos previamente etiquetados. Por ejemplo, para clasificar agua en una imagen satelital, es necesario identificar y etiquetar píxeles de muestra representativos de agua y no agua. Estos datos de entrenamiento alimentan al algoritmo, que aprende a generalizar y clasificar el resto de la imagen. Algoritmos como regresión logística, bosques aleatorios (random forest) y otros modelos de clasificación supervisada son ampliamente utilizados.
 
@@ -102,7 +100,7 @@ Para ilustrar el proceso de aprendizaje supervisado, consideremos una clasificac
 
 Un modelo entrenado con estos datos aprenderá a predecir la clase de nuevos píxeles basándose en sus reflectancias. Este proceso es escalable a problemas más complejos, como clasificaciones multiclase (ej., vegetación, suelo desnudo, agua) y análisis multiespectral.
 
-### Conclusión
+### Conclusión de la sección
 
 La mayoría de las aplicaciones de teledetección implican algún tipo de clasificación supervisada, ya que permiten convertir imágenes en mapas clasificados, útiles para responder preguntas clave como: ¿Qué porcentaje de la ciudad está cubierto por árboles? o ¿Cuál es el área urbanizada en crecimiento?
 
@@ -152,7 +150,7 @@ Para clasificar un píxel, se sigue el flujo del árbol:
 Se verifican las condiciones establecidas en cada nodo.
 Al final, se llega a una hoja que indica la clase del píxel (agua o no agua).
 
-## Ventajas y limitaciones:
+### Ventajas y limitaciones:
 Los Árboles de Decisión son fáciles de interpretar porque el modelo resulta en un diagrama explicativo.
 Sin embargo, tienen un problema conocido como sobreajuste: si los datos de entrenamiento contienen ruido, el árbol puede volverse excesivamente complejo al intentar ajustarse a datos irrelevantes.
 
@@ -192,7 +190,7 @@ Aseguráte de recopilar datos de diferentes partes de la ciudad que correspondan
 Del mismo modo, crearemos capas para las clases de agua y vegetación.  Una vez que hayamos terminado, tendremos algo como esto: una colección de muestras de entrenamiento para cada clase. Estas muestras estarán bien distribuidas por la región de interés, con alrededor de 10 puntos por clase para áreas pequeñas. Para regiones más grandes, se recomienda aumentar la cantidad de puntos.
 
 
-## Unificando Muestras de Entrenamiento
+### Unificando Muestras de Entrenamiento
 
 Ahora que hemos etiquetado cada clase con valores únicos (0 para urbano, 1 para terreno desnudo, 2 para agua, y 3 para vegetación), necesitamos combinar todas estas muestras en una sola colección de entrenamiento. Esto simplificará el proceso de clasificación.
 
@@ -200,13 +198,13 @@ Definiremos una variable llamada GCP (Ground Control Points, puntos de control e
 
 Esta colección tiene una única propiedad llamada land cover, que es la etiqueta de clase. Sin embargo, aún necesitamos asociar las reflectancias espectrales de cada píxel en nuestra imagen compuesta a estas etiquetas.
 
-## Extracción de Valores de Píxeles
+### Extracción de Valores de Píxeles
 
 El siguiente paso es extraer los valores espectrales de los píxeles en nuestra imagen compuesta. Esto se hace con la función sampleRegions, que toma la imagen y las geometrías de nuestras muestras de entrenamiento. Configuraremos la función para mantener solo la propiedad land cover y definiremos una escala de muestreo acorde a la resolución de Sentinel-2 (10 metros).
 
 Después de ejecutar esta función, cada muestra de entrenamiento incluirá los valores espectrales de las 12 bandas de la imagen, junto con su etiqueta de clase. Esto nos proporciona una tabla donde cada fila corresponde a un píxel de entrenamiento y cada columna representa las bandas espectrales. Esta tabla será usada para entrenar el modelo de clasificación.
 
-## Entrenamiento del Clasificador
+### Entrenamiento del Clasificador
 
 Para entrenar el modelo, utilizaremos un clasificador de bosque aleatorio (Random Forest). En Earth Engine, esto se hace con la función ee.Classifier.smileRandomForest. Inicializaremos el clasificador con un número arbitrario de árboles, por ejemplo, 50. Más adelante, podremos optimizar este valor utilizando técnicas de ajuste de hiperparámetros.
 
@@ -216,7 +214,7 @@ El clasificador se entrena llamando a la función train, donde especificamos:
 - La propiedad objetivo (land cover).
 Una vez entrenado, el clasificador estará listo para predecir las etiquetas de clase en los píxeles no etiquetados de nuestra imagen.
 
-## Clasificación de la Imagen
+### Clasificación de la Imagen
 
 Tomamos nuestra imagen compuesta y aplicamos el clasificador con la función classify. Esto genera una nueva imagen clasificada, donde cada píxel tiene un valor correspondiente a una de las clases (0, 1, 2 o 3).
 
@@ -240,7 +238,7 @@ El algoritmo que utilizamos es el clasificador de bosques aleatorios, basado en 
 
 Lo que Earth Engine aporta es la capacidad de realizar estos procesos en tiempo real y a gran escala. Esto significa que, mientras que en un entorno local podría tomar meses realizar una clasificación a nivel nacional, en Earth Engine se puede hacer en tiempo real.
 
-## Algunas recomendaciones para optimizar la recolección de datos son las siguientes:
+### Algunas recomendaciones para optimizar la recolección de datos son las siguientes:
 
 Usar imágenes Sentinel-2 como referencia. Asegúrate de utilizar imágenes de Sentinel-2 para seleccionar las muestras de entrenamiento, ya que las imágenes de alta resolución pueden no coincidir temporalmente con las imágenes de Sentinel-2, lo que podría afectar la precisión del modelo.
 
@@ -248,7 +246,7 @@ Distribuir las muestras de entrenamiento de manera equitativa. Asegúrate de tom
 
 Evitar muestras mixtas. No utilices píxeles mixtos para el entrenamiento. Intenta seleccionar ejemplos puros de agua, vegetación, áreas urbanas y terrenos áridos. Deja que el modelo se encargue de los píxeles mixtos.
 
-## Evaluación de la Precisión
+### Evaluación de la Precisión
 
 Una vez que completes la clasificación, es fundamental evaluar cuán precisa es la clasificación realizada. ¿Está el modelo generando resultados satisfactorios? ¿Es el modelo perfecto? ¿Está alcanzando una precisión del 100% o solo un 90%? Si deseas mejorar la clasificación, ¿cuánto influiría recolectar 100 muestras de entrenamiento adicionales? ¿Mejoraría la precisión o no tendría un impacto significativo?
 

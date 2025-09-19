@@ -148,8 +148,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="_static/logoAgua.png" class="logo__image only-light" alt="GeoIA aplicado a Imágenes Satelitales - Home"/>
+    <script>document.write(`<img src="_static/logoAgua.png" class="logo__image only-dark" alt="GeoIA aplicado a Imágenes Satelitales - Home"/>`);</script>
   
-    <p class="title logo__title">GeoIA aplicado a Imágenes Satelitales</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -378,34 +384,36 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teledeteccion">1.1. Teledetección</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-y-aprendizaje-automatico-en-teledeteccion">1.2. Clasificación y aprendizaje automático en teledetección</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-o-supervisado">1.3. Aprendizaje o supervisado</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-supervisado">1.4. Aprendizaje supervisado</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consideraciones-practicas">1.4.1. Consideraciones prácticas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-practico-clasificacion-binaria">1.4.2. Ejemplo práctico: Clasificación binaria</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">1.4.3. Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-y-aprendizaje-automatico-en-teledeteccion">1.2. Clasificación y aprendizaje automático en teledetección</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-no-supervisado">1.2.1. Aprendizaje no supervisado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-supervisado">1.2.2. Aprendizaje supervisado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consideraciones-practicas">1.2.3. Consideraciones prácticas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-practico-clasificacion-binaria">1.2.4. Ejemplo práctico: Clasificación binaria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-de-la-seccion">1.2.5. Conclusión de la sección</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial-svm">1.5. Maquina de Soporte Vectorial (SVM)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">1.5.1. Entrenamiento:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion">1.5.2. Predicción:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial-svm">1.3. Maquina de Soporte Vectorial (SVM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">1.3.1. Entrenamiento:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion">1.3.2. Predicción:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-de-decision">1.6. Árboles de Decisión</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.6.1. Entrenamiento:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.6.2. Predicción:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-de-decision">1.4. Árboles de Decisión</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.4.1. Entrenamiento:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.4.2. Predicción:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-y-limitaciones">1.4.3. Ventajas y limitaciones:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-y-limitaciones">1.7. Ventajas y limitaciones:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pasos-en-la-aplicacion-de-ml-a-imagenes-satelitales">1.8. Pasos en la aplicacion de ML a imágenes satelitales.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unificando-muestras-de-entrenamiento">1.9. Unificando Muestras de Entrenamiento</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-de-pixeles">1.10. Extracción de Valores de Píxeles</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">1.11. Entrenamiento del Clasificador</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-la-imagen">1.12. Clasificación de la Imagen</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algunas-recomendaciones-para-optimizar-la-recoleccion-de-datos-son-las-siguientes">1.13. Algunas recomendaciones para optimizar la recolección de datos son las siguientes:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-la-precision">1.14. Evaluación de la Precisión</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.15. Conclusión</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">1.16. Video del capítulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pasos-en-la-aplicacion-de-ml-a-imagenes-satelitales">1.5. Pasos en la aplicacion de ML a imágenes satelitales.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unificando-muestras-de-entrenamiento">1.5.1. Unificando Muestras de Entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-de-pixeles">1.5.2. Extracción de Valores de Píxeles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">1.5.3. Entrenamiento del Clasificador</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-la-imagen">1.5.4. Clasificación de la Imagen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algunas-recomendaciones-para-optimizar-la-recoleccion-de-datos-son-las-siguientes">1.5.5. Algunas recomendaciones para optimizar la recolección de datos son las siguientes:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-la-precision">1.5.6. Evaluación de la Precisión</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">1.6. Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">1.7. Video del capítulo</a></li>
 </ul>
             </nav>
         </div>
@@ -422,10 +430,15 @@ document.write(`
 <p>Bienvenidos en este capítulo exploraremos cómo el aprendizaje automático está revolucionando la teledetección y el trabajo en la nube y mostraremos un ejemplo práctico de aprendizaje automático supervisado con Random Forest. El capítulo se estructura en tres partes en la primera parte comenzaremos haciendo una breve reseña sobre teledetección luego en la segunda parte abordaremos técnicas de aprendizaje automático o Machine learning aplicadas a imágenes satelitales, en la tercera parte mostraremos un ejemplo concreto de la técnica Random Forest a una composición de imágenes sobre un área de estudio. Comenzaremos haciendo una pequeña reseña sobre teledetección:</p>
 <section id="teledeteccion">
 <h2><span class="section-number">1.1. </span>Teledetección<a class="headerlink" href="#teledeteccion" title="Link to this heading">#</a></h2>
-<p>La teledetección es la ciencia de obtener información sobre objetos o áreas a distancia mediante el uso de satélites aeronaves o drones.</p>
-<p>Jensen, John R. en su libro Remote Sensing of the Environment: An Earth Resource Perspective (2007) define la teledetección como: “La ciencia y el arte de obtener información sobre un objeto, área o fenómeno mediante el análisis de datos adquiridos por un dispositivo que no está en contacto con el objeto, área o fenómeno en estudio.”</p>
-<p>Remote Sensing and Image Interpretation (2015), Lillesand, Kiefer y Chipman definen la teledetección como:</p>
-<p>“La teledetección es el proceso de adquirir información sobre las propiedades de los objetos en la superficie terrestre sin estar en contacto físico con ellos. Esto se logra detectando y analizando la radiación reflejada o emitida por esos objetos, utilizando sensores montados en plataformas remotas, como satélites o aeronaves.”</p>
+<blockquote>
+<div><p>La teledetección es la ciencia de obtener información sobre objetos o áreas a distancia mediante el uso de satélites aeronaves o drones.</p>
+</div></blockquote>
+<blockquote>
+<div><p>Jensen, John R. en su libro Remote Sensing of the Environment: An Earth Resource Perspective (2007) define la teledetección como: “La ciencia y el arte de obtener información sobre un objeto, área o fenómeno mediante el análisis de datos adquiridos por un dispositivo que no está en contacto con el objeto, área o fenómeno en estudio.” Remote Sensing and Image Interpretation (2015), Lillesand, Kiefer y Chipman definen la teledetección como:</p>
+</div></blockquote>
+<blockquote>
+<div><p>“La teledetección es el proceso de adquirir información sobre las propiedades de los objetos en la superficie terrestre sin estar en contacto físico con ellos. Esto se logra detectando y analizando la radiación reflejada o emitida por esos objetos, utilizando sensores montados en plataformas remotas, como satélites o aeronaves.”</p>
+</div></blockquote>
 <p><img alt="" src="_images/areasIA2.png" /></p>
 <p>Esta disciplina se ha convertido en una herramienta esencial para entender nuestro entorno y tomar decisiones fundamentadas en múltiples campos. Entre sus principales propósitos se encuentran:</p>
 <ul class="simple">
@@ -459,14 +472,13 @@ document.write(`
 <section id="clasificacion-y-aprendizaje-automatico-en-teledeteccion">
 <h2><span class="section-number">1.2. </span>Clasificación y aprendizaje automático en teledetección<a class="headerlink" href="#clasificacion-y-aprendizaje-automatico-en-teledeteccion" title="Link to this heading">#</a></h2>
 <p>El aprendizaje automático (en inglés <em>ML ó Machine learning</em>) ofrece dos enfoques principales para abordar problemas en teledetección: aprendizaje supervisado y no supervisado. Cada uno tiene aplicaciones específicas y ventajas según el caso de uso: Aprendizaje no supervisado y Aprendizaje supervisado.</p>
-</section>
-<section id="aprendizaje-o-supervisado">
-<h2><span class="section-number">1.3. </span>Aprendizaje o supervisado<a class="headerlink" href="#aprendizaje-o-supervisado" title="Link to this heading">#</a></h2>
+<section id="aprendizaje-no-supervisado">
+<h3><span class="section-number">1.2.1. </span>Aprendizaje no supervisado<a class="headerlink" href="#aprendizaje-no-supervisado" title="Link to this heading">#</a></h3>
 <p>Este método implica proporcionar los datos al algoritmo sin etiquetas previas. Los algoritmos no supervisados agrupan los datos en categorías basadas en similitudes internas, como los valores de reflectancia en imágenes satelitales. Por ejemplo, algoritmos como k-means clustering o SNCC identifican agrupaciones de píxeles con características espectrales similares, pero no asignan significado alguno a esos grupos; esta tarea recae en el analista o en otro modelo.</p>
 <p>Aunque el aprendizaje no supervisado es útil para encontrar patrones en datos complejos, tiene limitaciones. La interpretación y etiquetado posterior de los grupos requieren un esfuerzo significativo, lo que lo convierte más en una herramienta inicial o complementaria que en una solución completa. En teledetección, se utiliza comúnmente para la clasificación basada en objetos, donde se combinan agrupaciones no supervisadas con métodos supervisados.</p>
 </section>
 <section id="aprendizaje-supervisado">
-<h2><span class="section-number">1.4. </span>Aprendizaje supervisado<a class="headerlink" href="#aprendizaje-supervisado" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">1.2.2. </span>Aprendizaje supervisado<a class="headerlink" href="#aprendizaje-supervisado" title="Link to this heading">#</a></h3>
 <p>El aprendizaje supervisado, por otro lado, requiere datos previamente etiquetados. Por ejemplo, para clasificar agua en una imagen satelital, es necesario identificar y etiquetar píxeles de muestra representativos de agua y no agua. Estos datos de entrenamiento alimentan al algoritmo, que aprende a generalizar y clasificar el resto de la imagen. Algoritmos como regresión logística, bosques aleatorios (random forest) y otros modelos de clasificación supervisada son ampliamente utilizados.</p>
 <p>En la práctica, la clasificación supervisada es la técnica predominante, ya que permite asignar etiquetas claras a cada píxel, crucial para cuantificaciones precisas y análisis detallados. Su flujo de trabajo típico incluye:</p>
 <ul class="simple">
@@ -477,18 +489,19 @@ document.write(`
 <li><p>Refinamiento iterativo mediante ajustes de parámetros o mejora de los datos de entrada</p></li>
 </ul>
 <p><img alt="" src="_images/Workflow.png" /></p>
+</section>
 <section id="consideraciones-practicas">
-<h3><span class="section-number">1.4.1. </span>Consideraciones prácticas<a class="headerlink" href="#consideraciones-practicas" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.2.3. </span>Consideraciones prácticas<a class="headerlink" href="#consideraciones-practicas" title="Link to this heading">#</a></h3>
 <p>Aunque el aprendizaje automático simplifica el manejo de datos complejos, no siempre es la mejor opción. Métodos tradicionales como los sistemas expertos, que emplean fórmulas derivadas de las propiedades físicas del terreno, son preferibles en ciertos casos, especialmente cuando se trabaja con pocos parámetros (bandas espectrales). Por ejemplo, el conjunto de datos global Global Surface Water, basado en un sistema experto, supera a los métodos de Aprendizaje automático en la detección de agua en imágenes Landsat a escala global.</p>
 <p>La elección entre un sistema experto y Aprendizaje automático depende del problema en cuestión. Los sistemas expertos destacan por su transparencia y simplicidad en problemas bien definidos, mientras que el Aprendizaje automático se adapta mejor a datos complejos y ruidosos, descubriendo patrones ocultos sin necesidad de reglas explícitas.</p>
 </section>
 <section id="ejemplo-practico-clasificacion-binaria">
-<h3><span class="section-number">1.4.2. </span>Ejemplo práctico: Clasificación binaria<a class="headerlink" href="#ejemplo-practico-clasificacion-binaria" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.2.4. </span>Ejemplo práctico: Clasificación binaria<a class="headerlink" href="#ejemplo-practico-clasificacion-binaria" title="Link to this heading">#</a></h3>
 <p>Para ilustrar el proceso de aprendizaje supervisado, consideremos una clasificación binaria: detectar agua frente a no agua. Supongamos que seleccionamos píxeles representativos (50 de agua y 50 de no agua) y extraemos sus valores de reflectancia en dos bandas (verde e infrarrojo). Estos datos se organizan en una tabla de entrenamiento, donde cada fila representa un píxel y contiene sus valores espectrales y etiqueta correspondiente.</p>
 <p>Un modelo entrenado con estos datos aprenderá a predecir la clase de nuevos píxeles basándose en sus reflectancias. Este proceso es escalable a problemas más complejos, como clasificaciones multiclase (ej., vegetación, suelo desnudo, agua) y análisis multiespectral.</p>
 </section>
-<section id="conclusion">
-<h3><span class="section-number">1.4.3. </span>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h3>
+<section id="conclusion-de-la-seccion">
+<h3><span class="section-number">1.2.5. </span>Conclusión de la sección<a class="headerlink" href="#conclusion-de-la-seccion" title="Link to this heading">#</a></h3>
 <p>La mayoría de las aplicaciones de teledetección implican algún tipo de clasificación supervisada, ya que permiten convertir imágenes en mapas clasificados, útiles para responder preguntas clave como: ¿Qué porcentaje de la ciudad está cubierto por árboles? o ¿Cuál es el área urbanizada en crecimiento?</p>
 <p>Aunque ambos enfoques (supervisado y no supervisado) tienen un lugar en el análisis de teledetección, comprender sus fortalezas y limitaciones es esencial para elegir la estrategia adecuada en cada caso. Al final, la combinación de ambos métodos, junto con sistemas expertos, puede ofrecer resultados más robustos y confiables.</p>
 <p>El aprendizaje automático se ha convertido en una herramienta imprescindible en teledetección, particularmente para resolver problemas de clasificación. Una aplicación común es identificar qué píxeles en una imagen satelital representan cuerpos de agua y cuáles corresponden a otras superficies. Para abordar estas tareas, se han desarrollado diversos algoritmos, cada uno con fortalezas particulares. Entre ellos, destacan las Máquinas de Soporte Vectorial (SVM), los árboles de decisión y el algoritmo Random Forest, que han transformado la manera en que se procesan y analizan los datos satelitales.</p>
@@ -501,10 +514,10 @@ document.write(`
 </section>
 </section>
 <section id="maquina-de-soporte-vectorial-svm">
-<h2><span class="section-number">1.5. </span>Maquina de Soporte Vectorial (SVM)<a class="headerlink" href="#maquina-de-soporte-vectorial-svm" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.3. </span>Maquina de Soporte Vectorial (SVM)<a class="headerlink" href="#maquina-de-soporte-vectorial-svm" title="Link to this heading">#</a></h2>
 <p>A continuación, exploraremos cómo funciona la tecnica maquinas de soporte vectorial o SVM</p>
 <section id="entrenamiento">
-<h3><span class="section-number">1.5.1. </span>Entrenamiento:<a class="headerlink" href="#entrenamiento" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.3.1. </span>Entrenamiento:<a class="headerlink" href="#entrenamiento" title="Link to this heading">#</a></h3>
 <p>SVM es un modelo adecuado para problemas con dos clases (en este caso, agua y no agua). Durante el entrenamiento, SVM busca una línea (o un plano en dimensiones superiores) que separe los píxeles etiquetados como “agua” de los etiquetados como “no agua”.</p>
 <ul class="simple">
 <li><p>En un gráfico 2D, con la reflectancia de la banda verde en el eje X y la reflectancia de la banda NIR en el eje Y, SVM encuentra la línea que mejor separa los dos grupos.</p></li>
@@ -512,7 +525,7 @@ document.write(`
 </ul>
 </section>
 <section id="prediccion">
-<h3><span class="section-number">1.5.2. </span>Predicción:<a class="headerlink" href="#prediccion" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.3.2. </span>Predicción:<a class="headerlink" href="#prediccion" title="Link to this heading">#</a></h3>
 <p>Una vez entrenado, el modelo usa esta línea para clasificar nuevos píxeles:</p>
 <ul class="simple">
 <li><p>Si un píxel tiene valores que caen por debajo de la línea, se clasifica como “agua”.</p></li>
@@ -523,26 +536,26 @@ document.write(`
 </section>
 </section>
 <section id="arboles-de-decision">
-<h2><span class="section-number">1.6. </span>Árboles de Decisión<a class="headerlink" href="#arboles-de-decision" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.4. </span>Árboles de Decisión<a class="headerlink" href="#arboles-de-decision" title="Link to this heading">#</a></h2>
 <section id="id1">
-<h3><span class="section-number">1.6.1. </span>Entrenamiento:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.4.1. </span>Entrenamiento:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <p>Los Árboles de Decisión dividen los datos en pasos secuenciales basados en umbrales en los valores de las bandas. Por ejemplo, el modelo puede establecer que un píxel es “agua” si su reflectancia en la banda verde es menor que un valor X y su reflectancia en la banda infrarroja cercana es menor que un valor Y. Estas reglas se organizan en un flujo lógico (un diagrama de árbol), donde cada bifurcación representa una decisión basada en un umbral.</p>
 </section>
 <section id="id2">
-<h3><span class="section-number">1.6.2. </span>Predicción:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">1.4.2. </span>Predicción:<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
 <p>Para clasificar un píxel, se sigue el flujo del árbol:
 Se verifican las condiciones establecidas en cada nodo.
 Al final, se llega a una hoja que indica la clase del píxel (agua o no agua).</p>
 </section>
-</section>
 <section id="ventajas-y-limitaciones">
-<h2><span class="section-number">1.7. </span>Ventajas y limitaciones:<a class="headerlink" href="#ventajas-y-limitaciones" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">1.4.3. </span>Ventajas y limitaciones:<a class="headerlink" href="#ventajas-y-limitaciones" title="Link to this heading">#</a></h3>
 <p>Los Árboles de Decisión son fáciles de interpretar porque el modelo resulta en un diagrama explicativo.
 Sin embargo, tienen un problema conocido como sobreajuste: si los datos de entrenamiento contienen ruido, el árbol puede volverse excesivamente complejo al intentar ajustarse a datos irrelevantes.</p>
 <p>Para mitigar el sobreajuste, se pueden podar ramas del árbol, limitar la profundidad máxima o emplear métodos como Random Forest, que combinan múltiples árboles para mejorar la generalización.</p>
 </section>
+</section>
 <section id="pasos-en-la-aplicacion-de-ml-a-imagenes-satelitales">
-<h2><span class="section-number">1.8. </span>Pasos en la aplicacion de ML a imágenes satelitales.<a class="headerlink" href="#pasos-en-la-aplicacion-de-ml-a-imagenes-satelitales" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.5. </span>Pasos en la aplicacion de ML a imágenes satelitales.<a class="headerlink" href="#pasos-en-la-aplicacion-de-ml-a-imagenes-satelitales" title="Link to this heading">#</a></h2>
 <p>La clasificación de imágenes satelitales es una técnica fundamental en teledetección, y uno de los enfoques más comunes es dividir el territorio en categorías específicas, como urbano, suelo desnudo, agua y vegetación. Este proceso comienza identificando los píxeles correspondientes a cada una de estas clases dentro de una imagen satelital. Para ello, es esencial recolectar datos de entrenamiento representativos que permitan entrenar un modelo de clasificación eficaz.</p>
 <p>En este caso, trabajamos con imágenes de la ciudad de Rosario, utilizando datos del satélite Sentinel-2. La imagen compuesta que tenemos es un mosaico anual, una herramienta particularmente útil, ya que elimina la interferencia de nubes y asegura que todos los píxeles sean claros y legibles. El objetivo es clasificar esta imagen en cuatro clases principales: urbano, suelo desnudo, agua y vegetación. A medida que avanzamos, aprenderemos a implementar este proceso en código, con la meta final de que cada participante pueda replicar el ejemplo en su ciudad.</p>
 <p>El primer paso crucial es la recolección de datos de entrenamiento. Para ello, necesitamos etiquetar manualmente ejemplos de cada una de las cuatro clases en nuestra imagen. Por motivos de eficiencia, las etiquetas no se asignan como texto, sino como valores numéricos: los píxeles urbanos se etiquetan como 0, los de suelo desnudo como 1, los de agua como 2 y los de vegetación como 3. Esta codificación facilita el procesamiento por parte del modelo y asegura un manejo eficiente de las clases.</p>
@@ -559,20 +572,19 @@ Clasificación de Datos y Entrenamiento de un Modelo en Google Earth Engine</p>
 <p>Si la ciudad o región que estás clasificando no tiene áreas de suelo desnudo, está bien omitir esta clase. Hay regiones donde no es común encontrar suelos expuestos, donde prácticamente no hay áreas de tierra desnuda.</p>
 <p>Aseguráte de recopilar datos de diferentes partes de la ciudad que correspondan a la misma clase para garantizar que el modelo capture la variabilidad dentro de esa categoría. Mientras marcas puntos para una clase, si identificas un ejemplo claro de otra clase, puedes cambiar de capa y marcar ese punto también.</p>
 <p>Del mismo modo, crearemos capas para las clases de agua y vegetación.  Una vez que hayamos terminado, tendremos algo como esto: una colección de muestras de entrenamiento para cada clase. Estas muestras estarán bien distribuidas por la región de interés, con alrededor de 10 puntos por clase para áreas pequeñas. Para regiones más grandes, se recomienda aumentar la cantidad de puntos.</p>
-</section>
 <section id="unificando-muestras-de-entrenamiento">
-<h2><span class="section-number">1.9. </span>Unificando Muestras de Entrenamiento<a class="headerlink" href="#unificando-muestras-de-entrenamiento" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">1.5.1. </span>Unificando Muestras de Entrenamiento<a class="headerlink" href="#unificando-muestras-de-entrenamiento" title="Link to this heading">#</a></h3>
 <p>Ahora que hemos etiquetado cada clase con valores únicos (0 para urbano, 1 para terreno desnudo, 2 para agua, y 3 para vegetación), necesitamos combinar todas estas muestras en una sola colección de entrenamiento. Esto simplificará el proceso de clasificación.</p>
 <p>Definiremos una variable llamada GCP (Ground Control Points, puntos de control en tierra), que contendrá nuestras muestras de entrenamiento. Usaremos la función merge para combinar las capas: primero la urbana, luego la de terrenos desnudos, después la de agua y finalmente la de vegetación. Ahora, GCP será una única colección que incluye todas las muestras de entrenamiento.</p>
 <p>Esta colección tiene una única propiedad llamada land cover, que es la etiqueta de clase. Sin embargo, aún necesitamos asociar las reflectancias espectrales de cada píxel en nuestra imagen compuesta a estas etiquetas.</p>
 </section>
 <section id="extraccion-de-valores-de-pixeles">
-<h2><span class="section-number">1.10. </span>Extracción de Valores de Píxeles<a class="headerlink" href="#extraccion-de-valores-de-pixeles" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">1.5.2. </span>Extracción de Valores de Píxeles<a class="headerlink" href="#extraccion-de-valores-de-pixeles" title="Link to this heading">#</a></h3>
 <p>El siguiente paso es extraer los valores espectrales de los píxeles en nuestra imagen compuesta. Esto se hace con la función sampleRegions, que toma la imagen y las geometrías de nuestras muestras de entrenamiento. Configuraremos la función para mantener solo la propiedad land cover y definiremos una escala de muestreo acorde a la resolución de Sentinel-2 (10 metros).</p>
 <p>Después de ejecutar esta función, cada muestra de entrenamiento incluirá los valores espectrales de las 12 bandas de la imagen, junto con su etiqueta de clase. Esto nos proporciona una tabla donde cada fila corresponde a un píxel de entrenamiento y cada columna representa las bandas espectrales. Esta tabla será usada para entrenar el modelo de clasificación.</p>
 </section>
 <section id="entrenamiento-del-clasificador">
-<h2><span class="section-number">1.11. </span>Entrenamiento del Clasificador<a class="headerlink" href="#entrenamiento-del-clasificador" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">1.5.3. </span>Entrenamiento del Clasificador<a class="headerlink" href="#entrenamiento-del-clasificador" title="Link to this heading">#</a></h3>
 <p>Para entrenar el modelo, utilizaremos un clasificador de bosque aleatorio (Random Forest). En Earth Engine, esto se hace con la función ee.Classifier.smileRandomForest. Inicializaremos el clasificador con un número arbitrario de árboles, por ejemplo, 50. Más adelante, podremos optimizar este valor utilizando técnicas de ajuste de hiperparámetros.</p>
 <p>El clasificador se entrena llamando a la función train, donde especificamos:</p>
 <ul class="simple">
@@ -582,7 +594,7 @@ Una vez entrenado, el clasificador estará listo para predecir las etiquetas de 
 </ul>
 </section>
 <section id="clasificacion-de-la-imagen">
-<h2><span class="section-number">1.12. </span>Clasificación de la Imagen<a class="headerlink" href="#clasificacion-de-la-imagen" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">1.5.4. </span>Clasificación de la Imagen<a class="headerlink" href="#clasificacion-de-la-imagen" title="Link to this heading">#</a></h3>
 <p>Tomamos nuestra imagen compuesta y aplicamos el clasificador con la función classify. Esto genera una nueva imagen clasificada, donde cada píxel tiene un valor correspondiente a una de las clases (0, 1, 2 o 3).</p>
 <p>Para visualizar la imagen clasificada, definimos parámetros de visualización (visParams) que incluyan:</p>
 <ul class="simple">
@@ -598,13 +610,13 @@ Una vez entrenado, el clasificador estará listo para predecir las etiquetas de 
 <p>Lo que Earth Engine aporta es la capacidad de realizar estos procesos en tiempo real y a gran escala. Esto significa que, mientras que en un entorno local podría tomar meses realizar una clasificación a nivel nacional, en Earth Engine se puede hacer en tiempo real.</p>
 </section>
 <section id="algunas-recomendaciones-para-optimizar-la-recoleccion-de-datos-son-las-siguientes">
-<h2><span class="section-number">1.13. </span>Algunas recomendaciones para optimizar la recolección de datos son las siguientes:<a class="headerlink" href="#algunas-recomendaciones-para-optimizar-la-recoleccion-de-datos-son-las-siguientes" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">1.5.5. </span>Algunas recomendaciones para optimizar la recolección de datos son las siguientes:<a class="headerlink" href="#algunas-recomendaciones-para-optimizar-la-recoleccion-de-datos-son-las-siguientes" title="Link to this heading">#</a></h3>
 <p>Usar imágenes Sentinel-2 como referencia. Asegúrate de utilizar imágenes de Sentinel-2 para seleccionar las muestras de entrenamiento, ya que las imágenes de alta resolución pueden no coincidir temporalmente con las imágenes de Sentinel-2, lo que podría afectar la precisión del modelo.</p>
 <p>Distribuir las muestras de entrenamiento de manera equitativa. Asegúrate de tomar puntos de entrenamiento distribuidos por toda la ciudad y, especialmente, en las calles. Un error común es confundir cuerpos de agua con áreas urbanas oscuras.</p>
 <p>Evitar muestras mixtas. No utilices píxeles mixtos para el entrenamiento. Intenta seleccionar ejemplos puros de agua, vegetación, áreas urbanas y terrenos áridos. Deja que el modelo se encargue de los píxeles mixtos.</p>
 </section>
 <section id="evaluacion-de-la-precision">
-<h2><span class="section-number">1.14. </span>Evaluación de la Precisión<a class="headerlink" href="#evaluacion-de-la-precision" title="Link to this heading">#</a></h2>
+<h3><span class="section-number">1.5.6. </span>Evaluación de la Precisión<a class="headerlink" href="#evaluacion-de-la-precision" title="Link to this heading">#</a></h3>
 <p>Una vez que completes la clasificación, es fundamental evaluar cuán precisa es la clasificación realizada. ¿Está el modelo generando resultados satisfactorios? ¿Es el modelo perfecto? ¿Está alcanzando una precisión del 100% o solo un 90%? Si deseas mejorar la clasificación, ¿cuánto influiría recolectar 100 muestras de entrenamiento adicionales? ¿Mejoraría la precisión o no tendría un impacto significativo?</p>
 <p>La evaluación de la precisión es un paso crucial en el análisis de cualquier modelo. Una técnica común es la validación cruzada, que consiste en dividir los datos de entrenamiento en dos subconjuntos: uno para entrenar el modelo y otro para validar las predicciones. Por ejemplo, se podría usar el 60% de los datos para entrenar y el 40% restante para validar.</p>
 <p>El objetivo es medir el rendimiento del modelo en el subconjunto de validación, que contiene muestras que no se han usado en el entrenamiento. Se compara la predicción del modelo con el valor real de cada muestra de validación. Si el modelo clasifica correctamente un píxel, se considera que el modelo ha hecho una predicción acertada.</p>
@@ -614,13 +626,14 @@ Una vez entrenado, el clasificador estará listo para predecir las etiquetas de 
 <p>Al revisar la matriz de confusión, si se observa que hay una alta confusión entre ciertas clases, como entre agua y vegetación, es posible revisar las muestras de entrenamiento para esas clases específicas, añadiendo más ejemplos representativos y reduciendo el solapamiento entre clases.</p>
 <p>Una vez que estemos satisfechos con los resultados de la clasificación y la precisión, podemos comenzar a optimizar el modelo, ajustando parámetros y evaluando nuevas muestras de entrenamiento para mejorar la precisión general.</p>
 </section>
-<section id="id3">
-<h2><span class="section-number">1.15. </span>Conclusión<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+</section>
+<section id="conclusion">
+<h2><span class="section-number">1.6. </span>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>El aprendizaje automático no solo transforma datos en conocimiento accionable también redefine nuestra capacidad para comprender y gestionar entornos complejos. Herramientas como las máquinas de soporte vectorial, árboles de decisión y Random Forest nos brindan la precisión necesaria para abordar desafíos reales como el análisis del uso de suelo y la planificación territorial. En este ejemplo aplicado al área metropolitana de Rosario Random Forest demostró ser una herramienta poderosa capaz de clasificar grandes extensiones de territorio con una precisión sobresaliente esto no solo mejora nuestra visión científica del entorno sino que también apoya la toma de decisiones fundamentadas en evidencia.</p>
 <p>El futuro del Análisis Geoespacial está aquí combinando algoritmos robustos y datos satelitales podemos planificar un desarrollo sostenible que beneficie a las generaciones actuales y futuras. Gracias por acompañarnos en este recorrido acerca del aprendizaje automático aplicado análisis territorial, sigamos impulsando el conocimiento y la acción en favor de nuestro entorno.</p>
 </section>
 <section id="video-del-capitulo">
-<h2><span class="section-number">1.16. </span>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">1.7. </span>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
 <p>Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: <a class="reference external" href="https://www.youtube.com/watch?v=fk6atugR6ss">https://www.youtube.com/watch?v=fk6atugR6ss</a></p>
 </section>
 </section>
@@ -690,34 +703,36 @@ Una vez entrenado, el clasificador estará listo para predecir las etiquetas de 
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#teledeteccion">1.1. Teledetección</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-y-aprendizaje-automatico-en-teledeteccion">1.2. Clasificación y aprendizaje automático en teledetección</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-o-supervisado">1.3. Aprendizaje o supervisado</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-supervisado">1.4. Aprendizaje supervisado</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consideraciones-practicas">1.4.1. Consideraciones prácticas</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-practico-clasificacion-binaria">1.4.2. Ejemplo práctico: Clasificación binaria</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">1.4.3. Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-y-aprendizaje-automatico-en-teledeteccion">1.2. Clasificación y aprendizaje automático en teledetección</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-no-supervisado">1.2.1. Aprendizaje no supervisado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aprendizaje-supervisado">1.2.2. Aprendizaje supervisado</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#consideraciones-practicas">1.2.3. Consideraciones prácticas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-practico-clasificacion-binaria">1.2.4. Ejemplo práctico: Clasificación binaria</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-de-la-seccion">1.2.5. Conclusión de la sección</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial-svm">1.5. Maquina de Soporte Vectorial (SVM)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">1.5.1. Entrenamiento:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion">1.5.2. Predicción:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#maquina-de-soporte-vectorial-svm">1.3. Maquina de Soporte Vectorial (SVM)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">1.3.1. Entrenamiento:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion">1.3.2. Predicción:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-de-decision">1.6. Árboles de Decisión</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.6.1. Entrenamiento:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.6.2. Predicción:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arboles-de-decision">1.4. Árboles de Decisión</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.4.1. Entrenamiento:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.4.2. Predicción:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-y-limitaciones">1.4.3. Ventajas y limitaciones:</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ventajas-y-limitaciones">1.7. Ventajas y limitaciones:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pasos-en-la-aplicacion-de-ml-a-imagenes-satelitales">1.8. Pasos en la aplicacion de ML a imágenes satelitales.</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unificando-muestras-de-entrenamiento">1.9. Unificando Muestras de Entrenamiento</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-de-pixeles">1.10. Extracción de Valores de Píxeles</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">1.11. Entrenamiento del Clasificador</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-la-imagen">1.12. Clasificación de la Imagen</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#algunas-recomendaciones-para-optimizar-la-recoleccion-de-datos-son-las-siguientes">1.13. Algunas recomendaciones para optimizar la recolección de datos son las siguientes:</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-la-precision">1.14. Evaluación de la Precisión</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.15. Conclusión</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">1.16. Video del capítulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pasos-en-la-aplicacion-de-ml-a-imagenes-satelitales">1.5. Pasos en la aplicacion de ML a imágenes satelitales.</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#unificando-muestras-de-entrenamiento">1.5.1. Unificando Muestras de Entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-de-pixeles">1.5.2. Extracción de Valores de Píxeles</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">1.5.3. Entrenamiento del Clasificador</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-la-imagen">1.5.4. Clasificación de la Imagen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#algunas-recomendaciones-para-optimizar-la-recoleccion-de-datos-son-las-siguientes">1.5.5. Algunas recomendaciones para optimizar la recolección de datos son las siguientes:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-la-precision">1.5.6. Evaluación de la Precisión</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">1.6. Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">1.7. Video del capítulo</a></li>
 </ul>
   </nav></div>
 
