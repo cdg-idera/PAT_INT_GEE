@@ -1,4 +1,4 @@
-# Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión
+# Capítulo 4 · Máquina de Soporte Vectorial y Árbol de Decisión
 
 ## Introducción
 
@@ -10,31 +10,145 @@ y Arboles de Decisión.
 
 ## Máquina de soporte vectorial.
 
-En un capítulo anterior utilizamos Random Forest para clasificar imágenes de Sentinel-2 en  el área metropolitana de Rosario, para ello creamos el script GEE: Lab_002_RandomForest_Rosario.
+En un capítulo anterior utilizamos Random Forest para clasificar imágenes de Sentinel-2 en  el área metropolitana de Rosario, para ello creamos el script GEE: Lab_002_RandomForest_Rosario. Accederemos a dicho script y guardaremos una copia del mismo, que renombraremos a Lab_003_SVM_Rosario.
 
-Accederemos a dicho script y guardaremos una copia del mismo, que renombraremos a Lab_003_SVM_Rosario.
+Para aplicar Maquinas de soporte vectorial, el flujo de trabajo es el mismo que utilizamos con Random Forest, con excepción de que en lugar de utilizar un clasificador de Random Forest, utilizaremos un clasificador de Maquina de Soporte Vectorial. En otras palabras, el cambio principal está en la etapa de entrenamiento del clasificador.
 
-Para aplicar Maquinas de soporte vectorial, el flujo de trabajo es el mismo que utilizamos RF, con excepción de que en lugar de utilizar un clasificador de Random Forest, utilizaremos un clasificador de Maquina de Soporte Vectorial. En otras palabras, el cambio principal está en la etapa de entrenamiento del clasificador.
-
-Antes usábamos ee.Classifier.smileRandomForest(100), ahora utilizamos ee.Classifier.libsvm(). Libsvm significa "a library por support vector machine".
+Antes utilizaamos ee.Classifier.smileRandomForest(100), ahora utilizamos ee.Classifier.libsvm(). Libsvm significa "a library por support vector machine".
 
 ![](imagenes/POST_5.png)
 
+```javascript
+var s2 = ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED");
+ 
+var filtered = s2
+  .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 30))
+  .filter(ee.Filter.date('2024-01-01', '2025-01-01'))
+  .filter(ee.Filter.bounds(roi))
+  .select('B.*');
+  
+var composite = filtered.median().clip(roi);
 
-¿Qué es SVM? Es un clasificador que busca encontrar un hiperplano óptimo que separe los datos en clases. (esto fue explicado en el capítulo anterior)
+var rgbVisParams = {
+  min: 0.0,
+  max: 3000,
+  bands: ['B4','B3','B2']
+}
 
-Luego de este, cambio no hay nada mas que hacer para obtener la clasificación, simplemente guardar y volver a ejecutar.
+Map.addLayer(composite, rgbVisParams, 'roi: región de interés');
+Map.centerObject(roi, 10);
 
-Realizamos una evaluación de la exactitud, incluyendo la matriz de confusión. Obtenemos métricas de productor y consumidor y el coeficiente de Kappa, como en el script anterior.
+// TRAINING DATA:
+// Crear FeatureCollections para
+// agua con propiedad landcover = 0
+// urbano  con propiedad landcover = 1
+// cultivos con propiedad landcover = 2
+// bosque con propiedad landcover = 3
+// terrenoDesnudo con propiedad landcover = 4
 
-SVM es ideal para escenarios donde las clases no están claramente separadas linealmente. GEE es una poderosa herramienta para el análisis de datos espaciales y la clasificación de imágenes satelitales, 
-Sin embargo, hay ciertas limitaciones cuando trabajamos con algoritmos como SVM. Por ejemplo GEE no esta diseñado para visualizar los hiperplanos que separan las clases en una clasificación. 
-Esto se debe a que el enfoque principal de GEE es el procesamiento y el analisis de datos espaciales no la visualizacion detallada de los resultados matematicos de los modelos de ML.
+// Merge Training Samples
+// definir una variable gcps: ground control points
+
+var gcps = urbano.merge(agua).merge(cultivos).merge(terrenoDesnudo).merge(bosque);
+print(gcps.size());
+
+// Training fraction 60%
+// Validation Fraction 40%
+
+// Asignar un numero random entre 0 y 1 
+var gcp = gcps.randomColumn();
+var trainingGCP = gcp.filter(ee.Filter.lt('random', 0.6));
+var validationGCP = gcp.filter(ee.Filter.gte('random', 0.6));
+// print(trainingGCP.size());
+// print(validationGCP.size());
+
+// Extract the pixel values
+var training = composite.sampleRegions({
+  collection: trainingGCP,
+  properties: ['landcover'],
+  scale: 10,
+  tileScale: 16
+});
+print(training);
+
+//print('Training data:', training.limit(10)); 
+
+
+// Agregar propiedades explícitas al training si es necesario
+var trainingWithBands = training.map(function(feature) {
+  return feature.set({
+    B1: feature.get('B1'),
+    B2: feature.get('B2'),
+    B3: feature.get('B3'),
+    B4: feature.get('B4'),
+    B5: feature.get('B5'),
+    B6: feature.get('B6'),
+    B7: feature.get('B7'),
+    B8: feature.get('B8'),
+    B8A: feature.get('B8A'),
+    B9: feature.get('B9'),
+    B11: feature.get('B11'),
+    B12: feature.get('B12'),
+    landcover: feature.get('landcover')
+  });
+});
+// Exportar los datos a Google Drive
+Export.table.toDrive({
+  collection: trainingWithBands,
+  description: 'Training_Data2',
+  fileFormat: 'CSV'
+});
+
+
+// TRAIN A CLASSIFIER
+var classifier = ee.Classifier.libsvm().train({
+  features: training,
+  classProperty: 'landcover',
+  inputProperties: composite.bandNames()
+});
+
+// CLASSIFY THE IMAGE
+var classified = composite.classify(classifier);
+
+// Display the image
+var classVis = {
+  min: 0,
+  max: 4,
+  palette: ['blue', 'gray', 'green', 'violet', 'orange']
+}
+
+Map.addLayer(classified.clip(roi), classVis, 'Imagen Clasificada');
+
+// ACCURACY ASSESSMENT
+
+var test = classified.sampleRegions({
+  collection: validationGCP,
+  properties: ['landcover'],
+  scale: 10
+});
+// print(test);
+
+var testConfusionMatrix = test.errorMatrix('landcover', 'classification');
+print('Confusion Matrix', testConfusionMatrix);
+print('Test Accuracy', testConfusionMatrix.accuracy());
+
+print('Producers Accuracy:', testConfusionMatrix.producersAccuracy() );
+print('Consumers Accuracy:', testConfusionMatrix.consumersAccuracy() );
+```
+
+
+¿Qué es SVM? Es un clasificador que busca encontrar un hiperplano óptimo que separe los datos en clases. (esto fue explicado en el capítulo 1). Luego de este, cambio no hay nada mas que hacer para obtener la clasificación, simplemente guardar y volver a ejecutar.
+
+En el script realizamos una evaluación de la exactitud, incluyendo la matriz de confusión. Obtenemos métricas de productor y consumidor y el coeficiente de Kappa, como en el script anterior.
+
+SVM es ideal para escenarios donde las clases no están claramente separadas linealmente. GEE es una poderosa herramienta para el análisis de datos espaciales y la clasificación de imágenes satelitales. 
+Sin embargo, hay ciertas limitaciones cuando trabajamos con algoritmos como SVM. Por ejemplo GEE *no esta diseñado para visualizar los hiperplanos que separan las clases en una clasificación*. 
+Esto se debe a que el *enfoque principal de GEE es el procesamiento y el analisis de datos espaciales* no la visualizacion detallada de los resultados matematicos de los modelos de ML.
 
 ![](imagenes/POST_7.png)
 
 Ademas cuando aplicamos una clasificacion multiclase, como en el caso de un problema con 5 clases, el uso de SVM puede tornarse un tanto engorroso. Esto se debe a que SVM manejan las clasificaciones multiclase
-dividiendolas en multiples problemas de clasificiones binarias. Lo que aumenta la complejida del modelo y su interpretación. Si bien GEE puede efectuar la clasificacion y devolver el mapa resultante, no proporcionará una visualización clara de como se generan o estructuran estos hiperplanos en el espacio de características.
+dividiéndolas en multiples problemas de clasificiones binarias. Lo que aumenta la complejida del modelo y su interpretación. Si bien GEE puede efectuar la clasificación y devolver el mapa resultante, no proporcionará una visualización clara de cómo se generan o estructuran estos hiperplanos en el espacio de características.
 
 
 
@@ -168,11 +282,9 @@ Para aplicar esta técnica necesitamos cambiar el clasificador, borraremos el cl
 
 Es decir, ahora usamos ee.Classifier.smileCart() para aplicar un árbol de decisión. Como lo indica su documentación CART significa ´*Clasification and Regression Tree* *Árbol de Regresión y Clasificación* 
 
-
 ![](imagenes/POST_8.png)
 
-> **¿Qué es un árbol de decisión?**
-Es un modelo jerárquico que divide los datos en función de preguntas simples o nodos decisión, también llamadas condiciones, para clasificar cada pixel.
+> **¿Qué es un árbol de decisión?** Es un modelo jerárquico que divide los datos en función de preguntas simples o nodos decisión, también llamadas condiciones, para clasificar cada pixel.
 
 >**Ventajas y aplicaciones:**
 Es fácil de interpretar y útil para entender cómo se toman las decisiones de clasificación. Extraemos las reglas del árbol con el comando classifier.explain(), que nos permite visualizar las condiciones utilizadas para clasificar.
@@ -418,7 +530,7 @@ Para cada píxel realizaremos un recorrido del arbol considerando los valores de
 
 ![](imagenes/POST_1.png)
 
-## Ejemplo 1 clase 0 agua
+### Ejemplo 1 clase 0 agua
 
 El recorrido del arbol para clasificar este píxel es corto y consiste solo de una evaluación:
 
@@ -430,7 +542,7 @@ Seguimos por la rama true: La clase predicha para este píxel es clase 0.
 
 ![](imagenes/Pixel78_Cat0.png)
 
-## Ejemplo 2 clase 1 urbano
+### Ejemplo 2 clase 1 urbano
 
 El recorrido consiste de tres evaluaciones:
 
@@ -456,7 +568,7 @@ Seguimos por la rama true: La clase predicha para este píxel es clase 1.
 
 ![](imagenes/Pixel41_Cat1.png)
 
-## Ejemplo 3 clase 2 cultivos
+### Ejemplo 3 clase 2 cultivos
 
 El recorrido consiste de tres evaluaciones:
 
@@ -487,7 +599,7 @@ Seguimos por la rama true: La clase predicha para este píxel es clase 2.
 
 ![](imagenes/Pixel109_Cat2.png)
 
-## Ejemplo 4 clase 3 bosque
+### Ejemplo 4 clase 3 bosque
 
 El recorrido consiste de tres evaluaciones:
 
@@ -513,7 +625,7 @@ Seguimos por la rama true: La clase predicha para este píxel es clase 3
 
 ![](imagenes/Pixel159_Cat3.png)
 
-## Ejemplo 5 clase 4 suelo desnudo
+### Ejemplo 5 clase 4 suelo desnudo
 
 El recorrido consiste de cuatro evaluaciones:
 

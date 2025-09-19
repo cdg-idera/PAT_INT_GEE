@@ -3,6 +3,11 @@
 
 Bienvenidos en este capítulo exploraremos cómo el aprendizaje automático está revolucionando la teledetección y el trabajo en la nube y mostraremos un ejemplo práctico de aprendizaje automático supervisado con Random Forest. El capítulo se estructura en tres partes en la primera parte comenzaremos haciendo una breve reseña sobre teledetección luego en la segunda parte abordaremos técnicas de aprendizaje automático o Machine learning aplicadas a imágenes satelitales, en la tercera parte mostraremos un ejemplo concreto de la técnica Random Forest a una composición de imágenes sobre un área de estudio. Comenzaremos haciendo una pequeña reseña sobre teledetección:
 
+
+## ¿Qué es la geoAI?
+
+> "GeoAI es la integración de la inteligencia artificial (IA) con los datos espaciales, la ciencia y la tecnología geoespacial para potenciar el conocimiento y solucionar problemas espaciales. GeoAI incluye la aplicación de técnicas de IA tradicionales para generar datos espaciales por medio de la extracción, la clasificación y la detección de información de datos estructurados y no estructurados. GeoAI es el uso de técnicas de IA expresamente espaciales cuya finalidad es resolver los problemas espaciales mediante el análisis de datos espaciales, e incluye técnicas de detección de patrones, predicción, previsión espaciotemporal, etc." ESRI
+
 ## Teledetección
 
 > La teledetección es la ciencia de obtener información sobre objetos o áreas a distancia mediante el uso de satélites aeronaves o drones.
