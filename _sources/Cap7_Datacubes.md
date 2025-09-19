@@ -5,16 +5,15 @@
 
 ## Introducción
 
-🎬 ¡Seguimos explorando las Series Temporales aplicadas a la Información Geoespacial! 🌍📊
-En este nuevo episodio, damos un paso más: introducimos los cubos de datos 🧊🛰️ como estructura clave para organizar, analizar y visualizar imágenes satelitales a lo largo del tiempo.
+¡Seguimos explorando las Series Temporales aplicadas a la Información Geoespacial! En este nuevo capítulo, damos un paso más: introducimos los **cubos de datos** como estructura clave para *organizar, analizar y visualizar imágenes satelitales a lo largo del tiempo*.
 
-🚀 A partir de la misión Sentinel-3 de la Agencia Espacial Europea, repasamos conceptos esenciales como bandas espectrales, índices y, sobre todo, definimos qué es un cubo de datos geoespaciales, cuáles son sus dimensiones (espacio, tiempo, espectro, categorías) y por qué resultan fundamentales para el análisis ambiental y territorial.
+A partir de la misión Sentinel-3 de la Agencia Espacial Europea, repasamos conceptos esenciales como bandas espectrales, índices y, sobre todo, definimos qué es un cubo de datos geoespaciales, cuáles son sus dimensiones (espacio, tiempo, espectro, categorías) y por qué resultan fundamentales para el análisis ambiental y territorial.
 
-💡 Para ilustrar su utilidad, presentamos tres casos prácticos donde aplicamos cubos de datos a variables reales:
+Para ilustrar su utilidad, presentamos tres casos prácticos donde aplicamos cubos de datos a variables reales:
 
 🔷 Ejemplo 1: Cubo de temperatura superficial MODIS 🌡️
 Creamos un cubo de datos mensual para Bahía Blanca con imágenes MODIS (2024-2025). Calculamos promedios mensuales, generamos una serie temporal y exportamos los resultados en CSV para analizarlos en Colab. Detectamos tendencias, estacionalidad y anomalías térmicas —como la registrada en marzo de 2025.
-📓 Notebook: Lab_007_ST_BahiaBlanca.ipynb
+
 
 🔷 Ejemplo 2: Cubo de precipitación con CHIRPS 🌧️📉
 Construimos un cubo de datos de precipitación mensual para la misma región, utilizando la colección CHIRPS. Visualizamos capas en el mapa, graficamos valores mensuales y detectamos eventos extremos, como lluvias anómalas en marzo de 2025. Gráficos y tablas complementan el análisis en consola.
@@ -83,13 +82,14 @@ Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el c
 ![](imagenes/PlacaJ.png)
 
 Según la plataforma abierta para la observación de la Tierra openEO:
-“Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.”
+
+> “Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.” {cite:p}`openeo_datacube`.
+
 
 ![](imagenes/PlacaL.png)
 
-Y según Giuliani et al. (2016):
-“Es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”
-En otras palabras, un cubo de datos no es solo un almacenamiento de imágenes, sino una forma ordenada e inteligente de organizarlas para que podamos filtrar, combinar, analizar y visualizar los datos de manera eficiente.
+> Y según Giuliani et al. {cite:t}`giuliani2016datacube`: “Es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”
+
 
 
 ![](imagenes/PlacaM.png)
@@ -127,7 +127,7 @@ Comprender cómo se estructuran, cómo se consultan y cómo se transforman es cl
 
 ## Datacube de temperatura superficial en Bahía Blanca con GEE
 
-En este laboratorio vamos a construir y analizar un datacube de temperatura superficial terrestre (LST) para la región de Bahía Blanca, usando imágenes satelitales MODIS desde Google Earth Engine.
+En este laboratorio vamos a construir y analizar un datacube de temperatura superficial terrestre (LST) para la región de Bahía Blanca, usando imágenes satelitales MODIS desde Google Earth Engine {cite:p}`gee_modis`.
 Veremos cómo generar mapas mensuales de temperatura, cómo calcular promedios sobre toda el área y cómo exportar esta información para estudios más avanzados.
 Lo más importante: vamos a entender cómo este proceso representa un claro ejemplo del uso de cubo de datos geoespacial.
 
@@ -328,7 +328,7 @@ En este ejercicio analizamos la precipitación mensual en el partido de Bahía B
 
 ## ¿Qué es CHIRPS?
 
-CHIRPS (Climate Hazards Group InfraRed Precipitation with Station data) es un producto de precipitación global que combina observaciones satelitales infrarrojas con datos de estaciones meteorológicas. Está disponible a resolución diaria desde 1981, con una malla espacial de aproximadamente 5 km.
+Utilizamos datos de precipitación de CHIRPS (Climate Hazards Group InfraRed Precipitation with Station data) {cite:p}`funk2015chirps`. CHIRPS es un producto de precipitación global que combina observaciones satelitales infrarrojas con datos de estaciones meteorológicas. Está disponible a resolución diaria desde 1981, con una malla espacial de aproximadamente 5 km.
 Es muy utilizado para estudios hidrológicos, agrícolas y climáticos en todo el mundo, gracias a su cobertura consistente y su accesibilidad.
 
 ¿Cuál es el datacube en este ejemplo?

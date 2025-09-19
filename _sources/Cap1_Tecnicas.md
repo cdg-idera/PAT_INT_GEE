@@ -1,21 +1,24 @@
 # Capítulo 1 · Teledetección y Aprendizaje Automático
 
 
-Bienvenidos en este capítulo exploraremos cómo el aprendizaje automático está revolucionando la teledetección y el trabajo en la nube y mostraremos un ejemplo práctico de aprendizaje automático supervisado con Random Forest. El capítulo se estructura en tres partes en la primera parte comenzaremos haciendo una breve reseña sobre teledetección luego en la segunda parte abordaremos técnicas de aprendizaje automático o Machine learning aplicadas a imágenes satelitales, en la tercera parte mostraremos un ejemplo concreto de la técnica Random Forest a una composición de imágenes sobre un área de estudio. Comenzaremos haciendo una pequeña reseña sobre teledetección:
+Bienvenidos en este capítulo exploraremos cómo el aprendizaje automático está revolucionando la teledetección y el trabajo en la nube y mostraremos un ejemplo práctico de aprendizaje automático supervisado con Random Forest. El capítulo se estructura en tres partes en la primera parte comenzaremos haciendo una breve reseña sobre teledetección luego en la segunda parte abordaremos técnicas de aprendizaje automático o Machine learning aplicadas a imágenes satelitales, en la tercera parte mostraremos un ejemplo concreto de la técnica Random Forest a una composición de imágenes sobre un área de estudio. Comenzaremos haciendo una pequeña reseña sobre GeoAI, teledetección y Aprendizaje Automático.
 
 
 ## ¿Qué es la geoAI?
 
-> "GeoAI es la integración de la inteligencia artificial (IA) con los datos espaciales, la ciencia y la tecnología geoespacial para potenciar el conocimiento y solucionar problemas espaciales. GeoAI incluye la aplicación de técnicas de IA tradicionales para generar datos espaciales por medio de la extracción, la clasificación y la detección de información de datos estructurados y no estructurados. GeoAI es el uso de técnicas de IA expresamente espaciales cuya finalidad es resolver los problemas espaciales mediante el análisis de datos espaciales, e incluye técnicas de detección de patrones, predicción, previsión espaciotemporal, etc." ESRI
+> Inteligencia Artificial Geoespacial (GeoAI) es la integración de los estudios geoespaciales con la inteligencia artificial (aprendizaje automático y profundo) y las tecnologías de grafos de conocimiento {cite:p}`gao_hu_li_2023_handbook_geoai`. 
+
+> "GeoAI es la integración de la inteligencia artificial (IA) con los datos espaciales, la ciencia y la tecnología geoespacial para potenciar el conocimiento y solucionar problemas espaciales. GeoAI incluye la aplicación de técnicas de IA tradicionales para generar datos espaciales por medio de la extracción, la clasificación y la detección de información de datos estructurados y no estructurados. GeoAI es el uso de técnicas de IA expresamente espaciales cuya finalidad es resolver los problemas espaciales mediante el análisis de datos espaciales, e incluye técnicas de detección de patrones, predicción, previsión espaciotemporal, etc." {cite:p}`esri2021geoai`
 
 ## Teledetección
 
 > La teledetección es la ciencia de obtener información sobre objetos o áreas a distancia mediante el uso de satélites aeronaves o drones.
 
+> Jensen, John R. en su libro Remote Sensing of the Environment {cite:t}`jensen2007remote`: An Earth Resource Perspective (2007) define la teledetección como: "La ciencia y el arte de obtener información sobre un objeto, área o fenómeno mediante el análisis de datos adquiridos por un dispositivo que no está en contacto con el objeto, área o fenómeno en estudio." 
 
-> Jensen, John R. en su libro Remote Sensing of the Environment: An Earth Resource Perspective (2007) define la teledetección como: "La ciencia y el arte de obtener información sobre un objeto, área o fenómeno mediante el análisis de datos adquiridos por un dispositivo que no está en contacto con el objeto, área o fenómeno en estudio." Remote Sensing and Image Interpretation (2015), Lillesand, Kiefer y Chipman definen la teledetección como:
+Otra definición es:
 
-> "La teledetección es el proceso de adquirir información sobre las propiedades de los objetos en la superficie terrestre sin estar en contacto físico con ellos. Esto se logra detectando y analizando la radiación reflejada o emitida por esos objetos, utilizando sensores montados en plataformas remotas, como satélites o aeronaves."
+> "La teledetección es el proceso de adquirir información sobre las propiedades de los objetos en la superficie terrestre sin estar en contacto físico con ellos. Esto se logra detectando y analizando la radiación reflejada o emitida por esos objetos, utilizando sensores montados en plataformas remotas, como satélites o aeronaves." {cite:t}`lillesand2015remote`
 
 ![](imagenes/areasIA2.png)
 
@@ -30,8 +33,6 @@ Esta disciplina se ha convertido en una herramienta esencial para entender nuest
 
 * Con la democratización del acceso a imágenes satelitales, plataformas como Google Earth Engine y hubs como Copernicus ofrecen recursos gratuitos y accesibles que eliminan las barreras de entrada para realizar análisis geoespaciales. Ya no hay excusas: hoy en día, cualquier persona con conocimientos básicos puede acceder a datos satelitales para abordar problemas ambientales, monitorear el crecimiento urbano o evaluar la salud de los ecosistemas.
 
-
-
 Además, gracias a las capacidades de procesamiento en la nube, podemos llevar a cabo estudios a escalas regionales y nacionales sin la necesidad de infraestructuras complejas. Esto abre un abanico de posibilidades para investigadores, profesionales y tomadores de decisiones que buscan soluciones sostenibles basadas en datos confiables y actualizados.
 
 Como indicamos anteriormente este capítulo se enfocará en el uso del aprendizaje automático en teledetección y mostraremos un ejemplo en el cual aplicamos aprendizaje supervisado con árboles aleatorios o Random Forest. 
@@ -43,13 +44,13 @@ El aprendizaje automático se ha consolidado como una herramienta ideal para res
 
 Existen algunos desafíos de los Datos de Observación Terrestre:
 
-* Los datos satelitales, aunque ricos en información, están inherentemente sujetos a ruido y variabilidad:
+* Los datos satelitales, aunque ricos en información, están **inherentemente sujetos a ruido y variabilidad**:
 
-* Ruido atmosférico y del sensor: Los satélites operan a cientos de kilómetros de altitud, capturando datos a través de múltiples interferencias atmosféricas. Este entorno introduce desviaciones en las mediciones de reflectancia.
+* **Ruido atmosférico y del sensor:** Los satélites operan a cientos de kilómetros de altitud, capturando datos a través de múltiples interferencias atmosféricas. Este entorno introduce desviaciones en las mediciones de reflectancia.
 
-* Variabilidad temporal y espacial: Las mismas condiciones en diferentes días pueden generar valores de reflectancia ligeramente distintos debido a factores ambientales y limitaciones instrumentales.
+* **Variabilidad temporal y espacial:** Las mismas condiciones en diferentes días pueden generar valores de reflectancia ligeramente distintos debido a factores ambientales y limitaciones instrumentales.
 
-* Dimensionalidad de los datos: Las imágenes de teledetección suelen incluir múltiples bandas espectrales, lo que genera un espacio de características de alta dimensionalidad que dificulta la creación de reglas manuales para clasificar objetos con precisión.
+* **Dimensionalidad de los datos:** Las imágenes de teledetección suelen incluir múltiples bandas espectrales, lo que genera un espacio de características de alta dimensionalidad que dificulta la creación de reglas manuales para clasificar objetos con precisión.
 
 Ventajas del Aprendizaje Automático:
 
@@ -91,6 +92,7 @@ En la práctica, la clasificación supervisada es la técnica predominante, ya q
 
 ![](imagenes/Workflow.png)
 
+Este enfoque, según {cite:p}`reynoso2025flujo`, permite integrar algoritmos de Machine Learning en flujos de trabajo reproducibles e integra las partes principales que deberán ser consideradas en cada aplicación de algoritmos de machine learning (ML) a informacion geoespacial. El flujo será aplicado en distintos capítulos del presente libro.
 
 
 ### Consideraciones prácticas
@@ -275,8 +277,6 @@ Una vez que estemos satisfechos con los resultados de la clasificación y la pre
 El aprendizaje automático no solo transforma datos en conocimiento accionable también redefine nuestra capacidad para comprender y gestionar entornos complejos. Herramientas como las máquinas de soporte vectorial, árboles de decisión y Random Forest nos brindan la precisión necesaria para abordar desafíos reales como el análisis del uso de suelo y la planificación territorial. En este ejemplo aplicado al área metropolitana de Rosario Random Forest demostró ser una herramienta poderosa capaz de clasificar grandes extensiones de territorio con una precisión sobresaliente esto no solo mejora nuestra visión científica del entorno sino que también apoya la toma de decisiones fundamentadas en evidencia. 
 
 El futuro del Análisis Geoespacial está aquí combinando algoritmos robustos y datos satelitales podemos planificar un desarrollo sostenible que beneficie a las generaciones actuales y futuras. Gracias por acompañarnos en este recorrido acerca del aprendizaje automático aplicado análisis territorial, sigamos impulsando el conocimiento y la acción en favor de nuestro entorno.
-
-
 
 ## Video del capítulo
 

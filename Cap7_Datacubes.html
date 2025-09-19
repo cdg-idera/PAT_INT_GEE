@@ -415,9 +415,9 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mejora-estetica-del-mapa">7.10.1. Mejora estética del mapa</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">7.11. Conclusión de esta sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">7.11. Conclusión de esta sección</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-tipos-de-suelo-con-sentinel-2-un-enfoque-basado-en-datacubes">7.12. Clasificación de tipos de suelo con Sentinel-2: un enfoque basado en datacubes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">7.12.1. Introducción</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">7.12.1. Introducción</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coleccion-de-imagenes-sentinel-2-y-preparacion-del-mosaico-base">7.12.2. Colección de imágenes Sentinel-2 y preparación del mosaico base</a></li>
 </ul>
 </li>
@@ -440,7 +440,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-7-visualizacion-porcentual">7.14.6. BLOQUE 7: Visualización porcentual</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">7.15. Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">7.15. Conclusión</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">7.16. Video del capítulo</a></li>
 </ul>
             </nav>
@@ -457,13 +457,11 @@ document.write(`
 <h1><span class="section-number">7. </span>Capítulo 7 · Cubos de Imágenes Satelitales<a class="headerlink" href="#capitulo-7-cubos-de-imagenes-satelitales" title="Link to this heading">#</a></h1>
 <section id="introduccion">
 <h2><span class="section-number">7.1. </span>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
-<p>🎬 ¡Seguimos explorando las Series Temporales aplicadas a la Información Geoespacial! 🌍📊
-En este nuevo episodio, damos un paso más: introducimos los cubos de datos 🧊🛰️ como estructura clave para organizar, analizar y visualizar imágenes satelitales a lo largo del tiempo.</p>
-<p>🚀 A partir de la misión Sentinel-3 de la Agencia Espacial Europea, repasamos conceptos esenciales como bandas espectrales, índices y, sobre todo, definimos qué es un cubo de datos geoespaciales, cuáles son sus dimensiones (espacio, tiempo, espectro, categorías) y por qué resultan fundamentales para el análisis ambiental y territorial.</p>
-<p>💡 Para ilustrar su utilidad, presentamos tres casos prácticos donde aplicamos cubos de datos a variables reales:</p>
+<p>¡Seguimos explorando las Series Temporales aplicadas a la Información Geoespacial! En este nuevo capítulo, damos un paso más: introducimos los <strong>cubos de datos</strong> como estructura clave para <em>organizar, analizar y visualizar imágenes satelitales a lo largo del tiempo</em>.</p>
+<p>A partir de la misión Sentinel-3 de la Agencia Espacial Europea, repasamos conceptos esenciales como bandas espectrales, índices y, sobre todo, definimos qué es un cubo de datos geoespaciales, cuáles son sus dimensiones (espacio, tiempo, espectro, categorías) y por qué resultan fundamentales para el análisis ambiental y territorial.</p>
+<p>Para ilustrar su utilidad, presentamos tres casos prácticos donde aplicamos cubos de datos a variables reales:</p>
 <p>🔷 Ejemplo 1: Cubo de temperatura superficial MODIS 🌡️
-Creamos un cubo de datos mensual para Bahía Blanca con imágenes MODIS (2024-2025). Calculamos promedios mensuales, generamos una serie temporal y exportamos los resultados en CSV para analizarlos en Colab. Detectamos tendencias, estacionalidad y anomalías térmicas —como la registrada en marzo de 2025.
-📓 Notebook: Lab_007_ST_BahiaBlanca.ipynb</p>
+Creamos un cubo de datos mensual para Bahía Blanca con imágenes MODIS (2024-2025). Calculamos promedios mensuales, generamos una serie temporal y exportamos los resultados en CSV para analizarlos en Colab. Detectamos tendencias, estacionalidad y anomalías térmicas —como la registrada en marzo de 2025.</p>
 <p>🔷 Ejemplo 2: Cubo de precipitación con CHIRPS 🌧️📉
 Construimos un cubo de datos de precipitación mensual para la misma región, utilizando la colección CHIRPS. Visualizamos capas en el mapa, graficamos valores mensuales y detectamos eventos extremos, como lluvias anómalas en marzo de 2025. Gráficos y tablas complementan el análisis en consola.</p>
 <p>🔷 Ejemplo 3: Cubo de clasificación de suelo con Sentinel-2 y Random Forest 🌾🏙️
@@ -513,12 +511,14 @@ Con tanto conocimiento disponible desde el espacio.
 <p>El volumen y la complejidad de los datos satelitales nos obliga a pensar de una forma nueva. ¿Cómo podemos analizar millones de imágenes, cada una con múltiples bandas y fechas distintas, sin ahogarnos en un mar de archivos?
 Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el cubo de dato o inglés datacube dádaciubs</p>
 <p><img alt="" src="_images/PlacaJ.png" /></p>
-<p>Según la plataforma abierta para la observación de la Tierra openEO:
-“Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.”</p>
+<p>Según la plataforma abierta para la observación de la Tierra openEO:</p>
+<blockquote>
+<div><p>“Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.” <span id="id1">[<a class="reference internal" href="Referencias.html#id9" title="openEO Consortium. Data cube concept in openeo. openEO Documentation, 2023. Consultado el 19 de septiembre de 2025. URL: https://openeo.org/documentation/.">openEO Consortium, 2023</a>]</span>.</p>
+</div></blockquote>
 <p><img alt="" src="_images/PlacaL.png" /></p>
-<p>Y según Giuliani et al. (2016):
-“Es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”
-En otras palabras, un cubo de datos no es solo un almacenamiento de imágenes, sino una forma ordenada e inteligente de organizarlas para que podamos filtrar, combinar, analizar y visualizar los datos de manera eficiente.</p>
+<blockquote>
+<div><p>Y según Giuliani et al. <span id="id2">Giuliani <em>et al.</em> [<a class="reference internal" href="Referencias.html#id10" title="Gregory Giuliani, Adrien Dubois, Pierre Lacroix, Bruno Chatenoux, Anthony Lehmann, and Nicolas Ray. Earth observation data cubes for space and time analysis of earth observation data. Data, 1(1):8, 2016. URL: https://www.mdpi.com/2306-5729/1/1/8, doi:10.3390/data1010008.">2016</a>]</span>: “Es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”</p>
+</div></blockquote>
 <p><img alt="" src="_images/PlacaM.png" /></p>
 <p>¿Y cuáles son sus dimensiones? Las principales son:</p>
 <ul class="simple">
@@ -553,7 +553,7 @@ Comprender cómo se estructuran, cómo se consultan y cómo se transforman es cl
 </section>
 <section id="datacube-de-temperatura-superficial-en-bahia-blanca-con-gee">
 <h2><span class="section-number">7.5. </span>Datacube de temperatura superficial en Bahía Blanca con GEE<a class="headerlink" href="#datacube-de-temperatura-superficial-en-bahia-blanca-con-gee" title="Link to this heading">#</a></h2>
-<p>En este laboratorio vamos a construir y analizar un datacube de temperatura superficial terrestre (LST) para la región de Bahía Blanca, usando imágenes satelitales MODIS desde Google Earth Engine.
+<p>En este laboratorio vamos a construir y analizar un datacube de temperatura superficial terrestre (LST) para la región de Bahía Blanca, usando imágenes satelitales MODIS desde Google Earth Engine <span id="id3">[<a class="reference internal" href="Referencias.html#id11" title="Google Earth Engine. Modis satellite imagery collections in google earth engine. Google Earth Engine Data Catalog, 2025. Consultado el 19 de septiembre de 2025. URL: https://developers.google.com/earth-engine/datasets/catalog/modis.">Google Earth Engine, 2025</a>]</span>.
 Veremos cómo generar mapas mensuales de temperatura, cómo calcular promedios sobre toda el área y cómo exportar esta información para estudios más avanzados.
 Lo más importante: vamos a entender cómo este proceso representa un claro ejemplo del uso de cubo de datos geoespacial.</p>
 <section id="paso-1-definir-la-region-de-interes">
@@ -734,7 +734,7 @@ Este archivo será utilizado luego en Python, para aplicar modelos de análisis 
 </section>
 <section id="que-es-chirps">
 <h2><span class="section-number">7.8. </span>¿Qué es CHIRPS?<a class="headerlink" href="#que-es-chirps" title="Link to this heading">#</a></h2>
-<p>CHIRPS (Climate Hazards Group InfraRed Precipitation with Station data) es un producto de precipitación global que combina observaciones satelitales infrarrojas con datos de estaciones meteorológicas. Está disponible a resolución diaria desde 1981, con una malla espacial de aproximadamente 5 km.
+<p>Utilizamos datos de precipitación de CHIRPS (Climate Hazards Group InfraRed Precipitation with Station data) <span id="id4">[<a class="reference internal" href="Referencias.html#id12" title="Chris Funk, Pete Peterson, Martin Landsfeld, Diego Pedreros, James Verdin, Shraddhanand Shukla, Greg Husak, James Rowland, Laura Harrison, Andrew Hoell, and Joel Michaelsen. The climate hazards infrared precipitation with stations—a new environmental record for monitoring extremes. Scientific Data, 2(1):150066, 2015. URL: https://www.nature.com/articles/sdata201566, doi:10.1038/sdata.2015.66.">Funk <em>et al.</em>, 2015</a>]</span>. CHIRPS es un producto de precipitación global que combina observaciones satelitales infrarrojas con datos de estaciones meteorológicas. Está disponible a resolución diaria desde 1981, con una malla espacial de aproximadamente 5 km.
 Es muy utilizado para estudios hidrológicos, agrícolas y climáticos en todo el mundo, gracias a su cobertura consistente y su accesibilidad.</p>
 <p>¿Cuál es el datacube en este ejemplo?</p>
 <p>En este caso, el datacube es una colección tridimensional de datos, estructurado según:</p>
@@ -879,14 +879,14 @@ Por ejemplo, en el mes de marzo de 2025, se registró un valor atípico de 8.27 
 </div>
 </section>
 </section>
-<section id="id1">
-<h2><span class="section-number">7.11. </span>Conclusión de esta sección<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="id5">
+<h2><span class="section-number">7.11. </span>Conclusión de esta sección<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
 <p>Este ejercicio nos permite construir y visualizar un datacube mensual de precipitación, combinando imágenes diarias CHIRPS. La visualización de cada capa en el mapa junto al gráfico de evolución mensual facilita la detección de anomalías climáticas y proporciona insumos valiosos para análisis posteriores en Python.</p>
 </section>
 <section id="clasificacion-de-tipos-de-suelo-con-sentinel-2-un-enfoque-basado-en-datacubes">
 <h2><span class="section-number">7.12. </span>Clasificación de tipos de suelo con Sentinel-2: un enfoque basado en datacubes<a class="headerlink" href="#clasificacion-de-tipos-de-suelo-con-sentinel-2-un-enfoque-basado-en-datacubes" title="Link to this heading">#</a></h2>
-<section id="id2">
-<h3><span class="section-number">7.12.1. </span>Introducción<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<section id="id6">
+<h3><span class="section-number">7.12.1. </span>Introducción<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <p>En este laboratorio, vamos a construir un ejemplo claro de datacube aplicado a la clasificación de tipos de suelo. Utilizaremos imágenes Sentinel-2 armonizadas, clasificaremos por Random Forest y generaremos una serie temporal categórica para el año 2024, con énfasis en su interpretación como cubo de datos espacio-temporal. Vamos paso por paso.</p>
 </section>
 <section id="coleccion-de-imagenes-sentinel-2-y-preparacion-del-mosaico-base">
@@ -1243,8 +1243,8 @@ Gracias al siguiente bloque:</p></li>
 <p>Mostramos un gráfico de líneas con la evolución relativa de cada clase. A diferencia del gráfico anterior, este permite detectar tendencias aunque cambie el número total de píxeles disponibles (por ejemplo, por nubosidad).</p>
 </section>
 </section>
-<section id="id3">
-<h2><span class="section-number">7.15. </span>Conclusión<a class="headerlink" href="#id3" title="Link to this heading">#</a></h2>
+<section id="id7">
+<h2><span class="section-number">7.15. </span>Conclusión<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
 <p>Con este último código logramos aplicar automáticamente el clasificador de suelos para Rosario a cada período bimestral. A partir de ahí, generamos una serie de tiempo de clases del suelo que nos permite observar tanto los cambios absolutos como los relativos. Este enfoque es ideal para detectar procesos de urbanización, expansión agrícola, deforestación o cambios hidrológicos en el territorio.</p>
 </section>
 <section id="video-del-capitulo">
@@ -1349,9 +1349,9 @@ Gracias al siguiente bloque:</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mejora-estetica-del-mapa">7.10.1. Mejora estética del mapa</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">7.11. Conclusión de esta sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">7.11. Conclusión de esta sección</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-tipos-de-suelo-con-sentinel-2-un-enfoque-basado-en-datacubes">7.12. Clasificación de tipos de suelo con Sentinel-2: un enfoque basado en datacubes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">7.12.1. Introducción</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">7.12.1. Introducción</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coleccion-de-imagenes-sentinel-2-y-preparacion-del-mosaico-base">7.12.2. Colección de imágenes Sentinel-2 y preparación del mosaico base</a></li>
 </ul>
 </li>
@@ -1374,7 +1374,7 @@ Gracias al siguiente bloque:</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-7-visualizacion-porcentual">7.14.6. BLOQUE 7: Visualización porcentual</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">7.15. Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">7.15. Conclusión</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">7.16. Video del capítulo</a></li>
 </ul>
   </nav></div>

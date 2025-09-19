@@ -341,7 +341,7 @@ Algunas Conclusiones de la sección
 ## Uso de Awesome Spectral Indices en GEE
 
 
-En este video vamos a explorar cómo usar el  catálogo abierto y colaborativo de índices espectrales denominado **Awesome Spectral Indices (ASI)** \citep{montero2023standardized} {cite:p}`montero2023standardized` :cite:p:`montero2023standardized`una herramienta muy potente para calcular de forma sencilla decenas de índices espectrales en Google Earth Engine.
+En este video vamos a explorar cómo usar el  catálogo abierto y colaborativo de índices espectrales denominado **Awesome Spectral Indices (ASI)** {cite:p}`montero2023standardized` una herramienta muy potente para calcular de forma sencilla decenas de índices espectrales en Google Earth Engine.
 
 Esta librería nos ahorra tiempo y evita errores al aplicar fórmulas, ya que contiene una base de datos bien documentada con cada índice, su fórmula, sus bandas requeridas y su referencia académica.
 

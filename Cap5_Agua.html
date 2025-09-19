@@ -392,7 +392,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-calcular-ndvi">5.2. Función para calcular NDVI</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">5.3. Workflow</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">5.3.1. Entrenamiento</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">5.3.2. ENTRENAMIENTO:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">5.3.2. ENTRENAMIENTO:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">5.3.3. Clasificar la imagen</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mascara">5.3.4. MASCARA:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acurracy-assessment">5.3.5. Acurracy Assessment</a></li>
@@ -415,9 +415,9 @@ document.write(`
 <h1><span class="section-number">5. </span>Capítulo 5 · Random Forest para detectar agua<a class="headerlink" href="#capitulo-5-random-forest-para-detectar-agua" title="Link to this heading">#</a></h1>
 <section id="introduccion">
 <h2><span class="section-number">5.1. </span>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
-<p>En este capítulo vamos a aplicar aprendizaje automático a imágenes satelitales para predecir superficies de agua. Utilizaremos datos satelitales de Sentinel-2 para procesar una colección de imágenes correspondientes a una región de estudio y aplicaremos un modelo de Random Forest para clasificar los píxeles en dos categorías: agua y no agua.</p>
-<p>En google Earth Engine, podes explorar imagenes SENTINEL haciendo click en DATASET para acceder al catálogo de datos y luego hacer en la opción de menú Sentinel y encontrarás todos los productos satelitales Sentinel.</p>
-<p>Sentinel-2 es propiedad de la Agencia Europea de Satélites ( European Space Agency ESA), en Google eart Engen tenemos varios conjuntos de imágenes satelitales Sentinel: Sentinel-1, Sentinel-2, Sentinel-3 y Sentinel-5.</p>
+<p>En este capítulo vamos a aplicar aprendizaje automático a imágenes satelitales para predecir superficies de agua. Utilizaremos datos satelitales de Sentinel-2 para procesar una colección de imágenes correspondientes a una región de estudio y aplicaremos un modelo de Random Forest para clasificar los píxeles en dos categorías: agua y no agua. Es decir, emplearemos una clasificación binaria.</p>
+<p>En Google Earth Engine (GEE) podes explorar imagenes Sentinel haciendo click en DATASET para acceder al catálogo de datos y luego hacer en la opción de menú Sentinel y encontrarás todos los productos satelitales Sentinel.</p>
+<p>Sentinel-2 es propiedad de la Agencia Espacial Europea <span id="id1">[<a class="reference internal" href="Referencias.html#id8" title="European Space Agency. Sentinel-2: esa's optical high-resolution mission for gmes operational services. European Space Agency, 2015. Consultado el 19 de septiembre de 2025. URL: https://sentinel.esa.int/web/sentinel/missions/sentinel-2.">European Space Agency, 2015</a>]</span>.  En Google Earth Engine tenemos acceso a colecciones de imágenes satelitales Sentinel-1, Sentinel-2, Sentinel-3 y Sentinel-5 <span id="id2">[<a class="reference internal" href="Referencias.html#id7" title="Google Earth Engine. Sentinel satellite imagery collections in google earth engine. Google Earth Engine Data Catalog, 2025. Consultado el 19 de septiembre de 2025. URL: https://developers.google.com/earth-engine/datasets/catalog/sentinel.">Google Earth Engine, 2025</a>]</span>.</p>
 <p>Nos vamos a centrar en Sentinel-2, cuyos datos son muy populares.</p>
 <p>Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida la gestión de desastres, la gestión de emergencias, la cuantificación de la tendencia de urbanización y la cobertura del suelo, entre otras.</p>
 <p><img alt="" src="_images/PosIT-1.png" /></p>
@@ -632,8 +632,8 @@ Contamos con el valor de las bandas Sentinel seleccionadas, la banda NDVI y la e
 <p>Por lo tanto, dividiremos esos datos: crearemos una columna aleatoria y luego solo el 70 % de los datos se utilizarán para entrenar nuestro modelo.
 Y luego, el conjunto de prueba aquí será la evaluación, que es el 30 % de datos restantes.</p>
 </section>
-<section id="id1">
-<h3><span class="section-number">5.3.2. </span>ENTRENAMIENTO:<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<section id="id3">
+<h3><span class="section-number">5.3.2. </span>ENTRENAMIENTO:<a class="headerlink" href="#id3" title="Link to this heading">#</a></h3>
 <p><img alt="alt text" src="_images/p_2.png" /></p>
 <p>En este paso entrenemos el modelo para luego aplicarlo a la imagen con el fin de generar un mapa de masa de agua.</p>
 <p>El paso de entrenar el modelo consiste en aplicar la clasificación supervisada de random forest con los datos de entremiento</p>
@@ -819,7 +819,7 @@ también exporta tu clasificación final a tu Google Drive.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-calcular-ndvi">5.2. Función para calcular NDVI</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">5.3. Workflow</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">5.3.1. Entrenamiento</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">5.3.2. ENTRENAMIENTO:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">5.3.2. ENTRENAMIENTO:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">5.3.3. Clasificar la imagen</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mascara">5.3.4. MASCARA:</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acurracy-assessment">5.3.5. Acurracy Assessment</a></li>

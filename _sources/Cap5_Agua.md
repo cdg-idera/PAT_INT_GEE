@@ -2,11 +2,12 @@
 
 ## Introducción
 
-En este capítulo vamos a aplicar aprendizaje automático a imágenes satelitales para predecir superficies de agua. Utilizaremos datos satelitales de Sentinel-2 para procesar una colección de imágenes correspondientes a una región de estudio y aplicaremos un modelo de Random Forest para clasificar los píxeles en dos categorías: agua y no agua.
+En este capítulo vamos a aplicar aprendizaje automático a imágenes satelitales para predecir superficies de agua. Utilizaremos datos satelitales de Sentinel-2 para procesar una colección de imágenes correspondientes a una región de estudio y aplicaremos un modelo de Random Forest para clasificar los píxeles en dos categorías: agua y no agua. Es decir, emplearemos una clasificación binaria.
 
-En google Earth Engine, podes explorar imagenes SENTINEL haciendo click en DATASET para acceder al catálogo de datos y luego hacer en la opción de menú Sentinel y encontrarás todos los productos satelitales Sentinel. 
+En Google Earth Engine (GEE) podes explorar imagenes Sentinel haciendo click en DATASET para acceder al catálogo de datos y luego hacer en la opción de menú Sentinel y encontrarás todos los productos satelitales Sentinel. 
 
-Sentinel-2 es propiedad de la Agencia Europea de Satélites ( European Space Agency ESA), en Google eart Engen tenemos varios conjuntos de imágenes satelitales Sentinel: Sentinel-1, Sentinel-2, Sentinel-3 y Sentinel-5.
+Sentinel-2 es propiedad de la Agencia Espacial Europea {cite:p}`esa_sentinel2`.  En Google Earth Engine tenemos acceso a colecciones de imágenes satelitales Sentinel-1, Sentinel-2, Sentinel-3 y Sentinel-5 {cite:p}`gee_sentinel`.
+
 
 Nos vamos a centrar en Sentinel-2, cuyos datos son muy populares. 
 
