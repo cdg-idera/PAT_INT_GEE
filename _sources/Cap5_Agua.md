@@ -15,7 +15,7 @@ Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida 
 
 ```{figure} imagenes/PosIT-1.png
 :name: fig-PosIT-1
-:width: 100%
+:width: 60%
 
 Algunas aplicaciones de Sentinel-2
 ```
@@ -27,7 +27,7 @@ Nuestra área de estudio será la región del Comahue principalmente la provinci
 
 ```{figure} imagenes/km.png
 :name: fig-km
-:width: 100%
+:width: 60%
 
 Sobre el area de estudio
 ```
@@ -51,7 +51,7 @@ FAO GAUL: Global Administrative Unit Layers 2015, First-Level Administrative Uni
 
 ```{figure} imagenes/PosIT-2.png
 :name: fig-PosIT-2
-:width: 100%
+:width: 60%
 
 Sobre Global Administrative Unit Layers
 ```
