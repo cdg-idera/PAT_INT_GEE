@@ -219,7 +219,6 @@ A partir de esto, podemos generar una matriz de confusión (ver fig. {numref}`fi
 Tabla de Variables Independientes y Dependientes
 ```
 
-
 Earth Engine permite calcular todas estas métricas y compararlas fácilmente para evaluar el rendimiento del modelo. Si la matriz de confusión muestra valores elevados fuera de la diagonal, eso indica que el modelo está teniendo dificultades con ciertas clases. En ese caso, se puede recolectar más datos para las clases problemáticas o ajustar los parámetros del modelo para mejorar la clasificación.
 
 Al revisar la matriz de confusión, si se observa que hay una baja confusión entre clases.
@@ -237,40 +236,40 @@ Una precisión Global (ver fig. {numref}`fig-Interpretacion`) de 98.02% indica q
 Interpretación de la Precisión Global
 ```
 
-Confusiones a considerar:
+**Confusiones a considerar:**
 
-Bosque/Zona Arbolada-Arbustiva y Cultivos: Hay un píxel de cultivos clasificado erróneamente como Bosque.
-Suelos Desnudos y Urbano: Hay un píxel de Suelos Desnudos clasificado erróneamente como Urbano.
-Estas áreas de confusión podrían abordarse mediante ajustes en los datos de entrenamiento o en las características utilizadas para clasificar.
+* Bosque/Zona Arbolada-Arbustiva y Cultivos: Hay un píxel de cultivos clasificado erróneamente como Bosque.
+* Suelos Desnudos y Urbano: Hay un píxel de Suelos Desnudos clasificado erróneamente como Urbano.
+* Estas áreas de confusión podrían abordarse mediante ajustes en los datos de entrenamiento o en las características utilizadas para clasificar.
 
 
 ### Interpretación por Clase: Agua (Clase 0):
 
-Precisión del consumidor: 100%
-Esto significa que todos los píxeles clasificados como agua son efectivamente agua.
-Precisión del productor: 100%
-Todos los píxeles reales de agua han sido clasificados correctamente.
+* Precisión del consumidor: 100%
+    * Esto significa que todos los píxeles clasificados como agua son efectivamente agua.
+* Precisión del productor: 100%
+    * Todos los píxeles reales de agua han sido clasificados correctamente.
 
 ### Interpretación por Clase: Urbano (Clase 1):
 
-Precisión del consumidor: 100%
-Todos los píxeles clasificados como urbanos son realmente urbanos.
-Precisión del productor: 97.5%
-Hay una pequeña confusión en la que un píxel urbano fue clasificado como otra clase.
+* Precisión del consumidor: 100%
+    * Todos los píxeles clasificados como urbanos son realmente urbanos.
+* Precisión del productor: 97.5%
+    * Hay una pequeña confusión en la que un píxel urbano fue clasificado como otra clase.
 
 ### Interpretación por Clase: Cultivos (Clase 2):
 
-Precisión del consumidor: 100%
-Ningún píxel clasificado como cultivos fue mal clasificado.
-Precisión del productor: 92.3%
-Un píxel de cultivos fue clasificado como bosque/zona arbustiva, indicando cierta confusión entre estas clases.
+* Precisión del consumidor: 100%
+    * Ningún píxel clasificado como cultivos fue mal clasificado.
+* Precisión del productor: 92.3%
+    * Un píxel de cultivos fue clasificado como bosque/zona arbustiva, indicando cierta confusión entre estas clases.
 
 ### Interpretación por Clase: Bosque/Zona Arbolada-Arbustiva (Clase 3):
 
-Precisión del consumidor: 93.3%
-La mayoría de los píxeles clasificados como bosque/zona arbustiva son correctos, aunque un píxel fue clasificado erróneamente como cultivos.
-Precisión del productor: 100%
-Todos los píxeles reales de bosque/zona arbustiva fueron clasificados correctamente.
+* Precisión del consumidor: 93.3%
+    * La mayoría de los píxeles clasificados como bosque/zona arbustiva son correctos, aunque un píxel fue clasificado erróneamente como cultivos.
+* Precisión del productor: 100%
+    * Todos los píxeles reales de bosque/zona arbustiva fueron clasificados correctamente.
 
 ### Conclusión General
 

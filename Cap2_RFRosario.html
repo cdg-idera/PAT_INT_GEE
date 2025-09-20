@@ -590,37 +590,71 @@ Para asegurarnos de que todo esté correcto, usamos el comando print() para veri
 <p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Interpretación de la Precisión Global</span><a class="headerlink" href="#fig-interpretacion" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Confusiones a considerar:</p>
-<p>Bosque/Zona Arbolada-Arbustiva y Cultivos: Hay un píxel de cultivos clasificado erróneamente como Bosque.
-Suelos Desnudos y Urbano: Hay un píxel de Suelos Desnudos clasificado erróneamente como Urbano.
-Estas áreas de confusión podrían abordarse mediante ajustes en los datos de entrenamiento o en las características utilizadas para clasificar.</p>
+<p><strong>Confusiones a considerar:</strong></p>
+<ul class="simple">
+<li><p>Bosque/Zona Arbolada-Arbustiva y Cultivos: Hay un píxel de cultivos clasificado erróneamente como Bosque.</p></li>
+<li><p>Suelos Desnudos y Urbano: Hay un píxel de Suelos Desnudos clasificado erróneamente como Urbano.</p></li>
+<li><p>Estas áreas de confusión podrían abordarse mediante ajustes en los datos de entrenamiento o en las características utilizadas para clasificar.</p></li>
+</ul>
 <section id="interpretacion-por-clase-agua-clase-0">
 <h3><span class="section-number">2.8.1. </span>Interpretación por Clase: Agua (Clase 0):<a class="headerlink" href="#interpretacion-por-clase-agua-clase-0" title="Link to this heading">#</a></h3>
-<p>Precisión del consumidor: 100%
-Esto significa que todos los píxeles clasificados como agua son efectivamente agua.
-Precisión del productor: 100%
-Todos los píxeles reales de agua han sido clasificados correctamente.</p>
+<ul class="simple">
+<li><p>Precisión del consumidor: 100%</p>
+<ul>
+<li><p>Esto significa que todos los píxeles clasificados como agua son efectivamente agua.</p></li>
+</ul>
+</li>
+<li><p>Precisión del productor: 100%</p>
+<ul>
+<li><p>Todos los píxeles reales de agua han sido clasificados correctamente.</p></li>
+</ul>
+</li>
+</ul>
 </section>
 <section id="interpretacion-por-clase-urbano-clase-1">
 <h3><span class="section-number">2.8.2. </span>Interpretación por Clase: Urbano (Clase 1):<a class="headerlink" href="#interpretacion-por-clase-urbano-clase-1" title="Link to this heading">#</a></h3>
-<p>Precisión del consumidor: 100%
-Todos los píxeles clasificados como urbanos son realmente urbanos.
-Precisión del productor: 97.5%
-Hay una pequeña confusión en la que un píxel urbano fue clasificado como otra clase.</p>
+<ul class="simple">
+<li><p>Precisión del consumidor: 100%</p>
+<ul>
+<li><p>Todos los píxeles clasificados como urbanos son realmente urbanos.</p></li>
+</ul>
+</li>
+<li><p>Precisión del productor: 97.5%</p>
+<ul>
+<li><p>Hay una pequeña confusión en la que un píxel urbano fue clasificado como otra clase.</p></li>
+</ul>
+</li>
+</ul>
 </section>
 <section id="interpretacion-por-clase-cultivos-clase-2">
 <h3><span class="section-number">2.8.3. </span>Interpretación por Clase: Cultivos (Clase 2):<a class="headerlink" href="#interpretacion-por-clase-cultivos-clase-2" title="Link to this heading">#</a></h3>
-<p>Precisión del consumidor: 100%
-Ningún píxel clasificado como cultivos fue mal clasificado.
-Precisión del productor: 92.3%
-Un píxel de cultivos fue clasificado como bosque/zona arbustiva, indicando cierta confusión entre estas clases.</p>
+<ul class="simple">
+<li><p>Precisión del consumidor: 100%</p>
+<ul>
+<li><p>Ningún píxel clasificado como cultivos fue mal clasificado.</p></li>
+</ul>
+</li>
+<li><p>Precisión del productor: 92.3%</p>
+<ul>
+<li><p>Un píxel de cultivos fue clasificado como bosque/zona arbustiva, indicando cierta confusión entre estas clases.</p></li>
+</ul>
+</li>
+</ul>
 </section>
 <section id="interpretacion-por-clase-bosque-zona-arbolada-arbustiva-clase-3">
 <h3><span class="section-number">2.8.4. </span>Interpretación por Clase: Bosque/Zona Arbolada-Arbustiva (Clase 3):<a class="headerlink" href="#interpretacion-por-clase-bosque-zona-arbolada-arbustiva-clase-3" title="Link to this heading">#</a></h3>
-<p>Precisión del consumidor: 93.3%
-La mayoría de los píxeles clasificados como bosque/zona arbustiva son correctos, aunque un píxel fue clasificado erróneamente como cultivos.
-Precisión del productor: 100%
-Todos los píxeles reales de bosque/zona arbustiva fueron clasificados correctamente.</p>
+<ul class="simple">
+<li><p>Precisión del consumidor: 93.3%</p>
+<ul>
+<li><p>La mayoría de los píxeles clasificados como bosque/zona arbustiva son correctos, aunque un píxel fue clasificado erróneamente como cultivos.</p></li>
+</ul>
+</li>
+<li><p>Precisión del productor: 100%</p>
+<ul>
+<li><p>Todos los píxeles reales de bosque/zona arbustiva fueron clasificados correctamente.</p></li>
+</ul>
+</li>
+</ul>
 </section>
 <section id="conclusion-general">
 <h3><span class="section-number">2.8.5. </span>Conclusión General<a class="headerlink" href="#conclusion-general" title="Link to this heading">#</a></h3>
