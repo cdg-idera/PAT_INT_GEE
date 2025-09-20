@@ -1,0 +1,825 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>2. Capítulo 2 · Random Forest en GEE &#8212; GeoIA aplicado a Imágenes Satelitales</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Cap2_RFRosario';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="3. Capítulo 3 · Random Forest en GEE y Colab" href="Cap3_gee_colab.html" />
+    <link rel="prev" title="1. Capítulo 1 · Teledetección y Aprendizaje Automático" href="Cap1_Tecnicas.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logoAgua.png" class="logo__image only-light" alt="GeoIA aplicado a Imágenes Satelitales - Home"/>
+    <script>document.write(`<img src="_static/logoAgua.png" class="logo__image only-dark" alt="GeoIA aplicado a Imágenes Satelitales - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Prólogo
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Cap1_Tecnicas.html">1. Capítulo 1 · Teledetección y Aprendizaje Automático</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Capítulo 2 · Random Forest en GEE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap3_gee_colab.html">3. Capítulo 3 · Random Forest en GEE y Colab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap4_SVM_DT.html">4. Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">5. Capítulo 5 · Random Forest para detectar agua</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap6_ST.html">6. Capítulo 6 · Serie Temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">7. Capítulo 7 · Cubos de Imágenes Satelitales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Referencias.html">8. Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE/issues/new?title=Issue%20on%20page%20%2FCap2_RFRosario.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Cap2_RFRosario.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Capítulo 2 · Random Forest en GEE</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">2.1. Introducción</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recoleccion-de-muestras-de-entrenamiento">2.1.1. Recolección de muestras de entrenamiento</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unificando-muestras-de-entrenamiento">2.2. Unificando Muestras de Entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-de-pixeles">2.3. Extracción de Valores de Píxeles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">2.4. Entrenamiento del Clasificador</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-la-imagen">2.5. Clasificación de la Imagen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendaciones-para-la-recoleccion-de-datos">2.6. Recomendaciones para la recolección de Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-del-modelo">2.7. Precisión del Modelo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-la-precision-global">2.8. Interpretación de la Precisión Global</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-agua-clase-0">2.8.1. Interpretación por Clase: Agua (Clase 0):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-urbano-clase-1">2.8.2. Interpretación por Clase: Urbano (Clase 1):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-cultivos-clase-2">2.8.3. Interpretación por Clase: Cultivos (Clase 2):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-bosque-zona-arbolada-arbustiva-clase-3">2.8.4. Interpretación por Clase: Bosque/Zona Arbolada-Arbustiva (Clase 3):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general">2.8.5. Conclusión General</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#otras-metricas-de-validacion">2.9. Otras métricas de validación:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre">2.10. Cierre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">2.11. Video del capítulo</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="capitulo-2-random-forest-en-gee">
+<h1><span class="section-number">2. </span>Capítulo 2 · Random Forest en GEE<a class="headerlink" href="#capitulo-2-random-forest-en-gee" title="Link to this heading">#</a></h1>
+<section id="introduccion">
+<h2><span class="section-number">2.1. </span>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
+<p>La clasificación de imágenes satelitales es una técnica fundamental en teledetección, y uno de los enfoques más comunes es dividir el territorio en categorías específicas como: urbano, suelo desnudo, agua ó vegetación de cultivos, Bosque-o-Zona Arbolada-Arbustiva (ver fig. <a class="reference internal" href="#fig-leyendaarbol"><span class="std std-numref">Fig. 2.1</span></a>).</p>
+<p>Primero, accedemos al code editor de nuestra cuenta de Google Earth engen y cargamos la colección de imágenes Sentinel-2 SR Harmonized, que incluye datos de alta calidad para análisis medioambientales.</p>
+<p>Luego defimos una región de interés (ROI), la cual comprende una gran parte del área metropolitana de Rosario en la provincia de Santa Fé.
+A medida que avanzamos, aprenderemos a implementar este proceso en código, con la meta final de que cada participante pueda replicar el ejemplo en su ciudad.</p>
+<p>Aplicamos filtros para limitar las imágenes a las que tienen menos del 30% de nubes, que fueron capturadas entre el 1 de enero de 2024 y el 31 de Diciembre de 2024, y que se encuentran dentro de nuestra región de interés, o ROI. Finalmente, filtramos las bandas expectrales B*.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_SR_HARMONIZED&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">date</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2025-01-01&#39;</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">bounds</span><span class="p">(</span><span class="nx">roi</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B.*&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Creamos una composición utilizando la mediana de las imágenes seleccionadas, lo que nos permite reducir la interferencia de nubes y otros artefactos.</p>
+<p>Para visualizar nuestra composición, configuramos parámetros RGB usando las bandas B4, B3 y B2, que representan rojo, verde y azul respectivamente.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">composite</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">s2</span><span class="p">.</span><span class="nx">median</span><span class="p">().</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi</span><span class="p">);</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">composite</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">min</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="o">:</span><span class="mf">3000</span><span class="p">,</span><span class="w"> </span><span class="nx">bands</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">]},</span><span class="w"> </span><span class="s1">&#39;Composite&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Ahora contamos con una imagen compuesta y procesada lista para análisis geoespacial, en particular explicaremos en esta sección como aplicar aprendizaje automático con <strong>Random Forest</strong> a la región de estudio para obtener una clasificación
+de suelos de acuerdo a las categorías de agua, edicaciones del sector urbano, suelo desnudo, y vegetación en la que distinguiremos cultivos de forestación.</p>
+<section id="recoleccion-de-muestras-de-entrenamiento">
+<h3><span class="section-number">2.1.1. </span>Recolección de muestras de entrenamiento<a class="headerlink" href="#recoleccion-de-muestras-de-entrenamiento" title="Link to this heading">#</a></h3>
+<p>Este proceso comienza identificando los píxeles correspondientes a cada una de estas clases dentro de una imagen satelital. Para ello, es esencial recolectar datos de entrenamiento representativos que permitan entrenar un modelo de clasificación eficaz. El primer paso: la recolección de datos de entrenamiento es crucial. Para ello, necesitamos etiquetar manualmente ejemplos de cada una de las cinco clases en nuestra imagen. Por motivos de eficiencia, las etiquetas no se asignan como texto, sino como valores numéricos: los píxeles de agua se etiquetan como 0, los pixeles de edificaciones urbanas como 1, los de suelo desnudo como 3, los de cultivos como 4 y los de vegetación bosques o arbustiva como 4. Esta codificación facilita el procesamiento por parte del modelo y asegura un manejo eficiente de las clases.</p>
+<p>El primer paso es crear una nueva capa. Haz clic en “Nueva capa”. Por defecto, el tipo es geometría, pero iremos a la configuración y cambiaremos esto a un Feature collection. Nombraremos esta capa como “agua”, y agregaremos una propiedad llamada landcover. Para esta clase, definiremos que land cover = 0 corresponde agua.</p>
+<p>Al recolectar datos de entrenamiento, es fundamental ser preciso. Por ejemplo, para identificar áreas urbanas, definimos esta categoría como cualquier superficie mencionada recién, superf. construida, edificios, carreteras y otras superficies impermeables. Utilizando las herramientas de dibujo disponibles, como marcadores o puntos, seleccionamos manualmente píxeles que representen agua. Es esencial hacer esto con cuidado, asegurándonos de que los puntos se coloquen exactamente sobre píxeles de agua,</p>
+<p>Una vez que recolectamos ejemplos representativos de píxeles de agua, repetimos el proceso para las demás clases:</p>
+<p>Ahora es el turno de la categoría urbano que representa a edificios, superficie construida, como edificios, carreteras y otras superficies impermeables. Creamos una nueva capa, de tipo feature collection, cuyo nombre es urbano, con una propiedad lancover igual a 1. Ahora, con esta nueva colección configurada, comenzaremos a marcar puntos DE ESAS caracteristicas.Nuevamente es esencial hacer esto con cuidado, asegurándonos de que los puntos se coloquen exactamente sobre pixeles urbanos, evitando errores como etiquetar un árbol o vegetación cercana.</p>
+<p>Es útil contar con mapas base de alta resolución como referencia. Sin embargo, estos deben utilizarse con precaución, ya que las imágenes de los mapas base pueden corresponder a fechas diferentes a las de nuestra imagen satelital. Por ejemplo, un edificio visible en el mapa base puede no existir en la imagen satelital actual. Por lo tanto, siempre debemos priorizar la referencia directa de nuestra imagen satelital.</p>
+<p>Aseguráte de recopilar datos de diferentes partes de la ciudad que correspondan a la misma clase para garantizar que el modelo capture la variabilidad dentro de esa categoría. Mientras marcas puntos para una clase, si identificas un ejemplo claro de otra clase, puedes cambiar de capa y marcar ese punto también.</p>
+<p>Bien, ahora que hemos recopilado todos los datos para los puntos de la clase urbana, pasaremos a la siguiente clase: terrenos desnudos. El primer paso es crear una nueva capa. Haz clic en “Nueva capa”. Por defecto, el tipo será geometría, pero iremos a la configuración y cambiaremos esto a una colección de características (feature collection). Nombraremos esta capa como “superficieDesnuda”, y agregaremos una propiedad llamada land covER. Para esta clase, definiremos que land cover = 1 corresponde a terrenos desnudos. También puedes cambiar los colores de la capa si lo deseas para facilitar su visualización.
+Ahora, con esta nueva colección configurada, comenzaremos a marcar puntos en las superficiesDesnudas.</p>
+<p>Definimos terreno desnudo como cualquier píxel que representa suelo expuesto, sin construcciones ni vegetación, únicamente tierra desnuda. Utilizando la herramienta de marcador, selecciona la capa de terrenos desnudos y comienza a colocar puntos en las áreas correspondientes.</p>
+<p>hacemos los mismo con cultivos,  Creamos una nueva capa, de tipo feature collection, cuyo nombre es cultivos, con una propiedad lancover igual a 3. Incorporamos pixeles a la capa.
+hacemos los mismo con forestación o arbusto,  Creamos una nueva capa, de tipo feature collection, cuyo nombre es bosque pero comprende también “zona arbolada y arbustiva” o vegetación leñosa, con una propiedad lancover igual a 4. Incorporamos pixeles a la capa  (ver fig. <a class="reference internal" href="#fig-leyendaarbol"><span class="std std-numref">Fig. 2.1</span></a>).</p>
+<figure class="align-default" id="fig-leyendaarbol">
+<a class="reference internal image-reference" href="_images/LeyendaArbol.png"><img alt="_images/LeyendaArbol.png" src="_images/LeyendaArbol.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Clasificación Multiclase: Categorías</span><a class="headerlink" href="#fig-leyendaarbol" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>La calidad y la representatividad de estos datos de entrenamiento son cruciales, ya que los algoritmos de aprendizaje automático tratan los datos de entrada como verdades absolutas. Cualquier error en esta etapa puede traducirse en un modelo impreciso y resultados incorrectos.</p>
+<p>Aunque existe la posibilidad de utilizar polígonos para generar automáticamente múltiples ejemplos de entrenamiento, esta práctica debe evitarse. Cuando un polígono incluye píxeles de diferentes clases, el modelo puede recibir información incorrecta y generalizar de manera inexacta. Por ello, la recolección manual y cuidadosa de puntos individuales es siempre preferible, aunque sea más laboriosa.</p>
+<p>El aprendizaje automático, aunque automatiza muchos procesos, requiere una inversión significativa en tiempo y esfuerzo para recolectar y limpiar los datos de entrada. Este trabajo manual es la base de un modelo exitoso. Una vez que los datos están listos, el resto del proceso, como la implementación del modelo y la clasificación, es relativamente sencillo y eficiente.</p>
+<p>Una vez que hayamos terminado, tendremos algo como esto: una colección de muestras de entrenamiento para cada clase. Estas muestras estarán bien distribuidas por la región de interés, con alrededor de 10 puntos por clase para áreas pequeñas. Para regiones más grandes, se recomienda aumentar la cantidad de puntos a 100.</p>
+</section>
+</section>
+<section id="unificando-muestras-de-entrenamiento">
+<h2><span class="section-number">2.2. </span>Unificando Muestras de Entrenamiento<a class="headerlink" href="#unificando-muestras-de-entrenamiento" title="Link to this heading">#</a></h2>
+<p>Ahora que hemos etiquetado cada clase con valores únicos (0 para agua, 1 para urbano, 2 para terreno desnudo, 3 para cultivos y 4 para vegetación de bosque o zona arbolada ó arbustiva), necesitamos combinar todas estas muestras en una sola colección de entrenamiento. Esto simplificará el proceso de clasificación.</p>
+<p>Definiremos una variable llamada GCPs (Ground Control Points, puntos de control en tierra), que contendrá nuestras muestras de entrenamiento. Usaremos la función MERGE para combinar las capas: primero la urbana, luego la de agua,  después la de cultivos, después la de terrenoDesnudo y finalmente la de bosque-zona arbolada y arbustiva. Ahora, GCP será una única colección que incluye todas las muestras de entrenamiento.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">gcps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">urbano</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">agua</span><span class="p">).</span><span class="nx">merge</span><span class="p">(</span><span class="nx">cultivos</span><span class="p">).</span><span class="nx">merge</span><span class="p">(</span><span class="nx">terrenoDesnudo</span><span class="p">).</span><span class="nx">merge</span><span class="p">(</span><span class="nx">bosque</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Esta colección tiene una única propiedad llamada land cover, que es la etiqueta de clase. Sin embargo, aún necesitamos asociar las REFLECTANCIAS ESPECTRALES de cada píxel en nuestra imagen compuesta a estas etiquetas.</p>
+</section>
+<section id="extraccion-de-valores-de-pixeles">
+<h2><span class="section-number">2.3. </span>Extracción de Valores de Píxeles<a class="headerlink" href="#extraccion-de-valores-de-pixeles" title="Link to this heading">#</a></h2>
+<p>El siguiente paso es extraer los valores espectrales de los píxeles en nuestra imagen compuesta. Esto se hace con la función sampleRegions, que toma la imagen y las geometrías de nuestras muestras de entrenamiento. Configuraremos la función para mantener solo la propiedad land cover y definiremos una escala de muestreo acorde a la resolución de Sentinel-2 (EN ESTE CASO 10 metros).</p>
+<p>Después de ejecutar esta función, cada muestra de entrenamiento incluirá los valores espectrales de las 12 bandas de la imagen, junto con su etiqueta de clase. Esto nos proporciona una tabla donde cada fila corresponde a un píxel de entrenamiento y cada columna representa las bandas espectrales. Esta tabla será usada para entrenar el modelo de clasificación.</p>
+</section>
+<section id="entrenamiento-del-clasificador">
+<h2><span class="section-number">2.4. </span>Entrenamiento del Clasificador<a class="headerlink" href="#entrenamiento-del-clasificador" title="Link to this heading">#</a></h2>
+<p>Para entrenar el modelo, utilizaremos un clasificador de bosque aleatorio (Random Forest). En Earth Engine, esto se hace con la función ee.Classifier.smileRandomForest. Inicializaremos el clasificador con un número arbitrario de árboles, por ejemplo, 50. Más adelante, podremos optimizar este valor utilizando técnicas de ajuste de hiperparámetros.</p>
+<p>El clasificador se entrena llamando a la función train, donde especificamos:</p>
+<ul class="simple">
+<li><p>Las propiedades de entrada (los nombres de las bandas espectrales).</p></li>
+<li><p>La propiedad objetivo (land cover).</p></li>
+</ul>
+<p>Una vez entrenado, el clasificador estará listo para predecir las etiquetas de clase en los píxeles no etiquetados de nuestra imagen.</p>
+</section>
+<section id="clasificacion-de-la-imagen">
+<h2><span class="section-number">2.5. </span>Clasificación de la Imagen<a class="headerlink" href="#clasificacion-de-la-imagen" title="Link to this heading">#</a></h2>
+<p>Tomamos nuestra imagen compuesta y aplicamos el clasificador con la función classify. Esto genera una nueva imagen clasificada, donde cada píxel tiene un valor correspondiente a una de las clases (0, 1, 2 o 3).</p>
+<p>Para visualizar la imagen clasificada, definimos parámetros de visualización que incluyan:</p>
+<ul class="simple">
+<li><p>Rango de valores (min = 0, max = 3), los cuales representan los cuatro valores de nuestras clases.</p></li>
+<li><p>Una paleta de colores que facilite identificar las diferentes clases.</p></li>
+</ul>
+<p>Al final, tendremos una representación visual clara de la clasificación, con cada clase distinguible por su color. Esto completa el proceso básico de clasificación supervisada utilizando Google Earth Engine (ver fig. <a class="reference internal" href="#fig-tabla-rfrosario"><span class="std std-numref">Fig. 2.2</span></a>).</p>
+<figure class="align-default" id="fig-tabla-rfrosario">
+<a class="reference internal image-reference" href="_images/Tabla_RFRosario.png"><img alt="_images/Tabla_RFRosario.png" src="_images/Tabla_RFRosario.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Tabla de Variables Independientes y Dependientes</span><a class="headerlink" href="#fig-tabla-rfrosario" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Cualquiera sea el color que especifiques aquí, corresponderá a la clase cero, clase uno, clase dos y clase tres y clase 4. Ahora, vamos a añadirlo al mapa, específicamente a la imagen clasificada, utilizando este parámetro.</p>
+<p>Cuando ejecuto este proceso, GEE procederá a entrenar el modelo con la imagen clasificada. Esto implica que GEE entrenará el modelo utilizando los datos proporcionados, realizará las predicciones para cada clase y generará los resultados correspondientes. A continuación, quiero recortar los datos a la geometría con la que hemos entrenado el modelo, y así podrás observar los resultados obtenidos.</p>
+<p>Al ejecutar la función, EE realizará la predicción para cada píxel, asignando a cada uno su clase correspondiente. Como resultado, verás la imagen clasificada final. A medida que realizas zoom en la imagen, EE continuará con la clasificación en tiempo real, previendo el valor de cada clase en cada píxel. Incluso con las pocas muestras de entrenamiento recolectadas en apenas unos minutos, el modelo tiene un rendimiento bastante bueno, logrando clasificar la imagen de manera precisa.</p>
+<p>La clasificación se realiza de forma eficiente, con una detección precisa de píxeles correspondientes a áreas urbanas, cuerpos de agua y vegetación, lo que demuestra el poder del aprendizaje automático y la computación en la nube. Lo interesante de este enfoque es que, utilizando una cantidad mínima de muestras de entrenamiento, es posible crear un modelo que clasifica cada píxel en la imagen en tiempo real, gracias a las capacidades de procesamiento paralelo en la nube. No es necesario descargar datos ni esperar largos tiempos de cómputo.</p>
+<p>El algoritmo que utilizamos es el clasificador Random forest o en español “bosques aleatorios”, basado en una biblioteca de código abierto llamada SMILE, que implementa diversos algoritmos de aprendizaje automático. Dado que el backend de Earth Engine está desarrollado en Java, al ejecutar esta función, se utiliza dicha biblioteca para construir el modelo de bosques aleatorios y emplearlo en las predicciones. Este flujo de trabajo se basa completamente en modelos y herramientas de código abierto, lo que proporciona una gran flexibilidad.</p>
+<p>Lo que Earth Engine aporta es la capacidad de realizar estos procesos en tiempo real y a gran escala. Esto significa que, mientras que en un entorno local podría tomar meses realizar una clasificación a nivel nacional, en Earth Engine se puede hacer en tiempo real.</p>
+</section>
+<section id="recomendaciones-para-la-recoleccion-de-datos">
+<h2><span class="section-number">2.6. </span>Recomendaciones para la recolección de Datos<a class="headerlink" href="#recomendaciones-para-la-recoleccion-de-datos" title="Link to this heading">#</a></h2>
+<p>Algunas recomendaciones para optimizar la recolección de datos son las siguientes:</p>
+<p>Usar imágenes Sentinel-2 como referencia. Asegúrate de utilizar imágenes de Sentinel-2 para seleccionar las muestras de entrenamiento, ya que las imágenes de alta resolución pueden no coincidir temporalmente con las imágenes de Sentinel-2, lo que podría afectar la precisión del modelo.</p>
+<p>Distribuir las muestras de entrenamiento de manera equitativa. Asegúrate de tomar puntos de entrenamiento distribuidos por toda la ciudad y, especialmente, en las calles. Un error común es confundir cuerpos de agua con áreas urbanas oscuras.</p>
+<p>Evitar muestras mixtas. No utilices píxeles mixtos para el entrenamiento. Intenta seleccionar ejemplos puros de agua, vegetación, áreas urbanas y terrenos áridos. Dejá que el modelo se encargue de los píxeles mixtos.</p>
+<p>Una vez que completes la clasificación, es fundamental evaluar cuán precisa es la clasificación realizada. ¿Está el modelo generando resultados satisfactorios? ¿Es el modelo perfecto? ¿Está alcanzando una precisión del 100% o solo un 90%? Si deseas mejorar la clasificación, ¿cuánto influiría recolectar 100 muestras de entrenamiento adicionales? ¿Mejoraría la precisión o no tendría un impacto significativo? ¿Cuánto aumenta la precisión aplicando 100 arboles aleatorios en lugar de 50?</p>
+<p>La evaluación de la precisión es un paso crucial en el análisis de cualquier modelo. Una técnica común es la validación cruzada, que consiste en dividir los datos de entrenamiento en dos subconjuntos: uno para entrenar el modelo y otro para validar las predicciones. Por ejemplo, se podría usar el 60% de los datos para entrenar y el 40% restante para validar.</p>
+<p>Para ello, vamos a dividir con puntos de control para entrenar y validar un modelo de clasificación de imágenes satelitales.</p>
+<p>El comando .merge() nos permitió fusionar las colecciones en una sola llamada gcps. Así consolidamos todas nuestras muestras.
+Para asegurarnos de que todo esté correcto, usamos el comando print() para verificar el tamaño de la colección resultante.</p>
+<p>Ahora necesitamos dividir nuestras muestras en dos grupos: uno para entrenamiento y otro para validación. Lo hacemos asignando un número aleatorio entre 0 y 1 a cada punto en la colección.”</p>
+<p>El método randomColumn() crea una nueva columna llamada random, que contiene números aleatorios. Así podemos dividir las muestras de forma equitativa.</p>
+<p>Con este número aleatorio, aplicamos un filtro para separar los datos. Aquí asignamos el 60% de las muestras al conjunto de entrenamiento.</p>
+<p>Y el restante 40% al conjunto de validación.</p>
+<p>Por último, usamos nuevamente el comando print() para verificar el tamaño de cada conjunto y asegurarnos de que la división sea correcta.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">gcp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gcps</span><span class="p">.</span><span class="nx">randomColumn</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">trainingGCP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gcp</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">));</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">validationGCP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">gcp</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">gte</span><span class="p">(</span><span class="s1">&#39;random&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">0.6</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">training</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">sampleRegions</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">trainingGCP</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
+<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">tileScale</span><span class="o">:</span><span class="w"> </span><span class="mf">16</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">classifier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Classifier</span><span class="p">.</span><span class="nx">smileRandomForest</span><span class="p">(</span><span class="mf">100</span><span class="p">).</span><span class="nx">train</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">features</span><span class="o">:</span><span class="w"> </span><span class="nx">training</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">classProperty</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;landcover&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">inputProperties</span><span class="o">:</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">bandNames</span><span class="p">()</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">classified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">composite</span><span class="p">.</span><span class="nx">classify</span><span class="p">(</span><span class="nx">classifier</span><span class="p">);</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">classVis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nx">min</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="o">:</span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="nx">palette</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;violet&#39;</span><span class="p">,</span><span class="s1">&#39;orange&#39;</span><span class="p">]};</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">classified</span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi</span><span class="p">),</span><span class="w"> </span><span class="nx">classVis</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Imagen Clasificada&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="precision-del-modelo">
+<h2><span class="section-number">2.7. </span>Precisión del Modelo<a class="headerlink" href="#precision-del-modelo" title="Link to this heading">#</a></h2>
+<p>El objetivo de esta separación de los puntos de control, es medir el rendimiento del modelo en el subconjunto de validación, que contiene muestras que no se han usado en el entrenamiento. Se compara la predicción del modelo con el valor real de cada muestra de validación. Si el modelo clasifica correctamente un píxel, se considera que el modelo ha hecho una predicción acertada.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">classified</span><span class="p">.</span><span class="nx">sampleRegions</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">validationGCP</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;landcover&#39;</span><span class="p">],</span>
+<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">10</span>
+<span class="p">});</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">test</span><span class="p">.</span><span class="nx">errorMatrix</span><span class="p">(</span><span class="s1">&#39;landcover&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;classification&#39;</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Confusion Matrix&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Test Accuracy&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">accuracy</span><span class="p">());</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Producers Accuracy:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">producersAccuracy</span><span class="p">());</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Consumers Accuracy:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">consumersAccuracy</span><span class="p">());</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Kappa:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">kappa</span><span class="p">());</span>
+<span class="nx">print</span><span class="p">(</span><span class="s1">&#39;F-Score:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">fscore</span><span class="p">(</span><span class="mf">1</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>A partir de esto, podemos generar una matriz de confusión (ver fig. <a class="reference internal" href="#fig-matriz-conf-2"><span class="std std-numref">Fig. 2.3</span></a>), que muestra las predicciones del modelo frente a las clases reales. Esta matriz nos permite visualizar cuántos píxeles fueron correctamente clasificados (diagonal principal) y cuántos fueron confundidos entre diferentes clases (fuera de la diagonal). A partir de esta matriz, se pueden calcular varias métricas de precisión, tales como la precisión global, que es el porcentaje de píxeles correctamente clasificados, así como la precisión del consumidor y la precisión del productor, que se refieren a la capacidad del modelo para identificar correctamente cada clase.</p>
+<figure class="align-default" id="fig-matriz-conf-2">
+<a class="reference internal image-reference" href="_images/Matriz_Conf_2.png"><img alt="_images/Matriz_Conf_2.png" src="_images/Matriz_Conf_2.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Tabla de Variables Independientes y Dependientes</span><a class="headerlink" href="#fig-matriz-conf-2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Earth Engine permite calcular todas estas métricas y compararlas fácilmente para evaluar el rendimiento del modelo. Si la matriz de confusión muestra valores elevados fuera de la diagonal, eso indica que el modelo está teniendo dificultades con ciertas clases. En ese caso, se puede recolectar más datos para las clases problemáticas o ajustar los parámetros del modelo para mejorar la clasificación.</p>
+<p>Al revisar la matriz de confusión, si se observa que hay una baja confusión entre clases.</p>
+<p>La precisión global es alta, sin embargo podemos comenzar a optimizar el modelo, incrementando el parámetro de cantidad de arboles que se utilizan. Al cambiarlo de 50 a 100, aumenta la precisión a 98.02%</p>
+</section>
+<section id="interpretacion-de-la-precision-global">
+<h2><span class="section-number">2.8. </span>Interpretación de la Precisión Global<a class="headerlink" href="#interpretacion-de-la-precision-global" title="Link to this heading">#</a></h2>
+<p>Una precisión Global (ver fig. <a class="reference internal" href="#fig-interpretacion"><span class="std std-numref">Fig. 2.4</span></a>) de 98.02% indica que el modelo clasifica correctamente la gran mayoría de las observaciones. Este es un excelente desempeño, lo que sugiere que el modelo distingue bien entre las clases.</p>
+<figure class="align-default" id="fig-interpretacion">
+<a class="reference internal image-reference" href="_images/Interpretacion.png"><img alt="_images/Interpretacion.png" src="_images/Interpretacion.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Interpretación de la Precisión Global</span><a class="headerlink" href="#fig-interpretacion" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Confusiones a considerar:</strong></p>
+<ul class="simple">
+<li><p>Bosque/Zona Arbolada-Arbustiva y Cultivos: Hay un píxel de cultivos clasificado erróneamente como Bosque.</p></li>
+<li><p>Suelos Desnudos y Urbano: Hay un píxel de Suelos Desnudos clasificado erróneamente como Urbano.</p></li>
+<li><p>Estas áreas de confusión podrían abordarse mediante ajustes en los datos de entrenamiento o en las características utilizadas para clasificar.</p></li>
+</ul>
+<section id="interpretacion-por-clase-agua-clase-0">
+<h3><span class="section-number">2.8.1. </span>Interpretación por Clase: Agua (Clase 0):<a class="headerlink" href="#interpretacion-por-clase-agua-clase-0" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Precisión del consumidor: 100%</p>
+<ul>
+<li><p>Esto significa que todos los píxeles clasificados como agua son efectivamente agua.</p></li>
+</ul>
+</li>
+<li><p>Precisión del productor: 100%</p>
+<ul>
+<li><p>Todos los píxeles reales de agua han sido clasificados correctamente.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="interpretacion-por-clase-urbano-clase-1">
+<h3><span class="section-number">2.8.2. </span>Interpretación por Clase: Urbano (Clase 1):<a class="headerlink" href="#interpretacion-por-clase-urbano-clase-1" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Precisión del consumidor: 100%</p>
+<ul>
+<li><p>Todos los píxeles clasificados como urbanos son realmente urbanos.</p></li>
+</ul>
+</li>
+<li><p>Precisión del productor: 97.5%</p>
+<ul>
+<li><p>Hay una pequeña confusión en la que un píxel urbano fue clasificado como otra clase.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="interpretacion-por-clase-cultivos-clase-2">
+<h3><span class="section-number">2.8.3. </span>Interpretación por Clase: Cultivos (Clase 2):<a class="headerlink" href="#interpretacion-por-clase-cultivos-clase-2" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Precisión del consumidor: 100%</p>
+<ul>
+<li><p>Ningún píxel clasificado como cultivos fue mal clasificado.</p></li>
+</ul>
+</li>
+<li><p>Precisión del productor: 92.3%</p>
+<ul>
+<li><p>Un píxel de cultivos fue clasificado como bosque/zona arbustiva, indicando cierta confusión entre estas clases.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="interpretacion-por-clase-bosque-zona-arbolada-arbustiva-clase-3">
+<h3><span class="section-number">2.8.4. </span>Interpretación por Clase: Bosque/Zona Arbolada-Arbustiva (Clase 3):<a class="headerlink" href="#interpretacion-por-clase-bosque-zona-arbolada-arbustiva-clase-3" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Precisión del consumidor: 93.3%</p>
+<ul>
+<li><p>La mayoría de los píxeles clasificados como bosque/zona arbustiva son correctos, aunque un píxel fue clasificado erróneamente como cultivos.</p></li>
+</ul>
+</li>
+<li><p>Precisión del productor: 100%</p>
+<ul>
+<li><p>Todos los píxeles reales de bosque/zona arbustiva fueron clasificados correctamente.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="conclusion-general">
+<h3><span class="section-number">2.8.5. </span>Conclusión General<a class="headerlink" href="#conclusion-general" title="Link to this heading">#</a></h3>
+<p>Precisión global (Test Accuracy): La precisión general es 98.02%, lo cual es excelente y muestra que el modelo clasifica muy bien en la mayoría de los casos.
+Áreas de mejora:</p>
+<p>La confusión más notable ocurre entre cultivos y bosque/zona arbustiva, lo cual podría mejorarse mediante ajustes en las características del modelo o una recolección más detallada de puntos de control en estas áreas.
+Recomendación sobre nomenclatura:</p>
+<p>Mantener el nombre de “Bosque/Zona Arbolada-Arbustiva” es apropiado, ya que refleja con más precisión la diversidad de esta clase, incluyendo árboles dispersos y vegetación silvestre.</p>
+</section>
+</section>
+<section id="otras-metricas-de-validacion">
+<h2><span class="section-number">2.9. </span>Otras métricas de validación:<a class="headerlink" href="#otras-metricas-de-validacion" title="Link to this heading">#</a></h2>
+<p>Otras métricas incluyen el coeficiente Kappa, que mide la concordancia entre las predicciones del modelo y la clasificación aleatoria, y el F-score, que es una medida combinada de la precisión y el recall. En general, la precisión global es la métrica más utilizada en el análisis de precisión, aunque el F-score también es común en el campo del aprendizaje automático.</p>
+<p>Una vez que estemos satisfechos con los resultados de la clasificación y la precisión, podemos continuar optimizando el modelo, ajustando otros parámetros y evaluando nuevas muestras de entrenamiento para clases especificas y mejorar la precisión general.</p>
+<p>En próximos videos exploraremos otras técnicas de aprendizaje automático supervisado como arboles de decisión y maquinas de soporte vectorial, como así también técnicas de aprendizaje automático no supervisado, por ejemplo K-means.</p>
+</section>
+<section id="cierre">
+<h2><span class="section-number">2.10. </span>Cierre<a class="headerlink" href="#cierre" title="Link to this heading">#</a></h2>
+<p>El aprendizaje automático no solo transforma datos en conocimiento; también redefine nuestra capacidad para comprender y gestionar entornos complejos. Herramientas como SVM, árboles de decisión y Random Forest nos brindan la precisión necesaria para abordar desafíos reales, como el análisis del uso del suelo y la planificación territorial.</p>
+<p>En este ejemplo aplicado al Área Metropolitana de Rosario, Random Forest demostró ser una herramienta poderosa, capaz de clasificar grandes extensiones de territorio con una precisión sobresaliente. Esto no solo mejora nuestra visión científica del entorno, sino que también apoya la toma de decisiones fundamentadas en evidencia.</p>
+<p>El futuro del análisis geoespacial está aquí. Combinando algoritmos robustos y datos satelitales, podemos planificar un desarrollo sostenible que beneficie a las generaciones actuales y futuras. Gracias por acompañarnos en este recorrido por el aprendizaje automático aplicado al análisis territorial. Sigamos impulsando el conocimiento y la acción en favor de nuestro entorno.</p>
+</section>
+<section id="video-del-capitulo">
+<h2><span class="section-number">2.11. </span>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
+<p>Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: <a class="reference external" href="https://www.youtube.com/watch?v=fk6atugR6ss">https://www.youtube.com/watch?v=fk6atugR6ss</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdg-idera/PAT_INT_GEE",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Cap1_Tecnicas.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Capítulo 1 · Teledetección y Aprendizaje Automático</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Cap3_gee_colab.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Capítulo 3 · Random Forest en GEE y Colab</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion">2.1. Introducción</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recoleccion-de-muestras-de-entrenamiento">2.1.1. Recolección de muestras de entrenamiento</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unificando-muestras-de-entrenamiento">2.2. Unificando Muestras de Entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-de-pixeles">2.3. Extracción de Valores de Píxeles</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">2.4. Entrenamiento del Clasificador</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-la-imagen">2.5. Clasificación de la Imagen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendaciones-para-la-recoleccion-de-datos">2.6. Recomendaciones para la recolección de Datos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-del-modelo">2.7. Precisión del Modelo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-la-precision-global">2.8. Interpretación de la Precisión Global</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-agua-clase-0">2.8.1. Interpretación por Clase: Agua (Clase 0):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-urbano-clase-1">2.8.2. Interpretación por Clase: Urbano (Clase 1):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-cultivos-clase-2">2.8.3. Interpretación por Clase: Cultivos (Clase 2):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-bosque-zona-arbolada-arbustiva-clase-3">2.8.4. Interpretación por Clase: Bosque/Zona Arbolada-Arbustiva (Clase 3):</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general">2.8.5. Conclusión General</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#otras-metricas-de-validacion">2.9. Otras métricas de validación:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre">2.10. Cierre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">2.11. Video del capítulo</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Luis Reynoso (IDERA-GTT CDG)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

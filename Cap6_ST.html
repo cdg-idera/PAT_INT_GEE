@@ -1,0 +1,1014 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6. Capítulo 6 · Serie Temporales &#8212; GeoIA aplicado a Imágenes Satelitales</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Cap6_ST';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7. Capítulo 7 · Cubos de Imágenes Satelitales" href="Cap7_Datacubes.html" />
+    <link rel="prev" title="5. Capítulo 5 · Random Forest para detectar agua" href="Cap5_Agua.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logoAgua.png" class="logo__image only-light" alt="GeoIA aplicado a Imágenes Satelitales - Home"/>
+    <script>document.write(`<img src="_static/logoAgua.png" class="logo__image only-dark" alt="GeoIA aplicado a Imágenes Satelitales - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Prólogo
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Cap1_Tecnicas.html">1. Capítulo 1 · Teledetección y Aprendizaje Automático</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap2_RFRosario.html">2. Capítulo 2 · Random Forest en GEE</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap3_gee_colab.html">3. Capítulo 3 · Random Forest en GEE y Colab</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap4_SVM_DT.html">4. Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">5. Capítulo 5 · Random Forest para detectar agua</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Capítulo 6 · Serie Temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">7. Capítulo 7 · Cubos de Imágenes Satelitales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Referencias.html">8. Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE/issues/new?title=Issue%20on%20page%20%2FCap6_ST.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Cap6_ST.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Capítulo 6 · Serie Temporales</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-de-tiempo-ejemplo-bahia-blanca">6.1. Serie de Tiempo: Ejemplo Bahía Blanca</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-la-frecuencia-de-analisis-temporal">6.2. Definición de la frecuencia de análisis temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-de-interes-roi">6.3. Región de interés (ROI)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-agregar-indices-a-cada-imagen">6.4. Función para agregar índices a cada imagen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-clave-getcoleccionporperiodo">6.5. Función clave: getColeccionPorPeriodo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-la-coleccion-temporal">6.6. Crear la colección temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-indices-sentinel-2">6.7. Gráfico de índices Sentinel-2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-temporal-de-temperatura-superficial-lst">6.8. Serie temporal de temperatura superficial (LST)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion-opcional-de-estadisticas-a-csv">6.9. Exportación opcional de estadísticas a CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-de-la-seccion">6.10. Conclusión de la sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-awesome-spectral-indices-en-gee">6.11. Uso de Awesome Spectral Indices en GEE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona-importar-el-modulo">6.11.1. ¿Cómo funciona? – Importar el módulo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ver-la-lista-completa-de-indices">6.11.2. Ver la lista completa de índices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acceder-a-la-informacion-de-un-indice-especifico">6.11.3. Acceder a la información de un índice específico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explorar-los-atributos-del-indice">6.11.4. Explorar los atributos del índice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2">6.11.5. Calcular un índice: NDVI sobre una imagen Sentinel-2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-multiples-indices-a-la-vez">6.11.6. Calcular múltiples índices a la vez</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-el-resultado-en-el-visor-de-gee">6.11.7. Mostrar el resultado en el visor de GEE</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicacion-de-la-nueva-version-con-asi">6.12. Explicación de la nueva versión con ASI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre">6.13. Cierre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">6.14. Video del capítulo</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="capitulo-6-serie-temporales">
+<h1><span class="section-number">6. </span>Capítulo 6 · Serie Temporales<a class="headerlink" href="#capitulo-6-serie-temporales" title="Link to this heading">#</a></h1>
+<p>En el análisis de datos geoespaciales, las series de tiempo ocupan un lugar central. Ya sea que estudiemos fenómenos terrestres, marítimos o atmosféricos, observar cómo varían en el tiempo ciertas variables nos permite comprender procesos, detectar patrones y anticipar futuros escenarios.</p>
+<p>Los científicos de datos trabajan con múltiples formas de representar la información, y una de las más poderosas en aplicaciones de inteligencia artificial aplicada al ambiente es, sin dudas, la serie temporal. Nos ayuda a responder preguntas como: ¿qué está cambiando? ¿cómo? ¿cuándo? y, sobre todo, ¿por qué?</p>
+<blockquote>
+<div><p>Una serie de tiempo consiste en un conjunto de observaciones de una misma variable recogidas a intervalos regulares. Estos intervalos pueden ser diarios, semanales, mensuales, bimensuales, trimestrales, cuatrimestrales, incluso anuales o multianuales, dependiendo del fenómeno que estemos analizando. No es lo mismo estudiar un evento extremo como una inundación —que requiere una resolución diaria— que seguir el avance de la urbanización, que puede analizarse en escalas mensuales o anuales.</p>
+</div></blockquote>
+<p><img alt="" src="_images/graf1.png" /></p>
+<p>En este primer video vamos a trabajar con un ejemplo concreto y sencillo para introducirnos en el tema: El caso es Bahía Blanca, donde analizamos la evolución mensual durante el año 2024 de una serie de indicadores ambientales derivados de imágenes satelitales <em>Sentinel-2</em> y <em>MODIS</em>. Calculamos índices como NDVI, NDWI, NDBI, NDMI, NIR y temperatura superficial (LST) (ver en <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig-indices</span></code>) que permiten seguir la dinámica de la vegetación, la presencia de agua, el suelo desnudo, o el impacto del calor. A lo largo del ejemplo, mostramos cómo graficar estas variables, cómo generar las series de tiempo con Google Earth Engine, y cómo exportarlas para su posterior análisis en R o Python.</p>
+<figure class="align-default" id="fig-indices">
+<a class="reference internal image-reference" href="_images/IndicesST.png"><img alt="_images/IndicesST.png" src="_images/IndicesST.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Indices espectrales y bandas utilizadas en el estudio.</span><a class="headerlink" href="#fig-indices" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Ahora bien, para trabajar de forma sólida con series temporales es importante entender que detrás de cada gráfico hay <em>múltiples componentes interactuando</em> (ver en <a class="reference internal" href="#fig-componentes"><span class="std std-numref">Fig. 6.2</span></a>).</p>
+<figure class="align-default" id="fig-componentes">
+<a class="reference internal image-reference" href="_images/componentes.png"><img alt="_images/componentes.png" src="_images/componentes.png" style="width: 30%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.2 </span><span class="caption-text">Componentes principales del sistema.</span><a class="headerlink" href="#fig-componentes" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Por un lado, está la <strong>tendencia</strong>, ese <em>comportamiento de largo plazo</em> que puede marcar una dirección ascendente o descendente.</p>
+<p><img alt="" src="_images/tendencia.png" /></p>
+<p>También encontramos <strong>ciclos</strong>, como los que impone el clima o la economía, que pueden repetirse con menor frecuencia pero tener gran impacto.</p>
+<p><img alt="" src="_images/ciclo.png" /></p>
+<p>La <strong>estacionalidad</strong>, por su parte, nos habla de patrones que se repiten en el mismo periodo cada año: más verdor en primavera, más calor en verano.</p>
+<p><img alt="" src="_images/estacionalidad.png" /></p>
+<p>Y, por supuesto, el <strong>ruido aleatorio</strong>, esas pequeñas fluctuaciones impredecibles que también forman parte de la realidad.</p>
+<p><img alt="" src="_images/ruido.png" /></p>
+<blockquote>
+<div><p>¿Cómo se obtuvieron estos ejemplos gráficos? Fue a partir de la generación de datos sintéticos con el siguiente código en Colab: <a class="reference external" href="https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing">https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing</a> En el ejemplo se generan gráficos con fondos negro y blanco. El video de este capítulo cuenta con gráficos con fondo negro.</p>
+</div></blockquote>
+<p>Antes de lanzarse a modelar o predecir, conviene detenerse en un análisis exploratorio. Visualizar la serie en un gráfico —con el tiempo en el eje horizontal y el valor en el eje vertical— ya ofrece una gran cantidad de información. A partir de ahí podemos detectar anomalías, rupturas, variaciones estacionales, o comportamientos inesperados.</p>
+<p><img alt="" src="_images/DS_ST.png" /></p>
+<p>Este análisis puede tener distintos niveles de profundidad. Uno <strong>descriptivo</strong>, que se limita a mostrar lo que ocurre. Otro <strong>explicativo</strong>, que busca entender por qué ocurre: por ejemplo, una caída brusca del NDWI puede relacionarse con una sequía o con una obra de canalización. Y también uno <strong>predictivo</strong>, que usa la historia registrada para anticipar lo que podría venir, como un riesgo ambiental o una oportunidad productiva.</p>
+<p>Pero para que todo esto funcione, es fundamental tener algunos conceptos claros desde el inicio. Primero, es indispensable conocer el <em>dominio del fenómeno</em> que estamos estudiando: no podemos interpretar una serie de NDVI si no entendemos qué mide ese índice y cómo se comporta en distintos tipos de cobertura, como cultivos, bosques o zonas urbanas. También es clave <em>tener un objetivo bien definido</em>: ¿Queremos monitorear degradación ambiental? ¿Comparar campañas agrícolas? ¿Estudiar procesos de urbanización? Estas decisiones condicionan cómo configuramos nuestra serie: <em>qué resolución temporal</em> elegimos, a qué <em>escala espacial</em> trabajaremos, qué variables o índices vamos a incorporar.</p>
+<p>Este video tiene un enfoque introductorio. No busca dar una explicación exhaustiva de todos los componentes técnicos que intervienen en el análisis temporal, sino más bien motivar el uso de las series de tiempo como una herramienta clave en el análisis de información geoespacial con técnicas de inteligencia artificial. Por cuestiones de tiempo, no se abordan en profundidad aspectos como los fundamentos de los índices espectrales o los modelos de series temporales. Por eso, si te interesa avanzar, te recomendamos complementar este material con cursos específicos de teledetección y análisis de series de tiempo, que te brinden una base teórica y metodológica más sólida.</p>
+<p>El preprocesamiento también juega un rol clave: a veces hay que rellenar valores faltantes, unificar series con distintas frecuencias, decidir qué hacer con valores extremos, y elegir con cuidado el <em>horizonte temporal</em> según lo que estemos estudiando.</p>
+<p>Si el objetivo es predecir, entramos en un terreno más exigente: hay que dividir los datos en un período de <em>entrenamiento</em> y otro de <em>validación</em>, respetando el orden temporal para no introducir sesgos. Aquí aparecen dos grandes caminos: los <em>modelos estadísticos clásicos</em>, como ARIMA, que buscan capturar regularidades estructuradas, y los <em>modelos basados en datos</em>, como las redes neuronales LSTM, que pueden aprender directamente de la complejidad sin necesidad de hacer suposiciones rígidas.</p>
+<p>Las series de tiempo <em>son mucho más que líneas en un gráfico</em>. Son herramientas vivas que nos permiten leer el pasado, entender el presente y proyectar el futuro. Aplicadas a la información geoespacial y a la inteligencia artificial, se convierten en aliadas estratégicas para estudiar el mundo cambiante que habitamos. Nos permiten transformar imágenes satelitales en narrativas dinámicas del territorio.
+Estas herramientas no solo sirven para entender el pasado o describir el presente, sino que son esenciales para anticipar y planificar un futuro más informado y sostenible.</p>
+<section id="serie-de-tiempo-ejemplo-bahia-blanca">
+<h2><span class="section-number">6.1. </span>Serie de Tiempo: Ejemplo Bahía Blanca<a class="headerlink" href="#serie-de-tiempo-ejemplo-bahia-blanca" title="Link to this heading">#</a></h2>
+<p>En este laboratorio trabajamos con series temporales aplicadas a imágenes satelitales, tomando como área de estudio <em>el partido de Bahía Blanca</em> en la provincia de Buenos Aires, Argentina.
+El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a partir de imágenes <em>Sentinel-2</em> y <em>MODIS</em>, calcular valores promedio sobre una región de interés (ROI: Region of Interest), visualizarlos como gráficos y opcionalmente exportar las estadísticas en formato CSV para análisis externos con R, python o Power BI.</p>
+<p>Con este mismo codigo vas a poder calcular series de tiempo con otras frecuencias.</p>
+</section>
+<section id="definicion-de-la-frecuencia-de-analisis-temporal">
+<h2><span class="section-number">6.2. </span>Definición de la frecuencia de análisis temporal<a class="headerlink" href="#definicion-de-la-frecuencia-de-analisis-temporal" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">frecuencia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;mensual&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Este parámetro define cada cuánto tiempo se va a tomar una imagen compuesta: puede ser <em>mensual</em>, <em>bimestral</em>, <em>trimestral</em> o <em>cuatrimestral</em>. Esto permite adaptar el análisis a diferentes necesidades: monitoreo fino o más general.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">mesesPorPaso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="s1">&#39;mensual&#39;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;bimestral&#39;</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;trimestral&#39;</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span>
+<span class="w">  </span><span class="s1">&#39;cuatrimestral&#39;</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span>
+<span class="p">};</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">paso</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">mesesPorPaso</span><span class="p">[</span><span class="nx">frecuencia</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>A continuación se define cuántos meses tiene cada intervalo (paso) según la frecuencia elegida. Este valor será clave para generar las fechas y los períodos de análisis.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">fechas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">List</span><span class="p">.</span><span class="nx">sequence</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">11</span><span class="p">,</span><span class="w"> </span><span class="nx">paso</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">mes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">).</span><span class="nx">advance</span><span class="p">(</span><span class="nx">mes</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Se crea una lista de fechas iniciales, empezando el 1 de enero de 2024 y avanzando de paso en paso. Por ejemplo, si paso = 2, las fechas serán enero, marzo, mayo, etc.</p>
+</section>
+<section id="region-de-interes-roi">
+<h2><span class="section-number">6.3. </span>Región de interés (ROI)<a class="headerlink" href="#region-de-interes-roi" title="Link to this heading">#</a></h2>
+<p>En el siguiente código:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">admin2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="s2">&quot;FAO/GAUL/2015/level2&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM0_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Argentina&#39;</span><span class="p">))</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM1_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Buenos Aires&#39;</span><span class="p">));</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">bahiaBlanca</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">admin2</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM2_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Bahia Blanca&#39;</span><span class="p">));</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">roi2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">bahiaBlanca</span><span class="p">.</span><span class="nx">geometry</span><span class="p">().</span><span class="nx">simplify</span><span class="p">(</span><span class="mf">100</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>se define la región de interés: el polígono de Bahía Blanca. Se simplifica la geometría para que sea más eficiente computacionalmente.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">roi2</span><span class="p">,</span><span class="w"> </span><span class="mf">8</span><span class="p">);</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">roi2</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">color</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;red&#39;</span><span class="p">},</span><span class="w"> </span><span class="s1">&#39;Bahía Blanca&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Se centra el mapa en la región de estudio y se visualiza.</p>
+</section>
+<section id="funcion-para-agregar-indices-a-cada-imagen">
+<h2><span class="section-number">6.4. </span>Función para agregar índices a cada imagen<a class="headerlink" href="#funcion-para-agregar-indices-a-cada-imagen" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">agregarIndices</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">ndvi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B4&#39;</span><span class="p">]).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NDVI&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">ndbi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B11&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B8&#39;</span><span class="p">]).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NDBI&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">ndwi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B8&#39;</span><span class="p">]).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NDWI&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">ndmi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B11&#39;</span><span class="p">]).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NDMI&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">nir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B8&#39;</span><span class="p">).</span><span class="nx">divide</span><span class="p">(</span><span class="mf">10000</span><span class="p">).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NIR&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">addBands</span><span class="p">([</span><span class="nx">ndvi</span><span class="p">,</span><span class="w"> </span><span class="nx">ndbi</span><span class="p">,</span><span class="w"> </span><span class="nx">ndwi</span><span class="p">,</span><span class="w"> </span><span class="nx">ndmi</span><span class="p">,</span><span class="w"> </span><span class="nx">nir</span><span class="p">]);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Esta función calcula distintos índices espectrales (NDVI, NDBI, NDWI, NDMI) y NIR, y agrega esos nuevos bandas derivadas a la imagen original. Esto facilita su análisis posterior.</p>
+</section>
+<section id="funcion-clave-getcoleccionporperiodo">
+<h2><span class="section-number">6.5. </span>Función clave: getColeccionPorPeriodo<a class="headerlink" href="#funcion-clave-getcoleccionporperiodo" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">getColeccionPorPeriodo</span><span class="p">(</span><span class="nx">fecha</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">fecha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">(</span><span class="nx">fecha</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">fin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fecha</span><span class="p">.</span><span class="nx">advance</span><span class="p">(</span><span class="nx">paso</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Recibe una fecha de inicio, y calcula la fecha de fin del periodo, avanzando paso meses.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">coleccion</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s1">&#39;COPERNICUS/S2_SR_HARMONIZED&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">roi2</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="nx">fecha</span><span class="p">,</span><span class="w"> </span><span class="nx">fin</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">20</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Filtra la colección Sentinel-2:
+•	Solo imágenes dentro de la ROI.
+•	Solo dentro del rango de fechas definido.
+•	Solo imágenes con menos del 20% de nubes.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="nx">agregarIndices</span><span class="p">(</span><span class="nx">img</span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi2</span><span class="p">).</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;system:time_start&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">date</span><span class="p">().</span><span class="nx">millis</span><span class="p">()));</span>
+<span class="w">    </span><span class="p">});</span>
+</pre></div>
+</div>
+<p>A cada imagen del periodo:
+•	Se la recorta a la ROI.
+•	Se le calculan los índices.
+•	Se le asigna el campo <em>system:time_start</em> para graficar luego.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">coleccion</span><span class="p">.</span><span class="nx">mean</span><span class="p">().</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;system:time_start&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">fecha</span><span class="p">.</span><span class="nx">millis</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Devuelve una única imagen compuesta promedio de ese periodo, con fecha de inicio del bloque temporal.</p>
+</section>
+<section id="crear-la-coleccion-temporal">
+<h2><span class="section-number">6.6. </span>Crear la colección temporal<a class="headerlink" href="#crear-la-coleccion-temporal" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="kr">final</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">.</span><span class="nx">fromImages</span><span class="p">(</span><span class="nx">fechas</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">getColeccionPorPeriodo</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Aplica getColeccionPorPeriodo a cada fecha de inicio. El resultado es una serie de imágenes promedio por período, listas para graficar.</p>
+</section>
+<section id="grafico-de-indices-sentinel-2">
+<h2><span class="section-number">6.7. </span>Gráfico de índices Sentinel-2<a class="headerlink" href="#grafico-de-indices-sentinel-2" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">chart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ui</span><span class="p">.</span><span class="nx">Chart</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">series</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">imageCollection</span><span class="o">:</span><span class="w"> </span><span class="kr">final</span><span class="p">.</span><span class="nx">select</span><span class="p">([</span><span class="s1">&#39;NDVI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDBI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDWI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDMI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NIR&#39;</span><span class="p">]),</span>
+<span class="w">  </span><span class="nx">region</span><span class="o">:</span><span class="w"> </span><span class="nx">roi2</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">mean</span><span class="p">(),</span>
+<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">200</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">xProperty</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;system:time_start&#39;</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<p>Se crea una serie temporal multivariable, extrayendo el <strong>valor promedio de cada índice</strong> en la ROI para cada imagen compuesta.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">.</span><span class="nx">setChartType</span><span class="p">(</span><span class="s1">&#39;LineChart&#39;</span><span class="p">)</span>
+<span class="p">.</span><span class="nx">setOptions</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Serie temporal con índices Sentinel-2 y VV Sentinel-1&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">hAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Fecha&#39;</span><span class="p">},</span>
+<span class="w">  </span><span class="nx">vAxis</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Valor promedio&#39;</span><span class="p">},</span>
+<span class="w">  </span><span class="nx">lineWidth</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">pointSize</span><span class="o">:</span><span class="w"> </span><span class="mf">4</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>Configuración estética del gráfico (ver Figura <a class="reference internal" href="#fig-indicesbb"><span class="std std-numref">Fig. 6.3</span></a>).</p>
+<figure class="align-default" id="fig-indicesbb">
+<a class="reference internal image-reference" href="_images/stIndicesBB.png"><img alt="_images/stIndicesBB.png" src="_images/stIndicesBB.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.3 </span><span class="caption-text">Serie temporal: valores promedio de NDVI, NDBI, NDWI, NDMI, NIR para el partido de Bahía Blanca, año 2024.</span><a class="headerlink" href="#fig-indicesbb" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="serie-temporal-de-temperatura-superficial-lst">
+<h2><span class="section-number">6.8. </span>Serie temporal de temperatura superficial (LST)<a class="headerlink" href="#serie-temporal-de-temperatura-superficial-lst" title="Link to this heading">#</a></h2>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">modisLST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;MODIS/061/MOD11A2&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">roi2</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2024-12-15&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">lst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;LST_Day_1km&#39;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">multiply</span><span class="p">(</span><span class="mf">0.02</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">subtract</span><span class="p">(</span><span class="mf">273.15</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;LST&#39;</span><span class="p">)</span>
+<span class="w">      </span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi2</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">lst</span><span class="p">.</span><span class="nx">copyProperties</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">propertyNames</span><span class="p">());</span>
+<span class="w">  </span><span class="p">});</span>
+</pre></div>
+</div>
+<p>Se obtiene la temperatura superficial de MODIS, se convierte de Kelvin a Celsius (°C) y se recorta a la ROI.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">lstChart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ui</span><span class="p">.</span><span class="nx">Chart</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">series</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">imageCollection</span><span class="o">:</span><span class="w"> </span><span class="nx">modisLST</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">region</span><span class="o">:</span><span class="w"> </span><span class="nx">roi2</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">mean</span><span class="p">(),</span>
+<span class="w">  </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">xProperty</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;system:time_start&#39;</span>
+<span class="p">})</span>
+</pre></div>
+</div>
+<p>Genera un gráfico de temperatura superficial promedio (ver Figura <a class="reference internal" href="#fig-preci"><span class="std std-numref">Fig. 6.4</span></a>).</p>
+<figure class="align-default" id="fig-preci">
+<a class="reference internal image-reference" href="_images/stPrecipitacion.png"><img alt="_images/stPrecipitacion.png" src="_images/stPrecipitacion.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.4 </span><span class="caption-text">Figura generada en GEE de la serie temporal de temperatura promedio para el partido de Bahía Blanca</span><a class="headerlink" href="#fig-preci" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="exportacion-opcional-de-estadisticas-a-csv">
+<h2><span class="section-number">6.9. </span>Exportación opcional de estadísticas a CSV<a class="headerlink" href="#exportacion-opcional-de-estadisticas-a-csv" title="Link to this heading">#</a></h2>
+<p>Exportar los conjuntos de datos a csv es una buena opción para procesamiento posterior en lenguajes como R, python, julia o Power BI.</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/interApp2.png"><img alt="_images/interApp2.png" src="_images/interApp2.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.5 </span><span class="caption-text">Exportación de archivos CSV de GEE a python, R y Power BI.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>a) <strong>Para Sentinel-2:</strong></p>
+<p>Esto exporta una tabla con una fila por período, conteniendo los valores promedio de NDVI, NDBI, etc.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// var statsSentinel = imagenesPorPeriodo.map(function(img) {</span>
+</pre></div>
+</div>
+<p>Debe usarse la colección final en lugar de imagenesPorPeriodo:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">statsSentinel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">final</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">reducer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">reduceRegion</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">mean</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">geometry</span><span class="o">:</span><span class="w"> </span><span class="nx">roi2</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">60</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">maxPixels</span><span class="o">:</span><span class="w"> </span><span class="mf">1e8</span>
+<span class="w">  </span><span class="p">});</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Feature</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nx">reducer</span><span class="p">).</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;fecha&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">date</span><span class="p">().</span><span class="nx">format</span><span class="p">(</span><span class="s1">&#39;YYYY-MM-dd&#39;</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="nx">Export</span><span class="p">.</span><span class="nx">table</span><span class="p">.</span><span class="nx">toDrive</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">statsSentinel</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;sentinel_indices_roi&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">fileFormat</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;CSV&#39;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+<p>b) <strong>Para MODIS LST:</strong></p>
+<p>De forma similar, se genera una tabla con una fila por imagen de MODIS, con el valor de temperatura superficial promedio.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">statsLST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">modisLST</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">reducer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">reduceRegion</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">mean</span><span class="p">(),</span>
+<span class="w">    </span><span class="nx">geometry</span><span class="o">:</span><span class="w"> </span><span class="nx">roi2</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">scale</span><span class="o">:</span><span class="w"> </span><span class="mf">1000</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">maxPixels</span><span class="o">:</span><span class="w"> </span><span class="mf">1e8</span>
+<span class="w">  </span><span class="p">});</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Feature</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="nx">reducer</span><span class="p">).</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;fecha&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">date</span><span class="p">().</span><span class="nx">format</span><span class="p">(</span><span class="s1">&#39;YYYY-MM-dd&#39;</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="nx">Export</span><span class="p">.</span><span class="nx">table</span><span class="p">.</span><span class="nx">toDrive</span><span class="p">({</span>
+<span class="w">  </span><span class="nx">collection</span><span class="o">:</span><span class="w"> </span><span class="nx">statsLST</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;serie_LST_BahiaBlanca&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">fileFormat</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;CSV&#39;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="conclusion-de-la-seccion">
+<h2><span class="section-number">6.10. </span>Conclusión de la sección<a class="headerlink" href="#conclusion-de-la-seccion" title="Link to this heading">#</a></h2>
+<p>La Figura <a class="reference internal" href="#fig-indicesp15"><span class="std std-numref">Fig. 6.6</span></a> muestra algunas conclusiones de la sección:</p>
+<figure class="align-default" id="fig-indicesp15">
+<a class="reference internal image-reference" href="_images/Placa15.png"><img alt="_images/Placa15.png" src="_images/Placa15.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.6 </span><span class="caption-text">Algunas Conclusiones de la sección</span><a class="headerlink" href="#fig-indicesp15" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="uso-de-awesome-spectral-indices-en-gee">
+<h2><span class="section-number">6.11. </span>Uso de Awesome Spectral Indices en GEE<a class="headerlink" href="#uso-de-awesome-spectral-indices-en-gee" title="Link to this heading">#</a></h2>
+<p>En este video vamos a explorar cómo usar el  catálogo abierto y colaborativo de índices espectrales denominado <strong>Awesome Spectral Indices (ASI)</strong> <span id="id2">[<a class="reference internal" href="Referencias.html#id2" title="David Montero, C'esar Aybar, Miguel D Mahecha, Francesco Martinuzzi, Maximilian S&quot;ochting, and Sebastian Wieneke. A standardized catalogue of spectral indices to advance the use of remote sensing in earth system research. Scientific Data, 10(1):197, 2023.">Montero <em>et al.</em>, 2023</a>]</span> una herramienta muy potente para calcular de forma sencilla decenas de índices espectrales en Google Earth Engine.</p>
+<p>Esta librería nos ahorra tiempo y evita errores al aplicar fórmulas, ya que contiene una base de datos bien documentada con cada índice, su fórmula, sus bandas requeridas y su referencia académica.</p>
+<figure class="align-default" id="fig-spectral">
+<a class="reference internal image-reference" href="_images/spectral.png"><img alt="_images/spectral.png" src="_images/spectral.png" style="width: 60%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.7 </span><span class="caption-text">ïcono de la librería Spectral que implementa ASI en JS</span><a class="headerlink" href="#fig-spectral" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="como-funciona-importar-el-modulo">
+<h3><span class="section-number">6.11.1. </span>¿Cómo funciona? – Importar el módulo<a class="headerlink" href="#como-funciona-importar-el-modulo" title="Link to this heading">#</a></h3>
+<p>Lo primero que tenemos que hacer es aceptar el módulo desde el repositorio del autor. Una vez aceptado, lo cargamos con el siguiente comando:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">spectral</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;users/dmlmont/spectral:spectral&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Esto nos habilita todas las funciones y estructuras que forman parte del paquete.</p>
+</section>
+<section id="ver-la-lista-completa-de-indices">
+<h3><span class="section-number">6.11.2. </span>Ver la lista completa de índices<a class="headerlink" href="#ver-la-lista-completa-de-indices" title="Link to this heading">#</a></h3>
+<p>Podemos listar todos los índices disponibles simplemente con:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="nx">spectral</span><span class="p">.</span><span class="nx">indices</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>En la consola vamos a ver un diccionario grande, donde cada clave es el nombre corto del índice: como NDVI, EVI, NDWI, NDBI, SAVI, entre muchos otros.</p>
+</section>
+<section id="acceder-a-la-informacion-de-un-indice-especifico">
+<h3><span class="section-number">6.11.3. </span>Acceder a la información de un índice específico<a class="headerlink" href="#acceder-a-la-informacion-de-un-indice-especifico" title="Link to this heading">#</a></h3>
+<p>Supongamos que queremos saber más sobre el NDVI. Tenemos dos formas equivalentes de hacerlo:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="nx">spectral</span><span class="p">.</span><span class="nx">indices</span><span class="p">.</span><span class="nx">NDVI</span><span class="p">);</span>
+<span class="nx">print</span><span class="p">(</span><span class="nx">spectral</span><span class="p">.</span><span class="nx">indices</span><span class="p">[</span><span class="s2">&quot;NDVI&quot;</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p>En ambos casos se nos despliega toda la información asociada a ese índice.</p>
+</section>
+<section id="explorar-los-atributos-del-indice">
+<h3><span class="section-number">6.11.4. </span>Explorar los atributos del índice<a class="headerlink" href="#explorar-los-atributos-del-indice" title="Link to this heading">#</a></h3>
+<p>Los atributos disponibles para cada índice incluyen:</p>
+<ul class="simple">
+<li><p><strong>short_name</strong>: el nombre corto (por ejemplo “NDVI”).</p></li>
+<li><p><strong>long_name</strong>: el nombre largo (como “Normalized Difference Vegetation Index”).</p></li>
+<li><p><strong>formula</strong>: la fórmula que se utiliza para calcularlo.</p></li>
+<li><p><strong>bands</strong>: las bandas que requiere (por ejemplo, “N” y “R”).</p></li>
+<li><p><strong>reference</strong>: el link al paper o DOI original.</p></li>
+<li><p><strong>type</strong>: el tipo o dominio de aplicación (vegetación, agua, suelo, etc.).</p></li>
+<li><p><strong>date_of_addition</strong>: la fecha en que fue agregado a la lista.</p></li>
+<li><p><strong>contributor</strong>: el enlace al usuario de GitHub que lo subió.</p></li>
+</ul>
+<p>Por ejemplo, si queremos ver únicamente la fórmula del NDVI, utilizamos esta instrucción:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="nx">spectral</span><span class="p">.</span><span class="nx">indices</span><span class="p">.</span><span class="nx">NDVI</span><span class="p">.</span><span class="nx">formula</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>O bien:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="nx">spectral</span><span class="p">.</span><span class="nx">indices</span><span class="p">.</span><span class="nx">NDVI</span><span class="p">[</span><span class="s2">&quot;formula&quot;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</section>
+<section id="calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2">
+<h3><span class="section-number">6.11.5. </span>Calcular un índice: NDVI sobre una imagen Sentinel-2<a class="headerlink" href="#calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2" title="Link to this heading">#</a></h3>
+<p>Ahora vamos a calcular un índice real sobre una imagen de Sentinel-2.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">dataset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;COPERNICUS/S2_SR&quot;</span><span class="p">;</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">S2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="nx">dataset</span><span class="p">).</span><span class="nx">first</span><span class="p">();</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">S2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">spectral</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">S2</span><span class="p">,</span><span class="w"> </span><span class="nx">dataset</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Lo primero que hacemos es seleccionar una imagen y escalarla usando la función spectral.scale, que ajusta las bandas correctamente.
+Luego definimos los parámetros necesarios para el NDVI:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">parameters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;N&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;B8&quot;</span><span class="p">),</span><span class="w">  </span><span class="c1">// Banda del infrarrojo cercano</span>
+<span class="w">    </span><span class="s2">&quot;R&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;B4&quot;</span><span class="p">)</span><span class="w">   </span><span class="c1">// Banda del rojo</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Finalmente, aplicamos el cálculo del índice:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">S2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">spectral</span><span class="p">.</span><span class="nx">computeIndex</span><span class="p">(</span><span class="nx">S2</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;NDVI&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">parameters</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Esto agrega una nueva banda llamada NDVI a la imagen. Podemos verificarlo mostrando la imagen por consola:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="s2">&quot;Imagen con NDVI:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">S2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>En la consola, dentro de la pestaña bands, vamos a ver que además de las bandas originales, ahora tenemos una nueva banda NDVI, calculada automáticamente.</p>
+</section>
+<section id="calcular-multiples-indices-a-la-vez">
+<h3><span class="section-number">6.11.6. </span>Calcular múltiples índices a la vez<a class="headerlink" href="#calcular-multiples-indices-a-la-vez" title="Link to this heading">#</a></h3>
+<p>También podemos calcular varios índices simultáneamente:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">parameters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;N&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;B8&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="s2">&quot;R&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;B4&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="s2">&quot;G&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;B3&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="s2">&quot;L&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="p">};</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">S2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">spectral</span><span class="p">.</span><span class="nx">computeIndex</span><span class="p">(</span><span class="nx">S2</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;NDVI&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;GNDVI&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;SAVI&quot;</span><span class="p">],</span><span class="w"> </span><span class="nx">parameters</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Nuevamente, si imprimimos la imagen:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="s2">&quot;Imagen con varios índices:&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">S2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>En la consola vamos a ver que ahora tenemos nuevas bandas: NDVI, GNDVI y SAVI, todas calculadas en una sola línea de código.</p>
+</section>
+<section id="mostrar-el-resultado-en-el-visor-de-gee">
+<h3><span class="section-number">6.11.7. </span>Mostrar el resultado en el visor de GEE<a class="headerlink" href="#mostrar-el-resultado-en-el-visor-de-gee" title="Link to this heading">#</a></h3>
+<p>Podemos agregar cualquiera de estos índices al mapa. Por ejemplo:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">S2</span><span class="p">,</span><span class="w"> </span><span class="mf">9</span><span class="p">);</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;NDVI&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">{</span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">palette</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;white&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;green&quot;</span><span class="p">]},</span><span class="w"> </span><span class="s2">&quot;NDVI&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Así podemos ver visualmente el resultado del índice espectral calculado con Awesome Spectral Indices.</p>
+<p>Como vimos Awesome Spectral Indices (ASI) facilita mucho el trabajo con índices en GEE. No solo nos permite acceder a una base de datos curada y documentada de fórmulas, sino que también simplifica su cálculo, evita errores y permite hacer análisis espectrales complejos con muy pocas líneas de código. Si trabajás con teledetección, ¡esta herramienta es realmente imprescindible!.</p>
+<p>ASI no solo esta disponible en GEE para JS, sino tambien en lenguaje python, R y Julia. Ademas en su repositorio oficial de github (<a class="github reference external" href="https://github.com/awesome-spectral-indices/awesome-spectral-indices">awesome-spectral-indices/awesome-spectral-indices</a>) ofrece un completo catalago de indices clasificado por
+<strong>dominio de aplicación</strong> como : vegetación, agua, fuego, nieve, urbano, suelo, kernel y radar. Cada indice incluye la <em>fórmula</em>, el <em>dominio temático</em> y también la <em>compatibilidad</em>, es decir con qué sensores se pueden aplicar cada uno de estos indices, incluyendo: MODIS, Landsat, Sentinel-2 y planet fusion.</p>
+</section>
+</section>
+<section id="explicacion-de-la-nueva-version-con-asi">
+<h2><span class="section-number">6.12. </span>Explicación de la nueva versión con ASI<a class="headerlink" href="#explicacion-de-la-nueva-version-con-asi" title="Link to this heading">#</a></h2>
+<p>Para cerrar este capítulo mostraremos una mejora en la función agregarIndices, ahora usando la librería Awesome Spectral Indices (ASI). Realizamos una copia del script anterior y lo denominamos
+Lab_006_TS_BahiaBlanca_BIS</p>
+<p>Comentamos la función agregarIndices anterior, para volver a definirla utilizando Awesome Spectral Indices. Lo primero que hacemos es importar la librería desde el repositorio público:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">spectral</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;users/dmlmont/spectral:spectral&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Luego, definimos la función <strong>agregarIndices</strong>, donde pedimos que se calculen automáticamente los índices <strong>NDVI</strong>, <strong>NDBI</strong>, <strong>NDWI</strong> y <strong>NDMI</strong>:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">indices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;NDVI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDBI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDWI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDMI&#39;</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>Para que ASI entienda correctamente qué bandas usar, le tenemos que pasar un objeto con los parámetros necesarios. Por ejemplo:</p>
+<ul class="simple">
+<li><p>N representa el infrarrojo cercano, la banda B8.</p></li>
+<li><p>R es el rojo, la banda B4.</p></li>
+<li><p>G es el verde, la banda B3.</p></li>
+<li><p>S1 es el SWIR1, la banda B11.</p></li>
+</ul>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">parametros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">N</span><span class="o">:</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B8&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="nx">S1</span><span class="o">:</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B11&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="nx">G</span><span class="o">:</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B3&#39;</span><span class="p">),</span>
+<span class="w">  </span><span class="nx">R</span><span class="o">:</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B4&#39;</span><span class="p">)</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Con eso, ASI puede interpretar correctamente las fórmulas internas de cada índice y calcularlos todos de forma automática con una sola línea:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">conIndices</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">spectral</span><span class="p">.</span><span class="nx">computeIndex</span><span class="p">(</span><span class="nx">img</span><span class="p">,</span><span class="w"> </span><span class="nx">indices</span><span class="p">,</span><span class="w"> </span><span class="nx">parametros</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Finalmente, como en la versión anterior, agregamos la banda NIR escalada dividiendo la B8 por 10.000:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">nir</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;B8&#39;</span><span class="p">).</span><span class="nx">divide</span><span class="p">(</span><span class="mf">10000</span><span class="p">).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NIR&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Y retornamos la imagen con todos los índices calculados:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="k">return</span><span class="w"> </span><span class="nx">conIndices</span><span class="p">.</span><span class="nx">addBands</span><span class="p">(</span><span class="nx">nir</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Esta versión es más ordenada, más mantenible, y nos permite reutilizar fácilmente la función para otros índices o sensores si lo necesitamos más adelante.</p>
+</section>
+<section id="cierre">
+<h2><span class="section-number">6.13. </span>Cierre<a class="headerlink" href="#cierre" title="Link to this heading">#</a></h2>
+<p>Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de datos geoespaciales de varios petabytes con capacidades de análisis a escala planetaria. Científicos, investigadores y desarrolladores utilizan Earth Engine para detectar cambios, mapear tendencias y cuantificar diferencias en la superficie terrestre. Earth Engine ahora está disponible para uso comercial y sigue siendo gratuito para fines académicos y de investigación.</p>
+<blockquote>
+<div><p>“Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real” es una fórmula que resume el potencial de Google Earth Engine (GEE) para generar soluciones científicas y prácticas.</p>
+</div></blockquote>
+<p><img alt="" src="_images/Satellite_150dpi.png" /></p>
+<blockquote>
+<div><p>Imágenes satelitales: GEE brinda acceso inmediato a un vasto catálogo de imágenes de observación de la Tierra, que incluye datos de sensores como Landsat, Sentinel, MODIS, entre otros. Esto permite monitorear cambios en el planeta en escalas temporales y espaciales diversas.</p>
+</div></blockquote>
+<p><img alt="" src="_images/Algorithm_150dpi.png" /></p>
+<blockquote>
+<div><p>Tus algoritmos: Los usuarios pueden aplicar sus propios modelos de análisis, ya sean simples cálculos de índices espectrales o complejos algoritmos de <strong>machine learning</strong>, todo dentro del entorno de GEE, aprovechando su capacidad de procesamiento en la nube.</p>
+</div></blockquote>
+<p><img alt="" src="_images/mundo.png" /></p>
+<blockquote>
+<div><p>Aplicaciones en el mundo real: Al combinar datos y algoritmos, es posible desarrollar soluciones para problemas concretos como la deforestación, el cambio climático, la planificación urbana, la gestión del agua, la agricultura de precisión y muchos más.</p>
+</div></blockquote>
+<p>En conjunto, ¡esta fórmula representa cómo GEE empodera a los científicos, desarrolladores y tomadores de decisiones para transformar datos en conocimiento y acción!.</p>
+<p><img alt="" src="_images/interApp.png" /></p>
+<p>En el próximo capítulo de esta serie Time Series, calcularemos mas series temporales de precipitaciones, y obtendremos una serie etemporal de tipos de suelo de Rosario utilizando el clasificador de Random Forest de un video anterior. Nos enfocaremos en ver esos ejemplos en el marco de la teoría de cubos de datos de Imágenes Satelitales.</p>
+</section>
+<section id="video-del-capitulo">
+<h2><span class="section-number">6.14. </span>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
+<p>Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: <a class="reference external" href="https://www.youtube.com/watch?v=1hrdqhz78SU">https://www.youtube.com/watch?v=1hrdqhz78SU</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "cdg-idera/PAT_INT_GEE",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Cap5_Agua.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Capítulo 5 · Random Forest para detectar agua</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Cap7_Datacubes.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Capítulo 7 · Cubos de Imágenes Satelitales</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-de-tiempo-ejemplo-bahia-blanca">6.1. Serie de Tiempo: Ejemplo Bahía Blanca</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-la-frecuencia-de-analisis-temporal">6.2. Definición de la frecuencia de análisis temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-de-interes-roi">6.3. Región de interés (ROI)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-agregar-indices-a-cada-imagen">6.4. Función para agregar índices a cada imagen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-clave-getcoleccionporperiodo">6.5. Función clave: getColeccionPorPeriodo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-la-coleccion-temporal">6.6. Crear la colección temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-indices-sentinel-2">6.7. Gráfico de índices Sentinel-2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-temporal-de-temperatura-superficial-lst">6.8. Serie temporal de temperatura superficial (LST)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion-opcional-de-estadisticas-a-csv">6.9. Exportación opcional de estadísticas a CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-de-la-seccion">6.10. Conclusión de la sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-awesome-spectral-indices-en-gee">6.11. Uso de Awesome Spectral Indices en GEE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona-importar-el-modulo">6.11.1. ¿Cómo funciona? – Importar el módulo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ver-la-lista-completa-de-indices">6.11.2. Ver la lista completa de índices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acceder-a-la-informacion-de-un-indice-especifico">6.11.3. Acceder a la información de un índice específico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explorar-los-atributos-del-indice">6.11.4. Explorar los atributos del índice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2">6.11.5. Calcular un índice: NDVI sobre una imagen Sentinel-2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-multiples-indices-a-la-vez">6.11.6. Calcular múltiples índices a la vez</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-el-resultado-en-el-visor-de-gee">6.11.7. Mostrar el resultado en el visor de GEE</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicacion-de-la-nueva-version-con-asi">6.12. Explicación de la nueva versión con ASI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre">6.13. Cierre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">6.14. Video del capítulo</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Luis Reynoso (IDERA-GTT CDG)
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
