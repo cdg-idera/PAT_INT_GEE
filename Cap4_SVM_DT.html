@@ -392,7 +392,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-clase-0-agua">4.6.1. Ejemplo 1 clase 0 agua</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-clase-1-urbano">4.6.2. Ejemplo 2 clase 1 urbano</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-clase-2-cultivos">4.6.3. Ejemplo 3 clase 2 cultivos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-clase-3-bosque">4.6.4. Ejemplo 4 clase 3 bosque</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-clase-3-bosque-zona-arbustiva">4.6.4. Ejemplo 4 clase 3 bosque-zona arbustiva</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-clase-4-suelo-desnudo">4.6.5. Ejemplo 5 clase 4 suelo desnudo</a></li>
 </ul>
 </li>
@@ -424,7 +424,7 @@ y Arboles de Decisión.</p>
 <p>Para aplicar Maquinas de soporte vectorial, el flujo de trabajo es el mismo que utilizamos con Random Forest, con excepción de que en lugar de utilizar un clasificador de Random Forest, utilizaremos un clasificador de Maquina de Soporte Vectorial. En otras palabras, el cambio principal está en la etapa de entrenamiento del clasificador.</p>
 <p>Antes utilizaamos ee.Classifier.smileRandomForest(100), ahora utilizamos ee.Classifier.libsvm(). Libsvm significa “a library por support vector machine” (ver fig. <a class="reference internal" href="#fig-post-5"><span class="std std-numref">Fig. 4.1</span></a>).</p>
 <figure class="align-default" id="fig-post-5">
-<a class="reference internal image-reference" href="_images/POST_5.png"><img alt="_images/POST_5.png" src="_images/POST_5.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/POST_5.png"><img alt="_images/POST_5.png" src="_images/POST_5.png" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">Significado del acrónimo libSVM</span><a class="headerlink" href="#fig-post-5" title="Link to this image">#</a></p>
 </figcaption>
@@ -692,7 +692,7 @@ dividiéndolas en multiples problemas de clasificiones binarias. Lo que aumenta 
 <p>Para aplicar esta técnica necesitamos cambiar el clasificador, borraremos el clasificador <strong>libsvm()</strong> y lo reemplazaremos por <strong>smileCart()</strong></p>
 <p>Es decir, ahora usamos ee.Classifier.smileCart() para aplicar un árbol de decisión. Como lo indica su documentación CART significa ´<em>Clasification and Regression Tree</em> (ver fig. <a class="reference internal" href="#fig-post-8"><span class="std std-numref">Fig. 4.4</span></a>) <em>Árbol de Regresión y Clasificación</em></p>
 <figure class="align-default" id="fig-post-8">
-<a class="reference internal image-reference" href="_images/POST_8.png"><img alt="_images/POST_8.png" src="_images/POST_8.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/POST_8.png"><img alt="_images/POST_8.png" src="_images/POST_8.png" style="width: 70%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 4.4 </span><span class="caption-text">Acrónimo de CART</span><a class="headerlink" href="#fig-post-8" title="Link to this image">#</a></p>
 </figcaption>
@@ -961,9 +961,12 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <li><p>a la izquierda el árbol de decisión,</p></li>
 <li><p>a la derecha los valores de cada una de sus bandas.</p></li>
 </ul>
-<p>Para cada píxel realizaremos un recorrido del arbol considerando los valores de las bandas espectrales en el pixel:</p>
+<p>Para cada píxel realizaremos un recorrido del arbol (ver fig. <a class="reference internal" href="#fig-post-1"><span class="std std-numref">Fig. 4.15</span></a>). considerando los valores de las bandas espectrales en el pixel:</p>
 <figure class="align-default" id="fig-post-1">
 <a class="reference internal image-reference" href="_images/POST_1.png"><img alt="_images/POST_1.png" src="_images/POST_1.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.15 </span><span class="caption-text">Recorrido de un árbol de decisión</span><a class="headerlink" href="#fig-post-1" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
 <section id="ejemplo-1-clase-0-agua">
 <h3><span class="section-number">4.6.1. </span>Ejemplo 1 clase 0 agua<a class="headerlink" href="#ejemplo-1-clase-0-agua" title="Link to this heading">#</a></h3>
@@ -976,6 +979,9 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p>Seguimos por la rama true: La clase predicha para este píxel es clase 0.</p>
 <figure class="align-default" id="fig-pixel78-cat0">
 <a class="reference internal image-reference" href="_images/Pixel78_Cat0.png"><img alt="_images/Pixel78_Cat0.png" src="_images/Pixel78_Cat0.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.16 </span><span class="caption-text">Píxel del ejemplo 1 clase 0 agua</span><a class="headerlink" href="#fig-pixel78-cat0" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
 </section>
 <section id="ejemplo-2-clase-1-urbano">
@@ -1002,6 +1008,9 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p>Seguimos por la rama true: La clase predicha para este píxel es clase 1.</p>
 <figure class="align-default" id="fig-pixel41-cat1">
 <a class="reference internal image-reference" href="_images/Pixel41_Cat1.png"><img alt="_images/Pixel41_Cat1.png" src="_images/Pixel41_Cat1.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.17 </span><span class="caption-text">Píxel del ejemplo 2 clase 1 urbano</span><a class="headerlink" href="#fig-pixel41-cat1" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
 </section>
 <section id="ejemplo-3-clase-2-cultivos">
@@ -1028,10 +1037,13 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p>Seguimos por la rama true: La clase predicha para este píxel es clase 2.</p>
 <figure class="align-default" id="fig-pixel109-cat2">
 <a class="reference internal image-reference" href="_images/Pixel109_Cat2.png"><img alt="_images/Pixel109_Cat2.png" src="_images/Pixel109_Cat2.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.18 </span><span class="caption-text">Píxel del ejemplo 3 clase 2 cultivos</span><a class="headerlink" href="#fig-pixel109-cat2" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
 </section>
-<section id="ejemplo-4-clase-3-bosque">
-<h3><span class="section-number">4.6.4. </span>Ejemplo 4 clase 3 bosque<a class="headerlink" href="#ejemplo-4-clase-3-bosque" title="Link to this heading">#</a></h3>
+<section id="ejemplo-4-clase-3-bosque-zona-arbustiva">
+<h3><span class="section-number">4.6.4. </span>Ejemplo 4 clase 3 bosque-zona arbustiva<a class="headerlink" href="#ejemplo-4-clase-3-bosque-zona-arbustiva" title="Link to this heading">#</a></h3>
 <p>El recorrido consiste de tres evaluaciones:</p>
 <p>Primera evaluación:</p>
 <ul class="simple">
@@ -1054,6 +1066,9 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <p>Seguimos por la rama true: La clase predicha para este píxel es clase 3</p>
 <figure class="align-default" id="fig-pixel159-cat3">
 <a class="reference internal image-reference" href="_images/Pixel159_Cat3.png"><img alt="_images/Pixel159_Cat3.png" src="_images/Pixel159_Cat3.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.19 </span><span class="caption-text">Píxel del ejemplo 4 clase 3 bosque-zona arbustiva</span><a class="headerlink" href="#fig-pixel159-cat3" title="Link to this image">#</a></p>
+</figcaption>
 </figure>
 </section>
 <section id="ejemplo-5-clase-4-suelo-desnudo">
@@ -1106,7 +1121,7 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <figure class="align-default" id="fig-post-14">
 <a class="reference internal image-reference" href="_images/POST_14.png"><img alt="_images/POST_14.png" src="_images/POST_14.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 4.15 </span><span class="caption-text">Serie de tiempo: Tema de próximos capítulos</span><a class="headerlink" href="#fig-post-14" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 4.20 </span><span class="caption-text">Serie de tiempo: Tema de próximos capítulos</span><a class="headerlink" href="#fig-post-14" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>En otras posibilidades, podemos analizar <em>imágenes satelitales nocturnas</em>, un recurso valioso para explorar patrones y actividades humanas que solo se manifiestan de noche, como la iluminación artificial en áreas urbanas. Las imágenes de luz nocturna proporcionan información relevante sobre la urbanización, el uso de la tierra y el desarrollo económico. A través de estas imágenes, es posible realizar estudios sobre la expansión urbana, monitorear el comportamiento de las actividades industriales o incluso analizar la distribución de la pobreza en diferentes regiones. De hecho, se ha demostrado que las luces nocturnas pueden ser un indicador confiable de la actividad económica y social, lo que abre nuevas oportunidades para aplicar machine learning y técnicas de clasificación en este tipo de datos.</p>
@@ -1193,7 +1208,7 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-1-clase-0-agua">4.6.1. Ejemplo 1 clase 0 agua</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-clase-1-urbano">4.6.2. Ejemplo 2 clase 1 urbano</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-3-clase-2-cultivos">4.6.3. Ejemplo 3 clase 2 cultivos</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-clase-3-bosque">4.6.4. Ejemplo 4 clase 3 bosque</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-4-clase-3-bosque-zona-arbustiva">4.6.4. Ejemplo 4 clase 3 bosque-zona arbustiva</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-5-clase-4-suelo-desnudo">4.6.5. Ejemplo 5 clase 4 suelo desnudo</a></li>
 </ul>
 </li>

@@ -18,7 +18,7 @@ Antes utilizaamos ee.Classifier.smileRandomForest(100), ahora utilizamos ee.Clas
 
 ```{figure} imagenes/POST_5.png
 :name: fig-POST_5
-:width: 100%
+:width: 70%
 
 Significado del acrónimo libSVM
 ```
@@ -301,7 +301,7 @@ Es decir, ahora usamos ee.Classifier.smileCart() para aplicar un árbol de decis
 
 ```{figure} imagenes/POST_8.png
 :name: fig-POST_8
-:width: 100%
+:width: 70%
 
 Acrónimo de CART
 ```
@@ -599,12 +599,13 @@ En cada ejemplo, mostraremos el píxel al cual determinaremos la clase a la que 
 * a la izquierda el árbol de decisión,
 * a la derecha los valores de cada una de sus bandas.
 
-Para cada píxel realizaremos un recorrido del arbol considerando los valores de las bandas espectrales en el pixel:
+Para cada píxel realizaremos un recorrido del arbol (ver fig. {numref}`fig-POST_1`). considerando los valores de las bandas espectrales en el pixel:
 
 ```{figure} imagenes/POST_1.png
 :name: fig-POST_1
 :width: 100%
 
+Recorrido de un árbol de decisión
 ```
 
 
@@ -622,6 +623,7 @@ Seguimos por la rama true: La clase predicha para este píxel es clase 0.
 :name: fig-Pixel78_Cat0
 :width: 100%
 
+Píxel del ejemplo 1 clase 0 agua
 ```
 
 
@@ -654,6 +656,7 @@ Seguimos por la rama true: La clase predicha para este píxel es clase 1.
 :name: fig-Pixel41_Cat1
 :width: 100%
 
+Píxel del ejemplo 2 clase 1 urbano 
 ```
 
 
@@ -689,10 +692,11 @@ Seguimos por la rama true: La clase predicha para este píxel es clase 2.
 :name: fig-Pixel109_Cat2
 :width: 100%
 
+Píxel del ejemplo 3 clase 2 cultivos
 ```
 
 
-### Ejemplo 4 clase 3 bosque
+### Ejemplo 4 clase 3 bosque-zona arbustiva
 
 El recorrido consiste de tres evaluaciones:
 
@@ -720,6 +724,7 @@ Seguimos por la rama true: La clase predicha para este píxel es clase 3
 :name: fig-Pixel159_Cat3
 :width: 100%
 
+Píxel del ejemplo 4 clase 3 bosque-zona arbustiva
 ```
 
 
