@@ -154,7 +154,7 @@ Esto se debe a que el *enfoque principal de GEE es el procesamiento y el analisi
 
 ```{figure} imagenes/POST_7.png
 :name: fig-POST_7
-:width: 100%
+:width: 90%
 
 Hiperplanos de SVM
 ```
@@ -286,7 +286,7 @@ print('Consumers Accuracy:', testConfusionMatrix.consumersAccuracy() );
 
 ```{figure} imagenes/POST_6.png
 :name: fig-POST_6
-:width: 100%
+:width: 90%
 
 Indicaciones para aplicar la plantilla de SVM
 ```
@@ -315,7 +315,7 @@ Calculamos su precsión 98.02 por ciento. Ahora agregaremo código para obtener 
 
 ```{figure} imagenes/POST_10.png
 :name: fig-POST_10
-:width: 100%
+:width: 90%
 
 Arbol de Decisión con CART
 ```
@@ -325,7 +325,7 @@ Como mencionamos en el video 2 de esta serie, el árbol de decisión es útil po
 
 ```{figure} imagenes/POST_9.png
 :name: fig-POST_9
-:width: 100%
+:width: 90%
 
 Template de SmileCART
 ```
@@ -445,7 +445,7 @@ Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot (v
 
 ```{figure} imagenes/POST_11.png
 :name: fig-POST_11
-:width: 100%
+:width: 90%
 
 Reglas del Arbol en formato dot 
 ```
@@ -504,7 +504,7 @@ Enlace al archivo en Google Colab: https://colab.research.google.com/drive/1AdTW
 
 ```{figure} imagenes/POST_6.png
 :name: fig-POST_6
-:width: 100%
+:width: 90%
 
 Tips para apicar SVM con el script como template
 ```
@@ -521,7 +521,7 @@ Este árbol tiene 7 **nodos de decisión**, donde cada nodo de decisión tiene u
 
 ```{figure} imagenes/POST_16.png
 :name: fig-POST_16
-:width: 100%
+:width: 90%
 
 Nodo de Decisión: Definición
 ```
@@ -536,7 +536,7 @@ Por ejemplo la **raíz del árbol** es el primer nodo situado en la parte superi
 
 ```{figure} imagenes/POST_17.png
 :name: fig-POST_17
-:width: 100%
+:width: 90%
 
 Raíz del árbol de decisión
 ```
@@ -553,7 +553,7 @@ Este nodo, el nodo raíz, tiene una condición: B6 <= 1095.0.
 
 ```{figure} imagenes/POST_15.png
 :name: fig-POST_15
-:width: 100%
+:width: 90%
 
 Hoja de un árbol de decisión: Definición
 ```
@@ -603,7 +603,7 @@ Para cada píxel realizaremos un recorrido del arbol (ver fig. {numref}`fig-POST
 
 ```{figure} imagenes/POST_1.png
 :name: fig-POST_1
-:width: 100%
+:width: 90%
 
 Recorrido de un árbol de decisión
 ```
@@ -782,7 +782,7 @@ Sin embargo, este es solo el comienzo de las posibilidades. Por ejemplo, el ajus
 
 ```{figure} imagenes/POST_14.png
 :name: fig-POST_14
-:width: 100%
+:width: 80%
 
 Serie de tiempo: Tema de próximos capítulos
 ```
