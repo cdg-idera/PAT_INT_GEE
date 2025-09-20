@@ -141,7 +141,7 @@ En la práctica, la clasificación supervisada es la técnica predominante, ya q
 :name: fig-workflow
 :width: 100%
 
-Etiquetas o muestras de Entrenamiento de Agua-No Agua.
+Workflow de trabajo para aplicar ML.
 ```
 
 
@@ -150,7 +150,7 @@ Este enfoque, según {cite:p}`reynoso2025flujo`, permite integrar algoritmos de 
 
 ### Consideraciones prácticas
 
-Aunque el aprendizaje automático simplifica el manejo de datos complejos, no siempre es la mejor opción. Métodos tradicionales como los sistemas expertos, que emplean fórmulas derivadas de las propiedades físicas del terreno, son preferibles en ciertos casos, especialmente cuando se trabaja con pocos parámetros (bandas espectrales). Por ejemplo, el conjunto de datos global Global Surface Water, basado en un sistema experto, supera a los métodos de Aprendizaje automático en la detección de agua en imágenes Landsat a escala global.
+Aunque el aprendizaje automático simplifica el manejo de datos complejos, no siempre es la mejor opción. Métodos tradicionales como los sistemas expertos, que emplean fórmulas derivadas de las propiedades físicas del terreno, son preferibles en ciertos casos, especialmente cuando se trabaja con pocos parámetros (bandas espectrales). Por ejemplo, el conjunto de datos global Global Surface Water, basado en un sistema experto, supera a los métodos de Aprendizaje automático en la detección de agua en imágenes Landsat a escala global (ver fig. {numref}`fig-Slide7`).
 
 ```{figure} imagenes/Slide7.png
 :name: fig-Slide7
@@ -170,7 +170,15 @@ Un modelo entrenado con estos datos aprenderá a predecir la clase de nuevos pí
 
 ### Conclusión de la sección
 
-La mayoría de las aplicaciones de teledetección implican algún tipo de clasificación supervisada, ya que permiten convertir imágenes en mapas clasificados, útiles para responder preguntas clave como: ¿Qué porcentaje de la ciudad está cubierto por árboles? o ¿Cuál es el área urbanizada en crecimiento?
+
+La mayoría de las aplicaciones de teledetección implican algún tipo de clasificación supervisada, ya que permiten convertir imágenes en mapas clasificados, útiles para responder preguntas clave como (ver fig. {numref}`fig-Slide11`): ¿Qué porcentaje de la ciudad está cubierto por árboles? o ¿Cuál es el área urbanizada en crecimiento?
+
+```{figure} imagenes/Slide11.png
+:name: fig-Slide11
+:width: 100%
+
+Sistemas Expertos ó Aprendizaje Automático.
+```
 
 Aunque ambos enfoques (supervisado y no supervisado) tienen un lugar en el análisis de teledetección, comprender sus fortalezas y limitaciones es esencial para elegir la estrategia adecuada en cada caso. Al final, la combinación de ambos métodos, junto con sistemas expertos, puede ofrecer resultados más robustos y confiables.
 
@@ -189,7 +197,15 @@ Durante años, las Máquinas de Soporte Vectorial se posicionaron como una de la
 
 Con el tiempo, los árboles de decisión comenzaron a ganar terreno como una alternativa más flexible y adaptativa. A diferencia de las SVM, los árboles de decisión no se limitan a dos clases y son capaces de manejar problemas multiclase de forma natural. Este algoritmo utiliza un enfoque basado en reglas, en el que los datos son clasificados mediante un proceso de decisiones jerárquicas. Cada nodo en el árbol representa una condición, como un umbral de reflectancia, y las ramas llevan a diferentes resultados según las características de los datos. Al final, cada píxel es asignado a una clase con base en su recorrido por el árbol. Esta estructura no solo es eficaz, sino también intuitiva, ya que las reglas generadas por el modelo pueden interpretarse con facilidad. Además, su capacidad para realizar regresiones amplía su utilidad a problemas más complejos, como la estimación de rendimientos agrícolas. Sin embargo, su principal desafío radica en el sobreajuste: cuando un árbol se adapta demasiado a los datos de entrenamiento, pierde capacidad para generalizar en nuevos contextos.
 
-Para superar estas limitaciones, surgió Random Forest, un algoritmo que revolucionó el uso de los árboles de decisión mediante un enfoque de aprendizaje en conjunto. En lugar de construir un único árbol, Random Forest genera múltiples árboles independientes, cada uno entrenado con un subconjunto aleatorio de los datos. Si bien cada árbol puede ser propenso al sobreajuste, el algoritmo combina sus predicciones mediante un proceso de votación mayoritaria, logrando así un modelo final más robusto y preciso. Este enfoque, inspirado en la "sabiduría de las multitudes", ha demostrado ser particularmente eficaz en teledetección, donde la diversidad de los datos suele complicar el análisis. Además de su capacidad para manejar ruido y datos complejos, Random Forest se adapta fácilmente a problemas multiclase, consolidándose como una herramienta versátil y confiable.
+Para superar estas limitaciones, surgió Random Forest, un algoritmo que revolucionó el uso de los árboles de decisión mediante un enfoque de aprendizaje en conjunto. En lugar de construir un único árbol, Random Forest genera múltiples árboles independientes, cada uno entrenado con un subconjunto aleatorio de los datos. Si bien cada árbol puede ser propenso al sobreajuste, el algoritmo combina sus predicciones mediante un proceso de votación mayoritaria, logrando así un modelo final más robusto y preciso (ver fig. {numref}`fig-Slide14`). Este enfoque, inspirado en la "sabiduría de las multitudes", ha demostrado ser particularmente eficaz en teledetección, donde la diversidad de los datos suele complicar el análisis. Además de su capacidad para manejar ruido y datos complejos, Random Forest se adapta fácilmente a problemas multiclase, consolidándose como una herramienta versátil y confiable.
+
+
+```{figure} imagenes/Slide14.png
+:name: fig-Slide14
+:width: 100%
+
+Algunas Características de RF.
+```
 
 A lo largo de los años, la evolución de los algoritmos en teledetección ha reflejado un cambio significativo en las preferencias y necesidades de la comunidad científica. Aunque las SVM continúan siendo útiles para problemas específicos, como las clasificaciones binarias, Random Forest se ha establecido como el estándar para tareas más complejas y de mayor escala. Este algoritmo no solo garantiza precisión y robustez, sino que también permite ajustes personalizados y evaluaciones de rendimiento, adaptándose a los requisitos de cada proyecto. Su integración en plataformas como Google Earth Engine lo ha convertido en una opción accesible y eficaz para usuarios de diferentes niveles de experiencia, marcando el punto de partida ideal para explorar técnicas más avanzadas.
 
@@ -208,11 +224,20 @@ SVM es un modelo adecuado para problemas con dos clases (en este caso, agua y no
 * En un grafico 3D en lugar de linea empleamos un plano.
 
 ### Predicción:
-Una vez entrenado, el modelo usa esta línea para clasificar nuevos píxeles:
+
+Una vez entrenado, el modelo usa esta línea para clasificar nuevos píxeles (ver fig. {numref}`fig-Slide12`):
 
 * Si un píxel tiene valores que caen por debajo de la línea, se clasifica como "agua".
 * Si está por encima, se clasifica como "no agua".
 * SVM es eficaz, simple y rápido para este tipo de problemas binarios.
+
+```{figure} imagenes/Slide12.png
+:name: fig-Slide12
+:width: 100%
+
+Algunas Características de las SMV.
+```
+
 
 Ahora mostraremos de manera esquemática como se emplea Arboles de decisión a nuestro ejemplo sencillo de clasificación binaria (agua /no agua):
 
@@ -228,8 +253,16 @@ Se verifican las condiciones establecidas en cada nodo.
 Al final, se llega a una hoja que indica la clase del píxel (agua o no agua).
 
 ### Ventajas y limitaciones:
-Los Árboles de Decisión son fáciles de interpretar porque el modelo resulta en un diagrama explicativo.
+Los Árboles de Decisión son fáciles de interpretar porque el modelo resulta en un diagrama explicativo (ver fig. {numref}`fig-Slide13`).
 Sin embargo, tienen un problema conocido como sobreajuste: si los datos de entrenamiento contienen ruido, el árbol puede volverse excesivamente complejo al intentar ajustarse a datos irrelevantes.
+
+
+```{figure} imagenes/Slide13.png
+:name: fig-Slide13
+:width: 100%
+
+Algunas Características de los Árboles de Decisión.
+```
 
 Para mitigar el sobreajuste, se pueden podar ramas del árbol, limitar la profundidad máxima o emplear métodos como Random Forest, que combinan múltiples árboles para mejorar la generalización.
 
@@ -317,6 +350,14 @@ Lo que Earth Engine aporta es la capacidad de realizar estos procesos en tiempo 
 
 ### Algunas recomendaciones para optimizar la recolección de datos son las siguientes:
 
+Algunas recomendaciones para optimizar la recolección de datos son las siguientes (ver fig. {numref}`fig-Slide22`):
+
+```{figure} imagenes/Slide22.png
+:name: fig-Slide22
+:width: 100%
+
+Recomendaciones en la recolección de muestras de Entrenamiento.
+```
 Usar imágenes Sentinel-2 como referencia. Asegúrate de utilizar imágenes de Sentinel-2 para seleccionar las muestras de entrenamiento, ya que las imágenes de alta resolución pueden no coincidir temporalmente con las imágenes de Sentinel-2, lo que podría afectar la precisión del modelo.
 
 Distribuir las muestras de entrenamiento de manera equitativa. Asegúrate de tomar puntos de entrenamiento distribuidos por toda la ciudad y, especialmente, en las calles. Un error común es confundir cuerpos de agua con áreas urbanas oscuras.
@@ -345,6 +386,8 @@ Una vez que estemos satisfechos con los resultados de la clasificación y la pre
 ## Conclusión
 
 El aprendizaje automático no solo transforma datos en conocimiento accionable también redefine nuestra capacidad para comprender y gestionar entornos complejos. Herramientas como las máquinas de soporte vectorial, árboles de decisión y Random Forest nos brindan la precisión necesaria para abordar desafíos reales como el análisis del uso de suelo y la planificación territorial. En este ejemplo aplicado al área metropolitana de Rosario Random Forest demostró ser una herramienta poderosa capaz de clasificar grandes extensiones de territorio con una precisión sobresaliente esto no solo mejora nuestra visión científica del entorno sino que también apoya la toma de decisiones fundamentadas en evidencia. 
+
+
 
 El futuro del Análisis Geoespacial está aquí combinando algoritmos robustos y datos satelitales podemos planificar un desarrollo sostenible que beneficie a las generaciones actuales y futuras. Gracias por acompañarnos en este recorrido acerca del aprendizaje automático aplicado análisis territorial, sigamos impulsando el conocimiento y la acción en favor de nuestro entorno.
 

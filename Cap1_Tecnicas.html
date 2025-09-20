@@ -542,14 +542,14 @@ document.write(`
 <figure class="align-default" id="fig-workflow">
 <a class="reference internal image-reference" href="_images/Workflow.png"><img alt="_images/Workflow.png" src="_images/Workflow.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.8 </span><span class="caption-text">Etiquetas o muestras de Entrenamiento de Agua-No Agua.</span><a class="headerlink" href="#fig-workflow" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 1.8 </span><span class="caption-text">Workflow de trabajo para aplicar ML.</span><a class="headerlink" href="#fig-workflow" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Este enfoque, según <span id="id5">[]</span>, permite integrar algoritmos de Machine Learning en flujos de trabajo reproducibles e integra las partes principales que deberán ser consideradas en cada aplicación de algoritmos de machine learning (ML) a informacion geoespacial. El flujo será aplicado en distintos capítulos del presente libro.</p>
 </section>
 <section id="consideraciones-practicas">
 <h3><span class="section-number">1.3.3. </span>Consideraciones prácticas<a class="headerlink" href="#consideraciones-practicas" title="Link to this heading">#</a></h3>
-<p>Aunque el aprendizaje automático simplifica el manejo de datos complejos, no siempre es la mejor opción. Métodos tradicionales como los sistemas expertos, que emplean fórmulas derivadas de las propiedades físicas del terreno, son preferibles en ciertos casos, especialmente cuando se trabaja con pocos parámetros (bandas espectrales). Por ejemplo, el conjunto de datos global Global Surface Water, basado en un sistema experto, supera a los métodos de Aprendizaje automático en la detección de agua en imágenes Landsat a escala global.</p>
+<p>Aunque el aprendizaje automático simplifica el manejo de datos complejos, no siempre es la mejor opción. Métodos tradicionales como los sistemas expertos, que emplean fórmulas derivadas de las propiedades físicas del terreno, son preferibles en ciertos casos, especialmente cuando se trabaja con pocos parámetros (bandas espectrales). Por ejemplo, el conjunto de datos global Global Surface Water, basado en un sistema experto, supera a los métodos de Aprendizaje automático en la detección de agua en imágenes Landsat a escala global (ver fig. <a class="reference internal" href="#fig-slide7"><span class="std std-numref">Fig. 1.9</span></a>).</p>
 <figure class="align-default" id="fig-slide7">
 <a class="reference internal image-reference" href="_images/Slide7.png"><img alt="_images/Slide7.png" src="_images/Slide7.png" style="width: 100%;" /></a>
 <figcaption>
@@ -565,18 +565,30 @@ document.write(`
 </section>
 <section id="conclusion-de-la-seccion">
 <h3><span class="section-number">1.3.5. </span>Conclusión de la sección<a class="headerlink" href="#conclusion-de-la-seccion" title="Link to this heading">#</a></h3>
-<p>La mayoría de las aplicaciones de teledetección implican algún tipo de clasificación supervisada, ya que permiten convertir imágenes en mapas clasificados, útiles para responder preguntas clave como: ¿Qué porcentaje de la ciudad está cubierto por árboles? o ¿Cuál es el área urbanizada en crecimiento?</p>
+<p>La mayoría de las aplicaciones de teledetección implican algún tipo de clasificación supervisada, ya que permiten convertir imágenes en mapas clasificados, útiles para responder preguntas clave como (ver fig. <a class="reference internal" href="#fig-slide11"><span class="std std-numref">Fig. 1.10</span></a>): ¿Qué porcentaje de la ciudad está cubierto por árboles? o ¿Cuál es el área urbanizada en crecimiento?</p>
+<figure class="align-default" id="fig-slide11">
+<a class="reference internal image-reference" href="_images/Slide11.png"><img alt="_images/Slide11.png" src="_images/Slide11.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.10 </span><span class="caption-text">Sistemas Expertos ó Aprendizaje Automático.</span><a class="headerlink" href="#fig-slide11" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Aunque ambos enfoques (supervisado y no supervisado) tienen un lugar en el análisis de teledetección, comprender sus fortalezas y limitaciones es esencial para elegir la estrategia adecuada en cada caso. Al final, la combinación de ambos métodos, junto con sistemas expertos, puede ofrecer resultados más robustos y confiables.</p>
-<p>El aprendizaje automático se ha convertido en una herramienta imprescindible en teledetección, particularmente para resolver problemas de clasificación. Una aplicación común es identificar qué píxeles en una imagen satelital representan cuerpos de agua y cuáles corresponden a otras superficies. Para abordar estas tareas, se han desarrollado diversos algoritmos, cada uno con fortalezas particulares (ver fig. <a class="reference internal" href="#fig-slide9"><span class="std std-numref">Fig. 1.10</span></a>). Entre ellos, destacan las Máquinas de Soporte Vectorial (SVM), los árboles de decisión y el algoritmo Random Forest, que han transformado la manera en que se procesan y analizan los datos satelitales.</p>
+<p>El aprendizaje automático se ha convertido en una herramienta imprescindible en teledetección, particularmente para resolver problemas de clasificación. Una aplicación común es identificar qué píxeles en una imagen satelital representan cuerpos de agua y cuáles corresponden a otras superficies. Para abordar estas tareas, se han desarrollado diversos algoritmos, cada uno con fortalezas particulares (ver fig. <a class="reference internal" href="#fig-slide9"><span class="std std-numref">Fig. 1.11</span></a>). Entre ellos, destacan las Máquinas de Soporte Vectorial (SVM), los árboles de decisión y el algoritmo Random Forest, que han transformado la manera en que se procesan y analizan los datos satelitales.</p>
 <figure class="align-default" id="fig-slide9">
 <a class="reference internal image-reference" href="_images/Slide9.png"><img alt="_images/Slide9.png" src="_images/Slide9.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.10 </span><span class="caption-text">Sistemas Expertos ó Aprendizaje Automático.</span><a class="headerlink" href="#fig-slide9" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 1.11 </span><span class="caption-text">Sistemas Expertos ó Aprendizaje Automático.</span><a class="headerlink" href="#fig-slide9" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Durante años, las Máquinas de Soporte Vectorial se posicionaron como una de las herramientas preferidas en teledetección, especialmente en problemas de clasificación binaria. Este algoritmo, conocido por su precisión, construye un hiperplano que separa de forma óptima dos clases de datos en un espacio multidimensional. Por ejemplo, en dos dimensiones, esta separación se traduce en una línea, mientras que en tres dimensiones, se convierte en un plano. El modelo aprende a clasificar datos a partir de ejemplos etiquetados, ajustando el hiperplano para maximizar la distancia entre las dos clases. Una vez entrenado, puede determinar la clase de un nuevo píxel simplemente evaluando en qué lado del hiperplano se encuentra. Sin embargo, a pesar de su efectividad en problemas simples, las SVM enfrentan limitaciones cuando se aplican a tareas que involucran múltiples clases, lo que redujo su protagonismo a medida que surgieron enfoques más versátiles.</p>
 <p>Con el tiempo, los árboles de decisión comenzaron a ganar terreno como una alternativa más flexible y adaptativa. A diferencia de las SVM, los árboles de decisión no se limitan a dos clases y son capaces de manejar problemas multiclase de forma natural. Este algoritmo utiliza un enfoque basado en reglas, en el que los datos son clasificados mediante un proceso de decisiones jerárquicas. Cada nodo en el árbol representa una condición, como un umbral de reflectancia, y las ramas llevan a diferentes resultados según las características de los datos. Al final, cada píxel es asignado a una clase con base en su recorrido por el árbol. Esta estructura no solo es eficaz, sino también intuitiva, ya que las reglas generadas por el modelo pueden interpretarse con facilidad. Además, su capacidad para realizar regresiones amplía su utilidad a problemas más complejos, como la estimación de rendimientos agrícolas. Sin embargo, su principal desafío radica en el sobreajuste: cuando un árbol se adapta demasiado a los datos de entrenamiento, pierde capacidad para generalizar en nuevos contextos.</p>
-<p>Para superar estas limitaciones, surgió Random Forest, un algoritmo que revolucionó el uso de los árboles de decisión mediante un enfoque de aprendizaje en conjunto. En lugar de construir un único árbol, Random Forest genera múltiples árboles independientes, cada uno entrenado con un subconjunto aleatorio de los datos. Si bien cada árbol puede ser propenso al sobreajuste, el algoritmo combina sus predicciones mediante un proceso de votación mayoritaria, logrando así un modelo final más robusto y preciso. Este enfoque, inspirado en la “sabiduría de las multitudes”, ha demostrado ser particularmente eficaz en teledetección, donde la diversidad de los datos suele complicar el análisis. Además de su capacidad para manejar ruido y datos complejos, Random Forest se adapta fácilmente a problemas multiclase, consolidándose como una herramienta versátil y confiable.</p>
+<p>Para superar estas limitaciones, surgió Random Forest, un algoritmo que revolucionó el uso de los árboles de decisión mediante un enfoque de aprendizaje en conjunto. En lugar de construir un único árbol, Random Forest genera múltiples árboles independientes, cada uno entrenado con un subconjunto aleatorio de los datos. Si bien cada árbol puede ser propenso al sobreajuste, el algoritmo combina sus predicciones mediante un proceso de votación mayoritaria, logrando así un modelo final más robusto y preciso (ver fig. <a class="reference internal" href="#fig-slide14"><span class="std std-numref">Fig. 1.12</span></a>). Este enfoque, inspirado en la “sabiduría de las multitudes”, ha demostrado ser particularmente eficaz en teledetección, donde la diversidad de los datos suele complicar el análisis. Además de su capacidad para manejar ruido y datos complejos, Random Forest se adapta fácilmente a problemas multiclase, consolidándose como una herramienta versátil y confiable.</p>
+<figure class="align-default" id="fig-slide14">
+<a class="reference internal image-reference" href="_images/Slide14.png"><img alt="_images/Slide14.png" src="_images/Slide14.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.12 </span><span class="caption-text">Algunas Características de RF.</span><a class="headerlink" href="#fig-slide14" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>A lo largo de los años, la evolución de los algoritmos en teledetección ha reflejado un cambio significativo en las preferencias y necesidades de la comunidad científica. Aunque las SVM continúan siendo útiles para problemas específicos, como las clasificaciones binarias, Random Forest se ha establecido como el estándar para tareas más complejas y de mayor escala. Este algoritmo no solo garantiza precisión y robustez, sino que también permite ajustes personalizados y evaluaciones de rendimiento, adaptándose a los requisitos de cada proyecto. Su integración en plataformas como Google Earth Engine lo ha convertido en una opción accesible y eficaz para usuarios de diferentes niveles de experiencia, marcando el punto de partida ideal para explorar técnicas más avanzadas.</p>
 <p>Para clasificar píxeles en una imagen satelital, supongamos que tenemos un conjunto de datos inicial compuesto por 100 píxeles. Cada píxel tiene dos valores asociados, correspondientes a las reflectancias en las bandas verde e infrarroja cercana (NIR). Además, sabemos qué píxeles representan agua (etiquetados como “agua”) y cuáles no (etiquetados como “no agua”).</p>
 <p>El objetivo es entrenar un modelo que, con base en las reflectancias, pueda clasificar todos los píxeles de la imagen en una de estas dos categorías.</p>
@@ -595,12 +607,18 @@ document.write(`
 </section>
 <section id="prediccion">
 <h3><span class="section-number">1.4.2. </span>Predicción:<a class="headerlink" href="#prediccion" title="Link to this heading">#</a></h3>
-<p>Una vez entrenado, el modelo usa esta línea para clasificar nuevos píxeles:</p>
+<p>Una vez entrenado, el modelo usa esta línea para clasificar nuevos píxeles (ver fig. <a class="reference internal" href="#fig-slide12"><span class="std std-numref">Fig. 1.13</span></a>):</p>
 <ul class="simple">
 <li><p>Si un píxel tiene valores que caen por debajo de la línea, se clasifica como “agua”.</p></li>
 <li><p>Si está por encima, se clasifica como “no agua”.</p></li>
 <li><p>SVM es eficaz, simple y rápido para este tipo de problemas binarios.</p></li>
 </ul>
+<figure class="align-default" id="fig-slide12">
+<a class="reference internal image-reference" href="_images/Slide12.png"><img alt="_images/Slide12.png" src="_images/Slide12.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.13 </span><span class="caption-text">Algunas Características de las SMV.</span><a class="headerlink" href="#fig-slide12" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Ahora mostraremos de manera esquemática como se emplea Arboles de decisión a nuestro ejemplo sencillo de clasificación binaria (agua /no agua):</p>
 </section>
 </section>
@@ -618,8 +636,14 @@ Al final, se llega a una hoja que indica la clase del píxel (agua o no agua).</
 </section>
 <section id="ventajas-y-limitaciones">
 <h3><span class="section-number">1.5.3. </span>Ventajas y limitaciones:<a class="headerlink" href="#ventajas-y-limitaciones" title="Link to this heading">#</a></h3>
-<p>Los Árboles de Decisión son fáciles de interpretar porque el modelo resulta en un diagrama explicativo.
+<p>Los Árboles de Decisión son fáciles de interpretar porque el modelo resulta en un diagrama explicativo (ver fig. <a class="reference internal" href="#fig-slide13"><span class="std std-numref">Fig. 1.14</span></a>).
 Sin embargo, tienen un problema conocido como sobreajuste: si los datos de entrenamiento contienen ruido, el árbol puede volverse excesivamente complejo al intentar ajustarse a datos irrelevantes.</p>
+<figure class="align-default" id="fig-slide13">
+<a class="reference internal image-reference" href="_images/Slide13.png"><img alt="_images/Slide13.png" src="_images/Slide13.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.14 </span><span class="caption-text">Algunas Características de los Árboles de Decisión.</span><a class="headerlink" href="#fig-slide13" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Para mitigar el sobreajuste, se pueden podar ramas del árbol, limitar la profundidad máxima o emplear métodos como Random Forest, que combinan múltiples árboles para mejorar la generalización.</p>
 </section>
 </section>
@@ -680,6 +704,13 @@ Una vez entrenado, el clasificador estará listo para predecir las etiquetas de 
 </section>
 <section id="algunas-recomendaciones-para-optimizar-la-recoleccion-de-datos-son-las-siguientes">
 <h3><span class="section-number">1.6.5. </span>Algunas recomendaciones para optimizar la recolección de datos son las siguientes:<a class="headerlink" href="#algunas-recomendaciones-para-optimizar-la-recoleccion-de-datos-son-las-siguientes" title="Link to this heading">#</a></h3>
+<p>Algunas recomendaciones para optimizar la recolección de datos son las siguientes (ver fig. <a class="reference internal" href="#fig-slide22"><span class="std std-numref">Fig. 1.15</span></a>):</p>
+<figure class="align-default" id="fig-slide22">
+<a class="reference internal image-reference" href="_images/Slide22.png"><img alt="_images/Slide22.png" src="_images/Slide22.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.15 </span><span class="caption-text">Recomendaciones en la recolección de muestras de Entrenamiento.</span><a class="headerlink" href="#fig-slide22" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Usar imágenes Sentinel-2 como referencia. Asegúrate de utilizar imágenes de Sentinel-2 para seleccionar las muestras de entrenamiento, ya que las imágenes de alta resolución pueden no coincidir temporalmente con las imágenes de Sentinel-2, lo que podría afectar la precisión del modelo.</p>
 <p>Distribuir las muestras de entrenamiento de manera equitativa. Asegúrate de tomar puntos de entrenamiento distribuidos por toda la ciudad y, especialmente, en las calles. Un error común es confundir cuerpos de agua con áreas urbanas oscuras.</p>
 <p>Evitar muestras mixtas. No utilices píxeles mixtos para el entrenamiento. Intenta seleccionar ejemplos puros de agua, vegetación, áreas urbanas y terrenos áridos. Deja que el modelo se encargue de los píxeles mixtos.</p>
