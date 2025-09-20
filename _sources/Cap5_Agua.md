@@ -298,7 +298,7 @@ Antes de ejecutar este código comprobamos que la colección de imágenes no cue
 
 ```{figure} imagenes/FalsoColor.png
 :name: fig-FalsoColor
-:width: 70%
+:width: 50%
 
 Falso Color: Descripción
 ```
