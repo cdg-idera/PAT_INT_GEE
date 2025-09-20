@@ -450,8 +450,13 @@ document.write(`
 <blockquote>
 <div><p>“La teledetección es el proceso de adquirir información sobre las propiedades de los objetos en la superficie terrestre sin estar en contacto físico con ellos. Esto se logra detectando y analizando la radiación reflejada o emitida por esos objetos, utilizando sensores montados en plataformas remotas, como satélites o aeronaves.” <span id="id4">Lillesand <em>et al.</em> [<a class="reference internal" href="Referencias.html#id5" title="Thomas M. Lillesand, Ralph W. Kiefer, and Jonathan W. Chipman. Remote Sensing and Image Interpretation. John Wiley &amp; Sons, Hoboken, NJ, 7 edition, 2015. ISBN 9781118343289.">2015</a>]</span></p>
 </div></blockquote>
-<p><img alt="" src="_images/areasIA2.png" /></p>
-<p>Esta disciplina se ha convertido en una herramienta esencial para entender nuestro entorno y tomar decisiones fundamentadas en múltiples campos. Entre sus principales propósitos se encuentran:</p>
+<figure class="align-default" id="fig-areas">
+<a class="reference internal image-reference" href="_images/areasIA2.png"><img alt="_images/areasIA2.png" src="_images/areasIA2.png" style="width: 90%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Teledetección: Áreas de Aplicación.</span><a class="headerlink" href="#fig-areas" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Esta disciplina se ha convertido en una herramienta esencial para entender nuestro entorno y tomar decisiones fundamentadas en múltiples campos. Entre sus principales propósitos se encuentran (ver fig. <a class="reference internal" href="#fig-areas"><span class="std std-numref">Fig. 1.1</span></a>):</p>
 <ul class="simple">
 <li><p>La Generación de mapas de uso del suelo y cobertura del suelo (LULC, por sus siglas en inglés), una práctica clave para monitorear el crecimiento urbano, la planificación urbana sostenible y la identificación de cambios en el paisaje.</p></li>
 <li><p>La Detección de cambios ambientales, como la expansión urbana, las variaciones en la vegetación, los cultivos, y los cuerpos de agua.</p></li>
@@ -460,29 +465,64 @@ document.write(`
 </ul>
 <p>Además, gracias a las capacidades de procesamiento en la nube, podemos llevar a cabo estudios a escalas regionales y nacionales sin la necesidad de infraestructuras complejas. Esto abre un abanico de posibilidades para investigadores, profesionales y tomadores de decisiones que buscan soluciones sostenibles basadas en datos confiables y actualizados.</p>
 <p>Como indicamos anteriormente este capítulo se enfocará en el uso del aprendizaje automático en teledetección y mostraremos un ejemplo en el cual aplicamos aprendizaje supervisado con árboles aleatorios o Random Forest.</p>
-<p><img alt="" src="_images/tele2.png" /></p>
-<p>El aprendizaje automático se ha consolidado como una herramienta ideal para resolver problemas complejos en teledetección, principalmente porque aborda de manera eficiente la clasificación y detección de objetos o materiales en imágenes satelitales (por ejemplo detectar vegetación, agua, edificios, carreteras). Estos problemas, como identificar tipos de cobertura terrestre o distinguir entre características específicas, presentan desafíos significativos cuando se intentan resolver mediante métodos analíticos tradicionales.</p>
-<p>Existen algunos desafíos de los Datos de Observación Terrestre:</p>
+<p>El aprendizaje automático se ha consolidado como una herramienta ideal para resolver problemas complejos en teledetección, principalmente porque aborda de manera eficiente la clasificación y detección de objetos o materiales en imágenes satelitales. Por ejemplo detectar vegetación, agua, edificios, carreteras, etc. (ver fig. <a class="reference internal" href="#fig-tele2"><span class="std std-numref">Fig. 1.2</span></a>). Estos problemas, como identificar tipos de cobertura terrestre o distinguir entre características específicas, presentan desafíos significativos cuando se intentan resolver mediante métodos analíticos tradicionales.</p>
+<figure class="align-default" id="fig-tele2">
+<a class="reference internal image-reference" href="_images/tele2.png"><img alt="_images/tele2.png" src="_images/tele2.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Teledetección: Gráfico Simbólico</span><a class="headerlink" href="#fig-tele2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Existen algunos desafíos de los Datos de Observación Terrestre (ver fig. <a class="reference internal" href="#fig-slide3"><span class="std std-numref">Fig. 1.3</span></a>):</p>
 <ul class="simple">
 <li><p>Los datos satelitales, aunque ricos en información, están <strong>inherentemente sujetos a ruido y variabilidad</strong>:</p></li>
 <li><p><strong>Ruido atmosférico y del sensor:</strong> Los satélites operan a cientos de kilómetros de altitud, capturando datos a través de múltiples interferencias atmosféricas. Este entorno introduce desviaciones en las mediciones de reflectancia.</p></li>
 <li><p><strong>Variabilidad temporal y espacial:</strong> Las mismas condiciones en diferentes días pueden generar valores de reflectancia ligeramente distintos debido a factores ambientales y limitaciones instrumentales.</p></li>
 <li><p><strong>Dimensionalidad de los datos:</strong> Las imágenes de teledetección suelen incluir múltiples bandas espectrales, lo que genera un espacio de características de alta dimensionalidad que dificulta la creación de reglas manuales para clasificar objetos con precisión.</p></li>
 </ul>
+<figure class="align-default" id="fig-slide3">
+<a class="reference internal image-reference" href="_images/Slide3.png"><img alt="_images/Slide3.png" src="_images/Slide3.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Teledetección: Desafíos de la Observación Terrestre</span><a class="headerlink" href="#fig-slide3" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Ventajas del Aprendizaje Automático:</p>
-<p>El aprendizaje automático supera estos desafíos al modelar relaciones complejas entre las bandas espectrales y los objetos de interés, sin requerir que el usuario formule reglas explícitas. En su lugar, utiliza datos etiquetados de campo  para entrenar modelos, a estos datos etiqeutados de campo se los suele denominar “verdad terrestre”. A partir de estas etiquetas los algoritmos de aprendizaje automático:</p>
-<p><img alt="" src="_images/EtiquetaA.png" /> <img alt="" src="_images/EtiquetaB.png" /></p>
+<p>El aprendizaje automático supera estos desafíos al modelar relaciones complejas entre las bandas espectrales y los objetos de interés, sin requerir que el usuario formule reglas explícitas. En su lugar, utiliza datos etiquetados de campo  para entrenar modelos, a estos datos etiqeutados de campo se los suele denominar “verdad terrestre” (ver fig. <a class="reference internal" href="#fig-etiquetaa"><span class="std std-numref">Fig. 1.4</span></a> y fig. <a class="reference internal" href="#fig-etiquetab"><span class="std std-numref">Fig. 1.5</span></a>).</p>
+<figure class="align-default" id="fig-etiquetaa">
+<a class="reference internal image-reference" href="_images/EtiquetaA.png"><img alt="_images/EtiquetaA.png" src="_images/EtiquetaA.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Etiquetas o muestras de Entrenamiento de tipos de Suelo</span><a class="headerlink" href="#fig-etiquetaa" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-etiquetab">
+<a class="reference internal image-reference" href="_images/EtiquetaB.png"><img alt="_images/EtiquetaB.png" src="_images/EtiquetaB.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.5 </span><span class="caption-text">Etiquetas o muestras de Entrenamiento de Agua-No Agua.</span><a class="headerlink" href="#fig-etiquetab" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>A partir de estas etiquetas los algoritmos de aprendizaje automático (ver fig. <a class="reference internal" href="#fig-slide4"><span class="std std-numref">Fig. 1.6</span></a>):</p>
 <ul class="simple">
 <li><p>Aprenden <em>patrones espectrales</em>: es decir, Identifican combinaciones óptimas de bandas espectrales para clasificar materiales específicos, como agua o vegetación, a pesar del ruido.</p></li>
 <li><p><em>Se adaptan a la variabilidad</em>: Los modelos pueden generalizar patrones, tolerando pequeñas variaciones en los datos de entrada sin comprometer la precisión.</p></li>
 </ul>
+<figure class="align-default" id="fig-slide4">
+<a class="reference internal image-reference" href="_images/Slide4.png"><img alt="_images/Slide4.png" src="_images/Slide4.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.6 </span><span class="caption-text">Ventajas del Aprendizaje Automático.</span><a class="headerlink" href="#fig-slide4" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Un Enfoque Práctico:</p>
 <p>Por ejemplo, si el objetivo es detectar agua, sería ideal medir directamente las propiedades espectrales del agua en el campo. Sin embargo, debido al ruido y la complejidad inherente de los datos satelitales, un modelo de aprendizaje automático entrenado con datos de referencia puede inferir las reglas necesarias para identificar agua con alta precisión, incluso cuando las condiciones no son ideales.</p>
-<p>Conclusión: En el contexto de teledetección, el aprendizaje automático no solo simplifica el manejo de datos complejos y ruidosos, sino que también proporciona una robustez y adaptabilidad que los métodos tradicionales no pueden igualar. Este enfoque representa un cambio de paradigma: en lugar de tratar de definir manualmente las reglas de clasificación, delegamos esta tarea a algoritmos capaces de extraer patrones directamente de los datos.</p>
+<p><em>Conclusión:</em> En el contexto de teledetección, el aprendizaje automático no solo simplifica el manejo de datos complejos y ruidosos, sino que también proporciona una robustez y adaptabilidad que los métodos tradicionales no pueden igualar. Este enfoque representa un cambio de paradigma: en lugar de tratar de definir manualmente las reglas de clasificación, delegamos esta tarea a algoritmos capaces de extraer patrones directamente de los datos.</p>
 </section>
 <section id="clasificacion-y-aprendizaje-automatico-en-teledeteccion">
 <h2><span class="section-number">1.3. </span>Clasificación y aprendizaje automático en teledetección<a class="headerlink" href="#clasificacion-y-aprendizaje-automatico-en-teledeteccion" title="Link to this heading">#</a></h2>
-<p>El aprendizaje automático (en inglés <em>ML ó Machine learning</em>) ofrece dos enfoques principales para abordar problemas en teledetección: aprendizaje supervisado y no supervisado. Cada uno tiene aplicaciones específicas y ventajas según el caso de uso: Aprendizaje no supervisado y Aprendizaje supervisado.</p>
+<p>El aprendizaje automático (en inglés <em>ML ó Machine learning</em>) ofrece dos enfoques principales para abordar problemas en teledetección: aprendizaje supervisado y no supervisado. Cada uno tiene aplicaciones específicas y ventajas según el caso de uso: Aprendizaje no supervisado y Aprendizaje supervisado (ver fig. <a class="reference internal" href="#fig-slide6"><span class="std std-numref">Fig. 1.7</span></a>).</p>
+<figure class="align-default" id="fig-slide6">
+<a class="reference internal image-reference" href="_images/Slide6.png"><img alt="_images/Slide6.png" src="_images/Slide6.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.7 </span><span class="caption-text">Principales tipos de Aprendizaje Automático.</span><a class="headerlink" href="#fig-slide6" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <section id="aprendizaje-no-supervisado">
 <h3><span class="section-number">1.3.1. </span>Aprendizaje no supervisado<a class="headerlink" href="#aprendizaje-no-supervisado" title="Link to this heading">#</a></h3>
 <p>Este método implica proporcionar los datos al algoritmo sin etiquetas previas. Los algoritmos no supervisados agrupan los datos en categorías basadas en similitudes internas, como los valores de reflectancia en imágenes satelitales. Por ejemplo, algoritmos como k-means clustering o SNCC identifican agrupaciones de píxeles con características espectrales similares, pero no asignan significado alguno a esos grupos; esta tarea recae en el analista o en otro modelo.</p>
@@ -491,7 +531,7 @@ document.write(`
 <section id="aprendizaje-supervisado">
 <h3><span class="section-number">1.3.2. </span>Aprendizaje supervisado<a class="headerlink" href="#aprendizaje-supervisado" title="Link to this heading">#</a></h3>
 <p>El aprendizaje supervisado, por otro lado, requiere datos previamente etiquetados. Por ejemplo, para clasificar agua en una imagen satelital, es necesario identificar y etiquetar píxeles de muestra representativos de agua y no agua. Estos datos de entrenamiento alimentan al algoritmo, que aprende a generalizar y clasificar el resto de la imagen. Algoritmos como regresión logística, bosques aleatorios (random forest) y otros modelos de clasificación supervisada son ampliamente utilizados.</p>
-<p>En la práctica, la clasificación supervisada es la técnica predominante, ya que permite asignar etiquetas claras a cada píxel, crucial para cuantificaciones precisas y análisis detallados. Su flujo de trabajo típico incluye:</p>
+<p>En la práctica, la clasificación supervisada es la técnica predominante, ya que permite asignar etiquetas claras a cada píxel, crucial para cuantificaciones precisas y análisis detallados. Su flujo de trabajo típico incluye (ver fig. <a class="reference internal" href="#fig-workflow"><span class="std std-numref">Fig. 1.8</span></a>):</p>
 <ul class="simple">
 <li><p>Selección de de datos de entrenamiento</p></li>
 <li><p>Entrenamiento de un clasificador</p></li>
@@ -499,12 +539,23 @@ document.write(`
 <li><p>Evaluación de precisión</p></li>
 <li><p>Refinamiento iterativo mediante ajustes de parámetros o mejora de los datos de entrada</p></li>
 </ul>
-<p><img alt="" src="_images/Workflow.png" /></p>
+<figure class="align-default" id="fig-workflow">
+<a class="reference internal image-reference" href="_images/Workflow.png"><img alt="_images/Workflow.png" src="_images/Workflow.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.8 </span><span class="caption-text">Etiquetas o muestras de Entrenamiento de Agua-No Agua.</span><a class="headerlink" href="#fig-workflow" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Este enfoque, según <span id="id5">[]</span>, permite integrar algoritmos de Machine Learning en flujos de trabajo reproducibles e integra las partes principales que deberán ser consideradas en cada aplicación de algoritmos de machine learning (ML) a informacion geoespacial. El flujo será aplicado en distintos capítulos del presente libro.</p>
 </section>
 <section id="consideraciones-practicas">
 <h3><span class="section-number">1.3.3. </span>Consideraciones prácticas<a class="headerlink" href="#consideraciones-practicas" title="Link to this heading">#</a></h3>
 <p>Aunque el aprendizaje automático simplifica el manejo de datos complejos, no siempre es la mejor opción. Métodos tradicionales como los sistemas expertos, que emplean fórmulas derivadas de las propiedades físicas del terreno, son preferibles en ciertos casos, especialmente cuando se trabaja con pocos parámetros (bandas espectrales). Por ejemplo, el conjunto de datos global Global Surface Water, basado en un sistema experto, supera a los métodos de Aprendizaje automático en la detección de agua en imágenes Landsat a escala global.</p>
+<figure class="align-default" id="fig-slide7">
+<a class="reference internal image-reference" href="_images/Slide7.png"><img alt="_images/Slide7.png" src="_images/Slide7.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.9 </span><span class="caption-text">Sistemas Expertos ó Aprendizaje Automático.</span><a class="headerlink" href="#fig-slide7" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>La elección entre un sistema experto y Aprendizaje automático depende del problema en cuestión. Los sistemas expertos destacan por su transparencia y simplicidad en problemas bien definidos, mientras que el Aprendizaje automático se adapta mejor a datos complejos y ruidosos, descubriendo patrones ocultos sin necesidad de reglas explícitas.</p>
 </section>
 <section id="ejemplo-practico-clasificacion-binaria">
@@ -516,7 +567,13 @@ document.write(`
 <h3><span class="section-number">1.3.5. </span>Conclusión de la sección<a class="headerlink" href="#conclusion-de-la-seccion" title="Link to this heading">#</a></h3>
 <p>La mayoría de las aplicaciones de teledetección implican algún tipo de clasificación supervisada, ya que permiten convertir imágenes en mapas clasificados, útiles para responder preguntas clave como: ¿Qué porcentaje de la ciudad está cubierto por árboles? o ¿Cuál es el área urbanizada en crecimiento?</p>
 <p>Aunque ambos enfoques (supervisado y no supervisado) tienen un lugar en el análisis de teledetección, comprender sus fortalezas y limitaciones es esencial para elegir la estrategia adecuada en cada caso. Al final, la combinación de ambos métodos, junto con sistemas expertos, puede ofrecer resultados más robustos y confiables.</p>
-<p>El aprendizaje automático se ha convertido en una herramienta imprescindible en teledetección, particularmente para resolver problemas de clasificación. Una aplicación común es identificar qué píxeles en una imagen satelital representan cuerpos de agua y cuáles corresponden a otras superficies. Para abordar estas tareas, se han desarrollado diversos algoritmos, cada uno con fortalezas particulares. Entre ellos, destacan las Máquinas de Soporte Vectorial (SVM), los árboles de decisión y el algoritmo Random Forest, que han transformado la manera en que se procesan y analizan los datos satelitales.</p>
+<p>El aprendizaje automático se ha convertido en una herramienta imprescindible en teledetección, particularmente para resolver problemas de clasificación. Una aplicación común es identificar qué píxeles en una imagen satelital representan cuerpos de agua y cuáles corresponden a otras superficies. Para abordar estas tareas, se han desarrollado diversos algoritmos, cada uno con fortalezas particulares (ver fig. <a class="reference internal" href="#fig-slide9"><span class="std std-numref">Fig. 1.10</span></a>). Entre ellos, destacan las Máquinas de Soporte Vectorial (SVM), los árboles de decisión y el algoritmo Random Forest, que han transformado la manera en que se procesan y analizan los datos satelitales.</p>
+<figure class="align-default" id="fig-slide9">
+<a class="reference internal image-reference" href="_images/Slide9.png"><img alt="_images/Slide9.png" src="_images/Slide9.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.10 </span><span class="caption-text">Sistemas Expertos ó Aprendizaje Automático.</span><a class="headerlink" href="#fig-slide9" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Durante años, las Máquinas de Soporte Vectorial se posicionaron como una de las herramientas preferidas en teledetección, especialmente en problemas de clasificación binaria. Este algoritmo, conocido por su precisión, construye un hiperplano que separa de forma óptima dos clases de datos en un espacio multidimensional. Por ejemplo, en dos dimensiones, esta separación se traduce en una línea, mientras que en tres dimensiones, se convierte en un plano. El modelo aprende a clasificar datos a partir de ejemplos etiquetados, ajustando el hiperplano para maximizar la distancia entre las dos clases. Una vez entrenado, puede determinar la clase de un nuevo píxel simplemente evaluando en qué lado del hiperplano se encuentra. Sin embargo, a pesar de su efectividad en problemas simples, las SVM enfrentan limitaciones cuando se aplican a tareas que involucran múltiples clases, lo que redujo su protagonismo a medida que surgieron enfoques más versátiles.</p>
 <p>Con el tiempo, los árboles de decisión comenzaron a ganar terreno como una alternativa más flexible y adaptativa. A diferencia de las SVM, los árboles de decisión no se limitan a dos clases y son capaces de manejar problemas multiclase de forma natural. Este algoritmo utiliza un enfoque basado en reglas, en el que los datos son clasificados mediante un proceso de decisiones jerárquicas. Cada nodo en el árbol representa una condición, como un umbral de reflectancia, y las ramas llevan a diferentes resultados según las características de los datos. Al final, cada píxel es asignado a una clase con base en su recorrido por el árbol. Esta estructura no solo es eficaz, sino también intuitiva, ya que las reglas generadas por el modelo pueden interpretarse con facilidad. Además, su capacidad para realizar regresiones amplía su utilidad a problemas más complejos, como la estimación de rendimientos agrícolas. Sin embargo, su principal desafío radica en el sobreajuste: cuando un árbol se adapta demasiado a los datos de entrenamiento, pierde capacidad para generalizar en nuevos contextos.</p>
 <p>Para superar estas limitaciones, surgió Random Forest, un algoritmo que revolucionó el uso de los árboles de decisión mediante un enfoque de aprendizaje en conjunto. En lugar de construir un único árbol, Random Forest genera múltiples árboles independientes, cada uno entrenado con un subconjunto aleatorio de los datos. Si bien cada árbol puede ser propenso al sobreajuste, el algoritmo combina sus predicciones mediante un proceso de votación mayoritaria, logrando así un modelo final más robusto y preciso. Este enfoque, inspirado en la “sabiduría de las multitudes”, ha demostrado ser particularmente eficaz en teledetección, donde la diversidad de los datos suele complicar el análisis. Además de su capacidad para manejar ruido y datos complejos, Random Forest se adapta fácilmente a problemas multiclase, consolidándose como una herramienta versátil y confiable.</p>

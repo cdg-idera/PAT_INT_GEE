@@ -20,10 +20,15 @@ Otra definición es:
 
 > "La teledetección es el proceso de adquirir información sobre las propiedades de los objetos en la superficie terrestre sin estar en contacto físico con ellos. Esto se logra detectando y analizando la radiación reflejada o emitida por esos objetos, utilizando sensores montados en plataformas remotas, como satélites o aeronaves." {cite:t}`lillesand2015remote`
 
-![](imagenes/areasIA2.png)
+```{figure} imagenes/areasIA2.png
+:name: fig-areas
+:width: 90%
+
+Teledetección: Áreas de Aplicación.
+```
 
 
-Esta disciplina se ha convertido en una herramienta esencial para entender nuestro entorno y tomar decisiones fundamentadas en múltiples campos. Entre sus principales propósitos se encuentran:
+Esta disciplina se ha convertido en una herramienta esencial para entender nuestro entorno y tomar decisiones fundamentadas en múltiples campos. Entre sus principales propósitos se encuentran (ver fig. {numref}`fig-areas`):
 
 * La Generación de mapas de uso del suelo y cobertura del suelo (LULC, por sus siglas en inglés), una práctica clave para monitorear el crecimiento urbano, la planificación urbana sostenible y la identificación de cambios en el paisaje.
 
@@ -37,12 +42,16 @@ Además, gracias a las capacidades de procesamiento en la nube, podemos llevar a
 
 Como indicamos anteriormente este capítulo se enfocará en el uso del aprendizaje automático en teledetección y mostraremos un ejemplo en el cual aplicamos aprendizaje supervisado con árboles aleatorios o Random Forest. 
 
-![](imagenes/tele2.png)
+El aprendizaje automático se ha consolidado como una herramienta ideal para resolver problemas complejos en teledetección, principalmente porque aborda de manera eficiente la clasificación y detección de objetos o materiales en imágenes satelitales. Por ejemplo detectar vegetación, agua, edificios, carreteras, etc. (ver fig. {numref}`fig-tele2`). Estos problemas, como identificar tipos de cobertura terrestre o distinguir entre características específicas, presentan desafíos significativos cuando se intentan resolver mediante métodos analíticos tradicionales.
 
+```{figure} imagenes/tele2.png
+:name: fig-tele2
+:width: 100%
 
-El aprendizaje automático se ha consolidado como una herramienta ideal para resolver problemas complejos en teledetección, principalmente porque aborda de manera eficiente la clasificación y detección de objetos o materiales en imágenes satelitales (por ejemplo detectar vegetación, agua, edificios, carreteras). Estos problemas, como identificar tipos de cobertura terrestre o distinguir entre características específicas, presentan desafíos significativos cuando se intentan resolver mediante métodos analíticos tradicionales.
+Teledetección: Gráfico Simbólico
+```
 
-Existen algunos desafíos de los Datos de Observación Terrestre:
+Existen algunos desafíos de los Datos de Observación Terrestre (ver fig. {numref}`fig-slide3`):
 
 * Los datos satelitales, aunque ricos en información, están **inherentemente sujetos a ruido y variabilidad**:
 
@@ -52,25 +61,62 @@ Existen algunos desafíos de los Datos de Observación Terrestre:
 
 * **Dimensionalidad de los datos:** Las imágenes de teledetección suelen incluir múltiples bandas espectrales, lo que genera un espacio de características de alta dimensionalidad que dificulta la creación de reglas manuales para clasificar objetos con precisión.
 
+```{figure} imagenes/Slide3.png
+:name: fig-slide3
+:width: 100%
+
+Teledetección: Desafíos de la Observación Terrestre
+```
+
+
 Ventajas del Aprendizaje Automático:
 
-El aprendizaje automático supera estos desafíos al modelar relaciones complejas entre las bandas espectrales y los objetos de interés, sin requerir que el usuario formule reglas explícitas. En su lugar, utiliza datos etiquetados de campo  para entrenar modelos, a estos datos etiqeutados de campo se los suele denominar "verdad terrestre". A partir de estas etiquetas los algoritmos de aprendizaje automático:
+El aprendizaje automático supera estos desafíos al modelar relaciones complejas entre las bandas espectrales y los objetos de interés, sin requerir que el usuario formule reglas explícitas. En su lugar, utiliza datos etiquetados de campo  para entrenar modelos, a estos datos etiqeutados de campo se los suele denominar "verdad terrestre" (ver fig. {numref}`fig-etiquetaA` y fig. {numref}`fig-etiquetaB`). 
+```{figure} imagenes/EtiquetaA.png
+:name: fig-etiquetaA
+:width: 100%
 
-![](imagenes/EtiquetaA.png) ![](imagenes/EtiquetaB.png)
+Etiquetas o muestras de Entrenamiento de tipos de Suelo
+```
+
+```{figure} imagenes/EtiquetaB.png
+:name: fig-etiquetaB
+:width: 100%
+
+Etiquetas o muestras de Entrenamiento de Agua-No Agua.
+```
+
+A partir de estas etiquetas los algoritmos de aprendizaje automático (ver fig. {numref}`fig-Slide4`):
 
 * Aprenden *patrones espectrales*: es decir, Identifican combinaciones óptimas de bandas espectrales para clasificar materiales específicos, como agua o vegetación, a pesar del ruido.
 
 * *Se adaptan a la variabilidad*: Los modelos pueden generalizar patrones, tolerando pequeñas variaciones en los datos de entrada sin comprometer la precisión.
 
+```{figure} imagenes/Slide4.png
+:name: fig-Slide4
+:width: 100%
+
+Ventajas del Aprendizaje Automático.
+```
+
+
 Un Enfoque Práctico:
 
 Por ejemplo, si el objetivo es detectar agua, sería ideal medir directamente las propiedades espectrales del agua en el campo. Sin embargo, debido al ruido y la complejidad inherente de los datos satelitales, un modelo de aprendizaje automático entrenado con datos de referencia puede inferir las reglas necesarias para identificar agua con alta precisión, incluso cuando las condiciones no son ideales.
 
-Conclusión: En el contexto de teledetección, el aprendizaje automático no solo simplifica el manejo de datos complejos y ruidosos, sino que también proporciona una robustez y adaptabilidad que los métodos tradicionales no pueden igualar. Este enfoque representa un cambio de paradigma: en lugar de tratar de definir manualmente las reglas de clasificación, delegamos esta tarea a algoritmos capaces de extraer patrones directamente de los datos.
+*Conclusión:* En el contexto de teledetección, el aprendizaje automático no solo simplifica el manejo de datos complejos y ruidosos, sino que también proporciona una robustez y adaptabilidad que los métodos tradicionales no pueden igualar. Este enfoque representa un cambio de paradigma: en lugar de tratar de definir manualmente las reglas de clasificación, delegamos esta tarea a algoritmos capaces de extraer patrones directamente de los datos.
 
 ## Clasificación y aprendizaje automático en teledetección 
 
-El aprendizaje automático (en inglés *ML ó Machine learning*) ofrece dos enfoques principales para abordar problemas en teledetección: aprendizaje supervisado y no supervisado. Cada uno tiene aplicaciones específicas y ventajas según el caso de uso: Aprendizaje no supervisado y Aprendizaje supervisado. 
+El aprendizaje automático (en inglés *ML ó Machine learning*) ofrece dos enfoques principales para abordar problemas en teledetección: aprendizaje supervisado y no supervisado. Cada uno tiene aplicaciones específicas y ventajas según el caso de uso: Aprendizaje no supervisado y Aprendizaje supervisado (ver fig. {numref}`fig-Slide6`). 
+
+
+```{figure} imagenes/Slide6.png
+:name: fig-Slide6
+:width: 100%
+
+Principales tipos de Aprendizaje Automático.
+```
 
 ### Aprendizaje no supervisado 
 
@@ -82,7 +128,7 @@ Aunque el aprendizaje no supervisado es útil para encontrar patrones en datos c
  
 El aprendizaje supervisado, por otro lado, requiere datos previamente etiquetados. Por ejemplo, para clasificar agua en una imagen satelital, es necesario identificar y etiquetar píxeles de muestra representativos de agua y no agua. Estos datos de entrenamiento alimentan al algoritmo, que aprende a generalizar y clasificar el resto de la imagen. Algoritmos como regresión logística, bosques aleatorios (random forest) y otros modelos de clasificación supervisada son ampliamente utilizados.
 
-En la práctica, la clasificación supervisada es la técnica predominante, ya que permite asignar etiquetas claras a cada píxel, crucial para cuantificaciones precisas y análisis detallados. Su flujo de trabajo típico incluye:
+En la práctica, la clasificación supervisada es la técnica predominante, ya que permite asignar etiquetas claras a cada píxel, crucial para cuantificaciones precisas y análisis detallados. Su flujo de trabajo típico incluye (ver fig. {numref}`fig-workflow`):
 
 * Selección de de datos de entrenamiento 
 * Entrenamiento de un clasificador 
@@ -90,7 +136,14 @@ En la práctica, la clasificación supervisada es la técnica predominante, ya q
 * Evaluación de precisión 
 * Refinamiento iterativo mediante ajustes de parámetros o mejora de los datos de entrada 
 
-![](imagenes/Workflow.png)
+
+```{figure} imagenes/Workflow.png
+:name: fig-workflow
+:width: 100%
+
+Etiquetas o muestras de Entrenamiento de Agua-No Agua.
+```
+
 
 Este enfoque, según {cite:p}`reynoso2025flujo`, permite integrar algoritmos de Machine Learning en flujos de trabajo reproducibles e integra las partes principales que deberán ser consideradas en cada aplicación de algoritmos de machine learning (ML) a informacion geoespacial. El flujo será aplicado en distintos capítulos del presente libro.
 
@@ -98,6 +151,14 @@ Este enfoque, según {cite:p}`reynoso2025flujo`, permite integrar algoritmos de 
 ### Consideraciones prácticas
 
 Aunque el aprendizaje automático simplifica el manejo de datos complejos, no siempre es la mejor opción. Métodos tradicionales como los sistemas expertos, que emplean fórmulas derivadas de las propiedades físicas del terreno, son preferibles en ciertos casos, especialmente cuando se trabaja con pocos parámetros (bandas espectrales). Por ejemplo, el conjunto de datos global Global Surface Water, basado en un sistema experto, supera a los métodos de Aprendizaje automático en la detección de agua en imágenes Landsat a escala global.
+
+```{figure} imagenes/Slide7.png
+:name: fig-Slide7
+:width: 100%
+
+Sistemas Expertos ó Aprendizaje Automático.
+```
+
 
 La elección entre un sistema experto y Aprendizaje automático depende del problema en cuestión. Los sistemas expertos destacan por su transparencia y simplicidad en problemas bien definidos, mientras que el Aprendizaje automático se adapta mejor a datos complejos y ruidosos, descubriendo patrones ocultos sin necesidad de reglas explícitas.
 
@@ -113,7 +174,16 @@ La mayoría de las aplicaciones de teledetección implican algún tipo de clasif
 
 Aunque ambos enfoques (supervisado y no supervisado) tienen un lugar en el análisis de teledetección, comprender sus fortalezas y limitaciones es esencial para elegir la estrategia adecuada en cada caso. Al final, la combinación de ambos métodos, junto con sistemas expertos, puede ofrecer resultados más robustos y confiables.
 
-El aprendizaje automático se ha convertido en una herramienta imprescindible en teledetección, particularmente para resolver problemas de clasificación. Una aplicación común es identificar qué píxeles en una imagen satelital representan cuerpos de agua y cuáles corresponden a otras superficies. Para abordar estas tareas, se han desarrollado diversos algoritmos, cada uno con fortalezas particulares. Entre ellos, destacan las Máquinas de Soporte Vectorial (SVM), los árboles de decisión y el algoritmo Random Forest, que han transformado la manera en que se procesan y analizan los datos satelitales.
+El aprendizaje automático se ha convertido en una herramienta imprescindible en teledetección, particularmente para resolver problemas de clasificación. Una aplicación común es identificar qué píxeles en una imagen satelital representan cuerpos de agua y cuáles corresponden a otras superficies. Para abordar estas tareas, se han desarrollado diversos algoritmos, cada uno con fortalezas particulares (ver fig. {numref}`fig-Slide9`). Entre ellos, destacan las Máquinas de Soporte Vectorial (SVM), los árboles de decisión y el algoritmo Random Forest, que han transformado la manera en que se procesan y analizan los datos satelitales.
+
+
+```{figure} imagenes/Slide9.png
+:name: fig-Slide9
+:width: 100%
+
+Sistemas Expertos ó Aprendizaje Automático.
+```
+
 
 Durante años, las Máquinas de Soporte Vectorial se posicionaron como una de las herramientas preferidas en teledetección, especialmente en problemas de clasificación binaria. Este algoritmo, conocido por su precisión, construye un hiperplano que separa de forma óptima dos clases de datos en un espacio multidimensional. Por ejemplo, en dos dimensiones, esta separación se traduce en una línea, mientras que en tres dimensiones, se convierte en un plano. El modelo aprende a clasificar datos a partir de ejemplos etiquetados, ajustando el hiperplano para maximizar la distancia entre las dos clases. Una vez entrenado, puede determinar la clase de un nuevo píxel simplemente evaluando en qué lado del hiperplano se encuentra. Sin embargo, a pesar de su efectividad en problemas simples, las SVM enfrentan limitaciones cuando se aplican a tareas que involucran múltiples clases, lo que redujo su protagonismo a medida que surgieron enfoques más versátiles.
 

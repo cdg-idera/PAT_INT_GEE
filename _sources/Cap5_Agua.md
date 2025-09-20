@@ -21,6 +21,8 @@ Bien CREAMOS UN NUEVO SCRIPT denominado A001_RandomForest_CuerposDeAguaComahue
 
 Nuestra área de estudio será la región del Comahue principalmente la provincia del Neuquén y la de Rio negro. Vamos a crear nuestra región de estudio, nuestraregión de interés o ROI. 
 
+![](imagenes/km.png)
+
 ![](imagenes/p_3.png)
 
 Como no estamos interesados en los límites provinciales precisos de la provincia, debido a que queremos abarcar los rios que componen los limites naturales provinciales, 
@@ -219,7 +221,9 @@ es decir
 NDVI= (NIR−RED) / (NIR+RED)
 ```
 
-Asi de simple, es calcular un índice para una imagen satelital. Este acercamiento nos permite definir otros índices como: NDWI, MNDWI, LSWI
+Asi de simple, es calcular un índice para una imagen satelital. Este acercamiento nos permite definir otros índices como: NDWI, MNDWI, y otros mostrados en la Figura a continuación:
+
+![](imagenes/IndicesAgua.png)
 
 Luego, finalmente, la funcion devuelve nuestra imagen, a la cual le agregaremos estas banda calculada con el NDVI. 
 
@@ -230,11 +234,11 @@ Esta función se define para una imagen, luego calculará técnicamente el NDVI 
 
 Antes de ejecutar este código comprobamos que la colección de imágenes no cuenta inicialmente con este índice NDVI, y que solo luego de ejecutar el código es posible ver esta nuevo dato en cada imagen
 
--------------------------------------------------------------------------------
+![](imagenes/FalsoColor.png)
 
 Generaremos una imagen de FALSO COLOR ,  utilizando las bandas B5 (NIR), B4 (Red), y B3 (Green) del Sentinel-2 ,  que nos permitirá detectar agua y generar mas facilmente los puntos de entrenamiento
 
-Estoi permite detectar cuerpos de agua de manera efectiva debido a cómo el agua interactúa con la luz en estas longitudes de onda
+Esto permite detectar cuerpos de agua de manera efectiva debido a cómo el agua interactúa con la luz en estas longitudes de onda
 En un mapa con este esquema de falso color:
 
 - Ríos, lagos y océanos: Oscuros o negros.
@@ -251,7 +255,7 @@ Estos son los datos de Sentinel que vamos a utilizar para nuestro aprendizaje au
 Para aplicar la tecnica supervisada de random forest tendremos en cuenta el flujo de trabajo
 
 
-![alt text](imagenes/Workflow.png)
+![](imagenes/Workflow.png)
 
 ###  Entrenamiento 
 
