@@ -14,9 +14,15 @@ En un capítulo anterior utilizamos Random Forest para clasificar imágenes de S
 
 Para aplicar Maquinas de soporte vectorial, el flujo de trabajo es el mismo que utilizamos con Random Forest, con excepción de que en lugar de utilizar un clasificador de Random Forest, utilizaremos un clasificador de Maquina de Soporte Vectorial. En otras palabras, el cambio principal está en la etapa de entrenamiento del clasificador.
 
-Antes utilizaamos ee.Classifier.smileRandomForest(100), ahora utilizamos ee.Classifier.libsvm(). Libsvm significa "a library por support vector machine".
+Antes utilizaamos ee.Classifier.smileRandomForest(100), ahora utilizamos ee.Classifier.libsvm(). Libsvm significa "a library por support vector machine" (ver fig. {numref}`fig-POST_5`).
 
-![](imagenes/POST_5.png)
+```{figure} imagenes/POST_5.png
+:name: fig-POST_5
+:width: 100%
+
+Significado del acrónimo libSVM
+```
+
 
 ```javascript
 var s2 = ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED");
@@ -142,10 +148,16 @@ print('Consumers Accuracy:', testConfusionMatrix.consumersAccuracy() );
 En el script realizamos una evaluación de la exactitud, incluyendo la matriz de confusión. Obtenemos métricas de productor y consumidor y el coeficiente de Kappa, como en el script anterior.
 
 SVM es ideal para escenarios donde las clases no están claramente separadas linealmente. GEE es una poderosa herramienta para el análisis de datos espaciales y la clasificación de imágenes satelitales. 
-Sin embargo, hay ciertas limitaciones cuando trabajamos con algoritmos como SVM. Por ejemplo GEE *no esta diseñado para visualizar los hiperplanos que separan las clases en una clasificación*. 
+Sin embargo, hay ciertas limitaciones cuando trabajamos con algoritmos como SVM. Por ejemplo GEE *no esta diseñado para visualizar los hiperplanos que separan las clases en una clasificación* (ver fig. {numref}`fig-POST_7`). 
 Esto se debe a que el *enfoque principal de GEE es el procesamiento y el analisis de datos espaciales* no la visualizacion detallada de los resultados matematicos de los modelos de ML.
 
-![](imagenes/POST_7.png)
+
+```{figure} imagenes/POST_7.png
+:name: fig-POST_7
+:width: 100%
+
+Hiperplanos de SVM
+```
 
 Ademas cuando aplicamos una clasificacion multiclase, como en el caso de un problema con 5 clases, el uso de SVM puede tornarse un tanto engorroso. Esto se debe a que SVM manejan las clasificaciones multiclase
 dividiéndolas en multiples problemas de clasificiones binarias. Lo que aumenta la complejida del modelo y su interpretación. Si bien GEE puede efectuar la clasificación y devolver el mapa resultante, no proporcionará una visualización clara de cómo se generan o estructuran estos hiperplanos en el espacio de características.
@@ -271,8 +283,13 @@ print('Producers Accuracy:', testConfusionMatrix.producersAccuracy() );
 print('Consumers Accuracy:', testConfusionMatrix.consumersAccuracy() );
 ```
 
-![](imagenes/POST_6.png)
 
+```{figure} imagenes/POST_6.png
+:name: fig-POST_6
+:width: 100%
+
+Indicaciones para aplicar la plantilla de SVM
+```
 
 ## Arbol de Decisión
 
@@ -280,23 +297,38 @@ Ahora guardaremos nuevamente este script con otro nombre: Lab_004_DT_Rosario. DT
 
 Para aplicar esta técnica necesitamos cambiar el clasificador, borraremos el clasificador **libsvm()** y lo reemplazaremos por **smileCart()** 
 
-Es decir, ahora usamos ee.Classifier.smileCart() para aplicar un árbol de decisión. Como lo indica su documentación CART significa ´*Clasification and Regression Tree* *Árbol de Regresión y Clasificación* 
+Es decir, ahora usamos ee.Classifier.smileCart() para aplicar un árbol de decisión. Como lo indica su documentación CART significa ´*Clasification and Regression Tree* (ver fig. {numref}`fig-POST_8`) *Árbol de Regresión y Clasificación* 
 
-![](imagenes/POST_8.png)
+```{figure} imagenes/POST_8.png
+:name: fig-POST_8
+:width: 100%
+
+Acrónimo de CART
+```
 
 > **¿Qué es un árbol de decisión?** Es un modelo jerárquico que divide los datos en función de preguntas simples o nodos decisión, también llamadas condiciones, para clasificar cada pixel.
 
 >**Ventajas y aplicaciones:**
-Es fácil de interpretar y útil para entender cómo se toman las decisiones de clasificación. Extraemos las reglas del árbol con el comando classifier.explain(), que nos permite visualizar las condiciones utilizadas para clasificar.
+Es fácil de interpretar y útil para entender cómo se toman las decisiones de clasificación. Extraemos las reglas del árbol con el comando classifier.explain(), que nos permite visualizar las condiciones utilizadas para clasificar (ver fig. {numref}`fig-POST_10`).
 
 Calculamos su precsión 98.02 por ciento. Ahora agregaremo código para obtener las reglas del árbol de decisión entrenado, y para mostrar las reglas del árbol.
 
-![](imagenes/POST_10.png)
+```{figure} imagenes/POST_10.png
+:name: fig-POST_10
+:width: 100%
+
+Arbol de Decisión con CART
+```
 
 Como mencionamos en el video 2 de esta serie, el árbol de decisión es útil porque condensa la información del modelo entrenado. 
 
-![](imagenes/POST_9.png)
 
+```{figure} imagenes/POST_9.png
+:name: fig-POST_9
+:width: 100%
+
+Template de SmileCART
+```
 
 > **GEE (JavaScript)**
 ```javascript
@@ -408,9 +440,15 @@ print('Número total de píxeles válidos por banda:', pixelCount);
 ## Gráfico del Arbol de decisión con Google Colab
 
 
-Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.
+Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot (ver fig. {numref}`fig-POST_11`) y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.
 
-![](imagenes/POST_11.png)
+
+```{figure} imagenes/POST_11.png
+:name: fig-POST_11
+:width: 100%
+
+Reglas del Arbol en formato dot 
+```
 
 
 A continuación se muestra el código Python que permite graficar un árbol de decisión, dado el archivo .dot. 
@@ -464,7 +502,12 @@ Cada vez que emplees árbol de decisión en GEE podrás utilizar este archivo co
 Enlace al archivo en Google Colab: https://colab.research.google.com/drive/1AdTW_jUPDzoIhBjeoGgWkSdsh1Ke6SLy?usp=sharing
 
 
-![](imagenes/POST_6.png)
+```{figure} imagenes/POST_6.png
+:name: fig-POST_6
+:width: 100%
+
+Tips para apicar SVM con el script como template
+```
 
 Los árboles de decisión son una herramienta sencilla y poderosa, especialmente para tareas donde la *interpretabilidad es importante*. Comparados con Random Forest y SVM, ofrecen una estructura clara de cómo se toman las decisiones.
 
@@ -476,25 +519,55 @@ Primero podemos identificar las principales partes de un árbol de decisión:
 
 Este árbol tiene 7 **nodos de decisión**, donde cada nodo de decisión tiene una condición lógica o booleana "menor igual que", basado en un umbral de las bandas. 
 
-![](imagenes/POST_16.png)
+```{figure} imagenes/POST_16.png
+:name: fig-POST_16
+:width: 100%
 
-![](imagenes/NDhojasArbolDecisionLab004.png)
+Nodo de Decisión: Definición
+```
+```{figure} imagenes/NDhojasArbolDecisionLab004.png
+:name: fig-NDhojasArbolDecisionLab004
+:width: 100%
+
+Nodo de Decisión: Ejemplo
+```
 
 Por ejemplo la **raíz del árbol** es el primer nodo situado en la parte superior:
 
+```{figure} imagenes/POST_17.png
+:name: fig-POST_17
+:width: 100%
 
-![](imagenes/POST_17.png)
+Raíz del árbol de decisión
+```
 
+```{figure} imagenes/raizArbolDecisionLab004.png
+:name: fig-raizArbolDecisionLab004
+:width: 100%
 
-![](imagenes/raizArbolDecisionLab004.png)
+Raíz del árbol de decisión: Ejemplo
+```
 
 Este nodo, el nodo raíz, tiene una condición: B6 <= 1095.0.
 
-![](imagenes/POST_15.png)
+
+```{figure} imagenes/POST_15.png
+:name: fig-POST_15
+:width: 100%
+
+Hoja de un árbol de decisión: Definición
+```
+
 
 El árbol además de tener siete **nodos de decisión** cuenta con 8 hojas. Cada hoja representa una clasificación a una de las 5 clases de nuestra clasificación multiclase de Rosario.
 
-![](imagenes/hojasArbolDecisionLab004.png)
+```{figure} imagenes/hojasArbolDecisionLab004.png
+:name: fig-hojasArbolDecisionLab004
+:width: 100%
+
+Hoja de un árbol de decisión: Ejemplo
+```
+
 
 Para clasificar una imagen satelital, una vez entrenado este clasificador de arbol de decisión CART, debemos tomar cada pixel y analizar la clase que le corresponde, es decir el árbol se aplica a cada pixel de la imagen satelital. 
 
@@ -528,7 +601,12 @@ En cada ejemplo, mostraremos el píxel al cual determinaremos la clase a la que 
 
 Para cada píxel realizaremos un recorrido del arbol considerando los valores de las bandas espectrales en el pixel:
 
-![](imagenes/POST_1.png)
+```{figure} imagenes/POST_1.png
+:name: fig-POST_1
+:width: 100%
+
+```
+
 
 ### Ejemplo 1 clase 0 agua
 
@@ -540,7 +618,12 @@ El recorrido del arbol para clasificar este píxel es corto y consiste solo de u
 
 Seguimos por la rama true: La clase predicha para este píxel es clase 0.
 
-![](imagenes/Pixel78_Cat0.png)
+```{figure} imagenes/Pixel78_Cat0.png
+:name: fig-Pixel78_Cat0
+:width: 100%
+
+```
+
 
 ### Ejemplo 2 clase 1 urbano
 
@@ -566,7 +649,13 @@ Tercera evaluación:
 
 Seguimos por la rama true: La clase predicha para este píxel es clase 1.
 
-![](imagenes/Pixel41_Cat1.png)
+
+```{figure} imagenes/Pixel41_Cat1.png
+:name: fig-Pixel41_Cat1
+:width: 100%
+
+```
+
 
 ### Ejemplo 3 clase 2 cultivos
 
@@ -596,8 +685,12 @@ Primera evaluación:
 
 Seguimos por la rama true: La clase predicha para este píxel es clase 2.
 
+```{figure} imagenes/Pixel109_Cat2.png
+:name: fig-Pixel109_Cat2
+:width: 100%
 
-![](imagenes/Pixel109_Cat2.png)
+```
+
 
 ### Ejemplo 4 clase 3 bosque
 
@@ -623,7 +716,12 @@ Tercera evaluación:
 
 Seguimos por la rama true: La clase predicha para este píxel es clase 3
 
-![](imagenes/Pixel159_Cat3.png)
+```{figure} imagenes/Pixel159_Cat3.png
+:name: fig-Pixel159_Cat3
+:width: 100%
+
+```
+
 
 ### Ejemplo 5 clase 4 suelo desnudo
 
@@ -655,8 +753,11 @@ Cuarta evaluación:
 
 Seguimos por la rama falso: La clase predicha para este píxel es clase 4.
 
-![](imagenes/Pixel115_Cat4.png)
+```{figure} imagenes/Pixel115_Cat4.png
+:name: fig-Pixel115_Cat4
+:width: 100%
 
+```
 
 ## Recursos
 
@@ -673,11 +774,17 @@ Hemos explorado cómo aplicar técnicas de machine learning, una rama clave de l
 
 Sin embargo, este es solo el comienzo de las posibilidades. Por ejemplo, el ajuste de hiperparámetros es una tarea crucial para optimizar el rendimiento de los clasificadores, y plataformas como Google Colab nos ofrecen un entorno accesible y potente para explorar estas técnicas con recursos computacionales avanzados. Además, conceptos como la *detección de cambios* o la creación de *series de tiempo* permiten un análisis mucho más dinámico y profundo. Estas herramientas son fundamentales para comprender fenómenos como el crecimiento urbano, la deforestación o los impactos de eventos extremos como inundaciones, mientras que los paneles interactivos, con barras deslizantes o comparaciones visuales, facilitan una mejor comunicación de resultados, haciéndolos accesibles para una audiencia más amplia.
 
+
+```{figure} imagenes/POST_14.png
+:name: fig-POST_14
+:width: 100%
+
+Serie de tiempo: Tema de próximos capítulos
+```
+
 En otras posibilidades, podemos analizar *imágenes satelitales nocturnas*, un recurso valioso para explorar patrones y actividades humanas que solo se manifiestan de noche, como la iluminación artificial en áreas urbanas. Las imágenes de luz nocturna proporcionan información relevante sobre la urbanización, el uso de la tierra y el desarrollo económico. A través de estas imágenes, es posible realizar estudios sobre la expansión urbana, monitorear el comportamiento de las actividades industriales o incluso analizar la distribución de la pobreza en diferentes regiones. De hecho, se ha demostrado que las luces nocturnas pueden ser un indicador confiable de la actividad económica y social, lo que abre nuevas oportunidades para aplicar machine learning y técnicas de clasificación en este tipo de datos.
 
 Más allá de estas herramientas, también debemos reconocer el impacto de los productos globales que integran machine learning y sistemas expertos, como OpenBuilding V3, Global Surface Water, TerraClimate y otros conjuntos de datos clave. Estos productos no solo nos permiten realizar análisis geoespaciales detallados, sino que también simplifican tareas complejas, como el estudio de tendencias climáticas o la evaluación de la urbanización. Por ejemplo, *Global Surface Water* proporciona un monitoreo detallado de los cuerpos de agua desde 1984, mientras que *TerraClimate* facilita el análisis de variables climáticas a lo largo del tiempo. El uso de estos recursos combina el poder del aprendizaje automático con la democratización de datos geoespaciales, permitiendo a más personas y organizaciones participar en el análisis y toma de decisiones informadas.
-
-![](imagenes/POST_14.png)
 
 Estamos en un *momento histórico donde el acceso a imágenes satelitales y datos geoespaciales se ha expandido enormemente*, abriendo la puerta a un futuro prometedor. La posibilidad de trabajar con imágenes de mayor resolución y precisión en un futuro cercano potenciará aún más las capacidades que estamos desarrollando ahora. Este enfoque progresivo y escalonado es clave: cada concepto y herramienta que integramos se convierte en *un peldaño más en esta espiral de conocimiento*, que nos permitirá abordar desafíos más complejos con confianza.
 

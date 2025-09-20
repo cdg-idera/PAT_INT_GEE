@@ -422,8 +422,13 @@ y Arboles de Decisión.</p>
 <h2><span class="section-number">4.2. </span>Máquina de soporte vectorial.<a class="headerlink" href="#maquina-de-soporte-vectorial" title="Link to this heading">#</a></h2>
 <p>En un capítulo anterior utilizamos Random Forest para clasificar imágenes de Sentinel-2 en  el área metropolitana de Rosario, para ello creamos el script GEE: Lab_002_RandomForest_Rosario. Accederemos a dicho script y guardaremos una copia del mismo, que renombraremos a Lab_003_SVM_Rosario.</p>
 <p>Para aplicar Maquinas de soporte vectorial, el flujo de trabajo es el mismo que utilizamos con Random Forest, con excepción de que en lugar de utilizar un clasificador de Random Forest, utilizaremos un clasificador de Maquina de Soporte Vectorial. En otras palabras, el cambio principal está en la etapa de entrenamiento del clasificador.</p>
-<p>Antes utilizaamos ee.Classifier.smileRandomForest(100), ahora utilizamos ee.Classifier.libsvm(). Libsvm significa “a library por support vector machine”.</p>
-<p><img alt="" src="_images/POST_5.png" /></p>
+<p>Antes utilizaamos ee.Classifier.smileRandomForest(100), ahora utilizamos ee.Classifier.libsvm(). Libsvm significa “a library por support vector machine” (ver fig. <a class="reference internal" href="#fig-post-5"><span class="std std-numref">Fig. 4.1</span></a>).</p>
+<figure class="align-default" id="fig-post-5">
+<a class="reference internal image-reference" href="_images/POST_5.png"><img alt="_images/POST_5.png" src="_images/POST_5.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.1 </span><span class="caption-text">Significado del acrónimo libSVM</span><a class="headerlink" href="#fig-post-5" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_SR_HARMONIZED&quot;</span><span class="p">);</span>
 <span class="w"> </span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">s2</span>
@@ -544,9 +549,14 @@ y Arboles de Decisión.</p>
 <p>¿Qué es SVM? Es un clasificador que busca encontrar un hiperplano óptimo que separe los datos en clases. (esto fue explicado en el capítulo 1). Luego de este, cambio no hay nada mas que hacer para obtener la clasificación, simplemente guardar y volver a ejecutar.</p>
 <p>En el script realizamos una evaluación de la exactitud, incluyendo la matriz de confusión. Obtenemos métricas de productor y consumidor y el coeficiente de Kappa, como en el script anterior.</p>
 <p>SVM es ideal para escenarios donde las clases no están claramente separadas linealmente. GEE es una poderosa herramienta para el análisis de datos espaciales y la clasificación de imágenes satelitales.
-Sin embargo, hay ciertas limitaciones cuando trabajamos con algoritmos como SVM. Por ejemplo GEE <em>no esta diseñado para visualizar los hiperplanos que separan las clases en una clasificación</em>.
+Sin embargo, hay ciertas limitaciones cuando trabajamos con algoritmos como SVM. Por ejemplo GEE <em>no esta diseñado para visualizar los hiperplanos que separan las clases en una clasificación</em> (ver fig. <a class="reference internal" href="#fig-post-7"><span class="std std-numref">Fig. 4.2</span></a>).
 Esto se debe a que el <em>enfoque principal de GEE es el procesamiento y el analisis de datos espaciales</em> no la visualizacion detallada de los resultados matematicos de los modelos de ML.</p>
-<p><img alt="" src="_images/POST_7.png" /></p>
+<figure class="align-default" id="fig-post-7">
+<a class="reference internal image-reference" href="_images/POST_7.png"><img alt="_images/POST_7.png" src="_images/POST_7.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.2 </span><span class="caption-text">Hiperplanos de SVM</span><a class="headerlink" href="#fig-post-7" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Ademas cuando aplicamos una clasificacion multiclase, como en el caso de un problema con 5 clases, el uso de SVM puede tornarse un tanto engorroso. Esto se debe a que SVM manejan las clasificaciones multiclase
 dividiéndolas en multiples problemas de clasificiones binarias. Lo que aumenta la complejida del modelo y su interpretación. Si bien GEE puede efectuar la clasificación y devolver el mapa resultante, no proporcionará una visualización clara de cómo se generan o estructuran estos hiperplanos en el espacio de características.</p>
 <blockquote>
@@ -669,25 +679,45 @@ dividiéndolas en multiples problemas de clasificiones binarias. Lo que aumenta 
 <span class="nx">print</span><span class="p">(</span><span class="s1">&#39;Consumers Accuracy:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">consumersAccuracy</span><span class="p">()</span><span class="w"> </span><span class="p">);</span>
 </pre></div>
 </div>
-<p><img alt="" src="_images/POST_6.png" /></p>
+<figure class="align-default" id="fig-post-6">
+<a class="reference internal image-reference" href="_images/POST_6.png"><img alt="_images/POST_6.png" src="_images/POST_6.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.3 </span><span class="caption-text">Indicaciones para aplicar la plantilla de SVM</span><a class="headerlink" href="#fig-post-6" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="arbol-de-decision">
 <h2><span class="section-number">4.3. </span>Arbol de Decisión<a class="headerlink" href="#arbol-de-decision" title="Link to this heading">#</a></h2>
 <p>Ahora guardaremos nuevamente este script con otro nombre: Lab_004_DT_Rosario. DT son las siglas de <em>árbol de decisión</em> o <em>decision tree</em>.</p>
 <p>Para aplicar esta técnica necesitamos cambiar el clasificador, borraremos el clasificador <strong>libsvm()</strong> y lo reemplazaremos por <strong>smileCart()</strong></p>
-<p>Es decir, ahora usamos ee.Classifier.smileCart() para aplicar un árbol de decisión. Como lo indica su documentación CART significa ´<em>Clasification and Regression Tree</em> <em>Árbol de Regresión y Clasificación</em></p>
-<p><img alt="" src="_images/POST_8.png" /></p>
+<p>Es decir, ahora usamos ee.Classifier.smileCart() para aplicar un árbol de decisión. Como lo indica su documentación CART significa ´<em>Clasification and Regression Tree</em> (ver fig. <a class="reference internal" href="#fig-post-8"><span class="std std-numref">Fig. 4.4</span></a>) <em>Árbol de Regresión y Clasificación</em></p>
+<figure class="align-default" id="fig-post-8">
+<a class="reference internal image-reference" href="_images/POST_8.png"><img alt="_images/POST_8.png" src="_images/POST_8.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.4 </span><span class="caption-text">Acrónimo de CART</span><a class="headerlink" href="#fig-post-8" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <blockquote>
 <div><p><strong>¿Qué es un árbol de decisión?</strong> Es un modelo jerárquico que divide los datos en función de preguntas simples o nodos decisión, también llamadas condiciones, para clasificar cada pixel.</p>
 </div></blockquote>
 <blockquote>
 <div><p><strong>Ventajas y aplicaciones:</strong>
-Es fácil de interpretar y útil para entender cómo se toman las decisiones de clasificación. Extraemos las reglas del árbol con el comando classifier.explain(), que nos permite visualizar las condiciones utilizadas para clasificar.</p>
+Es fácil de interpretar y útil para entender cómo se toman las decisiones de clasificación. Extraemos las reglas del árbol con el comando classifier.explain(), que nos permite visualizar las condiciones utilizadas para clasificar (ver fig. <a class="reference internal" href="#fig-post-10"><span class="std std-numref">Fig. 4.5</span></a>).</p>
 </div></blockquote>
 <p>Calculamos su precsión 98.02 por ciento. Ahora agregaremo código para obtener las reglas del árbol de decisión entrenado, y para mostrar las reglas del árbol.</p>
-<p><img alt="" src="_images/POST_10.png" /></p>
+<figure class="align-default" id="fig-post-10">
+<a class="reference internal image-reference" href="_images/POST_10.png"><img alt="_images/POST_10.png" src="_images/POST_10.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.5 </span><span class="caption-text">Arbol de Decisión con CART</span><a class="headerlink" href="#fig-post-10" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Como mencionamos en el video 2 de esta serie, el árbol de decisión es útil porque condensa la información del modelo entrenado.</p>
-<p><img alt="" src="_images/POST_9.png" /></p>
+<figure class="align-default" id="fig-post-9">
+<a class="reference internal image-reference" href="_images/POST_9.png"><img alt="_images/POST_9.png" src="_images/POST_9.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.6 </span><span class="caption-text">Template de SmileCART</span><a class="headerlink" href="#fig-post-9" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <blockquote>
 <div><p><strong>GEE (JavaScript)</strong></p>
 </div></blockquote>
@@ -799,8 +829,13 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 </section>
 <section id="grafico-del-arbol-de-decision-con-google-colab">
 <h2><span class="section-number">4.4. </span>Gráfico del Arbol de decisión con Google Colab<a class="headerlink" href="#grafico-del-arbol-de-decision-con-google-colab" title="Link to this heading">#</a></h2>
-<p>Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.</p>
-<p><img alt="" src="_images/POST_11.png" /></p>
+<p>Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot (ver fig. <a class="reference internal" href="#fig-post-11"><span class="std std-numref">Fig. 4.7</span></a>) y abriremos un archivo nuevo en Google colab que nos permitirá dado el archivo dot, graficar el mismo y ver su formato árbol.</p>
+<figure class="align-default" id="fig-post-11">
+<a class="reference internal image-reference" href="_images/POST_11.png"><img alt="_images/POST_11.png" src="_images/POST_11.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.7 </span><span class="caption-text">Reglas del Arbol en formato dot</span><a class="headerlink" href="#fig-post-11" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>A continuación se muestra el código Python que permite graficar un árbol de decisión, dado el archivo .dot.</p>
 <blockquote>
 <div><p><strong>Colab (Python)</strong></p>
@@ -849,7 +884,12 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 </div>
 <p>Cada vez que emplees árbol de decisión en GEE podrás utilizar este archivo colab para graficar el árbol del clasificador entrenado. Simplemente deberás modificar el archivo .dot, es decir modificar el contendio de la vairalbe <strong>dot_data</strong> y ejecutar cada chunk de código.</p>
 <p>Enlace al archivo en Google Colab: <a class="reference external" href="https://colab.research.google.com/drive/1AdTW_jUPDzoIhBjeoGgWkSdsh1Ke6SLy?usp=sharing">https://colab.research.google.com/drive/1AdTW_jUPDzoIhBjeoGgWkSdsh1Ke6SLy?usp=sharing</a></p>
-<p><img alt="" src="_images/POST_6.png" /></p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="_images/POST_6.png"><img alt="_images/POST_6.png" src="_images/POST_6.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.8 </span><span class="caption-text">Tips para apicar SVM con el script como template</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Los árboles de decisión son una herramienta sencilla y poderosa, especialmente para tareas donde la <em>interpretabilidad es importante</em>. Comparados con Random Forest y SVM, ofrecen una estructura clara de cómo se toman las decisiones.</p>
 <p>Ahora que hemos aplicado el algoritmo de aprendizaje automático de Arboles de Decisión al área metropolitana de Rosario, podemos analizar el árbol de decisión</p>
 </section>
@@ -857,15 +897,45 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <h2><span class="section-number">4.5. </span>Identificando los elementos del árbol de decisión<a class="headerlink" href="#identificando-los-elementos-del-arbol-de-decision" title="Link to this heading">#</a></h2>
 <p>Primero podemos identificar las principales partes de un árbol de decisión:</p>
 <p>Este árbol tiene 7 <strong>nodos de decisión</strong>, donde cada nodo de decisión tiene una condición lógica o booleana “menor igual que”, basado en un umbral de las bandas.</p>
-<p><img alt="" src="_images/POST_16.png" /></p>
-<p><img alt="" src="_images/NDhojasArbolDecisionLab004.png" /></p>
+<figure class="align-default" id="fig-post-16">
+<a class="reference internal image-reference" href="_images/POST_16.png"><img alt="_images/POST_16.png" src="_images/POST_16.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.9 </span><span class="caption-text">Nodo de Decisión: Definición</span><a class="headerlink" href="#fig-post-16" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-ndhojasarboldecisionlab004">
+<a class="reference internal image-reference" href="_images/NDhojasArbolDecisionLab004.png"><img alt="_images/NDhojasArbolDecisionLab004.png" src="_images/NDhojasArbolDecisionLab004.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.10 </span><span class="caption-text">Nodo de Decisión: Ejemplo</span><a class="headerlink" href="#fig-ndhojasarboldecisionlab004" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Por ejemplo la <strong>raíz del árbol</strong> es el primer nodo situado en la parte superior:</p>
-<p><img alt="" src="_images/POST_17.png" /></p>
-<p><img alt="" src="_images/raizArbolDecisionLab004.png" /></p>
+<figure class="align-default" id="fig-post-17">
+<a class="reference internal image-reference" href="_images/POST_17.png"><img alt="_images/POST_17.png" src="_images/POST_17.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.11 </span><span class="caption-text">Raíz del árbol de decisión</span><a class="headerlink" href="#fig-post-17" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-raizarboldecisionlab004">
+<a class="reference internal image-reference" href="_images/raizArbolDecisionLab004.png"><img alt="_images/raizArbolDecisionLab004.png" src="_images/raizArbolDecisionLab004.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.12 </span><span class="caption-text">Raíz del árbol de decisión: Ejemplo</span><a class="headerlink" href="#fig-raizarboldecisionlab004" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Este nodo, el nodo raíz, tiene una condición: B6 &lt;= 1095.0.</p>
-<p><img alt="" src="_images/POST_15.png" /></p>
+<figure class="align-default" id="fig-post-15">
+<a class="reference internal image-reference" href="_images/POST_15.png"><img alt="_images/POST_15.png" src="_images/POST_15.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.13 </span><span class="caption-text">Hoja de un árbol de decisión: Definición</span><a class="headerlink" href="#fig-post-15" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>El árbol además de tener siete <strong>nodos de decisión</strong> cuenta con 8 hojas. Cada hoja representa una clasificación a una de las 5 clases de nuestra clasificación multiclase de Rosario.</p>
-<p><img alt="" src="_images/hojasArbolDecisionLab004.png" /></p>
+<figure class="align-default" id="fig-hojasarboldecisionlab004">
+<a class="reference internal image-reference" href="_images/hojasArbolDecisionLab004.png"><img alt="_images/hojasArbolDecisionLab004.png" src="_images/hojasArbolDecisionLab004.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.14 </span><span class="caption-text">Hoja de un árbol de decisión: Ejemplo</span><a class="headerlink" href="#fig-hojasarboldecisionlab004" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Para clasificar una imagen satelital, una vez entrenado este clasificador de arbol de decisión CART, debemos tomar cada pixel y analizar la clase que le corresponde, es decir el árbol se aplica a cada pixel de la imagen satelital.</p>
 <p>Hemos calculado la cantidad de pixel por banda con este código:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Contar píxeles válidos por banda</span>
@@ -892,7 +962,9 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <li><p>a la derecha los valores de cada una de sus bandas.</p></li>
 </ul>
 <p>Para cada píxel realizaremos un recorrido del arbol considerando los valores de las bandas espectrales en el pixel:</p>
-<p><img alt="" src="_images/POST_1.png" /></p>
+<figure class="align-default" id="fig-post-1">
+<a class="reference internal image-reference" href="_images/POST_1.png"><img alt="_images/POST_1.png" src="_images/POST_1.png" style="width: 100%;" /></a>
+</figure>
 <section id="ejemplo-1-clase-0-agua">
 <h3><span class="section-number">4.6.1. </span>Ejemplo 1 clase 0 agua<a class="headerlink" href="#ejemplo-1-clase-0-agua" title="Link to this heading">#</a></h3>
 <p>El recorrido del arbol para clasificar este píxel es corto y consiste solo de una evaluación:</p>
@@ -902,7 +974,9 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <li><p>Evaluación: 521 &lt;= 1095.5 se evalúa a true, verdadero.</p></li>
 </ul>
 <p>Seguimos por la rama true: La clase predicha para este píxel es clase 0.</p>
-<p><img alt="" src="_images/Pixel78_Cat0.png" /></p>
+<figure class="align-default" id="fig-pixel78-cat0">
+<a class="reference internal image-reference" href="_images/Pixel78_Cat0.png"><img alt="_images/Pixel78_Cat0.png" src="_images/Pixel78_Cat0.png" style="width: 100%;" /></a>
+</figure>
 </section>
 <section id="ejemplo-2-clase-1-urbano">
 <h3><span class="section-number">4.6.2. </span>Ejemplo 2 clase 1 urbano<a class="headerlink" href="#ejemplo-2-clase-1-urbano" title="Link to this heading">#</a></h3>
@@ -926,7 +1000,9 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <li><p>Evaluación: 2416 &lt;= 2879.25 true</p></li>
 </ul>
 <p>Seguimos por la rama true: La clase predicha para este píxel es clase 1.</p>
-<p><img alt="" src="_images/Pixel41_Cat1.png" /></p>
+<figure class="align-default" id="fig-pixel41-cat1">
+<a class="reference internal image-reference" href="_images/Pixel41_Cat1.png"><img alt="_images/Pixel41_Cat1.png" src="_images/Pixel41_Cat1.png" style="width: 100%;" /></a>
+</figure>
 </section>
 <section id="ejemplo-3-clase-2-cultivos">
 <h3><span class="section-number">4.6.3. </span>Ejemplo 3 clase 2 cultivos<a class="headerlink" href="#ejemplo-3-clase-2-cultivos" title="Link to this heading">#</a></h3>
@@ -950,7 +1026,9 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <li><p>Evalución: 351 &lt;= 625.00 true ,</p></li>
 </ul>
 <p>Seguimos por la rama true: La clase predicha para este píxel es clase 2.</p>
-<p><img alt="" src="_images/Pixel109_Cat2.png" /></p>
+<figure class="align-default" id="fig-pixel109-cat2">
+<a class="reference internal image-reference" href="_images/Pixel109_Cat2.png"><img alt="_images/Pixel109_Cat2.png" src="_images/Pixel109_Cat2.png" style="width: 100%;" /></a>
+</figure>
 </section>
 <section id="ejemplo-4-clase-3-bosque">
 <h3><span class="section-number">4.6.4. </span>Ejemplo 4 clase 3 bosque<a class="headerlink" href="#ejemplo-4-clase-3-bosque" title="Link to this heading">#</a></h3>
@@ -974,7 +1052,9 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <li><p>Evaluación: 1388 &lt;= 1879.5, verdadero</p></li>
 </ul>
 <p>Seguimos por la rama true: La clase predicha para este píxel es clase 3</p>
-<p><img alt="" src="_images/Pixel159_Cat3.png" /></p>
+<figure class="align-default" id="fig-pixel159-cat3">
+<a class="reference internal image-reference" href="_images/Pixel159_Cat3.png"><img alt="_images/Pixel159_Cat3.png" src="_images/Pixel159_Cat3.png" style="width: 100%;" /></a>
+</figure>
 </section>
 <section id="ejemplo-5-clase-4-suelo-desnudo">
 <h3><span class="section-number">4.6.5. </span>Ejemplo 5 clase 4 suelo desnudo<a class="headerlink" href="#ejemplo-5-clase-4-suelo-desnudo" title="Link to this heading">#</a></h3>
@@ -1004,7 +1084,9 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <li><p>Evaluación: 3756 &lt;= 2910, falso</p></li>
 </ul>
 <p>Seguimos por la rama falso: La clase predicha para este píxel es clase 4.</p>
-<p><img alt="" src="_images/Pixel115_Cat4.png" /></p>
+<figure class="align-default" id="fig-pixel115-cat4">
+<a class="reference internal image-reference" href="_images/Pixel115_Cat4.png"><img alt="_images/Pixel115_Cat4.png" src="_images/Pixel115_Cat4.png" style="width: 100%;" /></a>
+</figure>
 </section>
 </section>
 <section id="recursos">
@@ -1021,9 +1103,14 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 <h2><span class="section-number">4.8. </span>Cierre e Incentivos<a class="headerlink" href="#cierre-e-incentivos" title="Link to this heading">#</a></h2>
 <p>Hemos explorado cómo aplicar técnicas de machine learning, una rama clave de la inteligencia artificial, para abordar la clasificación de imágenes satelitales, centrándonos en herramientas como árboles de decisión, Random Forest y máquinas de soporte vectorial (SVM). Estas técnicas permiten no solo clasificar imágenes en múltiples clases, sino también realizar tareas más específicas como clasificación binaria, generando insights valiosos para distintos campos. A lo largo de este recorrido, revisamos el flujo de trabajo completo, incorporando métricas esenciales como la precisión general, la precisión del productor y del consumidor, lo que refuerza nuestra capacidad de evaluar y mejorar la calidad de nuestros modelos.</p>
 <p>Sin embargo, este es solo el comienzo de las posibilidades. Por ejemplo, el ajuste de hiperparámetros es una tarea crucial para optimizar el rendimiento de los clasificadores, y plataformas como Google Colab nos ofrecen un entorno accesible y potente para explorar estas técnicas con recursos computacionales avanzados. Además, conceptos como la <em>detección de cambios</em> o la creación de <em>series de tiempo</em> permiten un análisis mucho más dinámico y profundo. Estas herramientas son fundamentales para comprender fenómenos como el crecimiento urbano, la deforestación o los impactos de eventos extremos como inundaciones, mientras que los paneles interactivos, con barras deslizantes o comparaciones visuales, facilitan una mejor comunicación de resultados, haciéndolos accesibles para una audiencia más amplia.</p>
+<figure class="align-default" id="fig-post-14">
+<a class="reference internal image-reference" href="_images/POST_14.png"><img alt="_images/POST_14.png" src="_images/POST_14.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 4.15 </span><span class="caption-text">Serie de tiempo: Tema de próximos capítulos</span><a class="headerlink" href="#fig-post-14" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>En otras posibilidades, podemos analizar <em>imágenes satelitales nocturnas</em>, un recurso valioso para explorar patrones y actividades humanas que solo se manifiestan de noche, como la iluminación artificial en áreas urbanas. Las imágenes de luz nocturna proporcionan información relevante sobre la urbanización, el uso de la tierra y el desarrollo económico. A través de estas imágenes, es posible realizar estudios sobre la expansión urbana, monitorear el comportamiento de las actividades industriales o incluso analizar la distribución de la pobreza en diferentes regiones. De hecho, se ha demostrado que las luces nocturnas pueden ser un indicador confiable de la actividad económica y social, lo que abre nuevas oportunidades para aplicar machine learning y técnicas de clasificación en este tipo de datos.</p>
 <p>Más allá de estas herramientas, también debemos reconocer el impacto de los productos globales que integran machine learning y sistemas expertos, como OpenBuilding V3, Global Surface Water, TerraClimate y otros conjuntos de datos clave. Estos productos no solo nos permiten realizar análisis geoespaciales detallados, sino que también simplifican tareas complejas, como el estudio de tendencias climáticas o la evaluación de la urbanización. Por ejemplo, <em>Global Surface Water</em> proporciona un monitoreo detallado de los cuerpos de agua desde 1984, mientras que <em>TerraClimate</em> facilita el análisis de variables climáticas a lo largo del tiempo. El uso de estos recursos combina el poder del aprendizaje automático con la democratización de datos geoespaciales, permitiendo a más personas y organizaciones participar en el análisis y toma de decisiones informadas.</p>
-<p><img alt="" src="_images/POST_14.png" /></p>
 <p>Estamos en un <em>momento histórico donde el acceso a imágenes satelitales y datos geoespaciales se ha expandido enormemente</em>, abriendo la puerta a un futuro prometedor. La posibilidad de trabajar con imágenes de mayor resolución y precisión en un futuro cercano potenciará aún más las capacidades que estamos desarrollando ahora. Este enfoque progresivo y escalonado es clave: cada concepto y herramienta que integramos se convierte en <em>un peldaño más en esta espiral de conocimiento</em>, que nos permitirá abordar desafíos más complejos con confianza.</p>
 <p>Finalmente, quiero invitarte a seguir profundizando en este fascinante campo en la intersección entre inteligencia artificial, ciencia de datos y análisis geoespacial. <em>La democratización de las imágenes satelitales nos permite acceder a datos precisos y tangibles sobre la realidad del mundo que nos rodea, lo que transforma cómo entendemos y respondemos a los desafíos globales</em>. Al trabajar con estos datos concretos, no solo aprendemos, sino que también tenemos la <em>oportunidad de generar un impacto real en proyectos que afectan directamente nuestras comunidades y el entorno</em>. Cada paso que damos nos acerca más a dominar estas herramientas poderosas, y eso, sin duda, nos abre un abanico de posibilidades para cambiar el mundo. ¡Lo mejor está por venir! Gracias por acompañarme en este viaje, y espero verte en el próximo video.</p>
 </section>
