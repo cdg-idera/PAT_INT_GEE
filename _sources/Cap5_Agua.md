@@ -13,31 +13,56 @@ Nos vamos a centrar en Sentinel-2, cuyos datos son muy populares.
 
 Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida la gestión de desastres, la gestión de emergencias, la cuantificación de la tendencia de urbanización y la cobertura del suelo, entre otras.
 
+```{figure} imagenes/PosIT-1.png
+:name: fig-PosIT-1
+:width: 100%
 
-![](imagenes/PosIT-1.png)
+Algunas aplicaciones de Sentinel-2
+```
 
 
-Bien CREAMOS UN NUEVO SCRIPT denominado A001_RandomForest_CuerposDeAguaComahue
+Bien creamos un nuevo script denominado A001_RandomForest_CuerposDeAguaComahue
 
 Nuestra área de estudio será la región del Comahue principalmente la provincia del Neuquén y la de Rio negro. Vamos a crear nuestra región de estudio, nuestraregión de interés o ROI. 
 
-![](imagenes/km.png)
+```{figure} imagenes/km.png
+:name: fig-km
+:width: 100%
 
-![](imagenes/p_3.png)
+Sobre el area de estudio
+```
+
+```{figure} imagenes/p_3.png
+:name: fig-p_3
+:width: 50%
+
+Etapa: Clasificar la imagen
+```
 
 Como no estamos interesados en los límites provinciales precisos de la provincia, debido a que queremos abarcar los rios que componen los limites naturales provinciales, 
 no utilizaremos los límites administrativos exactos disponibles en la IDE de la provincia de RN y Nqn, o en el Instituto Geográfico Nacional
-sino que utilizaremos el conjunto de datos de Capas de Unidades Administrativas Globales de Google eart engen
+sino que utilizaremos el conjunto de datos de Capas de Unidades Administrativas Globales de Google Earth Engine.
 
 Esto nos permitirá aprender un poco más sobre este conjunto de datos de Unidades Administrativas Globales: 
 
 
 FAO GAUL: Global Administrative Unit Layers 2015, First-Level Administrative Units
 
-![](imagenes/PosIT-2.png)
 
+```{figure} imagenes/PosIT-2.png
+:name: fig-PosIT-2
+:width: 100%
 
-![](imagenes/Tabla_1.png)
+Sobre Global Administrative Unit Layers
+```
+
+```{figure} imagenes/Tabla_1.png
+:name: fig-Tabla_1
+:width: 100%
+
+Tabla de variables independientes y dependientes
+```
+
 
 Las Capas de Unidades Administrativas Globales (GAUL) recopilan y difunden la mejor información disponible sobre unidades administrativas para todos los países del mundo, contribuyendo a la estandarización del conjunto de datos espaciales que representan las unidades administrativas.
 
@@ -56,10 +81,10 @@ Primero mostramos como ADM0_NAME nos permite filtrar por nombre de país en este
 Luego mostramos como utilizando ADM1_NAME podemos filtrar las provincia de Rio Negro y Neuquen.
 Cuando agregamos esta capa al mapa la llamamos Comahue
 
-En ambos casos se inspeccionan datos utilizando el inspector de Google Earth Engen para ver
+En ambos casos se inspeccionan datos utilizando el inspector de Google Earth Engine para ver
 como están escritos los nombres de provincias, por ejemplo Neuquén no esta con acento.
 
-### CENTER OBJECT
+### Center Object
 
 Centramos nuestra zona de estudio utilizando la función centerObject, haciendo variar el nivel de zoom.
 
@@ -75,7 +100,7 @@ var roi = ee.FeatureCollection("FAO/GAUL/2015/level1")
     'Neuquen']));
 ```
 
-### BUFFER
+### Buffer
 
 Aplicaremos un buffer de 5 km para incluir los límites naturales completos que comprenden rios que separan provincias.
 
@@ -90,7 +115,7 @@ var bufferedRoi = roi.map(function(feature) {
 
 Esta es nuestra área de estudio.
 
-### IMAGENES SENTINEL 2
+### Imágenes Sentinel-2
 
 A continuación buscamos Sentinel-2 y seleccionamos las colecciones de imágenes 
 Harmonized sentinel-2 MSI (MultiSpectralInstrument) level 1-c
@@ -102,6 +127,11 @@ Filtraremos imágenes sentinel del año 2024, utilizaré datos de todo el año 2
 (esta ultima fecha se excluye) como podemos comprobar en la documentación de FilterData
 un método que se aplica a un FeatureColection (start date es inclusive pero end date es exclusive).
 
+```javascript
+
+```
+
+
 -------------------------------------------------------------------------------
 Vamos a usar un filtro de nubes aquí. Cuando se utilizan datos satelitales, generalmente hay contaminación por nubes. 
 Deseamos utilizar la mayor cantidad posible de imágenes libres de nubes. Entonces, aquí vamos a aplicar un filtro para seleccionar imagens con menos de un 10% de nubes.
@@ -111,9 +141,17 @@ que representa el Porcentaje de píxeles nublados específicos
 
 esto  nos permite utilizar una imagen de nubes en la que la contaminación de las nubes es menor al 10 %. Podes ajustar este parámetro en función del área de estudio según tu criterio de análisis.
 
+```javascript
+
+```
+
 -------------------------------------------------------------------------------
 filterBounds(roi) tiene un propósito: Filtrar las imágenes en la colección para incluir solo aquellas que intersectan con la región de interés (roi).
 Limita la cantidad de imágenes en la colección para que solo contenga aquellas que cubren total o parcialmente la región definida por roi. Esto reduce el número de imágenes procesadas y mejora la eficiencia.
+
+```javascript
+
+```
 
 -------------------------------------------------------------------------------
 
@@ -121,26 +159,24 @@ Lo que necesitamos es una sola imagen. Por lo tanto, necesitamos agregar todas l
 Se suele recomendar la mediana como mínimo mejor que la media. Se evitará incluir algunos valores atípicos, por lo que se utilizará el valor de la mediana.
 De esta manera, se evita incluir valores atípicos en el proceso de agregación estadística. En este caso, utilizamos la mediana. 
 
--------------------------------------------------------------------------------
 Luego recortamos la imagen en función la región de estudio CON clipToCollection(roi)
 eL Propósito ES RecortaR la imagen resultante al contorno exacto de la colección o región (roi).
 Tras combinar las imágenes (en este caso, usando .median()), recorta la salida final para que coincida exactamente con el contorno de roi.
 
--------------------------------------------------------------------------------
 Ahora tenemos una imagen Sentinel más limpia, que está lista para nuestra clasificación de aprendizaje automático.
 aHORA VAMOS A UTILIZAR ESTA FUNCIÓN EN LA COLECCION DE IMAGENES sENTINEL
 
+```javascript
+
+```
 
 Vamos a aplicar algunos parámetros de filtrado a la colección de imágenes Sentinel.
 
-PARA ELLO utilizarEMOS la funcion Map que ejecuta la función que definimos anteriormente agregarNDVI a todo feature  del featureColetcion en otras palabaras a toda imagen de la colección de imágenes. 
+Para ello utilizaremos la funcion Map que ejecuta la función que definimos anteriormente agregarNDVI a todo feature  del featureColetcion en otras palabaras a toda imagen de la colección de imágenes. 
 En otras palabras MAP permite aplicar la función agregarNDVI a cada imagen de la colección de imágenes. 
 
 
--------------------------------------------------------------------------------
-
-
-CargaMOS nuestra imagen, a nuestro mapa con addLayer, si la imagen sentinel no cuenta con parámetros de visualización se verá negra, 
+Cargamos nuestra imagen, a nuestro mapa con addLayer, si la imagen sentinel no cuenta con parámetros de visualización se verá negra, 
 podemos importar los parámetros de visualización , utilizando la configuración de la capa, seleccionando las 3 bandas RGB, bandas 4,3 y2 y un stretch de 98% 
 que permite visualizar los valores de estas tres bandas,
 
@@ -170,7 +206,15 @@ Por lo tanto, un NDVI más alto generalmente indica una cobertura vegetal densa 
 Valores negativos son comunes en cuerpos de agua abiertos.
 mientras que Valores cercanos a 0 pueden observarse en agua con sedimentos o cubierta parcial por vegetación flotante.
 
-![](imagenes/PosIT-NDVIbis.png)
+
+
+
+```{figure} imagenes/PosIT-NDVIbis.png
+:name: fig-PosIT-NDVIbis
+:width: 100%
+
+Indice Espectral NDVI
+```
 
 Rangos típicos del NDVI:
 
@@ -181,8 +225,12 @@ Suelo desnudo: 0 a 0.2
 Vegetación escasa: 0.2 a 0.5
 Vegetación densa: 0.5 a 1
 
-![](imagenes/valoresNDVI.png)
+```{figure} imagenes/valoresNDVI.png
+:name: fig-valoresNDVI
+:width: 100%
 
+Valores típicos del NDVI
+```
 
 Lo primero que debemos hacer es escribir una función que calcule el NDVI. 
 Vamos a crear una función denominada agregarNDVI para calcular el NDVI, que vamos a utilizar en nuestra clasificación de aprendizaje automático.
@@ -195,7 +243,13 @@ También podríamos utilizar otros índices como:
 * LSWI (Índice del Agua Basado en Tierra)
 * WI (Índice del Agua)
 
-![](imagenes/IndicesAguaBis.png)
+
+```{figure} imagenes/IndicesAguaBis.png
+:name: fig-IndicesAguaBis
+:width: 100%
+
+Algunos Indices espectrales en el dominio de aplicación Agua
+```
 
 
 
@@ -204,7 +258,7 @@ Nuestra función agregarNDVI, tiene un parámetro de entrada imagen. Podemos lla
 La primera instrucción es definir la variable NDVI. que es igual a la diferencia normalizada de la banda ocho, la banda infrarroja cercana, y la banda cuatro, la banda roja de la imagen Sentinel. 
 Si consultamos la documentación del método normalizedDifference, este metodo se aplica a una imagen. Aca se utiliza la notación orientada a objetos objeto.metodo() el objeto es 1 imagen y el método es normalizedDifference.
 
-consultando la documentaicon de los métodos que se aplican a un objeto, la función normalizedDifference, una función incorporada a Google eart engen, calcula la diferencia normalizada entre dos bandas.
+consultando la documentaicon de los métodos que se aplican a un objeto, la función normalizedDifference, una función incorporada a Google Earth Engine, calcula la diferencia normalizada entre dos bandas.
 
 Es necesario proporcionar las dos bandas a este método para obtener el índice ndvi calculado.
 
@@ -223,7 +277,14 @@ NDVI= (NIR−RED) / (NIR+RED)
 
 Asi de simple, es calcular un índice para una imagen satelital. Este acercamiento nos permite definir otros índices como: NDWI, MNDWI, y otros mostrados en la Figura a continuación:
 
-![](imagenes/IndicesAgua.png)
+
+```{figure} imagenes/IndicesAgua.png
+:name: fig-IndicesAgua
+:width: 100%
+
+Indices Espectrales con el mismo patron de fórmula matemática 
+```
+
 
 Luego, finalmente, la funcion devuelve nuestra imagen, a la cual le agregaremos estas banda calculada con el NDVI. 
 
@@ -234,7 +295,14 @@ Esta función se define para una imagen, luego calculará técnicamente el NDVI 
 
 Antes de ejecutar este código comprobamos que la colección de imágenes no cuenta inicialmente con este índice NDVI, y que solo luego de ejecutar el código es posible ver esta nuevo dato en cada imagen
 
-![](imagenes/FalsoColor.png)
+
+```{figure} imagenes/FalsoColor.png
+:name: fig-FalsoColor
+:width: 70%
+
+Falso Color: Descripción
+```
+
 
 Generaremos una imagen de FALSO COLOR ,  utilizando las bandas B5 (NIR), B4 (Red), y B3 (Green) del Sentinel-2 ,  que nos permitirá detectar agua y generar mas facilmente los puntos de entrenamiento
 
@@ -255,14 +323,24 @@ Estos son los datos de Sentinel que vamos a utilizar para nuestro aprendizaje au
 Para aplicar la tecnica supervisada de random forest tendremos en cuenta el flujo de trabajo
 
 
-![](imagenes/Workflow.png)
+```{figure} imagenes/Workflow.png
+:name: fig-Workflow
+:width: 100%
+
+Workflow para aplicar ML a imágenes satelitales
+```
+
 
 ###  Entrenamiento 
 
 Ahora crearemos datos de entrenamiento y luego ejecutaremos nuestro aprendizaje automático. 
 
+```{figure} imagenes/p_1.png
+:name: fig-p_1
+:width: 50%
 
-![alt text](imagenes/p_1.png) 
+Etapa: Seleccionar las muestras de entrenamiento
+```
 
 Vamos a crear los datos de entrenamiento:
 
@@ -318,7 +396,13 @@ Esa será la etiqueta para nuestra clasificación.
 Vamos a utilizar para el entrenamiento las bandas dos, tres, cuatro, ocho y NDVI de la imagen del satélite Sentinel.
 Extraemos las bandas Sentinel para estos datos de entrenamiento que hemos capturado.
 
-![alt text](imagenes/Tabla_Comahue.png)
+
+```{figure} imagenes/Tabla_Comahue.png
+:name: fig-Tabla_Comahue
+:width: 100%
+
+Variables Independientes y Dependientes
+```
 
 
 Para obtener estos datos de la imagen utilizamos la función sampleRegions
@@ -340,9 +424,14 @@ Por lo tanto, dividiremos esos datos: crearemos una columna aleatoria y luego so
  Y luego, el conjunto de prueba aquí será la evaluación, que es el 30 % de datos restantes.
 
 
-### ENTRENAMIENTO:
+### Entrenamiento
 
-![alt text](imagenes/p_2.png) 
+```{figure} imagenes/p_2.png
+:name: fig-p_2
+:width: 50%
+
+Etapa Entrenamiento del Clasificador 
+```
 
 En este paso entrenemos el modelo para luego aplicarlo a la imagen con el fin de generar un mapa de masa de agua. 
 
@@ -359,8 +448,12 @@ Cuando lo haga, el modelo de aprendizaje automático se entrenará en función d
 
 ### Clasificar la imagen
 
-![](imagenes/p_3.png)
+```{figure} imagenes/p_3.png
+:name: fig-p_3
+:width: 50%
 
+Etapa Clasificar la imagen
+```
 El siguiente paso es aplicar este modelo, que es el clasificador, a la imagen, la imagen Sentinel.
 Simplemente se va a aplicar el modelo para generar una clasificación.
 
@@ -392,7 +485,13 @@ específicamente en un algoritmo de random forest o bosque aleatorio en la plata
 
 ### Acurracy Assessment
 
-![](imagenes/p_4.png)
+```{figure} imagenes/p_4.png
+:name: fig-p_4
+:width: 50%
+
+Etapa Evaluación de Precisión
+```
+
 
 Como hemos mencionado en anteriores videos, hay algunos pasos después de este posprocesamiento y tenemos que calcular evaluaciones de precisión de estos datos, 
 
@@ -414,7 +513,7 @@ Parece que es 100 %, bastante buena, pero creo que si capturamos más puntos de 
 
 ### Exportación
 
-La última parte a considerar, es que si deseas usar esta clasificación fuera de Google eart engen , digamos un software GIS estándar, como QGIS o ArcGIS 
+La última parte a considerar, es que si deseas usar esta clasificación fuera de Google Earth Engine, digamos un software GIS estándar, como QGIS o ArcGIS 
 vas a usar la función Export.image.toDrive para exportar, ya sabes, tu mapa de agua.
 
 Cuando lo ejecutes, lo verás en tu Google Drive. Una vez que hayas completado esto, verás los datos o la imagen en tu Google Drive. 
