@@ -469,32 +469,38 @@ Generamos un cubo categórico bimestral de tipos de suelo (agua, urbano, cultivo
 </section>
 <section id="de-imagenes-satelitales-a-cubos-de-imagenes">
 <h2><span class="section-number">7.2. </span>De imágenes satelitales a Cubos de Imágenes<a class="headerlink" href="#de-imagenes-satelitales-a-cubos-de-imagenes" title="Link to this heading">#</a></h2>
-<p>Al observar una imagen tomada desde un satélite, es tentador pensar que estamos viendo una simple foto de la Tierra como si fuera una fotografía aérea en alta resolución, pero eso sería una visión limitada, sería reducirla a lo que nuestros ojos alcanzan a ver, cuando en realidad hay mucho más que eso.</p>
+<figure class="align-default" id="fig-ojos">
+<a class="reference internal image-reference" href="imagenes/ojos.png"><img alt="imagenes/ojos.png" src="imagenes/ojos.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.1 </span><span class="caption-text">Parte del espectro electromagnético visible a nuestros ojos</span><a class="headerlink" href="#fig-ojos" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Al observar una imagen tomada desde un satélite, es tentador pensar que estamos viendo una simple foto de la Tierra como si fuera una fotografía aérea en alta resolución, pero eso sería una visión limitada, sería reducirla a lo que nuestros ojos alcanzan a ver, cuando en realidad hay mucho más que eso (ver fig. <a class="reference internal" href="#fig-ojos"><span class="std std-numref">Fig. 7.1</span></a>).</p>
 <figure class="align-default" id="fig-spectrum1">
 <a class="reference internal image-reference" href="_images/spectrum1.png"><img alt="_images/spectrum1.png" src="_images/spectrum1.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 7.1 </span><span class="caption-text">Esquema del Espectro Electromagnetico.</span><a class="headerlink" href="#fig-spectrum1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.2 </span><span class="caption-text">Esquema del Espectro Electromagnetico.</span><a class="headerlink" href="#fig-spectrum1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>En verdad, lo que capturan los satélites no es una simple imagen como una fotografía convencional, sino un conjunto de bandas espectrales, cada una correspondiente a una distinta longitud de onda del espectro electromagnético (ver fig. <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig-spectrum</span></code>)</p>
 <figure class="align-default" id="fig-placanegramedia2">
 <a class="reference internal image-reference" href="_images/PlacaNegraMedia2.png"><img alt="_images/PlacaNegraMedia2.png" src="_images/PlacaNegraMedia2.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 7.2 </span><span class="caption-text">Tips sobre Indices Espectrales</span><a class="headerlink" href="#fig-placanegramedia2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.3 </span><span class="caption-text">Tips sobre Indices Espectrales</span><a class="headerlink" href="#fig-placanegramedia2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Estas bandas, combinadas, forman una representación detallada y multidimensional de lo que ocurre en la superficie terrestre. Pero la información no termina acá, las bandas pueden ser utilizadas individualmente o combinadas mediante índices espectrales  (ver fig. <a class="reference internal" href="#fig-placanegramedia2"><span class="std std-numref">Fig. 7.2</span></a>), que son fórmulas matemáticas diseñadas para resaltar ciertos fenómenos, como la vegetación, el agua, los suelos y las áreas urbanas, en función de su comportamiento espectral.</p>
+<p>Estas bandas, combinadas, forman una representación detallada y multidimensional de lo que ocurre en la superficie terrestre. Pero la información no termina acá, las bandas pueden ser utilizadas individualmente o combinadas mediante índices espectrales  (ver fig. <a class="reference internal" href="#fig-placanegramedia2"><span class="std std-numref">Fig. 7.3</span></a>), que son fórmulas matemáticas diseñadas para resaltar ciertos fenómenos, como la vegetación, el agua, los suelos y las áreas urbanas, en función de su comportamiento espectral.</p>
 <figure class="align-default" id="fig-placanegramedia1">
 <a class="reference internal image-reference" href="_images/PlacaNegraMedia1.png"><img alt="_images/PlacaNegraMedia1.png" src="_images/PlacaNegraMedia1.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 7.3 </span><span class="caption-text">Catálogo ASI: Dominios de Aplicación</span><a class="headerlink" href="#fig-placanegramedia1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.4 </span><span class="caption-text">Catálogo ASI: Dominios de Aplicación</span><a class="headerlink" href="#fig-placanegramedia1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>El catálogo <strong>Awesome Spectral Indices (ASI)</strong> <span id="id1">[<a class="reference internal" href="Referencias.html#id2" title="David Montero, C'esar Aybar, Miguel D Mahecha, Francesco Martinuzzi, Maximilian S&quot;ochting, and Sebastian Wieneke. A standardized catalogue of spectral indices to advance the use of remote sensing in earth system research. Scientific Data, 10(1):197, 2023.">Montero <em>et al.</em>, 2023</a>]</span>, reúne más de 250 de estos índices organizados por dominio de aplicación (ver fig. <a class="reference internal" href="#fig-placanegramedia1"><span class="std std-numref">Fig. 7.3</span></a>), lo que lo convierte en una herramienta clave para interpretar y extraer información significativa de las imágenes satelitales. El cumulo de cientos de índices de este catálogo puede ser accedido desde distintos paquetes en lenguajes d eprogramacion como javascript, Python, R y julia (ver fig. <a class="reference internal" href="#fig-asiusedby"><span class="std std-numref">Fig. 7.4</span></a>).</p>
+<p>El catálogo <strong>Awesome Spectral Indices (ASI)</strong> <span id="id1">[<a class="reference internal" href="Referencias.html#id2" title="David Montero, C'esar Aybar, Miguel D Mahecha, Francesco Martinuzzi, Maximilian S&quot;ochting, and Sebastian Wieneke. A standardized catalogue of spectral indices to advance the use of remote sensing in earth system research. Scientific Data, 10(1):197, 2023.">Montero <em>et al.</em>, 2023</a>]</span>, reúne más de 250 de estos índices organizados por dominio de aplicación (ver fig. <a class="reference internal" href="#fig-placanegramedia1"><span class="std std-numref">Fig. 7.4</span></a>), lo que lo convierte en una herramienta clave para interpretar y extraer información significativa de las imágenes satelitales. El cumulo de cientos de índices de este catálogo puede ser accedido desde distintos paquetes en lenguajes d eprogramacion como javascript, Python, R y julia (ver fig. <a class="reference internal" href="#fig-asiusedby"><span class="std std-numref">Fig. 7.5</span></a>).</p>
 <figure class="align-default" id="fig-asiusedby">
 <a class="reference internal image-reference" href="_images/asiUsedBy.png"><img alt="_images/asiUsedBy.png" src="_images/asiUsedBy.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 7.4 </span><span class="caption-text">Catálogo ASI: Paquetes y librerías para JS, Python, R y Julia</span><a class="headerlink" href="#fig-asiusedby" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.5 </span><span class="caption-text">Catálogo ASI: Paquetes y librerías para JS, Python, R y Julia</span><a class="headerlink" href="#fig-asiusedby" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Un excelente ejemplo de esta riqueza espectral es la misión Sentinel-2, operada por la Agencia Espacial Europea. Esta misión no toma simplemente una foto del planeta, sino que registra 13 bandas espectrales distintas, distribuidas en diferentes partes del espectro electromagnético y con distintas resoluciones espaciales 10, 20 y 60 metros, cada una con un propósito específico.</p>
@@ -532,7 +538,7 @@ Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el c
 <figure class="align-default" id="fig-placaj">
 <a class="reference internal image-reference" href="_images/PlacaJ.png"><img alt="_images/PlacaJ.png" src="_images/PlacaJ.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 7.5 </span><span class="caption-text">Cubo de Datos definición de openEO</span><a class="headerlink" href="#fig-placaj" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.6 </span><span class="caption-text">Cubo de Datos definición de openEO</span><a class="headerlink" href="#fig-placaj" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Según la plataforma abierta para la observación de la Tierra openEO:</p>
@@ -542,7 +548,7 @@ Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el c
 <figure class="align-default" id="fig-placal">
 <a class="reference internal image-reference" href="_images/PlacaL.png"><img alt="_images/PlacaL.png" src="_images/PlacaL.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 7.6 </span><span class="caption-text">Cubo de Datos definición de Giulian et al.</span><a class="headerlink" href="#fig-placal" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.7 </span><span class="caption-text">Cubo de Datos definición de Giulian et al.</span><a class="headerlink" href="#fig-placal" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <blockquote>
@@ -551,7 +557,7 @@ Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el c
 <figure class="align-default" id="fig-placam">
 <a class="reference internal image-reference" href="_images/PlacaM.png"><img alt="_images/PlacaM.png" src="_images/PlacaM.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 7.7 </span><span class="caption-text">Cubo de Datos: Dimensiones principales</span><a class="headerlink" href="#fig-placam" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.8 </span><span class="caption-text">Cubo de Datos: Dimensiones principales</span><a class="headerlink" href="#fig-placam" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>¿Y cuáles son sus dimensiones? Las principales son:</p>
@@ -561,7 +567,7 @@ Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el c
 <li><p><strong>Espectro</strong>: se refiere a las bandas espectrales que capturan diferentes rangos del espectro electromagnético, como el visible, el infrarrojo cercano o el SWIR, lo que permite observar fenómenos que no son visibles a simple vista.</p></li>
 <li><p>Y, en algunos casos, también la geometría o incluso el sistema de referencia espacial (CRS) como una dimensión adicional.</p></li>
 </ul>
-<p>Esto nos permite hacer operaciones sofisticadas (ver fig. <a class="reference internal" href="#fig-placan"><span class="std std-numref">Fig. 7.8</span></a>) sin necesidad de reestructurar los datos. Por ejemplo:</p>
+<p>Esto nos permite hacer operaciones sofisticadas (ver fig. <a class="reference internal" href="#fig-placan"><span class="std std-numref">Fig. 7.9</span></a>) sin necesidad de reestructurar los datos. Por ejemplo:</p>
 <ul class="simple">
 <li><p>Filtrar el cubo por fechas, bandas o región.</p></li>
 <li><p>Aplicar funciones matemáticas sobre cada píxel o grupo de píxeles.</p></li>
@@ -572,14 +578,14 @@ Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el c
 <figure class="align-default" id="fig-placan">
 <a class="reference internal image-reference" href="_images/PlacaN.png"><img alt="_images/PlacaN.png" src="_images/PlacaN.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 7.8 </span><span class="caption-text">Cubo de Datos: Operaciones sobre el Cubo</span><a class="headerlink" href="#fig-placan" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.9 </span><span class="caption-text">Cubo de Datos: Operaciones sobre el Cubo</span><a class="headerlink" href="#fig-placan" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Un cubo de datos puede ser raster, cuando trabaja con pixeles organizados en grillas, o vectorial, cuando se organiza por geometrías como polígonos o puntos.</p>
 </section>
 <section id="aplicaciones-reales-y-cierre">
 <h2><span class="section-number">7.4. </span>Aplicaciones reales y cierre<a class="headerlink" href="#aplicaciones-reales-y-cierre" title="Link to this heading">#</a></h2>
-<p>Gracias a los cubos de datos, hoy es posible (ver fig. <a class="reference internal" href="#fig-placap"><span class="std std-numref">Fig. 7.9</span></a>):</p>
+<p>Gracias a los cubos de datos, hoy es posible (ver fig. <a class="reference internal" href="#fig-placap"><span class="std std-numref">Fig. 7.10</span></a>):</p>
 <ul class="simple">
 <li><p>Analizar la evolución mensual del NDVI en una región agrícola.</p></li>
 <li><p>Detectar patrones de urbanización usando índices como NDBI.</p></li>
@@ -589,7 +595,7 @@ Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el c
 <figure class="align-default" id="fig-placap">
 <a class="reference internal image-reference" href="_images/PlacaP.png"><img alt="_images/PlacaP.png" src="_images/PlacaP.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 7.9 </span><span class="caption-text">Cubo de Datos: Principales Usos</span><a class="headerlink" href="#fig-placap" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.10 </span><span class="caption-text">Cubo de Datos: Principales Usos</span><a class="headerlink" href="#fig-placap" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>En definitiva, los cubos de datos no son solo una forma eficiente de almacenar información, sino una herramienta poderosa para transformar datos satelitales en conocimiento accionable.
@@ -733,8 +739,14 @@ temperatura_celsius: 19.49</p>
 <p>En consola se imprimen dos elementos:</p>
 <ul class="simple">
 <li><p>Una tabla con los valores mensuales.</p></li>
-<li><p>Un gráfico de líneas que permite visualizar tendencias, oscilaciones térmicas y meses extremos.</p></li>
+<li><p>Un gráfico de líneas que permite visualizar tendencias, oscilaciones térmicas y meses extremos (ver fig. <a class="reference internal" href="#fig-placagrafico1a"><span class="std std-numref">Fig. 7.11</span></a>).</p></li>
 </ul>
+<figure class="align-default" id="fig-placagrafico1a">
+<a class="reference internal image-reference" href="imagenes/Grafico1A.png"><img alt="imagenes/Grafico1A.png" src="imagenes/Grafico1A.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.11 </span><span class="caption-text">Temperatura Superficial Promedio</span><a class="headerlink" href="#fig-placagrafico1a" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 <section id="paso-9-estetica-del-mapa">
 <h3><span class="section-number">7.5.8. </span>Paso 9: Estética del mapa<a class="headerlink" href="#paso-9-estetica-del-mapa" title="Link to this heading">#</a></h3>
@@ -894,7 +906,13 @@ Es muy utilizado para estudios hidrológicos, agrícolas y climáticos en todo e
 </pre></div>
 </div>
 <p>En la consola, el gráfico permite detectar anomalías climáticas o estacionalidades.
-Por ejemplo, en el mes de marzo de 2025, se registró un valor atípico de 8.27 mm, que puede corresponder a un evento extremo como una DANA (Depresión Aislada en Niveles Altos).</p>
+Por ejemplo, en el mes de marzo de 2025, se registró un valor atípico de 8.27 mm, que puede corresponder a un evento extremo como una DANA (Depresión Aislada en Niveles Altos) (ver fig. <a class="reference internal" href="#fig-grafico2a"><span class="std std-numref">Fig. 7.12</span></a>).</p>
+<figure class="align-default" id="fig-grafico2a">
+<a class="reference internal image-reference" href="imagenes/Grafico2A.png"><img alt="imagenes/Grafico2A.png" src="imagenes/Grafico2A.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.12 </span><span class="caption-text">Precipitación Mensual Promedio</span><a class="headerlink" href="#fig-grafico2a" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 </section>
 </section>
 <section id="ejemplo-concreto-feature-14">
@@ -1048,9 +1066,11 @@ Por ejemplo, en el mes de marzo de 2025, se registró un valor atípico de 8.27 
 </div>
 <p>Descripción: Para cada período bimestral, se crea un nuevo mosaico de Sentinel-2, se clasifica y se cuenta la cantidad de píxeles por clase. Esta colección temporal de objetos Feature conforma el núcleo del datacube: cada capa representa un período de tiempo con distribución espacial clasificada.</p>
 <p>🧊 Datacube: Este es un cubo de datos categóricos donde:</p>
-<p>El eje x es el tiempo (bimestres).</p>
-<p>El eje y representa las clases del suelo.</p>
-<p>El eje z es la cantidad de píxeles por clase, reflejando área relativa.</p>
+<ul class="simple">
+<li><p>El eje x es el tiempo (bimestres).</p></li>
+<li><p>El eje y representa las clases del suelo.</p></li>
+<li><p>El eje z es la cantidad de píxeles por clase, reflejando área relativa.</p></li>
+</ul>
 <ol class="arabic simple" start="8">
 <li><p>Visualización de resultados en consola</p></li>
 </ol>
@@ -1060,10 +1080,30 @@ Por ejemplo, en el mes de marzo de 2025, se registró un valor atípico de 8.27 
 <span class="nx">print</span><span class="p">(</span><span class="nx">graficoPorcentual</span><span class="p">);</span><span class="w"> </span><span class="c1">// evolución porcentual por clase</span>
 </pre></div>
 </div>
+<figure class="align-default" id="fig-grafico3a">
+<a class="reference internal image-reference" href="imagenes/Grafico3A.png"><img alt="imagenes/Grafico3A.png" src="imagenes/Grafico3A.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.13 </span><span class="caption-text">Gráfico Porcentual por clase</span><a class="headerlink" href="#fig-grafico3a" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-grafico3b">
+<a class="reference internal image-reference" href="imagenes/Grafico3B.png"><img alt="imagenes/Grafico3B.png" src="imagenes/Grafico3B.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.14 </span><span class="caption-text">Cantidad de Imágenes por Período</span><a class="headerlink" href="#fig-grafico3b" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-grafico3c">
+<a class="reference internal image-reference" href="imagenes/Grafico3C.png"><img alt="imagenes/Grafico3C.png" src="imagenes/Grafico3C.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.15 </span><span class="caption-text">Serie temporal porcentual de tipos de suelo</span><a class="headerlink" href="#fig-grafico3c" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Descripción:</p>
-<p>Gráfico apilado: muestra cuántos píxeles ocupa cada clase por período, permitiendo detectar cambios como expansión urbana o pérdida de vegetación.</p>
-<p>Gráfico de imágenes: señala cuántas imágenes se usaron por período, útil para evaluar calidad del mosaico.</p>
-<p>Gráfico porcentual: destaca tendencias proporcionales. Por ejemplo, si el área urbana crece, su porcentaje aumentará aunque el número de píxeles totales también lo haga.</p>
+<ul class="simple">
+<li><p>Gráfico apilado: muestra cuántos píxeles ocupa cada clase por período, permitiendo detectar cambios como expansión urbana o pérdida de vegetación.</p></li>
+<li><p>Gráfico de imágenes: señala cuántas imágenes se usaron por período, útil para evaluar calidad del mosaico (ver fig. <a class="reference internal" href="#fig-grafico3b"><span class="std std-numref">Fig. 7.14</span></a>).</p></li>
+<li><p>Gráfico porcentual: destaca tendencias proporcionales. Por ejemplo, si el área urbana crece, su porcentaje aumentará aunque el número de píxeles totales también lo haga (ver fig. <a class="reference internal" href="#fig-grafico3c"><span class="std std-numref">Fig. 7.15</span></a>).</p></li>
+</ul>
 <ol class="arabic simple" start="9">
 <li><p>Visualización espacial del datacube
 Gracias al siguiente bloque:</p></li>

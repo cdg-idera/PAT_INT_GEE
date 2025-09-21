@@ -24,7 +24,15 @@ Generamos un cubo categórico bimestral de tipos de suelo (agua, urbano, cultivo
 
 ## De imágenes satelitales a Cubos de Imágenes
 
-Al observar una imagen tomada desde un satélite, es tentador pensar que estamos viendo una simple foto de la Tierra como si fuera una fotografía aérea en alta resolución, pero eso sería una visión limitada, sería reducirla a lo que nuestros ojos alcanzan a ver, cuando en realidad hay mucho más que eso. 
+```{figure} imagenes/ojos.png
+:name: fig-ojos
+:width: 100%
+
+Parte del espectro electromagnético visible a nuestros ojos
+```
+
+
+Al observar una imagen tomada desde un satélite, es tentador pensar que estamos viendo una simple foto de la Tierra como si fuera una fotografía aérea en alta resolución, pero eso sería una visión limitada, sería reducirla a lo que nuestros ojos alcanzan a ver, cuando en realidad hay mucho más que eso (ver fig. {numref}`fig-ojos`). 
 
 ```{figure} imagenes/spectrum1.png
 :name: fig-spectrum1
@@ -320,8 +328,15 @@ print(chart);
 
 En consola se imprimen dos elementos:
 * Una tabla con los valores mensuales.
-* Un gráfico de líneas que permite visualizar tendencias, oscilaciones térmicas y meses extremos.
+* Un gráfico de líneas que permite visualizar tendencias, oscilaciones térmicas y meses extremos (ver fig. {numref}`fig-PlacaGrafico1A`).
 
+
+```{figure} imagenes/Grafico1A.png
+:name: fig-PlacaGrafico1A
+:width: 100%
+
+Temperatura Superficial Promedio
+```
 
 ### Paso 9: Estética del mapa
  
@@ -504,7 +519,15 @@ print(chart);
 
 
 En la consola, el gráfico permite detectar anomalías climáticas o estacionalidades.
-Por ejemplo, en el mes de marzo de 2025, se registró un valor atípico de 8.27 mm, que puede corresponder a un evento extremo como una DANA (Depresión Aislada en Niveles Altos).
+Por ejemplo, en el mes de marzo de 2025, se registró un valor atípico de 8.27 mm, que puede corresponder a un evento extremo como una DANA (Depresión Aislada en Niveles Altos) (ver fig. {numref}`fig-Grafico2A`).
+
+
+```{figure} imagenes/Grafico2A.png
+:name: fig-Grafico2A
+:width: 100%
+
+Precipitación Mensual Promedio
+```
 
 ## Ejemplo concreto: Feature 14
 
@@ -675,11 +698,9 @@ Descripción: Para cada período bimestral, se crea un nuevo mosaico de Sentinel
 
 🧊 Datacube: Este es un cubo de datos categóricos donde:
 
-El eje x es el tiempo (bimestres).
-
-El eje y representa las clases del suelo.
-
-El eje z es la cantidad de píxeles por clase, reflejando área relativa.
+* El eje x es el tiempo (bimestres).
+* El eje y representa las clases del suelo.
+* El eje z es la cantidad de píxeles por clase, reflejando área relativa.
 
 8. Visualización de resultados en consola
 
@@ -690,13 +711,37 @@ print(graficoCantidad);  // gráfico de cantidad de imágenes
 print(graficoPorcentual); // evolución porcentual por clase
 ```
 
+
+```{figure} imagenes/Grafico3A.png
+:name: fig-Grafico3A
+:width: 100%
+
+Gráfico Porcentual por clase
+```
+
+
+```{figure} imagenes/Grafico3B.png
+:name: fig-Grafico3B
+:width: 100%
+
+Cantidad de Imágenes por Período
+```
+
+
+```{figure} imagenes/Grafico3C.png
+:name: fig-Grafico3C
+:width: 100%
+
+Serie temporal porcentual de tipos de suelo
+```
+
 Descripción:
 
-Gráfico apilado: muestra cuántos píxeles ocupa cada clase por período, permitiendo detectar cambios como expansión urbana o pérdida de vegetación.
+* Gráfico apilado: muestra cuántos píxeles ocupa cada clase por período, permitiendo detectar cambios como expansión urbana o pérdida de vegetación.
 
-Gráfico de imágenes: señala cuántas imágenes se usaron por período, útil para evaluar calidad del mosaico.
+* Gráfico de imágenes: señala cuántas imágenes se usaron por período, útil para evaluar calidad del mosaico (ver fig. {numref}`fig-Grafico3B`).
 
-Gráfico porcentual: destaca tendencias proporcionales. Por ejemplo, si el área urbana crece, su porcentaje aumentará aunque el número de píxeles totales también lo haga.
+* Gráfico porcentual: destaca tendencias proporcionales. Por ejemplo, si el área urbana crece, su porcentaje aumentará aunque el número de píxeles totales también lo haga (ver fig. {numref}`fig-Grafico3C`).
 
 9. Visualización espacial del datacube
 Gracias al siguiente bloque:

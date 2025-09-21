@@ -29,7 +29,7 @@ Ahora bien, para trabajar de forma sólida con series temporales es importante e
 
 ```{figure} imagenes/componentes.png
 :name: fig-componentes
-:width: 30%
+:width: 40%
 
 Serie de Tiempo: Componentes principales.
 ```
@@ -39,7 +39,7 @@ Por un lado, está la **tendencia**, ese *comportamiento de largo plazo* que pue
 
 ```{figure} imagenes/tendencia.png
 :name: fig-tendencia
-:width: 30%
+:width: 60%
 
 Serie de Tiempo: Tendencia
 ```
@@ -49,7 +49,7 @@ También encontramos **ciclos**, como los que impone el clima o la economía, qu
  
 ```{figure} imagenes/ciclo.png
 :name: fig-ciclo
-:width: 30%
+:width: 60%
 
 Serie de Tiempo: Ciclo
 ```
@@ -58,7 +58,7 @@ La **estacionalidad**, por su parte, nos habla de patrones que se repiten en el 
   
 ```{figure} imagenes/estacionalidad.png
 :name: fig-estacionalidad
-:width: 30%
+:width: 60%
 
 Serie de Tiempo: Estacionalidad
 ```
@@ -68,7 +68,7 @@ Y, por supuesto, el **ruido aleatorio**, esas pequeñas fluctuaciones impredecib
   
 ```{figure} imagenes/ruido.png
 :name: fig-ruido
-:width: 30%
+:width: 60%
 
 Serie de Tiempo: Ruido
 ```
@@ -80,7 +80,7 @@ Antes de lanzarse a modelar o predecir, conviene detenerse en un análisis explo
 
 ```{figure} imagenes/DS_ST
 :name: fig-DS_ST
-:width: 30%
+:width: 60%
 
 Imágen Ilustrativa: Analizar y Diseñar
 ```
