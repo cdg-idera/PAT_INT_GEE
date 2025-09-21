@@ -415,9 +415,9 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mejora-estetica-del-mapa">7.10.1. Mejora estética del mapa</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">7.11. Conclusión de esta sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">7.11. Conclusión de esta sección</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-tipos-de-suelo-con-sentinel-2-un-enfoque-basado-en-datacubes">7.12. Clasificación de tipos de suelo con Sentinel-2: un enfoque basado en datacubes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">7.12.1. Introducción</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">7.12.1. Introducción</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coleccion-de-imagenes-sentinel-2-y-preparacion-del-mosaico-base">7.12.2. Colección de imágenes Sentinel-2 y preparación del mosaico base</a></li>
 </ul>
 </li>
@@ -440,7 +440,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-7-visualizacion-porcentual">7.14.6. BLOQUE 7: Visualización porcentual</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">7.15. Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">7.15. Conclusión</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">7.16. Video del capítulo</a></li>
 </ul>
             </nav>
@@ -470,13 +470,33 @@ Generamos un cubo categórico bimestral de tipos de suelo (agua, urbano, cultivo
 <section id="de-imagenes-satelitales-a-cubos-de-imagenes">
 <h2><span class="section-number">7.2. </span>De imágenes satelitales a Cubos de Imágenes<a class="headerlink" href="#de-imagenes-satelitales-a-cubos-de-imagenes" title="Link to this heading">#</a></h2>
 <p>Al observar una imagen tomada desde un satélite, es tentador pensar que estamos viendo una simple foto de la Tierra como si fuera una fotografía aérea en alta resolución, pero eso sería una visión limitada, sería reducirla a lo que nuestros ojos alcanzan a ver, cuando en realidad hay mucho más que eso.</p>
-<p><img alt="" src="imagenes/spectrum.png" /></p>
-<p>En verdad, lo que capturan los satélites no es una simple imagen como una fotografía convencional, sino un conjunto de bandas espectrales, cada una correspondiente a una distinta longitud de onda del espectro electromagnético</p>
-<p><img alt="" src="_images/PlacaNegraMedia2.png" /></p>
-<p>Estas bandas, combinadas, forman una representación detallada y multidimensional de lo que ocurre en la superficie terrestre. Pero la información no termina acá, las bandas pueden ser utilizadas individualmente o combinadas mediante índices espectrales, que son fórmulas matemáticas diseñadas para resaltar ciertos fenómenos, como la vegetación, el agua, los suelos y las áreas urbanas, en función de su comportamiento espectral.</p>
-<p><img alt="" src="_images/PlacaNegraMedia1.png" /></p>
-<p>El catálogo awesome spectral indecis, reúne más de 250 de estos índices organizados por dominio de aplicación, lo que lo convierte en una herramienta clave para interpretar y extraer información significativa de las imágenes satelitales. El cumulo de cientos de índices de este catálogo puede ser accedido desde distintos paquetes en lenguajes d eprogramacion como javascript, Python, R y julia.</p>
-<p><img alt="" src="_images/asiUsedBy.png" /></p>
+<figure class="align-default" id="fig-spectrum">
+<a class="reference internal image-reference" href="imagenes/spectrum.png"><img alt="imagenes/spectrum.png" src="imagenes/spectrum.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.1 </span><span class="caption-text">Esquema del Espectro Electromagnetico.</span><a class="headerlink" href="#fig-spectrum" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>En verdad, lo que capturan los satélites no es una simple imagen como una fotografía convencional, sino un conjunto de bandas espectrales, cada una correspondiente a una distinta longitud de onda del espectro electromagnético (ver fig. <a class="reference internal" href="#fig-spectrum"><span class="std std-numref">Fig. 7.1</span></a>)</p>
+<figure class="align-default" id="fig-placanegramedia2">
+<a class="reference internal image-reference" href="_images/PlacaNegraMedia2.png"><img alt="_images/PlacaNegraMedia2.png" src="_images/PlacaNegraMedia2.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.2 </span><span class="caption-text">Tips sobre Indices Espectrales</span><a class="headerlink" href="#fig-placanegramedia2" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Estas bandas, combinadas, forman una representación detallada y multidimensional de lo que ocurre en la superficie terrestre. Pero la información no termina acá, las bandas pueden ser utilizadas individualmente o combinadas mediante índices espectrales  (ver fig. <a class="reference internal" href="#fig-placanegramedia2"><span class="std std-numref">Fig. 7.2</span></a>), que son fórmulas matemáticas diseñadas para resaltar ciertos fenómenos, como la vegetación, el agua, los suelos y las áreas urbanas, en función de su comportamiento espectral.</p>
+<figure class="align-default" id="fig-placanegramedia1">
+<a class="reference internal image-reference" href="_images/PlacaNegraMedia1.png"><img alt="_images/PlacaNegraMedia1.png" src="_images/PlacaNegraMedia1.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.3 </span><span class="caption-text">Catálogo ASI: Dominios de Aplicación</span><a class="headerlink" href="#fig-placanegramedia1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>El catálogo <strong>Awesome Spectral Indices (ASI)</strong> <span id="id1">[<a class="reference internal" href="Referencias.html#id2" title="David Montero, C'esar Aybar, Miguel D Mahecha, Francesco Martinuzzi, Maximilian S&quot;ochting, and Sebastian Wieneke. A standardized catalogue of spectral indices to advance the use of remote sensing in earth system research. Scientific Data, 10(1):197, 2023.">Montero <em>et al.</em>, 2023</a>]</span>, reúne más de 250 de estos índices organizados por dominio de aplicación (ver fig. <a class="reference internal" href="#fig-placanegramedia1"><span class="std std-numref">Fig. 7.3</span></a>), lo que lo convierte en una herramienta clave para interpretar y extraer información significativa de las imágenes satelitales. El cumulo de cientos de índices de este catálogo puede ser accedido desde distintos paquetes en lenguajes d eprogramacion como javascript, Python, R y julia (ver fig. <a class="reference internal" href="#fig-asiusedby"><span class="std std-numref">Fig. 7.4</span></a>).</p>
+<figure class="align-default" id="fig-asiusedby">
+<a class="reference internal image-reference" href="_images/asiUsedBy.png"><img alt="_images/asiUsedBy.png" src="_images/asiUsedBy.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.4 </span><span class="caption-text">Catálogo ASI: Paquetes y librerías para JS, Python, R y Julia</span><a class="headerlink" href="#fig-asiusedby" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Un excelente ejemplo de esta riqueza espectral es la misión Sentinel-2, operada por la Agencia Espacial Europea. Esta misión no toma simplemente una foto del planeta, sino que registra 13 bandas espectrales distintas, distribuidas en diferentes partes del espectro electromagnético y con distintas resoluciones espaciales 10, 20 y 60 metros, cada una con un propósito específico.</p>
 <p>Estas bandas incluyen banda 1 aerosol captura información en la región del violeta, útil para la corrección atmosférica y detección de aerosoles, resolución 60 metros,
 banda 2 azul, banda 3 verde y banda 4 rojo, bandas visibles al ojo humano que permiten generar imágenes en color natural, resolución 10 metros,
@@ -487,12 +507,11 @@ banda 10, cirrus, diseñada específicamente para la detección de nubes cirrus 
 banda 11 y banda 12, SWIR 1 y SWIR 2, bandas en el infrarrojo de onda corta, útiles para analizar contenido de  humedad del suelo, nieve, hielo o detectar áreas afectadas por incendios, resolución 20 metros,
 Cada una de estas bandas aporta una capa distinta de información. Y al combinar esta riqueza espectral con series temporales, índices matemáticos e inteligencia artificial, podemos transformar simples imágenes en verdaderos análisis dinámicos del territorio.
 Entonces, lo que vemos como una imagen, en realidad, es una colección multidimensional de datos espectrales. Cada píxel tiene múltiples valores asociados, uno por cada banda, revelando propiedades biofísicas que no podríamos captar con nuestros sentidos. Es como si viéramos el mundo con “ojos científicos”.
-Y esto ocurre para cada punto de la Tierra observado por la misión. Pero además, estos puntos no se observan una única vez</p>
+Y esto ocurre para cada punto de la Tierra observado por la misión. Pero además, estos puntos no se observan una única vez.</p>
 </section>
 <section id="revisitando-la-tierra-frecuencia-y-volumen-de-datos-en-sentinel-2">
 <h2><span class="section-number">7.3. </span>Revisitando la Tierra: frecuencia y volumen de datos en Sentinel 2<a class="headerlink" href="#revisitando-la-tierra-frecuencia-y-volumen-de-datos-en-sentinel-2" title="Link to this heading">#</a></h2>
-<p>Sentinel 2 no solo es poderosa por la cantidad de bandas que captura…
-Lo verdaderamente extraordinario es su capacidad para volver a mirar, una y otra vez, el mismo lugar del planeta con una frecuencia difícil de igualar.
+<p>Sentinel 2 no solo es poderosa por la cantidad de bandas que captura, lo verdaderamente extraordinario es su capacidad para volver a mirar, una y otra vez, el mismo lugar del planeta con una frecuencia difícil de igualar.
 Durante años, esta misión estuvo compuesta por dos satélites gemelos: Sentinel 2A y Sentinel 2B, operando en la misma órbita para cubrir la superficie terrestre con alta frecuencia. Pero en septiembre de 2024 se produjo un hito importante: el lanzamiento de Sentinel 2C, desde la Guayana Francesa a bordo del último cohete Vega de la Agencia Espacial Europea.
 Aunque Sentinel 2C fue diseñado como satélite de reemplazo, durante una etapa transitoria en 2025, los tres satélites estuvieron operativos de forma simultánea, lo que llevó la frecuencia de revisita a niveles inéditos. En ciertas regiones, ahora es posible observar un mismo punto del territorio con apenas uno o dos días de diferencia entre capturas. Y eso, para quienes trabajamos con análisis multitemporal, es una oportunidad invaluable.
 Este ritmo sostenido de adquisición nos permite construir series temporales detalladas: ver cómo se expande una ciudad, cómo reverdece un bosque tras un incendio, cómo evoluciona un cultivo o cómo fluctúan los cuerpos de agua. Pero claro… semejante constancia tiene un precio. No económico, sino informativo.
@@ -510,24 +529,39 @@ Con tanto conocimiento disponible desde el espacio.
 </div></blockquote>
 <p>El volumen y la complejidad de los datos satelitales nos obliga a pensar de una forma nueva. ¿Cómo podemos analizar millones de imágenes, cada una con múltiples bandas y fechas distintas, sin ahogarnos en un mar de archivos?
 Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el cubo de dato o inglés datacube dádaciubs</p>
-<p><img alt="" src="_images/PlacaJ.png" /></p>
+<figure class="align-default" id="fig-placaj">
+<a class="reference internal image-reference" href="_images/PlacaJ.png"><img alt="_images/PlacaJ.png" src="_images/PlacaJ.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.5 </span><span class="caption-text">Cubo de Datos definición de openEO</span><a class="headerlink" href="#fig-placaj" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Según la plataforma abierta para la observación de la Tierra openEO:</p>
 <blockquote>
-<div><p>“Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.” <span id="id1">[<a class="reference internal" href="Referencias.html#id9" title="openEO Consortium. Data cube concept in openeo. openEO Documentation, 2023. Consultado el 19 de septiembre de 2025. URL: https://openeo.org/documentation/.">openEO Consortium, 2023</a>]</span>.</p>
+<div><p>“Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.” <span id="id2">[<a class="reference internal" href="Referencias.html#id9" title="openEO Consortium. Data cube concept in openeo. openEO Documentation, 2023. Consultado el 19 de septiembre de 2025. URL: https://openeo.org/documentation/.">openEO Consortium, 2023</a>]</span>.</p>
 </div></blockquote>
-<p><img alt="" src="_images/PlacaL.png" /></p>
+<figure class="align-default" id="fig-placal">
+<a class="reference internal image-reference" href="_images/PlacaL.png"><img alt="_images/PlacaL.png" src="_images/PlacaL.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.6 </span><span class="caption-text">Cubo de Datos definición de Giulian et al.</span><a class="headerlink" href="#fig-placal" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <blockquote>
-<div><p>Y según Giuliani et al. <span id="id2">Giuliani <em>et al.</em> [<a class="reference internal" href="Referencias.html#id10" title="Gregory Giuliani, Adrien Dubois, Pierre Lacroix, Bruno Chatenoux, Anthony Lehmann, and Nicolas Ray. Earth observation data cubes for space and time analysis of earth observation data. Data, 1(1):8, 2016. URL: https://www.mdpi.com/2306-5729/1/1/8, doi:10.3390/data1010008.">2016</a>]</span>: “Es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”</p>
+<div><p>Y según Giuliani et al. <span id="id3">Giuliani <em>et al.</em> [<a class="reference internal" href="Referencias.html#id10" title="Gregory Giuliani, Adrien Dubois, Pierre Lacroix, Bruno Chatenoux, Anthony Lehmann, and Nicolas Ray. Earth observation data cubes for space and time analysis of earth observation data. Data, 1(1):8, 2016. URL: https://www.mdpi.com/2306-5729/1/1/8, doi:10.3390/data1010008.">2016</a>]</span>: “Es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”</p>
 </div></blockquote>
-<p><img alt="" src="_images/PlacaM.png" /></p>
+<figure class="align-default" id="fig-placam">
+<a class="reference internal image-reference" href="_images/PlacaM.png"><img alt="_images/PlacaM.png" src="_images/PlacaM.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.7 </span><span class="caption-text">Cubo de Datos: Dimensiones principales</span><a class="headerlink" href="#fig-placam" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>¿Y cuáles son sus dimensiones? Las principales son:</p>
 <ul class="simple">
-<li><p>Espacio: definido por las coordenadas x e y, donde x representa la longitud (el eje horizontal, de oeste a este) y y representa la latitud (el eje vertical, de sur a norte). Estas dos dimensiones permiten ubicar cada píxel en la superficie terrestre.</p></li>
-<li><p>Tiempo: corresponde al momento en que fue adquirida cada imagen, ya sea una fecha o una hora específica. Esta dimensión es clave para el análisis de cambios en el territorio.</p></li>
-<li><p>Espectro: se refiere a las bandas espectrales que capturan diferentes rangos del espectro electromagnético, como el visible, el infrarrojo cercano o el SWIR, lo que permite observar fenómenos que no son visibles a simple vista.</p></li>
+<li><p><strong>Espacio</strong>: definido por las coordenadas x e y, donde x representa la longitud (el eje horizontal, de oeste a este) y y representa la latitud (el eje vertical, de sur a norte). Estas dos dimensiones permiten ubicar cada píxel en la superficie terrestre.</p></li>
+<li><p><strong>Tiempo</strong>: corresponde al momento en que fue adquirida cada imagen, ya sea una fecha o una hora específica. Esta dimensión es clave para el análisis de cambios en el territorio.</p></li>
+<li><p><strong>Espectro</strong>: se refiere a las bandas espectrales que capturan diferentes rangos del espectro electromagnético, como el visible, el infrarrojo cercano o el SWIR, lo que permite observar fenómenos que no son visibles a simple vista.</p></li>
 <li><p>Y, en algunos casos, también la geometría o incluso el sistema de referencia espacial (CRS) como una dimensión adicional.</p></li>
 </ul>
-<p>Esto nos permite hacer operaciones sofisticadas sin necesidad de reestructurar los datos. Por ejemplo:</p>
+<p>Esto nos permite hacer operaciones sofisticadas (ver fig. <a class="reference internal" href="#fig-placan"><span class="std std-numref">Fig. 7.8</span></a>) sin necesidad de reestructurar los datos. Por ejemplo:</p>
 <ul class="simple">
 <li><p>Filtrar el cubo por fechas, bandas o región.</p></li>
 <li><p>Aplicar funciones matemáticas sobre cada píxel o grupo de píxeles.</p></li>
@@ -535,25 +569,35 @@ Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el c
 <li><p>Remuestrear los datos a resoluciones espaciales o temporales diferentes.</p></li>
 <li><p>Y realizar agregaciones estadísticas por regiones geográficas, como cuencas, provincias o áreas de cultivo.</p></li>
 </ul>
-<p><img alt="" src="_images/PlacaN.png" /></p>
+<figure class="align-default" id="fig-placan">
+<a class="reference internal image-reference" href="_images/PlacaN.png"><img alt="_images/PlacaN.png" src="_images/PlacaN.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.8 </span><span class="caption-text">Cubo de Datos: Operaciones sobre el Cubo</span><a class="headerlink" href="#fig-placan" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Un cubo de datos puede ser raster, cuando trabaja con pixeles organizados en grillas, o vectorial, cuando se organiza por geometrías como polígonos o puntos.</p>
 </section>
 <section id="aplicaciones-reales-y-cierre">
 <h2><span class="section-number">7.4. </span>Aplicaciones reales y cierre<a class="headerlink" href="#aplicaciones-reales-y-cierre" title="Link to this heading">#</a></h2>
-<p>Gracias a los cubos de datos, hoy es posible:</p>
+<p>Gracias a los cubos de datos, hoy es posible (ver fig. <a class="reference internal" href="#fig-placap"><span class="std std-numref">Fig. 7.9</span></a>):</p>
 <ul class="simple">
 <li><p>Analizar la evolución mensual del NDVI en una región agrícola.</p></li>
 <li><p>Detectar patrones de urbanización usando índices como NDBI.</p></li>
 <li><p>Entrenar modelos de machine learning sobre cubos multitemporales.</p></li>
 <li><p>Crear tableros interactivos para monitorear el ambiente a gran escala.</p></li>
 </ul>
-<p><img alt="" src="_images/PlacaP.png" /></p>
+<figure class="align-default" id="fig-placap">
+<a class="reference internal image-reference" href="_images/PlacaP.png"><img alt="_images/PlacaP.png" src="_images/PlacaP.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7.9 </span><span class="caption-text">Cubo de Datos: Principales Usos</span><a class="headerlink" href="#fig-placap" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>En definitiva, los cubos de datos no son solo una forma eficiente de almacenar información, sino una herramienta poderosa para transformar datos satelitales en conocimiento accionable.
 Comprender cómo se estructuran, cómo se consultan y cómo se transforman es clave para aprovechar todo el potencial de los datos de observación de la Tierra.</p>
 </section>
 <section id="datacube-de-temperatura-superficial-en-bahia-blanca-con-gee">
 <h2><span class="section-number">7.5. </span>Datacube de temperatura superficial en Bahía Blanca con GEE<a class="headerlink" href="#datacube-de-temperatura-superficial-en-bahia-blanca-con-gee" title="Link to this heading">#</a></h2>
-<p>En este laboratorio vamos a construir y analizar un datacube de temperatura superficial terrestre (LST) para la región de Bahía Blanca, usando imágenes satelitales MODIS desde Google Earth Engine <span id="id3">[<a class="reference internal" href="Referencias.html#id11" title="Google Earth Engine. Modis satellite imagery collections in google earth engine. Google Earth Engine Data Catalog, 2025. Consultado el 19 de septiembre de 2025. URL: https://developers.google.com/earth-engine/datasets/catalog/modis.">Google Earth Engine, 2025</a>]</span>.
+<p>En este laboratorio vamos a construir y analizar un datacube de temperatura superficial terrestre (LST) para la región de Bahía Blanca, usando imágenes satelitales MODIS desde Google Earth Engine <span id="id4">[<a class="reference internal" href="Referencias.html#id11" title="Google Earth Engine. Modis satellite imagery collections in google earth engine. Google Earth Engine Data Catalog, 2025. Consultado el 19 de septiembre de 2025. URL: https://developers.google.com/earth-engine/datasets/catalog/modis.">Google Earth Engine, 2025</a>]</span>.
 Veremos cómo generar mapas mensuales de temperatura, cómo calcular promedios sobre toda el área y cómo exportar esta información para estudios más avanzados.
 Lo más importante: vamos a entender cómo este proceso representa un claro ejemplo del uso de cubo de datos geoespacial.</p>
 <section id="paso-1-definir-la-region-de-interes">
@@ -734,7 +778,7 @@ Este archivo será utilizado luego en Python, para aplicar modelos de análisis 
 </section>
 <section id="que-es-chirps">
 <h2><span class="section-number">7.8. </span>¿Qué es CHIRPS?<a class="headerlink" href="#que-es-chirps" title="Link to this heading">#</a></h2>
-<p>Utilizamos datos de precipitación de CHIRPS (Climate Hazards Group InfraRed Precipitation with Station data) <span id="id4">[<a class="reference internal" href="Referencias.html#id12" title="Chris Funk, Pete Peterson, Martin Landsfeld, Diego Pedreros, James Verdin, Shraddhanand Shukla, Greg Husak, James Rowland, Laura Harrison, Andrew Hoell, and Joel Michaelsen. The climate hazards infrared precipitation with stations—a new environmental record for monitoring extremes. Scientific Data, 2(1):150066, 2015. URL: https://www.nature.com/articles/sdata201566, doi:10.1038/sdata.2015.66.">Funk <em>et al.</em>, 2015</a>]</span>. CHIRPS es un producto de precipitación global que combina observaciones satelitales infrarrojas con datos de estaciones meteorológicas. Está disponible a resolución diaria desde 1981, con una malla espacial de aproximadamente 5 km.
+<p>Utilizamos datos de precipitación de CHIRPS (Climate Hazards Group InfraRed Precipitation with Station data) <span id="id5">[<a class="reference internal" href="Referencias.html#id12" title="Chris Funk, Pete Peterson, Martin Landsfeld, Diego Pedreros, James Verdin, Shraddhanand Shukla, Greg Husak, James Rowland, Laura Harrison, Andrew Hoell, and Joel Michaelsen. The climate hazards infrared precipitation with stations—a new environmental record for monitoring extremes. Scientific Data, 2(1):150066, 2015. URL: https://www.nature.com/articles/sdata201566, doi:10.1038/sdata.2015.66.">Funk <em>et al.</em>, 2015</a>]</span>. CHIRPS es un producto de precipitación global que combina observaciones satelitales infrarrojas con datos de estaciones meteorológicas. Está disponible a resolución diaria desde 1981, con una malla espacial de aproximadamente 5 km.
 Es muy utilizado para estudios hidrológicos, agrícolas y climáticos en todo el mundo, gracias a su cobertura consistente y su accesibilidad.</p>
 <p>¿Cuál es el datacube en este ejemplo?</p>
 <p>En este caso, el datacube es una colección tridimensional de datos, estructurado según:</p>
@@ -879,14 +923,14 @@ Por ejemplo, en el mes de marzo de 2025, se registró un valor atípico de 8.27 
 </div>
 </section>
 </section>
-<section id="id5">
-<h2><span class="section-number">7.11. </span>Conclusión de esta sección<a class="headerlink" href="#id5" title="Link to this heading">#</a></h2>
+<section id="id6">
+<h2><span class="section-number">7.11. </span>Conclusión de esta sección<a class="headerlink" href="#id6" title="Link to this heading">#</a></h2>
 <p>Este ejercicio nos permite construir y visualizar un datacube mensual de precipitación, combinando imágenes diarias CHIRPS. La visualización de cada capa en el mapa junto al gráfico de evolución mensual facilita la detección de anomalías climáticas y proporciona insumos valiosos para análisis posteriores en Python.</p>
 </section>
 <section id="clasificacion-de-tipos-de-suelo-con-sentinel-2-un-enfoque-basado-en-datacubes">
 <h2><span class="section-number">7.12. </span>Clasificación de tipos de suelo con Sentinel-2: un enfoque basado en datacubes<a class="headerlink" href="#clasificacion-de-tipos-de-suelo-con-sentinel-2-un-enfoque-basado-en-datacubes" title="Link to this heading">#</a></h2>
-<section id="id6">
-<h3><span class="section-number">7.12.1. </span>Introducción<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<section id="id7">
+<h3><span class="section-number">7.12.1. </span>Introducción<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
 <p>En este laboratorio, vamos a construir un ejemplo claro de datacube aplicado a la clasificación de tipos de suelo. Utilizaremos imágenes Sentinel-2 armonizadas, clasificaremos por Random Forest y generaremos una serie temporal categórica para el año 2024, con énfasis en su interpretación como cubo de datos espacio-temporal. Vamos paso por paso.</p>
 </section>
 <section id="coleccion-de-imagenes-sentinel-2-y-preparacion-del-mosaico-base">
@@ -1243,8 +1287,8 @@ Gracias al siguiente bloque:</p></li>
 <p>Mostramos un gráfico de líneas con la evolución relativa de cada clase. A diferencia del gráfico anterior, este permite detectar tendencias aunque cambie el número total de píxeles disponibles (por ejemplo, por nubosidad).</p>
 </section>
 </section>
-<section id="id7">
-<h2><span class="section-number">7.15. </span>Conclusión<a class="headerlink" href="#id7" title="Link to this heading">#</a></h2>
+<section id="id8">
+<h2><span class="section-number">7.15. </span>Conclusión<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <p>Con este último código logramos aplicar automáticamente el clasificador de suelos para Rosario a cada período bimestral. A partir de ahí, generamos una serie de tiempo de clases del suelo que nos permite observar tanto los cambios absolutos como los relativos. Este enfoque es ideal para detectar procesos de urbanización, expansión agrícola, deforestación o cambios hidrológicos en el territorio.</p>
 </section>
 <section id="video-del-capitulo">
@@ -1349,9 +1393,9 @@ Gracias al siguiente bloque:</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mejora-estetica-del-mapa">7.10.1. Mejora estética del mapa</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">7.11. Conclusión de esta sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">7.11. Conclusión de esta sección</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-de-tipos-de-suelo-con-sentinel-2-un-enfoque-basado-en-datacubes">7.12. Clasificación de tipos de suelo con Sentinel-2: un enfoque basado en datacubes</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">7.12.1. Introducción</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">7.12.1. Introducción</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coleccion-de-imagenes-sentinel-2-y-preparacion-del-mosaico-base">7.12.2. Colección de imágenes Sentinel-2 y preparación del mosaico base</a></li>
 </ul>
 </li>
@@ -1374,7 +1418,7 @@ Gracias al siguiente bloque:</p></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-7-visualizacion-porcentual">7.14.6. BLOQUE 7: Visualización porcentual</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">7.15. Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">7.15. Conclusión</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">7.16. Video del capítulo</a></li>
 </ul>
   </nav></div>

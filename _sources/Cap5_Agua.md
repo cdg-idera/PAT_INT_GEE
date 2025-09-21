@@ -60,7 +60,7 @@ Si visualizamos el esquema de tabla (ver fig. {numref}`fig-FAO`) de este conjunt
 
 ```{figure} imagenes/FAOSchema.png
 :name: fig-FAO
-:width: 60%
+:width: 100%
 
 El esquema de Global Administrative Unit Layers
 ```

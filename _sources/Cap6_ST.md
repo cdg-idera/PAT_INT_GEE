@@ -6,7 +6,14 @@ Los científicos de datos trabajan con múltiples formas de representar la infor
 
 > Una serie de tiempo consiste en un conjunto de observaciones de una misma variable recogidas a intervalos regulares. Estos intervalos pueden ser diarios, semanales, mensuales, bimensuales, trimestrales, cuatrimestrales, incluso anuales o multianuales, dependiendo del fenómeno que estemos analizando. No es lo mismo estudiar un evento extremo como una inundación —que requiere una resolución diaria— que seguir el avance de la urbanización, que puede analizarse en escalas mensuales o anuales.
 
-![](imagenes/graf1.png)
+
+```{figure} imagenes/graf1.png
+:name: fig-graf1
+:width: 100%
+
+Ilustración sobre Series de Tiempo
+```
+
 
 
 En este primer video vamos a trabajar con un ejemplo concreto y sencillo para introducirnos en el tema: El caso es Bahía Blanca, donde analizamos la evolución mensual durante el año 2024 de una serie de indicadores ambientales derivados de imágenes satelitales *Sentinel-2* y *MODIS*. Calculamos índices como NDVI, NDWI, NDBI, NDMI, NIR y temperatura superficial (LST) (ver en {numref}`fig-indices`) que permiten seguir la dinámica de la vegetación, la presencia de agua, el suelo desnudo, o el impacto del calor. A lo largo del ejemplo, mostramos cómo graficar estas variables, cómo generar las series de tiempo con Google Earth Engine, y cómo exportarlas para su posterior análisis en R o Python.
@@ -18,38 +25,65 @@ En este primer video vamos a trabajar con un ejemplo concreto y sencillo para in
 Indices espectrales y bandas utilizadas en el estudio.
 ```
 
-Ahora bien, para trabajar de forma sólida con series temporales es importante entender que detrás de cada gráfico hay *múltiples componentes interactuando* (ver en {numref}`fig-componentes`). 
+Ahora bien, para trabajar de forma sólida con series temporales es importante entender que detrás de cada gráfico hay *múltiples componentes interactuando* (ver fig. {numref}`fig-componentes`). 
 
 ```{figure} imagenes/componentes.png
 :name: fig-componentes
 :width: 30%
 
-Componentes principales del sistema.
+Serie de Tiempo: Componentes principales.
 ```
 
-Por un lado, está la **tendencia**, ese *comportamiento de largo plazo* que puede marcar una dirección ascendente o descendente.
+Por un lado, está la **tendencia**, ese *comportamiento de largo plazo* que puede marcar una dirección ascendente o descendente (ver en {numref}`fig-tendencia`).
 
-![](imagenes/tendencia.png)
 
-También encontramos **ciclos**, como los que impone el clima o la economía, que pueden repetirse con menor frecuencia pero tener gran impacto.
+```{figure} imagenes/tendencia.png
+:name: fig-tendencia
+:width: 30%
+
+Serie de Tiempo: Tendencia
+```
+
+
+También encontramos **ciclos**, como los que impone el clima o la economía, que pueden repetirse con menor frecuencia pero tener gran impacto (ver en {numref}`fig-ciclo`).
  
-![](imagenes/ciclo.png)
+```{figure} imagenes/ciclo.png
+:name: fig-ciclo
+:width: 30%
 
-La **estacionalidad**, por su parte, nos habla de patrones que se repiten en el mismo periodo cada año: más verdor en primavera, más calor en verano. 
+Serie de Tiempo: Ciclo
+```
+
+La **estacionalidad**, por su parte, nos habla de patrones que se repiten en el mismo periodo cada año: más verdor en primavera, más calor en verano (ver en {numref}`fig-estacionalidad`).
   
-![](imagenes/estacionalidad.png)
+```{figure} imagenes/estacionalidad.png
+:name: fig-estacionalidad
+:width: 30%
 
-Y, por supuesto, el **ruido aleatorio**, esas pequeñas fluctuaciones impredecibles que también forman parte de la realidad.
+Serie de Tiempo: Estacionalidad
+```
 
-![](imagenes/ruido.png)
+
+Y, por supuesto, el **ruido aleatorio**, esas pequeñas fluctuaciones impredecibles que también forman parte de la realidad (ver en {numref}`fig-ruido`).
+  
+```{figure} imagenes/ruido.png
+:name: fig-ruido
+:width: 30%
+
+Serie de Tiempo: Ruido
+```
 
 > ¿Cómo se obtuvieron estos ejemplos gráficos? Fue a partir de la generación de datos sintéticos con el siguiente código en Colab: https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing En el ejemplo se generan gráficos con fondos negro y blanco. El video de este capítulo cuenta con gráficos con fondo negro.
 
 
-Antes de lanzarse a modelar o predecir, conviene detenerse en un análisis exploratorio. Visualizar la serie en un gráfico —con el tiempo en el eje horizontal y el valor en el eje vertical— ya ofrece una gran cantidad de información. A partir de ahí podemos detectar anomalías, rupturas, variaciones estacionales, o comportamientos inesperados.
+Antes de lanzarse a modelar o predecir, conviene detenerse en un análisis exploratorio. Visualizar la serie en un gráfico —con el tiempo en el eje horizontal y el valor en el eje vertical— ya ofrece una gran cantidad de información. A partir de ahí podemos detectar anomalías, rupturas, variaciones estacionales, o comportamientos inesperados (ver en {numref}`fig-DS_ST`).
 
-![](imagenes/DS_ST.png)
+```{figure} imagenes/DS_ST
+:name: fig-DS_ST
+:width: 30%
 
+Imágen Ilustrativa: Analizar y Diseñar
+```
 
 Este análisis puede tener distintos niveles de profundidad. Uno **descriptivo**, que se limita a mostrar lo que ocurre. Otro **explicativo**, que busca entender por qué ocurre: por ejemplo, una caída brusca del NDWI puede relacionarse con una sequía o con una obra de canalización. Y también uno **predictivo**, que usa la historia registrada para anticipar lo que podría venir, como un riesgo ambiental o una oportunidad productiva.
 
@@ -545,21 +579,41 @@ Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de
 
 > "Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real" es una fórmula que resume el potencial de Google Earth Engine (GEE) para generar soluciones científicas y prácticas.
 
-![](imagenes/Satellite_150dpi.png)
+```{figure} imagenes/Satellite_150dpi.png
+:name: fig-Satellite_150dpi
+:width: 70%
 
-> Imágenes satelitales: GEE brinda acceso inmediato a un vasto catálogo de imágenes de observación de la Tierra, que incluye datos de sensores como Landsat, Sentinel, MODIS, entre otros. Esto permite monitorear cambios en el planeta en escalas temporales y espaciales diversas.
+Información Geoespacial: Imágenes Satelitales
+```
+> Imágenes satelitales: GEE brinda acceso inmediato a un vasto catálogo de imágenes de observación de la Tierra, que incluye datos de sensores como Landsat, Sentinel, MODIS, entre otros. Esto permite monitorear cambios en el planeta en escalas temporales y espaciales diversas (ver fig. {numref}`fig-Satellite_150dpi`). 
 
-![](imagenes/Algorithm_150dpi.png)
+```{figure} imagenes/Algorithm_150dpi.png
+:name: fig-Algorithm_150dpi
+:width: 70%
 
-> Tus algoritmos: Los usuarios pueden aplicar sus propios modelos de análisis, ya sean simples cálculos de índices espectrales o complejos algoritmos de **machine learning**, todo dentro del entorno de GEE, aprovechando su capacidad de procesamiento en la nube.
+Pensamiento Algorítmico.
+```
 
-![](imagenes/mundo.png)
 
-> Aplicaciones en el mundo real: Al combinar datos y algoritmos, es posible desarrollar soluciones para problemas concretos como la deforestación, el cambio climático, la planificación urbana, la gestión del agua, la agricultura de precisión y muchos más.
+> Tus algoritmos: Los usuarios pueden aplicar sus propios modelos de análisis, ya sean simples cálculos de índices espectrales o complejos algoritmos de **machine learning**, todo dentro del entorno de GEE, aprovechando su capacidad de procesamiento en la nube  (ver fig. {numref}`fig-Algorithm_150dpi`). 
 
-En conjunto, ¡esta fórmula representa cómo GEE empodera a los científicos, desarrolladores y tomadores de decisiones para transformar datos en conocimiento y acción!.
+```{figure} imagenes/mundo.png
+:name: fig-mundo
+:width: 70%
 
-![](imagenes/interApp.png)
+Aplicaciones en el mundo real.
+```
+
+> Aplicaciones en el mundo real: Al combinar datos y algoritmos, es posible desarrollar soluciones para problemas concretos como la deforestación, el cambio climático, la planificación urbana, la gestión del agua, la agricultura de precisión y muchos más (ver fig. {numref}`fig-mundo`). 
+
+En conjunto, ¡esta fórmula, cuyos íconos se muestran en fig. {numref}`fig-interApp`, representa cómo GEE empodera a los científicos, desarrolladores y tomadores de decisiones para transformar datos en conocimiento y acción!
+
+```{figure} imagenes/interApp.png
+:name: fig-interApp
+:width: 70%
+
+Fórmula: Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real
+```
 
 En el próximo capítulo de esta serie Time Series, calcularemos mas series temporales de precipitaciones, y obtendremos una serie etemporal de tipos de suelo de Rosario utilizando el clasificador de Random Forest de un video anterior. Nos enfocaremos en ver esos ejemplos en el marco de la teoría de cubos de datos de Imágenes Satelitales.
 

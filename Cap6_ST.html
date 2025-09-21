@@ -424,34 +424,64 @@ document.write(`
 <blockquote>
 <div><p>Una serie de tiempo consiste en un conjunto de observaciones de una misma variable recogidas a intervalos regulares. Estos intervalos pueden ser diarios, semanales, mensuales, bimensuales, trimestrales, cuatrimestrales, incluso anuales o multianuales, dependiendo del fenómeno que estemos analizando. No es lo mismo estudiar un evento extremo como una inundación —que requiere una resolución diaria— que seguir el avance de la urbanización, que puede analizarse en escalas mensuales o anuales.</p>
 </div></blockquote>
-<p><img alt="" src="_images/graf1.png" /></p>
+<figure class="align-default" id="fig-graf1">
+<a class="reference internal image-reference" href="_images/graf1.png"><img alt="_images/graf1.png" src="_images/graf1.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Ilustración sobre Series de Tiempo</span><a class="headerlink" href="#fig-graf1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>En este primer video vamos a trabajar con un ejemplo concreto y sencillo para introducirnos en el tema: El caso es Bahía Blanca, donde analizamos la evolución mensual durante el año 2024 de una serie de indicadores ambientales derivados de imágenes satelitales <em>Sentinel-2</em> y <em>MODIS</em>. Calculamos índices como NDVI, NDWI, NDBI, NDMI, NIR y temperatura superficial (LST) (ver en <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig-indices</span></code>) que permiten seguir la dinámica de la vegetación, la presencia de agua, el suelo desnudo, o el impacto del calor. A lo largo del ejemplo, mostramos cómo graficar estas variables, cómo generar las series de tiempo con Google Earth Engine, y cómo exportarlas para su posterior análisis en R o Python.</p>
 <figure class="align-default" id="fig-indices">
 <a class="reference internal image-reference" href="_images/IndicesST.png"><img alt="_images/IndicesST.png" src="_images/IndicesST.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Indices espectrales y bandas utilizadas en el estudio.</span><a class="headerlink" href="#fig-indices" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 6.2 </span><span class="caption-text">Indices espectrales y bandas utilizadas en el estudio.</span><a class="headerlink" href="#fig-indices" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Ahora bien, para trabajar de forma sólida con series temporales es importante entender que detrás de cada gráfico hay <em>múltiples componentes interactuando</em> (ver en <a class="reference internal" href="#fig-componentes"><span class="std std-numref">Fig. 6.2</span></a>).</p>
+<p>Ahora bien, para trabajar de forma sólida con series temporales es importante entender que detrás de cada gráfico hay <em>múltiples componentes interactuando</em> (ver fig. <a class="reference internal" href="#fig-componentes"><span class="std std-numref">Fig. 6.3</span></a>).</p>
 <figure class="align-default" id="fig-componentes">
 <a class="reference internal image-reference" href="_images/componentes.png"><img alt="_images/componentes.png" src="_images/componentes.png" style="width: 30%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.2 </span><span class="caption-text">Componentes principales del sistema.</span><a class="headerlink" href="#fig-componentes" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 6.3 </span><span class="caption-text">Serie de Tiempo: Componentes principales.</span><a class="headerlink" href="#fig-componentes" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Por un lado, está la <strong>tendencia</strong>, ese <em>comportamiento de largo plazo</em> que puede marcar una dirección ascendente o descendente.</p>
-<p><img alt="" src="_images/tendencia.png" /></p>
-<p>También encontramos <strong>ciclos</strong>, como los que impone el clima o la economía, que pueden repetirse con menor frecuencia pero tener gran impacto.</p>
-<p><img alt="" src="_images/ciclo.png" /></p>
-<p>La <strong>estacionalidad</strong>, por su parte, nos habla de patrones que se repiten en el mismo periodo cada año: más verdor en primavera, más calor en verano.</p>
-<p><img alt="" src="_images/estacionalidad.png" /></p>
-<p>Y, por supuesto, el <strong>ruido aleatorio</strong>, esas pequeñas fluctuaciones impredecibles que también forman parte de la realidad.</p>
-<p><img alt="" src="_images/ruido.png" /></p>
+<p>Por un lado, está la <strong>tendencia</strong>, ese <em>comportamiento de largo plazo</em> que puede marcar una dirección ascendente o descendente (ver en <a class="reference internal" href="#fig-tendencia"><span class="std std-numref">Fig. 6.4</span></a>).</p>
+<figure class="align-default" id="fig-tendencia">
+<a class="reference internal image-reference" href="_images/tendencia.png"><img alt="_images/tendencia.png" src="_images/tendencia.png" style="width: 30%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.4 </span><span class="caption-text">Serie de Tiempo: Tendencia</span><a class="headerlink" href="#fig-tendencia" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>También encontramos <strong>ciclos</strong>, como los que impone el clima o la economía, que pueden repetirse con menor frecuencia pero tener gran impacto (ver en <a class="reference internal" href="#fig-ciclo"><span class="std std-numref">Fig. 6.5</span></a>).</p>
+<figure class="align-default" id="fig-ciclo">
+<a class="reference internal image-reference" href="_images/ciclo.png"><img alt="_images/ciclo.png" src="_images/ciclo.png" style="width: 30%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.5 </span><span class="caption-text">Serie de Tiempo: Ciclo</span><a class="headerlink" href="#fig-ciclo" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>La <strong>estacionalidad</strong>, por su parte, nos habla de patrones que se repiten en el mismo periodo cada año: más verdor en primavera, más calor en verano (ver en <a class="reference internal" href="#fig-estacionalidad"><span class="std std-numref">Fig. 6.6</span></a>).</p>
+<figure class="align-default" id="fig-estacionalidad">
+<a class="reference internal image-reference" href="_images/estacionalidad.png"><img alt="_images/estacionalidad.png" src="_images/estacionalidad.png" style="width: 30%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.6 </span><span class="caption-text">Serie de Tiempo: Estacionalidad</span><a class="headerlink" href="#fig-estacionalidad" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Y, por supuesto, el <strong>ruido aleatorio</strong>, esas pequeñas fluctuaciones impredecibles que también forman parte de la realidad (ver en <a class="reference internal" href="#fig-ruido"><span class="std std-numref">Fig. 6.7</span></a>).</p>
+<figure class="align-default" id="fig-ruido">
+<a class="reference internal image-reference" href="_images/ruido.png"><img alt="_images/ruido.png" src="_images/ruido.png" style="width: 30%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.7 </span><span class="caption-text">Serie de Tiempo: Ruido</span><a class="headerlink" href="#fig-ruido" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <blockquote>
 <div><p>¿Cómo se obtuvieron estos ejemplos gráficos? Fue a partir de la generación de datos sintéticos con el siguiente código en Colab: <a class="reference external" href="https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing">https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing</a> En el ejemplo se generan gráficos con fondos negro y blanco. El video de este capítulo cuenta con gráficos con fondo negro.</p>
 </div></blockquote>
-<p>Antes de lanzarse a modelar o predecir, conviene detenerse en un análisis exploratorio. Visualizar la serie en un gráfico —con el tiempo en el eje horizontal y el valor en el eje vertical— ya ofrece una gran cantidad de información. A partir de ahí podemos detectar anomalías, rupturas, variaciones estacionales, o comportamientos inesperados.</p>
-<p><img alt="" src="_images/DS_ST.png" /></p>
+<p>Antes de lanzarse a modelar o predecir, conviene detenerse en un análisis exploratorio. Visualizar la serie en un gráfico —con el tiempo en el eje horizontal y el valor en el eje vertical— ya ofrece una gran cantidad de información. A partir de ahí podemos detectar anomalías, rupturas, variaciones estacionales, o comportamientos inesperados (ver en <a class="reference internal" href="#fig-ds-st"><span class="std std-numref">Fig. 6.8</span></a>).</p>
+<figure class="align-default" id="fig-ds-st">
+<a class="reference internal image-reference" href="imagenes/DS_ST"><img alt="imagenes/DS_ST" src="imagenes/DS_ST" style="width: 30%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.8 </span><span class="caption-text">Imágen Ilustrativa: Analizar y Diseñar</span><a class="headerlink" href="#fig-ds-st" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Este análisis puede tener distintos niveles de profundidad. Uno <strong>descriptivo</strong>, que se limita a mostrar lo que ocurre. Otro <strong>explicativo</strong>, que busca entender por qué ocurre: por ejemplo, una caída brusca del NDWI puede relacionarse con una sequía o con una obra de canalización. Y también uno <strong>predictivo</strong>, que usa la historia registrada para anticipar lo que podría venir, como un riesgo ambiental o una oportunidad productiva.</p>
 <p>Pero para que todo esto funcione, es fundamental tener algunos conceptos claros desde el inicio. Primero, es indispensable conocer el <em>dominio del fenómeno</em> que estamos estudiando: no podemos interpretar una serie de NDVI si no entendemos qué mide ese índice y cómo se comporta en distintos tipos de cobertura, como cultivos, bosques o zonas urbanas. También es clave <em>tener un objetivo bien definido</em>: ¿Queremos monitorear degradación ambiental? ¿Comparar campañas agrícolas? ¿Estudiar procesos de urbanización? Estas decisiones condicionan cómo configuramos nuestra serie: <em>qué resolución temporal</em> elegimos, a qué <em>escala espacial</em> trabajaremos, qué variables o índices vamos a incorporar.</p>
 <p>Este video tiene un enfoque introductorio. No busca dar una explicación exhaustiva de todos los componentes técnicos que intervienen en el análisis temporal, sino más bien motivar el uso de las series de tiempo como una herramienta clave en el análisis de información geoespacial con técnicas de inteligencia artificial. Por cuestiones de tiempo, no se abordan en profundidad aspectos como los fundamentos de los índices espectrales o los modelos de series temporales. Por eso, si te interesa avanzar, te recomendamos complementar este material con cursos específicos de teledetección y análisis de series de tiempo, que te brinden una base teórica y metodológica más sólida.</p>
@@ -581,11 +611,11 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>Configuración estética del gráfico (ver Figura <a class="reference internal" href="#fig-indicesbb"><span class="std std-numref">Fig. 6.3</span></a>).</p>
+<p>Configuración estética del gráfico (ver Figura <a class="reference internal" href="#fig-indicesbb"><span class="std std-numref">Fig. 6.9</span></a>).</p>
 <figure class="align-default" id="fig-indicesbb">
 <a class="reference internal image-reference" href="_images/stIndicesBB.png"><img alt="_images/stIndicesBB.png" src="_images/stIndicesBB.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.3 </span><span class="caption-text">Serie temporal: valores promedio de NDVI, NDBI, NDWI, NDMI, NIR para el partido de Bahía Blanca, año 2024.</span><a class="headerlink" href="#fig-indicesbb" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 6.9 </span><span class="caption-text">Serie temporal: valores promedio de NDVI, NDBI, NDWI, NDMI, NIR para el partido de Bahía Blanca, año 2024.</span><a class="headerlink" href="#fig-indicesbb" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -614,11 +644,11 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <span class="p">})</span>
 </pre></div>
 </div>
-<p>Genera un gráfico de temperatura superficial promedio (ver Figura <a class="reference internal" href="#fig-preci"><span class="std std-numref">Fig. 6.4</span></a>).</p>
+<p>Genera un gráfico de temperatura superficial promedio (ver Figura <a class="reference internal" href="#fig-preci"><span class="std std-numref">Fig. 6.10</span></a>).</p>
 <figure class="align-default" id="fig-preci">
 <a class="reference internal image-reference" href="_images/stPrecipitacion.png"><img alt="_images/stPrecipitacion.png" src="_images/stPrecipitacion.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.4 </span><span class="caption-text">Figura generada en GEE de la serie temporal de temperatura promedio para el partido de Bahía Blanca</span><a class="headerlink" href="#fig-preci" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 6.10 </span><span class="caption-text">Figura generada en GEE de la serie temporal de temperatura promedio para el partido de Bahía Blanca</span><a class="headerlink" href="#fig-preci" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -628,7 +658,7 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="_images/interApp2.png"><img alt="_images/interApp2.png" src="_images/interApp2.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.5 </span><span class="caption-text">Exportación de archivos CSV de GEE a python, R y Power BI.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 6.11 </span><span class="caption-text">Exportación de archivos CSV de GEE a python, R y Power BI.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>a) <strong>Para Sentinel-2:</strong></p>
@@ -678,11 +708,11 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 </section>
 <section id="conclusion-de-la-seccion">
 <h2><span class="section-number">6.10. </span>Conclusión de la sección<a class="headerlink" href="#conclusion-de-la-seccion" title="Link to this heading">#</a></h2>
-<p>La Figura <a class="reference internal" href="#fig-indicesp15"><span class="std std-numref">Fig. 6.6</span></a> muestra algunas conclusiones de la sección:</p>
+<p>La Figura <a class="reference internal" href="#fig-indicesp15"><span class="std std-numref">Fig. 6.12</span></a> muestra algunas conclusiones de la sección:</p>
 <figure class="align-default" id="fig-indicesp15">
 <a class="reference internal image-reference" href="_images/Placa15.png"><img alt="_images/Placa15.png" src="_images/Placa15.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.6 </span><span class="caption-text">Algunas Conclusiones de la sección</span><a class="headerlink" href="#fig-indicesp15" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 6.12 </span><span class="caption-text">Algunas Conclusiones de la sección</span><a class="headerlink" href="#fig-indicesp15" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -693,7 +723,7 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <figure class="align-default" id="fig-spectral">
 <a class="reference internal image-reference" href="_images/spectral.png"><img alt="_images/spectral.png" src="_images/spectral.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.7 </span><span class="caption-text">ïcono de la librería Spectral que implementa ASI en JS</span><a class="headerlink" href="#fig-spectral" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 6.13 </span><span class="caption-text">ïcono de la librería Spectral que implementa ASI en JS</span><a class="headerlink" href="#fig-spectral" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="como-funciona-importar-el-modulo">
@@ -848,20 +878,40 @@ Lab_006_TS_BahiaBlanca_BIS</p>
 <blockquote>
 <div><p>“Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real” es una fórmula que resume el potencial de Google Earth Engine (GEE) para generar soluciones científicas y prácticas.</p>
 </div></blockquote>
-<p><img alt="" src="_images/Satellite_150dpi.png" /></p>
+<figure class="align-default" id="fig-satellite-150dpi">
+<a class="reference internal image-reference" href="_images/Satellite_150dpi.png"><img alt="_images/Satellite_150dpi.png" src="_images/Satellite_150dpi.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.14 </span><span class="caption-text">Información Geoespacial: Imágenes Satelitales</span><a class="headerlink" href="#fig-satellite-150dpi" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <blockquote>
-<div><p>Imágenes satelitales: GEE brinda acceso inmediato a un vasto catálogo de imágenes de observación de la Tierra, que incluye datos de sensores como Landsat, Sentinel, MODIS, entre otros. Esto permite monitorear cambios en el planeta en escalas temporales y espaciales diversas.</p>
+<div><p>Imágenes satelitales: GEE brinda acceso inmediato a un vasto catálogo de imágenes de observación de la Tierra, que incluye datos de sensores como Landsat, Sentinel, MODIS, entre otros. Esto permite monitorear cambios en el planeta en escalas temporales y espaciales diversas (ver fig. <a class="reference internal" href="#fig-satellite-150dpi"><span class="std std-numref">Fig. 6.14</span></a>).</p>
 </div></blockquote>
-<p><img alt="" src="_images/Algorithm_150dpi.png" /></p>
+<figure class="align-default" id="fig-algorithm-150dpi">
+<a class="reference internal image-reference" href="_images/Algorithm_150dpi.png"><img alt="_images/Algorithm_150dpi.png" src="_images/Algorithm_150dpi.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.15 </span><span class="caption-text">Pensamiento Algorítmico.</span><a class="headerlink" href="#fig-algorithm-150dpi" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <blockquote>
-<div><p>Tus algoritmos: Los usuarios pueden aplicar sus propios modelos de análisis, ya sean simples cálculos de índices espectrales o complejos algoritmos de <strong>machine learning</strong>, todo dentro del entorno de GEE, aprovechando su capacidad de procesamiento en la nube.</p>
+<div><p>Tus algoritmos: Los usuarios pueden aplicar sus propios modelos de análisis, ya sean simples cálculos de índices espectrales o complejos algoritmos de <strong>machine learning</strong>, todo dentro del entorno de GEE, aprovechando su capacidad de procesamiento en la nube  (ver fig. <a class="reference internal" href="#fig-algorithm-150dpi"><span class="std std-numref">Fig. 6.15</span></a>).</p>
 </div></blockquote>
-<p><img alt="" src="_images/mundo.png" /></p>
+<figure class="align-default" id="fig-mundo">
+<a class="reference internal image-reference" href="_images/mundo.png"><img alt="_images/mundo.png" src="_images/mundo.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.16 </span><span class="caption-text">Aplicaciones en el mundo real.</span><a class="headerlink" href="#fig-mundo" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <blockquote>
-<div><p>Aplicaciones en el mundo real: Al combinar datos y algoritmos, es posible desarrollar soluciones para problemas concretos como la deforestación, el cambio climático, la planificación urbana, la gestión del agua, la agricultura de precisión y muchos más.</p>
+<div><p>Aplicaciones en el mundo real: Al combinar datos y algoritmos, es posible desarrollar soluciones para problemas concretos como la deforestación, el cambio climático, la planificación urbana, la gestión del agua, la agricultura de precisión y muchos más (ver fig. <a class="reference internal" href="#fig-mundo"><span class="std std-numref">Fig. 6.16</span></a>).</p>
 </div></blockquote>
-<p>En conjunto, ¡esta fórmula representa cómo GEE empodera a los científicos, desarrolladores y tomadores de decisiones para transformar datos en conocimiento y acción!.</p>
-<p><img alt="" src="_images/interApp.png" /></p>
+<p>En conjunto, ¡esta fórmula, cuyos íconos se muestran en fig. <a class="reference internal" href="#fig-interapp"><span class="std std-numref">Fig. 6.17</span></a>, representa cómo GEE empodera a los científicos, desarrolladores y tomadores de decisiones para transformar datos en conocimiento y acción!</p>
+<figure class="align-default" id="fig-interapp">
+<a class="reference internal image-reference" href="_images/interApp.png"><img alt="_images/interApp.png" src="_images/interApp.png" style="width: 70%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6.17 </span><span class="caption-text">Fórmula: Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real</span><a class="headerlink" href="#fig-interapp" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>En el próximo capítulo de esta serie Time Series, calcularemos mas series temporales de precipitaciones, y obtendremos una serie etemporal de tipos de suelo de Rosario utilizando el clasificador de Random Forest de un video anterior. Nos enfocaremos en ver esos ejemplos en el marco de la teoría de cubos de datos de Imágenes Satelitales.</p>
 </section>
 <section id="video-del-capitulo">

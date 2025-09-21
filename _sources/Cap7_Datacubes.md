@@ -26,22 +26,40 @@ Generamos un cubo categórico bimestral de tipos de suelo (agua, urbano, cultivo
 
 Al observar una imagen tomada desde un satélite, es tentador pensar que estamos viendo una simple foto de la Tierra como si fuera una fotografía aérea en alta resolución, pero eso sería una visión limitada, sería reducirla a lo que nuestros ojos alcanzan a ver, cuando en realidad hay mucho más que eso. 
 
-![](imagenes/spectrum.png)
+```{figure} imagenes/spectrum.png
+:name: fig-spectrum
+:width: 100%
 
-En verdad, lo que capturan los satélites no es una simple imagen como una fotografía convencional, sino un conjunto de bandas espectrales, cada una correspondiente a una distinta longitud de onda del espectro electromagnético
+Esquema del Espectro Electromagnetico.
+```
+En verdad, lo que capturan los satélites no es una simple imagen como una fotografía convencional, sino un conjunto de bandas espectrales, cada una correspondiente a una distinta longitud de onda del espectro electromagnético (ver fig. {numref}`fig-spectrum`)
 
 
+```{figure} imagenes/PlacaNegraMedia2.png
+:name: fig-PlacaNegraMedia2
+:width: 100%
+
+Tips sobre Indices Espectrales
+```
 
 
-![](imagenes/PlacaNegraMedia2.png)
+Estas bandas, combinadas, forman una representación detallada y multidimensional de lo que ocurre en la superficie terrestre. Pero la información no termina acá, las bandas pueden ser utilizadas individualmente o combinadas mediante índices espectrales  (ver fig. {numref}`fig-PlacaNegraMedia2`), que son fórmulas matemáticas diseñadas para resaltar ciertos fenómenos, como la vegetación, el agua, los suelos y las áreas urbanas, en función de su comportamiento espectral. 
 
-Estas bandas, combinadas, forman una representación detallada y multidimensional de lo que ocurre en la superficie terrestre. Pero la información no termina acá, las bandas pueden ser utilizadas individualmente o combinadas mediante índices espectrales, que son fórmulas matemáticas diseñadas para resaltar ciertos fenómenos, como la vegetación, el agua, los suelos y las áreas urbanas, en función de su comportamiento espectral. 
+```{figure} imagenes/PlacaNegraMedia1.png
+:name: fig-PlacaNegraMedia1
+:width: 100%
 
-![](imagenes/PlacaNegraMedia1.png)
+Catálogo ASI: Dominios de Aplicación
+```
 
-El catálogo awesome spectral indecis, reúne más de 250 de estos índices organizados por dominio de aplicación, lo que lo convierte en una herramienta clave para interpretar y extraer información significativa de las imágenes satelitales. El cumulo de cientos de índices de este catálogo puede ser accedido desde distintos paquetes en lenguajes d eprogramacion como javascript, Python, R y julia.
+El catálogo **Awesome Spectral Indices (ASI)** {cite:p}`montero2023standardized`, reúne más de 250 de estos índices organizados por dominio de aplicación (ver fig. {numref}`fig-PlacaNegraMedia1`), lo que lo convierte en una herramienta clave para interpretar y extraer información significativa de las imágenes satelitales. El cumulo de cientos de índices de este catálogo puede ser accedido desde distintos paquetes en lenguajes d eprogramacion como javascript, Python, R y julia (ver fig. {numref}`fig-asiUsedBy`).
 
-![](imagenes/asiUsedBy.png)
+```{figure} imagenes/asiUsedBy.png
+:name: fig-asiUsedBy
+:width: 100%
+
+Catálogo ASI: Paquetes y librerías para JS, Python, R y Julia
+```
 
 Un excelente ejemplo de esta riqueza espectral es la misión Sentinel-2, operada por la Agencia Espacial Europea. Esta misión no toma simplemente una foto del planeta, sino que registra 13 bandas espectrales distintas, distribuidas en diferentes partes del espectro electromagnético y con distintas resoluciones espaciales 10, 20 y 60 metros, cada una con un propósito específico.
 
@@ -54,12 +72,11 @@ banda 10, cirrus, diseñada específicamente para la detección de nubes cirrus 
 banda 11 y banda 12, SWIR 1 y SWIR 2, bandas en el infrarrojo de onda corta, útiles para analizar contenido de  humedad del suelo, nieve, hielo o detectar áreas afectadas por incendios, resolución 20 metros, 
 Cada una de estas bandas aporta una capa distinta de información. Y al combinar esta riqueza espectral con series temporales, índices matemáticos e inteligencia artificial, podemos transformar simples imágenes en verdaderos análisis dinámicos del territorio.
 Entonces, lo que vemos como una imagen, en realidad, es una colección multidimensional de datos espectrales. Cada píxel tiene múltiples valores asociados, uno por cada banda, revelando propiedades biofísicas que no podríamos captar con nuestros sentidos. Es como si viéramos el mundo con “ojos científicos”.
-Y esto ocurre para cada punto de la Tierra observado por la misión. Pero además, estos puntos no se observan una única vez
+Y esto ocurre para cada punto de la Tierra observado por la misión. Pero además, estos puntos no se observan una única vez.
 
 ## Revisitando la Tierra: frecuencia y volumen de datos en Sentinel 2
 
-Sentinel 2 no solo es poderosa por la cantidad de bandas que captura…
-Lo verdaderamente extraordinario es su capacidad para volver a mirar, una y otra vez, el mismo lugar del planeta con una frecuencia difícil de igualar.
+Sentinel 2 no solo es poderosa por la cantidad de bandas que captura, lo verdaderamente extraordinario es su capacidad para volver a mirar, una y otra vez, el mismo lugar del planeta con una frecuencia difícil de igualar.
 Durante años, esta misión estuvo compuesta por dos satélites gemelos: Sentinel 2A y Sentinel 2B, operando en la misma órbita para cubrir la superficie terrestre con alta frecuencia. Pero en septiembre de 2024 se produjo un hito importante: el lanzamiento de Sentinel 2C, desde la Guayana Francesa a bordo del último cohete Vega de la Agencia Espacial Europea.
 Aunque Sentinel 2C fue diseñado como satélite de reemplazo, durante una etapa transitoria en 2025, los tres satélites estuvieron operativos de forma simultánea, lo que llevó la frecuencia de revisita a niveles inéditos. En ciertas regiones, ahora es posible observar un mismo punto del territorio con apenas uno o dos días de diferencia entre capturas. Y eso, para quienes trabajamos con análisis multitemporal, es una oportunidad invaluable.
 Este ritmo sostenido de adquisición nos permite construir series temporales detalladas: ver cómo se expande una ciudad, cómo reverdece un bosque tras un incendio, cómo evoluciona un cultivo o cómo fluctúan los cuerpos de agua. Pero claro… semejante constancia tiene un precio. No económico, sino informativo.
@@ -79,28 +96,40 @@ Con tanto conocimiento disponible desde el espacio.
 El volumen y la complejidad de los datos satelitales nos obliga a pensar de una forma nueva. ¿Cómo podemos analizar millones de imágenes, cada una con múltiples bandas y fechas distintas, sin ahogarnos en un mar de archivos?
 Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el cubo de dato o inglés datacube dádaciubs
 
-![](imagenes/PlacaJ.png)
+```{figure} imagenes/PlacaJ.png
+:name: fig-PlacaJ
+:width: 100%
+
+Cubo de Datos definición de openEO
+```
 
 Según la plataforma abierta para la observación de la Tierra openEO:
 
 > “Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.” {cite:p}`openeo_datacube`.
 
+```{figure} imagenes/PlacaL.png
+:name: fig-PlacaL
+:width: 100%
 
-![](imagenes/PlacaL.png)
+Cubo de Datos definición de Giulian et al.
+```
 
 > Y según Giuliani et al. {cite:t}`giuliani2016datacube`: “Es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”
 
+```{figure} imagenes/PlacaM.png
+:name: fig-PlacaM
+:width: 100%
 
-
-![](imagenes/PlacaM.png)
+Cubo de Datos: Dimensiones principales
+```
 
 ¿Y cuáles son sus dimensiones? Las principales son:
-*	Espacio: definido por las coordenadas x e y, donde x representa la longitud (el eje horizontal, de oeste a este) y y representa la latitud (el eje vertical, de sur a norte). Estas dos dimensiones permiten ubicar cada píxel en la superficie terrestre.
-*	Tiempo: corresponde al momento en que fue adquirida cada imagen, ya sea una fecha o una hora específica. Esta dimensión es clave para el análisis de cambios en el territorio.
-*	Espectro: se refiere a las bandas espectrales que capturan diferentes rangos del espectro electromagnético, como el visible, el infrarrojo cercano o el SWIR, lo que permite observar fenómenos que no son visibles a simple vista.
+*	**Espacio**: definido por las coordenadas x e y, donde x representa la longitud (el eje horizontal, de oeste a este) y y representa la latitud (el eje vertical, de sur a norte). Estas dos dimensiones permiten ubicar cada píxel en la superficie terrestre.
+*	**Tiempo**: corresponde al momento en que fue adquirida cada imagen, ya sea una fecha o una hora específica. Esta dimensión es clave para el análisis de cambios en el territorio.
+*	**Espectro**: se refiere a las bandas espectrales que capturan diferentes rangos del espectro electromagnético, como el visible, el infrarrojo cercano o el SWIR, lo que permite observar fenómenos que no son visibles a simple vista.
 *	Y, en algunos casos, también la geometría o incluso el sistema de referencia espacial (CRS) como una dimensión adicional.
 
-Esto nos permite hacer operaciones sofisticadas sin necesidad de reestructurar los datos. Por ejemplo:
+Esto nos permite hacer operaciones sofisticadas (ver fig. {numref}`fig-PlacaN`) sin necesidad de reestructurar los datos. Por ejemplo:
 
 *	Filtrar el cubo por fechas, bandas o región.
 *	Aplicar funciones matemáticas sobre cada píxel o grupo de píxeles.
@@ -108,19 +137,30 @@ Esto nos permite hacer operaciones sofisticadas sin necesidad de reestructurar l
 *	Remuestrear los datos a resoluciones espaciales o temporales diferentes.
 *	Y realizar agregaciones estadísticas por regiones geográficas, como cuencas, provincias o áreas de cultivo.
 
-![](imagenes/PlacaN.png)
+```{figure} imagenes/PlacaN.png
+:name: fig-PlacaN
+:width: 100%
+
+Cubo de Datos: Operaciones sobre el Cubo
+```
 
 Un cubo de datos puede ser raster, cuando trabaja con pixeles organizados en grillas, o vectorial, cuando se organiza por geometrías como polígonos o puntos.
 
 ## Aplicaciones reales y cierre
 
-Gracias a los cubos de datos, hoy es posible:
+Gracias a los cubos de datos, hoy es posible (ver fig. {numref}`fig-PlacaP`):
+
 *	Analizar la evolución mensual del NDVI en una región agrícola.
 *	Detectar patrones de urbanización usando índices como NDBI.
 *	Entrenar modelos de machine learning sobre cubos multitemporales.
 *	Crear tableros interactivos para monitorear el ambiente a gran escala.
 
-![](imagenes/PlacaP.png)
+```{figure} imagenes/PlacaP.png
+:name: fig-PlacaP
+:width: 100%
+
+Cubo de Datos: Principales Usos
+```
 
 En definitiva, los cubos de datos no son solo una forma eficiente de almacenar información, sino una herramienta poderosa para transformar datos satelitales en conocimiento accionable.
 Comprender cómo se estructuran, cómo se consultan y cómo se transforman es clave para aprovechar todo el potencial de los datos de observación de la Tierra.
