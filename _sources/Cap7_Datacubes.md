@@ -26,8 +26,8 @@ Generamos un cubo categórico bimestral de tipos de suelo (agua, urbano, cultivo
 
 Al observar una imagen tomada desde un satélite, es tentador pensar que estamos viendo una simple foto de la Tierra como si fuera una fotografía aérea en alta resolución, pero eso sería una visión limitada, sería reducirla a lo que nuestros ojos alcanzan a ver, cuando en realidad hay mucho más que eso. 
 
-```{figure} imagenes/spectrum.png
-:name: fig-spectrum
+```{figure} imagenes/spectrum1.png
+:name: fig-spectrum1
 :width: 100%
 
 Esquema del Espectro Electromagnetico.
@@ -37,7 +37,7 @@ En verdad, lo que capturan los satélites no es una simple imagen como una fotog
 
 ```{figure} imagenes/PlacaNegraMedia2.png
 :name: fig-PlacaNegraMedia2
-:width: 100%
+:width: 70%
 
 Tips sobre Indices Espectrales
 ```
@@ -47,7 +47,7 @@ Estas bandas, combinadas, forman una representación detallada y multidimensiona
 
 ```{figure} imagenes/PlacaNegraMedia1.png
 :name: fig-PlacaNegraMedia1
-:width: 100%
+:width: 70%
 
 Catálogo ASI: Dominios de Aplicación
 ```
@@ -979,7 +979,7 @@ Con este último código logramos aplicar automáticamente el clasificador de su
 
 ## Video del capítulo
 
-Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: ttps://www.youtube.com/watch?v=mxV8URF8z9U&t=1538s
+Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: https://www.youtube.com/watch?v=mxV8URF8z9U&t=1538s
 
 
 
