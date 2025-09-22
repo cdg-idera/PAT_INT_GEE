@@ -581,17 +581,17 @@ Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de
 
 ```{figure} imagenes/Satellite_150dpi.png
 :name: fig-Satellite_150dpi
-:width: 70%
+:width: 40%
 
-Información Geoespacial: Imágenes Satelitales
+Ícono de la Fórmula: Imágenes Satelitales
 ```
 > Imágenes satelitales: GEE brinda acceso inmediato a un vasto catálogo de imágenes de observación de la Tierra, que incluye datos de sensores como Landsat, Sentinel, MODIS, entre otros. Esto permite monitorear cambios en el planeta en escalas temporales y espaciales diversas (ver fig. {numref}`fig-Satellite_150dpi`). 
 
 ```{figure} imagenes/Algorithm_150dpi.png
 :name: fig-Algorithm_150dpi
-:width: 70%
+:width: 40%
 
-Pensamiento Algorítmico.
+Ícono de la Fórmula: Pensamiento Algorítmico.
 ```
 
 
@@ -599,9 +599,9 @@ Pensamiento Algorítmico.
 
 ```{figure} imagenes/mundo.png
 :name: fig-mundo
-:width: 70%
+:width: 40%
 
-Aplicaciones en el mundo real.
+Ícono de la Fórmula: Aplicaciones en el mundo real.
 ```
 
 > Aplicaciones en el mundo real: Al combinar datos y algoritmos, es posible desarrollar soluciones para problemas concretos como la deforestación, el cambio climático, la planificación urbana, la gestión del agua, la agricultura de precisión y muchos más (ver fig. {numref}`fig-mundo`). 
@@ -610,7 +610,7 @@ En conjunto, ¡esta fórmula, cuyos íconos se muestran en fig. {numref}`fig-int
 
 ```{figure} imagenes/interApp.png
 :name: fig-interApp
-:width: 70%
+:width: 80%
 
 Fórmula: Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real
 ```
