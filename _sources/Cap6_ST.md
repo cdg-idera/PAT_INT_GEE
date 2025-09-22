@@ -78,7 +78,7 @@ Serie de Tiempo: Ruido
 
 Antes de lanzarse a modelar o predecir, conviene detenerse en un análisis exploratorio. Visualizar la serie en un gráfico —con el tiempo en el eje horizontal y el valor en el eje vertical— ya ofrece una gran cantidad de información. A partir de ahí podemos detectar anomalías, rupturas, variaciones estacionales, o comportamientos inesperados (ver en {numref}`fig-DS_ST`).
 
-```{figure} imagenes/DS_ST
+```{figure} imagenes/DS_ST.png
 :name: fig-DS_ST
 :width: 60%
 
@@ -581,7 +581,7 @@ Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de
 
 ```{figure} imagenes/Satellite_150dpi.png
 :name: fig-Satellite_150dpi
-:width: 40%
+:width: 20%
 
 Ícono de la Fórmula: Imágenes Satelitales
 ```
@@ -589,7 +589,7 @@ Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de
 
 ```{figure} imagenes/Algorithm_150dpi.png
 :name: fig-Algorithm_150dpi
-:width: 40%
+:width: 20%
 
 Ícono de la Fórmula: Pensamiento Algorítmico.
 ```
@@ -599,7 +599,7 @@ Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de
 
 ```{figure} imagenes/mundo.png
 :name: fig-mundo
-:width: 40%
+:width: 20%
 
 Ícono de la Fórmula: Aplicaciones en el mundo real.
 ```
