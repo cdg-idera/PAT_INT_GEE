@@ -432,12 +432,13 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-serie-temporal-de-clases-de-suelo-con-clasificador-entrenado">7.14. Ejemplo 2: Serie Temporal de Clases de Suelo con Clasificador Entrenado</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-2-definicion-de-etiquetas-de-clases">7.14.1. BLOQUE 2: Definición de etiquetas de clases</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-3-aplicacion-del-clasificador-por-periodo">7.14.2. BLOQUE 3: Aplicación del clasificador por período</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-4-conteo-de-pixeles-por-clase">7.14.3. BLOQUE 4: Conteo de píxeles por clase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-5-visualizacion-absoluta">7.14.4. BLOQUE 5: Visualización absoluta</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-6-conversion-a-porcentajes">7.14.5. BLOQUE 6: Conversión a porcentajes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-7-visualizacion-porcentual">7.14.6. BLOQUE 7: Visualización porcentual</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-configuracion-del-periodo-temporal">7.14.1. Paso 1: Configuración del período temporal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-definicion-de-etiquetas-de-clases">7.14.2. Paso 2: Definición de etiquetas de clases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-aplicacion-del-clasificador-por-periodo">7.14.3. Paso 3: Aplicación del clasificador por período</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-conteo-de-pixeles-por-clase">7.14.4. Paso 4: Conteo de píxeles por clase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-5-visualizacion-absoluta">7.14.5. Paso 5: Visualización absoluta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-6-conversion-a-porcentajes">7.14.6. Paso 6: Conversión a porcentajes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-7-visualizacion-porcentual">7.14.7. Paso 7: Visualización porcentual</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">7.15. Conclusión</a></li>
@@ -470,7 +471,7 @@ Generamos un cubo categórico bimestral de tipos de suelo (agua, urbano, cultivo
 <section id="de-imagenes-satelitales-a-cubos-de-imagenes">
 <h2><span class="section-number">7.2. </span>De imágenes satelitales a Cubos de Imágenes<a class="headerlink" href="#de-imagenes-satelitales-a-cubos-de-imagenes" title="Link to this heading">#</a></h2>
 <figure class="align-default" id="fig-ojos">
-<a class="reference internal image-reference" href="imagenes/ojos.png"><img alt="imagenes/ojos.png" src="imagenes/ojos.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/ojos.png"><img alt="_images/ojos.png" src="_images/ojos.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 7.1 </span><span class="caption-text">Parte del espectro electromagnético visible a nuestros ojos</span><a class="headerlink" href="#fig-ojos" title="Link to this image">#</a></p>
 </figcaption>
@@ -1155,7 +1156,8 @@ Gracias al siguiente bloque:</p></li>
 <section id="ejemplo-2-serie-temporal-de-clases-de-suelo-con-clasificador-entrenado">
 <h2><span class="section-number">7.14. </span>Ejemplo 2: Serie Temporal de Clases de Suelo con Clasificador Entrenado<a class="headerlink" href="#ejemplo-2-serie-temporal-de-clases-de-suelo-con-clasificador-entrenado" title="Link to this heading">#</a></h2>
 <p>En esta sección vamos a aplicar el clasificador supervisado que entrenamos en capítulo 2 sobre datos Sentinel-2 de la ciudad de Rosario. Nuestro objetivo es generar una serie temporal que nos permita observar cómo evolucionan los distintos tipos de cobertura del suelo a lo largo del tiempo, distinguiendo clases como agua, zonas urbanas, cultivos, vegetación natural y terreno desnudo.</p>
-<p>BLOQUE 1: Configuración del período temporal</p>
+<section id="paso-1-configuracion-del-periodo-temporal">
+<h3><span class="section-number">7.14.1. </span>Paso 1: Configuración del período temporal<a class="headerlink" href="#paso-1-configuracion-del-periodo-temporal" title="Link to this heading">#</a></h3>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">frecuencia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;bimestral&quot;</span><span class="p">;</span>
 <span class="nx">Definimos</span><span class="w"> </span><span class="nx">la</span><span class="w"> </span><span class="nx">frecuencia</span><span class="w"> </span><span class="nx">temporal</span><span class="w"> </span><span class="nx">con</span><span class="w"> </span><span class="nx">la</span><span class="w"> </span><span class="nx">que</span><span class="w"> </span><span class="nx">vamos</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">construir</span><span class="w"> </span><span class="nx">nuestra</span><span class="w"> </span><span class="nx">serie</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">tiempo</span><span class="p">.</span><span class="w"> </span><span class="nx">En</span><span class="w"> </span><span class="nx">este</span><span class="w"> </span><span class="nx">caso</span><span class="w"> </span><span class="nx">elegimos</span><span class="w"> </span><span class="nx">bimestral</span><span class="p">,</span><span class="w"> </span><span class="nx">lo</span><span class="w"> </span><span class="nx">que</span><span class="w"> </span><span class="nx">implica</span><span class="w"> </span><span class="nx">que</span><span class="w"> </span><span class="nx">cada</span><span class="w"> </span><span class="nx">punto</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">la</span><span class="w"> </span><span class="nx">serie</span><span class="w"> </span><span class="nx">va</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">representar</span><span class="w"> </span><span class="nx">un</span><span class="w"> </span><span class="nx">promedio</span><span class="w"> </span><span class="nx">de</span><span class="w"> </span><span class="nx">dos</span><span class="w"> </span><span class="nx">meses</span><span class="p">.</span>
 <span class="nx">javascript</span>
@@ -1179,8 +1181,9 @@ Gracias al siguiente bloque:</p></li>
 </pre></div>
 </div>
 <p>Generamos una lista de fechas que representan los inicios de cada período bimestral, a partir de enero de 2024. Cada valor es un objeto ee.Date.</p>
-<section id="bloque-2-definicion-de-etiquetas-de-clases">
-<h3><span class="section-number">7.14.1. </span>BLOQUE 2: Definición de etiquetas de clases<a class="headerlink" href="#bloque-2-definicion-de-etiquetas-de-clases" title="Link to this heading">#</a></h3>
+</section>
+<section id="paso-2-definicion-de-etiquetas-de-clases">
+<h3><span class="section-number">7.14.2. </span>Paso 2: Definición de etiquetas de clases<a class="headerlink" href="#paso-2-definicion-de-etiquetas-de-clases" title="Link to this heading">#</a></h3>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">etiquetas</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Dictionary</span><span class="p">({</span>
 <span class="w">  </span><span class="s1">&#39;0&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Agua&#39;</span><span class="p">,</span>
 <span class="w">  </span><span class="s1">&#39;1&#39;</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;Urbano&#39;</span><span class="p">,</span>
@@ -1192,8 +1195,8 @@ Gracias al siguiente bloque:</p></li>
 </div>
 <p>Creamos un diccionario que asocia cada código de clase (usado por el clasificador) con un nombre legible. Esto nos permitirá mostrar las clases en gráficos con nombres descriptivos.</p>
 </section>
-<section id="bloque-3-aplicacion-del-clasificador-por-periodo">
-<h3><span class="section-number">7.14.2. </span>BLOQUE 3: Aplicación del clasificador por período<a class="headerlink" href="#bloque-3-aplicacion-del-clasificador-por-periodo" title="Link to this heading">#</a></h3>
+<section id="paso-3-aplicacion-del-clasificador-por-periodo">
+<h3><span class="section-number">7.14.3. </span>Paso 3: Aplicación del clasificador por período<a class="headerlink" href="#paso-3-aplicacion-del-clasificador-por-periodo" title="Link to this heading">#</a></h3>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">coleccionClasificada</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="nx">fechas</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">fechaInicio</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </pre></div>
 </div>
@@ -1221,8 +1224,8 @@ Gracias al siguiente bloque:</p></li>
 </div>
 <p>Aplicamos el clasificador previamente entrenado a la imagen compuesta para generar un raster de clases.</p>
 </section>
-<section id="bloque-4-conteo-de-pixeles-por-clase">
-<h3><span class="section-number">7.14.3. </span>BLOQUE 4: Conteo de píxeles por clase<a class="headerlink" href="#bloque-4-conteo-de-pixeles-por-clase" title="Link to this heading">#</a></h3>
+<section id="paso-4-conteo-de-pixeles-por-clase">
+<h3><span class="section-number">7.14.4. </span>Paso 4: Conteo de píxeles por clase<a class="headerlink" href="#paso-4-conteo-de-pixeles-por-clase" title="Link to this heading">#</a></h3>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">histograma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">clasificada</span><span class="p">.</span><span class="nx">reduceRegion</span><span class="p">({</span>
 <span class="w">    </span><span class="nx">reducer</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">Reducer</span><span class="p">.</span><span class="nx">frequencyHistogram</span><span class="p">(),</span>
 <span class="w">    </span><span class="nx">geometry</span><span class="o">:</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="nx">roi</span><span class="p">).</span><span class="nx">geometry</span><span class="p">(),</span>
@@ -1257,8 +1260,8 @@ Gracias al siguiente bloque:</p></li>
 </div>
 <p>Creamos un Feature con los datos de ese período y la fecha correspondiente, y lo devolvemos. Al final, coleccionClasificada es una colección de Features, uno por período.</p>
 </section>
-<section id="bloque-5-visualizacion-absoluta">
-<h3><span class="section-number">7.14.4. </span>BLOQUE 5: Visualización absoluta<a class="headerlink" href="#bloque-5-visualizacion-absoluta" title="Link to this heading">#</a></h3>
+<section id="paso-5-visualizacion-absoluta">
+<h3><span class="section-number">7.14.5. </span>Paso 5: Visualización absoluta<a class="headerlink" href="#paso-5-visualizacion-absoluta" title="Link to this heading">#</a></h3>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">grafico</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ui</span><span class="p">.</span><span class="nx">Chart</span><span class="p">.</span><span class="nx">feature</span><span class="p">.</span><span class="nx">byFeature</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">features</span><span class="o">:</span><span class="w"> </span><span class="nx">coleccionClasificada</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">xProperty</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;fecha&#39;</span>
@@ -1272,8 +1275,8 @@ Gracias al siguiente bloque:</p></li>
 </div>
 <p>Creamos un gráfico de barras apiladas que muestra la cantidad absoluta de píxeles por clase en cada período. Esto permite ver por ejemplo si aumentaron los cultivos o disminuyó el área urbana en un bimestre determinado.</p>
 </section>
-<section id="bloque-6-conversion-a-porcentajes">
-<h3><span class="section-number">7.14.5. </span>BLOQUE 6: Conversión a porcentajes<a class="headerlink" href="#bloque-6-conversion-a-porcentajes" title="Link to this heading">#</a></h3>
+<section id="paso-6-conversion-a-porcentajes">
+<h3><span class="section-number">7.14.6. </span>Paso 6: Conversión a porcentajes<a class="headerlink" href="#paso-6-conversion-a-porcentajes" title="Link to this heading">#</a></h3>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">coleccionPorcentual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">coleccionClasificada</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">feat</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 </pre></div>
 </div>
@@ -1306,8 +1309,8 @@ Gracias al siguiente bloque:</p></li>
 </div>
 <p>Creamos un nuevo Feature para cada período, ahora con porcentajes. coleccionPorcentual es una colección con los datos relativos.</p>
 </section>
-<section id="bloque-7-visualizacion-porcentual">
-<h3><span class="section-number">7.14.6. </span>BLOQUE 7: Visualización porcentual<a class="headerlink" href="#bloque-7-visualizacion-porcentual" title="Link to this heading">#</a></h3>
+<section id="paso-7-visualizacion-porcentual">
+<h3><span class="section-number">7.14.7. </span>Paso 7: Visualización porcentual<a class="headerlink" href="#paso-7-visualizacion-porcentual" title="Link to this heading">#</a></h3>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">graficoPorcentual</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ui</span><span class="p">.</span><span class="nx">Chart</span><span class="p">.</span><span class="nx">feature</span><span class="p">.</span><span class="nx">byFeature</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">features</span><span class="o">:</span><span class="w"> </span><span class="nx">coleccionPorcentual</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">xProperty</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;fecha&#39;</span>
@@ -1450,12 +1453,13 @@ Gracias al siguiente bloque:</p></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-2-serie-temporal-de-clases-de-suelo-con-clasificador-entrenado">7.14. Ejemplo 2: Serie Temporal de Clases de Suelo con Clasificador Entrenado</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-2-definicion-de-etiquetas-de-clases">7.14.1. BLOQUE 2: Definición de etiquetas de clases</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-3-aplicacion-del-clasificador-por-periodo">7.14.2. BLOQUE 3: Aplicación del clasificador por período</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-4-conteo-de-pixeles-por-clase">7.14.3. BLOQUE 4: Conteo de píxeles por clase</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-5-visualizacion-absoluta">7.14.4. BLOQUE 5: Visualización absoluta</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-6-conversion-a-porcentajes">7.14.5. BLOQUE 6: Conversión a porcentajes</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bloque-7-visualizacion-porcentual">7.14.6. BLOQUE 7: Visualización porcentual</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-1-configuracion-del-periodo-temporal">7.14.1. Paso 1: Configuración del período temporal</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-2-definicion-de-etiquetas-de-clases">7.14.2. Paso 2: Definición de etiquetas de clases</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-3-aplicacion-del-clasificador-por-periodo">7.14.3. Paso 3: Aplicación del clasificador por período</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-4-conteo-de-pixeles-por-clase">7.14.4. Paso 4: Conteo de píxeles por clase</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-5-visualizacion-absoluta">7.14.5. Paso 5: Visualización absoluta</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-6-conversion-a-porcentajes">7.14.6. Paso 6: Conversión a porcentajes</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#paso-7-visualizacion-porcentual">7.14.7. Paso 7: Visualización porcentual</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">7.15. Conclusión</a></li>

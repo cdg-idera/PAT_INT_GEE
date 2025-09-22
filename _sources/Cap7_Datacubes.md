@@ -798,7 +798,7 @@ Este es un ejemplo de cómo un cubo de datos no solo organiza información geoes
 
 En esta sección vamos a aplicar el clasificador supervisado que entrenamos en capítulo 2 sobre datos Sentinel-2 de la ciudad de Rosario. Nuestro objetivo es generar una serie temporal que nos permita observar cómo evolucionan los distintos tipos de cobertura del suelo a lo largo del tiempo, distinguiendo clases como agua, zonas urbanas, cultivos, vegetación natural y terreno desnudo.
 
-BLOQUE 1: Configuración del período temporal
+### Paso 1: Configuración del período temporal
 
 ```javascript
 var frecuencia = "bimestral";
@@ -829,7 +829,7 @@ var fechas = ee.List.sequence(0, 12, paso).map(function(mes) {
 Generamos una lista de fechas que representan los inicios de cada período bimestral, a partir de enero de 2024. Cada valor es un objeto ee.Date.
 
 
-### BLOQUE 2: Definición de etiquetas de clases
+### Paso 2: Definición de etiquetas de clases
 
 ```javascript
 
@@ -845,7 +845,7 @@ var etiquetas = ee.Dictionary({
 Creamos un diccionario que asocia cada código de clase (usado por el clasificador) con un nombre legible. Esto nos permitirá mostrar las clases en gráficos con nombres descriptivos.
 
 
-### BLOQUE 3: Aplicación del clasificador por período
+### Paso 3: Aplicación del clasificador por período
 
 ```javascript
 var coleccionClasificada = ee.FeatureCollection(fechas.map(function(fechaInicio) {
@@ -885,7 +885,7 @@ var clasificada = imagen.classify(classifier);
 
 Aplicamos el clasificador previamente entrenado a la imagen compuesta para generar un raster de clases.
 
-### BLOQUE 4: Conteo de píxeles por clase
+### Paso 4: Conteo de píxeles por clase
 
 ```javascript
 var histograma = clasificada.reduceRegion({
@@ -933,7 +933,7 @@ var ft = ee.Feature(null, propsEtiquetadas)
 Creamos un Feature con los datos de ese período y la fecha correspondiente, y lo devolvemos. Al final, coleccionClasificada es una colección de Features, uno por período.
 
 
-### BLOQUE 5: Visualización absoluta
+### Paso 5: Visualización absoluta
 
 
 ```javascript
@@ -950,7 +950,7 @@ var grafico = ui.Chart.feature.byFeature({
 
 Creamos un gráfico de barras apiladas que muestra la cantidad absoluta de píxeles por clase en cada período. Esto permite ver por ejemplo si aumentaron los cultivos o disminuyó el área urbana en un bimestre determinado.
 
-### BLOQUE 6: Conversión a porcentajes
+### Paso 6: Conversión a porcentajes
 
 ```javascript
 var coleccionPorcentual = coleccionClasificada.map(function(feat) {
@@ -995,7 +995,7 @@ Para cada clase, calculamos su porcentaje con respecto al total y lo guardamos e
 Creamos un nuevo Feature para cada período, ahora con porcentajes. coleccionPorcentual es una colección con los datos relativos.
 
 
-### BLOQUE 7: Visualización porcentual
+### Paso 7: Visualización porcentual
 
 ```javascript
 var graficoPorcentual = ui.Chart.feature.byFeature({
