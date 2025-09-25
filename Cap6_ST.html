@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>6. Capítulo 6 · Serie Temporales &#8212; GeoIA aplicado a Imágenes Satelitales</title>
+    <title>7. Capítulo 6 · Serie Temporales &#8212; GeoIA aplicado a Imágenes Satelitales</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'Cap6_ST';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="7. Capítulo 7 · Cubos de Imágenes Satelitales" href="Cap7_Datacubes.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="Capitulo_BIS.html" />
+    <link rel="next" title="8. Capítulo 7 · Cubos de Imágenes Satelitales" href="Cap7_Datacubes.html" />
+    <link rel="prev" title="6. Capítulo 6 · Workflow ML en GEE" href="Capitulo_BIS.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -185,9 +185,10 @@
 <li class="toctree-l1"><a class="reference internal" href="Cap3_gee_colab.html">3. Capítulo 3 · Random Forest en GEE y Colab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Cap4_SVM_DT.html">4. Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">5. Capítulo 5 · Random Forest para detectar agua</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Capítulo 7 · Serie Temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">7. Capítulo 8 · Cubos de Imágenes Satelitales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Referencias.html">8. Bibliografía</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Capitulo_BIS.html">6. Capítulo 6 · Workflow ML en GEE</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Capítulo 7 · Serie Temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">8. Capítulo 8 · Cubos de Imágenes Satelitales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Referencias.html">9. Bibliografía</a></li>
 </ul>
 
     </div>
@@ -383,29 +384,29 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-de-tiempo-ejemplo-bahia-blanca">6.1. Serie de Tiempo: Ejemplo Bahía Blanca</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-la-frecuencia-de-analisis-temporal">6.2. Definición de la frecuencia de análisis temporal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-de-interes-roi">6.3. Región de interés (ROI)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-agregar-indices-a-cada-imagen">6.4. Función para agregar índices a cada imagen</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-clave-getcoleccionporperiodo">6.5. Función clave: getColeccionPorPeriodo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-la-coleccion-temporal">6.6. Crear la colección temporal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-indices-sentinel-2">6.7. Gráfico de índices Sentinel-2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-temporal-de-temperatura-superficial-lst">6.8. Serie temporal de temperatura superficial (LST)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion-opcional-de-estadisticas-a-csv">6.9. Exportación opcional de estadísticas a CSV</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-de-la-seccion">6.10. Conclusión de la sección</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-awesome-spectral-indices-en-gee">6.11. Uso de Awesome Spectral Indices en GEE</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona-importar-el-modulo">6.11.1. ¿Cómo funciona? – Importar el módulo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ver-la-lista-completa-de-indices">6.11.2. Ver la lista completa de índices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acceder-a-la-informacion-de-un-indice-especifico">6.11.3. Acceder a la información de un índice específico</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explorar-los-atributos-del-indice">6.11.4. Explorar los atributos del índice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2">6.11.5. Calcular un índice: NDVI sobre una imagen Sentinel-2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-multiples-indices-a-la-vez">6.11.6. Calcular múltiples índices a la vez</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-el-resultado-en-el-visor-de-gee">6.11.7. Mostrar el resultado en el visor de GEE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-de-tiempo-ejemplo-bahia-blanca">7.1. Serie de Tiempo: Ejemplo Bahía Blanca</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-la-frecuencia-de-analisis-temporal">7.2. Definición de la frecuencia de análisis temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-de-interes-roi">7.3. Región de interés (ROI)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-agregar-indices-a-cada-imagen">7.4. Función para agregar índices a cada imagen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-clave-getcoleccionporperiodo">7.5. Función clave: getColeccionPorPeriodo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-la-coleccion-temporal">7.6. Crear la colección temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-indices-sentinel-2">7.7. Gráfico de índices Sentinel-2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-temporal-de-temperatura-superficial-lst">7.8. Serie temporal de temperatura superficial (LST)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion-opcional-de-estadisticas-a-csv">7.9. Exportación opcional de estadísticas a CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-de-la-seccion">7.10. Conclusión de la sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-awesome-spectral-indices-en-gee">7.11. Uso de Awesome Spectral Indices en GEE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona-importar-el-modulo">7.11.1. ¿Cómo funciona? – Importar el módulo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ver-la-lista-completa-de-indices">7.11.2. Ver la lista completa de índices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acceder-a-la-informacion-de-un-indice-especifico">7.11.3. Acceder a la información de un índice específico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explorar-los-atributos-del-indice">7.11.4. Explorar los atributos del índice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2">7.11.5. Calcular un índice: NDVI sobre una imagen Sentinel-2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-multiples-indices-a-la-vez">7.11.6. Calcular múltiples índices a la vez</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-el-resultado-en-el-visor-de-gee">7.11.7. Mostrar el resultado en el visor de GEE</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicacion-de-la-nueva-version-con-asi">6.12. Explicación de la nueva versión con ASI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre">6.13. Cierre</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">6.14. Video del capítulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicacion-de-la-nueva-version-con-asi">7.12. Explicación de la nueva versión con ASI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre">7.13. Cierre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">7.14. Video del capítulo</a></li>
 </ul>
             </nav>
         </div>
@@ -418,7 +419,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="capitulo-6-serie-temporales">
-<h1><span class="section-number">6. </span>Capítulo 6 · Serie Temporales<a class="headerlink" href="#capitulo-6-serie-temporales" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">7. </span>Capítulo 6 · Serie Temporales<a class="headerlink" href="#capitulo-6-serie-temporales" title="Link to this heading">#</a></h1>
 <p>En el análisis de datos geoespaciales, las series de tiempo ocupan un lugar central. Ya sea que estudiemos fenómenos terrestres, marítimos o atmosféricos, observar cómo varían en el tiempo ciertas variables nos permite comprender procesos, detectar patrones y anticipar futuros escenarios.</p>
 <p>Los científicos de datos trabajan con múltiples formas de representar la información, y una de las más poderosas en aplicaciones de inteligencia artificial aplicada al ambiente es, sin dudas, la serie temporal. Nos ayuda a responder preguntas como: ¿qué está cambiando? ¿cómo? ¿cuándo? y, sobre todo, ¿por qué?</p>
 <blockquote>
@@ -427,59 +428,59 @@ document.write(`
 <figure class="align-default" id="fig-graf1">
 <a class="reference internal image-reference" href="_images/graf1.png"><img alt="_images/graf1.png" src="_images/graf1.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.1 </span><span class="caption-text">Ilustración sobre Series de Tiempo</span><a class="headerlink" href="#fig-graf1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.1 </span><span class="caption-text">Ilustración sobre Series de Tiempo</span><a class="headerlink" href="#fig-graf1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>En este primer video vamos a trabajar con un ejemplo concreto y sencillo para introducirnos en el tema: El caso es Bahía Blanca, donde analizamos la evolución mensual durante el año 2024 de una serie de indicadores ambientales derivados de imágenes satelitales <em>Sentinel-2</em> y <em>MODIS</em>. Calculamos índices como NDVI, NDWI, NDBI, NDMI, NIR y temperatura superficial (LST) (ver en <code class="xref std std-numref docutils literal notranslate"><span class="pre">fig-indices</span></code>) que permiten seguir la dinámica de la vegetación, la presencia de agua, el suelo desnudo, o el impacto del calor. A lo largo del ejemplo, mostramos cómo graficar estas variables, cómo generar las series de tiempo con Google Earth Engine, y cómo exportarlas para su posterior análisis en R o Python.</p>
 <figure class="align-default" id="fig-indices">
 <a class="reference internal image-reference" href="_images/IndicesST.png"><img alt="_images/IndicesST.png" src="_images/IndicesST.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.2 </span><span class="caption-text">Indices espectrales y bandas utilizadas en el estudio.</span><a class="headerlink" href="#fig-indices" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.2 </span><span class="caption-text">Indices espectrales y bandas utilizadas en el estudio.</span><a class="headerlink" href="#fig-indices" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Ahora bien, para trabajar de forma sólida con series temporales es importante entender que detrás de cada gráfico hay <em>múltiples componentes interactuando</em> (ver fig. <a class="reference internal" href="#fig-componentes"><span class="std std-numref">Fig. 6.3</span></a>).</p>
+<p>Ahora bien, para trabajar de forma sólida con series temporales es importante entender que detrás de cada gráfico hay <em>múltiples componentes interactuando</em> (ver fig. <a class="reference internal" href="#fig-componentes"><span class="std std-numref">Fig. 7.3</span></a>).</p>
 <figure class="align-default" id="fig-componentes">
 <a class="reference internal image-reference" href="_images/componentes.png"><img alt="_images/componentes.png" src="_images/componentes.png" style="width: 40%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.3 </span><span class="caption-text">Serie de Tiempo: Componentes principales.</span><a class="headerlink" href="#fig-componentes" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.3 </span><span class="caption-text">Serie de Tiempo: Componentes principales.</span><a class="headerlink" href="#fig-componentes" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Por un lado, está la <strong>tendencia</strong>, ese <em>comportamiento de largo plazo</em> que puede marcar una dirección ascendente o descendente (ver en <a class="reference internal" href="#fig-tendencia"><span class="std std-numref">Fig. 6.4</span></a>).</p>
+<p>Por un lado, está la <strong>tendencia</strong>, ese <em>comportamiento de largo plazo</em> que puede marcar una dirección ascendente o descendente (ver en <a class="reference internal" href="#fig-tendencia"><span class="std std-numref">Fig. 7.4</span></a>).</p>
 <figure class="align-default" id="fig-tendencia">
 <a class="reference internal image-reference" href="_images/tendencia.png"><img alt="_images/tendencia.png" src="_images/tendencia.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.4 </span><span class="caption-text">Serie de Tiempo: Tendencia</span><a class="headerlink" href="#fig-tendencia" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.4 </span><span class="caption-text">Serie de Tiempo: Tendencia</span><a class="headerlink" href="#fig-tendencia" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>También encontramos <strong>ciclos</strong>, como los que impone el clima o la economía, que pueden repetirse con menor frecuencia pero tener gran impacto (ver en <a class="reference internal" href="#fig-ciclo"><span class="std std-numref">Fig. 6.5</span></a>).</p>
+<p>También encontramos <strong>ciclos</strong>, como los que impone el clima o la economía, que pueden repetirse con menor frecuencia pero tener gran impacto (ver en <a class="reference internal" href="#fig-ciclo"><span class="std std-numref">Fig. 7.5</span></a>).</p>
 <figure class="align-default" id="fig-ciclo">
 <a class="reference internal image-reference" href="_images/ciclo.png"><img alt="_images/ciclo.png" src="_images/ciclo.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.5 </span><span class="caption-text">Serie de Tiempo: Ciclo</span><a class="headerlink" href="#fig-ciclo" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.5 </span><span class="caption-text">Serie de Tiempo: Ciclo</span><a class="headerlink" href="#fig-ciclo" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>La <strong>estacionalidad</strong>, por su parte, nos habla de patrones que se repiten en el mismo periodo cada año: más verdor en primavera, más calor en verano (ver en <a class="reference internal" href="#fig-estacionalidad"><span class="std std-numref">Fig. 6.6</span></a>).</p>
+<p>La <strong>estacionalidad</strong>, por su parte, nos habla de patrones que se repiten en el mismo periodo cada año: más verdor en primavera, más calor en verano (ver en <a class="reference internal" href="#fig-estacionalidad"><span class="std std-numref">Fig. 7.6</span></a>).</p>
 <figure class="align-default" id="fig-estacionalidad">
 <a class="reference internal image-reference" href="_images/estacionalidad.png"><img alt="_images/estacionalidad.png" src="_images/estacionalidad.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.6 </span><span class="caption-text">Serie de Tiempo: Estacionalidad</span><a class="headerlink" href="#fig-estacionalidad" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.6 </span><span class="caption-text">Serie de Tiempo: Estacionalidad</span><a class="headerlink" href="#fig-estacionalidad" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Y, por supuesto, el <strong>ruido aleatorio</strong>, esas pequeñas fluctuaciones impredecibles que también forman parte de la realidad (ver en <a class="reference internal" href="#fig-ruido"><span class="std std-numref">Fig. 6.7</span></a>).</p>
+<p>Y, por supuesto, el <strong>ruido aleatorio</strong>, esas pequeñas fluctuaciones impredecibles que también forman parte de la realidad (ver en <a class="reference internal" href="#fig-ruido"><span class="std std-numref">Fig. 7.7</span></a>).</p>
 <figure class="align-default" id="fig-ruido">
 <a class="reference internal image-reference" href="_images/ruido.png"><img alt="_images/ruido.png" src="_images/ruido.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.7 </span><span class="caption-text">Serie de Tiempo: Ruido</span><a class="headerlink" href="#fig-ruido" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.7 </span><span class="caption-text">Serie de Tiempo: Ruido</span><a class="headerlink" href="#fig-ruido" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <blockquote>
 <div><p>¿Cómo se obtuvieron estos ejemplos gráficos? Fue a partir de la generación de datos sintéticos con el siguiente código en Colab: <a class="reference external" href="https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing">https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing</a> En el ejemplo se generan gráficos con fondos negro y blanco. El video de este capítulo cuenta con gráficos con fondo negro.</p>
 </div></blockquote>
-<p>Antes de lanzarse a modelar o predecir, conviene detenerse en un análisis exploratorio. Visualizar la serie en un gráfico —con el tiempo en el eje horizontal y el valor en el eje vertical— ya ofrece una gran cantidad de información. A partir de ahí podemos detectar anomalías, rupturas, variaciones estacionales, o comportamientos inesperados (ver en <a class="reference internal" href="#fig-ds-st"><span class="std std-numref">Fig. 6.8</span></a>).</p>
+<p>Antes de lanzarse a modelar o predecir, conviene detenerse en un análisis exploratorio. Visualizar la serie en un gráfico —con el tiempo en el eje horizontal y el valor en el eje vertical— ya ofrece una gran cantidad de información. A partir de ahí podemos detectar anomalías, rupturas, variaciones estacionales, o comportamientos inesperados (ver en <a class="reference internal" href="#fig-ds-st"><span class="std std-numref">Fig. 7.8</span></a>).</p>
 <figure class="align-default" id="fig-ds-st">
 <a class="reference internal image-reference" href="_images/DS_ST.png"><img alt="_images/DS_ST.png" src="_images/DS_ST.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.8 </span><span class="caption-text">Imágen Ilustrativa: Analizar y Diseñar</span><a class="headerlink" href="#fig-ds-st" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.8 </span><span class="caption-text">Imágen Ilustrativa: Analizar y Diseñar</span><a class="headerlink" href="#fig-ds-st" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Este análisis puede tener distintos niveles de profundidad. Uno <strong>descriptivo</strong>, que se limita a mostrar lo que ocurre. Otro <strong>explicativo</strong>, que busca entender por qué ocurre: por ejemplo, una caída brusca del NDWI puede relacionarse con una sequía o con una obra de canalización. Y también uno <strong>predictivo</strong>, que usa la historia registrada para anticipar lo que podría venir, como un riesgo ambiental o una oportunidad productiva.</p>
@@ -490,13 +491,13 @@ document.write(`
 <p>Las series de tiempo <em>son mucho más que líneas en un gráfico</em>. Son herramientas vivas que nos permiten leer el pasado, entender el presente y proyectar el futuro. Aplicadas a la información geoespacial y a la inteligencia artificial, se convierten en aliadas estratégicas para estudiar el mundo cambiante que habitamos. Nos permiten transformar imágenes satelitales en narrativas dinámicas del territorio.
 Estas herramientas no solo sirven para entender el pasado o describir el presente, sino que son esenciales para anticipar y planificar un futuro más informado y sostenible.</p>
 <section id="serie-de-tiempo-ejemplo-bahia-blanca">
-<h2><span class="section-number">6.1. </span>Serie de Tiempo: Ejemplo Bahía Blanca<a class="headerlink" href="#serie-de-tiempo-ejemplo-bahia-blanca" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.1. </span>Serie de Tiempo: Ejemplo Bahía Blanca<a class="headerlink" href="#serie-de-tiempo-ejemplo-bahia-blanca" title="Link to this heading">#</a></h2>
 <p>En este laboratorio trabajamos con series temporales aplicadas a imágenes satelitales, tomando como área de estudio <em>el partido de Bahía Blanca</em> en la provincia de Buenos Aires, Argentina.
 El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a partir de imágenes <em>Sentinel-2</em> y <em>MODIS</em>, calcular valores promedio sobre una región de interés (ROI: Region of Interest), visualizarlos como gráficos y opcionalmente exportar las estadísticas en formato CSV para análisis externos con R, python o Power BI.</p>
 <p>Con este mismo codigo vas a poder calcular series de tiempo con otras frecuencias.</p>
 </section>
 <section id="definicion-de-la-frecuencia-de-analisis-temporal">
-<h2><span class="section-number">6.2. </span>Definición de la frecuencia de análisis temporal<a class="headerlink" href="#definicion-de-la-frecuencia-de-analisis-temporal" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.2. </span>Definición de la frecuencia de análisis temporal<a class="headerlink" href="#definicion-de-la-frecuencia-de-analisis-temporal" title="Link to this heading">#</a></h2>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">frecuencia</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;mensual&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -519,7 +520,7 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <p>Se crea una lista de fechas iniciales, empezando el 1 de enero de 2024 y avanzando de paso en paso. Por ejemplo, si paso = 2, las fechas serán enero, marzo, mayo, etc.</p>
 </section>
 <section id="region-de-interes-roi">
-<h2><span class="section-number">6.3. </span>Región de interés (ROI)<a class="headerlink" href="#region-de-interes-roi" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.3. </span>Región de interés (ROI)<a class="headerlink" href="#region-de-interes-roi" title="Link to this heading">#</a></h2>
 <p>En el siguiente código:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">admin2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="s2">&quot;FAO/GAUL/2015/level2&quot;</span><span class="p">)</span>
 <span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">eq</span><span class="p">(</span><span class="s1">&#39;ADM0_NAME&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Argentina&#39;</span><span class="p">))</span>
@@ -536,7 +537,7 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <p>Se centra el mapa en la región de estudio y se visualiza.</p>
 </section>
 <section id="funcion-para-agregar-indices-a-cada-imagen">
-<h2><span class="section-number">6.4. </span>Función para agregar índices a cada imagen<a class="headerlink" href="#funcion-para-agregar-indices-a-cada-imagen" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.4. </span>Función para agregar índices a cada imagen<a class="headerlink" href="#funcion-para-agregar-indices-a-cada-imagen" title="Link to this heading">#</a></h2>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">agregarIndices</span><span class="p">(</span><span class="nx">img</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">ndvi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B8&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B4&#39;</span><span class="p">]).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NDVI&#39;</span><span class="p">);</span>
 <span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">ndbi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">img</span><span class="p">.</span><span class="nx">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B11&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;B8&#39;</span><span class="p">]).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NDBI&#39;</span><span class="p">);</span>
@@ -550,7 +551,7 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <p>Esta función calcula distintos índices espectrales (NDVI, NDBI, NDWI, NDMI) y NIR, y agrega esos nuevos bandas derivadas a la imagen original. Esto facilita su análisis posterior.</p>
 </section>
 <section id="funcion-clave-getcoleccionporperiodo">
-<h2><span class="section-number">6.5. </span>Función clave: getColeccionPorPeriodo<a class="headerlink" href="#funcion-clave-getcoleccionporperiodo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.5. </span>Función clave: getColeccionPorPeriodo<a class="headerlink" href="#funcion-clave-getcoleccionporperiodo" title="Link to this heading">#</a></h2>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">function</span><span class="w"> </span><span class="nx">getColeccionPorPeriodo</span><span class="p">(</span><span class="nx">fecha</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">fecha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nb">Date</span><span class="p">(</span><span class="nx">fecha</span><span class="p">);</span>
 <span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">fin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">fecha</span><span class="p">.</span><span class="nx">advance</span><span class="p">(</span><span class="nx">paso</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;month&#39;</span><span class="p">);</span>
@@ -583,14 +584,14 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <p>Devuelve una única imagen compuesta promedio de ese periodo, con fecha de inicio del bloque temporal.</p>
 </section>
 <section id="crear-la-coleccion-temporal">
-<h2><span class="section-number">6.6. </span>Crear la colección temporal<a class="headerlink" href="#crear-la-coleccion-temporal" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.6. </span>Crear la colección temporal<a class="headerlink" href="#crear-la-coleccion-temporal" title="Link to this heading">#</a></h2>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="kr">final</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">.</span><span class="nx">fromImages</span><span class="p">(</span><span class="nx">fechas</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">getColeccionPorPeriodo</span><span class="p">));</span>
 </pre></div>
 </div>
 <p>Aplica getColeccionPorPeriodo a cada fecha de inicio. El resultado es una serie de imágenes promedio por período, listas para graficar.</p>
 </section>
 <section id="grafico-de-indices-sentinel-2">
-<h2><span class="section-number">6.7. </span>Gráfico de índices Sentinel-2<a class="headerlink" href="#grafico-de-indices-sentinel-2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.7. </span>Gráfico de índices Sentinel-2<a class="headerlink" href="#grafico-de-indices-sentinel-2" title="Link to this heading">#</a></h2>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">chart</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ui</span><span class="p">.</span><span class="nx">Chart</span><span class="p">.</span><span class="nx">image</span><span class="p">.</span><span class="nx">series</span><span class="p">({</span>
 <span class="w">  </span><span class="nx">imageCollection</span><span class="o">:</span><span class="w"> </span><span class="kr">final</span><span class="p">.</span><span class="nx">select</span><span class="p">([</span><span class="s1">&#39;NDVI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDBI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDWI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NDMI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;NIR&#39;</span><span class="p">]),</span>
 <span class="w">  </span><span class="nx">region</span><span class="o">:</span><span class="w"> </span><span class="nx">roi2</span><span class="p">,</span>
@@ -611,16 +612,16 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <span class="p">});</span>
 </pre></div>
 </div>
-<p>Configuración estética del gráfico (ver Figura <a class="reference internal" href="#fig-indicesbb"><span class="std std-numref">Fig. 6.9</span></a>).</p>
+<p>Configuración estética del gráfico (ver Figura <a class="reference internal" href="#fig-indicesbb"><span class="std std-numref">Fig. 7.9</span></a>).</p>
 <figure class="align-default" id="fig-indicesbb">
 <a class="reference internal image-reference" href="_images/stIndicesBB.png"><img alt="_images/stIndicesBB.png" src="_images/stIndicesBB.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.9 </span><span class="caption-text">Serie temporal: valores promedio de NDVI, NDBI, NDWI, NDMI, NIR para el partido de Bahía Blanca, año 2024.</span><a class="headerlink" href="#fig-indicesbb" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.9 </span><span class="caption-text">Serie temporal: valores promedio de NDVI, NDBI, NDWI, NDMI, NIR para el partido de Bahía Blanca, año 2024.</span><a class="headerlink" href="#fig-indicesbb" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="serie-temporal-de-temperatura-superficial-lst">
-<h2><span class="section-number">6.8. </span>Serie temporal de temperatura superficial (LST)<a class="headerlink" href="#serie-temporal-de-temperatura-superficial-lst" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.8. </span>Serie temporal de temperatura superficial (LST)<a class="headerlink" href="#serie-temporal-de-temperatura-superficial-lst" title="Link to this heading">#</a></h2>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">modisLST</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;MODIS/061/MOD11A2&quot;</span><span class="p">)</span>
 <span class="w">  </span><span class="p">.</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">roi2</span><span class="p">)</span>
 <span class="w">  </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2024-12-15&#39;</span><span class="p">)</span>
@@ -644,21 +645,21 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <span class="p">})</span>
 </pre></div>
 </div>
-<p>Genera un gráfico de temperatura superficial promedio (ver Figura <a class="reference internal" href="#fig-preci"><span class="std std-numref">Fig. 6.10</span></a>).</p>
+<p>Genera un gráfico de temperatura superficial promedio (ver Figura <a class="reference internal" href="#fig-preci"><span class="std std-numref">Fig. 7.10</span></a>).</p>
 <figure class="align-default" id="fig-preci">
 <a class="reference internal image-reference" href="_images/stPrecipitacion.png"><img alt="_images/stPrecipitacion.png" src="_images/stPrecipitacion.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.10 </span><span class="caption-text">Figura generada en GEE de la serie temporal de temperatura promedio para el partido de Bahía Blanca</span><a class="headerlink" href="#fig-preci" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.10 </span><span class="caption-text">Figura generada en GEE de la serie temporal de temperatura promedio para el partido de Bahía Blanca</span><a class="headerlink" href="#fig-preci" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="exportacion-opcional-de-estadisticas-a-csv">
-<h2><span class="section-number">6.9. </span>Exportación opcional de estadísticas a CSV<a class="headerlink" href="#exportacion-opcional-de-estadisticas-a-csv" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.9. </span>Exportación opcional de estadísticas a CSV<a class="headerlink" href="#exportacion-opcional-de-estadisticas-a-csv" title="Link to this heading">#</a></h2>
 <p>Exportar los conjuntos de datos a csv es una buena opción para procesamiento posterior en lenguajes como R, python, julia o Power BI.</p>
 <figure class="align-default" id="id1">
 <a class="reference internal image-reference" href="_images/interApp2.png"><img alt="_images/interApp2.png" src="_images/interApp2.png" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.11 </span><span class="caption-text">Exportación de archivos CSV de GEE a python, R y Power BI.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.11 </span><span class="caption-text">Exportación de archivos CSV de GEE a python, R y Power BI.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>a) <strong>Para Sentinel-2:</strong></p>
@@ -707,27 +708,27 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 </div>
 </section>
 <section id="conclusion-de-la-seccion">
-<h2><span class="section-number">6.10. </span>Conclusión de la sección<a class="headerlink" href="#conclusion-de-la-seccion" title="Link to this heading">#</a></h2>
-<p>La Figura <a class="reference internal" href="#fig-indicesp15"><span class="std std-numref">Fig. 6.12</span></a> muestra algunas conclusiones de la sección:</p>
+<h2><span class="section-number">7.10. </span>Conclusión de la sección<a class="headerlink" href="#conclusion-de-la-seccion" title="Link to this heading">#</a></h2>
+<p>La Figura <a class="reference internal" href="#fig-indicesp15"><span class="std std-numref">Fig. 7.12</span></a> muestra algunas conclusiones de la sección:</p>
 <figure class="align-default" id="fig-indicesp15">
 <a class="reference internal image-reference" href="_images/Placa15.png"><img alt="_images/Placa15.png" src="_images/Placa15.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.12 </span><span class="caption-text">Algunas Conclusiones de la sección</span><a class="headerlink" href="#fig-indicesp15" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.12 </span><span class="caption-text">Algunas Conclusiones de la sección</span><a class="headerlink" href="#fig-indicesp15" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="uso-de-awesome-spectral-indices-en-gee">
-<h2><span class="section-number">6.11. </span>Uso de Awesome Spectral Indices en GEE<a class="headerlink" href="#uso-de-awesome-spectral-indices-en-gee" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.11. </span>Uso de Awesome Spectral Indices en GEE<a class="headerlink" href="#uso-de-awesome-spectral-indices-en-gee" title="Link to this heading">#</a></h2>
 <p>En este video vamos a explorar cómo usar el  catálogo abierto y colaborativo de índices espectrales denominado <strong>Awesome Spectral Indices (ASI)</strong> <span id="id2">[<a class="reference internal" href="Referencias.html#id2" title="David Montero, C'esar Aybar, Miguel D Mahecha, Francesco Martinuzzi, Maximilian S&quot;ochting, and Sebastian Wieneke. A standardized catalogue of spectral indices to advance the use of remote sensing in earth system research. Scientific Data, 10(1):197, 2023.">Montero <em>et al.</em>, 2023</a>]</span> una herramienta muy potente para calcular de forma sencilla decenas de índices espectrales en Google Earth Engine.</p>
 <p>Esta librería nos ahorra tiempo y evita errores al aplicar fórmulas, ya que contiene una base de datos bien documentada con cada índice, su fórmula, sus bandas requeridas y su referencia académica.</p>
 <figure class="align-default" id="fig-spectral">
 <a class="reference internal image-reference" href="_images/spectral.png"><img alt="_images/spectral.png" src="_images/spectral.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.13 </span><span class="caption-text">ïcono de la librería Spectral que implementa ASI en JS</span><a class="headerlink" href="#fig-spectral" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.13 </span><span class="caption-text">ïcono de la librería Spectral que implementa ASI en JS</span><a class="headerlink" href="#fig-spectral" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="como-funciona-importar-el-modulo">
-<h3><span class="section-number">6.11.1. </span>¿Cómo funciona? – Importar el módulo<a class="headerlink" href="#como-funciona-importar-el-modulo" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.11.1. </span>¿Cómo funciona? – Importar el módulo<a class="headerlink" href="#como-funciona-importar-el-modulo" title="Link to this heading">#</a></h3>
 <p>Lo primero que tenemos que hacer es aceptar el módulo desde el repositorio del autor. Una vez aceptado, lo cargamos con el siguiente comando:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">spectral</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;users/dmlmont/spectral:spectral&quot;</span><span class="p">);</span>
 </pre></div>
@@ -735,7 +736,7 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <p>Esto nos habilita todas las funciones y estructuras que forman parte del paquete.</p>
 </section>
 <section id="ver-la-lista-completa-de-indices">
-<h3><span class="section-number">6.11.2. </span>Ver la lista completa de índices<a class="headerlink" href="#ver-la-lista-completa-de-indices" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.11.2. </span>Ver la lista completa de índices<a class="headerlink" href="#ver-la-lista-completa-de-indices" title="Link to this heading">#</a></h3>
 <p>Podemos listar todos los índices disponibles simplemente con:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="nx">spectral</span><span class="p">.</span><span class="nx">indices</span><span class="p">);</span>
 </pre></div>
@@ -743,7 +744,7 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <p>En la consola vamos a ver un diccionario grande, donde cada clave es el nombre corto del índice: como NDVI, EVI, NDWI, NDBI, SAVI, entre muchos otros.</p>
 </section>
 <section id="acceder-a-la-informacion-de-un-indice-especifico">
-<h3><span class="section-number">6.11.3. </span>Acceder a la información de un índice específico<a class="headerlink" href="#acceder-a-la-informacion-de-un-indice-especifico" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.11.3. </span>Acceder a la información de un índice específico<a class="headerlink" href="#acceder-a-la-informacion-de-un-indice-especifico" title="Link to this heading">#</a></h3>
 <p>Supongamos que queremos saber más sobre el NDVI. Tenemos dos formas equivalentes de hacerlo:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">print</span><span class="p">(</span><span class="nx">spectral</span><span class="p">.</span><span class="nx">indices</span><span class="p">.</span><span class="nx">NDVI</span><span class="p">);</span>
 <span class="nx">print</span><span class="p">(</span><span class="nx">spectral</span><span class="p">.</span><span class="nx">indices</span><span class="p">[</span><span class="s2">&quot;NDVI&quot;</span><span class="p">]);</span>
@@ -752,7 +753,7 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 <p>En ambos casos se nos despliega toda la información asociada a ese índice.</p>
 </section>
 <section id="explorar-los-atributos-del-indice">
-<h3><span class="section-number">6.11.4. </span>Explorar los atributos del índice<a class="headerlink" href="#explorar-los-atributos-del-indice" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.11.4. </span>Explorar los atributos del índice<a class="headerlink" href="#explorar-los-atributos-del-indice" title="Link to this heading">#</a></h3>
 <p>Los atributos disponibles para cada índice incluyen:</p>
 <ul class="simple">
 <li><p><strong>short_name</strong>: el nombre corto (por ejemplo “NDVI”).</p></li>
@@ -774,7 +775,7 @@ El objetivo es generar indicadores ambientales mensuales o con otra frecuencia a
 </div>
 </section>
 <section id="calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2">
-<h3><span class="section-number">6.11.5. </span>Calcular un índice: NDVI sobre una imagen Sentinel-2<a class="headerlink" href="#calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.11.5. </span>Calcular un índice: NDVI sobre una imagen Sentinel-2<a class="headerlink" href="#calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2" title="Link to this heading">#</a></h3>
 <p>Ahora vamos a calcular un índice real sobre una imagen de Sentinel-2.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">dataset</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;COPERNICUS/S2_SR&quot;</span><span class="p">;</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">S2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="nx">dataset</span><span class="p">).</span><span class="nx">first</span><span class="p">();</span>
@@ -800,7 +801,7 @@ Luego definimos los parámetros necesarios para el NDVI:</p>
 <p>En la consola, dentro de la pestaña bands, vamos a ver que además de las bandas originales, ahora tenemos una nueva banda NDVI, calculada automáticamente.</p>
 </section>
 <section id="calcular-multiples-indices-a-la-vez">
-<h3><span class="section-number">6.11.6. </span>Calcular múltiples índices a la vez<a class="headerlink" href="#calcular-multiples-indices-a-la-vez" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.11.6. </span>Calcular múltiples índices a la vez<a class="headerlink" href="#calcular-multiples-indices-a-la-vez" title="Link to this heading">#</a></h3>
 <p>También podemos calcular varios índices simultáneamente:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">parameters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;N&quot;</span><span class="o">:</span><span class="w"> </span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;B8&quot;</span><span class="p">),</span>
@@ -819,7 +820,7 @@ Luego definimos los parámetros necesarios para el NDVI:</p>
 <p>En la consola vamos a ver que ahora tenemos nuevas bandas: NDVI, GNDVI y SAVI, todas calculadas en una sola línea de código.</p>
 </section>
 <section id="mostrar-el-resultado-en-el-visor-de-gee">
-<h3><span class="section-number">6.11.7. </span>Mostrar el resultado en el visor de GEE<a class="headerlink" href="#mostrar-el-resultado-en-el-visor-de-gee" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">7.11.7. </span>Mostrar el resultado en el visor de GEE<a class="headerlink" href="#mostrar-el-resultado-en-el-visor-de-gee" title="Link to this heading">#</a></h3>
 <p>Podemos agregar cualquiera de estos índices al mapa. Por ejemplo:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">S2</span><span class="p">,</span><span class="w"> </span><span class="mf">9</span><span class="p">);</span>
 <span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">S2</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&quot;NDVI&quot;</span><span class="p">),</span><span class="w"> </span><span class="p">{</span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">palette</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;white&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;green&quot;</span><span class="p">]},</span><span class="w"> </span><span class="s2">&quot;NDVI&quot;</span><span class="p">);</span>
@@ -832,7 +833,7 @@ Luego definimos los parámetros necesarios para el NDVI:</p>
 </section>
 </section>
 <section id="explicacion-de-la-nueva-version-con-asi">
-<h2><span class="section-number">6.12. </span>Explicación de la nueva versión con ASI<a class="headerlink" href="#explicacion-de-la-nueva-version-con-asi" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.12. </span>Explicación de la nueva versión con ASI<a class="headerlink" href="#explicacion-de-la-nueva-version-con-asi" title="Link to this heading">#</a></h2>
 <p>Para cerrar este capítulo mostraremos una mejora en la función agregarIndices, ahora usando la librería Awesome Spectral Indices (ASI). Realizamos una copia del script anterior y lo denominamos
 Lab_006_TS_BahiaBlanca_BIS</p>
 <p>Comentamos la función agregarIndices anterior, para volver a definirla utilizando Awesome Spectral Indices. Lo primero que hacemos es importar la librería desde el repositorio público:</p>
@@ -873,7 +874,7 @@ Lab_006_TS_BahiaBlanca_BIS</p>
 <p>Esta versión es más ordenada, más mantenible, y nos permite reutilizar fácilmente la función para otros índices o sensores si lo necesitamos más adelante.</p>
 </section>
 <section id="cierre">
-<h2><span class="section-number">6.13. </span>Cierre<a class="headerlink" href="#cierre" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.13. </span>Cierre<a class="headerlink" href="#cierre" title="Link to this heading">#</a></h2>
 <p>Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de datos geoespaciales de varios petabytes con capacidades de análisis a escala planetaria. Científicos, investigadores y desarrolladores utilizan Earth Engine para detectar cambios, mapear tendencias y cuantificar diferencias en la superficie terrestre. Earth Engine ahora está disponible para uso comercial y sigue siendo gratuito para fines académicos y de investigación.</p>
 <blockquote>
 <div><p>“Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real” es una fórmula que resume el potencial de Google Earth Engine (GEE) para generar soluciones científicas y prácticas.</p>
@@ -881,41 +882,41 @@ Lab_006_TS_BahiaBlanca_BIS</p>
 <figure class="align-default" id="fig-satellite-150dpi">
 <a class="reference internal image-reference" href="_images/Satellite_150dpi.png"><img alt="_images/Satellite_150dpi.png" src="_images/Satellite_150dpi.png" style="width: 20%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.14 </span><span class="caption-text">Ícono de la Fórmula: Imágenes Satelitales</span><a class="headerlink" href="#fig-satellite-150dpi" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.14 </span><span class="caption-text">Ícono de la Fórmula: Imágenes Satelitales</span><a class="headerlink" href="#fig-satellite-150dpi" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <blockquote>
-<div><p>Imágenes satelitales: GEE brinda acceso inmediato a un vasto catálogo de imágenes de observación de la Tierra, que incluye datos de sensores como Landsat, Sentinel, MODIS, entre otros. Esto permite monitorear cambios en el planeta en escalas temporales y espaciales diversas (ver fig. <a class="reference internal" href="#fig-satellite-150dpi"><span class="std std-numref">Fig. 6.14</span></a>).</p>
+<div><p>Imágenes satelitales: GEE brinda acceso inmediato a un vasto catálogo de imágenes de observación de la Tierra, que incluye datos de sensores como Landsat, Sentinel, MODIS, entre otros. Esto permite monitorear cambios en el planeta en escalas temporales y espaciales diversas (ver fig. <a class="reference internal" href="#fig-satellite-150dpi"><span class="std std-numref">Fig. 7.14</span></a>).</p>
 </div></blockquote>
 <figure class="align-default" id="fig-algorithm-150dpi">
 <a class="reference internal image-reference" href="_images/Algorithm_150dpi.png"><img alt="_images/Algorithm_150dpi.png" src="_images/Algorithm_150dpi.png" style="width: 20%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.15 </span><span class="caption-text">Ícono de la Fórmula: Pensamiento Algorítmico.</span><a class="headerlink" href="#fig-algorithm-150dpi" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.15 </span><span class="caption-text">Ícono de la Fórmula: Pensamiento Algorítmico.</span><a class="headerlink" href="#fig-algorithm-150dpi" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <blockquote>
-<div><p>Tus algoritmos: Los usuarios pueden aplicar sus propios modelos de análisis, ya sean simples cálculos de índices espectrales o complejos algoritmos de <strong>machine learning</strong>, todo dentro del entorno de GEE, aprovechando su capacidad de procesamiento en la nube  (ver fig. <a class="reference internal" href="#fig-algorithm-150dpi"><span class="std std-numref">Fig. 6.15</span></a>).</p>
+<div><p>Tus algoritmos: Los usuarios pueden aplicar sus propios modelos de análisis, ya sean simples cálculos de índices espectrales o complejos algoritmos de <strong>machine learning</strong>, todo dentro del entorno de GEE, aprovechando su capacidad de procesamiento en la nube  (ver fig. <a class="reference internal" href="#fig-algorithm-150dpi"><span class="std std-numref">Fig. 7.15</span></a>).</p>
 </div></blockquote>
 <figure class="align-default" id="fig-mundo">
 <a class="reference internal image-reference" href="_images/mundo.png"><img alt="_images/mundo.png" src="_images/mundo.png" style="width: 20%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.16 </span><span class="caption-text">Ícono de la Fórmula: Aplicaciones en el mundo real.</span><a class="headerlink" href="#fig-mundo" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.16 </span><span class="caption-text">Ícono de la Fórmula: Aplicaciones en el mundo real.</span><a class="headerlink" href="#fig-mundo" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <blockquote>
-<div><p>Aplicaciones en el mundo real: Al combinar datos y algoritmos, es posible desarrollar soluciones para problemas concretos como la deforestación, el cambio climático, la planificación urbana, la gestión del agua, la agricultura de precisión y muchos más (ver fig. <a class="reference internal" href="#fig-mundo"><span class="std std-numref">Fig. 6.16</span></a>).</p>
+<div><p>Aplicaciones en el mundo real: Al combinar datos y algoritmos, es posible desarrollar soluciones para problemas concretos como la deforestación, el cambio climático, la planificación urbana, la gestión del agua, la agricultura de precisión y muchos más (ver fig. <a class="reference internal" href="#fig-mundo"><span class="std std-numref">Fig. 7.16</span></a>).</p>
 </div></blockquote>
-<p>En conjunto, ¡esta fórmula, cuyos íconos se muestran en fig. <a class="reference internal" href="#fig-interapp"><span class="std std-numref">Fig. 6.17</span></a>, representa cómo GEE empodera a los científicos, desarrolladores y tomadores de decisiones para transformar datos en conocimiento y acción!</p>
+<p>En conjunto, ¡esta fórmula, cuyos íconos se muestran en fig. <a class="reference internal" href="#fig-interapp"><span class="std std-numref">Fig. 7.17</span></a>, representa cómo GEE empodera a los científicos, desarrolladores y tomadores de decisiones para transformar datos en conocimiento y acción!</p>
 <figure class="align-default" id="fig-interapp">
 <a class="reference internal image-reference" href="_images/interApp.png"><img alt="_images/interApp.png" src="_images/interApp.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 6.17 </span><span class="caption-text">Fórmula: Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real</span><a class="headerlink" href="#fig-interapp" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 7.17 </span><span class="caption-text">Fórmula: Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real</span><a class="headerlink" href="#fig-interapp" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>En el próximo capítulo de esta serie Time Series, calcularemos mas series temporales de precipitaciones, y obtendremos una serie etemporal de tipos de suelo de Rosario utilizando el clasificador de Random Forest de un video anterior. Nos enfocaremos en ver esos ejemplos en el marco de la teoría de cubos de datos de Imágenes Satelitales.</p>
 </section>
 <section id="video-del-capitulo">
-<h2><span class="section-number">6.14. </span>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">7.14. </span>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
 <p>Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: <a class="reference external" href="https://www.youtube.com/watch?v=1hrdqhz78SU">https://www.youtube.com/watch?v=1hrdqhz78SU</a></p>
 </section>
 </section>
@@ -956,7 +957,7 @@ Lab_006_TS_BahiaBlanca_BIS</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Capítulo 6 · Workflow ML en GEE</p>
       </div>
     </a>
     <a class="right-next"
@@ -964,7 +965,7 @@ Lab_006_TS_BahiaBlanca_BIS</p>
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Capítulo 7 · Cubos de Imágenes Satelitales</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Capítulo 7 · Cubos de Imágenes Satelitales</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -984,29 +985,29 @@ Lab_006_TS_BahiaBlanca_BIS</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-de-tiempo-ejemplo-bahia-blanca">6.1. Serie de Tiempo: Ejemplo Bahía Blanca</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-la-frecuencia-de-analisis-temporal">6.2. Definición de la frecuencia de análisis temporal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-de-interes-roi">6.3. Región de interés (ROI)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-agregar-indices-a-cada-imagen">6.4. Función para agregar índices a cada imagen</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-clave-getcoleccionporperiodo">6.5. Función clave: getColeccionPorPeriodo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-la-coleccion-temporal">6.6. Crear la colección temporal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-indices-sentinel-2">6.7. Gráfico de índices Sentinel-2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-temporal-de-temperatura-superficial-lst">6.8. Serie temporal de temperatura superficial (LST)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion-opcional-de-estadisticas-a-csv">6.9. Exportación opcional de estadísticas a CSV</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-de-la-seccion">6.10. Conclusión de la sección</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-awesome-spectral-indices-en-gee">6.11. Uso de Awesome Spectral Indices en GEE</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona-importar-el-modulo">6.11.1. ¿Cómo funciona? – Importar el módulo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ver-la-lista-completa-de-indices">6.11.2. Ver la lista completa de índices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acceder-a-la-informacion-de-un-indice-especifico">6.11.3. Acceder a la información de un índice específico</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explorar-los-atributos-del-indice">6.11.4. Explorar los atributos del índice</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2">6.11.5. Calcular un índice: NDVI sobre una imagen Sentinel-2</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-multiples-indices-a-la-vez">6.11.6. Calcular múltiples índices a la vez</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-el-resultado-en-el-visor-de-gee">6.11.7. Mostrar el resultado en el visor de GEE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-de-tiempo-ejemplo-bahia-blanca">7.1. Serie de Tiempo: Ejemplo Bahía Blanca</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#definicion-de-la-frecuencia-de-analisis-temporal">7.2. Definición de la frecuencia de análisis temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#region-de-interes-roi">7.3. Región de interés (ROI)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-agregar-indices-a-cada-imagen">7.4. Función para agregar índices a cada imagen</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-clave-getcoleccionporperiodo">7.5. Función clave: getColeccionPorPeriodo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crear-la-coleccion-temporal">7.6. Crear la colección temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grafico-de-indices-sentinel-2">7.7. Gráfico de índices Sentinel-2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#serie-temporal-de-temperatura-superficial-lst">7.8. Serie temporal de temperatura superficial (LST)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion-opcional-de-estadisticas-a-csv">7.9. Exportación opcional de estadísticas a CSV</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-de-la-seccion">7.10. Conclusión de la sección</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uso-de-awesome-spectral-indices-en-gee">7.11. Uso de Awesome Spectral Indices en GEE</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#como-funciona-importar-el-modulo">7.11.1. ¿Cómo funciona? – Importar el módulo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ver-la-lista-completa-de-indices">7.11.2. Ver la lista completa de índices</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acceder-a-la-informacion-de-un-indice-especifico">7.11.3. Acceder a la información de un índice específico</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#explorar-los-atributos-del-indice">7.11.4. Explorar los atributos del índice</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-un-indice-ndvi-sobre-una-imagen-sentinel-2">7.11.5. Calcular un índice: NDVI sobre una imagen Sentinel-2</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calcular-multiples-indices-a-la-vez">7.11.6. Calcular múltiples índices a la vez</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-el-resultado-en-el-visor-de-gee">7.11.7. Mostrar el resultado en el visor de GEE</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicacion-de-la-nueva-version-con-asi">6.12. Explicación de la nueva versión con ASI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre">6.13. Cierre</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">6.14. Video del capítulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explicacion-de-la-nueva-version-con-asi">7.12. Explicación de la nueva versión con ASI</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cierre">7.13. Cierre</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">7.14. Video del capítulo</a></li>
 </ul>
   </nav></div>
 
