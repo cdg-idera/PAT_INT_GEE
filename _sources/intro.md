@@ -35,15 +35,18 @@ El objetivo de este libro digital es impulsar el desarrollo de capacidades en la
 ````{admonition} Producción del libro y de los videos
 :class: note
 
-```{tip} Libro (Jupyter Book)
+```{admonition} Libro (Jupyter Book)
+:class: tip
 Este libro interactivo digital está siendo desarrollado con [**Jupyter Book**](https://jupyterbook.org) y tendrá ISBN tramitado por IDERA-IGN.
 ```
 
-```{tip} Videos
+```{admonition} Videos
+:class: tip
 Los videos asociados a los distintos capítulos se produjeron con componentes de **Adobe Creative Cloud** {cite}`adobe-creative-cloud-2025` —**After Effects** {cite}`adobe-after-effects-2025`, **Illustrator** {cite}`adobe-illustrator-2025`, **Audition** {cite}`adobe-audition-2025` y **Media Encoder** {cite}`adobe-media-encoder-2025`—: **After Effects** para *animación* y *composición de gráficos en movimiento*; **Illustrator** para la *preparación de arte vectorial*; **Audition** para la *edición y mezcla de audio*; y **Media Encoder** para la *transcodificación* y *publicación de los másteres finales*. Adicionalmente, se utilizó **Adobe Stock** {cite}`adobe-stock-2025`; no obstante, una parte sustancial del trabajo consistió en la *adaptación de imágenes*, la *generación de nuevas* a partir de *material base* y la *integración de diversos recursos* durante la *edición de video*.
 ```
 
 ````
+
 
 
 # Requerimientos
@@ -59,6 +62,9 @@ En síntesis, la **cuenta gratuita es suficiente para el aprendizaje y la invest
 Una vez que cuentes con tu cuenta en GEE, podrás utilizar el siguiente enlace para explorar el repositorio público de código en JavaScript:  
 🔗 [Repositorio público de IDERA en GEE](https://code.earthengine.google.com/?accept_repo=users%2Fcdg-idera%2Fgee)
 
+Además, para complementar la programación en JavaScript en el Code Editor de GEE, utilizaremos **Google Colab** para ejecutar código **Python**. Allí mostraremos, entre otras cosas, cómo *generar ejemplos sintéticos* y *visualizar árboles de decisión* a partir de archivos .dot exportados desde GEE, ampliando así las posibilidades de análisis y documentación de los resultados.
+
+En síntesis, la cuenta gratuita es suficiente para el aprendizaje y la investigación, y constituye el camino recomendado para iniciarse en el mundo del análisis satelital con GEE.
 
 # Tabla de Contenidos
 

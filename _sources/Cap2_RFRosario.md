@@ -1,13 +1,18 @@
 # Capítulo 2 · Random Forest en GEE
 
+Este capítulo muestra nuestro primer ejemplo aplicado con Random Forest.
+
 ## Introducción
 
-La clasificación de imágenes satelitales es una técnica fundamental en teledetección, y uno de los enfoques más comunes es dividir el territorio en categorías específicas como: urbano, suelo desnudo, agua ó vegetación de cultivos, Bosque-o-Zona Arbolada-Arbustiva (ver fig. {numref}`fig-LeyendaArbol`).
+La clasificación de imágenes satelitales es una técnica fundamental en teledetección, y uno de los enfoques más comunes es dividir el territorio en categorías específicas como: urbano, suelo desnudo, agua, vegetación de cultivos, Bosque-o-Zona Arbolada-Arbustiva (ver fig. {numref}`fig-LeyendaArbol`).
 
-Primero, accedemos al code editor de nuestra cuenta de Google Earth engen y cargamos la colección de imágenes Sentinel-2 SR Harmonized, que incluye datos de alta calidad para análisis medioambientales.
+Primero, accedemos al code editor de nuestra cuenta de Google Earth Engine y cargamos la colección de imágenes Sentinel-2 SR Harmonized, que incluye datos de alta calidad para análisis medioambientales.
 
-Luego defimos una región de interés (ROI), la cual comprende una gran parte del área metropolitana de Rosario en la provincia de Santa Fé.
-A medida que avanzamos, aprenderemos a implementar este proceso en código, con la meta final de que cada participante pueda replicar el ejemplo en su ciudad.
+```javascript
+var s2 = ee.ImageCollection("COPERNICUS/S2_SR_HARMONIZED");
+```
+
+Luego defimos una región de interés (ROI), la cual comprende una gran parte del área metropolitana de Rosario en la provincia de Santa Fé. A medida que avanzamos, aprenderemos a implementar este proceso en código, con la meta final de que cada participante pueda replicar el ejemplo en su ciudad.
 
 Aplicamos filtros para limitar las imágenes a las que tienen menos del 30% de nubes, que fueron capturadas entre el 1 de enero de 2024 y el 31 de Diciembre de 2024, y que se encuentran dentro de nuestra región de interés, o ROI. Finalmente, filtramos las bandas expectrales B*.
 
@@ -28,8 +33,7 @@ var composite = s2.median().clip(roi);
 Map.addLayer(composite, {min:0, max:3000, bands:['B4','B3','B2']}, 'Composite');
 ```
 
-Ahora contamos con una imagen compuesta y procesada lista para análisis geoespacial, en particular explicaremos en esta sección como aplicar aprendizaje automático con **Random Forest** a la región de estudio para obtener una clasificación
-de suelos de acuerdo a las categorías de agua, edicaciones del sector urbano, suelo desnudo, y vegetación en la que distinguiremos cultivos de forestación.
+Ahora contamos con una imagen compuesta y procesada lista para análisis geoespacial, en particular explicaremos en esta sección como aplicar aprendizaje automático con **Random Forest** a la región de estudio para obtener una clasificación de suelos de acuerdo a las categorías de agua, edicaciones del sector urbano, suelo desnudo, y vegetación en la que distinguiremos cultivos de forestación o zona arbolada arbustiva.
 
 
 ```{tip}
@@ -67,11 +71,49 @@ Map.addLayer(medianClip, {bands:['B4','B3','B2'], min:0, max:3000}, 'Median CLIP
 
 ### Recolección de muestras de entrenamiento
 
-Este proceso comienza identificando los píxeles correspondientes a cada una de estas clases dentro de una imagen satelital. Para ello, es esencial recolectar datos de entrenamiento representativos que permitan entrenar un modelo de clasificación eficaz. El primer paso: la recolección de datos de entrenamiento es crucial. Para ello, necesitamos etiquetar manualmente ejemplos de cada una de las cinco clases en nuestra imagen. Por motivos de eficiencia, las etiquetas no se asignan como texto, sino como valores numéricos: los píxeles de agua se etiquetan como 0, los pixeles de edificaciones urbanas como 1, los de suelo desnudo como 3, los de cultivos como 4 y los de vegetación bosques o arbustiva como 4. Esta codificación facilita el procesamiento por parte del modelo y asegura un manejo eficiente de las clases.
+Este proceso comienza identificando los píxeles correspondientes a cada una de estas clases dentro de una imagen satelital. Para ello, es esencial **recolectar datos de entrenamiento representativos** que permitan **entrenar un modelo de clasificación eficaz**. El primer paso: la recolección de datos de entrenamiento es crucial. Para ello, necesitamos etiquetar manualmente ejemplos de cada una de las cinco clases en nuestra imagen. Por motivos de *eficiencia*, las etiquetas no se asignan como texto, sino como valores numéricos: 
 
-El primer paso es crear una nueva capa. Haz clic en "Nueva capa". Por defecto, el tipo es geometría, pero iremos a la configuración y cambiaremos esto a un Feature collection. Nombraremos esta capa como "agua", y agregaremos una propiedad llamada landcover. Para esta clase, definiremos que land cover = 0 corresponde agua.
+* los píxeles de agua se etiquetan como 0, 
+* los pixeles de edificaciones urbanas como 1, 
+* los de suelo desnudo como 3, 
+* los de cultivos como 4 y 
+* los de vegetación bosques o arbustiva como 4. 
 
-Al recolectar datos de entrenamiento, es fundamental ser preciso. Por ejemplo, para identificar áreas urbanas, definimos esta categoría como cualquier superficie mencionada recién, superf. construida, edificios, carreteras y otras superficies impermeables. Utilizando las herramientas de dibujo disponibles, como marcadores o puntos, seleccionamos manualmente píxeles que representen agua. Es esencial hacer esto con cuidado, asegurándonos de que los puntos se coloquen exactamente sobre píxeles de agua,
+Esta codificación facilita el procesamiento por parte del modelo y asegura un manejo eficiente de las clases.
+
+El primer paso es crear una nueva capa. Haz clic en "Nueva capa"  (ver fig. {numref}`fig-NuevaCapa`). Por defecto, el tipo es geometría  (ver fig. {numref}`fig-geometriaVentana`)., pero iremos a la configuración y cambiaremos esto a un Feature collection (ver fig. {numref}`fig-FeatureColl`). Nombraremos esta capa como "agua", y agregaremos una propiedad llamada landcover. Para esta clase, definiremos que land cover = 0 corresponde agua (ver fig. {numref}`fig-featuraAgua`).
+
+```{figure} imagenes/NuevaCapa.png
+:name: fig-NuevaCapa
+:width: 80%
+
+Herramienta del Mapa: Nueva capa
+```
+
+
+```{figure} imagenes/geometriaVentana.png
+:name: fig-geometriaVentana
+:width: 80%
+
+Ventana de Geometria
+```
+
+```{figure} imagenes/FeatureColl.png
+:name: fig-FeatureColl
+:width: 80%
+
+Ventana de Geometria: Seleccionar FeatureCollection
+```
+
+
+```{figure} imagenes/featuraAgua.png
+:name: fig-featuraAgua
+:width: 80%
+
+Creación del Feature Collection Agua
+```
+
+Al recolectar datos de entrenamiento, es fundamental **ser precisos**. Por ejemplo, para identificar áreas urbanas, definimos esta categoría como cualquier superficie mencionada recién, superf. construida, edificios, carreteras y otras superficies impermeables. Utilizando las herramientas de dibujo disponibles, como marcadores o puntos, seleccionamos manualmente píxeles que representen agua. Es esencial hacer esto con cuidado, asegurándonos de que los puntos se coloquen exactamente sobre píxeles de agua,
 
 Una vez que recolectamos ejemplos representativos de píxeles de agua, repetimos el proceso para las demás clases:
 
@@ -171,6 +213,15 @@ Lo que Earth Engine aporta es la capacidad de realizar estos procesos en tiempo 
 ## Recomendaciones para la recolección de Datos
 
 Algunas recomendaciones para optimizar la recolección de datos son las siguientes:
+
+
+```{figure} imagenes/Slide22.png
+:name: fig-Slide22
+:width: 100%
+
+Recomendaciones en la recolección de muestras de Entrenamiento.
+```
+
 
 Usar imágenes Sentinel-2 como referencia. Asegúrate de utilizar imágenes de Sentinel-2 para seleccionar las muestras de entrenamiento, ya que las imágenes de alta resolución pueden no coincidir temporalmente con las imágenes de Sentinel-2, lo que podría afectar la precisión del modelo.
 

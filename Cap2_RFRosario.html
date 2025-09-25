@@ -417,12 +417,15 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="capitulo-2-random-forest-en-gee">
 <h1><span class="section-number">2. </span>Capítulo 2 · Random Forest en GEE<a class="headerlink" href="#capitulo-2-random-forest-en-gee" title="Link to this heading">#</a></h1>
+<p>Este capítulo muestra nuestro primer ejemplo aplicado con Random Forest.</p>
 <section id="introduccion">
 <h2><span class="section-number">2.1. </span>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
-<p>La clasificación de imágenes satelitales es una técnica fundamental en teledetección, y uno de los enfoques más comunes es dividir el territorio en categorías específicas como: urbano, suelo desnudo, agua ó vegetación de cultivos, Bosque-o-Zona Arbolada-Arbustiva (ver fig. <a class="reference internal" href="#fig-leyendaarbol"><span class="std std-numref">Fig. 2.1</span></a>).</p>
-<p>Primero, accedemos al code editor de nuestra cuenta de Google Earth engen y cargamos la colección de imágenes Sentinel-2 SR Harmonized, que incluye datos de alta calidad para análisis medioambientales.</p>
-<p>Luego defimos una región de interés (ROI), la cual comprende una gran parte del área metropolitana de Rosario en la provincia de Santa Fé.
-A medida que avanzamos, aprenderemos a implementar este proceso en código, con la meta final de que cada participante pueda replicar el ejemplo en su ciudad.</p>
+<p>La clasificación de imágenes satelitales es una técnica fundamental en teledetección, y uno de los enfoques más comunes es dividir el territorio en categorías específicas como: urbano, suelo desnudo, agua, vegetación de cultivos, Bosque-o-Zona Arbolada-Arbustiva (ver fig. <a class="reference internal" href="#fig-leyendaarbol"><span class="std std-numref">Fig. 2.5</span></a>).</p>
+<p>Primero, accedemos al code editor de nuestra cuenta de Google Earth Engine y cargamos la colección de imágenes Sentinel-2 SR Harmonized, que incluye datos de alta calidad para análisis medioambientales.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_SR_HARMONIZED&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Luego defimos una región de interés (ROI), la cual comprende una gran parte del área metropolitana de Rosario en la provincia de Santa Fé. A medida que avanzamos, aprenderemos a implementar este proceso en código, con la meta final de que cada participante pueda replicar el ejemplo en su ciudad.</p>
 <p>Aplicamos filtros para limitar las imágenes a las que tienen menos del 30% de nubes, que fueron capturadas entre el 1 de enero de 2024 y el 31 de Diciembre de 2024, y que se encuentran dentro de nuestra región de interés, o ROI. Finalmente, filtramos las bandas expectrales B*.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_SR_HARMONIZED&quot;</span><span class="p">)</span>
 <span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">30</span><span class="p">))</span>
@@ -437,8 +440,7 @@ A medida que avanzamos, aprenderemos a implementar este proceso en código, con 
 <span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">composite</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">min</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="o">:</span><span class="mf">3000</span><span class="p">,</span><span class="w"> </span><span class="nx">bands</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">]},</span><span class="w"> </span><span class="s1">&#39;Composite&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Ahora contamos con una imagen compuesta y procesada lista para análisis geoespacial, en particular explicaremos en esta sección como aplicar aprendizaje automático con <strong>Random Forest</strong> a la región de estudio para obtener una clasificación
-de suelos de acuerdo a las categorías de agua, edicaciones del sector urbano, suelo desnudo, y vegetación en la que distinguiremos cultivos de forestación.</p>
+<p>Ahora contamos con una imagen compuesta y procesada lista para análisis geoespacial, en particular explicaremos en esta sección como aplicar aprendizaje automático con <strong>Random Forest</strong> a la región de estudio para obtener una clasificación de suelos de acuerdo a las categorías de agua, edicaciones del sector urbano, suelo desnudo, y vegetación en la que distinguiremos cultivos de forestación o zona arbolada arbustiva.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Es importante señalar la diferencia en GEE entre <code class="docutils literal notranslate"><span class="pre">filterBounds(roi)</span></code> (o <code class="docutils literal notranslate"><span class="pre">filter(ee.Filter.bounds(roi))</span></code>) y <code class="docutils literal notranslate"><span class="pre">clip(roi)</span></code>:</p>
@@ -475,9 +477,41 @@ de suelos de acuerdo a las categorías de agua, edicaciones del sector urbano, s
 </div>
 <section id="recoleccion-de-muestras-de-entrenamiento">
 <h3><span class="section-number">2.1.1. </span>Recolección de muestras de entrenamiento<a class="headerlink" href="#recoleccion-de-muestras-de-entrenamiento" title="Link to this heading">#</a></h3>
-<p>Este proceso comienza identificando los píxeles correspondientes a cada una de estas clases dentro de una imagen satelital. Para ello, es esencial recolectar datos de entrenamiento representativos que permitan entrenar un modelo de clasificación eficaz. El primer paso: la recolección de datos de entrenamiento es crucial. Para ello, necesitamos etiquetar manualmente ejemplos de cada una de las cinco clases en nuestra imagen. Por motivos de eficiencia, las etiquetas no se asignan como texto, sino como valores numéricos: los píxeles de agua se etiquetan como 0, los pixeles de edificaciones urbanas como 1, los de suelo desnudo como 3, los de cultivos como 4 y los de vegetación bosques o arbustiva como 4. Esta codificación facilita el procesamiento por parte del modelo y asegura un manejo eficiente de las clases.</p>
-<p>El primer paso es crear una nueva capa. Haz clic en “Nueva capa”. Por defecto, el tipo es geometría, pero iremos a la configuración y cambiaremos esto a un Feature collection. Nombraremos esta capa como “agua”, y agregaremos una propiedad llamada landcover. Para esta clase, definiremos que land cover = 0 corresponde agua.</p>
-<p>Al recolectar datos de entrenamiento, es fundamental ser preciso. Por ejemplo, para identificar áreas urbanas, definimos esta categoría como cualquier superficie mencionada recién, superf. construida, edificios, carreteras y otras superficies impermeables. Utilizando las herramientas de dibujo disponibles, como marcadores o puntos, seleccionamos manualmente píxeles que representen agua. Es esencial hacer esto con cuidado, asegurándonos de que los puntos se coloquen exactamente sobre píxeles de agua,</p>
+<p>Este proceso comienza identificando los píxeles correspondientes a cada una de estas clases dentro de una imagen satelital. Para ello, es esencial <strong>recolectar datos de entrenamiento representativos</strong> que permitan <strong>entrenar un modelo de clasificación eficaz</strong>. El primer paso: la recolección de datos de entrenamiento es crucial. Para ello, necesitamos etiquetar manualmente ejemplos de cada una de las cinco clases en nuestra imagen. Por motivos de <em>eficiencia</em>, las etiquetas no se asignan como texto, sino como valores numéricos:</p>
+<ul class="simple">
+<li><p>los píxeles de agua se etiquetan como 0,</p></li>
+<li><p>los pixeles de edificaciones urbanas como 1,</p></li>
+<li><p>los de suelo desnudo como 3,</p></li>
+<li><p>los de cultivos como 4 y</p></li>
+<li><p>los de vegetación bosques o arbustiva como 4.</p></li>
+</ul>
+<p>Esta codificación facilita el procesamiento por parte del modelo y asegura un manejo eficiente de las clases.</p>
+<p>El primer paso es crear una nueva capa. Haz clic en “Nueva capa”  (ver fig. <a class="reference internal" href="#fig-nuevacapa"><span class="std std-numref">Fig. 2.1</span></a>). Por defecto, el tipo es geometría  (ver fig. <a class="reference internal" href="#fig-geometriaventana"><span class="std std-numref">Fig. 2.2</span></a>)., pero iremos a la configuración y cambiaremos esto a un Feature collection (ver fig. <a class="reference internal" href="#fig-featurecoll"><span class="std std-numref">Fig. 2.3</span></a>). Nombraremos esta capa como “agua”, y agregaremos una propiedad llamada landcover. Para esta clase, definiremos que land cover = 0 corresponde agua (ver fig. <a class="reference internal" href="#fig-featuraagua"><span class="std std-numref">Fig. 2.4</span></a>).</p>
+<figure class="align-default" id="fig-nuevacapa">
+<a class="reference internal image-reference" href="_images/NuevaCapa.png"><img alt="_images/NuevaCapa.png" src="_images/NuevaCapa.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Herramienta del Mapa: Nueva capa</span><a class="headerlink" href="#fig-nuevacapa" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-geometriaventana">
+<a class="reference internal image-reference" href="_images/geometriaVentana.png"><img alt="_images/geometriaVentana.png" src="_images/geometriaVentana.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Ventana de Geometria</span><a class="headerlink" href="#fig-geometriaventana" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-featurecoll">
+<a class="reference internal image-reference" href="_images/FeatureColl.png"><img alt="_images/FeatureColl.png" src="_images/FeatureColl.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Ventana de Geometria: Seleccionar FeatureCollection</span><a class="headerlink" href="#fig-featurecoll" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-featuraagua">
+<a class="reference internal image-reference" href="imagenes/featuraAgua.png"><img alt="imagenes/featuraAgua.png" src="imagenes/featuraAgua.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Creación del Feature Collection Agua</span><a class="headerlink" href="#fig-featuraagua" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Al recolectar datos de entrenamiento, es fundamental <strong>ser precisos</strong>. Por ejemplo, para identificar áreas urbanas, definimos esta categoría como cualquier superficie mencionada recién, superf. construida, edificios, carreteras y otras superficies impermeables. Utilizando las herramientas de dibujo disponibles, como marcadores o puntos, seleccionamos manualmente píxeles que representen agua. Es esencial hacer esto con cuidado, asegurándonos de que los puntos se coloquen exactamente sobre píxeles de agua,</p>
 <p>Una vez que recolectamos ejemplos representativos de píxeles de agua, repetimos el proceso para las demás clases:</p>
 <p>Ahora es el turno de la categoría urbano que representa a edificios, superficie construida, como edificios, carreteras y otras superficies impermeables. Creamos una nueva capa, de tipo feature collection, cuyo nombre es urbano, con una propiedad lancover igual a 1. Ahora, con esta nueva colección configurada, comenzaremos a marcar puntos DE ESAS caracteristicas.Nuevamente es esencial hacer esto con cuidado, asegurándonos de que los puntos se coloquen exactamente sobre pixeles urbanos, evitando errores como etiquetar un árbol o vegetación cercana.</p>
 <p>Es útil contar con mapas base de alta resolución como referencia. Sin embargo, estos deben utilizarse con precaución, ya que las imágenes de los mapas base pueden corresponder a fechas diferentes a las de nuestra imagen satelital. Por ejemplo, un edificio visible en el mapa base puede no existir en la imagen satelital actual. Por lo tanto, siempre debemos priorizar la referencia directa de nuestra imagen satelital.</p>
@@ -486,11 +520,11 @@ de suelos de acuerdo a las categorías de agua, edicaciones del sector urbano, s
 Ahora, con esta nueva colección configurada, comenzaremos a marcar puntos en las superficiesDesnudas.</p>
 <p>Definimos terreno desnudo como cualquier píxel que representa suelo expuesto, sin construcciones ni vegetación, únicamente tierra desnuda. Utilizando la herramienta de marcador, selecciona la capa de terrenos desnudos y comienza a colocar puntos en las áreas correspondientes.</p>
 <p>hacemos los mismo con cultivos,  Creamos una nueva capa, de tipo feature collection, cuyo nombre es cultivos, con una propiedad lancover igual a 3. Incorporamos pixeles a la capa.
-hacemos los mismo con forestación o arbusto,  Creamos una nueva capa, de tipo feature collection, cuyo nombre es bosque pero comprende también “zona arbolada y arbustiva” o vegetación leñosa, con una propiedad lancover igual a 4. Incorporamos pixeles a la capa  (ver fig. <a class="reference internal" href="#fig-leyendaarbol"><span class="std std-numref">Fig. 2.1</span></a>).</p>
+hacemos los mismo con forestación o arbusto,  Creamos una nueva capa, de tipo feature collection, cuyo nombre es bosque pero comprende también “zona arbolada y arbustiva” o vegetación leñosa, con una propiedad lancover igual a 4. Incorporamos pixeles a la capa  (ver fig. <a class="reference internal" href="#fig-leyendaarbol"><span class="std std-numref">Fig. 2.5</span></a>).</p>
 <figure class="align-default" id="fig-leyendaarbol">
 <a class="reference internal image-reference" href="_images/LeyendaArbol.png"><img alt="_images/LeyendaArbol.png" src="_images/LeyendaArbol.png" style="width: 80%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Clasificación Multiclase: Categorías</span><a class="headerlink" href="#fig-leyendaarbol" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">Clasificación Multiclase: Categorías</span><a class="headerlink" href="#fig-leyendaarbol" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>La calidad y la representatividad de estos datos de entrenamiento son cruciales, ya que los algoritmos de aprendizaje automático tratan los datos de entrada como verdades absolutas. Cualquier error en esta etapa puede traducirse en un modelo impreciso y resultados incorrectos.</p>
@@ -531,11 +565,11 @@ hacemos los mismo con forestación o arbusto,  Creamos una nueva capa, de tipo f
 <li><p>Rango de valores (min = 0, max = 3), los cuales representan los cuatro valores de nuestras clases.</p></li>
 <li><p>Una paleta de colores que facilite identificar las diferentes clases.</p></li>
 </ul>
-<p>Al final, tendremos una representación visual clara de la clasificación, con cada clase distinguible por su color. Esto completa el proceso básico de clasificación supervisada utilizando Google Earth Engine (ver fig. <a class="reference internal" href="#fig-tabla-rfrosario"><span class="std std-numref">Fig. 2.2</span></a>).</p>
+<p>Al final, tendremos una representación visual clara de la clasificación, con cada clase distinguible por su color. Esto completa el proceso básico de clasificación supervisada utilizando Google Earth Engine (ver fig. <a class="reference internal" href="#fig-tabla-rfrosario"><span class="std std-numref">Fig. 2.6</span></a>).</p>
 <figure class="align-default" id="fig-tabla-rfrosario">
 <a class="reference internal image-reference" href="_images/Tabla_RFRosario.png"><img alt="_images/Tabla_RFRosario.png" src="_images/Tabla_RFRosario.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">Tabla de Variables Independientes y Dependientes</span><a class="headerlink" href="#fig-tabla-rfrosario" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">Tabla de Variables Independientes y Dependientes</span><a class="headerlink" href="#fig-tabla-rfrosario" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Cualquiera sea el color que especifiques aquí, corresponderá a la clase cero, clase uno, clase dos y clase tres y clase 4. Ahora, vamos a añadirlo al mapa, específicamente a la imagen clasificada, utilizando este parámetro.</p>
@@ -548,6 +582,12 @@ hacemos los mismo con forestación o arbusto,  Creamos una nueva capa, de tipo f
 <section id="recomendaciones-para-la-recoleccion-de-datos">
 <h2><span class="section-number">2.6. </span>Recomendaciones para la recolección de Datos<a class="headerlink" href="#recomendaciones-para-la-recoleccion-de-datos" title="Link to this heading">#</a></h2>
 <p>Algunas recomendaciones para optimizar la recolección de datos son las siguientes:</p>
+<figure class="align-default" id="fig-slide22">
+<a class="reference internal image-reference" href="_images/Slide22.png"><img alt="_images/Slide22.png" src="_images/Slide22.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 2.7 </span><span class="caption-text">Recomendaciones en la recolección de muestras de Entrenamiento.</span><a class="headerlink" href="#fig-slide22" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Usar imágenes Sentinel-2 como referencia. Asegúrate de utilizar imágenes de Sentinel-2 para seleccionar las muestras de entrenamiento, ya que las imágenes de alta resolución pueden no coincidir temporalmente con las imágenes de Sentinel-2, lo que podría afectar la precisión del modelo.</p>
 <p>Distribuir las muestras de entrenamiento de manera equitativa. Asegúrate de tomar puntos de entrenamiento distribuidos por toda la ciudad y, especialmente, en las calles. Un error común es confundir cuerpos de agua con áreas urbanas oscuras.</p>
 <p>Evitar muestras mixtas. No utilices píxeles mixtos para el entrenamiento. Intenta seleccionar ejemplos puros de agua, vegetación, áreas urbanas y terrenos áridos. Dejá que el modelo se encargue de los píxeles mixtos.</p>
@@ -604,11 +644,11 @@ Para asegurarnos de que todo esté correcto, usamos el comando print() para veri
 <span class="nx">print</span><span class="p">(</span><span class="s1">&#39;F-Score:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">testConfusionMatrix</span><span class="p">.</span><span class="nx">fscore</span><span class="p">(</span><span class="mf">1</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>A partir de esto, podemos generar una matriz de confusión (ver fig. <a class="reference internal" href="#fig-matriz-conf-2"><span class="std std-numref">Fig. 2.3</span></a>), que muestra las predicciones del modelo frente a las clases reales. Esta matriz nos permite visualizar cuántos píxeles fueron correctamente clasificados (diagonal principal) y cuántos fueron confundidos entre diferentes clases (fuera de la diagonal). A partir de esta matriz, se pueden calcular varias métricas de precisión, tales como la precisión global, que es el porcentaje de píxeles correctamente clasificados, así como la precisión del consumidor y la precisión del productor, que se refieren a la capacidad del modelo para identificar correctamente cada clase.</p>
+<p>A partir de esto, podemos generar una matriz de confusión (ver fig. <a class="reference internal" href="#fig-matriz-conf-2"><span class="std std-numref">Fig. 2.8</span></a>), que muestra las predicciones del modelo frente a las clases reales. Esta matriz nos permite visualizar cuántos píxeles fueron correctamente clasificados (diagonal principal) y cuántos fueron confundidos entre diferentes clases (fuera de la diagonal). A partir de esta matriz, se pueden calcular varias métricas de precisión, tales como la precisión global, que es el porcentaje de píxeles correctamente clasificados, así como la precisión del consumidor y la precisión del productor, que se refieren a la capacidad del modelo para identificar correctamente cada clase.</p>
 <figure class="align-default" id="fig-matriz-conf-2">
 <a class="reference internal image-reference" href="_images/Matriz_Conf_2.png"><img alt="_images/Matriz_Conf_2.png" src="_images/Matriz_Conf_2.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Tabla de Variables Independientes y Dependientes</span><a class="headerlink" href="#fig-matriz-conf-2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.8 </span><span class="caption-text">Tabla de Variables Independientes y Dependientes</span><a class="headerlink" href="#fig-matriz-conf-2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Earth Engine permite calcular todas estas métricas y compararlas fácilmente para evaluar el rendimiento del modelo. Si la matriz de confusión muestra valores elevados fuera de la diagonal, eso indica que el modelo está teniendo dificultades con ciertas clases. En ese caso, se puede recolectar más datos para las clases problemáticas o ajustar los parámetros del modelo para mejorar la clasificación.</p>
@@ -617,11 +657,11 @@ Para asegurarnos de que todo esté correcto, usamos el comando print() para veri
 </section>
 <section id="interpretacion-de-la-precision-global">
 <h2><span class="section-number">2.8. </span>Interpretación de la Precisión Global<a class="headerlink" href="#interpretacion-de-la-precision-global" title="Link to this heading">#</a></h2>
-<p>Una precisión Global (ver fig. <a class="reference internal" href="#fig-interpretacion"><span class="std std-numref">Fig. 2.4</span></a>) de 98.02% indica que el modelo clasifica correctamente la gran mayoría de las observaciones. Este es un excelente desempeño, lo que sugiere que el modelo distingue bien entre las clases.</p>
+<p>Una precisión Global (ver fig. <a class="reference internal" href="#fig-interpretacion"><span class="std std-numref">Fig. 2.9</span></a>) de 98.02% indica que el modelo clasifica correctamente la gran mayoría de las observaciones. Este es un excelente desempeño, lo que sugiere que el modelo distingue bien entre las clases.</p>
 <figure class="align-default" id="fig-interpretacion">
 <a class="reference internal image-reference" href="_images/Interpretacion.png"><img alt="_images/Interpretacion.png" src="_images/Interpretacion.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Interpretación de la Precisión Global</span><a class="headerlink" href="#fig-interpretacion" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.9 </span><span class="caption-text">Interpretación de la Precisión Global</span><a class="headerlink" href="#fig-interpretacion" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><strong>Confusiones a considerar:</strong></p>
