@@ -73,15 +73,15 @@ Map.addLayer(medianClip, {bands:['B4','B3','B2'], min:0, max:3000}, 'Median CLIP
 
 Este proceso comienza identificando los píxeles correspondientes a cada una de estas clases dentro de una imagen satelital. Para ello, es esencial **recolectar datos de entrenamiento representativos** que permitan **entrenar un modelo de clasificación eficaz**. El primer paso: la recolección de datos de entrenamiento es crucial. Para ello, necesitamos etiquetar manualmente ejemplos de cada una de las cinco clases en nuestra imagen. Por motivos de *eficiencia*, las etiquetas no se asignan como texto, sino como valores numéricos: 
 
-* los píxeles de agua se etiquetan como 0, 
-* los pixeles de edificaciones urbanas como 1, 
-* los de suelo desnudo como 3, 
-* los de cultivos como 4 y 
-* los de vegetación bosques o arbustiva como 4. 
+* los píxeles de *agua* se etiquetan como 0, 
+* los pixeles de *edificaciones urbanas* como 1, 
+* los de *suelo desnudo* como 3, 
+* los de *cultivos* como 4 y 
+* los de *vegetación bosques* o *zona arbustiva como 4. 
 
 Esta codificación facilita el procesamiento por parte del modelo y asegura un manejo eficiente de las clases.
 
-El primer paso es crear una nueva capa. Haz clic en "Nueva capa"  (ver fig. {numref}`fig-NuevaCapa`). Por defecto, el tipo es geometría  (ver fig. {numref}`fig-geometriaVentana`)., pero iremos a la configuración y cambiaremos esto a un Feature collection (ver fig. {numref}`fig-FeatureColl`). Nombraremos esta capa como "agua", y agregaremos una propiedad llamada landcover. Para esta clase, definiremos que land cover = 0 corresponde agua (ver fig. {numref}`fig-featuraAgua`).
+El primer paso es crear una nueva capa. Haz clic en "Nueva capa"  (ver fig. {numref}`fig-NuevaCapa`). Por defecto, el tipo es geometría  (ver fig. {numref}`fig-geometriaVentana`)., pero iremos a la configuración y cambiaremos esto a un Feature collection (ver fig. {numref}`fig-FeatureColl`). Nombraremos esta capa como "agua", y agregaremos una propiedad llamada landcover. Para esta clase, definiremos que land cover = 0 corresponde agua (ver fig. {numref}`fig-featureAgua`).
 
 ```{figure} imagenes/NuevaCapa.png
 :name: fig-NuevaCapa
@@ -93,22 +93,22 @@ Herramienta del Mapa: Nueva capa
 
 ```{figure} imagenes/geometriaVentana.png
 :name: fig-geometriaVentana
-:width: 80%
+:width: 50%
 
 Ventana de Geometria
 ```
 
 ```{figure} imagenes/FeatureColl.png
 :name: fig-FeatureColl
-:width: 80%
+:width: 50%
 
 Ventana de Geometria: Seleccionar FeatureCollection
 ```
 
 
-```{figure} imagenes/featuraAgua.png
-:name: fig-featuraAgua
-:width: 80%
+```{figure} imagenes/featureAgua.png
+:name: fig-featureAgua
+:width: 50%
 
 Creación del Feature Collection Agua
 ```
@@ -117,19 +117,18 @@ Al recolectar datos de entrenamiento, es fundamental **ser precisos**. Por ejemp
 
 Una vez que recolectamos ejemplos representativos de píxeles de agua, repetimos el proceso para las demás clases:
 
-Ahora es el turno de la categoría urbano que representa a edificios, superficie construida, como edificios, carreteras y otras superficies impermeables. Creamos una nueva capa, de tipo feature collection, cuyo nombre es urbano, con una propiedad lancover igual a 1. Ahora, con esta nueva colección configurada, comenzaremos a marcar puntos DE ESAS caracteristicas.Nuevamente es esencial hacer esto con cuidado, asegurándonos de que los puntos se coloquen exactamente sobre pixeles urbanos, evitando errores como etiquetar un árbol o vegetación cercana.
+Ahora es el turno de la categoría *urbano* que representa a edificios, superficie construida, como edificios, carreteras y otras superficies impermeables. Creamos una nueva capa, de tipo **FeatureCollection**, cuyo nombre es *urbano*, con una propiedad *lancover* igual a **1**. Ahora, con esta nueva colección configurada, comenzaremos a marcar puntos de esas caracteristicas. Nuevamente es esencial hacer esto con cuidado, asegurándonos de que los puntos se coloquen exactamente sobre *pixeles urbanos*, evitando errores como etiquetar un árbol o vegetación cercana.
 
-Es útil contar con mapas base de alta resolución como referencia. Sin embargo, estos deben utilizarse con precaución, ya que las imágenes de los mapas base pueden corresponder a fechas diferentes a las de nuestra imagen satelital. Por ejemplo, un edificio visible en el mapa base puede no existir en la imagen satelital actual. Por lo tanto, siempre debemos priorizar la referencia directa de nuestra imagen satelital.
+*Es útil contar con mapas base de alta resolución como referencia*. Sin embargo, estos deben utilizarse con precaución, ya que las imágenes de los mapas base pueden corresponder a fechas diferentes a las de nuestra imagen satelital. Por ejemplo, un edificio visible en el *mapa base* puede no existir en la imagen satelital actual. Por lo tanto, siempre debemos priorizar la referencia directa de nuestra imagen satelital.
 
-Aseguráte de recopilar datos de diferentes partes de la ciudad que correspondan a la misma clase para garantizar que el modelo capture la variabilidad dentro de esa categoría. Mientras marcas puntos para una clase, si identificas un ejemplo claro de otra clase, puedes cambiar de capa y marcar ese punto también.
+Aseguráte de recopilar datos de diferentes partes de la ciudad que correspondan a la misma clase para *garantizar* que el modelo capture la *variabilidad dentro de esa categoría*. Mientras marcás puntos para una clase, si identificas un ejemplo claro de otra clase, puedes cambiar de capa y marcar ese punto también.
 
-Bien, ahora que hemos recopilado todos los datos para los puntos de la clase urbana, pasaremos a la siguiente clase: terrenos desnudos. El primer paso es crear una nueva capa. Haz clic en "Nueva capa". Por defecto, el tipo será geometría, pero iremos a la configuración y cambiaremos esto a una colección de características (feature collection). Nombraremos esta capa como "superficieDesnuda", y agregaremos una propiedad llamada land covER. Para esta clase, definiremos que land cover = 1 corresponde a terrenos desnudos. También puedes cambiar los colores de la capa si lo deseas para facilitar su visualización.
+Bien, ahora que hemos recopilado todos los datos para los puntos de la clase urbana, pasaremos a la siguiente clase: *terrenos desnudos*. El primer paso es crear una nueva capa. Haz clic en *Nueva capa*. Por defecto, el tipo será geometría, pero iremos a la configuración y cambiaremos esto a una colección de características (**FeatureCollection**). Nombraremos esta capa como *superficieDesnuda*, y agregaremos una propiedad llamada *landcover*. Para esta clase, definiremos que *landcover* = 1 corresponde a *terrenos desnudos*. También puedes cambiar los colores de la capa si lo deseas para facilitar su visualización.
 Ahora, con esta nueva colección configurada, comenzaremos a marcar puntos en las superficiesDesnudas.
 
-Definimos terreno desnudo como cualquier píxel que representa suelo expuesto, sin construcciones ni vegetación, únicamente tierra desnuda. Utilizando la herramienta de marcador, selecciona la capa de terrenos desnudos y comienza a colocar puntos en las áreas correspondientes.
+Definimos *terreno desnudo* como cualquier píxel que representa suelo expuesto, sin construcciones ni vegetación, únicamente tierra desnuda. Utilizando la herramienta de marcador, selecciona la capa de terrenos desnudos y comienza a colocar puntos en las áreas correspondientes.
 
-hacemos los mismo con cultivos,  Creamos una nueva capa, de tipo feature collection, cuyo nombre es cultivos, con una propiedad lancover igual a 3. Incorporamos pixeles a la capa.
-hacemos los mismo con forestación o arbusto,  Creamos una nueva capa, de tipo feature collection, cuyo nombre es bosque pero comprende también "zona arbolada y arbustiva" o vegetación leñosa, con una propiedad lancover igual a 4. Incorporamos pixeles a la capa  (ver fig. {numref}`fig-LeyendaArbol`).
+Hacemos los mismo con *cultivos*:  creamos una nueva capa, de tipo **FeatureCollection**, cuyo nombre es *cultivos*, con una propiedad *landcover* igual a 3. Incorporamos pixeles a la capa. Hacemos los mismo con *forestación o zona arbustiva*,  Creamos una nueva capa, de tipo **Featurecollection**, cuyo nombre es *bosque* pero comprende también *zona arbolada y arbustiva* o vegetación leñosa, con una propiedad lancover igual a 4. Incorporamos pixeles a la capa  (ver fig. {numref}`fig-LeyendaArbol`).
 
 ```{figure} imagenes/LeyendaArbol.png
 :name: fig-LeyendaArbol
@@ -138,33 +137,41 @@ hacemos los mismo con forestación o arbusto,  Creamos una nueva capa, de tipo f
 Clasificación Multiclase: Categorías
 ```
 
-La calidad y la representatividad de estos datos de entrenamiento son cruciales, ya que los algoritmos de aprendizaje automático tratan los datos de entrada como verdades absolutas. Cualquier error en esta etapa puede traducirse en un modelo impreciso y resultados incorrectos.
+La **calidad** y la **representatividad** de estos datos de entrenamiento son cruciales, ya que los algoritmos de aprendizaje automático tratan los *datos de entrada* como verdades absolutas. **Cualquier error en esta etapa puede traducirse en un modelo impreciso y resultados incorrectos**.
 
-Aunque existe la posibilidad de utilizar polígonos para generar automáticamente múltiples ejemplos de entrenamiento, esta práctica debe evitarse. Cuando un polígono incluye píxeles de diferentes clases, el modelo puede recibir información incorrecta y generalizar de manera inexacta. Por ello, la recolección manual y cuidadosa de puntos individuales es siempre preferible, aunque sea más laboriosa.
+Para este ejemplo, aunque existe la posibilidad de utilizar polígonos para generar automáticamente múltiples ejemplos de entrenamiento, esta práctica debe evitarse. Cuando un polígono incluye píxeles de diferentes clases, el modelo puede recibir información incorrecta y generalizar de manera inexacta. Por ello, *la recolección manual y cuidadosa de puntos individuales es siempre preferible*, aunque sea más laboriosa.
 
-El aprendizaje automático, aunque automatiza muchos procesos, requiere una inversión significativa en tiempo y esfuerzo para recolectar y limpiar los datos de entrada. Este trabajo manual es la base de un modelo exitoso. Una vez que los datos están listos, el resto del proceso, como la implementación del modelo y la clasificación, es relativamente sencillo y eficiente.
+El aprendizaje automático, aunque automatiza muchos procesos, *requiere una inversión significativa en tiempo y esfuerzo para recolectar y limpiar los datos de entrada*. Este trabajo manual es la base de un modelo exitoso. Una vez que los datos están listos, el resto del proceso, como la implementación del modelo y la clasificación, es relativamente sencillo y eficiente.
 
-
-Una vez que hayamos terminado, tendremos algo como esto: una colección de muestras de entrenamiento para cada clase. Estas muestras estarán bien distribuidas por la región de interés, con alrededor de 10 puntos por clase para áreas pequeñas. Para regiones más grandes, se recomienda aumentar la cantidad de puntos a 100.
+Una vez que hayamos terminado, tendremos algo como esto: **una colección de muestras de entrenamiento para cada clase**. Estas muestras estarán *bien distribuidas por la región de interés*, con alrededor de 10 puntos por clase para áreas pequeñas. Para regiones más grandes, se recomienda aumentar la cantidad de puntos a 100.
 
 ## Unificando Muestras de Entrenamiento
 
-Ahora que hemos etiquetado cada clase con valores únicos (0 para agua, 1 para urbano, 2 para terreno desnudo, 3 para cultivos y 4 para vegetación de bosque o zona arbolada ó arbustiva), necesitamos combinar todas estas muestras en una sola colección de entrenamiento. Esto simplificará el proceso de clasificación.
+Ahora que hemos etiquetado cada clase con valores únicos (0 para agua, 1 para urbano, 2 para terreno desnudo, 3 para cultivos y 4 para vegetación de bosque o zona arbolada ó arbustiva), necesitamos *combinar todas estas muestras* en **una sola colección de entrenamiento**. Esto simplificará el proceso de clasificación.
 
-
-Definiremos una variable llamada GCPs (Ground Control Points, puntos de control en tierra), que contendrá nuestras muestras de entrenamiento. Usaremos la función MERGE para combinar las capas: primero la urbana, luego la de agua,  después la de cultivos, después la de terrenoDesnudo y finalmente la de bosque-zona arbolada y arbustiva. Ahora, GCP será una única colección que incluye todas las muestras de entrenamiento.
+Definiremos una variable llamada GCPs (**Ground Control Points**, puntos de control en tierra), que contendrá nuestras muestras de entrenamiento. Usaremos la función **merge** para combinar las capas: primero la *urbana*, luego la de *agua*,  después la de *cultivos*, después la de *terrenoDesnudo* y finalmente la de *bosque*-zona arbolada y arbustiva. Ahora, **gcp** será una única colección que incluye todas las muestras de entrenamiento.
 
 ```javascript
 var gcps = urbano.merge(agua).merge(cultivos).merge(terrenoDesnudo).merge(bosque);
 ```
 
-Esta colección tiene una única propiedad llamada land cover, que es la etiqueta de clase. Sin embargo, aún necesitamos asociar las REFLECTANCIAS ESPECTRALES de cada píxel en nuestra imagen compuesta a estas etiquetas.
+Esta colección tiene una *única propiedad llamada* **landcover**, que es la etiqueta de clase. Sin embargo, aún necesitamos asociar las reflectancias espectrales de cada píxel en nuestra imagen compuesta a estas etiquetas.
 
 ## Extracción de Valores de Píxeles
 
-El siguiente paso es extraer los valores espectrales de los píxeles en nuestra imagen compuesta. Esto se hace con la función sampleRegions, que toma la imagen y las geometrías de nuestras muestras de entrenamiento. Configuraremos la función para mantener solo la propiedad land cover y definiremos una escala de muestreo acorde a la resolución de Sentinel-2 (EN ESTE CASO 10 metros).
+El siguiente paso es extraer los valores espectrales de los píxeles en nuestra imagen compuesta. Esto se hace con la función **sampleRegions**, que toma la imagen y las geometrías de nuestras muestras de entrenamiento. Configuraremos la función para mantener solo la propiedad land cover y definiremos una escala de muestreo acorde a la resolución de Sentinel-2 (en este caso *10 metros*).
 
-Después de ejecutar esta función, cada muestra de entrenamiento incluirá los valores espectrales de las 12 bandas de la imagen, junto con su etiqueta de clase. Esto nos proporciona una tabla donde cada fila corresponde a un píxel de entrenamiento y cada columna representa las bandas espectrales. Esta tabla será usada para entrenar el modelo de clasificación.
+Después de ejecutar esta función, cada muestra de entrenamiento incluirá los valores espectrales de las 12 bandas de la imagen, junto con su etiqueta de clase. Esto nos proporciona una tabla donde cada fila corresponde a un píxel de entrenamiento y cada columna representa las bandas espectrales. Esta tabla será usada para entrenar el modelo de clasificación  (ver fig. {numref}`fig-Tabla_RFRosario`).
+
+
+```{figure} imagenes/Tabla_RFRosario.png
+:name: fig-Tabla_RFRosario
+:width: 80%
+
+Tabla esquemática de datos de entrenamiento
+```
+
+
 
 ## Entrenamiento del Clasificador
 
