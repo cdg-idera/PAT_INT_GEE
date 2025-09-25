@@ -11,7 +11,7 @@ clasificados; c) Entrenar un Clasificador, en la que los algoritmos de aprendiza
 
 La clasificación supervisada de imágenes satelitales es una de las técnicas más utilizadas en la teledetección para la extracción de información geoespacial. Gracias al avance en la tecnología satelital y al desarrollo de algoritmos de aprendizaje automático (Machine Learning, ML), se han logrado mejoras significativas en la precisión y eficiencia de estos procedimientos. La clasificación supervisada permite etiquetar cada píxel de una imagen en función de un conjunto de datos de entrenamiento previamente definidos, proporcionando una herramienta poderosa para el análisis de cambios en la cobertura terrestre, detección de cuerpos de agua, monitoreo ambiental y planificación urbana.
 
-El uso de algoritmos de aprendizaje automático en la teledetección ha sido ampliamente estudiado, destacando su aplicación en la clasificación de imágenes de alta resolución (Jensen, 2007; Lillesand, Kiefer & Chipman, 2015). Su uso en aplicaciones geoespaciales se ha incrementado debido a la creciente necesidad de datos actualizados y precisos para la
+El uso de algoritmos de aprendizaje automático en la teledetección ha sido ampliamente estudiado, destacando su aplicación en la clasificación de imágenes de alta resolución {cite:p}`jensen2007remote`, {cite:p}`lillesand2015remote`. Su uso en aplicaciones geoespaciales se ha incrementado debido a la creciente necesidad de datos actualizados y precisos para la
 toma de decisiones en diferentes sectores. Desde la agricultura de precisión hasta la gestión de riesgos naturales, la capacidad de analizar grandes volúmenes de datos en tiempo real ha cambiado la forma en que se estudian y comprenden los ecosistemas terrestres. Además, la combinación de sensores multiespectrales y el desarrollo de técnicas de procesamiento avanzadas han permitido identificar patrones de uso del suelo con un alto grado de precisión.
 
 En este contexto, herramientas como Google Earth Engine (GEE) han revolucionado la forma en que se manejan grandes volúmenes de datos satelitales, al proporcionar una plataforma de cómputo en la nube que facilita el acceso, procesamiento y análisis de imágenes sin la necesidad de infraestructura local costosa. Al integrar GEE con algoritmos de clasificación basados en aprendizaje automático, se abre un abanico de posibilidades para la optimización del análisis geoespacial. Este enfoque permite una escalabilidad sin precedentes, ya
@@ -64,11 +64,11 @@ la optimización de parámetros y la validación cruzada para evitar sesgos y so
 
 Los videos desarrollados son:
 
--   Machine Learning con Imágenes Satelitales - Aplicación de Random Forest. Serie Laboratorio 2 (Reynoso, 2025a). En este video introduce la aplicación de machine learning en teledetección y explora la aplicación del algoritmo Random Forest en imágenes satelitales en el área metropolitana de Rosario, mostrando su implementación en GEE y su capacidad para clasificar diferentes categorías de suelo.
+-   Machine Learning con Imágenes Satelitales - Aplicación de Random Forest. Serie Laboratorio 2  {cite:p}`reynoso2025a`. En este video introduce la aplicación de machine learning en teledetección y explora la aplicación del algoritmo Random Forest en imágenes satelitales en el área metropolitana de Rosario, mostrando su implementación en GEE y su capacidad para clasificar diferentes categorías de suelo.
 
--   Aplicación de Random Forest en Imágenes Satelitales para detectar agua. Serie Agua 1 (Reynoso, 2025b). Se demuestra cómo Random Forest puede ser utilizado para la detección de cuerpos de agua en imágenes satelitales, destacando su precisión.
+-   Aplicación de Random Forest en Imágenes Satelitales para detectar agua. Serie Agua 1  {cite:p}`reynoso2025a`. Se demuestra cómo Random Forest puede ser utilizado para la detección de cuerpos de agua en imágenes satelitales, destacando su precisión.
 
--   Clasificación Supervisada Multiclase con SVM y Árboles de Decisión. Serie Laboratorio 3-4 (Reynoso, 2025c). Se presentan las metodologías para la clasificación supervisada multiclase mediante Support Vector Machine y Árboles de Decisión CART, analizando su desempeño y sus aplicaciones prácticas.
+-   Clasificación Supervisada Multiclase con SVM y Árboles de Decisión. Serie Laboratorio 3-4  {cite:p}`reynoso2025c`. Se presentan las metodologías para la clasificación supervisada multiclase mediante Support Vector Machine y Árboles de Decisión CART, analizando su desempeño y sus aplicaciones prácticas.
 
 Estos videos proporcionan un recurso educativo valioso para quienes buscan implementar técnicas de aprendizaje automático en la clasificación de imágenes satelitales. A través de estas explicaciones detalladas, se facilita la comprensión de los procesos y se promueve el uso de herramientas avanzadas para el análisis geoespacial.
 
@@ -94,8 +94,7 @@ etapa es la partición de los datos en conjuntos de entrenamiento y validación.
 
 El entrenamiento del clasificador es el proceso mediante el cual el algoritmo aprende a diferenciar las distintas clases a partir de los datos de entrenamiento. Se implementaron tres algoritmos de clasificación supervisada: Random Forest, Support Vector Machine (SVM) y Árboles de Decisión CART.
 
-**Random Forest:** Modelo basado en múltiples árboles de decisión, ideal para manejar grandes volúmenes de datos con alta dimensionalidad. El algoritmo Random Forest ha sido ampliamente utilizado debido a su capacidad para manejar datos de alta dimensionalidad y mitigar el sobreajuste (Breiman, 2021; Barreñada et al., 2024; Cavalheiro et al.,
-2023).. Este modelo genera múltiples árboles de decisión y combina sus resultados para obtener una clasificación más precisa y estable. Para su implementación en GEE, se utilizó el método:
+**Random Forest:** Modelo basado en múltiples árboles de decisión, ideal para manejar grandes volúmenes de datos con alta dimensionalidad. El algoritmo Random Forest ha sido ampliamente utilizado debido a su capacidad para manejar datos de alta dimensionalidad y mitigar el sobreajuste  {cite:p}`breiman2021random`,  {cite:p}`barrenada2024random`,  {cite:p}`cavalheiro2023rfkernel`. Este modelo genera múltiples árboles de decisión y combina sus resultados para obtener una clasificación más precisa y estable. Para su implementación en GEE, se utilizó el método:
 
 ```javascript
 var classifier = ee.Classifier.smileRandomForest(100).train({ features:
@@ -110,7 +109,7 @@ Se exportaron los resultados y se evaluó la exactitud utilizando la matriz de c
 **SVM:** Algoritmo que busca encontrar un hiperplano óptimo que maximice la separación entre clases. SVM busca encontrar un hiperplano óptimo que
 separe los datos en clases. Es especialmente útil en escenarios donde las clases no están claramente separadas linealmente. SVM ha sido
 utilizados en múltiples estudios para la clasificación de imágenes satelitales, mostrando resultados satisfactorios en términos de
-precisión y regularización del modelo (Scholkopf & Smola, 2022). SVM se implementó en GEE utilizando:
+precisión y regularización del modelo {cite:p}`scholkopf2022kernels`. SVM se implementó en GEE utilizando:
 
 ```javascript
 var classifier = ee.Classifier.libsvm().train({ features: training,
@@ -119,7 +118,8 @@ classProperty: \'landcover\', inputProperties: composite.bandNames() });
 
 Se realizó una evaluación de exactitud con coeficiente de Kappa, obteniendo un valor de 1, lo que indica una alta fiabilidad (100%).
 
-**Árboles de Decisión CART:** Modelo jerárquico basado en reglas de decisión, útil para interpretabilidad (Blanquero et al., 2021) y análisis de características importantes. Los árboles de decisión clasifican datos en función de preguntas lógicas basadas en umbrales de las bandas espectrales. Se implementaron en GEE con:
+**Árboles de Decisión CART:** Modelo jerárquico basado en reglas de decisión, útil para interpretabilidad
+{cite:p}`blanquero2021arboles` y análisis de características importantes. Los árboles de decisión clasifican datos en función de preguntas lógicas basadas en umbrales de las bandas espectrales. Se implementaron en GEE con:
 
 ```javascript
 var classifier = ee.Classifier.smileCart().train({ features: training,
