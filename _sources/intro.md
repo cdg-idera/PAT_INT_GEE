@@ -48,7 +48,6 @@ Los videos asociados a los distintos capítulos se produjeron con componentes de
 ````
 
 
-
 # Requerimientos
 
 Para poder reproducir los ejemplos prácticos y aprovechar los contenidos de este libro, es necesario contar con una cuenta en **Google Earth Engine (GEE)**. El registro es gratuito y se realiza en línea mediante una cuenta de Google, lo que habilita el acceso inmediato a un extenso catálogo de imágenes satelitales y productos derivados, así como a la infraestructura de cómputo en la nube que distingue a esta plataforma.
@@ -64,7 +63,7 @@ Una vez que cuentes con tu cuenta en GEE, podrás utilizar el siguiente enlace p
 
 Además, para complementar la programación en JavaScript en el Code Editor de GEE, utilizaremos **Google Colab** para ejecutar código **Python**. Allí mostraremos, entre otras cosas, cómo *generar ejemplos sintéticos* y *visualizar árboles de decisión* a partir de archivos .dot exportados desde GEE, ampliando así las posibilidades de análisis y documentación de los resultados.
 
-En síntesis, la cuenta gratuita es suficiente para el aprendizaje y la investigación, y constituye el camino recomendado para iniciarse en el mundo del análisis satelital con GEE.
+En síntesis, una cuenta gratuita de GEE es suficiente para el aprendizaje y la investigación, y constituye el camino recomendado para iniciarse en el mundo del análisis satelital con GEE.
 
 # Tabla de Contenidos
 

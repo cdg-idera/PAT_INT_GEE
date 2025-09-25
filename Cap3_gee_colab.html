@@ -407,7 +407,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="capitulo-3-rf-en-gee-y-colab">
 <h1><span class="section-number">3. </span>Capítulo 3 · RF en GEE y Colab<a class="headerlink" href="#capitulo-3-rf-en-gee-y-colab" title="Link to this heading">#</a></h1>
-<p>Este capítulo muestra cómo realizar la clasificación supervisada de imágenes Sentinel-2 utilizando <strong>Google Earth Engine (GEE)</strong> en su Code Editor (JavaScript) del capítulo anterior en comparación con su aplicación en <strong>Google Colab</strong> (Python API). El flujo incluye:</p>
+<p>La mayor parte de los capítulos —y sus videos— se centran en el flujo con <strong>Google Earth Engine (GEE)</strong> en su <em>Code Editor</em> (JavaScript), porque ofrece un entorno inmediato para explorar datos, depurar en la consola y visualizar resultados en el mapa con muy poca fricción. <strong>Sin embargo, todo ese flujo puede reproducirse en Python</strong> trabajando en <strong>Google Colab</strong> mediante la <em>Python API</em> de Earth Engine, conservando el mismo modelo de cómputo <strong>server-side</strong> y beneficiándose del ecosistema científico de Python (por ejemplo, para graficar, registrar experimentos o complementar análisis).</p>
+<p>En este capítulo presentamos ambos enfoques <strong>en paralelo</strong> y paso a paso, usando imágenes <strong>Sentinel-2</strong> y un caso de estudio real (el <strong>conurbano de Rosario</strong>). Verás cómo cada operación del flujo de <strong>clasificación supervisada con Random Forest</strong> —carga y filtrado de imágenes, generación del <em>composite</em> por mediana, preparación y partición de muestras, entrenamiento, clasificación y evaluación— se expresa de forma equivalente en <strong>JS/GEE</strong> y en <strong>Python/Colab</strong>. La comparación te permitirá elegir el entorno más conveniente según tus objetivos: exploración rápida y cartografía interactiva en el <em>Code Editor</em>, o integración con bibliotecas de Python y cuadernos reproducibles en Colab.</p>
+<p>El flujo que muestra el capítulo incluye:</p>
 <ol class="arabic simple">
 <li><p>Carga y filtrado de imágenes.</p></li>
 <li><p>Creación de un composite (mediana).</p></li>
@@ -632,12 +634,33 @@ document.write(`
 </section>
 <section id="conclusion">
 <h2><span class="section-number">3.10. </span>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
-<p>Este ejemplo muestra cómo un flujo completo de clasificación supervisada en GEE (JavaScript) puede trasladarse paso a paso a Colab (Python). Esto permite:</p>
+<p>Este capítulo demostró que <strong>el flujo completo de clasificación supervisada</strong> puede implementarse de forma <strong>equivalente</strong> en <strong>GEE (JavaScript)</strong> y en <strong>Colab (Python API)</strong>, manteniendo el mismo modelo de cómputo <em>server-side</em> y los mismos insumos. Trabajar en paralelo en ambos entornos aporta flexibilidad y robustez metodológica.</p>
+<p><strong>Qué te llevás:</strong></p>
 <ul class="simple">
-<li><p>Integrar GEE con librerías de Python.</p></li>
-<li><p>Documentar y reproducir análisis en Jupyter/Colab.</p></li>
-<li><p>Generar libros interactivos con JupyterBook que incluyan ambos códigos.</p></li>
+<li><p><strong>Paridad de pasos</strong> entre JS y Python (carga/filtrado, <em>composite</em> por mediana, muestreo, entrenamiento RF, clasificación y evaluación).</p></li>
+<li><p><strong>Elección informada del entorno</strong>:</p>
+<ul>
+<li><p><em>Code Editor (JS)</em> para exploración rápida, visualización inmediata y prototipado.</p></li>
+<li><p><em>Colab (Python)</em> para integración con librerías científicas, experimentación reproducible y documentación.</p></li>
 </ul>
+</li>
+<li><p><strong>Reproducibilidad y trazabilidad</strong>: notebooks con parámetros explícitos, control de semillas aleatorias y registro de resultados/métricas.</p></li>
+<li><p><strong>Escalabilidad operativa</strong>: misma lógica de procesamiento en la nube con posibilidad de exportar activos, ajustar <code class="docutils literal notranslate"><span class="pre">tileScale</span></code> y gestionar <em>jobs</em> largos.</p></li>
+</ul>
+<p><strong>Recomendaciones prácticas:</strong></p>
+<ul class="simple">
+<li><p>Prototipá en <strong>JS</strong> y luego porta a <strong>Python</strong> cuando necesites análisis complementarios (gráficos, informes, pipelines).</p></li>
+<li><p>Centralizá <strong>ROI, fechas, umbrales y paletas</strong> en variables únicas para evitar divergencias entre entornos.</p></li>
+<li><p>Fijá <strong>semillas aleatorias</strong> al particionar (<em>train/validation</em>) para comparaciones justas.</p></li>
+<li><p>Verificá <strong>métricas de validación</strong> en ambos flujos (OA, matriz de confusión, precisiones del productor/usuario, Kappa, F1) para asegurar consistencia.</p></li>
+</ul>
+<p><strong>Tópicos en los que puedes investigar:</strong></p>
+<ul class="simple">
+<li><p>Incorporar <strong>ingeniería de variables</strong> (índices espectrales, texturas, estacionalidad).</p></li>
+<li><p>Ensayar <strong>búsqueda de hiperparámetros</strong> y validación cruzada.</p></li>
+<li><p>Aplicar <strong>posprocesamiento</strong> (suavizado espacial, reglas de negocio) y análisis de <strong>importancia de variables</strong> para interpretar el modelo.</p></li>
+</ul>
+<p>En síntesis, <strong>JS/GEE</strong> ofrece velocidad y simplicidad para explorar y cartografiar, mientras que <strong>Python/Colab</strong> amplía el análisis y la comunicación científica. Usados en conjunto, facilitan un flujo de trabajo <strong>replicable, auditable y productivo</strong>.</p>
 </section>
 </section>
 

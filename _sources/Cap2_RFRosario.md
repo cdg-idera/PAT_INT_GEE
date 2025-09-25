@@ -385,7 +385,7 @@ Existen algunas confusiones menores en la matriz con un pixel de terreno desnudo
 La confusión más notable ocurre entre cultivos y bosque/zona arbustiva, lo cual podría mejorarse mediante ajustes en las características del modelo o una recolección más detallada de puntos de control en estas áreas.
 ``` 
 
-```{tip}Recomendación sobre nomenclatura:
+```{tip} Recomendación sobre nomenclatura:
 Mantener el nombre de "Bosque/Zona Arbolada-Arbustiva" es apropiado, ya que refleja con más precisión la diversidad de esta clase, incluyendo árboles dispersos y vegetación silvestre.
 ```
 
