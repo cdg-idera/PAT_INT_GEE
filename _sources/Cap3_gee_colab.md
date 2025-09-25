@@ -1,6 +1,6 @@
-# Capítulo 3 · Random Forest en GEE y Colab
+# Capítulo 3 · RF en GEE y Colab
 
-En este capítulo mostramos cómo realizar una clasificación supervisada de imágenes Sentinel-2 utilizando **Google Earth Engine (GEE)** en su Code Editor (JavaScript) y en **Google Colab** (Python API). El flujo incluye:
+Este capítulo muestra cómo realizar la clasificación supervisada de imágenes Sentinel-2 utilizando **Google Earth Engine (GEE)** en su Code Editor (JavaScript) del capítulo anterior en comparación con su aplicación en **Google Colab** (Python API). El flujo incluye:
 
 1. Carga y filtrado de imágenes.
 2. Creación de un composite (mediana).
@@ -10,7 +10,6 @@ En este capítulo mostramos cómo realizar una clasificación supervisada de im�
 6. Clasificación del composite.
 7. Evaluación de exactitud con métricas estándar.
 
----
 
 ## 1. Carga de imágenes Sentinel-2
 

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3. Capítulo 3 · Random Forest en GEE y Colab &#8212; GeoIA aplicado a Imágenes Satelitales</title>
+    <title>3. Capítulo 3 · RF en GEE y Colab &#8212; GeoIA aplicado a Imágenes Satelitales</title>
   
   
   
@@ -374,7 +374,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Capítulo 3 · Random Forest en GEE y Colab</h1>
+    <h1>Capítulo 3 · RF en GEE y Colab</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -405,9 +405,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="capitulo-3-random-forest-en-gee-y-colab">
-<h1><span class="section-number">3. </span>Capítulo 3 · Random Forest en GEE y Colab<a class="headerlink" href="#capitulo-3-random-forest-en-gee-y-colab" title="Link to this heading">#</a></h1>
-<p>En este capítulo mostramos cómo realizar una clasificación supervisada de imágenes Sentinel-2 utilizando <strong>Google Earth Engine (GEE)</strong> en su Code Editor (JavaScript) y en <strong>Google Colab</strong> (Python API). El flujo incluye:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="capitulo-3-rf-en-gee-y-colab">
+<h1><span class="section-number">3. </span>Capítulo 3 · RF en GEE y Colab<a class="headerlink" href="#capitulo-3-rf-en-gee-y-colab" title="Link to this heading">#</a></h1>
+<p>Este capítulo muestra cómo realizar la clasificación supervisada de imágenes Sentinel-2 utilizando <strong>Google Earth Engine (GEE)</strong> en su Code Editor (JavaScript) del capítulo anterior en comparación con su aplicación en <strong>Google Colab</strong> (Python API). El flujo incluye:</p>
 <ol class="arabic simple">
 <li><p>Carga y filtrado de imágenes.</p></li>
 <li><p>Creación de un composite (mediana).</p></li>
@@ -417,7 +417,6 @@ document.write(`
 <li><p>Clasificación del composite.</p></li>
 <li><p>Evaluación de exactitud con métricas estándar.</p></li>
 </ol>
-<hr class="docutils" />
 <section id="carga-de-imagenes-sentinel-2">
 <h2><span class="section-number">3.1. </span>1. Carga de imágenes Sentinel-2<a class="headerlink" href="#carga-de-imagenes-sentinel-2" title="Link to this heading">#</a></h2>
 <p>Primero se crea una <code class="docutils literal notranslate"><span class="pre">ImageCollection</span></code> de Sentinel-2, se filtra por porcentaje de nubes, por fecha y por región de interés (ROI).</p>

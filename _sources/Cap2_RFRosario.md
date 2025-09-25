@@ -117,18 +117,23 @@ Al recolectar datos de entrenamiento, es fundamental **ser precisos**. Por ejemp
 
 Una vez que recolectamos ejemplos representativos de píxeles de agua, repetimos el proceso para las demás clases:
 
-Ahora es el turno de la categoría *urbano* que representa a edificios, superficie construida, como edificios, carreteras y otras superficies impermeables. Creamos una nueva capa, de tipo **FeatureCollection**, cuyo nombre es *urbano*, con una propiedad *lancover* igual a **1**. Ahora, con esta nueva colección configurada, comenzaremos a marcar puntos de esas caracteristicas. Nuevamente es esencial hacer esto con cuidado, asegurándonos de que los puntos se coloquen exactamente sobre *pixeles urbanos*, evitando errores como etiquetar un árbol o vegetación cercana.
+Ahora es el turno de la *categoría urbana* que representa a edificios, superficie construida, como edificios, carreteras y otras superficies impermeables. Creamos una nueva capa, de tipo **FeatureCollection**, cuyo nombre es *urbano*, con una propiedad *landcover* igual a **1**. Ahora, con esta nueva colección configurada, comenzaremos a marcar puntos de esas caracteristicas. Nuevamente es esencial hacer esto *con cuidado*, asegurándonos de que los puntos se coloquen exactamente sobre *pixeles urbanos*, evitando errores como etiquetar un árbol o vegetación cercana.
 
-*Es útil contar con mapas base de alta resolución como referencia*. Sin embargo, estos deben utilizarse con precaución, ya que las imágenes de los mapas base pueden corresponder a fechas diferentes a las de nuestra imagen satelital. Por ejemplo, un edificio visible en el *mapa base* puede no existir en la imagen satelital actual. Por lo tanto, siempre debemos priorizar la referencia directa de nuestra imagen satelital.
+*Es útil contar con mapas base de alta resolución como referencia*. Sin embargo, estos deben utilizarse con precaución, ya que las imágenes de los *mapas base* pueden corresponder a fechas diferentes a las de nuestra imagen satelital. Por ejemplo, un edificio visible en el *mapa base* puede no existir en la imagen satelital actual. Por lo tanto, siempre debemos *priorizar la referencia directa de nuestra imagen satelital*.
 
-Aseguráte de recopilar datos de diferentes partes de la ciudad que correspondan a la misma clase para *garantizar* que el modelo capture la *variabilidad dentro de esa categoría*. Mientras marcás puntos para una clase, si identificas un ejemplo claro de otra clase, puedes cambiar de capa y marcar ese punto también.
+Aseguráte de recopilar datos de diferentes partes de la ciudad que correspondan a la misma clase para *garantizar* que el modelo capture la *variabilidad dentro de esa categoría*. Mientras marcás puntos para una clase, si identificás un ejemplo dentro de otra clase, puedes cambiar de capa y marcar ese punto también.
 
-Bien, ahora que hemos recopilado todos los datos para los puntos de la clase urbana, pasaremos a la siguiente clase: *terrenos desnudos*. El primer paso es crear una nueva capa. Haz clic en *Nueva capa*. Por defecto, el tipo será geometría, pero iremos a la configuración y cambiaremos esto a una colección de características (**FeatureCollection**). Nombraremos esta capa como *superficieDesnuda*, y agregaremos una propiedad llamada *landcover*. Para esta clase, definiremos que *landcover* = 1 corresponde a *terrenos desnudos*. También puedes cambiar los colores de la capa si lo deseas para facilitar su visualización.
-Ahora, con esta nueva colección configurada, comenzaremos a marcar puntos en las superficiesDesnudas.
+Bien, ahora que hemos recopilado todos los datos para los puntos de la clase urbana, pasaremos a la siguiente clase: *cultivos*. Creamos una nuevo capa, de tipo **FeatureCollection**, cuyo nombre es *cultivos*, con una propiedad *landcover* igual a 2. Incorporamos píxeles a la capa. 
 
-Definimos *terreno desnudo* como cualquier píxel que representa suelo expuesto, sin construcciones ni vegetación, únicamente tierra desnuda. Utilizando la herramienta de marcador, selecciona la capa de terrenos desnudos y comienza a colocar puntos en las áreas correspondientes.
+La **calidad** y la **representatividad** de estos datos de entrenamiento son cruciales, ya que los algoritmos de aprendizaje automático tratan los *datos de entrada* como verdades absolutas. **Cualquier error en esta etapa puede traducirse en un modelo impreciso y resultados incorrectos**.
 
-Hacemos los mismo con *cultivos*:  creamos una nueva capa, de tipo **FeatureCollection**, cuyo nombre es *cultivos*, con una propiedad *landcover* igual a 3. Incorporamos pixeles a la capa. Hacemos los mismo con *forestación o zona arbustiva*,  Creamos una nueva capa, de tipo **Featurecollection**, cuyo nombre es *bosque* pero comprende también *zona arbolada y arbustiva* o vegetación leñosa, con una propiedad lancover igual a 4. Incorporamos pixeles a la capa  (ver fig. {numref}`fig-LeyendaArbol`).
+Aunque existe la posibilidad de utilizar polígonos para generar automáticamente múltiples ejemplos de entrenamiento, esta práctica debe evitarse. Cuando un polígono incluye píxeles de diferentes clases, el modelo puede recibir información incorrecta y generalizar de manera inexacta. Por ello, *la recolección manual y cuidadosa de puntos individuales es siempre preferible*, aunque sea más laboriosa.
+
+El orden en el cual creamos las colecciones de puntos de control en el terreno no es significativo. Ahora vamos a proceder con *terrenos desnudo*: El primer paso es crear una nueva capa. Haz clic en *Nueva capa*. Por defecto, el tipo será *geometría*, pero iremos a la configuración y cambiaremos esto a **FeatureCollection**. Nombraremos esta capa como *terrenoDesnudo*, y agregaremos una propiedad llamada *landcover*. Para esta clase, definiremos que *landcover* = 4 corresponde a *terrenos desnudos*. También puedes cambiar los colores de la capa si lo deseas para facilitar su visualización. Ahora, con esta nueva colección configurada, comenzaremos a marcar puntos en las superficiesDesnudas.
+
+Definimos *terreno desnudo* como cualquier píxel que representa suelo expuesto, sin construcciones ni vegetación, únicamente tierra desnuda. Utilizando la herramienta de marcador, marcamos diversos puntos en las áreas correspondientes.
+
+Ahora es el turno de *bosque o zona arbolada arbustiva*. Creamos una nueva capa, de tipo **Featurecollection**, cuyo nombre es *bosque* pero comprende también *zona arbolada y arbustiva* o vegetación leñosa, con una propiedad lancover igual a 3. Incorporamos pixeles a la capa  (ver fig. {numref}`fig-LeyendaArbol`).
 
 ```{figure} imagenes/LeyendaArbol.png
 :name: fig-LeyendaArbol
@@ -137,9 +142,6 @@ Hacemos los mismo con *cultivos*:  creamos una nueva capa, de tipo **FeatureColl
 Clasificación Multiclase: Categorías
 ```
 
-La **calidad** y la **representatividad** de estos datos de entrenamiento son cruciales, ya que los algoritmos de aprendizaje automático tratan los *datos de entrada* como verdades absolutas. **Cualquier error en esta etapa puede traducirse en un modelo impreciso y resultados incorrectos**.
-
-Para este ejemplo, aunque existe la posibilidad de utilizar polígonos para generar automáticamente múltiples ejemplos de entrenamiento, esta práctica debe evitarse. Cuando un polígono incluye píxeles de diferentes clases, el modelo puede recibir información incorrecta y generalizar de manera inexacta. Por ello, *la recolección manual y cuidadosa de puntos individuales es siempre preferible*, aunque sea más laboriosa.
 
 El aprendizaje automático, aunque automatiza muchos procesos, *requiere una inversión significativa en tiempo y esfuerzo para recolectar y limpiar los datos de entrada*. Este trabajo manual es la base de un modelo exitoso. Una vez que los datos están listos, el resto del proceso, como la implementación del modelo y la clasificación, es relativamente sencillo y eficiente.
 
@@ -147,9 +149,9 @@ Una vez que hayamos terminado, tendremos algo como esto: **una colección de mue
 
 ## Unificando Muestras de Entrenamiento
 
-Ahora que hemos etiquetado cada clase con valores únicos (0 para agua, 1 para urbano, 2 para terreno desnudo, 3 para cultivos y 4 para vegetación de bosque o zona arbolada ó arbustiva), necesitamos *combinar todas estas muestras* en **una sola colección de entrenamiento**. Esto simplificará el proceso de clasificación.
+Ahora que hemos etiquetado cada clase con valores únicos (0 para agua, 1 para urbano, 2 para cultivos, 3 para  para vegetación de bosque o zona arbolada ó arbustiva, 4 para terreno desnudo) necesitamos *combinar todas estas muestras* en **una sola colección de entrenamiento**. Esto simplificará el proceso de clasificación.
 
-Definiremos una variable llamada GCPs (**Ground Control Points**, puntos de control en tierra), que contendrá nuestras muestras de entrenamiento. Usaremos la función **merge** para combinar las capas: primero la *urbana*, luego la de *agua*,  después la de *cultivos*, después la de *terrenoDesnudo* y finalmente la de *bosque*-zona arbolada y arbustiva. Ahora, **gcp** será una única colección que incluye todas las muestras de entrenamiento.
+Definiremos una variable llamada GCPs (**Ground Control Points**, puntos de control en tierra), que contendrá nuestras muestras de entrenamiento. Usaremos la función **merge** para combinar las capas: primero la *urbana*, luego la de *agua*,  después la de *cultivos*, después la de *terrenoDesnudo* y finalmente la de *bosque*-zona arbolada y arbustiva. Ahora, **gcps** será una única colección que incluye todas las muestras de entrenamiento.
 
 ```javascript
 var gcps = urbano.merge(agua).merge(cultivos).merge(terrenoDesnudo).merge(bosque);
@@ -159,42 +161,18 @@ Esta colección tiene una *única propiedad llamada* **landcover**, que es la et
 
 ## Extracción de Valores de Píxeles
 
-El siguiente paso es extraer los valores espectrales de los píxeles en nuestra imagen compuesta. Esto se hace con la función **sampleRegions**, que toma la imagen y las geometrías de nuestras muestras de entrenamiento. Configuraremos la función para mantener solo la propiedad land cover y definiremos una escala de muestreo acorde a la resolución de Sentinel-2 (en este caso *10 metros*).
+El siguiente paso es extraer los valores espectrales de los píxeles en nuestra imagen compuesta. Esto se hace con la función **sampleRegions**, que toma la imagen y las geometrías de nuestras muestras de entrenamiento. Configuraremos la función para mantener solo la *propiedad landcover* y definiremos una escala de muestreo acorde a la resolución de Sentinel-2 (en este caso *10 metros*).
 
-Después de ejecutar esta función, cada muestra de entrenamiento incluirá los valores espectrales de las 12 bandas de la imagen, junto con su etiqueta de clase. Esto nos proporciona una tabla donde cada fila corresponde a un píxel de entrenamiento y cada columna representa las bandas espectrales. Esta tabla será usada para entrenar el modelo de clasificación  (ver fig. {numref}`fig-Tabla_RFRosario`).
-
-
-```{figure} imagenes/Tabla_RFRosario.png
-:name: fig-Tabla_RFRosario
-:width: 80%
-
-Tabla esquemática de datos de entrenamiento
+```javascript
+var training = composite.sampleRegions({
+  collection: trainingGCP,
+  properties: ['landcover'],
+  scale: 10,
+  tileScale: 16
+});
 ```
 
-
-
-## Entrenamiento del Clasificador
-
-Para entrenar el modelo, utilizaremos un clasificador de bosque aleatorio (Random Forest). En Earth Engine, esto se hace con la función ee.Classifier.smileRandomForest. Inicializaremos el clasificador con un número arbitrario de árboles, por ejemplo, 50. Más adelante, podremos optimizar este valor utilizando técnicas de ajuste de hiperparámetros.
-
-
-El clasificador se entrena llamando a la función train, donde especificamos:
-
-- Las propiedades de entrada (los nombres de las bandas espectrales).
-- La propiedad objetivo (land cover).
-
-Una vez entrenado, el clasificador estará listo para predecir las etiquetas de clase en los píxeles no etiquetados de nuestra imagen.
-
-## Clasificación de la Imagen
-
-Tomamos nuestra imagen compuesta y aplicamos el clasificador con la función classify. Esto genera una nueva imagen clasificada, donde cada píxel tiene un valor correspondiente a una de las clases (0, 1, 2 o 3).
-
-Para visualizar la imagen clasificada, definimos parámetros de visualización que incluyan:
-
-- Rango de valores (min = 0, max = 3), los cuales representan los cuatro valores de nuestras clases.
-- Una paleta de colores que facilite identificar las diferentes clases.
-
-Al final, tendremos una representación visual clara de la clasificación, con cada clase distinguible por su color. Esto completa el proceso básico de clasificación supervisada utilizando Google Earth Engine (ver fig. {numref}`fig-Tabla_RFRosario`).
+Después de ejecutar esta función, cada muestra de entrenamiento incluirá los valores espectrales de las 12 bandas de la imagen, junto con su etiqueta de clase. Esto nos proporciona una tabla donde *cada fila corresponde a un píxel de entrenamiento* y *cada columna representa las bandas espectrales*. Esta tabla será usada para entrenar el modelo de clasificación  (ver fig. {numref}`fig-Tabla_RFRosario`).
 
 
 ```{figure} imagenes/Tabla_RFRosario.png
@@ -204,70 +182,17 @@ Al final, tendremos una representación visual clara de la clasificación, con c
 Tabla de Variables Independientes y Dependientes
 ```
 
-Cualquiera sea el color que especifiques aquí, corresponderá a la clase cero, clase uno, clase dos y clase tres y clase 4. Ahora, vamos a añadirlo al mapa, específicamente a la imagen clasificada, utilizando este parámetro.
+## Entrenamiento del Clasificador
 
-Cuando ejecuto este proceso, GEE procederá a entrenar el modelo con la imagen clasificada. Esto implica que GEE entrenará el modelo utilizando los datos proporcionados, realizará las predicciones para cada clase y generará los resultados correspondientes. A continuación, quiero recortar los datos a la geometría con la que hemos entrenado el modelo, y así podrás observar los resultados obtenidos.
+Para entrenar el modelo, utilizaremos un clasificador de bosque aleatorio (Random Forest). En Earth Engine, esto se hace con la función **ee.Classifier.smileRandomForest**. Inicializaremos el clasificador con un número arbitrario de árboles, por ejemplo, 50. Más adelante, podremos optimizar este valor utilizando *técnicas de ajuste de hiperparámetros*.
 
-Al ejecutar la función, EE realizará la predicción para cada píxel, asignando a cada uno su clase correspondiente. Como resultado, verás la imagen clasificada final. A medida que realizas zoom en la imagen, EE continuará con la clasificación en tiempo real, previendo el valor de cada clase en cada píxel. Incluso con las pocas muestras de entrenamiento recolectadas en apenas unos minutos, el modelo tiene un rendimiento bastante bueno, logrando clasificar la imagen de manera precisa.
+El clasificador se entrena llamando a la función **train**, donde especificamos:
 
-La clasificación se realiza de forma eficiente, con una detección precisa de píxeles correspondientes a áreas urbanas, cuerpos de agua y vegetación, lo que demuestra el poder del aprendizaje automático y la computación en la nube. Lo interesante de este enfoque es que, utilizando una cantidad mínima de muestras de entrenamiento, es posible crear un modelo que clasifica cada píxel en la imagen en tiempo real, gracias a las capacidades de procesamiento paralelo en la nube. No es necesario descargar datos ni esperar largos tiempos de cómputo.
+- Las propiedades de entrada (los nombres de las bandas espectrales).
+- La propiedad objetivo (landcover).
 
-El algoritmo que utilizamos es el clasificador Random forest o en español "bosques aleatorios", basado en una biblioteca de código abierto llamada SMILE, que implementa diversos algoritmos de aprendizaje automático. Dado que el backend de Earth Engine está desarrollado en Java, al ejecutar esta función, se utiliza dicha biblioteca para construir el modelo de bosques aleatorios y emplearlo en las predicciones. Este flujo de trabajo se basa completamente en modelos y herramientas de código abierto, lo que proporciona una gran flexibilidad.
+Una vez entrenado, el clasificador estará listo para predecir las etiquetas de clase en los píxeles no etiquetados de nuestra imagen.
 
-Lo que Earth Engine aporta es la capacidad de realizar estos procesos en tiempo real y a gran escala. Esto significa que, mientras que en un entorno local podría tomar meses realizar una clasificación a nivel nacional, en Earth Engine se puede hacer en tiempo real.
-
-
-## Recomendaciones para la recolección de Datos
-
-Algunas recomendaciones para optimizar la recolección de datos son las siguientes:
-
-
-```{figure} imagenes/Slide22.png
-:name: fig-Slide22
-:width: 100%
-
-Recomendaciones en la recolección de muestras de Entrenamiento.
-```
-
-
-Usar imágenes Sentinel-2 como referencia. Asegúrate de utilizar imágenes de Sentinel-2 para seleccionar las muestras de entrenamiento, ya que las imágenes de alta resolución pueden no coincidir temporalmente con las imágenes de Sentinel-2, lo que podría afectar la precisión del modelo.
-
-Distribuir las muestras de entrenamiento de manera equitativa. Asegúrate de tomar puntos de entrenamiento distribuidos por toda la ciudad y, especialmente, en las calles. Un error común es confundir cuerpos de agua con áreas urbanas oscuras.
-
-Evitar muestras mixtas. No utilices píxeles mixtos para el entrenamiento. Intenta seleccionar ejemplos puros de agua, vegetación, áreas urbanas y terrenos áridos. Dejá que el modelo se encargue de los píxeles mixtos.
-
-Una vez que completes la clasificación, es fundamental evaluar cuán precisa es la clasificación realizada. ¿Está el modelo generando resultados satisfactorios? ¿Es el modelo perfecto? ¿Está alcanzando una precisión del 100% o solo un 90%? Si deseas mejorar la clasificación, ¿cuánto influiría recolectar 100 muestras de entrenamiento adicionales? ¿Mejoraría la precisión o no tendría un impacto significativo? ¿Cuánto aumenta la precisión aplicando 100 arboles aleatorios en lugar de 50?
-
-La evaluación de la precisión es un paso crucial en el análisis de cualquier modelo. Una técnica común es la validación cruzada, que consiste en dividir los datos de entrenamiento en dos subconjuntos: uno para entrenar el modelo y otro para validar las predicciones. Por ejemplo, se podría usar el 60% de los datos para entrenar y el 40% restante para validar.
-
-Para ello, vamos a dividir con puntos de control para entrenar y validar un modelo de clasificación de imágenes satelitales.
-
-El comando .merge() nos permitió fusionar las colecciones en una sola llamada gcps. Así consolidamos todas nuestras muestras.
-Para asegurarnos de que todo esté correcto, usamos el comando print() para verificar el tamaño de la colección resultante.
-
-Ahora necesitamos dividir nuestras muestras en dos grupos: uno para entrenamiento y otro para validación. Lo hacemos asignando un número aleatorio entre 0 y 1 a cada punto en la colección."
-
-El método randomColumn() crea una nueva columna llamada random, que contiene números aleatorios. Así podemos dividir las muestras de forma equitativa.
-
-Con este número aleatorio, aplicamos un filtro para separar los datos. Aquí asignamos el 60% de las muestras al conjunto de entrenamiento.
-
-Y el restante 40% al conjunto de validación.
-
-Por último, usamos nuevamente el comando print() para verificar el tamaño de cada conjunto y asegurarnos de que la división sea correcta.
-
-```javascript
-var gcp = gcps.randomColumn();
-var trainingGCP = gcp.filter(ee.Filter.lt('random', 0.6));
-var validationGCP = gcp.filter(ee.Filter.gte('random', 0.6));
-```
-```javascript
-var training = composite.sampleRegions({
-  collection: trainingGCP,
-  properties: ['landcover'],
-  scale: 10,
-  tileScale: 16
-});
-```
 ```javascript
 var classifier = ee.Classifier.smileRandomForest(100).train({
   features: training,
@@ -276,15 +201,88 @@ var classifier = ee.Classifier.smileRandomForest(100).train({
 });
 ```
 
+## Clasificación de la Imagen
+
+Tomamos nuestra imagen compuesta y aplicamos el clasificador con la función **classify**. Esto genera una nueva imagen clasificada, donde cada píxel tiene un valor correspondiente a una de las clases (0, 1, 2, 3 o 4).
+
+Para visualizar la imagen clasificada, definimos parámetros de visualización (variable *classVis*) que incluyan:
+
+- Rango de valores (min = 0, max = 4), los cuales representan los cinco valores de nuestras clases.
+- Una paleta de colores que facilite identificar las diferentes clases.
+
 ```javascript
 var classified = composite.classify(classifier);
 var classVis = {min:0, max:4, palette:['blue','gray','green','violet','orange']};
 Map.addLayer(classified.clip(roi), classVis, 'Imagen Clasificada');
 ```
 
+Al final, tendremos una representación visual clara de la clasificación, con cada clase distinguible por su color. Esto completa el proceso básico de clasificación supervisada utilizando Google Earth Engine (ver fig. {numref}`fig-Tabla_RFRosario`).
+
+Cualquiera sea el color que especifiques aquí, corresponderá a la clase cero, clase uno, clase dos y clase tres y clase 4. Ahora, vamos a añadirlo al mapa, específicamente a la imagen clasificada, utilizando este parámetro.
+
+```javascript
+var classified = composite.classify(classifier);
+```
+
+Cuando ejecuto este proceso, GEE procederá a entrenar el modelo con la imagen clasificada. Esto implica que GEE entrenará el modelo utilizando los datos proporcionados, realizará las predicciones para cada clase y generará los resultados correspondientes. Y así, podremos observar los resultados obtenidos.
+
+Al ejecutar la función, GEE realizará la predicción para cada píxel, asignando a cada uno su clase correspondiente. Como resultado, verás la imagen clasificada final ver fig. {numref}`fig-ImagenClasificadaRFR`). A medida que realizas zoom en la imagen, GEE continuará con la clasificación en tiempo real, previendo el valor de cada clase en cada píxel. Incluso con las pocas muestras de entrenamiento recolectadas en apenas unos minutos, el modelo tiene un rendimiento bastante bueno, logrando clasificar la imagen de manera precisa.
+
+
+```{figure} imagenes/ImagenClasificadaRFR.png
+:name: fig-ImagenClasificadaRFR
+:width: 100%
+
+Imagen clasificada o segmentación semántica obtenida
+```
+
+La clasificación se realiza de forma eficiente, con una detección precisa de píxeles correspondientes a áreas urbanas, cuerpos de agua y vegetación, lo que demuestra *el poder del aprendizaje automático y la computación en la nube*. Lo interesante de este enfoque es que, *utilizando una cantidad mínima de muestras de entrenamiento, es posible crear un modelo que clasifica cada píxel en la imagen en tiempo real*, gracias a las capacidades de **procesamiento paralelo en la nube**. No es necesario descargar datos ni esperar largos tiempos de cómputo.
+
+El algoritmo que utilizamos es el clasificador **Random forest** o en español *bosques aleatorios*, basado en una biblioteca de código abierto llamada Smile (https://haifengl.github.io/) {cite:p}`li-smile-docs`, que implementa diversos algoritmos de aprendizaje automático. Dado que el backend de Earth Engine está desarrollado en Java, al ejecutar esta función, se utiliza dicha biblioteca para construir el modelo de bosques aleatorios y emplearlo en las predicciones. Este flujo de trabajo se basa completamente en modelos y herramientas de código abierto, lo que proporciona una gran flexibilidad.
+
+Lo que Earth Engine aporta es la capacidad de realizar estos procesos en tiempo real y a gran escala. Esto significa que, mientras que en un entorno local podría tomar meses realizar una clasificación a nivel nacional, en Earth Engine se puede hacer en tiempo real.
+
+## Recomendaciones para la recolección de Datos
+
+Algunas recomendaciones para optimizar la recolección de datos son las siguientes:
+
+```{figure} imagenes/Slide22.png
+:name: fig-Slide22
+:width: 100%
+
+Recomendaciones en la recolección de muestras de Entrenamiento.
+```
+
+* Usar imágenes satelitales de *alta resolución espacial*, por ejemplo Sentinel-2 como referencia. Asegúrate de utilizar imágenes de Sentinel-2 para seleccionar las muestras de entrenamiento, ya que las imágenes de alta resolución pueden no coincidir temporalmente con las imágenes de Sentinel-2, lo que podría afectar la precisión del modelo.
+
+* Distribuir las muestras de entrenamiento de manera equitativa. Asegúrate de tomar puntos de entrenamiento distribuidos por toda la ciudad ó la región de estudio, especialmente, en las calles. Un error común es confundir cuerpos de agua con áreas urbanas oscuras.
+
+* Evitar muestras mixtas. No utilices píxeles mixtos para el entrenamiento. Intenta seleccionar ejemplos puros de agua, vegetación, áreas urbanas y terrenos áridos. Dejá que el modelo se encargue de los píxeles mixtos.
+
+Una vez que completes la clasificación, es fundamental evaluar cuán precisa es la clasificación realizada. ¿Está el modelo generando resultados satisfactorios? ¿Es el modelo perfecto? ¿Está alcanzando una precisión del 100% o solo un 90%? Si deseas mejorar la clasificación, *¿cuánto influiría recolectar 100 muestras de entrenamiento adicionales? ¿Mejoraría la precisión o no tendría un impacto significativo? ¿Cuánto aumenta la precisión aplicando 100 árboles aleatorios en lugar de 50?*
+
+La evaluación de la precisión es un paso crucial en el análisis de cualquier modelo. Una técnica común es la validación cruzada, que consiste en dividir los datos de entrenamiento en dos subconjuntos: *uno para entrenar el modelo* y *otro para validar las predicciones*. Por ejemplo, se podría usar el 60% de los datos para entrenar y el 40% restante para validar. Para ello, vamos a dividir con puntos de control para entrenar y validar un modelo de clasificación de imágenes satelitales.
+
+El comando *merge()* nos permitió fusionar las colecciones en una sola llamada *gcps*. Así consolidamos todas nuestras muestras. Para asegurarnos de que todo esté correcto, usamos el comando *print()* para verificar el tamaño de la colección resultante.
+
+Ahora necesitamos dividir nuestras muestras en dos grupos: **uno para entrenamiento** y **otro para validación**. Lo hacemos asignando un número aleatorio entre 0 y 1 a cada punto en la colección.
+
+El método **randomColumn()** *crea una nueva columna llamada random*, que contiene números aleatorios. Así podemos dividir las muestras de forma equitativa. Con este número aleatorio, *random*, aplicamos un filtro para separar los datos. Aquí asignamos el 60% de las muestras al conjunto de entrenamiento, y el restante 40% al conjunto de validación.
+
+Por último, usamos nuevamente el comando **print()** para *verificar el tamaño de cada conjunto* y asegurarnos de que la división sea correcta.
+
+```javascript
+// Asignar un numero random entre 0 y 1 
+var gcp = gcps.randomColumn();
+var trainingGCP = gcp.filter(ee.Filter.lt('random', 0.6));
+var validationGCP = gcp.filter(ee.Filter.gte('random', 0.6));
+// print(trainingGCP.size());
+// print(validationGCP.size());
+```
+
 ## Precisión del Modelo
 
-El objetivo de esta separación de los puntos de control, es medir el rendimiento del modelo en el subconjunto de validación, que contiene muestras que no se han usado en el entrenamiento. Se compara la predicción del modelo con el valor real de cada muestra de validación. Si el modelo clasifica correctamente un píxel, se considera que el modelo ha hecho una predicción acertada.
+El objetivo de esta separación de los puntos de control, es **medir el rendimiento del modelo en el subconjunto de validación**, que contiene muestras que no se han utilizado en el entrenamiento. Se *compara la predicción del modelo* con el *valor real de cada muestra de validación*. Si el modelo clasifica correctamente un píxel, se considera que el modelo ha hecho una predicción acertada.
 
 ```javascript
 var test = classified.sampleRegions({
@@ -301,21 +299,27 @@ print('Kappa:', testConfusionMatrix.kappa());
 print('F-Score:', testConfusionMatrix.fscore(1));
 ```
 
+A partir de esto, podemos generar una matriz de confusión (ver fig. {numref}`fig-Matriz_Conf_2`), que muestra las predicciones del modelo frente a las clases reales. Esta matriz nos permite visualizar cuántos píxeles fueron correctamente clasificados (diagonal principal) y cuántos fueron confundidos entre diferentes clases (fuera de la diagonal). A partir de esta matriz, se pueden calcular varias métricas de precisión, tales como la **precisión global**, que es *el porcentaje de píxeles correctamente clasificados*, así como la **precisión del consumidor** y **la precisión del productor**, que se refieren a *la capacidad del modelo para identificar correctamente cada clase* (ver fig. {numref}`fig-precisiones`).
 
-A partir de esto, podemos generar una matriz de confusión (ver fig. {numref}`fig-Matriz_Conf_2`), que muestra las predicciones del modelo frente a las clases reales. Esta matriz nos permite visualizar cuántos píxeles fueron correctamente clasificados (diagonal principal) y cuántos fueron confundidos entre diferentes clases (fuera de la diagonal). A partir de esta matriz, se pueden calcular varias métricas de precisión, tales como la precisión global, que es el porcentaje de píxeles correctamente clasificados, así como la precisión del consumidor y la precisión del productor, que se refieren a la capacidad del modelo para identificar correctamente cada clase.
+
+```{figure} imagenes/precisiones.png
+:name: fig-precisiones
+:width: 100%
+
+Métricas de precisión global, del productor y consumidor
+```
+
+Earth Engine permite calcular todas estas métricas y compararlas fácilmente para evaluar el rendimiento del modelo. *Si la matriz de confusión muestra valores elevados fuera de la diagonal, eso indica que el modelo está teniendo dificultades con ciertas clases*. En ese caso, se puede recolectar más datos para las clases problemáticas o ajustar los parámetros del modelo para mejorar la clasificación.
+
 
 ```{figure} imagenes/Matriz_Conf_2.png
 :name: fig-Matriz_Conf_2
 :width: 100%
 
-Tabla de Variables Independientes y Dependientes
+Matriz de Confusión
 ```
 
-Earth Engine permite calcular todas estas métricas y compararlas fácilmente para evaluar el rendimiento del modelo. Si la matriz de confusión muestra valores elevados fuera de la diagonal, eso indica que el modelo está teniendo dificultades con ciertas clases. En ese caso, se puede recolectar más datos para las clases problemáticas o ajustar los parámetros del modelo para mejorar la clasificación.
-
-Al revisar la matriz de confusión, si se observa que hay una baja confusión entre clases.
-
-La precisión global es alta, sin embargo podemos comenzar a optimizar el modelo, incrementando el parámetro de cantidad de arboles que se utilizan. Al cambiarlo de 50 a 100, aumenta la precisión a 98.02%
+Al revisar la matriz de confusión, se observa que hay una baja confusión entre clases y que la precisión global es alta. Sin embargo podemos comenzar a optimizar el modelo, incrementando el parámetro de cantidad de arboles que se utilizan. Al cambiarlo de 50 a 100, aumenta la precisión a 98.02%.
 
 ## Interpretación de la Precisión Global
 
@@ -330,8 +334,8 @@ Interpretación de la Precisión Global
 
 **Confusiones a considerar:**
 
-* Bosque/Zona Arbolada-Arbustiva y Cultivos: Hay un píxel de cultivos clasificado erróneamente como Bosque.
-* Suelos Desnudos y Urbano: Hay un píxel de Suelos Desnudos clasificado erróneamente como Urbano.
+* Bosque/Zona Arbolada-Arbustiva y Cultivos: Hay un píxel de Bosque clasificado erróneamente como Cultivo.
+* Suelos Desnudos y Urbano: Hay un píxel de terreno desnudos clasificado erróneamente como Urbano.
 * Estas áreas de confusión podrían abordarse mediante ajustes en los datos de entrenamiento o en las características utilizadas para clasificar.
 
 
@@ -344,50 +348,62 @@ Interpretación de la Precisión Global
 
 ### Interpretación por Clase: Urbano (Clase 1):
 
-* Precisión del consumidor: 100%
-    * Todos los píxeles clasificados como urbanos son realmente urbanos.
-* Precisión del productor: 97.5%
-    * Hay una pequeña confusión en la que un píxel urbano fue clasificado como otra clase.
+* Precisión del consumidor: 97.5%
+    * Casi todos los píxeles clasificados como urbanos son realmente urbanos. Con una pequeña confusión con terreno desnudo.
+* Precisión del productor: 100%
+    * Todos los píxeles reales de urbano han sido clasificados correctamente.
 
 ### Interpretación por Clase: Cultivos (Clase 2):
 
-* Precisión del consumidor: 100%
-    * Ningún píxel clasificado como cultivos fue mal clasificado.
-* Precisión del productor: 92.3%
-    * Un píxel de cultivos fue clasificado como bosque/zona arbustiva, indicando cierta confusión entre estas clases.
+* Precisión del consumidor: 92.3%
+    * La mayoría de los píxeles clasificados como cultivos son realmente cultivos, pero hay algo de confusión con bosque.
+* Precisión del productor: 100%
+    * Todos los pixeles reales de cultivos han sido clasificados correctamente.
 
 ### Interpretación por Clase: Bosque/Zona Arbolada-Arbustiva (Clase 3):
 
-* Precisión del consumidor: 93.3%
-    * La mayoría de los píxeles clasificados como bosque/zona arbustiva son correctos, aunque un píxel fue clasificado erróneamente como cultivos.
-* Precisión del productor: 100%
-    * Todos los píxeles reales de bosque/zona arbustiva fueron clasificados correctamente.
+* Precisión del consumidor: 100%
+    * Todos los píxeles clasificados como bosque son efectivamente bosque.
+* Precisión del productor: 93.3%
+    * La mayoría de los píxeles reales de bosque han sido clasificados correctamente, pero hay algo de confusión con cultivos.
+
+
+### Interpretación por Clase: Terreno Desnudo (Clase 4):
+
+* Precisión del consumidor: 100%
+    * Todos los píxeles clasificados como terreno desnudo son efectivamente terreno desnudo.
+* Precisión del productor: 92.3%
+    * La mayoría de los píxeles reales de terreno desnudo han sido clasificados correctamente, pero hay algo de confusión con urbano. 
+
+Existen algunas confusiones menores en la matriz con un pixel de terreno desnudo clasificado como urbano y un pixel de bosque clasificado como cultivos. Estas confusiones son pequeñas y no afectan la precisión general del modelo.
 
 ### Conclusión General
 
-Precisión global (Test Accuracy): La precisión general es 98.02%, lo cual es excelente y muestra que el modelo clasifica muy bien en la mayoría de los casos.
-Áreas de mejora:
+*Precisión global (Test Accuracy)*: La precisión general es 98.02%, lo cual es excelente y muestra que el modelo clasifica muy bien en la mayoría de los casos.
 
+```{tip} Áreas de mejora:
 La confusión más notable ocurre entre cultivos y bosque/zona arbustiva, lo cual podría mejorarse mediante ajustes en las características del modelo o una recolección más detallada de puntos de control en estas áreas.
-Recomendación sobre nomenclatura:
+``` 
 
+```{tip}Recomendación sobre nomenclatura:
 Mantener el nombre de "Bosque/Zona Arbolada-Arbustiva" es apropiado, ya que refleja con más precisión la diversidad de esta clase, incluyendo árboles dispersos y vegetación silvestre.
+```
 
 ## Otras métricas de validación:
 
-Otras métricas incluyen el coeficiente Kappa, que mide la concordancia entre las predicciones del modelo y la clasificación aleatoria, y el F-score, que es una medida combinada de la precisión y el recall. En general, la precisión global es la métrica más utilizada en el análisis de precisión, aunque el F-score también es común en el campo del aprendizaje automático.
+Otras métricas incluyen el **coeficiente Kappa**, que mide la concordancia entre las predicciones del modelo y la clasificación real ajustando por la posibilidad de que la concordancia ocurra por azar, y el **F-score**, que es una medida combinada de precisión y el recall, utilizada para evaluar el rendimiento del modelo especialmente cuando las clases estén desbalanceadas. En general, la precisión global es la métrica más utilizada en el análisis de precisión, aunque el F-score también es común en el campo del aprendizaje automático.
 
 Una vez que estemos satisfechos con los resultados de la clasificación y la precisión, podemos continuar optimizando el modelo, ajustando otros parámetros y evaluando nuevas muestras de entrenamiento para clases especificas y mejorar la precisión general.
 
-En próximos videos exploraremos otras técnicas de aprendizaje automático supervisado como arboles de decisión y maquinas de soporte vectorial, como así también técnicas de aprendizaje automático no supervisado, por ejemplo K-means.
+En próximos capítulos exploraremos otras técnicas de aprendizaje automático supervisado como arboles de decisión y maquinas de soporte vectorial (SVM).
 
 ## Cierre
 
-El aprendizaje automático no solo transforma datos en conocimiento; también redefine nuestra capacidad para comprender y gestionar entornos complejos. Herramientas como SVM, árboles de decisión y Random Forest nos brindan la precisión necesaria para abordar desafíos reales, como el análisis del uso del suelo y la planificación territorial.
+El aprendizaje automático no solo transforma datos en conocimiento, también redefine nuestra capacidad para comprender y gestionar entornos complejos. Herramientas como SVM, árboles de decisión y Random Forest nos brindan la precisión necesaria para abordar desafíos reales, como el análisis del uso del suelo y la planificación territorial.
 
 En este ejemplo aplicado al Área Metropolitana de Rosario, Random Forest demostró ser una herramienta poderosa, capaz de clasificar grandes extensiones de territorio con una precisión sobresaliente. Esto no solo mejora nuestra visión científica del entorno, sino que también apoya la toma de decisiones fundamentadas en evidencia.
 
-El futuro del análisis geoespacial está aquí. Combinando algoritmos robustos y datos satelitales, podemos planificar un desarrollo sostenible que beneficie a las generaciones actuales y futuras. Gracias por acompañarnos en este recorrido por el aprendizaje automático aplicado al análisis territorial. Sigamos impulsando el conocimiento y la acción en favor de nuestro entorno.
+El futuro del análisis geoespacial está aquí. Combinando algoritmos robustos y datos satelitales, podemos planificar un desarrollo sostenible que beneficie a las generaciones actuales y futuras. Gracias por acompañarnos en este recorrido acerca del aprendizaje automático aplicado al análisis territorial. ¡sigamos impulsando el conocimiento y la acción en favor de nuestro entorno!
 
 ## Video del capítulo
 
