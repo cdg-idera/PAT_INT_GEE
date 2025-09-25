@@ -619,6 +619,18 @@ document.write(`
 <p><span class="caption-number">Fig. 1.14 </span><span class="caption-text">Algunas Características de las SMV.</span><a class="headerlink" href="#fig-slide12" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
+<figure class="align-default" id="fig-planossvm">
+<a class="reference internal image-reference" href="_images/planosSVM.png"><img alt="_images/planosSVM.png" src="_images/planosSVM.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.15 </span><span class="caption-text">SVM: Ejemplo de planos (2D)</span><a class="headerlink" href="#fig-planossvm" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="fig-hiperplanossvm">
+<a class="reference internal image-reference" href="_images/hiperplanosSVM.png"><img alt="_images/hiperplanosSVM.png" src="_images/hiperplanosSVM.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.16 </span><span class="caption-text">SVM: Ejemplo de Hiperplanos (3D)</span><a class="headerlink" href="#fig-hiperplanossvm" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <p>Ahora mostraremos de manera esquemática como se emplea Arboles de decisión a nuestro ejemplo sencillo de clasificación binaria (agua /no agua):</p>
 </section>
 </section>
@@ -630,18 +642,32 @@ document.write(`
 </section>
 <section id="id7">
 <h3><span class="section-number">1.6.2. </span>Predicción:<a class="headerlink" href="#id7" title="Link to this heading">#</a></h3>
-<p>Para clasificar un píxel, se sigue el flujo del árbol:
-Se verifican las condiciones establecidas en cada nodo.
-Al final, se llega a una hoja que indica la clase del píxel (agua o no agua).</p>
+<p>Para clasificar un píxel, se sigue el flujo del árbol (ver fig. <a class="reference internal" href="#fig-imagenarbol"><span class="std std-numref">Fig. 1.17</span></a>):</p>
+<ul class="simple">
+<li><p>Se verifican las condiciones establecidas en cada nodo.</p></li>
+<li><p>Al final, se llega a una hoja que indica la clase del píxel (agua o no agua).</p></li>
+</ul>
+<figure class="align-default" id="fig-imagenarbol">
+<a class="reference internal image-reference" href="_images/ImagenArbol.png"><img alt="_images/ImagenArbol.png" src="_images/ImagenArbol.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.17 </span><span class="caption-text">Árboles de Decisión.</span><a class="headerlink" href="#fig-imagenarbol" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="tip admonition">
+<p class="admonition-title">Tip</p>
+<p>¿Te interesa explorar el codigo python que genero las imágenes de SVM y AD con datos sintéticos?
+Las imágenes de las figuras <a class="reference internal" href="#fig-imagenarbol"><span class="std std-numref">Fig. 1.17</span></a> , fig. <a class="reference internal" href="#fig-hiperplanossvm"><span class="std std-numref">Fig. 1.16</span></a> y fig. <a class="reference internal" href="#fig-planossvm"><span class="std std-numref">Fig. 1.15</span></a> fueron genedas en Google Colab. Podes acceder al código desde:
+<a class="reference external" href="https://colab.research.google.com/drive/1kjq3CmZPWQ-sC6L8f3Dp0TWQajv_XQGL?usp=sharing">https://colab.research.google.com/drive/1kjq3CmZPWQ-sC6L8f3Dp0TWQajv_XQGL?usp=sharing</a></p>
+</div>
 </section>
 <section id="ventajas-y-limitaciones">
 <h3><span class="section-number">1.6.3. </span>Ventajas y limitaciones:<a class="headerlink" href="#ventajas-y-limitaciones" title="Link to this heading">#</a></h3>
-<p>Los Árboles de Decisión son fáciles de interpretar porque el modelo resulta en un diagrama explicativo (ver fig. <a class="reference internal" href="#fig-slide13"><span class="std std-numref">Fig. 1.15</span></a>).
+<p>Los Árboles de Decisión son fáciles de interpretar porque el modelo resulta en un diagrama explicativo (ver fig. <a class="reference internal" href="#fig-slide13"><span class="std std-numref">Fig. 1.18</span></a>).
 Sin embargo, tienen un problema conocido como sobreajuste: si los datos de entrenamiento contienen ruido, el árbol puede volverse excesivamente complejo al intentar ajustarse a datos irrelevantes.</p>
 <figure class="align-default" id="fig-slide13">
 <a class="reference internal image-reference" href="_images/Slide13.png"><img alt="_images/Slide13.png" src="_images/Slide13.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.15 </span><span class="caption-text">Algunas Características de los Árboles de Decisión.</span><a class="headerlink" href="#fig-slide13" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 1.18 </span><span class="caption-text">Algunas Características de los Árboles de Decisión.</span><a class="headerlink" href="#fig-slide13" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Para mitigar el sobreajuste, se pueden podar ramas del árbol, limitar la profundidad máxima o emplear métodos como Random Forest, que combinan múltiples árboles para mejorar la generalización.</p>

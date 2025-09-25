@@ -246,6 +246,20 @@ Una vez entrenado, el modelo usa esta línea para clasificar nuevos píxeles (ve
 Algunas Características de las SMV.
 ```
 
+```{figure} imagenes/planosSVM.png
+:name: fig-planosSVM
+:width: 100%
+
+SVM: Ejemplo de planos (2D)
+```
+
+```{figure} imagenes/hiperplanosSVM.png
+:name: fig-hiperplanosSVM
+:width: 100%
+
+SVM: Ejemplo de Hiperplanos (3D)
+```
+
 
 Ahora mostraremos de manera esquemática como se emplea Arboles de decisión a nuestro ejemplo sencillo de clasificación binaria (agua /no agua):
 
@@ -256,9 +270,25 @@ Los Árboles de Decisión dividen los datos en pasos secuenciales basados en umb
 
 ### Predicción:
 
-Para clasificar un píxel, se sigue el flujo del árbol:
-Se verifican las condiciones establecidas en cada nodo.
-Al final, se llega a una hoja que indica la clase del píxel (agua o no agua).
+Para clasificar un píxel, se sigue el flujo del árbol (ver fig. {numref}`fig-ImagenArbol`):
+
+* Se verifican las condiciones establecidas en cada nodo.
+* Al final, se llega a una hoja que indica la clase del píxel (agua o no agua).
+
+```{figure} imagenes/ImagenArbol.png
+:name: fig-ImagenArbol
+:width: 100%
+
+Árboles de Decisión.
+```
+
+```{tip} ¿Te interesa explorar el codigo python que genero las imágenes de SVM y AD con datos sintéticos?
+:class: tip
+Las imágenes de las figuras {numref}`fig-ImagenArbol` , fig. {numref}`fig-hiperplanosSVM` y fig. {numref}`fig-planosSVM` fueron genedas en Google Colab. Podes acceder al código desde:
+https://colab.research.google.com/drive/1kjq3CmZPWQ-sC6L8f3Dp0TWQajv_XQGL?usp=sharing
+
+```
+
 
 ### Ventajas y limitaciones:
 Los Árboles de Decisión son fáciles de interpretar porque el modelo resulta en un diagrama explicativo (ver fig. {numref}`fig-Slide13`).
