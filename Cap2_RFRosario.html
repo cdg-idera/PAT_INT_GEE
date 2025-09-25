@@ -439,6 +439,40 @@ A medida que avanzamos, aprenderemos a implementar este proceso en código, con 
 </div>
 <p>Ahora contamos con una imagen compuesta y procesada lista para análisis geoespacial, en particular explicaremos en esta sección como aplicar aprendizaje automático con <strong>Random Forest</strong> a la región de estudio para obtener una clasificación
 de suelos de acuerdo a las categorías de agua, edicaciones del sector urbano, suelo desnudo, y vegetación en la que distinguiremos cultivos de forestación.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Es importante señalar la diferencia en GEE entre <code class="docutils literal notranslate"><span class="pre">filterBounds(roi)</span></code> (o <code class="docutils literal notranslate"><span class="pre">filter(ee.Filter.bounds(roi))</span></code>) y <code class="docutils literal notranslate"><span class="pre">clip(roi)</span></code>:</p>
+<p><strong><code class="docutils literal notranslate"><span class="pre">filterBounds(roi)</span></code></strong></p>
+<ul class="simple">
+<li><p><strong>Qué hace:</strong> filtra una <em>colección</em> (ImageCollection/FeatureCollection) para <strong>quedarse solo con los elementos cuyo footprint intersecta</strong> el <code class="docutils literal notranslate"><span class="pre">roi</span></code>.</p></li>
+<li><p><strong>No</strong> modifica píxeles ni geometrías de cada imagen; <strong>solo</strong> decide <em>qué imágenes/entidades entran</em> al conjunto.</p></li>
+<li><p><strong>Cuándo usar:</strong> para <strong>reducir el universo</strong> de escenas/rasters antes de calcular medianas, mosaicos, nubes, etc. Ahorra cómputo y cuota.</p></li>
+</ul>
+<p><strong><code class="docutils literal notranslate"><span class="pre">clip(roi)</span></code></strong></p>
+<ul class="simple">
+<li><p><strong>Qué hace:</strong> aplica a una <strong>imagen individual</strong> (o resultado de un cálculo) y <strong>enmascara</strong> (pone máscara 0) los píxeles <strong>fuera</strong> de <code class="docutils literal notranslate"><span class="pre">roi</span></code>. Efectivamente <strong>recorta</strong> la salida a la región.</p></li>
+<li><p><strong>No</strong> cambia la resolución/proyección, solo la máscara y extensión efectiva de salida.</p></li>
+<li><p><strong>Cuándo usar:</strong> para <strong>visualización</strong> o <strong>exportación</strong> recortada. Si vas a hacer reductores, suele ser mejor pasar <code class="docutils literal notranslate"><span class="pre">region=roi</span></code> al reductor en lugar de clipear temprano.</p></li>
+</ul>
+<p><strong>Ejemplos (JavaScript API)</strong></p>
+<div class="highlight-js notranslate"><div class="highlight"><pre><span></span><span class="c1">// ROI de interés</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">roi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cm">/* ee.Geometry(...) */</span><span class="p">;</span>
+
+<span class="c1">// 1) Filtrar la colección por intersección con el ROI</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">s2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s1">&#39;COPERNICUS/S2_SR&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;2024-02-01&#39;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">.</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">roi</span><span class="p">);</span><span class="w">                 </span><span class="c1">// o .filter(ee.Filter.bounds(roi))</span>
+
+<span class="c1">// 2) Procesar y recién al final recortar para mostrar/exportar</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">median</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">s2</span><span class="p">.</span><span class="nx">median</span><span class="p">();</span><span class="w">             </span><span class="c1">// calcula sobre escenas que tocan el ROI</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">medianClip</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">median</span><span class="p">.</span><span class="nx">clip</span><span class="p">(</span><span class="nx">roi</span><span class="p">);</span><span class="w">    </span><span class="c1">// máscara fuera del ROI</span>
+
+<span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">roi</span><span class="p">);</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">median</span><span class="p">,</span><span class="w">     </span><span class="p">{</span><span class="nx">bands</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">],</span><span class="w"> </span><span class="nx">min</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="o">:</span><span class="mf">3000</span><span class="p">},</span><span class="w"> </span><span class="s1">&#39;Median sin clip&#39;</span><span class="p">);</span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">medianClip</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="nx">bands</span><span class="o">:</span><span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">],</span><span class="w"> </span><span class="nx">min</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="o">:</span><span class="mf">3000</span><span class="p">},</span><span class="w"> </span><span class="s1">&#39;Median CLIP ROI&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
 <section id="recoleccion-de-muestras-de-entrenamiento">
 <h3><span class="section-number">2.1.1. </span>Recolección de muestras de entrenamiento<a class="headerlink" href="#recoleccion-de-muestras-de-entrenamiento" title="Link to this heading">#</a></h3>
 <p>Este proceso comienza identificando los píxeles correspondientes a cada una de estas clases dentro de una imagen satelital. Para ello, es esencial recolectar datos de entrenamiento representativos que permitan entrenar un modelo de clasificación eficaz. El primer paso: la recolección de datos de entrenamiento es crucial. Para ello, necesitamos etiquetar manualmente ejemplos de cada una de las cinco clases en nuestra imagen. Por motivos de eficiencia, las etiquetas no se asignan como texto, sino como valores numéricos: los píxeles de agua se etiquetan como 0, los pixeles de edificaciones urbanas como 1, los de suelo desnudo como 3, los de cultivos como 4 y los de vegetación bosques o arbustiva como 4. Esta codificación facilita el procesamiento por parte del modelo y asegura un manejo eficiente de las clases.</p>

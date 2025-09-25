@@ -31,6 +31,40 @@ Map.addLayer(composite, {min:0, max:3000, bands:['B4','B3','B2']}, 'Composite');
 Ahora contamos con una imagen compuesta y procesada lista para análisis geoespacial, en particular explicaremos en esta sección como aplicar aprendizaje automático con **Random Forest** a la región de estudio para obtener una clasificación
 de suelos de acuerdo a las categorías de agua, edicaciones del sector urbano, suelo desnudo, y vegetación en la que distinguiremos cultivos de forestación.
 
+
+```{tip}
+Es importante señalar la diferencia en GEE entre `filterBounds(roi)` (o `filter(ee.Filter.bounds(roi))`) y `clip(roi)`:
+
+**`filterBounds(roi)`**
+- **Qué hace:** filtra una *colección* (ImageCollection/FeatureCollection) para **quedarse solo con los elementos cuyo footprint intersecta** el `roi`.  
+- **No** modifica píxeles ni geometrías de cada imagen; **solo** decide *qué imágenes/entidades entran* al conjunto.
+- **Cuándo usar:** para **reducir el universo** de escenas/rasters antes de calcular medianas, mosaicos, nubes, etc. Ahorra cómputo y cuota.
+
+**`clip(roi)`**
+- **Qué hace:** aplica a una **imagen individual** (o resultado de un cálculo) y **enmascara** (pone máscara 0) los píxeles **fuera** de `roi`. Efectivamente **recorta** la salida a la región.
+- **No** cambia la resolución/proyección, solo la máscara y extensión efectiva de salida.
+- **Cuándo usar:** para **visualización** o **exportación** recortada. Si vas a hacer reductores, suele ser mejor pasar `region=roi` al reductor en lugar de clipear temprano.
+
+**Ejemplos (JavaScript API)**
+```js
+// ROI de interés
+var roi = /* ee.Geometry(...) */;
+
+// 1) Filtrar la colección por intersección con el ROI
+var s2 = ee.ImageCollection('COPERNICUS/S2_SR')
+  .filterDate('2024-01-01', '2024-02-01')
+  .filterBounds(roi);                 // o .filter(ee.Filter.bounds(roi))
+
+// 2) Procesar y recién al final recortar para mostrar/exportar
+var median = s2.median();             // calcula sobre escenas que tocan el ROI
+var medianClip = median.clip(roi);    // máscara fuera del ROI
+
+Map.centerObject(roi);
+Map.addLayer(median,     {bands:['B4','B3','B2'], min:0, max:3000}, 'Median sin clip');
+Map.addLayer(medianClip, {bands:['B4','B3','B2'], min:0, max:3000}, 'Median CLIP ROI');
+
+```
+
 ### Recolección de muestras de entrenamiento
 
 Este proceso comienza identificando los píxeles correspondientes a cada una de estas clases dentro de una imagen satelital. Para ello, es esencial recolectar datos de entrenamiento representativos que permitan entrenar un modelo de clasificación eficaz. El primer paso: la recolección de datos de entrenamiento es crucial. Para ello, necesitamos etiquetar manualmente ejemplos de cada una de las cinco clases en nuestra imagen. Por motivos de eficiencia, las etiquetas no se asignan como texto, sino como valores numéricos: los píxeles de agua se etiquetan como 0, los pixeles de edificaciones urbanas como 1, los de suelo desnudo como 3, los de cultivos como 4 y los de vegetación bosques o arbustiva como 4. Esta codificación facilita el procesamiento por parte del modelo y asegura un manejo eficiente de las clases.

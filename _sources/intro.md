@@ -31,9 +31,20 @@ Este libro y recursos didácticos han sido desarrollados en el marco del grupo d
 
 El objetivo de este libro digital es impulsar el desarrollo de capacidades en la aplicación de técnicas de geoAI con información geoespacial, principalmente empleando imágenes satelitales disponibles en Google Earth Engine. 
 
-```{note}
+
+````{admonition} Producción del libro y de los videos
+:class: note
+
+```{tip} Libro (Jupyter Book)
 Este libro interactivo digital está siendo desarrollado con [**Jupyter Book**](https://jupyterbook.org) y tendrá ISBN tramitado por IDERA-IGN.
 ```
+
+```{tip} Videos
+Los videos asociados a los distintos capítulos se produjeron con componentes de **Adobe Creative Cloud** {cite}`adobe-creative-cloud-2025` —**After Effects** {cite}`adobe-after-effects-2025`, **Illustrator** {cite}`adobe-illustrator-2025`, **Audition** {cite}`adobe-audition-2025` y **Media Encoder** {cite}`adobe-media-encoder-2025`—: **After Effects** para *animación* y *composición de gráficos en movimiento*; **Illustrator** para la *preparación de arte vectorial*; **Audition** para la *edición y mezcla de audio*; y **Media Encoder** para la *transcodificación* y *publicación de los másteres finales*. Adicionalmente, se utilizó **Adobe Stock** {cite}`adobe-stock-2025`; no obstante, una parte sustancial del trabajo consistió en la *adaptación de imágenes*, la *generación de nuevas* a partir de *material base* y la *integración de diversos recursos* durante la *edición de video*.
+```
+
+````
+
 
 # Requerimientos
 
