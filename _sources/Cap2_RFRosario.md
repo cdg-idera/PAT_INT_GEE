@@ -4,7 +4,7 @@ Este capítulo muestra nuestro primer ejemplo aplicado con Random Forest.
 
 ## Introducción
 
-La clasificación de imágenes satelitales es una técnica fundamental en teledetección, y uno de los enfoques más comunes es dividir el territorio en categorías específicas como: urbano, suelo desnudo, agua, vegetación de cultivos, Bosque-o-Zona Arbolada-Arbustiva (ver fig. {numref}`fig-LeyendaArbol`).
+La clasificación de imágenes satelitales es una técnica fundamental en teledetección, y uno de los enfoques más comunes es dividir el territorio en categorías específicas como: urbano, suelo desnudo, agua, vegetación de cultivos, Bosque-o-Zona Arbolada-Arbustiva (ver fig. {numref}`fig-LeyendaArbol`). Estas tareas de clasificación se enriquecen con aportes de la literatura en fusión de información hiperespectral, como los trabajos de Prasad {cite:p}`prasad2018_hyperspectral`.
 
 Primero, accedemos al code editor de nuestra cuenta de Google Earth Engine y cargamos la colección de imágenes Sentinel-2 SR Harmonized, que incluye datos de alta calidad para análisis medioambientales.
 

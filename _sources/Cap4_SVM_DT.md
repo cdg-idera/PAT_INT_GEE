@@ -145,8 +145,9 @@ print('Consumers Accuracy:', testConfusionMatrix.consumersAccuracy() );
 En el script realizamos una evaluación de la exactitud, incluyendo la matriz de confusión. Obtenemos métricas de productor y consumidor y el coeficiente de Kappa, como en el script anterior.
 
 SVM es ideal para escenarios donde las clases no están claramente separadas linealmente. GEE es una poderosa herramienta para el análisis de datos espaciales y la clasificación de imágenes satelitales. 
-Sin embargo, hay ciertas limitaciones cuando trabajamos con algoritmos como SVM. Por ejemplo GEE *no esta diseñado para visualizar los hiperplanos que separan las clases en una clasificación* (ver fig. {numref}`fig-POST_7`). 
-Esto se debe a que el *enfoque principal de GEE es el procesamiento y el analisis de datos espaciales* no la visualizacion detallada de los resultados matematicos de los modelos de ML.
+Sin embargo, hay ciertas limitaciones cuando trabajamos con algoritmos como SVM. Por ejemplo, GEE *no está diseñado para visualizar los hiperplanos que separan las clases en una clasificación* (ver fig. {numref}`fig-POST_7`). Esto se debe a que el *enfoque principal de GEE es el procesamiento y el análisis de datos espaciales* y no la visualización detallada de los resultados matemáticos de los modelos de ML. 
+El análisis multiclase y sus desafíos también han sido discutidos en el marco del radar y la teledetección urbana {cite:p}`gamba2019_sarUrban`.
+
 
 
 ```{figure} imagenes/POST_7.png

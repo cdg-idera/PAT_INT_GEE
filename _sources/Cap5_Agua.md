@@ -23,7 +23,7 @@ GEE: Opción de menú *Datasets*:*Sentinel*
 
 **Sentinel-2** es propiedad de la **Agencia Espacial Europea** {cite:p}`esa_sentinel2`.  En Google Earth Engine tenemos acceso a colecciones de imágenes satelitales *Sentinel-1*, *Sentinel-2*, *Sentinel-3* y *Sentinel-5* {cite:p}`gee_sentinel`. Nos vamos a centrar en **Sentinel-2**, cuyos datos son muy populares. 
 
-Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida la *gestión de desastres*, la *gestión de emergencias*, la *cuantificación de tendencia de urbanización* y la *cobertura del suelo*, entre otras.
+Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida la *gestión de desastres*, la *gestión de emergencias*, la *cuantificación de tendencia de urbanización* y la *cobertura del suelo*, entre otras. En este campo, los enfoques de {cite:p}`longepe2011_sarFlood` han mostrado cómo el SAR es clave para la detección y monitoreo de inundaciones.
 
 ```{figure} imagenes/PosIT-1.png
 :name: fig-PosIT-1

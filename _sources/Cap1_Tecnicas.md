@@ -3,12 +3,18 @@
 
 Bienvenidos en este capítulo exploraremos cómo el aprendizaje automático está revolucionando la teledetección y el trabajo en la nube y mostraremos un ejemplo práctico de aprendizaje automático supervisado con Random Forest. El capítulo se estructura en tres partes en la primera parte comenzaremos haciendo una breve reseña sobre teledetección luego en la segunda parte abordaremos técnicas de aprendizaje automático o Machine learning aplicadas a imágenes satelitales, en la tercera parte mostraremos un ejemplo concreto de la técnica Random Forest a una composición de imágenes sobre un área de estudio. Comenzaremos haciendo una pequeña reseña sobre GeoAI, teledetección y Aprendizaje Automático.
 
-
 ## ¿Qué es la geoAI?
 
-> Inteligencia Artificial Geoespacial (GeoAI) es la integración de los estudios geoespaciales con la inteligencia artificial (aprendizaje automático y profundo) y las tecnologías de grafos de conocimiento {cite:p}`gao_hu_li_2023_handbook_geoai`. 
+> Inteligencia Artificial Geoespacial (GeoAI) es la integración de los estudios geoespaciales con la inteligencia artificial (aprendizaje automático y profundo) y las tecnologías de grafos de conocimiento[^nota1] {cite:p}`gao_hu_li_2023_handbook_geoai`. 
+
+[^nota1]: Los grafos de conocimiento son estructuras que organizan la información como una red de nodos (entidades) y aristas (relaciones). En el ámbito geoespacial, permiten vincular datos satelitales, índices espectrales y fenómenos ambientales con conceptos semánticos, lo que facilita la interoperabilidad y el uso de inteligencia artificial para el razonamiento automático.
+
 
 > "GeoAI es la integración de la inteligencia artificial (IA) con los datos espaciales, la ciencia y la tecnología geoespacial para potenciar el conocimiento y solucionar problemas espaciales. GeoAI incluye la aplicación de técnicas de IA tradicionales para generar datos espaciales por medio de la extracción, la clasificación y la detección de información de datos estructurados y no estructurados. GeoAI es el uso de técnicas de IA expresamente espaciales cuya finalidad es resolver los problemas espaciales mediante el análisis de datos espaciales, e incluye técnicas de detección de patrones, predicción, previsión espaciotemporal, etc." {cite:p}`esri2021geoai`
+
+En esta línea, la **semántica de los grandes volúmenes de datos de observación de la Tierra** ha sido explorada en profundidad por {cite:p}`camara2020_bigEO`, quien destaca la necesidad de nuevos enfoques para organizar, clasificar y transformar datos en conocimiento.  
+Del mismo modo, las revisiones de {cite:p}`zhu2017_deepReview` han mostrado cómo el *deep learning* en teledetección constituye uno de los pilares que explican la rápida expansión de la GeoAI en la última década.
+
 
 ## Teledetección
 

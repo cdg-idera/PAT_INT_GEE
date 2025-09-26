@@ -543,7 +543,7 @@ Comentamos la función agregarIndices anterior, para volver a definirla utilizan
 var spectral = require("users/dmlmont/spectral:spectral");
 ```
 
-Luego, definimos la función **agregarIndices**, donde pedimos que se calculen automáticamente los índices **NDVI**, **NDBI**, **NDWI** y **NDMI**:
+Luego, definimos la función **agregarIndices**, donde pedimos que se calculen automáticamente los índices **NDVI**, **NDBI**, **NDWI** y **NDMI**. Estos índices no solo provienen de la literatura clásica, sino que también se apoyan en desarrollos recientes como los discutidos por {cite:p}`rulloni2022_aiEO`, que muestran experiencias locales en IA aplicada a observación de la Tierra.:
 
 ```javascript
 var indices = ['NDVI', 'NDBI', 'NDWI', 'NDMI'];

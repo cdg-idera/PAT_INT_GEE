@@ -102,7 +102,8 @@ Con tanto conocimiento disponible desde el espacio.
 > ¡Bienvenidos al mundo de los cubos de datos, o datacubes!
 
 El volumen y la complejidad de los datos satelitales nos obliga a pensar de una forma nueva. ¿Cómo podemos analizar millones de imágenes, cada una con múltiples bandas y fechas distintas, sin ahogarnos en un mar de archivos?
-Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el cubo de dato o inglés datacube dádaciubs
+Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el **cubo de dato** o inglés **datacube**. 
+Este paradigma conecta con la visión de {cite:p}`cavallaro2020_hpc` sobre la necesidad de infraestructura HPC y datacubes para EO.
 
 ```{figure} imagenes/PlacaJ.png
 :name: fig-PlacaJ

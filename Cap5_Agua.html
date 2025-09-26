@@ -396,7 +396,7 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">5.2. Workflow</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">5.2.1. Entrenamiento</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5.2.2. Entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">5.2.2. Entrenamiento</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">5.2.3. Clasificar la imagen</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mascara">5.2.4. Máscara</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-precision-acurracy-assessment">5.2.5. Evaluación de precisión (Acurracy Assessment)</a></li>
@@ -435,7 +435,7 @@ document.write(`
 </figcaption>
 </figure>
 <p><strong>Sentinel-2</strong> es propiedad de la <strong>Agencia Espacial Europea</strong> <span id="id1">[<a class="reference internal" href="Referencias.html#id8" title="European Space Agency. Sentinel-2: esa's optical high-resolution mission for gmes operational services. European Space Agency, 2015. Consultado el 19 de septiembre de 2025. URL: https://sentinel.esa.int/web/sentinel/missions/sentinel-2.">European Space Agency, 2015</a>]</span>.  En Google Earth Engine tenemos acceso a colecciones de imágenes satelitales <em>Sentinel-1</em>, <em>Sentinel-2</em>, <em>Sentinel-3</em> y <em>Sentinel-5</em> <span id="id2">[<a class="reference internal" href="Referencias.html#id7" title="Google Earth Engine. Sentinel satellite imagery collections in google earth engine. Google Earth Engine Data Catalog, 2025. Consultado el 19 de septiembre de 2025. URL: https://developers.google.com/earth-engine/datasets/catalog/sentinel.">Google Earth Engine, 2025</a>]</span>. Nos vamos a centrar en <strong>Sentinel-2</strong>, cuyos datos son muy populares.</p>
-<p>Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida la <em>gestión de desastres</em>, la <em>gestión de emergencias</em>, la <em>cuantificación de tendencia de urbanización</em> y la <em>cobertura del suelo</em>, entre otras.</p>
+<p>Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida la <em>gestión de desastres</em>, la <em>gestión de emergencias</em>, la <em>cuantificación de tendencia de urbanización</em> y la <em>cobertura del suelo</em>, entre otras. En este campo, los enfoques de <span id="id3">[]</span> han mostrado cómo el SAR es clave para la detección y monitoreo de inundaciones.</p>
 <figure class="align-default" id="fig-posit-1">
 <a class="reference internal image-reference" href="_images/PosIT-1.png"><img alt="_images/PosIT-1.png" src="_images/PosIT-1.png" style="width: 40%;" /></a>
 <figcaption>
@@ -455,7 +455,7 @@ document.write(`
 <p><span class="caption-number">Fig. 5.5 </span><span class="caption-text">Etapa: Clasificar la imagen</span><a class="headerlink" href="#fig-p-3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Como no estamos interesados en los límites provinciales precisos de la provincia, debido a que queremos abarcar los rios que componen los limites naturales provinciales, no utilizaremos los límites administrativos exactos disponibles en la IDE de la provincia de Neuquén y Rio Negro, o en el <strong>Instituto Geográfico Nacional</strong>  <span id="id3">[<a class="reference internal" href="Referencias.html#id15" title="Instituto Geográfico Nacional (Argentina). Capas sig. https://www.ign.gob.ar/NuestrasActividades/InformacionGeoespacial/CapasSIG, 2025. Consultado el 20 de septiembre de 2025.">(Argentina), 2025</a>]</span>, sino que utilizaremos el conjunto de datos de Capas de <strong>Unidades Administrativas Globales</strong> <span id="id4">[<a class="reference internal" href="Referencias.html#id16" title="United Nations. Global administrative unit layers (gaul). DataBasis dataset, septiembre 2025. Cobertura temporal: 2000–2014; Organización: United Nations. URL: https://data-basis.org/dataset/605e1a3d-c0ca-43e6-bcfa-26d944be8794?raw_data_source=5e4aedd6-6b7b-4f43-81a2-b95aa4dba235.">Nations, 2025</a>]</span> de Google Earth Engine.</p>
+<p>Como no estamos interesados en los límites provinciales precisos de la provincia, debido a que queremos abarcar los rios que componen los limites naturales provinciales, no utilizaremos los límites administrativos exactos disponibles en la IDE de la provincia de Neuquén y Rio Negro, o en el <strong>Instituto Geográfico Nacional</strong>  <span id="id4">[<a class="reference internal" href="Referencias.html#id15" title="Instituto Geográfico Nacional (Argentina). Capas sig. https://www.ign.gob.ar/NuestrasActividades/InformacionGeoespacial/CapasSIG, 2025. Consultado el 20 de septiembre de 2025.">(Argentina), 2025</a>]</span>, sino que utilizaremos el conjunto de datos de Capas de <strong>Unidades Administrativas Globales</strong> <span id="id5">[<a class="reference internal" href="Referencias.html#id16" title="United Nations. Global administrative unit layers (gaul). DataBasis dataset, septiembre 2025. Cobertura temporal: 2000–2014; Organización: United Nations. URL: https://data-basis.org/dataset/605e1a3d-c0ca-43e6-bcfa-26d944be8794?raw_data_source=5e4aedd6-6b7b-4f43-81a2-b95aa4dba235.">Nations, 2025</a>]</span> de Google Earth Engine.</p>
 <p>Esto nos permitirá aprender un poco más sobre este conjunto de datos de <em>Unidades Administrativas Globales</em>:</p>
 <p>En el buscador de dataset buscamos <em>FAO GAUL: Global Administrative Unit Layers 2015, First-Level Administrative Units</em></p>
 <figure class="align-default" id="fig-posit-2">
@@ -754,8 +754,8 @@ Si no se especifican las bandas a utilizar, es decir no se proporcionan parámet
 <p>Podemos imprimir la tabla de entrenamiento que vamos a utilizar para la clasificación de aprendizaje automático. Contamos con el valor de las bandas Sentinel seleccionadas, la banda NDVI y la etiqueta <em>categoriaAgua</em>.</p>
 <p>Necesitamos separar algunos de los datos para entrenar el modelo y también algunos de los datos para evaluarlo.  Por lo tanto, dividiremos esos datos: crearemos una columna aleatoria y luego solo el 70 % de los datos se utilizarán para entrenar nuestro modelo. Y luego, el conjunto de prueba aquí será la evaluación, que es el 30 % de datos restantes.</p>
 </section>
-<section id="id5">
-<h3><span class="section-number">5.2.2. </span>Entrenamiento<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<section id="id6">
+<h3><span class="section-number">5.2.2. </span>Entrenamiento<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
 <figure class="align-default" id="fig-p-2">
 <a class="reference internal image-reference" href="_images/p_2.png"><img alt="_images/p_2.png" src="_images/p_2.png" style="width: 50%;" /></a>
 <figcaption>
@@ -815,10 +815,10 @@ Si no se especifican las bandas a utilizar, es decir no se proporcionan parámet
 </section>
 <section id="clasificar-la-imagen">
 <h3><span class="section-number">5.2.3. </span>Clasificar la imagen<a class="headerlink" href="#clasificar-la-imagen" title="Link to this heading">#</a></h3>
-<figure class="align-default" id="id6">
+<figure class="align-default" id="id7">
 <a class="reference internal image-reference" href="_images/p_3.png"><img alt="_images/p_3.png" src="_images/p_3.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.19 </span><span class="caption-text">Etapa Clasificar la imagen</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.19 </span><span class="caption-text">Etapa Clasificar la imagen</span><a class="headerlink" href="#id7" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>El siguiente paso es aplicar este modelo, que es el clasificador, a la imagen, la imagen Sentinel. Simplemente se va a aplicar el modelo para generar una clasificación.</p>
@@ -1069,7 +1069,7 @@ vas a usar la función Export.image.toDrive para exportar, ya sabes, tu mapa de 
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">5.2. Workflow</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">5.2.1. Entrenamiento</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5.2.2. Entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">5.2.2. Entrenamiento</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">5.2.3. Clasificar la imagen</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mascara">5.2.4. Máscara</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-de-precision-acurracy-assessment">5.2.5. Evaluación de precisión (Acurracy Assessment)</a></li>
