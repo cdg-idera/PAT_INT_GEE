@@ -2,26 +2,41 @@
 
 ## Introducción
 
-En este capítulo vamos a aplicar aprendizaje automático a imágenes satelitales para predecir superficies de agua. Utilizaremos datos satelitales de Sentinel-2 para procesar una colección de imágenes correspondientes a una región de estudio y aplicaremos un modelo de Random Forest para clasificar los píxeles en dos categorías: agua y no agua. Es decir, emplearemos una clasificación binaria.
+En este capítulo vamos a aplicar aprendizaje automático a imágenes satelitales para *predecir superficies de agua*. Utilizaremos datos satelitales de Sentinel-2 para procesar una colección de imágenes correspondientes a una región de estudio y aplicaremos un modelo de **Random Forest** para clasificar los píxeles en dos categorías: agua y no agua. Es decir, emplearemos una clasificación binaria.
 
-En Google Earth Engine (GEE) podes explorar imagenes Sentinel haciendo click en DATASET para acceder al catálogo de datos y luego hacer en la opción de menú Sentinel y encontrarás todos los productos satelitales Sentinel. 
+En Google Earth Engine (GEE) podes explorar imagenes Sentinel haciendo click en **Datasets**  (ver fig. {numref}`fig-datasetsGoogle`) para acceder al catálogo de datos y luego hacer en la opción de menú **Sentinel** (ver fig. {numref}`fig-sentinelGoogle`)  y encontrarás todos los productos satelitales Sentinel. 
 
-Sentinel-2 es propiedad de la Agencia Espacial Europea {cite:p}`esa_sentinel2`.  En Google Earth Engine tenemos acceso a colecciones de imágenes satelitales Sentinel-1, Sentinel-2, Sentinel-3 y Sentinel-5 {cite:p}`gee_sentinel`. Nos vamos a centrar en Sentinel-2, cuyos datos son muy populares. 
+```{figure} imagenes/datasetsGoogle.png
+:name: fig-datasetsGoogle
+:width: 100%
 
-Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida la *gestión de desastres*, la *gestión de emergencias*, la *cuantificación de la tendencia de urbanización* y la *cobertura del suelo*, entre otras.
+GEE: Opción de menú *Datasets*
+```
+
+
+```{figure} imagenes/sentinelGoogle.png
+:name: fig-sentinelGoogle
+:width: 100%
+
+GEE: Opción de menú *Datasets*:*Sentinel*
+```
+
+**Sentinel-2** es propiedad de la **Agencia Espacial Europea** {cite:p}`esa_sentinel2`.  En Google Earth Engine tenemos acceso a colecciones de imágenes satelitales *Sentinel-1*, *Sentinel-2*, *Sentinel-3* y *Sentinel-5* {cite:p}`gee_sentinel`. Nos vamos a centrar en **Sentinel-2**, cuyos datos son muy populares. 
+
+Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida la *gestión de desastres*, la *gestión de emergencias*, la *cuantificación de tendencia de urbanización* y la *cobertura del suelo*, entre otras.
 
 ```{figure} imagenes/PosIT-1.png
 :name: fig-PosIT-1
-:width: 60%
+:width: 40%
 
 Algunas aplicaciones de Sentinel-2
 ```
 
-Bien creamos un nuevo script denominado *A001_RandomForest_CuerposDeAguaComahue*. Nuestra área de estudio será la **región del Comahue** principalmente la provincia del *Neuquén* y la de *Rio Negro*. Vamos a crear nuestra región de estudio, nuestraregión de interés o ROI. 
+Bien creamos un nuevo script denominado *A001_RandomForest_CuerposDeAguaComahue*. Nuestra área de estudio será la **región del Comahue** principalmente la provincia del *Neuquén* y la de *Rio Negro*. Vamos a crear nuestra región de estudio, nuestra región de interés o ROI. 
 
 ```{figure} imagenes/km.png
 :name: fig-km
-:width: 20%
+:width: 40%
 
 Sobre el area de estudio
 ```
@@ -35,7 +50,7 @@ Etapa: Clasificar la imagen
 
 Como no estamos interesados en los límites provinciales precisos de la provincia, debido a que queremos abarcar los rios que componen los limites naturales provinciales, no utilizaremos los límites administrativos exactos disponibles en la IDE de la provincia de Neuquén y Rio Negro, o en el **Instituto Geográfico Nacional**  {cite:p}`IGN:CapasSIG`, sino que utilizaremos el conjunto de datos de Capas de **Unidades Administrativas Globales** {cite:p}`UN:GAUL:DataBasis` de Google Earth Engine.
 
-Esto nos permitirá aprender un poco más sobre este conjunto de datos de Unidades Administrativas Globales: 
+Esto nos permitirá aprender un poco más sobre este conjunto de datos de *Unidades Administrativas Globales*: 
 
 En el buscador de dataset buscamos *FAO GAUL: Global Administrative Unit Layers 2015, First-Level Administrative Units*
 
@@ -55,8 +70,8 @@ var roi = ee.FeatureCollection("FAO/GAUL/2015/level1");
 
 Si visualizamos el esquema de tabla (ver fig. {numref}`fig-FAO`) de este conjunto de datos, existen algunos atributos que utilizaremos para filtrar:
 
-* **ADM0_CODE** tiene el código de pais, y **ADM0_NAME** tiene el nombre de pais,
-* **ADM1_CODE** tiene el código de unidades administrativas de primer nivel y **ADM1_NAME** tiene el nombre de unidades administrativas de primer nivel.
+* **ADM0_CODE** tiene el *código de pais*, y **ADM0_NAME** tiene el *nombre de pais*,
+* **ADM1_CODE** tiene el *código de unidades administrativas de primer nivel* y **ADM1_NAME** tiene el *nombre de unidades administrativas de primer nivel*.
 
 ```{figure} imagenes/FAOSchema.png
 :name: fig-FAO
@@ -65,9 +80,9 @@ Si visualizamos el esquema de tabla (ver fig. {numref}`fig-FAO`) de este conjunt
 El esquema de Global Administrative Unit Layers
 ```
 
-Utilizando **ADM0_NAME** filtraremos *Argentina* y utilizando y **ADM1_NAME** filtraremos la unidad administrativa de la provincia del neuquen y la Provincia de Rio Negro: 
+Utilizando **ADM0_NAME** filtraremos *Argentina* y utilizando y **ADM1_NAME** filtraremos la unidad administrativa de la provincia del Neuquén y la Provincia de Rio Negro: 
 
-Primero mostramos como ADM0_NAME nos permite filtrar por nombre de país en este caso, Argentina. Luego mostramos como utilizando ADM1_NAME podemos filtrar las provincia de Rio Negro y Neuquen. Cuando agregamos esta capa al mapa la llamamos *Comahue*.
+Primero mostramos como **ADM0_NAME** nos permite filtrar por *nombre de país* en este caso, Argentina. Luego mostramos como utilizando **ADM1_NAME** podemos filtrar las *provincias de Rio Negro y Neuquén*. Cuando agregamos esta capa al mapa la llamamos *Comahue*.
 
 En ambos casos se inspeccionan datos utilizando el inspector de Google Earth Engine para ver como están escritos los nombres de provincias, por ejemplo Neuquén no esta con acento.
 
@@ -83,8 +98,7 @@ var roi = ee.FeatureCollection("FAO/GAUL/2015/level1")
 
 Centramos nuestra zona de estudio utilizando la función *centerObject*, haciendo variar el nivel de zoom.
 
-La funcion *centerObjet*  es una función que te ayuda a cambiar la etiqueta de zoom. Según la documentación el nivel de zoom es un valor entre 0 y 24,
-Podes ajustar el nivel de zoom. Si no ajustás el parametro de zoom, no se ampliará el área que te interesa.
+La funcion *centerObjet*  es una función que te ayuda a cambiar la etiqueta de zoom. Según la documentación *el nivel de zoom es un valor entre 0 y 24*. Podes ajustar el nivel de zoom. Si no ajustás el parametro de zoom, no se ampliará el área que te interesa.
 
 ```javascript
 Map.addLayer(roi, {}, 'Comahue');
@@ -95,7 +109,7 @@ Map.centerObject(roi,5);
 
 Sin embargo antes de mostrar la región de estudio al mapa aplicaremos un **buffer de 5 km** para incluir los límites naturales completos que comprenden rios que separan provincias.
 
-Se puede crear un buffer para un *FeatureCollection* usando el método *.map()* para aplicar una operación a cada Feature en el FeatureCollection de unidades administrativas.
+Se puede crear un buffer para un *FeatureCollection* usando el método *.map()* para aplicar una operación a cada Feature en el FeatureCollection de unidades administrativas. Acá estamos seleccionando dos unidades administrativas, que son cada una de las provincias.
 
 ```javascript
 // Crear un buffer de 5 km (5.000 metros)
@@ -106,15 +120,13 @@ Map.addLayer(roi, {}, 'Comahue');
 Map.centerObject(roi,5);
 ```
 
-Esta es nuestra **área de estudio o ROI**.
+Esta es nuestra **área de estudio o roi**.
 
 ### Imágenes Sentinel-2
 
-A continuación buscamos Sentinel-2 y seleccionamos las colecciones de imágenes **Harmonized sentinel-2 MSI (MultiSpectralInstrument) level 1-c**
+A continuación buscamos Sentinel-2 y seleccionamos las colecciones de imágenes **Harmonized sentinel-2 MSI (MultiSpectralInstrument) level 1-c**. Copiamos su identificación que utilizarmeos en la defición de una colección de imágenes sentinel denominada **image**.
 
-Copiamos su identificación que utilizarmeos en la defición de una colección de imágenes sentinel denominada **image**
-
-Filtraremos imágenes sentinel del año 2024. Utilizaré datos de todo el año 2024, es decir, fecha de comienzo: 1 de enero de 2024 y fecha de finalización el 1 de enero de 2025 (esta ultima fecha se excluye) como podemos comprobar en la documentación de **FilterData**, un método que se aplica a un FeatureColection (**start date** es *inclusive* pero **end date** es *exclusive*).
+Filtraremos imágenes sentinel del año 2024. Utilizaremos datos de todo el año 2024, es decir, fecha de comienzo: 1 de enero de 2024 y fecha de finalización el 1 de enero de 2025 (esta ultima fecha se excluye) como podemos comprobar en la documentación de **FilterData**, un método que se aplica a un FeatureColection (**start date** es *inclusive* pero **end date** es *exclusive*).
 
 ```javascript
 // Cargar imagen Sentinel
@@ -124,12 +136,10 @@ var image = ee.ImageCollection("COPERNICUS/S2_HARMONIZED")
 
 ### Filtro de nubes
 
-Vamos a usar un filtro de nubes aquí. Cuando se utilizan datos satelitales, generalmente hay *contaminación por nubes*. Deseamos utilizar la mayor cantidad posible de imágenes libres de nubes. Entonces, aquí vamos a aplicar un filtro para seleccionar imagens con menos de un 10% de nubes.
+Vamos a usar un *filtro de nubes* aquí. Cuando se utilizan datos satelitales, generalmente hay *contaminación por nubes*. Deseamos utilizar la mayor cantidad posible de imágenes libres de nubes. Entonces, aquí vamos a aplicar un filtro para seleccionar imágenes con menos de un 10% de nubes.
 
-Esto se logra utilizando metadatos de la imagen satelital, si consultmaos las *propiedades* de la imagen, existe un atributo: **CLOUDY_PIXEL_PERCENTAGE** 
-que representa el Porcentaje de píxeles nublados específicos
-
-Esto nos permite utilizar una imagen de nubes en la que la contaminación de las nubes es menor al 10 %. Podes ajustar este parámetro en función del área de estudio según tu criterio de análisis.
+Esto se logra utilizando **metadatos de la imagen satelital**, si consultmaos las *propiedades* de la imagen, existe un atributo: **CLOUDY_PIXEL_PERCENTAGE** 
+que representa el Porcentaje de píxeles nublados específicos. Esto nos permite utilizar una imagen de nubes en la que la contaminación de las nubes es menor al 10 %. Podes ajustar este parámetro en función del área de estudio según tu criterio de análisis.
 
 ```javascript
 // Cargar imagen Sentinel
@@ -140,7 +150,7 @@ var image = ee.ImageCollection("COPERNICUS/S2_HARMONIZED")
 
 ### FilterBounds()
 
-filterBounds(roi) tiene un propósito: Filtrar las imágenes en la colección para incluir solo aquellas que intersectan con la región de interés (roi).
+filterBounds(roi) tiene un propósito: Filtrar las imágenes en la colección para incluir solo aquellas *imágenes que intersectan con la región de interés (roi)*.
 Limita la cantidad de imágenes en la colección para que solo contenga aquellas que cubren total o parcialmente la región definida por roi. Esto reduce el número de imágenes procesadas y mejora la eficiencia.
 
 ```javascript
@@ -152,7 +162,7 @@ var image = ee.ImageCollection("COPERNICUS/S2_HARMONIZED")
 
 ```
 
-Lo que necesitamos es una sola imagen. Por lo tanto, necesitamos agregar todas las imágenes mediante un reductor o una agregación estadística. En este caso, vamos a utilizar la mediana. Se suele recomendar la mediana como mínimo mejor que la media. Se evitará incluir algunos valores atípicos, por lo que se utilizará el valor de la mediana. De esta manera, se evita incluir valores atípicos en el proceso de agregación estadística. En este caso, utilizamos la mediana. 
+Lo que necesitamos es una sola imagen. Por lo tanto, necesitamos agregar todas las imágenes mediante un *reductor* o una *agregación estadística*. En este caso, vamos a utilizar la mediana. Se suele recomendar la mediana como mínimo mejor que la media. *Se evitará incluir algunos valores atípicos*, por lo que se utilizará el valor de la mediana. De esta manera, se evita incluir valores atípicos en el *proceso de agregación estadística*. En este caso, utilizamos la **mediana**. 
 
 
 ```javascript
@@ -165,7 +175,7 @@ var image = ee.ImageCollection("COPERNICUS/S2_HARMONIZED")
 
 ```
 
-Luego recortamos la imagen en función la región de estudio CON clipToCollection(roi). El propósito es recortar la imagen resultante al contorno exacto de la colección o región (roi). Tras combinar las imágenes (en este caso, usando .median()), recorta la salida final para que coincida exactamente con el contorno de roi.
+Luego recortamos la imagen en función la región de estudio con clipToCollection(roi). El propósito es *recortar la imagen resultante al contorno exacto de la colección o región (roi)*. Tras combinar las imágenes (en este caso, usando .median()), recortamos la salida final para que coincida exactamente con el contorno de roi.
 
 ```javascript
 // Cargar imagen Sentinel
@@ -178,32 +188,113 @@ var image = ee.ImageCollection("COPERNICUS/S2_HARMONIZED")
 ```
 Ahora tenemos una imagen Sentinel más limpia, que está lista para nuestra clasificación de aprendizaje automático.
 
-Vamos a utilizar esta función en la colección de Imágenes Sentinel:
+Cargamos nuestra imagen, a nuestro mapa con *addLayer*, si la imagen sentinel no cuenta con parámetros de visualización se verá negra. Podemos importar los parámetros de visualización , utilizando la configuración de la capa, seleccionando las 3 bandas RGB, bandas *B4*, *B3* y *B2* y un stretch de 98% que permite visualizar los valores de estas tres bandas. Aplicamos e importamos esta configuración. Hacemos una prueba con estos parámetros y ya visualizamos la colección de imágenes.
 
-Vamos a aplicar algunos parámetros de filtrado a la colección de imágenes Sentinel.
-
-Para ello utilizaremos la funcion Map que ejecuta la función que definimos anteriormente agregarNDVI a todo feature  del featureColetcion en otras palabaras a toda imagen de la colección de imágenes. 
-En otras palabras MAP permite aplicar la función agregarNDVI a cada imagen de la colección de imágenes. 
-
+En su defecto podemos definir nuestros propios parámetros con una variable *visParams*, para ello, creamos un parámetro de visualización.
 
 ```javascript
-
-// función para calcular NDVI
-var agregarNDVI = function(imagen){
-  var ndvi = imagen.normalizedDifference(['B8','B4']).rename('NDVI');
-  return imagen.addBands(ndvi);
-};
 
 // Cargar imagen Sentinel
 var image = ee.ImageCollection("COPERNICUS/S2_HARMONIZED")
   .filterDate('2024-01-01','2025-01-01')
   .filter(ee.Filter.lt('CLOUDY_PIXEL_PERCENTAGE', 10))
   .filterBounds(roi)
-  .map(agregarNDVI)
   .median()
   .clipToCollection(roi);
+
+var visParams = {bands: ['B4','B3','B2'], min:0, max: 3000};
+  
+Map.addLayer(image, visParams, "Sentinel 2024");
+
+// Map.addLayer(image, {bands: ['B5','B4','B3'], min:0, max: 3000}, 'False Color (543)');
 ```
 
+Vamos a utilizar una composición de colores rojo, verde, azul (RGB). En este caso, vamos a proporcionar las bandas que vamos a utilizar acá: banda B4, banda B3, banda B2. No las estamos utilizando para nuestro modelo, sino solo para *visualizar la imagen en el mapa*. Y luego un valor mínimo y máximo en función de los datos de reflectancia de la superficie para estas bandas.
+
+### Función para calcular el NDVI
+
+En nuestra clasificación aplicando aprendizaje automático utilizaremos valores de reflectancia de ciertas bandas de la imagen Sentinel en conjunto con el *índice NDVI*. 
+
+El NDVI es el índice de vegetación diferencial normalizado que ayuda a monitorear la salud de la vegetación (ver fig. {numref}`fig-PosIT-NDVIbis`).  Por lo tanto, un NDVI más alto generalmente indica una cobertura vegetal densa o una vegetación más verde. Valores negativos son comunes en cuerpos de agua abiertos. mientras que valores cercanos a 0 pueden observarse en agua con sedimentos o cubierta parcial por vegetación flotante (ver fig. {numref}`fig-PosIT-NDVIbis`).
+
+```{figure} imagenes/PosIT-NDVIbis.png
+:name: fig-PosIT-NDVIbis
+:width: 100%
+
+Indice Espectral NDVI
+```
+
+```{admonition} Rangos típicos del NDVI:
+:class: tip
+
+* Agua: -1 a ~0
+    - Valores negativos son comunes en cuerpos de agua abiertos.
+    - Valores cercanos a 0 pueden observarse en agua con sedimentos o cubierta parcial por vegetación flotante.
+* Suelo desnudo: 0 a 0.2
+* Vegetación escasa: 0.2 a 0.5
+* Vegetación densa: 0.5 a 1
+
+```
+
+```{figure} imagenes/valoresNDVI.png
+:name: fig-valoresNDVI
+:width: 100%
+
+Valores típicos del NDVI
+```
+
+Lo primero que debemos hacer es escribir una *función que calcule el NDVI*. Vamos a crear una función denominada *agregarNDVI* para calcular el NDVI, que vamos a utilizar en nuestra clasificación de aprendizaje automático.
+
+```{admonition} Otros índices espectrales para calcular índices
+:class: tip
+
+También podríamos utilizar otros índices (ver fig. {numref}`fig-IndicesAguaBis`) como:
+
+* NDWI (Índice de Diferencia Normalizada del Agua)
+* MNDWI (Índice de Diferencia Normalizada del Agua Modificado)
+* AWEI (Índice de Extracción Automática del Agua)
+* LSWI (Índice del Agua Basado en Tierra)
+* WI (Índice del Agua)
+
+```
+
+```{figure} imagenes/IndicesAguaBis.png
+:name: fig-IndicesAguaBis
+:width: 100%
+
+Algunos Indices espectrales en el dominio de aplicación Agua
+```
+
+Nuestra función **agregarNDVI**, tiene un parámetro de entrada *imagen*. Podemos llamarlo imagen o algún otro nombre significativo.
+
+La primera instrucción es definir la variable NDVI. que es igual a la diferencia normalizada de la banda B8, la banda infrarroja cercana, y la banda B4, la banda roja de la imagen Sentinel. Si consultamos la documentación del método **normalizedDifference**, este metodo se aplica a una imagen. Aca se utiliza la notación orientada a objetos *objeto.metodo()* el objeto es una imagen y el método es *normalizedDifference*.
+
+Consultando la documentación de los métodos que se aplican a un objeto, la función *normalizedDifference*, una función incorporada a Google Earth Engine, calcula la diferencia normalizada entre dos bandas. Es necesario proporcionar las dos bandas a este método para obtener el índice NDVI calculado.
+
+El método no tiene parámetros obligatorios, cuando los parámetros en la documentación están en *letra itálica* esto significa que los *parámetros son opcionales*.
+Si no se especifican las bandas a utilizar, es decir no se proporcionan parámetros, el método utiliza las dos primeras bandas. La diferencia normalizada se calcula con la siguiente fórmula: *(primero − segundo) / (primero + segundo)*
+
+para nuestro ejemplo:
+
+```javascript
+(first − second) / (first + second)  = (B8 − B4) / (B8 + B4)
+```
+es decir 
+
+```javascript
+NDVI= (NIR−RED) / (NIR+RED)
+```
+
+Asi de simple, es calcular un índice para una imagen satelital. Este acercamiento nos permite definir otros índices como: *NDWI*, *MNDWI*, y otros mostrados en la fig. {numref}`fig-IndicesAguaBis`  ya qeu tienen el mismo patrón de fórmula:
+
+```{figure} imagenes/IndicesAgua.png
+:name: fig-IndicesAgua
+:width: 100%
+
+Indices Espectrales con el mismo patron de fórmula matemática 
+```
+
+Luego, finalmente, la funcion devuelve nuestra imagen, a la cual le agregaremos estas banda calculada con el NDVI. 
 
 ```javascript
 
@@ -229,115 +320,6 @@ Map.addLayer(image, visParams, "Sentinel 2024");
 // Map.addLayer(image, {bands: ['B5','B4','B3'], min:0, max: 3000}, 'False Color (543)');
 
 ```
-
-
-
-Cargamos nuestra imagen, a nuestro mapa con addLayer, si la imagen sentinel no cuenta con parámetros de visualización se verá negra. Ppodemos importar los parámetros de visualización , utilizando la configuración de la capa, seleccionando las 3 bandas RGB, bandas B4, B3 y B2 y un stretch de 98% que permite visualizar los valores de estas tres bandas.
-
-Aplicamos e importamos esta configuración. Hacemos una prueba con estos parámetros y ya visualizamos la colección de imágenes.
-
-En su defecto podemos definir nuestros propiso parámetros con una variable *visParams*, para ello, creamos un parámetro de visualización, 
-
-Aamos a utilizar una composición de colores rojo, verde, azul (RGB). En este caso, vamos a proporcionar las bandas que vamos a utilizar aquí, banda B4, banda B3, banda B2. No las estamos utilizando para nuestro modelo, sino solo para visualizar la imagen en el mapa. 
-
-Y luego un valor mínimo y máximo en función de los datos de reflectancia de la superficie PARA ESTAS BANDAS
-
-```javascript
-var visParams = {bands: ['B4','B3','B2'], min: 0 , max: 3000};
-Map.addLayer(image, visParams, "Sentinel 2024")
-```
-
-## Función para calcular NDVI
-
-En nuestra clasificación aplicando aprendizaje automático utilizaremos valores de reflectancia de ciertas bandas de la imagen Sentinel en conjunto con el índice NDVI. 
-Utilizaremos filtros de nubes, y filtros temporales
-
-El NDVI es el índice de vegetación diferencial normalizado que ayuda a monitorear la salud de la vegetación. 
-Por lo tanto, un NDVI más alto generalmente indica una cobertura vegetal densa o una vegetación más verde.
-Valores negativos son comunes en cuerpos de agua abiertos.
-mientras que Valores cercanos a 0 pueden observarse en agua con sedimentos o cubierta parcial por vegetación flotante.
-
-
-
-
-```{figure} imagenes/PosIT-NDVIbis.png
-:name: fig-PosIT-NDVIbis
-:width: 100%
-
-Indice Espectral NDVI
-```
-
-Rangos típicos del NDVI:
-
-Agua: -1 a ~0
-    - Valores negativos son comunes en cuerpos de agua abiertos.
-    - Valores cercanos a 0 pueden observarse en agua con sedimentos o cubierta parcial por vegetación flotante.
-Suelo desnudo: 0 a 0.2
-Vegetación escasa: 0.2 a 0.5
-Vegetación densa: 0.5 a 1
-
-```{figure} imagenes/valoresNDVI.png
-:name: fig-valoresNDVI
-:width: 100%
-
-Valores típicos del NDVI
-```
-
-Lo primero que debemos hacer es escribir una función que calcule el NDVI. 
-Vamos a crear una función denominada agregarNDVI para calcular el NDVI, que vamos a utilizar en nuestra clasificación de aprendizaje automático.
-
-También podríamos utilizar otros índices como:
-
-* NDWI (Índice de Diferencia Normalizada del Agua)
-* MNDWI (Índice de Diferencia Normalizada del Agua Modificado)
-* AWEI (Índice de Extracción Automática del Agua)
-* LSWI (Índice del Agua Basado en Tierra)
-* WI (Índice del Agua)
-
-
-```{figure} imagenes/IndicesAguaBis.png
-:name: fig-IndicesAguaBis
-:width: 100%
-
-Algunos Indices espectrales en el dominio de aplicación Agua
-```
-
-Nuestra función agregarNDVI, tiene un parámetro de entrada imagen. Podemos llamarlo imagen o algún otro nombre significativo.
-
-La primera instrucción es definir la variable NDVI. que es igual a la diferencia normalizada de la banda ocho, la banda infrarroja cercana, y la banda cuatro, la banda roja de la imagen Sentinel. 
-Si consultamos la documentación del método normalizedDifference, este metodo se aplica a una imagen. Aca se utiliza la notación orientada a objetos objeto.metodo() el objeto es 1 imagen y el método es normalizedDifference.
-
-consultando la documentaicon de los métodos que se aplican a un objeto, la función normalizedDifference, una función incorporada a Google Earth Engine, calcula la diferencia normalizada entre dos bandas.
-
-Es necesario proporcionar las dos bandas a este método para obtener el índice ndvi calculado.
-
-El método no tiene parámetros obligatorios, cuando los parámetros en la documentación están en letra itálica esto signfiica que los parámetros son opcionales.
-Si no se especifican las bandas a utilizar, es decir no se proporcionan parámetros, el método utiliza las dos primeras bandas. 
-La diferencia normalizada se calcula como (primero − segundo) / (primero + segundo)
-
-para nuestro ejemplo:
-```javascript
-(first − second) / (first + second)  = (B8 − B4) / (B8 + B4)
-```
-es decir 
-```javascript
-NDVI= (NIR−RED) / (NIR+RED)
-```
-
-Asi de simple, es calcular un índice para una imagen satelital. Este acercamiento nos permite definir otros índices como: NDWI, MNDWI, y otros mostrados en la Figura a continuación:
-
-
-```{figure} imagenes/IndicesAgua.png
-:name: fig-IndicesAgua
-:width: 100%
-
-Indices Espectrales con el mismo patron de fórmula matemática 
-```
-
-
-Luego, finalmente, la funcion devuelve nuestra imagen, a la cual le agregaremos estas banda calculada con el NDVI. 
-
-
 
 Esta función se define para una imagen, luego calculará técnicamente el NDVI para todas las imágenes dentro de la colección de imágenes con la operación MAP. 
 

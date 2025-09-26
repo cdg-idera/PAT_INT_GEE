@@ -390,20 +390,20 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imagenes-sentinel-2">5.1.3. Imágenes Sentinel-2</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtro-de-nubes">5.1.4. Filtro de nubes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filterbounds">5.1.5. FilterBounds()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-calcular-el-ndvi">5.1.6. Función para calcular el NDVI</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-calcular-ndvi">5.2. Función para calcular NDVI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">5.3. Workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">5.3.1. Entrenamiento</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5.3.2. Entrenamiento</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">5.3.3. Clasificar la imagen</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mascara">5.3.4. MASCARA:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acurracy-assessment">5.3.5. Acurracy Assessment</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion">5.3.6. Exportación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">5.2. Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">5.2.1. Entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5.2.2. Entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">5.2.3. Clasificar la imagen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mascara">5.2.4. MASCARA:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acurracy-assessment">5.2.5. Acurracy Assessment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion">5.2.6. Exportación</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-el-arobol-de-decision-luego-de-aplicar-cart">5.4. Mostrar el árobol de decisión luego de aplicar CART</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">5.5. Video del capítulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-el-arobol-de-decision-luego-de-aplicar-cart">5.3. Mostrar el árobol de decisión luego de aplicar CART</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">5.4. Video del capítulo</a></li>
 </ul>
             </nav>
         </div>
@@ -419,36 +419,48 @@ document.write(`
 <h1><span class="section-number">5. </span>Capítulo 5 · Random Forest para detectar agua<a class="headerlink" href="#capitulo-5-random-forest-para-detectar-agua" title="Link to this heading">#</a></h1>
 <section id="introduccion">
 <h2><span class="section-number">5.1. </span>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
-<p>En este capítulo vamos a aplicar aprendizaje automático a imágenes satelitales para predecir superficies de agua. Utilizaremos datos satelitales de Sentinel-2 para procesar una colección de imágenes correspondientes a una región de estudio y aplicaremos un modelo de Random Forest para clasificar los píxeles en dos categorías: agua y no agua. Es decir, emplearemos una clasificación binaria.</p>
-<p>En Google Earth Engine (GEE) podes explorar imagenes Sentinel haciendo click en DATASET para acceder al catálogo de datos y luego hacer en la opción de menú Sentinel y encontrarás todos los productos satelitales Sentinel.</p>
-<p>Sentinel-2 es propiedad de la Agencia Espacial Europea <span id="id1">[<a class="reference internal" href="Referencias.html#id8" title="European Space Agency. Sentinel-2: esa's optical high-resolution mission for gmes operational services. European Space Agency, 2015. Consultado el 19 de septiembre de 2025. URL: https://sentinel.esa.int/web/sentinel/missions/sentinel-2.">European Space Agency, 2015</a>]</span>.  En Google Earth Engine tenemos acceso a colecciones de imágenes satelitales Sentinel-1, Sentinel-2, Sentinel-3 y Sentinel-5 <span id="id2">[<a class="reference internal" href="Referencias.html#id7" title="Google Earth Engine. Sentinel satellite imagery collections in google earth engine. Google Earth Engine Data Catalog, 2025. Consultado el 19 de septiembre de 2025. URL: https://developers.google.com/earth-engine/datasets/catalog/sentinel.">Google Earth Engine, 2025</a>]</span>. Nos vamos a centrar en Sentinel-2, cuyos datos son muy populares.</p>
-<p>Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida la <em>gestión de desastres</em>, la <em>gestión de emergencias</em>, la <em>cuantificación de la tendencia de urbanización</em> y la <em>cobertura del suelo</em>, entre otras.</p>
-<figure class="align-default" id="fig-posit-1">
-<a class="reference internal image-reference" href="_images/PosIT-1.png"><img alt="_images/PosIT-1.png" src="_images/PosIT-1.png" style="width: 60%;" /></a>
+<p>En este capítulo vamos a aplicar aprendizaje automático a imágenes satelitales para <em>predecir superficies de agua</em>. Utilizaremos datos satelitales de Sentinel-2 para procesar una colección de imágenes correspondientes a una región de estudio y aplicaremos un modelo de <strong>Random Forest</strong> para clasificar los píxeles en dos categorías: agua y no agua. Es decir, emplearemos una clasificación binaria.</p>
+<p>En Google Earth Engine (GEE) podes explorar imagenes Sentinel haciendo click en <strong>Datasets</strong>  (ver fig. <a class="reference internal" href="#fig-datasetsgoogle"><span class="std std-numref">Fig. 5.1</span></a>) para acceder al catálogo de datos y luego hacer en la opción de menú <strong>Sentinel</strong> (ver fig. <a class="reference internal" href="#fig-sentinelgoogle"><span class="std std-numref">Fig. 5.2</span></a>)  y encontrarás todos los productos satelitales Sentinel.</p>
+<figure class="align-default" id="fig-datasetsgoogle">
+<a class="reference internal image-reference" href="_images/datasetsGoogle.png"><img alt="_images/datasetsGoogle.png" src="_images/datasetsGoogle.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.1 </span><span class="caption-text">Algunas aplicaciones de Sentinel-2</span><a class="headerlink" href="#fig-posit-1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.1 </span><span class="caption-text">GEE: Opción de menú <em>Datasets</em></span><a class="headerlink" href="#fig-datasetsgoogle" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Bien creamos un nuevo script denominado <em>A001_RandomForest_CuerposDeAguaComahue</em>. Nuestra área de estudio será la <strong>región del Comahue</strong> principalmente la provincia del <em>Neuquén</em> y la de <em>Rio Negro</em>. Vamos a crear nuestra región de estudio, nuestraregión de interés o ROI.</p>
-<figure class="align-default" id="fig-km">
-<a class="reference internal image-reference" href="_images/km.png"><img alt="_images/km.png" src="_images/km.png" style="width: 20%;" /></a>
+<figure class="align-default" id="fig-sentinelgoogle">
+<a class="reference internal image-reference" href="_images/sentinelGoogle.png"><img alt="_images/sentinelGoogle.png" src="_images/sentinelGoogle.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">Sobre el area de estudio</span><a class="headerlink" href="#fig-km" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.2 </span><span class="caption-text">GEE: Opción de menú <em>Datasets</em>:<em>Sentinel</em></span><a class="headerlink" href="#fig-sentinelgoogle" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p><strong>Sentinel-2</strong> es propiedad de la <strong>Agencia Espacial Europea</strong> <span id="id1">[<a class="reference internal" href="Referencias.html#id8" title="European Space Agency. Sentinel-2: esa's optical high-resolution mission for gmes operational services. European Space Agency, 2015. Consultado el 19 de septiembre de 2025. URL: https://sentinel.esa.int/web/sentinel/missions/sentinel-2.">European Space Agency, 2015</a>]</span>.  En Google Earth Engine tenemos acceso a colecciones de imágenes satelitales <em>Sentinel-1</em>, <em>Sentinel-2</em>, <em>Sentinel-3</em> y <em>Sentinel-5</em> <span id="id2">[<a class="reference internal" href="Referencias.html#id7" title="Google Earth Engine. Sentinel satellite imagery collections in google earth engine. Google Earth Engine Data Catalog, 2025. Consultado el 19 de septiembre de 2025. URL: https://developers.google.com/earth-engine/datasets/catalog/sentinel.">Google Earth Engine, 2025</a>]</span>. Nos vamos a centrar en <strong>Sentinel-2</strong>, cuyos datos son muy populares.</p>
+<p>Se aplican en diversas áreas de monitoreo de la superficie terrestre, incluida la <em>gestión de desastres</em>, la <em>gestión de emergencias</em>, la <em>cuantificación de tendencia de urbanización</em> y la <em>cobertura del suelo</em>, entre otras.</p>
+<figure class="align-default" id="fig-posit-1">
+<a class="reference internal image-reference" href="_images/PosIT-1.png"><img alt="_images/PosIT-1.png" src="_images/PosIT-1.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.3 </span><span class="caption-text">Algunas aplicaciones de Sentinel-2</span><a class="headerlink" href="#fig-posit-1" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Bien creamos un nuevo script denominado <em>A001_RandomForest_CuerposDeAguaComahue</em>. Nuestra área de estudio será la <strong>región del Comahue</strong> principalmente la provincia del <em>Neuquén</em> y la de <em>Rio Negro</em>. Vamos a crear nuestra región de estudio, nuestra región de interés o ROI.</p>
+<figure class="align-default" id="fig-km">
+<a class="reference internal image-reference" href="_images/km.png"><img alt="_images/km.png" src="_images/km.png" style="width: 40%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.4 </span><span class="caption-text">Sobre el area de estudio</span><a class="headerlink" href="#fig-km" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-default" id="fig-p-3">
 <a class="reference internal image-reference" href="_images/p_3.png"><img alt="_images/p_3.png" src="_images/p_3.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.3 </span><span class="caption-text">Etapa: Clasificar la imagen</span><a class="headerlink" href="#fig-p-3" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.5 </span><span class="caption-text">Etapa: Clasificar la imagen</span><a class="headerlink" href="#fig-p-3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Como no estamos interesados en los límites provinciales precisos de la provincia, debido a que queremos abarcar los rios que componen los limites naturales provinciales, no utilizaremos los límites administrativos exactos disponibles en la IDE de la provincia de Neuquén y Rio Negro, o en el <strong>Instituto Geográfico Nacional</strong>  <span id="id3">[<a class="reference internal" href="Referencias.html#id15" title="Instituto Geográfico Nacional (Argentina). Capas sig. https://www.ign.gob.ar/NuestrasActividades/InformacionGeoespacial/CapasSIG, 2025. Consultado el 20 de septiembre de 2025.">(Argentina), 2025</a>]</span>, sino que utilizaremos el conjunto de datos de Capas de <strong>Unidades Administrativas Globales</strong> <span id="id4">[<a class="reference internal" href="Referencias.html#id16" title="United Nations. Global administrative unit layers (gaul). DataBasis dataset, septiembre 2025. Cobertura temporal: 2000–2014; Organización: United Nations. URL: https://data-basis.org/dataset/605e1a3d-c0ca-43e6-bcfa-26d944be8794?raw_data_source=5e4aedd6-6b7b-4f43-81a2-b95aa4dba235.">Nations, 2025</a>]</span> de Google Earth Engine.</p>
-<p>Esto nos permitirá aprender un poco más sobre este conjunto de datos de Unidades Administrativas Globales:</p>
+<p>Esto nos permitirá aprender un poco más sobre este conjunto de datos de <em>Unidades Administrativas Globales</em>:</p>
 <p>En el buscador de dataset buscamos <em>FAO GAUL: Global Administrative Unit Layers 2015, First-Level Administrative Units</em></p>
 <figure class="align-default" id="fig-posit-2">
 <a class="reference internal image-reference" href="_images/PosIT-2.png"><img alt="_images/PosIT-2.png" src="_images/PosIT-2.png" style="width: 60%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.4 </span><span class="caption-text">Sobre Global Administrative Unit Layers</span><a class="headerlink" href="#fig-posit-2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.6 </span><span class="caption-text">Sobre Global Administrative Unit Layers</span><a class="headerlink" href="#fig-posit-2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Las Capas de Unidades Administrativas Globales (GAUL) recopilan y difunden la mejor información disponible sobre unidades administrativas para todos los países del mundo, contribuyendo a la estandarización del conjunto de datos espaciales que representan las unidades administrativas.</p>
@@ -456,19 +468,19 @@ document.write(`
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">roi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="s2">&quot;FAO/GAUL/2015/level1&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Si visualizamos el esquema de tabla (ver fig. <a class="reference internal" href="#fig-fao"><span class="std std-numref">Fig. 5.5</span></a>) de este conjunto de datos, existen algunos atributos que utilizaremos para filtrar:</p>
+<p>Si visualizamos el esquema de tabla (ver fig. <a class="reference internal" href="#fig-fao"><span class="std std-numref">Fig. 5.7</span></a>) de este conjunto de datos, existen algunos atributos que utilizaremos para filtrar:</p>
 <ul class="simple">
-<li><p><strong>ADM0_CODE</strong> tiene el código de pais, y <strong>ADM0_NAME</strong> tiene el nombre de pais,</p></li>
-<li><p><strong>ADM1_CODE</strong> tiene el código de unidades administrativas de primer nivel y <strong>ADM1_NAME</strong> tiene el nombre de unidades administrativas de primer nivel.</p></li>
+<li><p><strong>ADM0_CODE</strong> tiene el <em>código de pais</em>, y <strong>ADM0_NAME</strong> tiene el <em>nombre de pais</em>,</p></li>
+<li><p><strong>ADM1_CODE</strong> tiene el <em>código de unidades administrativas de primer nivel</em> y <strong>ADM1_NAME</strong> tiene el <em>nombre de unidades administrativas de primer nivel</em>.</p></li>
 </ul>
 <figure class="align-default" id="fig-fao">
 <a class="reference internal image-reference" href="_images/FAOSchema.png"><img alt="_images/FAOSchema.png" src="_images/FAOSchema.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.5 </span><span class="caption-text">El esquema de Global Administrative Unit Layers</span><a class="headerlink" href="#fig-fao" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">El esquema de Global Administrative Unit Layers</span><a class="headerlink" href="#fig-fao" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>Utilizando <strong>ADM0_NAME</strong> filtraremos <em>Argentina</em> y utilizando y <strong>ADM1_NAME</strong> filtraremos la unidad administrativa de la provincia del neuquen y la Provincia de Rio Negro:</p>
-<p>Primero mostramos como ADM0_NAME nos permite filtrar por nombre de país en este caso, Argentina. Luego mostramos como utilizando ADM1_NAME podemos filtrar las provincia de Rio Negro y Neuquen. Cuando agregamos esta capa al mapa la llamamos <em>Comahue</em>.</p>
+<p>Utilizando <strong>ADM0_NAME</strong> filtraremos <em>Argentina</em> y utilizando y <strong>ADM1_NAME</strong> filtraremos la unidad administrativa de la provincia del Neuquén y la Provincia de Rio Negro:</p>
+<p>Primero mostramos como <strong>ADM0_NAME</strong> nos permite filtrar por <em>nombre de país</em> en este caso, Argentina. Luego mostramos como utilizando <strong>ADM1_NAME</strong> podemos filtrar las <em>provincias de Rio Negro y Neuquén</em>. Cuando agregamos esta capa al mapa la llamamos <em>Comahue</em>.</p>
 <p>En ambos casos se inspeccionan datos utilizando el inspector de Google Earth Engine para ver como están escritos los nombres de provincias, por ejemplo Neuquén no esta con acento.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Definir roi (region de interés o estudio): Prov. Neuquén y Rio Negro</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">roi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">FeatureCollection</span><span class="p">(</span><span class="s2">&quot;FAO/GAUL/2015/level1&quot;</span><span class="p">)</span>
@@ -479,8 +491,7 @@ document.write(`
 <section id="center-object">
 <h3><span class="section-number">5.1.1. </span>Center Object<a class="headerlink" href="#center-object" title="Link to this heading">#</a></h3>
 <p>Centramos nuestra zona de estudio utilizando la función <em>centerObject</em>, haciendo variar el nivel de zoom.</p>
-<p>La funcion <em>centerObjet</em>  es una función que te ayuda a cambiar la etiqueta de zoom. Según la documentación el nivel de zoom es un valor entre 0 y 24,
-Podes ajustar el nivel de zoom. Si no ajustás el parametro de zoom, no se ampliará el área que te interesa.</p>
+<p>La funcion <em>centerObjet</em>  es una función que te ayuda a cambiar la etiqueta de zoom. Según la documentación <em>el nivel de zoom es un valor entre 0 y 24</em>. Podes ajustar el nivel de zoom. Si no ajustás el parametro de zoom, no se ampliará el área que te interesa.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">roi</span><span class="p">,</span><span class="w"> </span><span class="p">{},</span><span class="w"> </span><span class="s1">&#39;Comahue&#39;</span><span class="p">);</span>
 <span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">roi</span><span class="p">,</span><span class="mf">5</span><span class="p">);</span>
 </pre></div>
@@ -489,7 +500,7 @@ Podes ajustar el nivel de zoom. Si no ajustás el parametro de zoom, no se ampli
 <section id="buffer">
 <h3><span class="section-number">5.1.2. </span>Buffer<a class="headerlink" href="#buffer" title="Link to this heading">#</a></h3>
 <p>Sin embargo antes de mostrar la región de estudio al mapa aplicaremos un <strong>buffer de 5 km</strong> para incluir los límites naturales completos que comprenden rios que separan provincias.</p>
-<p>Se puede crear un buffer para un <em>FeatureCollection</em> usando el método <em>.map()</em> para aplicar una operación a cada Feature en el FeatureCollection de unidades administrativas.</p>
+<p>Se puede crear un buffer para un <em>FeatureCollection</em> usando el método <em>.map()</em> para aplicar una operación a cada Feature en el FeatureCollection de unidades administrativas. Acá estamos seleccionando dos unidades administrativas, que son cada una de las provincias.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Crear un buffer de 5 km (5.000 metros)</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">roi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">roi</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">feature</span><span class="p">){</span>
 <span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">feature</span><span class="p">.</span><span class="nx">buffer</span><span class="p">(</span><span class="mf">5000</span><span class="p">);</span>
@@ -498,13 +509,12 @@ Podes ajustar el nivel de zoom. Si no ajustás el parametro de zoom, no se ampli
 <span class="nb">Map</span><span class="p">.</span><span class="nx">centerObject</span><span class="p">(</span><span class="nx">roi</span><span class="p">,</span><span class="mf">5</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Esta es nuestra <strong>área de estudio o ROI</strong>.</p>
+<p>Esta es nuestra <strong>área de estudio o roi</strong>.</p>
 </section>
 <section id="imagenes-sentinel-2">
 <h3><span class="section-number">5.1.3. </span>Imágenes Sentinel-2<a class="headerlink" href="#imagenes-sentinel-2" title="Link to this heading">#</a></h3>
-<p>A continuación buscamos Sentinel-2 y seleccionamos las colecciones de imágenes <strong>Harmonized sentinel-2 MSI (MultiSpectralInstrument) level 1-c</strong></p>
-<p>Copiamos su identificación que utilizarmeos en la defición de una colección de imágenes sentinel denominada <strong>image</strong></p>
-<p>Filtraremos imágenes sentinel del año 2024. Utilizaré datos de todo el año 2024, es decir, fecha de comienzo: 1 de enero de 2024 y fecha de finalización el 1 de enero de 2025 (esta ultima fecha se excluye) como podemos comprobar en la documentación de <strong>FilterData</strong>, un método que se aplica a un FeatureColection (<strong>start date</strong> es <em>inclusive</em> pero <strong>end date</strong> es <em>exclusive</em>).</p>
+<p>A continuación buscamos Sentinel-2 y seleccionamos las colecciones de imágenes <strong>Harmonized sentinel-2 MSI (MultiSpectralInstrument) level 1-c</strong>. Copiamos su identificación que utilizarmeos en la defición de una colección de imágenes sentinel denominada <strong>image</strong>.</p>
+<p>Filtraremos imágenes sentinel del año 2024. Utilizaremos datos de todo el año 2024, es decir, fecha de comienzo: 1 de enero de 2024 y fecha de finalización el 1 de enero de 2025 (esta ultima fecha se excluye) como podemos comprobar en la documentación de <strong>FilterData</strong>, un método que se aplica a un FeatureColection (<strong>start date</strong> es <em>inclusive</em> pero <strong>end date</strong> es <em>exclusive</em>).</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Cargar imagen Sentinel</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_HARMONIZED&quot;</span><span class="p">)</span>
 <span class="w">  </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="s1">&#39;2025-01-01&#39;</span><span class="p">);</span>
@@ -513,10 +523,9 @@ Podes ajustar el nivel de zoom. Si no ajustás el parametro de zoom, no se ampli
 </section>
 <section id="filtro-de-nubes">
 <h3><span class="section-number">5.1.4. </span>Filtro de nubes<a class="headerlink" href="#filtro-de-nubes" title="Link to this heading">#</a></h3>
-<p>Vamos a usar un filtro de nubes aquí. Cuando se utilizan datos satelitales, generalmente hay <em>contaminación por nubes</em>. Deseamos utilizar la mayor cantidad posible de imágenes libres de nubes. Entonces, aquí vamos a aplicar un filtro para seleccionar imagens con menos de un 10% de nubes.</p>
-<p>Esto se logra utilizando metadatos de la imagen satelital, si consultmaos las <em>propiedades</em> de la imagen, existe un atributo: <strong>CLOUDY_PIXEL_PERCENTAGE</strong>
-que representa el Porcentaje de píxeles nublados específicos</p>
-<p>Esto nos permite utilizar una imagen de nubes en la que la contaminación de las nubes es menor al 10 %. Podes ajustar este parámetro en función del área de estudio según tu criterio de análisis.</p>
+<p>Vamos a usar un <em>filtro de nubes</em> aquí. Cuando se utilizan datos satelitales, generalmente hay <em>contaminación por nubes</em>. Deseamos utilizar la mayor cantidad posible de imágenes libres de nubes. Entonces, aquí vamos a aplicar un filtro para seleccionar imágenes con menos de un 10% de nubes.</p>
+<p>Esto se logra utilizando <strong>metadatos de la imagen satelital</strong>, si consultmaos las <em>propiedades</em> de la imagen, existe un atributo: <strong>CLOUDY_PIXEL_PERCENTAGE</strong>
+que representa el Porcentaje de píxeles nublados específicos. Esto nos permite utilizar una imagen de nubes en la que la contaminación de las nubes es menor al 10 %. Podes ajustar este parámetro en función del área de estudio según tu criterio de análisis.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Cargar imagen Sentinel</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_HARMONIZED&quot;</span><span class="p">)</span>
 <span class="w">  </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="s1">&#39;2025-01-01&#39;</span><span class="p">)</span>
@@ -526,7 +535,7 @@ que representa el Porcentaje de píxeles nublados específicos</p>
 </section>
 <section id="filterbounds">
 <h3><span class="section-number">5.1.5. </span>FilterBounds()<a class="headerlink" href="#filterbounds" title="Link to this heading">#</a></h3>
-<p>filterBounds(roi) tiene un propósito: Filtrar las imágenes en la colección para incluir solo aquellas que intersectan con la región de interés (roi).
+<p>filterBounds(roi) tiene un propósito: Filtrar las imágenes en la colección para incluir solo aquellas <em>imágenes que intersectan con la región de interés (roi)</em>.
 Limita la cantidad de imágenes en la colección para que solo contenga aquellas que cubren total o parcialmente la región definida por roi. Esto reduce el número de imágenes procesadas y mejora la eficiencia.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Cargar imagen Sentinel</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_HARMONIZED&quot;</span><span class="p">)</span>
@@ -535,7 +544,7 @@ Limita la cantidad de imágenes en la colección para que solo contenga aquellas
 <span class="w">  </span><span class="p">.</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">roi</span><span class="p">)</span><span class="o">:</span>
 </pre></div>
 </div>
-<p>Lo que necesitamos es una sola imagen. Por lo tanto, necesitamos agregar todas las imágenes mediante un reductor o una agregación estadística. En este caso, vamos a utilizar la mediana. Se suele recomendar la mediana como mínimo mejor que la media. Se evitará incluir algunos valores atípicos, por lo que se utilizará el valor de la mediana. De esta manera, se evita incluir valores atípicos en el proceso de agregación estadística. En este caso, utilizamos la mediana.</p>
+<p>Lo que necesitamos es una sola imagen. Por lo tanto, necesitamos agregar todas las imágenes mediante un <em>reductor</em> o una <em>agregación estadística</em>. En este caso, vamos a utilizar la mediana. Se suele recomendar la mediana como mínimo mejor que la media. <em>Se evitará incluir algunos valores atípicos</em>, por lo que se utilizará el valor de la mediana. De esta manera, se evita incluir valores atípicos en el <em>proceso de agregación estadística</em>. En este caso, utilizamos la <strong>mediana</strong>.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Cargar imagen Sentinel</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_HARMONIZED&quot;</span><span class="p">)</span>
 <span class="w">  </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="s1">&#39;2025-01-01&#39;</span><span class="p">)</span>
@@ -544,7 +553,7 @@ Limita la cantidad de imágenes en la colección para que solo contenga aquellas
 <span class="w">  </span><span class="p">.</span><span class="nx">median</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>Luego recortamos la imagen en función la región de estudio CON clipToCollection(roi). El propósito es recortar la imagen resultante al contorno exacto de la colección o región (roi). Tras combinar las imágenes (en este caso, usando .median()), recorta la salida final para que coincida exactamente con el contorno de roi.</p>
+<p>Luego recortamos la imagen en función la región de estudio con clipToCollection(roi). El propósito es <em>recortar la imagen resultante al contorno exacto de la colección o región (roi)</em>. Tras combinar las imágenes (en este caso, usando .median()), recortamos la salida final para que coincida exactamente con el contorno de roi.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Cargar imagen Sentinel</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_HARMONIZED&quot;</span><span class="p">)</span>
 <span class="w">  </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="s1">&#39;2025-01-01&#39;</span><span class="p">)</span>
@@ -555,26 +564,94 @@ Limita la cantidad de imágenes en la colección para que solo contenga aquellas
 </pre></div>
 </div>
 <p>Ahora tenemos una imagen Sentinel más limpia, que está lista para nuestra clasificación de aprendizaje automático.</p>
-<p>Vamos a utilizar esta función en la colección de Imágenes Sentinel:</p>
-<p>Vamos a aplicar algunos parámetros de filtrado a la colección de imágenes Sentinel.</p>
-<p>Para ello utilizaremos la funcion Map que ejecuta la función que definimos anteriormente agregarNDVI a todo feature  del featureColetcion en otras palabaras a toda imagen de la colección de imágenes.
-En otras palabras MAP permite aplicar la función agregarNDVI a cada imagen de la colección de imágenes.</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// función para calcular NDVI</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">agregarNDVI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">imagen</span><span class="p">){</span>
-<span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">ndvi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">imagen</span><span class="p">.</span><span class="nx">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B8&#39;</span><span class="p">,</span><span class="s1">&#39;B4&#39;</span><span class="p">]).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NDVI&#39;</span><span class="p">);</span>
-<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">imagen</span><span class="p">.</span><span class="nx">addBands</span><span class="p">(</span><span class="nx">ndvi</span><span class="p">);</span>
-<span class="p">};</span>
-
-<span class="c1">// Cargar imagen Sentinel</span>
+<p>Cargamos nuestra imagen, a nuestro mapa con <em>addLayer</em>, si la imagen sentinel no cuenta con parámetros de visualización se verá negra. Podemos importar los parámetros de visualización , utilizando la configuración de la capa, seleccionando las 3 bandas RGB, bandas <em>B4</em>, <em>B3</em> y <em>B2</em> y un stretch de 98% que permite visualizar los valores de estas tres bandas. Aplicamos e importamos esta configuración. Hacemos una prueba con estos parámetros y ya visualizamos la colección de imágenes.</p>
+<p>En su defecto podemos definir nuestros propios parámetros con una variable <em>visParams</em>, para ello, creamos un parámetro de visualización.</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Cargar imagen Sentinel</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">image</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ee</span><span class="p">.</span><span class="nx">ImageCollection</span><span class="p">(</span><span class="s2">&quot;COPERNICUS/S2_HARMONIZED&quot;</span><span class="p">)</span>
 <span class="w">  </span><span class="p">.</span><span class="nx">filterDate</span><span class="p">(</span><span class="s1">&#39;2024-01-01&#39;</span><span class="p">,</span><span class="s1">&#39;2025-01-01&#39;</span><span class="p">)</span>
 <span class="w">  </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">ee</span><span class="p">.</span><span class="nx">Filter</span><span class="p">.</span><span class="nx">lt</span><span class="p">(</span><span class="s1">&#39;CLOUDY_PIXEL_PERCENTAGE&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">10</span><span class="p">))</span>
 <span class="w">  </span><span class="p">.</span><span class="nx">filterBounds</span><span class="p">(</span><span class="nx">roi</span><span class="p">)</span>
-<span class="w">  </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">agregarNDVI</span><span class="p">)</span>
 <span class="w">  </span><span class="p">.</span><span class="nx">median</span><span class="p">()</span>
 <span class="w">  </span><span class="p">.</span><span class="nx">clipToCollection</span><span class="p">(</span><span class="nx">roi</span><span class="p">);</span>
+
+<span class="kd">var</span><span class="w"> </span><span class="nx">visParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nx">bands</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">],</span><span class="w"> </span><span class="nx">min</span><span class="o">:</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">3000</span><span class="p">};</span>
+<span class="w">  </span>
+<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">image</span><span class="p">,</span><span class="w"> </span><span class="nx">visParams</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Sentinel 2024&quot;</span><span class="p">);</span>
+
+<span class="c1">// Map.addLayer(image, {bands: [&#39;B5&#39;,&#39;B4&#39;,&#39;B3&#39;], min:0, max: 3000}, &#39;False Color (543)&#39;);</span>
 </pre></div>
 </div>
+<p>Vamos a utilizar una composición de colores rojo, verde, azul (RGB). En este caso, vamos a proporcionar las bandas que vamos a utilizar acá: banda B4, banda B3, banda B2. No las estamos utilizando para nuestro modelo, sino solo para <em>visualizar la imagen en el mapa</em>. Y luego un valor mínimo y máximo en función de los datos de reflectancia de la superficie para estas bandas.</p>
+</section>
+<section id="funcion-para-calcular-el-ndvi">
+<h3><span class="section-number">5.1.6. </span>Función para calcular el NDVI<a class="headerlink" href="#funcion-para-calcular-el-ndvi" title="Link to this heading">#</a></h3>
+<p>En nuestra clasificación aplicando aprendizaje automático utilizaremos valores de reflectancia de ciertas bandas de la imagen Sentinel en conjunto con el <em>índice NDVI</em>.</p>
+<p>El NDVI es el índice de vegetación diferencial normalizado que ayuda a monitorear la salud de la vegetación (ver fig. <a class="reference internal" href="#fig-posit-ndvibis"><span class="std std-numref">Fig. 5.8</span></a>).  Por lo tanto, un NDVI más alto generalmente indica una cobertura vegetal densa o una vegetación más verde. Valores negativos son comunes en cuerpos de agua abiertos. mientras que valores cercanos a 0 pueden observarse en agua con sedimentos o cubierta parcial por vegetación flotante (ver fig. <a class="reference internal" href="#fig-posit-ndvibis"><span class="std std-numref">Fig. 5.8</span></a>).</p>
+<figure class="align-default" id="fig-posit-ndvibis">
+<a class="reference internal image-reference" href="_images/PosIT-NDVIbis.png"><img alt="_images/PosIT-NDVIbis.png" src="_images/PosIT-NDVIbis.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.8 </span><span class="caption-text">Indice Espectral NDVI</span><a class="headerlink" href="#fig-posit-ndvibis" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="tip admonition">
+<p class="admonition-title">Rangos típicos del NDVI:</p>
+<ul class="simple">
+<li><p>Agua: -1 a ~0</p>
+<ul>
+<li><p>Valores negativos son comunes en cuerpos de agua abiertos.</p></li>
+<li><p>Valores cercanos a 0 pueden observarse en agua con sedimentos o cubierta parcial por vegetación flotante.</p></li>
+</ul>
+</li>
+<li><p>Suelo desnudo: 0 a 0.2</p></li>
+<li><p>Vegetación escasa: 0.2 a 0.5</p></li>
+<li><p>Vegetación densa: 0.5 a 1</p></li>
+</ul>
+</div>
+<figure class="align-default" id="fig-valoresndvi">
+<a class="reference internal image-reference" href="_images/valoresNDVI.png"><img alt="_images/valoresNDVI.png" src="_images/valoresNDVI.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.9 </span><span class="caption-text">Valores típicos del NDVI</span><a class="headerlink" href="#fig-valoresndvi" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Lo primero que debemos hacer es escribir una <em>función que calcule el NDVI</em>. Vamos a crear una función denominada <em>agregarNDVI</em> para calcular el NDVI, que vamos a utilizar en nuestra clasificación de aprendizaje automático.</p>
+<div class="tip admonition">
+<p class="admonition-title">Otros índices espectrales para calcular índices</p>
+<p>También podríamos utilizar otros índices (ver fig. <a class="reference internal" href="#fig-indicesaguabis"><span class="std std-numref">Fig. 5.10</span></a>) como:</p>
+<ul class="simple">
+<li><p>NDWI (Índice de Diferencia Normalizada del Agua)</p></li>
+<li><p>MNDWI (Índice de Diferencia Normalizada del Agua Modificado)</p></li>
+<li><p>AWEI (Índice de Extracción Automática del Agua)</p></li>
+<li><p>LSWI (Índice del Agua Basado en Tierra)</p></li>
+<li><p>WI (Índice del Agua)</p></li>
+</ul>
+</div>
+<figure class="align-default" id="fig-indicesaguabis">
+<a class="reference internal image-reference" href="_images/IndicesAguaBis.png"><img alt="_images/IndicesAguaBis.png" src="_images/IndicesAguaBis.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.10 </span><span class="caption-text">Algunos Indices espectrales en el dominio de aplicación Agua</span><a class="headerlink" href="#fig-indicesaguabis" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Nuestra función <strong>agregarNDVI</strong>, tiene un parámetro de entrada <em>imagen</em>. Podemos llamarlo imagen o algún otro nombre significativo.</p>
+<p>La primera instrucción es definir la variable NDVI. que es igual a la diferencia normalizada de la banda B8, la banda infrarroja cercana, y la banda B4, la banda roja de la imagen Sentinel. Si consultamos la documentación del método <strong>normalizedDifference</strong>, este metodo se aplica a una imagen. Aca se utiliza la notación orientada a objetos <em>objeto.metodo()</em> el objeto es una imagen y el método es <em>normalizedDifference</em>.</p>
+<p>Consultando la documentación de los métodos que se aplican a un objeto, la función <em>normalizedDifference</em>, una función incorporada a Google Earth Engine, calcula la diferencia normalizada entre dos bandas. Es necesario proporcionar las dos bandas a este método para obtener el índice NDVI calculado.</p>
+<p>El método no tiene parámetros obligatorios, cuando los parámetros en la documentación están en <em>letra itálica</em> esto significa que los <em>parámetros son opcionales</em>.
+Si no se especifican las bandas a utilizar, es decir no se proporcionan parámetros, el método utiliza las dos primeras bandas. La diferencia normalizada se calcula con la siguiente fórmula: <em>(primero − segundo) / (primero + segundo)</em></p>
+<p>para nuestro ejemplo:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nx">first</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="nx">second</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">first</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">second</span><span class="p">)</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">B8</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="nx">B4</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">B8</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">B4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>es decir</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">NDVI</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">NIR</span><span class="err">−</span><span class="nx">RED</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">NIR</span><span class="o">+</span><span class="nx">RED</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Asi de simple, es calcular un índice para una imagen satelital. Este acercamiento nos permite definir otros índices como: <em>NDWI</em>, <em>MNDWI</em>, y otros mostrados en la fig. <a class="reference internal" href="#fig-indicesaguabis"><span class="std std-numref">Fig. 5.10</span></a>  ya qeu tienen el mismo patrón de fórmula:</p>
+<figure class="align-default" id="fig-indicesagua">
+<a class="reference internal image-reference" href="_images/IndicesAgua.png"><img alt="_images/IndicesAgua.png" src="_images/IndicesAgua.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 5.11 </span><span class="caption-text">Indices Espectrales con el mismo patron de fórmula matemática</span><a class="headerlink" href="#fig-indicesagua" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Luego, finalmente, la funcion devuelve nuestra imagen, a la cual le agregaremos estas banda calculada con el NDVI.</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// función para calcular NDVI</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">agregarNDVI</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">imagen</span><span class="p">){</span>
 <span class="w">  </span><span class="kd">var</span><span class="w"> </span><span class="nx">ndvi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">imagen</span><span class="p">.</span><span class="nx">normalizedDifference</span><span class="p">([</span><span class="s1">&#39;B8&#39;</span><span class="p">,</span><span class="s1">&#39;B4&#39;</span><span class="p">]).</span><span class="nx">rename</span><span class="p">(</span><span class="s1">&#39;NDVI&#39;</span><span class="p">);</span>
@@ -597,90 +674,12 @@ En otras palabras MAP permite aplicar la función agregarNDVI a cada imagen de l
 <span class="c1">// Map.addLayer(image, {bands: [&#39;B5&#39;,&#39;B4&#39;,&#39;B3&#39;], min:0, max: 3000}, &#39;False Color (543)&#39;);</span>
 </pre></div>
 </div>
-<p>Cargamos nuestra imagen, a nuestro mapa con addLayer, si la imagen sentinel no cuenta con parámetros de visualización se verá negra. Ppodemos importar los parámetros de visualización , utilizando la configuración de la capa, seleccionando las 3 bandas RGB, bandas B4, B3 y B2 y un stretch de 98% que permite visualizar los valores de estas tres bandas.</p>
-<p>Aplicamos e importamos esta configuración. Hacemos una prueba con estos parámetros y ya visualizamos la colección de imágenes.</p>
-<p>En su defecto podemos definir nuestros propiso parámetros con una variable <em>visParams</em>, para ello, creamos un parámetro de visualización,</p>
-<p>Aamos a utilizar una composición de colores rojo, verde, azul (RGB). En este caso, vamos a proporcionar las bandas que vamos a utilizar aquí, banda B4, banda B3, banda B2. No las estamos utilizando para nuestro modelo, sino solo para visualizar la imagen en el mapa.</p>
-<p>Y luego un valor mínimo y máximo en función de los datos de reflectancia de la superficie PARA ESTAS BANDAS</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="kd">var</span><span class="w"> </span><span class="nx">visParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nx">bands</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;B4&#39;</span><span class="p">,</span><span class="s1">&#39;B3&#39;</span><span class="p">,</span><span class="s1">&#39;B2&#39;</span><span class="p">],</span><span class="w"> </span><span class="nx">min</span><span class="o">:</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nx">max</span><span class="o">:</span><span class="w"> </span><span class="mf">3000</span><span class="p">};</span>
-<span class="nb">Map</span><span class="p">.</span><span class="nx">addLayer</span><span class="p">(</span><span class="nx">image</span><span class="p">,</span><span class="w"> </span><span class="nx">visParams</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Sentinel 2024&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<section id="funcion-para-calcular-ndvi">
-<h2><span class="section-number">5.2. </span>Función para calcular NDVI<a class="headerlink" href="#funcion-para-calcular-ndvi" title="Link to this heading">#</a></h2>
-<p>En nuestra clasificación aplicando aprendizaje automático utilizaremos valores de reflectancia de ciertas bandas de la imagen Sentinel en conjunto con el índice NDVI.
-Utilizaremos filtros de nubes, y filtros temporales</p>
-<p>El NDVI es el índice de vegetación diferencial normalizado que ayuda a monitorear la salud de la vegetación.
-Por lo tanto, un NDVI más alto generalmente indica una cobertura vegetal densa o una vegetación más verde.
-Valores negativos son comunes en cuerpos de agua abiertos.
-mientras que Valores cercanos a 0 pueden observarse en agua con sedimentos o cubierta parcial por vegetación flotante.</p>
-<figure class="align-default" id="fig-posit-ndvibis">
-<a class="reference internal image-reference" href="_images/PosIT-NDVIbis.png"><img alt="_images/PosIT-NDVIbis.png" src="_images/PosIT-NDVIbis.png" style="width: 100%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 5.6 </span><span class="caption-text">Indice Espectral NDVI</span><a class="headerlink" href="#fig-posit-ndvibis" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Rangos típicos del NDVI:</p>
-<p>Agua: -1 a ~0
-- Valores negativos son comunes en cuerpos de agua abiertos.
-- Valores cercanos a 0 pueden observarse en agua con sedimentos o cubierta parcial por vegetación flotante.
-Suelo desnudo: 0 a 0.2
-Vegetación escasa: 0.2 a 0.5
-Vegetación densa: 0.5 a 1</p>
-<figure class="align-default" id="fig-valoresndvi">
-<a class="reference internal image-reference" href="_images/valoresNDVI.png"><img alt="_images/valoresNDVI.png" src="_images/valoresNDVI.png" style="width: 100%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 5.7 </span><span class="caption-text">Valores típicos del NDVI</span><a class="headerlink" href="#fig-valoresndvi" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Lo primero que debemos hacer es escribir una función que calcule el NDVI.
-Vamos a crear una función denominada agregarNDVI para calcular el NDVI, que vamos a utilizar en nuestra clasificación de aprendizaje automático.</p>
-<p>También podríamos utilizar otros índices como:</p>
-<ul class="simple">
-<li><p>NDWI (Índice de Diferencia Normalizada del Agua)</p></li>
-<li><p>MNDWI (Índice de Diferencia Normalizada del Agua Modificado)</p></li>
-<li><p>AWEI (Índice de Extracción Automática del Agua)</p></li>
-<li><p>LSWI (Índice del Agua Basado en Tierra)</p></li>
-<li><p>WI (Índice del Agua)</p></li>
-</ul>
-<figure class="align-default" id="fig-indicesaguabis">
-<a class="reference internal image-reference" href="_images/IndicesAguaBis.png"><img alt="_images/IndicesAguaBis.png" src="_images/IndicesAguaBis.png" style="width: 100%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 5.8 </span><span class="caption-text">Algunos Indices espectrales en el dominio de aplicación Agua</span><a class="headerlink" href="#fig-indicesaguabis" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Nuestra función agregarNDVI, tiene un parámetro de entrada imagen. Podemos llamarlo imagen o algún otro nombre significativo.</p>
-<p>La primera instrucción es definir la variable NDVI. que es igual a la diferencia normalizada de la banda ocho, la banda infrarroja cercana, y la banda cuatro, la banda roja de la imagen Sentinel.
-Si consultamos la documentación del método normalizedDifference, este metodo se aplica a una imagen. Aca se utiliza la notación orientada a objetos objeto.metodo() el objeto es 1 imagen y el método es normalizedDifference.</p>
-<p>consultando la documentaicon de los métodos que se aplican a un objeto, la función normalizedDifference, una función incorporada a Google Earth Engine, calcula la diferencia normalizada entre dos bandas.</p>
-<p>Es necesario proporcionar las dos bandas a este método para obtener el índice ndvi calculado.</p>
-<p>El método no tiene parámetros obligatorios, cuando los parámetros en la documentación están en letra itálica esto signfiica que los parámetros son opcionales.
-Si no se especifican las bandas a utilizar, es decir no se proporcionan parámetros, el método utiliza las dos primeras bandas.
-La diferencia normalizada se calcula como (primero − segundo) / (primero + segundo)</p>
-<p>para nuestro ejemplo:</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="nx">first</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="nx">second</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">first</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">second</span><span class="p">)</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">B8</span><span class="w"> </span><span class="err">−</span><span class="w"> </span><span class="nx">B4</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">B8</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">B4</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>es decir</p>
-<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">NDVI</span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">NIR</span><span class="err">−</span><span class="nx">RED</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="nx">NIR</span><span class="o">+</span><span class="nx">RED</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Asi de simple, es calcular un índice para una imagen satelital. Este acercamiento nos permite definir otros índices como: NDWI, MNDWI, y otros mostrados en la Figura a continuación:</p>
-<figure class="align-default" id="fig-indicesagua">
-<a class="reference internal image-reference" href="_images/IndicesAgua.png"><img alt="_images/IndicesAgua.png" src="_images/IndicesAgua.png" style="width: 100%;" /></a>
-<figcaption>
-<p><span class="caption-number">Fig. 5.9 </span><span class="caption-text">Indices Espectrales con el mismo patron de fórmula matemática</span><a class="headerlink" href="#fig-indicesagua" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<p>Luego, finalmente, la funcion devuelve nuestra imagen, a la cual le agregaremos estas banda calculada con el NDVI.</p>
 <p>Esta función se define para una imagen, luego calculará técnicamente el NDVI para todas las imágenes dentro de la colección de imágenes con la operación MAP.</p>
 <p>Antes de ejecutar este código comprobamos que la colección de imágenes no cuenta inicialmente con este índice NDVI, y que solo luego de ejecutar el código es posible ver esta nuevo dato en cada imagen</p>
 <figure class="align-default" id="fig-falsocolor">
 <a class="reference internal image-reference" href="_images/FalsoColor.png"><img alt="_images/FalsoColor.png" src="_images/FalsoColor.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.10 </span><span class="caption-text">Falso Color: Descripción</span><a class="headerlink" href="#fig-falsocolor" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.12 </span><span class="caption-text">Falso Color: Descripción</span><a class="headerlink" href="#fig-falsocolor" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Generaremos una imagen de <strong>falso color</strong> utilizando las bandas B5 (NIR), B4 (Red), y B3 (Green) de Sentinel-2, que nos permitirá detectar agua y generar mas facilmente los puntos de entrenamiento. Esto permite detectar cuerpos de agua de manera efectiva debido a cómo el agua interactúa con la luz en estas longitudes de onda
@@ -695,22 +694,23 @@ En un mapa con este esquema de <strong>falso color</strong>:</p>
 </pre></div>
 </div>
 </section>
+</section>
 <section id="workflow">
-<h2><span class="section-number">5.3. </span>Workflow<a class="headerlink" href="#workflow" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.2. </span>Workflow<a class="headerlink" href="#workflow" title="Link to this heading">#</a></h2>
 <p>Para aplicar la tecnica supervisada de random forest tendremos en cuenta el flujo de trabajo</p>
 <figure class="align-default" id="fig-workflow">
 <a class="reference internal image-reference" href="_images/Workflow.png"><img alt="_images/Workflow.png" src="_images/Workflow.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.11 </span><span class="caption-text">Workflow para aplicar ML a imágenes satelitales</span><a class="headerlink" href="#fig-workflow" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.13 </span><span class="caption-text">Workflow para aplicar ML a imágenes satelitales</span><a class="headerlink" href="#fig-workflow" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <section id="entrenamiento">
-<h3><span class="section-number">5.3.1. </span>Entrenamiento<a class="headerlink" href="#entrenamiento" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">5.2.1. </span>Entrenamiento<a class="headerlink" href="#entrenamiento" title="Link to this heading">#</a></h3>
 <p>Ahora crearemos datos de entrenamiento y luego ejecutaremos nuestro aprendizaje automático.</p>
 <figure class="align-default" id="fig-p-1">
 <a class="reference internal image-reference" href="_images/p_1.png"><img alt="_images/p_1.png" src="_images/p_1.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.12 </span><span class="caption-text">Etapa: Seleccionar las muestras de entrenamiento</span><a class="headerlink" href="#fig-p-1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.14 </span><span class="caption-text">Etapa: Seleccionar las muestras de entrenamiento</span><a class="headerlink" href="#fig-p-1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Vamos a crear los datos de entrenamiento:</p>
@@ -746,7 +746,7 @@ Extraemos las bandas Sentinel para estos datos de entrenamiento que hemos captur
 <figure class="align-default" id="fig-tabla-comahue">
 <a class="reference internal image-reference" href="_images/Tabla_Comahue.png"><img alt="_images/Tabla_Comahue.png" src="_images/Tabla_Comahue.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.13 </span><span class="caption-text">Variables Independientes y Dependientes</span><a class="headerlink" href="#fig-tabla-comahue" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.15 </span><span class="caption-text">Variables Independientes y Dependientes</span><a class="headerlink" href="#fig-tabla-comahue" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>Para obtener estos datos de la imagen utilizamos la función sampleRegions
@@ -763,11 +763,11 @@ Contamos con el valor de las bandas Sentinel seleccionadas, la banda NDVI y la e
 Y luego, el conjunto de prueba aquí será la evaluación, que es el 30 % de datos restantes.</p>
 </section>
 <section id="id5">
-<h3><span class="section-number">5.3.2. </span>Entrenamiento<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">5.2.2. </span>Entrenamiento<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
 <figure class="align-default" id="fig-p-2">
 <a class="reference internal image-reference" href="_images/p_2.png"><img alt="_images/p_2.png" src="_images/p_2.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.14 </span><span class="caption-text">Etapa Entrenamiento del Clasificador</span><a class="headerlink" href="#fig-p-2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.16 </span><span class="caption-text">Etapa Entrenamiento del Clasificador</span><a class="headerlink" href="#fig-p-2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>En este paso entrenemos el modelo para luego aplicarlo a la imagen con el fin de generar un mapa de masa de agua.</p>
@@ -821,16 +821,16 @@ Cuando lo haga, el modelo de aprendizaje automático se entrenará en función d
 <figure class="align-default" id="fig-tabla-1">
 <a class="reference internal image-reference" href="_images/Tabla_1.png"><img alt="_images/Tabla_1.png" src="_images/Tabla_1.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.15 </span><span class="caption-text">Tabla de variables independientes y dependientes</span><a class="headerlink" href="#fig-tabla-1" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.17 </span><span class="caption-text">Tabla de variables independientes y dependientes</span><a class="headerlink" href="#fig-tabla-1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="clasificar-la-imagen">
-<h3><span class="section-number">5.3.3. </span>Clasificar la imagen<a class="headerlink" href="#clasificar-la-imagen" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">5.2.3. </span>Clasificar la imagen<a class="headerlink" href="#clasificar-la-imagen" title="Link to this heading">#</a></h3>
 <figure class="align-default" id="id6">
 <a class="reference internal image-reference" href="_images/p_3.png"><img alt="_images/p_3.png" src="_images/p_3.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.16 </span><span class="caption-text">Etapa Clasificar la imagen</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.18 </span><span class="caption-text">Etapa Clasificar la imagen</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>El siguiente paso es aplicar este modelo, que es el clasificador, a la imagen, la imagen Sentinel.
@@ -851,7 +851,7 @@ El siguiente paso es ver nuestra imagen clasificada en una pantalla aquí.</p>
 </div>
 </section>
 <section id="mascara">
-<h3><span class="section-number">5.3.4. </span>MASCARA:<a class="headerlink" href="#mascara" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">5.2.4. </span>MASCARA:<a class="headerlink" href="#mascara" title="Link to this heading">#</a></h3>
 <p>en el comando: var water = classifiedImage.updateMask(classifiedImage);</p>
 <p>La función updateMask utiliza los valores de classified como una máscara. Los píxeles con valor 1 (agua) permanecen visibles, mientras que los píxeles con valor 0 (no agua) se enmascaran (ocultan).</p>
 <p>Esto se traduce en:</p>
@@ -873,7 +873,7 @@ específicamente en un algoritmo de random forest o bosque aleatorio en la plata
 </div>
 </section>
 <section id="acurracy-assessment">
-<h3><span class="section-number">5.3.5. </span>Acurracy Assessment<a class="headerlink" href="#acurracy-assessment" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">5.2.5. </span>Acurracy Assessment<a class="headerlink" href="#acurracy-assessment" title="Link to this heading">#</a></h3>
 <p>Como hemos mencionado en anteriores videos, hay algunos pasos después de este posprocesamiento y tenemos que calcular evaluaciones de precisión de estos datos,</p>
 <p>Utilizaremos la función de matriz de confusión.
 Entonces, vamos a utilizar el conjunto de prueba y luego el clasificador. Este es nuestro modelo, el modelo de entrenamiento.
@@ -883,7 +883,7 @@ Una vez que se proporcionan estos parámetros, se va a crear una evaluación de 
 <figure class="align-default" id="fig-p-4">
 <a class="reference internal image-reference" href="_images/p_4.png"><img alt="_images/p_4.png" src="_images/p_4.png" style="width: 50%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 5.17 </span><span class="caption-text">Etapa Evaluación de Precisión</span><a class="headerlink" href="#fig-p-4" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.19 </span><span class="caption-text">Etapa Evaluación de Precisión</span><a class="headerlink" href="#fig-p-4" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="c1">// Accuracy Assessment</span>
@@ -925,7 +925,7 @@ Parece que es 100 %, bastante buena, pero creo que si capturamos más puntos de 
 </ul>
 </section>
 <section id="exportacion">
-<h3><span class="section-number">5.3.6. </span>Exportación<a class="headerlink" href="#exportacion" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">5.2.6. </span>Exportación<a class="headerlink" href="#exportacion" title="Link to this heading">#</a></h3>
 <p>La última parte a considerar, es que si deseas usar esta clasificación fuera de Google Earth Engine, digamos un software GIS estándar, como QGIS o ArcGIS
 vas a usar la función Export.image.toDrive para exportar, ya sabes, tu mapa de agua.</p>
 <p>Cuando lo ejecutes, lo verás en tu Google Drive. Una vez que hayas completado esto, verás los datos o la imagen en tu Google Drive.
@@ -952,7 +952,7 @@ Luego, lo descargarás desde Google Drive a tu equipo local y lo abrirás en un 
 </section>
 </section>
 <section id="mostrar-el-arobol-de-decision-luego-de-aplicar-cart">
-<h2><span class="section-number">5.4. </span>Mostrar el árobol de decisión luego de aplicar CART<a class="headerlink" href="#mostrar-el-arobol-de-decision-luego-de-aplicar-cart" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.3. </span>Mostrar el árobol de decisión luego de aplicar CART<a class="headerlink" href="#mostrar-el-arobol-de-decision-luego-de-aplicar-cart" title="Link to this heading">#</a></h2>
 <p>Se puede aplicar el método CART en lugar de Random Forest para obtener el árbol de decisión en formato dot. El siguiente código muestra el árbol de decisión obtenido:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">graphviz</span>
 <span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">graphviz</span>
@@ -998,7 +998,7 @@ Luego, lo descargarás desde Google Drive a tu equipo local y lo abrirás en un 
 </div>
 </section>
 <section id="video-del-capitulo">
-<h2><span class="section-number">5.5. </span>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.4. </span>Video del capítulo<a class="headerlink" href="#video-del-capitulo" title="Link to this heading">#</a></h2>
 <p>Podes mirar el video asociado a este capítulo en el canal de youtube de IDERA: <a class="reference external" href="https://www.youtube.com/watch?v=-DMd6LXIEkE&amp;amp;t=610s">https://www.youtube.com/watch?v=-DMd6LXIEkE&amp;t=610s</a></p>
 </section>
 </section>
@@ -1073,20 +1073,20 @@ Luego, lo descargarás desde Google Drive a tu equipo local y lo abrirás en un 
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#imagenes-sentinel-2">5.1.3. Imágenes Sentinel-2</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filtro-de-nubes">5.1.4. Filtro de nubes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#filterbounds">5.1.5. FilterBounds()</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-calcular-el-ndvi">5.1.6. Función para calcular el NDVI</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-para-calcular-ndvi">5.2. Función para calcular NDVI</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">5.3. Workflow</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">5.3.1. Entrenamiento</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5.3.2. Entrenamiento</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">5.3.3. Clasificar la imagen</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mascara">5.3.4. MASCARA:</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acurracy-assessment">5.3.5. Acurracy Assessment</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion">5.3.6. Exportación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">5.2. Workflow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">5.2.1. Entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">5.2.2. Entrenamiento</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificar-la-imagen">5.2.3. Clasificar la imagen</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mascara">5.2.4. MASCARA:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#acurracy-assessment">5.2.5. Acurracy Assessment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion">5.2.6. Exportación</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-el-arobol-de-decision-luego-de-aplicar-cart">5.4. Mostrar el árobol de decisión luego de aplicar CART</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">5.5. Video del capítulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-el-arobol-de-decision-luego-de-aplicar-cart">5.3. Mostrar el árobol de decisión luego de aplicar CART</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">5.4. Video del capítulo</a></li>
 </ul>
   </nav></div>
 
