@@ -467,14 +467,38 @@ import matplotlib.pyplot as plt
 
 # Definir las reglas del árbol de decisión en formato DOT
 dot_data = """
-digraph DecisionTree {
+ digraph DecisionTree {
  node [shape=box, style="filled, rounded", color="black", fontname=helvetica];
  edge [fontname=helvetica];
- 0 [label=<B8 &le; 891.5833<br/>score = 0.4998>, fillcolor="#00000000"];
- 1 [label=<class = 1>, fillcolor="#00000000", shape=ellipse];
+ 0 [label=<B6 &le; 1095.5000<br/>score = 0.2667>, fillcolor="#00000000"];
+ 1 [label=<class = 0>, fillcolor="#00000000", shape=ellipse];
  0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"];
- 2 [label=<class = 0>, fillcolor="#00000000", shape=ellipse];
+ 2 [label=<B1 &le; 955.0000<br/>score = 0.2539>, fillcolor="#00000000"];
  0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel="False"];
+ 3 [label=<B11 &le; 1879.5000<br/>score = 0.3333>, fillcolor="#00000000"];
+ 2 -> 3;
+ 4 [label=<B9 &le; 2879.2500<br/>score = 0.0843>, fillcolor="#00000000"];
+ 2 -> 4;
+ 5 [label=<class = 3>, fillcolor="#00000000", shape=ellipse];
+ 3 -> 5;
+ 6 [label=<B11 &le; 2910.0000<br/>score = 0.4147>, fillcolor="#00000000"];
+ 3 -> 6;
+ 7 [label=<class = 1>, fillcolor="#00000000", shape=ellipse];
+ 4 -> 7;
+ 8 [label=<B1 &le; 1700.7500<br/>score = 0.3750>, fillcolor="#00000000"];
+ 4 -> 8;
+ 9 [label=<B1 &le; 625.0000<br/>score = 0.3324>, fillcolor="#00000000"];
+ 6 -> 9;
+ 10 [label=<class = 4>, fillcolor="#00000000", shape=ellipse];
+ 6 -> 10;
+ 11 [label=<class = 4>, fillcolor="#00000000", shape=ellipse];
+ 8 -> 11;
+ 12 [label=<class = 1>, fillcolor="#00000000", shape=ellipse];
+ 8 -> 12;
+ 13 [label=<class = 2>, fillcolor="#00000000", shape=ellipse];
+ 9 -> 13;
+ 14 [label=<class = 1>, fillcolor="#00000000", shape=ellipse];
+ 9 -> 14;
 }
 """
 

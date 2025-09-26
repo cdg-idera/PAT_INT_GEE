@@ -26,7 +26,7 @@ Generamos un cubo categórico bimestral de tipos de suelo (agua, urbano, cultivo
 
 ```{figure} imagenes/ojos.png
 :name: fig-ojos
-:width: 100%
+:width: 80%
 
 Parte del espectro electromagnético visible a nuestros ojos
 ```

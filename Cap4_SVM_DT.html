@@ -855,14 +855,38 @@ Es fácil de interpretar y útil para entender cómo se toman las decisiones de 
 
 <span class="c1"># Definir las reglas del árbol de decisión en formato DOT</span>
 <span class="n">dot_data</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">digraph DecisionTree {</span>
+<span class="s2"> digraph DecisionTree {</span>
 <span class="s2"> node [shape=box, style=&quot;filled, rounded&quot;, color=&quot;black&quot;, fontname=helvetica];</span>
 <span class="s2"> edge [fontname=helvetica];</span>
-<span class="s2"> 0 [label=&lt;B8 &amp;le; 891.5833&lt;br/&gt;score = 0.4998&gt;, fillcolor=&quot;#00000000&quot;];</span>
-<span class="s2"> 1 [label=&lt;class = 1&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
+<span class="s2"> 0 [label=&lt;B6 &amp;le; 1095.5000&lt;br/&gt;score = 0.2667&gt;, fillcolor=&quot;#00000000&quot;];</span>
+<span class="s2"> 1 [label=&lt;class = 0&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
 <span class="s2"> 0 -&gt; 1 [labeldistance=2.5, labelangle=45, headlabel=&quot;True&quot;];</span>
-<span class="s2"> 2 [label=&lt;class = 0&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
+<span class="s2"> 2 [label=&lt;B1 &amp;le; 955.0000&lt;br/&gt;score = 0.2539&gt;, fillcolor=&quot;#00000000&quot;];</span>
 <span class="s2"> 0 -&gt; 2 [labeldistance=2.5, labelangle=-45, headlabel=&quot;False&quot;];</span>
+<span class="s2"> 3 [label=&lt;B11 &amp;le; 1879.5000&lt;br/&gt;score = 0.3333&gt;, fillcolor=&quot;#00000000&quot;];</span>
+<span class="s2"> 2 -&gt; 3;</span>
+<span class="s2"> 4 [label=&lt;B9 &amp;le; 2879.2500&lt;br/&gt;score = 0.0843&gt;, fillcolor=&quot;#00000000&quot;];</span>
+<span class="s2"> 2 -&gt; 4;</span>
+<span class="s2"> 5 [label=&lt;class = 3&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
+<span class="s2"> 3 -&gt; 5;</span>
+<span class="s2"> 6 [label=&lt;B11 &amp;le; 2910.0000&lt;br/&gt;score = 0.4147&gt;, fillcolor=&quot;#00000000&quot;];</span>
+<span class="s2"> 3 -&gt; 6;</span>
+<span class="s2"> 7 [label=&lt;class = 1&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
+<span class="s2"> 4 -&gt; 7;</span>
+<span class="s2"> 8 [label=&lt;B1 &amp;le; 1700.7500&lt;br/&gt;score = 0.3750&gt;, fillcolor=&quot;#00000000&quot;];</span>
+<span class="s2"> 4 -&gt; 8;</span>
+<span class="s2"> 9 [label=&lt;B1 &amp;le; 625.0000&lt;br/&gt;score = 0.3324&gt;, fillcolor=&quot;#00000000&quot;];</span>
+<span class="s2"> 6 -&gt; 9;</span>
+<span class="s2"> 10 [label=&lt;class = 4&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
+<span class="s2"> 6 -&gt; 10;</span>
+<span class="s2"> 11 [label=&lt;class = 4&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
+<span class="s2"> 8 -&gt; 11;</span>
+<span class="s2"> 12 [label=&lt;class = 1&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
+<span class="s2"> 8 -&gt; 12;</span>
+<span class="s2"> 13 [label=&lt;class = 2&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
+<span class="s2"> 9 -&gt; 13;</span>
+<span class="s2"> 14 [label=&lt;class = 1&gt;, fillcolor=&quot;#00000000&quot;, shape=ellipse];</span>
+<span class="s2"> 9 -&gt; 14;</span>
 <span class="s2">}</span>
 <span class="s2">&quot;&quot;&quot;</span>
 
