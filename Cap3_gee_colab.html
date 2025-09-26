@@ -384,16 +384,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-imagenes-sentinel-2">3.1. 1. Carga de imágenes Sentinel-2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-del-composite">3.2. 2. Creación del composite</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-entrenamiento">3.3. 3. Datos de entrenamiento</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#division-entrenamiento-validacion">3.4. 4. División entrenamiento/validación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-espectrales">3.5. 5. Extracción de valores espectrales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">3.6. 6. Entrenamiento del clasificador</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion">3.7. 7. Clasificación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-y-metricas">3.8. 8. Validación y métricas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">3.9. 9. Interpretación de resultados</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">3.10. Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#codigo-disponible">3.1. Código disponible</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-imagenes-sentinel-2">3.2. 1. Carga de imágenes Sentinel-2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-del-composite">3.3. 2. Creación del composite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-entrenamiento">3.4. 3. Datos de entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#division-entrenamiento-validacion">3.5. 4. División entrenamiento/validación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-espectrales">3.6. 5. Extracción de valores espectrales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">3.7. 6. Entrenamiento del clasificador</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion">3.8. 7. Clasificación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-y-metricas">3.9. 8. Validación y métricas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">3.10. 9. Interpretación de resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">3.11. Conclusión</a></li>
 </ul>
             </nav>
         </div>
@@ -419,8 +420,31 @@ document.write(`
 <li><p>Clasificación del composite.</p></li>
 <li><p>Evaluación de exactitud con métricas estándar.</p></li>
 </ol>
+<section id="codigo-disponible">
+<h2><span class="section-number">3.1. </span>Código disponible<a class="headerlink" href="#codigo-disponible" title="Link to this heading">#</a></h2>
+<div class="admonition-codigo-python-en-colab admonition">
+<p class="admonition-title">Código python en Colab</p>
+<p>El código python en Colab utilizado en este capítulo está disponible en: <a class="reference external" href="https://colab.research.google.com/drive/1SkpMLzMnUTGGUMSt2zH2QPyoldNXxZ9U?usp=sharing">https://colab.research.google.com/drive/1SkpMLzMnUTGGUMSt2zH2QPyoldNXxZ9U?usp=sharing</a></p>
+</div>
+<div class="admonition-codigo-js-en-gee admonition">
+<p class="admonition-title">Código JS en GEE</p>
+<p>El código JS en GEE corresponde al script: Lab_002_RandomForest_Rosario y
+está disponible en: 🔗 <a class="reference external" href="https://code.earthengine.google.com/?accept_repo=users%2Fcdg-idera%2Fgee">Repositorio público de IDERA en GEE</a></p>
+</div>
+<p>Para facilitar la comparación resultados obtenidos y de código  JS y python se exportó el polígono de la región de estudio y el set de entrenamiento en GEE como un <em>asset</em>. Los mismos son consumidos por el script en python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">roi_fc</span>  <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">(</span><span class="s1">&#39;users/cdg-idera/roi_polygon_2024&#39;</span><span class="p">)</span>
+<span class="n">roi</span>     <span class="o">=</span> <span class="n">roi_fc</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
+
+<span class="n">gcps</span> <span class="o">=</span> <span class="n">ee</span><span class="o">.</span><span class="n">FeatureCollection</span><span class="p">(</span><span class="s1">&#39;users/cdg-idera/gcps_landcover_2024&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ROI features:&#39;</span><span class="p">,</span> <span class="n">roi_fc</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GCPS features:&#39;</span><span class="p">,</span> <span class="n">gcps_fc</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">getInfo</span><span class="p">())</span>
+
+</pre></div>
+</div>
+</section>
 <section id="carga-de-imagenes-sentinel-2">
-<h2><span class="section-number">3.1. </span>1. Carga de imágenes Sentinel-2<a class="headerlink" href="#carga-de-imagenes-sentinel-2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.2. </span>1. Carga de imágenes Sentinel-2<a class="headerlink" href="#carga-de-imagenes-sentinel-2" title="Link to this heading">#</a></h2>
 <p>Primero se crea una <code class="docutils literal notranslate"><span class="pre">ImageCollection</span></code> de Sentinel-2, se filtra por porcentaje de nubes, por fecha y por región de interés (ROI).</p>
 <blockquote>
 <div><p><strong>GEE (JavaScript)</strong></p>
@@ -445,7 +469,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="creacion-del-composite">
-<h2><span class="section-number">3.2. </span>2. Creación del composite<a class="headerlink" href="#creacion-del-composite" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.3. </span>2. Creación del composite<a class="headerlink" href="#creacion-del-composite" title="Link to this heading">#</a></h2>
 <p>Se reduce la colección mediante la <strong>mediana</strong> y se recorta al ROI. Este composite elimina la mayor parte de nubes y anomalías.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -469,7 +493,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="datos-de-entrenamiento">
-<h2><span class="section-number">3.3. </span>3. Datos de entrenamiento<a class="headerlink" href="#datos-de-entrenamiento" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.4. </span>3. Datos de entrenamiento<a class="headerlink" href="#datos-de-entrenamiento" title="Link to this heading">#</a></h2>
 <p>Cada clase de cobertura (agua, urbano, cultivos, bosque, terreno desnudo) se representa con muestras (<code class="docutils literal notranslate"><span class="pre">FeatureCollection</span></code>) que tienen una propiedad <code class="docutils literal notranslate"><span class="pre">landcover</span></code> con valores entre 0 y 4.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -486,7 +510,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="division-entrenamiento-validacion">
-<h2><span class="section-number">3.4. </span>4. División entrenamiento/validación<a class="headerlink" href="#division-entrenamiento-validacion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.5. </span>4. División entrenamiento/validación<a class="headerlink" href="#division-entrenamiento-validacion" title="Link to this heading">#</a></h2>
 <p>Se divide aleatoriamente el 60% de las muestras para entrenamiento y el 40% para validación.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -507,7 +531,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="extraccion-de-valores-espectrales">
-<h2><span class="section-number">3.5. </span>5. Extracción de valores espectrales<a class="headerlink" href="#extraccion-de-valores-espectrales" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.6. </span>5. Extracción de valores espectrales<a class="headerlink" href="#extraccion-de-valores-espectrales" title="Link to this heading">#</a></h2>
 <p>Se muestrean los valores de reflectancia de las bandas Sentinel-2 en cada punto de entrenamiento.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -534,7 +558,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="entrenamiento-del-clasificador">
-<h2><span class="section-number">3.6. </span>6. Entrenamiento del clasificador<a class="headerlink" href="#entrenamiento-del-clasificador" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.7. </span>6. Entrenamiento del clasificador<a class="headerlink" href="#entrenamiento-del-clasificador" title="Link to this heading">#</a></h2>
 <p>Se utiliza el algoritmo <strong>Random Forest</strong> con 100 árboles.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -559,7 +583,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="clasificacion">
-<h2><span class="section-number">3.7. </span>7. Clasificación<a class="headerlink" href="#clasificacion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.8. </span>7. Clasificación<a class="headerlink" href="#clasificacion" title="Link to this heading">#</a></h2>
 <p>Se clasifica el composite completo y se visualiza con una paleta de colores.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -584,7 +608,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="validacion-y-metricas">
-<h2><span class="section-number">3.8. </span>8. Validación y métricas<a class="headerlink" href="#validacion-y-metricas" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.9. </span>8. Validación y métricas<a class="headerlink" href="#validacion-y-metricas" title="Link to this heading">#</a></h2>
 <p>Se evalúa el modelo con las muestras de validación. Se generan métricas de exactitud, matriz de confusión, Kappa y F1.</p>
 <blockquote>
 <div><p><strong>GEE</strong></p>
@@ -623,7 +647,7 @@ document.write(`
 </div>
 </section>
 <section id="interpretacion-de-resultados">
-<h2><span class="section-number">3.9. </span>9. Interpretación de resultados<a class="headerlink" href="#interpretacion-de-resultados" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.10. </span>9. Interpretación de resultados<a class="headerlink" href="#interpretacion-de-resultados" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Matriz de confusión</strong>: muestra aciertos y errores por clase.</p></li>
 <li><p><strong>Overall Accuracy</strong>: porcentaje global de aciertos.</p></li>
@@ -633,7 +657,7 @@ document.write(`
 </ul>
 </section>
 <section id="conclusion">
-<h2><span class="section-number">3.10. </span>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.11. </span>Conclusión<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
 <p>Este capítulo demostró que <strong>el flujo completo de clasificación supervisada</strong> puede implementarse de forma <strong>equivalente</strong> en <strong>GEE (JavaScript)</strong> y en <strong>Colab (Python API)</strong>, manteniendo el mismo modelo de cómputo <em>server-side</em> y los mismos insumos. Trabajar en paralelo en ambos entornos aporta flexibilidad y robustez metodológica.</p>
 <p><strong>Qué te llevás:</strong></p>
 <ul class="simple">
@@ -728,16 +752,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-imagenes-sentinel-2">3.1. 1. Carga de imágenes Sentinel-2</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-del-composite">3.2. 2. Creación del composite</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-entrenamiento">3.3. 3. Datos de entrenamiento</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#division-entrenamiento-validacion">3.4. 4. División entrenamiento/validación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-espectrales">3.5. 5. Extracción de valores espectrales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">3.6. 6. Entrenamiento del clasificador</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion">3.7. 7. Clasificación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-y-metricas">3.8. 8. Validación y métricas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">3.9. 9. Interpretación de resultados</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">3.10. Conclusión</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#codigo-disponible">3.1. Código disponible</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-de-imagenes-sentinel-2">3.2. 1. Carga de imágenes Sentinel-2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-del-composite">3.3. 2. Creación del composite</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datos-de-entrenamiento">3.4. 3. Datos de entrenamiento</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#division-entrenamiento-validacion">3.5. 4. División entrenamiento/validación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extraccion-de-valores-espectrales">3.6. 5. Extracción de valores espectrales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-del-clasificador">3.7. 6. Entrenamiento del clasificador</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion">3.8. 7. Clasificación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#validacion-y-metricas">3.9. 8. Validación y métricas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-resultados">3.10. 9. Interpretación de resultados</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">3.11. Conclusión</a></li>
 </ul>
   </nav></div>
 

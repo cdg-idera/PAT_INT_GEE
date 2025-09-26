@@ -19,7 +19,7 @@ Autor del libro digital
 
 # Dedicación
 
-Este libro está dedicado a todos los integrantes de la Infraestructura de Datos Espaciales de la República Argentina (IDERA) que han comenzado a transitar un nuevo camino de aprendizaje sobre técnicas de inteligencia artificial. En particular está dedicado a los miembros del Grupo Técnico de Trabajo de Ciencia de Datos geoespaciales (GTT-CDG) y a los alumnos de la Escuela de Primavera del Instituto Gullich (CONAE-UNC) donde tendré la oportunidad de brindar una capacitación utilizando este material.
+Este libro está dedicado a todos los integrantes de la Infraestructura de Datos Espaciales de la República Argentina (IDERA) que han comenzado a transitar un nuevo camino de aprendizaje sobre técnicas de inteligencia artificial. En particular está dedicado a los miembros del Grupo Técnico de Trabajo de Ciencia de Datos geoespaciales (GTT-CDG) y a los alumnos de la Escuela de Primavera 2025 del Instituto Gullich (CONAE-UNC) donde tendré la oportunidad de brindar una capacitación utilizando este material.
 
 # Agradecimientos
 

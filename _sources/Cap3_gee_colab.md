@@ -15,6 +15,32 @@ El flujo que muestra el capítulo incluye:
 6. Clasificación del composite.
 7. Evaluación de exactitud con métricas estándar.
 
+## Código disponible
+
+```{admonition} Código python en Colab
+
+El código python en Colab utilizado en este capítulo está disponible en: https://colab.research.google.com/drive/1SkpMLzMnUTGGUMSt2zH2QPyoldNXxZ9U?usp=sharing
+
+```
+
+```{admonition} Código JS en GEE
+
+El código JS en GEE corresponde al script: Lab_002_RandomForest_Rosario y
+está disponible en: 🔗 [Repositorio público de IDERA en GEE](https://code.earthengine.google.com/?accept_repo=users%2Fcdg-idera%2Fgee) 
+
+```
+Para facilitar la comparación resultados obtenidos y de código  JS y python se exportó el polígono de la región de estudio y el set de entrenamiento en GEE como un *asset*. Los mismos son consumidos por el script en python:
+
+```python
+roi_fc  = ee.FeatureCollection('users/cdg-idera/roi_polygon_2024')
+roi     = roi_fc.geometry()
+
+gcps = ee.FeatureCollection('users/cdg-idera/gcps_landcover_2024')
+
+print('ROI features:', roi_fc.size().getInfo())
+print('GCPS features:', gcps_fc.size().getInfo())
+
+```
 
 ## 1. Carga de imágenes Sentinel-2
 
