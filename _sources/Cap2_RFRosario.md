@@ -338,42 +338,61 @@ Interpretación de la Precisión Global
 * Suelos Desnudos y Urbano: Hay un píxel de terreno desnudos clasificado erróneamente como Urbano.
 * Estas áreas de confusión podrían abordarse mediante ajustes en los datos de entrenamiento o en las características utilizadas para clasificar.
 
+````{admonition} Interpretación por Clase:
+:class: note
 
-### Interpretación por Clase: Agua (Clase 0):
+```{admonition} *Agua* (Clase 0):
+:class: tip 
 
 * Precisión del consumidor: 100%
     * Esto significa que todos los píxeles clasificados como agua son efectivamente agua.
 * Precisión del productor: 100%
     * Todos los píxeles reales de agua han sido clasificados correctamente.
 
-### Interpretación por Clase: Urbano (Clase 1):
+```
+
+```{admonition} *Urbano* (Clase 1):
+:class: tip 
 
 * Precisión del consumidor: 97.5%
     * Casi todos los píxeles clasificados como urbanos son realmente urbanos. Con una pequeña confusión con terreno desnudo.
 * Precisión del productor: 100%
     * Todos los píxeles reales de urbano han sido clasificados correctamente.
 
-### Interpretación por Clase: Cultivos (Clase 2):
+```
+
+```{admonition} *Cultivos* (Clase 2):
+:class: tip 
 
 * Precisión del consumidor: 92.3%
     * La mayoría de los píxeles clasificados como cultivos son realmente cultivos, pero hay algo de confusión con bosque.
 * Precisión del productor: 100%
     * Todos los pixeles reales de cultivos han sido clasificados correctamente.
 
-### Interpretación por Clase: Bosque/Zona Arbolada-Arbustiva (Clase 3):
+```
+
+```{admonition} *Bosque/Zona Arbolada-Arbustiva* (Clase 3):
+:class: tip 
 
 * Precisión del consumidor: 100%
     * Todos los píxeles clasificados como bosque son efectivamente bosque.
 * Precisión del productor: 93.3%
     * La mayoría de los píxeles reales de bosque han sido clasificados correctamente, pero hay algo de confusión con cultivos.
 
+```
 
-### Interpretación por Clase: Terreno Desnudo (Clase 4):
+```{admonition} *Terreno Desnudo* (Clase 4):
+:class: tip 
 
 * Precisión del consumidor: 100%
     * Todos los píxeles clasificados como terreno desnudo son efectivamente terreno desnudo.
 * Precisión del productor: 92.3%
     * La mayoría de los píxeles reales de terreno desnudo han sido clasificados correctamente, pero hay algo de confusión con urbano. 
+
+```
+
+````
+
 
 Existen algunas confusiones menores en la matriz con un pixel de terreno desnudo clasificado como urbano y un pixel de bosque clasificado como cultivos. Estas confusiones son pequeñas y no afectan la precisión general del modelo.
 

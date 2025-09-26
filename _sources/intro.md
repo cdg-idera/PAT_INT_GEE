@@ -31,6 +31,11 @@ Este libro y recursos didácticos han sido desarrollados en el marco del grupo d
 
 El objetivo de este libro digital es impulsar el desarrollo de capacidades en la aplicación de técnicas de geoAI con información geoespacial, principalmente empleando imágenes satelitales disponibles en Google Earth Engine. 
 
+````{admonition} Objetivo
+:class: tip 
+Propiciar la incorporación enfoques innovadores y paradigmas de ciencias de datos para maximizar la gestión, análisis y aprovechamiento de la información geoespacial, fomentando el uso de tecnologías emergentes, inteligencia artificial y modelos analíticos avanzados.
+
+````
 
 ````{admonition} Producción del libro y de los videos
 :class: note

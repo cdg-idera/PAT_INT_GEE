@@ -1,11 +1,15 @@
-# Capítulo 6 · Serie Temporales
+# Capítulo 7 · Serie Temporales
 
 En el análisis de datos geoespaciales, las series de tiempo ocupan un lugar central. Ya sea que estudiemos fenómenos terrestres, marítimos o atmosféricos, observar cómo varían en el tiempo ciertas variables nos permite comprender procesos, detectar patrones y anticipar futuros escenarios.
 
 Los científicos de datos trabajan con múltiples formas de representar la información, y una de las más poderosas en aplicaciones de inteligencia artificial aplicada al ambiente es, sin dudas, la serie temporal. Nos ayuda a responder preguntas como: ¿qué está cambiando? ¿cómo? ¿cuándo? y, sobre todo, ¿por qué?
 
-> Una serie de tiempo consiste en un conjunto de observaciones de una misma variable recogidas a intervalos regulares. Estos intervalos pueden ser diarios, semanales, mensuales, bimensuales, trimestrales, cuatrimestrales, incluso anuales o multianuales, dependiendo del fenómeno que estemos analizando. No es lo mismo estudiar un evento extremo como una inundación —que requiere una resolución diaria— que seguir el avance de la urbanización, que puede analizarse en escalas mensuales o anuales.
+````{admonition} ¿Qué es una *serie de tiempo*?
+:class: note
 
+ Una serie de tiempo consiste en un conjunto de observaciones de una misma variable recogidas a intervalos regulares. Estos intervalos pueden ser diarios, semanales, mensuales, bimensuales, trimestrales, cuatrimestrales, incluso anuales o multianuales, dependiendo del fenómeno que estemos analizando. No es lo mismo estudiar un evento extremo como una inundación —que requiere una resolución diaria— que seguir el avance de la urbanización, que puede analizarse en escalas mensuales o anuales.
+
+````
 
 ```{figure} imagenes/graf1.png
 :name: fig-graf1
@@ -73,8 +77,12 @@ Y, por supuesto, el **ruido aleatorio**, esas pequeñas fluctuaciones impredecib
 Serie de Tiempo: Ruido
 ```
 
-> ¿Cómo se obtuvieron estos ejemplos gráficos? Fue a partir de la generación de datos sintéticos con el siguiente código en Colab: https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing En el ejemplo se generan gráficos con fondos negro y blanco. El video de este capítulo cuenta con gráficos con fondo negro.
+```{admonition}  ¿Cómo se obtuvieron estos ejemplos gráficos?
+:class: tip
 
+ Fue a partir de la generación de datos sintéticos con el siguiente código en Colab: https://colab.research.google.com/drive/1-k8N6c9fhpXcbusPSH_DbJt8TITVkCDw?usp=sharing En el ejemplo se generan gráficos con fondos negro y blanco. El video de este capítulo cuenta con gráficos con fondo negro.
+
+```
 
 Antes de lanzarse a modelar o predecir, conviene detenerse en un análisis exploratorio. Visualizar la serie en un gráfico —con el tiempo en el eje horizontal y el valor en el eje vertical— ya ofrece una gran cantidad de información. A partir de ahí podemos detectar anomalías, rupturas, variaciones estacionales, o comportamientos inesperados (ver en {numref}`fig-DS_ST`).
 
@@ -375,13 +383,13 @@ Algunas Conclusiones de la sección
 ## Uso de Awesome Spectral Indices en GEE
 
 
-En este video vamos a explorar cómo usar el  catálogo abierto y colaborativo de índices espectrales denominado **Awesome Spectral Indices (ASI)** {cite:p}`montero2023standardized` una herramienta muy potente para calcular de forma sencilla decenas de índices espectrales en Google Earth Engine.
+En esta sección vamos a explorar cómo usar el  catálogo abierto y colaborativo de índices espectrales denominado **Awesome Spectral Indices (ASI)** {cite:p}`montero2023standardized` una herramienta muy potente para calcular de forma sencilla decenas de índices espectrales en Google Earth Engine.
 
 Esta librería nos ahorra tiempo y evita errores al aplicar fórmulas, ya que contiene una base de datos bien documentada con cada índice, su fórmula, sus bandas requeridas y su referencia académica.
 
 ```{figure} imagenes/spectral.png
 :name: fig-Spectral
-:width: 60%
+:width: 40%
 
 ïcono de la librería Spectral que implementa ASI en JS
 ```
@@ -419,6 +427,9 @@ En ambos casos se nos despliega toda la información asociada a ese índice.
 
 ### Explorar los atributos del índice
 
+````{admonition} Atributos de cada índice en ASI
+:class: note
+
 Los atributos disponibles para cada índice incluyen:
 
 *	**short_name**: el nombre corto (por ejemplo "NDVI").
@@ -429,6 +440,8 @@ Los atributos disponibles para cada índice incluyen:
 *	**type**: el tipo o dominio de aplicación (vegetación, agua, suelo, etc.).
 *	**date_of_addition**: la fecha en que fue agregado a la lista.
 *	**contributor**: el enlace al usuario de GitHub que lo subió.
+
+````
 
 Por ejemplo, si queremos ver únicamente la fórmula del NDVI, utilizamos esta instrucción:
 
@@ -577,7 +590,17 @@ Esta versión es más ordenada, más mantenible, y nos permite reutilizar fácil
 
 Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de datos geoespaciales de varios petabytes con capacidades de análisis a escala planetaria. Científicos, investigadores y desarrolladores utilizan Earth Engine para detectar cambios, mapear tendencias y cuantificar diferencias en la superficie terrestre. Earth Engine ahora está disponible para uso comercial y sigue siendo gratuito para fines académicos y de investigación.
 
-> "Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real" es una fórmula que resume el potencial de Google Earth Engine (GEE) para generar soluciones científicas y prácticas.
+
+`````{admonition} Fórmula: *Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real*
+:class: note
+
+*Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real* es una fórmula que resume el potencial de Google Earth Engine (GEE) para generar soluciones científicas y prácticas.
+
+
+````{admonition} Imágenes satelitales
+:class: tip
+
+GEE brinda acceso inmediato a un vasto catálogo de imágenes de observación de la Tierra, que incluye datos de sensores como Landsat, Sentinel, MODIS, entre otros. Esto permite monitorear cambios en el planeta en escalas temporales y espaciales diversas (ver fig. {numref}`fig-Satellite_150dpi`). 
 
 ```{figure} imagenes/Satellite_150dpi.png
 :name: fig-Satellite_150dpi
@@ -585,7 +608,13 @@ Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de
 
 Ícono de la Fórmula: Imágenes Satelitales
 ```
-> Imágenes satelitales: GEE brinda acceso inmediato a un vasto catálogo de imágenes de observación de la Tierra, que incluye datos de sensores como Landsat, Sentinel, MODIS, entre otros. Esto permite monitorear cambios en el planeta en escalas temporales y espaciales diversas (ver fig. {numref}`fig-Satellite_150dpi`). 
+
+````
+
+````{admonition} Tus algoritmos
+:class: tip
+
+Los usuarios pueden aplicar sus propios modelos de análisis, ya sean simples cálculos de índices espectrales o complejos algoritmos de **machine learning**, todo dentro del entorno de GEE, aprovechando su capacidad de procesamiento en la nube  (ver fig. {numref}`fig-Algorithm_150dpi`). 
 
 ```{figure} imagenes/Algorithm_150dpi.png
 :name: fig-Algorithm_150dpi
@@ -594,8 +623,12 @@ Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de
 Ícono de la Fórmula: Pensamiento Algorítmico.
 ```
 
+````
 
-> Tus algoritmos: Los usuarios pueden aplicar sus propios modelos de análisis, ya sean simples cálculos de índices espectrales o complejos algoritmos de **machine learning**, todo dentro del entorno de GEE, aprovechando su capacidad de procesamiento en la nube  (ver fig. {numref}`fig-Algorithm_150dpi`). 
+````{admonition} Aplicaciones en el mundo real
+:class: tip
+
+Al combinar datos y algoritmos, es posible desarrollar soluciones para problemas concretos como la deforestación, el cambio climático, la planificación urbana, la gestión del agua, la agricultura de precisión y muchos más (ver fig. {numref}`fig-mundo`). 
 
 ```{figure} imagenes/mundo.png
 :name: fig-mundo
@@ -604,7 +637,7 @@ Google Earth Engine combina un catálogo de imágenes satelitales y conjuntos de
 Ícono de la Fórmula: Aplicaciones en el mundo real.
 ```
 
-> Aplicaciones en el mundo real: Al combinar datos y algoritmos, es posible desarrollar soluciones para problemas concretos como la deforestación, el cambio climático, la planificación urbana, la gestión del agua, la agricultura de precisión y muchos más (ver fig. {numref}`fig-mundo`). 
+````
 
 En conjunto, ¡esta fórmula, cuyos íconos se muestran en fig. {numref}`fig-interApp`, representa cómo GEE empodera a los científicos, desarrolladores y tomadores de decisiones para transformar datos en conocimiento y acción!
 
@@ -614,6 +647,8 @@ En conjunto, ¡esta fórmula, cuyos íconos se muestran en fig. {numref}`fig-int
 
 Fórmula: Imágenes satelitales + tus algoritmos + aplicaciones en el mundo real
 ```
+
+`````
 
 En el próximo capítulo de esta serie Time Series, calcularemos mas series temporales de precipitaciones, y obtendremos una serie etemporal de tipos de suelo de Rosario utilizando el clasificador de Random Forest de un video anterior. Nos enfocaremos en ver esos ejemplos en el marco de la teoría de cubos de datos de Imágenes Satelitales.
 

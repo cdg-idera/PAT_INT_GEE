@@ -186,8 +186,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Cap4_SVM_DT.html">4. Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">5. Capítulo 5 · Random Forest para detectar agua</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Capitulo_BIS.html">6. Capítulo 6 · Workflow ML en GEE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Cap6_ST.html">7. Capítulo 7 · Serie Temporales</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Cap7_Datacubes.html">8. Capítulo 8 · Cubos de Imágenes Satelitales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap7_ST.html">7. Capítulo 7 · Serie Temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap8_Datacubes.html">8. Capítulo 8 · Cubos de Imágenes Satelitales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Referencias.html">9. Bibliografía</a></li>
 </ul>
 
@@ -395,12 +395,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendaciones-para-la-recoleccion-de-datos">2.6. Recomendaciones para la recolección de Datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-del-modelo">2.7. Precisión del Modelo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-la-precision-global">2.8. Interpretación de la Precisión Global</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-agua-clase-0">2.8.1. Interpretación por Clase: Agua (Clase 0):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-urbano-clase-1">2.8.2. Interpretación por Clase: Urbano (Clase 1):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-cultivos-clase-2">2.8.3. Interpretación por Clase: Cultivos (Clase 2):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-bosque-zona-arbolada-arbustiva-clase-3">2.8.4. Interpretación por Clase: Bosque/Zona Arbolada-Arbustiva (Clase 3):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-terreno-desnudo-clase-4">2.8.5. Interpretación por Clase: Terreno Desnudo (Clase 4):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general">2.8.6. Conclusión General</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general">2.8.1. Conclusión General</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#otras-metricas-de-validacion">2.9. Otras métricas de validación:</a></li>
@@ -686,8 +681,10 @@ document.write(`
 <li><p>Suelos Desnudos y Urbano: Hay un píxel de terreno desnudos clasificado erróneamente como Urbano.</p></li>
 <li><p>Estas áreas de confusión podrían abordarse mediante ajustes en los datos de entrenamiento o en las características utilizadas para clasificar.</p></li>
 </ul>
-<section id="interpretacion-por-clase-agua-clase-0">
-<h3><span class="section-number">2.8.1. </span>Interpretación por Clase: Agua (Clase 0):<a class="headerlink" href="#interpretacion-por-clase-agua-clase-0" title="Link to this heading">#</a></h3>
+<div class="note admonition">
+<p class="admonition-title">Interpretación por Clase:</p>
+<div class="tip admonition">
+<p class="admonition-title"><em>Agua</em> (Clase 0):</p>
 <ul class="simple">
 <li><p>Precisión del consumidor: 100%</p>
 <ul>
@@ -700,9 +697,9 @@ document.write(`
 </ul>
 </li>
 </ul>
-</section>
-<section id="interpretacion-por-clase-urbano-clase-1">
-<h3><span class="section-number">2.8.2. </span>Interpretación por Clase: Urbano (Clase 1):<a class="headerlink" href="#interpretacion-por-clase-urbano-clase-1" title="Link to this heading">#</a></h3>
+</div>
+<div class="tip admonition">
+<p class="admonition-title"><em>Urbano</em> (Clase 1):</p>
 <ul class="simple">
 <li><p>Precisión del consumidor: 97.5%</p>
 <ul>
@@ -715,9 +712,9 @@ document.write(`
 </ul>
 </li>
 </ul>
-</section>
-<section id="interpretacion-por-clase-cultivos-clase-2">
-<h3><span class="section-number">2.8.3. </span>Interpretación por Clase: Cultivos (Clase 2):<a class="headerlink" href="#interpretacion-por-clase-cultivos-clase-2" title="Link to this heading">#</a></h3>
+</div>
+<div class="tip admonition">
+<p class="admonition-title"><em>Cultivos</em> (Clase 2):</p>
 <ul class="simple">
 <li><p>Precisión del consumidor: 92.3%</p>
 <ul>
@@ -730,9 +727,9 @@ document.write(`
 </ul>
 </li>
 </ul>
-</section>
-<section id="interpretacion-por-clase-bosque-zona-arbolada-arbustiva-clase-3">
-<h3><span class="section-number">2.8.4. </span>Interpretación por Clase: Bosque/Zona Arbolada-Arbustiva (Clase 3):<a class="headerlink" href="#interpretacion-por-clase-bosque-zona-arbolada-arbustiva-clase-3" title="Link to this heading">#</a></h3>
+</div>
+<div class="tip admonition">
+<p class="admonition-title"><em>Bosque/Zona Arbolada-Arbustiva</em> (Clase 3):</p>
 <ul class="simple">
 <li><p>Precisión del consumidor: 100%</p>
 <ul>
@@ -745,9 +742,9 @@ document.write(`
 </ul>
 </li>
 </ul>
-</section>
-<section id="interpretacion-por-clase-terreno-desnudo-clase-4">
-<h3><span class="section-number">2.8.5. </span>Interpretación por Clase: Terreno Desnudo (Clase 4):<a class="headerlink" href="#interpretacion-por-clase-terreno-desnudo-clase-4" title="Link to this heading">#</a></h3>
+</div>
+<div class="tip admonition">
+<p class="admonition-title"><em>Terreno Desnudo</em> (Clase 4):</p>
 <ul class="simple">
 <li><p>Precisión del consumidor: 100%</p>
 <ul>
@@ -760,10 +757,11 @@ document.write(`
 </ul>
 </li>
 </ul>
+</div>
+</div>
 <p>Existen algunas confusiones menores en la matriz con un pixel de terreno desnudo clasificado como urbano y un pixel de bosque clasificado como cultivos. Estas confusiones son pequeñas y no afectan la precisión general del modelo.</p>
-</section>
 <section id="conclusion-general">
-<h3><span class="section-number">2.8.6. </span>Conclusión General<a class="headerlink" href="#conclusion-general" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.8.1. </span>Conclusión General<a class="headerlink" href="#conclusion-general" title="Link to this heading">#</a></h3>
 <p><em>Precisión global (Test Accuracy)</em>: La precisión general es 98.02%, lo cual es excelente y muestra que el modelo clasifica muy bien en la mayoría de los casos.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -870,12 +868,7 @@ Mantener el nombre de “Bosque/Zona Arbolada-Arbustiva” es apropiado, ya que 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recomendaciones-para-la-recoleccion-de-datos">2.6. Recomendaciones para la recolección de Datos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#precision-del-modelo">2.7. Precisión del Modelo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-de-la-precision-global">2.8. Interpretación de la Precisión Global</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-agua-clase-0">2.8.1. Interpretación por Clase: Agua (Clase 0):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-urbano-clase-1">2.8.2. Interpretación por Clase: Urbano (Clase 1):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-cultivos-clase-2">2.8.3. Interpretación por Clase: Cultivos (Clase 2):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-bosque-zona-arbolada-arbustiva-clase-3">2.8.4. Interpretación por Clase: Bosque/Zona Arbolada-Arbustiva (Clase 3):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretacion-por-clase-terreno-desnudo-clase-4">2.8.5. Interpretación por Clase: Terreno Desnudo (Clase 4):</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general">2.8.6. Conclusión General</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion-general">2.8.1. Conclusión General</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#otras-metricas-de-validacion">2.9. Otras métricas de validación:</a></li>

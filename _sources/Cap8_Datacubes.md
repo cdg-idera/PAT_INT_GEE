@@ -1,4 +1,4 @@
-#  Capítulo 7 · Cubos de Imágenes Satelitales
+#  Capítulo 8 · Cubos de Imágenes Satelitales
 
 
 
@@ -113,7 +113,12 @@ Cubo de Datos definición de openEO
 
 Según la plataforma abierta para la observación de la Tierra openEO:
 
-> “Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.” {cite:p}`openeo_datacube`.
+```{admonition} ¿Qué es un *cubo de datos*?
+:class: tip
+
+Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.” {cite:p}`openeo_datacube`.
+
+```
 
 ```{figure} imagenes/PlacaL.png
 :name: fig-PlacaL
@@ -122,20 +127,32 @@ Según la plataforma abierta para la observación de la Tierra openEO:
 Cubo de Datos definición de Giulian et al.
 ```
 
-> Y según Giuliani et al. {cite:t}`giuliani2016datacube`: “Es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”
+```{admonition} ¿Qué es un *cubo de datos*?
+:class: tip
+
+ Según Giuliani et al. {cite:t}`giuliani2016datacube`: “Es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”
+
+```
 
 ```{figure} imagenes/PlacaM.png
 :name: fig-PlacaM
 :width: 100%
 
-Cubo de Datos: Dimensiones principales
+Dimensiones de un cubo de datos
 ```
+
+
+```{admonition} ¿Cuáles son las dimensiones principales de un *cubo de datos*?
+:class: tip 
 
 ¿Y cuáles son sus dimensiones? Las principales son:
 *	**Espacio**: definido por las coordenadas x e y, donde x representa la longitud (el eje horizontal, de oeste a este) y y representa la latitud (el eje vertical, de sur a norte). Estas dos dimensiones permiten ubicar cada píxel en la superficie terrestre.
 *	**Tiempo**: corresponde al momento en que fue adquirida cada imagen, ya sea una fecha o una hora específica. Esta dimensión es clave para el análisis de cambios en el territorio.
 *	**Espectro**: se refiere a las bandas espectrales que capturan diferentes rangos del espectro electromagnético, como el visible, el infrarrojo cercano o el SWIR, lo que permite observar fenómenos que no son visibles a simple vista.
 *	Y, en algunos casos, también la geometría o incluso el sistema de referencia espacial (CRS) como una dimensión adicional.
+
+```
+
 
 Esto nos permite hacer operaciones sofisticadas (ver fig. {numref}`fig-PlacaN`) sin necesidad de reestructurar los datos. Por ejemplo:
 

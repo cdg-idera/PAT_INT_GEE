@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>8. Capítulo 7 · Cubos de Imágenes Satelitales &#8212; GeoIA aplicado a Imágenes Satelitales</title>
+    <title>8. Capítulo 8 · Cubos de Imágenes Satelitales &#8212; GeoIA aplicado a Imágenes Satelitales</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'Cap7_Datacubes';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Cap8_Datacubes';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="9. Bibliografía" href="Referencias.html" />
-    <link rel="prev" title="7. Capítulo 6 · Serie Temporales" href="Cap6_ST.html" />
+    <link rel="prev" title="7. Capítulo 7 · Serie Temporales" href="Cap7_ST.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -186,7 +186,7 @@
 <li class="toctree-l1"><a class="reference internal" href="Cap4_SVM_DT.html">4. Capítulo 4 · Máquina de Soporte Vectorial y árbol de Decisión</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Cap5_Agua.html">5. Capítulo 5 · Random Forest para detectar agua</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Capitulo_BIS.html">6. Capítulo 6 · Workflow ML en GEE</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Cap6_ST.html">7. Capítulo 7 · Serie Temporales</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Cap7_ST.html">7. Capítulo 7 · Serie Temporales</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">8. Capítulo 8 · Cubos de Imágenes Satelitales</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Referencias.html">9. Bibliografía</a></li>
 </ul>
@@ -260,7 +260,7 @@
       
       
       
-      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE/issues/new?title=Issue%20on%20page%20%2FCap7_Datacubes.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/cdg-idera/PAT_INT_GEE/issues/new?title=Issue%20on%20page%20%2FCap8_Datacubes.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -290,7 +290,7 @@
       
       
       
-      <li><a href="_sources/Cap7_Datacubes.md" target="_blank"
+      <li><a href="_sources/Cap8_Datacubes.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -374,7 +374,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Capítulo 7 · Cubos de Imágenes Satelitales</h1>
+    <h1>Capítulo 8 · Cubos de Imágenes Satelitales</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -455,8 +455,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="capitulo-7-cubos-de-imagenes-satelitales">
-<h1><span class="section-number">8. </span>Capítulo 7 · Cubos de Imágenes Satelitales<a class="headerlink" href="#capitulo-7-cubos-de-imagenes-satelitales" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="capitulo-8-cubos-de-imagenes-satelitales">
+<h1><span class="section-number">8. </span>Capítulo 8 · Cubos de Imágenes Satelitales<a class="headerlink" href="#capitulo-8-cubos-de-imagenes-satelitales" title="Link to this heading">#</a></h1>
 <section id="introduccion">
 <h2><span class="section-number">8.1. </span>Introducción<a class="headerlink" href="#introduccion" title="Link to this heading">#</a></h2>
 <p>¡Seguimos explorando las Series Temporales aplicadas a la Información Geoespacial! En este nuevo capítulo, damos un paso más: introducimos los <strong>cubos de datos</strong> como estructura clave para <em>organizar, analizar y visualizar imágenes satelitales a lo largo del tiempo</em>.</p>
@@ -544,24 +544,28 @@ Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el c
 </figcaption>
 </figure>
 <p>Según la plataforma abierta para la observación de la Tierra openEO:</p>
-<blockquote>
-<div><p>“Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.” <span id="id2">[<a class="reference internal" href="Referencias.html#id9" title="openEO Consortium. Data cube concept in openeo. openEO Documentation, 2023. Consultado el 19 de septiembre de 2025. URL: https://openeo.org/documentation/.">openEO Consortium, 2023</a>]</span>.</p>
-</div></blockquote>
+<div class="tip admonition">
+<p class="admonition-title">¿Qué es un <em>cubo de datos</em>?</p>
+<p>Un cubo de datos es una estructura de datos multidimensional que organiza la información, generalmente geoespacial, en ejes bien definidos como espacio, tiempo, bandas espectrales, etc.” <span id="id2">[<a class="reference internal" href="Referencias.html#id9" title="openEO Consortium. Data cube concept in openeo. openEO Documentation, 2023. Consultado el 19 de septiembre de 2025. URL: https://openeo.org/documentation/.">openEO Consortium, 2023</a>]</span>.</p>
+</div>
 <figure class="align-default" id="fig-placal">
 <a class="reference internal image-reference" href="_images/PlacaL.png"><img alt="_images/PlacaL.png" src="_images/PlacaL.png" style="width: 100%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 8.7 </span><span class="caption-text">Cubo de Datos definición de Giulian et al.</span><a class="headerlink" href="#fig-placal" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<blockquote>
-<div><p>Y según Giuliani et al. <span id="id3">Giuliani <em>et al.</em> [<a class="reference internal" href="Referencias.html#id10" title="Gregory Giuliani, Adrien Dubois, Pierre Lacroix, Bruno Chatenoux, Anthony Lehmann, and Nicolas Ray. Earth observation data cubes for space and time analysis of earth observation data. Data, 1(1):8, 2016. URL: https://www.mdpi.com/2306-5729/1/1/8, doi:10.3390/data1010008.">2016</a>]</span>: “Es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”</p>
-</div></blockquote>
+<div class="tip admonition">
+<p class="admonition-title">¿Qué es un <em>cubo de datos</em>?</p>
+<p>Según Giuliani et al. <span id="id3">Giuliani <em>et al.</em> [<a class="reference internal" href="Referencias.html#id10" title="Gregory Giuliani, Adrien Dubois, Pierre Lacroix, Bruno Chatenoux, Anthony Lehmann, and Nicolas Ray. Earth observation data cubes for space and time analysis of earth observation data. Data, 1(1):8, 2016. URL: https://www.mdpi.com/2306-5729/1/1/8, doi:10.3390/data1010008.">2016</a>]</span>: “Es una colección de datos geoespaciales organizados como una matriz multidimensional regular, diseñada para facilitar el acceso, consulta y análisis en tiempo real de grandes volúmenes de información.”</p>
+</div>
 <figure class="align-default" id="fig-placam">
 <a class="reference internal image-reference" href="_images/PlacaM.png"><img alt="_images/PlacaM.png" src="_images/PlacaM.png" style="width: 100%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 8.8 </span><span class="caption-text">Cubo de Datos: Dimensiones principales</span><a class="headerlink" href="#fig-placam" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 8.8 </span><span class="caption-text">Dimensiones de un cubo de datos</span><a class="headerlink" href="#fig-placam" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
+<div class="tip admonition">
+<p class="admonition-title">¿Cuáles son las dimensiones principales de un <em>cubo de datos</em>?</p>
 <p>¿Y cuáles son sus dimensiones? Las principales son:</p>
 <ul class="simple">
 <li><p><strong>Espacio</strong>: definido por las coordenadas x e y, donde x representa la longitud (el eje horizontal, de oeste a este) y y representa la latitud (el eje vertical, de sur a norte). Estas dos dimensiones permiten ubicar cada píxel en la superficie terrestre.</p></li>
@@ -569,6 +573,7 @@ Aquí entra en juego un concepto clave en el análisis geoespacial moderno: el c
 <li><p><strong>Espectro</strong>: se refiere a las bandas espectrales que capturan diferentes rangos del espectro electromagnético, como el visible, el infrarrojo cercano o el SWIR, lo que permite observar fenómenos que no son visibles a simple vista.</p></li>
 <li><p>Y, en algunos casos, también la geometría o incluso el sistema de referencia espacial (CRS) como una dimensión adicional.</p></li>
 </ul>
+</div>
 <p>Esto nos permite hacer operaciones sofisticadas (ver fig. <a class="reference internal" href="#fig-placan"><span class="std std-numref">Fig. 8.9</span></a>) sin necesidad de reestructurar los datos. Por ejemplo:</p>
 <ul class="simple">
 <li><p>Filtrar el cubo por fechas, bandas o región.</p></li>
@@ -1372,12 +1377,12 @@ Gracias al siguiente bloque:</p></li>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="Cap6_ST.html"
+       href="Cap7_ST.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">7. </span>Capítulo 6 · Serie Temporales</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Capítulo 7 · Serie Temporales</p>
       </div>
     </a>
     <a class="right-next"
