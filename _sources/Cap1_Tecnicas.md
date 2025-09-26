@@ -18,13 +18,24 @@ Del mismo modo, las revisiones de {cite:p}`zhu2017_deepReview` han mostrado cóm
 
 ## Teledetección
 
-> La teledetección es la ciencia de obtener información sobre objetos o áreas a distancia mediante el uso de satélites aeronaves o drones.
+La teledetección es la ciencia de obtener información sobre objetos o áreas a distancia mediante el uso de satélites aeronaves o drones.
 
-> Jensen, John R. en su libro Remote Sensing of the Environment {cite:t}`jensen2007remote`: An Earth Resource Perspective (2007) define la teledetección como: "La ciencia y el arte de obtener información sobre un objeto, área o fenómeno mediante el análisis de datos adquiridos por un dispositivo que no está en contacto con el objeto, área o fenómeno en estudio." 
+```{admonition} ¿Qué es la teledetección?
+:class: tip
+Jensen, John R. en su libro Remote Sensing of the Environment {cite:t}`jensen2007remote`: An Earth Resource Perspective (2007) define la teledetección como: "La ciencia y el arte de obtener información sobre un objeto, área o fenómeno mediante el análisis de datos adquiridos por un dispositivo que no está en contacto con el objeto, área o fenómeno en estudio." 
+
+```
+
 
 Otra definición es:
 
-> "La teledetección es el proceso de adquirir información sobre las propiedades de los objetos en la superficie terrestre sin estar en contacto físico con ellos. Esto se logra detectando y analizando la radiación reflejada o emitida por esos objetos, utilizando sensores montados en plataformas remotas, como satélites o aeronaves." {cite:t}`lillesand2015remote`
+```{admonition} ¿Qué es la teledetección?
+:class: tip
+
+La teledetección es el proceso de adquirir información sobre las propiedades de los objetos en la superficie terrestre sin estar en contacto físico con ellos. Esto se logra detectando y analizando la radiación reflejada o emitida por esos objetos, utilizando sensores montados en plataformas remotas, como satélites o aeronaves." {cite:t}`lillesand2015remote`
+
+```
+
 
 ```{figure} imagenes/areasIA2.png
 :name: fig-areas
