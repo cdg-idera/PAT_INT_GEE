@@ -219,7 +219,7 @@ El NDVI es el índice de vegetación diferencial normalizado que ayuda a monitor
 
 ```{figure} imagenes/PosIT-NDVIbis.png
 :name: fig-PosIT-NDVIbis
-:width: 100%
+:width: 60%
 
 Indice Espectral NDVI
 ```
@@ -321,38 +321,47 @@ Map.addLayer(image, visParams, "Sentinel 2024");
 
 ```
 
-Esta función se define para una imagen, luego calculará técnicamente el NDVI para todas las imágenes dentro de la colección de imágenes con la operación MAP. 
+Esta función se define para una imagen, luego calculará técnicamente el NDVI para todas las imágenes dentro de la colección de imágenes con la operación *map*. 
 
-Antes de ejecutar este código comprobamos que la colección de imágenes no cuenta inicialmente con este índice NDVI, y que solo luego de ejecutar el código es posible ver esta nuevo dato en cada imagen
+Antes de ejecutar este código comprobamos que la colección de imágenes no cuenta inicialmente con este índice *NDVI*, y que solo luego de ejecutar el código es posible ver este nuevo índice en cada imagen.
 
+### Imágen de Falso Color
+
+Generaremos una imagen de **falso color** utilizando las bandas **B5 (NIR), B4 (Red), y B3 (Green)** de **Sentinel-2**, que nos permitirá detectar agua y generar mas facilmente los puntos de entrenamiento. Esto permite detectar cuerpos de agua de manera efectiva debido a cómo *el agua interactúa con la luz en estas longitudes de onda*.
 
 ```{figure} imagenes/FalsoColor.png
 :name: fig-FalsoColor
-:width: 50%
+:width: 40%
 
 Falso Color: Descripción
 ```
 
-Generaremos una imagen de **falso color** utilizando las bandas B5 (NIR), B4 (Red), y B3 (Green) de Sentinel-2, que nos permitirá detectar agua y generar mas facilmente los puntos de entrenamiento. Esto permite detectar cuerpos de agua de manera efectiva debido a cómo el agua interactúa con la luz en estas longitudes de onda
-En un mapa con este esquema de **falso color**:
+````{admonition} Imágen de falso color
+:class: tip
+En un mapa con este esquema de **falso color** (ver fig. {numref}`fig-mapaFalsoColor`):
+
+```{figure} imagenes/mapaFalsoColor.png
+:name: fig-mapaFalsoColor
+:width: 900%
+
+Falso Color: Ejemplo
+```
 
 - Ríos, lagos y océanos: Oscuros o negros.
 - Vegetación: Rojo brillante.
 - Suelo desnudo o urbano: Varía entre tonos de gris y verde tenue.
 
-Estos son los datos de Sentinel que vamos a utilizar para nuestro aprendizaje automático, es decir, la clasificación supervisada Random forest. 
+````
 
-
+Estos son los datos de Sentinel que vamos a utilizar para nuestro aprendizaje automático, es decir, la clasificación supervisada *Random forest*. 
 
 ```javascript
 Map.addLayer(image, {bands: ['B5','B4','B3'], min:0, max: 3000}, 'False Color (543)');
 ```
 
-
 ## Workflow
 
-Para aplicar la tecnica supervisada de random forest tendremos en cuenta el flujo de trabajo
-
+Para aplicar la técnica supervisada de random forest tendremos en cuenta el flujo de trabajo de la fig. {numref}`fig-Workflow`. 
 
 ```{figure} imagenes/Workflow.png
 :name: fig-Workflow
@@ -360,7 +369,6 @@ Para aplicar la tecnica supervisada de random forest tendremos en cuenta el fluj
 
 Workflow para aplicar ML a imágenes satelitales
 ```
-
 
 ###  Entrenamiento 
 
@@ -373,59 +381,24 @@ Ahora crearemos datos de entrenamiento y luego ejecutaremos nuestro aprendizaje 
 Etapa: Seleccionar las muestras de entrenamiento
 ```
 
-Vamos a crear los datos de entrenamiento:
+Para crear los datos de entrenamiento, utilizando la herramienta de dibujo del panel de Earth Engine. Crearemos una nueva capa, denominada *agua*, de tipo **featureCollection**, y definimos una propiedad denomninada *categoriaAgua*, con valor *1*. También crearemos otro **Featurecollection** denominado *no-agua*, con una propiedad denominada *categoriaAgua*, con valor *0*. De esta forma tenemos dos **FeatureCollection** Agua y NoAgua, con cero features. 
 
-Para crear los datos de entrenamiento, utilizando la herramienta de dibujo del panel de Earth Engine. 
+Vamos a comenzar a recopilar los datos, primero para el **FeatureCollection** *agua*, vamos a resaltar aquella capa para la cual deseamos capturar datos de entrenamiento.
 
-Crearemos una nueva capa, denominada agua, de tipo featureColeccion, y defiNImos una propiedad denomninada categoriaAgua, con valor 1.
+En este caso, se resaltamos la *capa agua*. Lo que haremos será recopilar la mayor cantidad posible de pixeles que representen agua y asegurarnos de que estén en nuestro region de estudio. Vamos a capturar tantos puntos como sea posible y luego lo vamos a cambiar un poco de zonas para *obtener muestras espacialmente dispersas y representativas*. Continuamos capturando más puntos. Esto debería ser suficiente para nuestro feature collection de agua.
 
-También crearé otro feature collection denominado NO-AGUA, con una propiedad denominada categoriaAgua, con valor 0.
 
-De esta forma tenemos dos feature collection Agua y NoAgua, con cero features. 
+Continuamos con nuestro **FeatureCollection** de *no-agua*. Podemos caputrar puntos que no sean agua, esto puede ser pixeles de una zona urbana, un cultivo o un bosque. Esta es un área agrícola de cultivo marcaeremos algunos putnos. Podemos ir a alguna ciudad importante solo para capturar pixels de la zona urbana. Podemos capturar puntos de cobertura vegetal tambien. Capturar puntos de una zona industrial. Y estamos a punto de terminar nuestra captura de muestras de *no agua*. Estos puntos de control en el terreno, deberían ser suficientes para nuestro análisis. 
 
-vamos a comenzar a recopilar los datos, primero para el featureCollection agua, vamos a resaltar aquella capa para la cual deseamos capturar datos de entrenamiento.
+Si realmente estás haciendo un análisis científico real o tu proyecto, necesitamos *capturar varios puntos de datos representativos* y *asegurarnos de que la calidad de los puntos de datos sea buena*. 
 
-En este caso, se resaltamos la capa agua. Lo que haremos será recopilar la mayor cantidad posible de pixeles que representen agua y asegurarnos de que estén en nuestro region de estudio.
+Nuestro próximo paso es combinar ambos **featureCollection** en un solo **featureCollection**, esto  lo hace la función *MERGE*. Fusiona ambas capas: *agua* y *no-agua* en una sola colección denominada *training*. La *fusión o merge*, combinó estos dos colecciones en una, la cual contiene tiene aproximadamente más de 300 puntos de datos de entrenamiento, puntos de clase *agua* y de clase *no-agua*.
 
-Vamos a capturar tantos puntos como sea posible aquí y luego lo vamos a cambiar un poco de zonas para obtener muestras espacialmente dispersas y representativas.
+Muy bien. Ahora estamos listos para nuestra clasificación de aprendizaje automático.
 
-Continuamos capturando más puntos:
+La etiqueta es *categoriaAgua* y representa nuestra etiqueta para la clasificación de aprendizaje automático o la clasificación supervisada. Recorda que la definimos cuando creamos los dos featureCollection de datos de entrenamiento agua y no-agua. Esa será la etiqueta para nuestra clasificación.
 
------
-Esto debería ser suficiente para nuestro feature collection de agua.
-
------
-
-Continuamos con nuestro featureCollectoin de no-agua.
-
-podemos caputrar puntos que no sean agua, esto puede ser pixeles de una zona urbana, un cultivo o un bosque. 
-
-Esta es un área agrícola de cultivo marcaeremos algunos putnos.
-
-Podemos ir a alguna ciudad importante solo para capturar pixels de la zona urbana.
-
-Podemos capturar puntos de cobertura vegetal tambien.
-
-Capturar puntos de una zona industrial. . Y estamos a punto de terminar nuestra captura de muestras de no agua.
-
-Estos puntos de control en el terreno, deberían ser suficientes para nuestro análisis. 
-
-Si realmente estás haciendo un análisis científico real o tu proyecto, necesitamos capturar varios puntos de datos representativos y asegurarnos de que la calidad de los puntos de datos sea buena.
-
-Nuestro próximo paso es combinar ambos featureCollection en un solo featureCollection, esto  lo hace la función MERGE.
-fusiona AMBAS CAPAS: AGUA Y NO AGUA EN UNA SOLA COLECCION denominada training
-
-La fusión o merge, combinó estos dos colecciones en una, la cual contiene tiene aproximadamente xxxx puntos de datos de entrenamiento, PUNTOS DE clase agua y DE clase no agua.
-
--------------------------------------------------------------------------------
-Muy bien. Ahora  estamos listos para nuestra clasificación de aprendizaje automático
-
-La etiqueta es CategoriaAgua y representa nuestra etiqueta para la clasificación de aprendizaje automático o la clasificación supervisada. 
-Recorda que la definimos cuando creamos los dos featureCollection de datos de entrenamiento agua y no-agua. 
-Esa será la etiqueta para nuestra clasificación.
-
-Vamos a utilizar para el entrenamiento las bandas dos, tres, cuatro, ocho y NDVI de la imagen del satélite Sentinel.
-Extraemos las bandas Sentinel para estos datos de entrenamiento que hemos capturado.
+Vamos a utilizar para el entrenamiento las bandas B2, B3, B4, B8 y NDVI de la imagen del satélite Sentinel. Extraemos las bandas Sentinel para estos datos de entrenamiento que hemos capturado.
 
 
 ```{figure} imagenes/Tabla_Comahue.png
@@ -435,24 +408,21 @@ Extraemos las bandas Sentinel para estos datos de entrenamiento que hemos captur
 Variables Independientes y Dependientes
 ```
 
+Para obtener estos datos de la imagen utilizamos la función *sampleRegions*. Vamos a utilizar la resolución de 10 metros, la resolución más alta posible de los datos de Sentinel-2. 
 
-Para obtener estos datos de la imagen utilizamos la función sampleRegions
-vamos a utilizar la resolución de 10 metros, la resolución más alta posible de los datos de Sentinel-2. 
+```{admonition} *SampleRegions*
+:class: tip
 
-SampleRegions permite definir la tabla que entrena el modelo de clasificación supervisada.
-los parámetro de esta función son un diccionario de JavaScript que incluye:
+*SampleRegions* permite definir la tabla que entrena el modelo de clasificación supervisada. Los parámetro de esta función son un diccionario de JavaScript que incluye:
 
-En collection especificamos la coleccion de imagenes Sentinel con las bandas seleccionadas 
-En properties indicamos la etiqeuta que deseamos predecir, en este caso categoriaAgua, que representa la propiedad o etiqueta para nuestro entrenamiento.
-En scale indicamos la escala es la resolución espacial, que es de 10 metros, porque estamos usando las bandas Sentinel con una resolución de 10 metros. 
+* En **collection** especificamos la coleccion de imagenes Sentinel con las bandas seleccionadas. 
+* En **properties** indicamos la etiqeuta que deseamos predecir, en este caso categoriaAgua, que representa la propiedad o etiqueta para nuestro entrenamiento.
+* En **scale** indicamos la escala es la *resolución espacial*, que es de 10 metros, porque estamos usando las bandas Sentinel con una resolución de 10 metros. 
 
-Podemos imprimir la tabla de entrenamiento que vamos a utilizar para la clasificación de aprendizaje automático. 
-Contamos con el valor de las bandas Sentinel seleccionadas, la banda NDVI y la etiqueta CategoriaAgua.
+```
+Podemos imprimir la tabla de entrenamiento que vamos a utilizar para la clasificación de aprendizaje automático. Contamos con el valor de las bandas Sentinel seleccionadas, la banda NDVI y la etiqueta *categoriaAgua*. 
 
-necesitamos separar algunos de los datos para entrenar el modelo y también algunos de los datos para evaluarlo. 
-
-Por lo tanto, dividiremos esos datos: crearemos una columna aleatoria y luego solo el 70 % de los datos se utilizarán para entrenar nuestro modelo.
- Y luego, el conjunto de prueba aquí será la evaluación, que es el 30 % de datos restantes.
+Necesitamos separar algunos de los datos para entrenar el modelo y también algunos de los datos para evaluarlo.  Por lo tanto, dividiremos esos datos: crearemos una columna aleatoria y luego solo el 70 % de los datos se utilizarán para entrenar nuestro modelo. Y luego, el conjunto de prueba aquí será la evaluación, que es el 30 % de datos restantes.
 
 
 ### Entrenamiento
@@ -464,16 +434,11 @@ Por lo tanto, dividiremos esos datos: crearemos una columna aleatoria y luego so
 Etapa Entrenamiento del Clasificador 
 ```
 
-En este paso entrenemos el modelo para luego aplicarlo a la imagen con el fin de generar un mapa de masa de agua. 
+En este paso entrenemos el modelo para luego aplicarlo a la imagen con el fin de generar un mapa de masa de agua. El paso de entrenar el modelo consiste en aplicar la clasificación supervisada de Random Forest con los datos de entremiento.
 
-El paso de entrenar el modelo consiste en aplicar la clasificación supervisada de random forest con los datos de entremiento
+Tendrás *features*, que son datos de entrenamiento, que es el conjunto de entrenamiento. Luego una *etiqueta*, necesita una etiqueta para la clasificación, y finalmente, *las bandas*, que *usamos para hacer la predicción*, que son las bandas Sentinel.
 
-Tendrás features, que son datos de entrenamiento, que es el conjunto de entrenamiento, 
-luego una etiqueta, necesita una etiqueta para la clasificación. 
-y luego, finalmente, las bandas, que usamos para hacer la predicción, que son las bandas Sentinel.
-
-Entonces, cuando ejecutes esto, entrenarás el modelo de aprendizaje automático. 
-Cuando lo haga, el modelo de aprendizaje automático se entrenará en función de nuestros datos de entrenamiento en las bandas Sentinel. 
+Entonces, cuando ejecutes esto, entrenarás el modelo de aprendizaje automático. Cuando lo haga, el modelo de aprendizaje automático se entrenará en función de nuestros datos de entrenamiento en las bandas Sentinel. 
 
 
 ```javascript
@@ -536,11 +501,9 @@ Tabla de variables independientes y dependientes
 
 Etapa Clasificar la imagen
 ```
-El siguiente paso es aplicar este modelo, que es el clasificador, a la imagen, la imagen Sentinel.
-Simplemente se va a aplicar el modelo para generar una clasificación.
+El siguiente paso es aplicar este modelo, que es el clasificador, a la imagen, la imagen Sentinel. Simplemente se va a aplicar el modelo para generar una clasificación. 
 
-Ahora, podemos ver la imagen, que es una clasificación.
-El siguiente paso es ver nuestra imagen clasificada en una pantalla aquí. 
+Ahora, podemos ver la imagen, que es una clasificación. El siguiente paso es ver nuestra imagen clasificada en el mapa. 
 
 ```javascript
 // Modelo de Clasificación
@@ -556,15 +519,16 @@ var classifiedImage = input.classify(classifier);
 
 ```
 
-### MASCARA:
-en el comando: var water = classifiedImage.updateMask(classifiedImage);
+### Máscara
 
-La función updateMask utiliza los valores de classified como una máscara. Los píxeles con valor 1 (agua) permanecen visibles, mientras que los píxeles con valor 0 (no agua) se enmascaran (ocultan).
+En el comando: var water = classifiedImage.updateMask(classifiedImage);
+
+La función **updateMask** utiliza los valores de *classified* como una máscara. Los píxeles con valor 1 (agua) permanecen visibles, mientras que los píxeles con valor 0 (no agua) se enmascaran (ocultan).
 
 Esto se traduce en:
 
-Si un píxel tiene valor 1 → Se mantiene visible en la nueva variable water.
-Si un píxel tiene valor 0 → Se vuelve invisible en water.
+* Si un píxel tiene valor 1 → Se mantiene visible en la nueva variable water.
+* Si un píxel tiene valor 0 → Se vuelve invisible en water.
 
 
 ```javascript
@@ -572,15 +536,12 @@ var water = classifiedImage.updateMask(classifiedImage);
 ```
 
 
-Crear un parámetro de visualización: cuyo parámetros son el mínimo y el máximo. Por lo tanto, se trata simplemente de un binario de cero y uno.
-El azul es para la clase de agua y el blanco para la clase de no agua y luego agregaremos la capa al mapa.
+Crear un parámetro de visualización: cuyo parámetros son el *mínimo* y el *máximo*. Por lo tanto, se trata simplemente de un binario de cero y uno. El azul es para la clase de agua y el blanco para la clase de no-agua y luego agregaremos la capa al mapa.
 
-Agregaremos la capa al mapa, pasaremos la imagen clasificada aquí, los parámetros de visualización y la llamaremos agua. 
-Entonces, simplemente ejecutemos eso. Y cuando lo ejecutemos, veremos nuestra clase de agua.
+Agregaremos la capa al mapa, pasaremos la imagen clasificada aquí, los parámetros de visualización y la llamaremos *agua*. Entonces, simplemente ejecutemos eso. Y cuando lo ejecutemos, veremos nuestra clase de agua.
 
-Esta es nuestra clase de agua, que se superpone a la imagen de Sentinel. Y esa es nuestra clase de agua basada en el aprendizaje automático en la imagen de Sentinel.
-Esta es nuestra clasificación. Se trata de una clasificación predicha por un modelo basado en el aprendizaje automático, 
-específicamente en un algoritmo de random forest o bosque aleatorio en la plataforma Earth Engine que utiliza datos satelitales Sentinel2 de 10 metros.
+Esta es nuestra clase de agua, que se superpone a la imagen de Sentinel. Es nuestra clase de agua basada en el aprendizaje automático en la imagen de Sentinel.
+Esta es nuestra clasificación. Se trata de una clasificación predicha por un modelo basado en el aprendizaje automático, específicamente en un algoritmo de **Random Forest** o *bosque aleatorio* en la plataforma **Earth Engine** que utiliza datos satelitales Sentinel-2 de 10 metros.
 
 ```javascript
 
@@ -588,16 +549,15 @@ var visParams = {min: 0, max: 1, palette: ['white','blue']};
 Map.addLayer(water, visParams, 'Water');
 ```
 
-### Acurracy Assessment
+### Evaluación de precisión (Acurracy Assessment)
 
 
-Como hemos mencionado en anteriores videos, hay algunos pasos después de este posprocesamiento y tenemos que calcular evaluaciones de precisión de estos datos, 
+Como hemos mencionado en capítulos anteriores, hay algunos pasos después de este posprocesamiento y tenemos que calcular *evaluaciones de precisión* de estos datos.
 
-Utilizaremos la función de matriz de confusión.
-Entonces, vamos a utilizar el conjunto de prueba y luego el clasificador. Este es nuestro modelo, el modelo de entrenamiento. 
-Utilizamos los datos del conjunto de prueba, que están configurados para la evaluación.
+Utilizaremos la función de **matriz de confusión**. Vamos a utilizar el conjunto de prueba y luego el clasificador. Este último es nuestro modelo, el modelo de entrenamiento. 
+Utilizamos los datos del conjunto de prueba que están configurados para la evaluación.
 
-El primero es el valor real, que es el valor observado en función de este conjunto de pruebas, Y el siguiente es el valor previsto, que es la clasificación. 
+El primero es el **valor real**, que es el valor observado en función de este conjunto de pruebas, Y el siguiente es el **valor previsto**, que es la clasificación. 
 Una vez que se proporcionan estos parámetros, se va a crear una evaluación de precisión, es decir, valores. 
 
 ```{figure} imagenes/p_4.png
@@ -615,8 +575,8 @@ Etapa Evaluación de Precisión
 
 var confusionMatrix = ee.ConfusionMatrix(testSet.classify(classifier)
    .errorMatrix({
-     actual: 'categoriaAgua',
-     predicted: 'classification'
+     actual: 'categoriaAgua',   // valor real
+     predicted: 'classification' // valor previsto
    }));
    
 print('Confusion Matrix:', confusionMatrix);
@@ -638,23 +598,21 @@ Export.image.toDrive({
 
 ```
 
+Algunos de estos valores incluyen: una **matriz de confusión**, una tabla y también la **precisión general**, es decir, la **precisión del productor** y la **precisión del consumidor**.
 
-Algunos de estos valores incluyen una matriz de confusión, una tabla y también la precisión general, es decir, la precisión del productor y la precisión del consumidor.
+Básicamente, nos limitaremos a observar la precisión general y ejecutaremos la prueba basándonos en estos puntos de datos. Veamos cuál es nuestra precisión. Parece que es 100 %, bastante buena, pero creo que si capturamos más puntos de datos.
 
-Básicamente, nos limitaremos a observar la precisión general y ejecutaremos la prueba basándonos en estos XXX puntos de datos aproximadamente. 
-Veamos cuál es nuestra precisión. 
-Parece que es 100 %, bastante buena, pero creo que si capturamos más puntos de datos, la razón por la que esto es 100 % cierto es que:
+La razón por la que esto es 100 % cierto es que:
 
 * A, el agua es bastante fácil de predecir, 
 * B, hemos utilizado la resolución de 10 metros, que también es otro factor.
 
 ### Exportación
 
-La última parte a considerar, es que si deseas usar esta clasificación fuera de Google Earth Engine, digamos un software GIS estándar, como QGIS o ArcGIS 
+La última parte a considerar, es que si deseas usar esta clasificación fuera de *Google Earth Engine*, digamos un software GIS estándar, como **QGIS** o **ArcGIS** 
 vas a usar la función Export.image.toDrive para exportar, ya sabes, tu mapa de agua.
 
-Cuando lo ejecutes, lo verás en tu Google Drive. Una vez que hayas completado esto, verás los datos o la imagen en tu Google Drive. 
-Luego, lo descargarás desde Google Drive a tu equipo local y lo abrirás en un software de GIS estándar.
+Cuando lo ejecutes, lo verás en tu **Google Drive**. Una vez que hayas completado esto, verás los datos o la imagen en tu Google Drive. Luego, lo descargarás desde Google Drive a tu equipo local y lo abrirás en un software de GIS estándard.  La exportación duro varias horas, considerando que el mapa comprende un extensión de 297.091 kilómetros cuadrados.
 
 ```javascript
 
@@ -670,16 +628,15 @@ Export.image.toDrive({
 
 ```
 
+Así es como se aplica la clasificación de aprendizaje automático, los datos satelitales en este caso Sentinel de Google Earth Engine Cloud y se realiza con estos pasos generales:
 
-Así es como se aplica la clasificación de aprendizaje automático, los datos satelitales en este caso Sentinel en la API de Google Earth Engine Cloud y se realiza con estos pasos generales:
+* Captura tus propios datos de entrenamiento, 
+* Desarrolla un modelo de aprendizaje automático, 
+* Aplicas el modelo para clasificar la imagen de la region de estudio
+* Estudias el rendimiento de tu modelo y 
+* También exporta tu clasificación final a Google Drive. 
 
-* captura tus propios datos de entrenamiento, 
-* desarrolla un modelo de aprendizaje automático, 
-* aplicas el modelo para clasificar la imagen de la region de estudio
-* estudias el rendimiento de tu modelo y 
-* también exporta tu clasificación final a tu Google Drive. 
-
-## Mostrar el árobol de decisión luego de aplicar CART
+## Mostrar el árbol de decisión luego de aplicar CART
 
 Se puede aplicar el método CART en lugar de Random Forest para obtener el árbol de decisión en formato dot. El siguiente código muestra el árbol de decisión obtenido:
 
