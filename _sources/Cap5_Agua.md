@@ -636,7 +636,7 @@ Así es como se aplica la clasificación de aprendizaje automático, los datos s
 * Estudias el rendimiento de tu modelo y 
 * También exporta tu clasificación final a Google Drive. 
 
-## Mostrar el árbol de decisión luego de aplicar CART
+## Árbol de decisión luego de aplicar CART
 
 Se puede aplicar el **método CART** en lugar de **Random Forest**, como se ejemplificó en el capítulo anterior. Para obtener el árbol de decisión en *formato dot* el siguiente código python muestra el **árbol de decisión** obtenido:
 
@@ -689,7 +689,7 @@ Si ejecutamos este último código python en Colab, obtendremos el gráfico del 
 
 ```{figure} imagenes/arbolAguaNoagua.png
 :name: fig-arbolAguaNoagua
-:width: 100%
+:width: 50%
 
 Árbol de decisión para detectar agua obtenido con CART
 ```

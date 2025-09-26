@@ -403,7 +403,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion">5.2.6. Exportación</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-el-arbol-de-decision-luego-de-aplicar-cart">5.3. Mostrar el árbol de decisión luego de aplicar CART</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision-luego-de-aplicar-cart">5.3. Árbol de decisión luego de aplicar CART</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">5.4. Video del capítulo</a></li>
 </ul>
             </nav>
@@ -933,8 +933,8 @@ vas a usar la función Export.image.toDrive para exportar, ya sabes, tu mapa de 
 </ul>
 </section>
 </section>
-<section id="mostrar-el-arbol-de-decision-luego-de-aplicar-cart">
-<h2><span class="section-number">5.3. </span>Mostrar el árbol de decisión luego de aplicar CART<a class="headerlink" href="#mostrar-el-arbol-de-decision-luego-de-aplicar-cart" title="Link to this heading">#</a></h2>
+<section id="arbol-de-decision-luego-de-aplicar-cart">
+<h2><span class="section-number">5.3. </span>Árbol de decisión luego de aplicar CART<a class="headerlink" href="#arbol-de-decision-luego-de-aplicar-cart" title="Link to this heading">#</a></h2>
 <p>Se puede aplicar el <strong>método CART</strong> en lugar de <strong>Random Forest</strong>, como se ejemplificó en el capítulo anterior. Para obtener el árbol de decisión en <em>formato dot</em> el siguiente código python muestra el <strong>árbol de decisión</strong> obtenido:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="err">!</span><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">graphviz</span>
 <span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="n">graphviz</span>
@@ -981,7 +981,7 @@ vas a usar la función Export.image.toDrive para exportar, ya sabes, tu mapa de 
 </div>
 <p>Si ejecutamos este último código python en Colab, obtendremos el gráfico del árbol de decisión de la fig. <a class="reference internal" href="#fig-arbolaguanoagua"><span class="std std-numref">Fig. 5.21</span></a>. El árbol tiene un único <em>nodo de decisión</em>, que es el <em>nodo raíz</em> del árbol, en el cual la banda espectral <em>B8</em> con la condición <em>B8 &lt;= 0.4998</em> es suficiente para determinar si un píxel es <em>agua</em> o <em>no-agua</em>. Si la condición <em>B8 &lt;= 0.4998</em> es verdadera el píxel es clasificado como <em>agua</em>, en caso contrario es clasificado como <em>no-agua</em>.</p>
 <figure class="align-default" id="fig-arbolaguanoagua">
-<a class="reference internal image-reference" href="_images/arbolAguaNoagua.png"><img alt="_images/arbolAguaNoagua.png" src="_images/arbolAguaNoagua.png" style="width: 100%;" /></a>
+<a class="reference internal image-reference" href="_images/arbolAguaNoagua.png"><img alt="_images/arbolAguaNoagua.png" src="_images/arbolAguaNoagua.png" style="width: 50%;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 5.21 </span><span class="caption-text">Árbol de decisión para detectar agua obtenido con CART</span><a class="headerlink" href="#fig-arbolaguanoagua" title="Link to this image">#</a></p>
 </figcaption>
@@ -1076,7 +1076,7 @@ vas a usar la función Export.image.toDrive para exportar, ya sabes, tu mapa de 
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exportacion">5.2.6. Exportación</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mostrar-el-arbol-de-decision-luego-de-aplicar-cart">5.3. Mostrar el árbol de decisión luego de aplicar CART</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arbol-de-decision-luego-de-aplicar-cart">5.3. Árbol de decisión luego de aplicar CART</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#video-del-capitulo">5.4. Video del capítulo</a></li>
 </ul>
   </nav></div>

@@ -151,7 +151,7 @@ Esto se debe a que el *enfoque principal de GEE es el procesamiento y el analisi
 
 ```{figure} imagenes/POST_7.png
 :name: fig-POST_7
-:width: 90%
+:width: 70%
 
 Hiperplanos de SVM
 ```
@@ -283,7 +283,7 @@ print('Consumers Accuracy:', testConfusionMatrix.consumersAccuracy() );
 
 ```{figure} imagenes/POST_6.png
 :name: fig-POST_6
-:width: 90%
+:width: 70%
 
 Indicaciones para aplicar la plantilla de SVM
 ```
@@ -312,7 +312,7 @@ Calculamos su precsión 98.02 por ciento. Ahora agregaremo código para obtener 
 
 ```{figure} imagenes/POST_10.png
 :name: fig-POST_10
-:width: 90%
+:width: 70%
 
 Arbol de Decisión con CART
 ```
@@ -322,7 +322,7 @@ Como mencionamos en el video 2 de esta serie, el árbol de decisión es útil po
 
 ```{figure} imagenes/POST_9.png
 :name: fig-POST_9
-:width: 90%
+:width: 70%
 
 Template de SmileCART
 ```
@@ -442,7 +442,7 @@ Las reglas del árbol se muestran en formato texto, copiaremos el archivo dot (v
 
 ```{figure} imagenes/POST_11.png
 :name: fig-POST_11
-:width: 90%
+:width: 70%
 
 Reglas del Arbol en formato dot 
 ```
@@ -501,7 +501,7 @@ Enlace al archivo en Google Colab: https://colab.research.google.com/drive/1AdTW
 
 ```{figure} imagenes/POST_6.png
 :name: fig-POST_6
-:width: 90%
+:width: 70%
 
 Tips para apicar SVM con el script como template
 ```
@@ -518,7 +518,7 @@ Este árbol tiene 7 **nodos de decisión**, donde cada nodo de decisión tiene u
 
 ```{figure} imagenes/POST_16.png
 :name: fig-POST_16
-:width: 90%
+:width: 80%
 
 Nodo de Decisión: Definición
 ```
@@ -608,11 +608,19 @@ Recorrido de un árbol de decisión
 
 ### Ejemplo 1 clase 0 agua
 
-El recorrido del arbol para clasificar este píxel es corto y consiste solo de una evaluación:
+El recorrido del árbol para clasificar este píxel es corto y consiste solo de una evaluación:
+
+````{admonition} El recorrido consiste de una evaluación:
+:class: note
+
+```{admonition} Evaluación
+:class: tip
 
 * Condición: B6 ≤ 1095.5
 * B6: 521
-* Evaluación: 521 <= 1095.5 se evalúa a true, verdadero.
+* Evaluación: 521 <= 1095.5 se evalúa a *true*, *verdadero*.
+
+```
 
 Seguimos por la rama true: La clase predicha para este píxel es clase 0.
 
@@ -621,33 +629,45 @@ Seguimos por la rama true: La clase predicha para este píxel es clase 0.
 :width: 100%
 
 Píxel del ejemplo 1 clase 0 agua
+
 ```
 
+````
 
 ### Ejemplo 2 clase 1 urbano
 
-El recorrido consiste de tres evaluaciones:
 
-Primera evaluación:
+````{admonition} El recorrido consiste de tres evaluaciones:
+:class: note
+
+```{admonition} Primera evaluación:
+:class: tip
 
 * Condición: B6 <= 1095.5
 * B6: 2743
 * Evaluación:  2743 <= 1095.5 Falso
 
-Segunda evaluación:
+```
+
+```{admonition} Segunda evaluación:
+:class: tip
 
 * Condición: B1 <= 955.00
 * B1: 1153
 * Evaluación 1153 <= 955 falso
 
-Tercera evaluación:
+```
+
+```{admonition} Tercera evaluación:
+:class: tip
 
 * Condición: B9 <= 2879.25
 * B9: 2416
 * Evaluación: 2416 <= 2879.25 true
 
-Seguimos por la rama true: La clase predicha para este píxel es clase 1.
+```
 
+Seguimos por la rama true: La clase predicha para este píxel es clase 1.
 
 ```{figure} imagenes/Pixel41_Cat1.png
 :name: fig-Pixel41_Cat1
@@ -656,33 +676,57 @@ Seguimos por la rama true: La clase predicha para este píxel es clase 1.
 Píxel del ejemplo 2 clase 1 urbano 
 ```
 
+````
 
 ### Ejemplo 3 clase 2 cultivos
 
-El recorrido consiste de tres evaluaciones:
 
-Primera evaluación:
+````{admonition} El recorrido consiste de cinco evaluaciones:
+:class: note
+
+```{admonition} Primera evaluación:
+:class: tip
 
 * Condición: B6 <= 1095.5
 * B6: 2751 
 * Evaluación: 2751 <= 1095.5 falso
 
+```
+
+```{admonition} Segunda evaluación:
+:class: tip
+
 * Condición: B1 <= 955.0
 * B1: 351
 * Evaluación: 351 <= 955 true, verdadero
- 
+
+```
+
+```{admonition} Tercera evaluación:
+:class: tip
+
 * Condición: B11 <= 1879.5
 * B11: 2579 
 * Evalucion: 2579 <= 1879.5 false
+
+```
+
+```{admonition} Cuarta evaluación:
+:class: tip
 
 * Condición: B11 <= 2910.0
 * B11: 2579
 * Evaluación: 2579 <= 2910.0 true
 
+```
+
+```{admonition} Quinta evaluación:
+:class: tip
 * Condición: B1 <= 625.00
 * B1: 351
 * Evalución: 351 <= 625.00 true , 
 
+```
 Seguimos por la rama true: La clase predicha para este píxel es clase 2.
 
 ```{figure} imagenes/Pixel109_Cat2.png
@@ -690,30 +734,43 @@ Seguimos por la rama true: La clase predicha para este píxel es clase 2.
 :width: 100%
 
 Píxel del ejemplo 3 clase 2 cultivos
+
 ```
 
+````
 
 ### Ejemplo 4 clase 3 bosque-zona arbustiva
 
-El recorrido consiste de tres evaluaciones:
 
-Primera evaluación:
+````{admonition} El recorrido consiste de tres evaluaciones:
+:class: note
+
+```{admonition} Primera evaluación:
+:class: tip
 
 * Condición: B6 <= 1095.5
 * B6: 2062
 * Evaluación: 2062 <= 1095.5 falso
 
-Segunda evaluación:
+```
+
+```{admonition} Segunda evaluación:
+:class: tip
 
 * Condición: B1 <= 955
 * B1: 159
 * Evaluación: 159 <= 955 verdaero
 
-Tercera evaluación:
+```
+
+```{admonition} Tercera evaluación:
+:class: tip
 
 * Condición: B11 <= 1879.5
 * B11: 1388
 * Evaluación: 1388 <= 1879.5, verdadero
+
+```
 
 Seguimos por la rama true: La clase predicha para este píxel es clase 3
 
@@ -724,34 +781,49 @@ Seguimos por la rama true: La clase predicha para este píxel es clase 3
 Píxel del ejemplo 4 clase 3 bosque-zona arbustiva
 ```
 
+````
 
 ### Ejemplo 5 clase 4 suelo desnudo
 
-El recorrido consiste de cuatro evaluaciones:
 
-Primera evaluación:
+````{admonition} El recorrido consiste de cuatro evaluaciones:
+:class: note
+
+```{admonition} Primera evaluación:
+:class: tip
 
 * Condición: B6 <= 1095.5
 * B6: 3151
 * Evaluación: 3151 <= 1095.5 , falso.
 
-Segunda evaluación:
+```
+
+```{admonition} Segunda evaluación:
+:class: tip
 
 * Condición B1 <= 955
 * B1: 804
 * Evaluación: 804 <= 955 verdaero
 
-Tercera evaluación:
+```
+
+```{admonition} Tercera evaluación:
+:class: tip
 
 * Condición: B11 <= 1879.5
 * B11: 3756
 * Evaluación: 3756 <= 1879.5, falso
 
-Cuarta evaluación:
+```
+
+```{admonition} Cuarta evaluación:
+:class: tip
 
 * Condición: B11 <= 2910.0
 * B11: es 3756
 * Evaluación: 3756 <= 2910, falso
+
+```
 
 Seguimos por la rama falso: La clase predicha para este píxel es clase 4.
 
@@ -760,6 +832,8 @@ Seguimos por la rama falso: La clase predicha para este píxel es clase 4.
 :width: 100%
 
 ```
+
+````
 
 ## Recursos
 
