@@ -638,7 +638,7 @@ Así es como se aplica la clasificación de aprendizaje automático, los datos s
 
 ## Mostrar el árbol de decisión luego de aplicar CART
 
-Se puede aplicar el método CART en lugar de Random Forest para obtener el árbol de decisión en formato dot. El siguiente código muestra el árbol de decisión obtenido:
+Se puede aplicar el **método CART** en lugar de **Random Forest**, como se ejemplificó en el capítulo anterior. Para obtener el árbol de decisión en *formato dot* el siguiente código python muestra el **árbol de decisión** obtenido:
 
 ```python
 !apt-get install graphviz
@@ -681,6 +681,17 @@ images = convert_from_path('decision_tree.pdf')
 plt.imshow(images[0])
 plt.axis('off')  # Desactivar los ejes para que solo se vea la imagen
 plt.show()
+
+```
+
+Si ejecutamos este último código python en Colab, obtendremos el gráfico del árbol de decisión de la fig. {numref}`fig-arbolAguaNoagua`. El árbol tiene un único *nodo de decisión*, que es el *nodo raíz* del árbol, en el cual la banda espectral *B8* con la condición *B8 <= 0.4998* es suficiente para determinar si un píxel es *agua* o *no-agua*. Si la condición *B8 <= 0.4998* es verdadera el píxel es clasificado como *agua*, en caso contrario es clasificado como *no-agua*.
+
+
+```{figure} imagenes/arbolAguaNoagua.png
+:name: fig-arbolAguaNoagua
+:width: 100%
+
+Árbol de decisión para detectar agua obtenido con CART
 ```
 
 ## Video del capítulo
