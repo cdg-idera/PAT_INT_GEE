@@ -23,9 +23,8 @@ Este libro está dedicado a todos los integrantes de la Infraestructura de Datos
 
 # Agradecimientos
 
-Este libro y recursos didácticos han sido desarrollados en el marco del grupo de investigación **04/F023: Tecnologías de Datos Espaciales, Visualización y Realidad Virtual**, Facultad de Informática, Universidad Nacional del Comahue; y del proyecto **32707 Patagonia Interoperable**, Proyecto de Desarrollo Tecnológico y Social (CIN-UNI-EUAR), Consejo Interuniversitario Nacional (CIN), Unión Universitaria Argentina Europea para la Transformación Digital (UNI-UEAR).
+Este libro y recursos didácticos han sido desarrollados en el marco del grupo de investigación **04/F023: Tecnologías de Datos Espaciales, Visualización y Realidad Virtual**, Facultad de Informática, Universidad Nacional del Comahue.
 
-![Logos CIN–UNI-UEAR](imagenes/CIN-UNIUEAR.png)
 
 # Sobre este libro
 
